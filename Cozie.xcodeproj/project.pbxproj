@@ -1,0 +1,876 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
+		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
+		E483824C247BA33A002C3708 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483824B247BA33A002C3708 /* ViewController.swift */; };
+		E483824F247BA33A002C3708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E483824D247BA33A002C3708 /* Main.storyboard */; };
+		E4838251247BA33B002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838250247BA33B002C3708 /* Assets.xcassets */; };
+		E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4838252247BA33B002C3708 /* LaunchScreen.storyboard */; };
+		E483825F247BA33B002C3708 /* CozieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483825E247BA33B002C3708 /* CozieTests.swift */; };
+		E483826A247BA33B002C3708 /* CozieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838269247BA33B002C3708 /* CozieUITests.swift */; };
+		E483826F247BA33B002C3708 /* Cozie WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E483826E247BA33B002C3708 /* Cozie WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E4838275247BA33B002C3708 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4838273247BA33B002C3708 /* Interface.storyboard */; };
+		E4838277247BA33C002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838276247BA33C002C3708 /* Assets.xcassets */; };
+		E483827E247BA33C002C3708 /* Cozie WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E483827D247BA33C002C3708 /* Cozie WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838282247BA33C002C3708 /* InterfaceController.swift */; };
+		E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838284247BA33C002C3708 /* ExtensionDelegate.swift */; };
+		E4838287247BA33C002C3708 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838286247BA33C002C3708 /* NotificationController.swift */; };
+		E4838289247BA33C002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838288247BA33C002C3708 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E483825B247BA33B002C3708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E483823C247BA33A002C3708 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E4838243247BA33A002C3708;
+			remoteInfo = Cozie;
+		};
+		E4838266247BA33B002C3708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E483823C247BA33A002C3708 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E4838243247BA33A002C3708;
+			remoteInfo = Cozie;
+		};
+		E4838270247BA33B002C3708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E483823C247BA33A002C3708 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E483826D247BA33B002C3708;
+			remoteInfo = "Cozie WatchKit App";
+		};
+		E483827F247BA33C002C3708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E483823C247BA33A002C3708 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E483827C247BA33C002C3708;
+			remoteInfo = "Cozie WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E4838291247BA33C002C3708 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E483827E247BA33C002C3708 /* Cozie WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838295247BA33C002C3708 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				E483826F247BA33B002C3708 /* Cozie WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4838247247BA33A002C3708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E4838249247BA33A002C3708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E483824B247BA33A002C3708 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E483824E247BA33A002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E4838250247BA33B002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E4838253247BA33B002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E4838255247BA33B002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E483825A247BA33B002C3708 /* CozieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CozieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E483825E247BA33B002C3708 /* CozieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieTests.swift; sourceTree = "<group>"; };
+		E4838260247BA33B002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4838265247BA33B002C3708 /* CozieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CozieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4838269247BA33B002C3708 /* CozieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieUITests.swift; sourceTree = "<group>"; };
+		E483826B247BA33B002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E483826E247BA33B002C3708 /* Cozie WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cozie WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4838274247BA33B002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		E4838276247BA33C002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E4838278247BA33C002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E483827D247BA33C002C3708 /* Cozie WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Cozie WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4838282247BA33C002C3708 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		E4838284247BA33C002C3708 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		E4838286247BA33C002C3708 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		E4838288247BA33C002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E483828A247BA33C002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E483828B247BA33C002C3708 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E4838241247BA33A002C3708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838257247BA33B002C3708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838262247BA33B002C3708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E483827A247BA33C002C3708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E483823B247BA33A002C3708 = {
+			isa = PBXGroup;
+			children = (
+				E4838246247BA33A002C3708 /* Cozie */,
+				E483825D247BA33B002C3708 /* CozieTests */,
+				E4838268247BA33B002C3708 /* CozieUITests */,
+				E4838272247BA33B002C3708 /* Cozie WatchKit App */,
+				E4838281247BA33C002C3708 /* Cozie WatchKit Extension */,
+				E4838245247BA33A002C3708 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E4838245247BA33A002C3708 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4838244247BA33A002C3708 /* Cozie.app */,
+				E483825A247BA33B002C3708 /* CozieTests.xctest */,
+				E4838265247BA33B002C3708 /* CozieUITests.xctest */,
+				E483826E247BA33B002C3708 /* Cozie WatchKit App.app */,
+				E483827D247BA33C002C3708 /* Cozie WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4838246247BA33A002C3708 /* Cozie */ = {
+			isa = PBXGroup;
+			children = (
+				E4838247247BA33A002C3708 /* AppDelegate.swift */,
+				E4838249247BA33A002C3708 /* SceneDelegate.swift */,
+				E483824B247BA33A002C3708 /* ViewController.swift */,
+				E483824D247BA33A002C3708 /* Main.storyboard */,
+				E4838250247BA33B002C3708 /* Assets.xcassets */,
+				E4838252247BA33B002C3708 /* LaunchScreen.storyboard */,
+				E4838255247BA33B002C3708 /* Info.plist */,
+			);
+			path = Cozie;
+			sourceTree = "<group>";
+		};
+		E483825D247BA33B002C3708 /* CozieTests */ = {
+			isa = PBXGroup;
+			children = (
+				E483825E247BA33B002C3708 /* CozieTests.swift */,
+				E4838260247BA33B002C3708 /* Info.plist */,
+			);
+			path = CozieTests;
+			sourceTree = "<group>";
+		};
+		E4838268247BA33B002C3708 /* CozieUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E4838269247BA33B002C3708 /* CozieUITests.swift */,
+				E483826B247BA33B002C3708 /* Info.plist */,
+			);
+			path = CozieUITests;
+			sourceTree = "<group>";
+		};
+		E4838272247BA33B002C3708 /* Cozie WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				E4838273247BA33B002C3708 /* Interface.storyboard */,
+				E4838276247BA33C002C3708 /* Assets.xcassets */,
+				E4838278247BA33C002C3708 /* Info.plist */,
+			);
+			path = "Cozie WatchKit App";
+			sourceTree = "<group>";
+		};
+		E4838281247BA33C002C3708 /* Cozie WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E4838282247BA33C002C3708 /* InterfaceController.swift */,
+				E4838284247BA33C002C3708 /* ExtensionDelegate.swift */,
+				E4838286247BA33C002C3708 /* NotificationController.swift */,
+				E4838288247BA33C002C3708 /* Assets.xcassets */,
+				E483828A247BA33C002C3708 /* Info.plist */,
+				E483828B247BA33C002C3708 /* PushNotificationPayload.apns */,
+			);
+			path = "Cozie WatchKit Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E4838243247BA33A002C3708 /* Cozie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie" */;
+			buildPhases = (
+				E4838240247BA33A002C3708 /* Sources */,
+				E4838241247BA33A002C3708 /* Frameworks */,
+				E4838242247BA33A002C3708 /* Resources */,
+				E4838295247BA33C002C3708 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4838271247BA33B002C3708 /* PBXTargetDependency */,
+			);
+			name = Cozie;
+			productName = Cozie;
+			productReference = E4838244247BA33A002C3708 /* Cozie.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E4838259247BA33B002C3708 /* CozieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4838299247BA33C002C3708 /* Build configuration list for PBXNativeTarget "CozieTests" */;
+			buildPhases = (
+				E4838256247BA33B002C3708 /* Sources */,
+				E4838257247BA33B002C3708 /* Frameworks */,
+				E4838258247BA33B002C3708 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E483825C247BA33B002C3708 /* PBXTargetDependency */,
+			);
+			name = CozieTests;
+			productName = CozieTests;
+			productReference = E483825A247BA33B002C3708 /* CozieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E4838264247BA33B002C3708 /* CozieUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E483829C247BA33C002C3708 /* Build configuration list for PBXNativeTarget "CozieUITests" */;
+			buildPhases = (
+				E4838261247BA33B002C3708 /* Sources */,
+				E4838262247BA33B002C3708 /* Frameworks */,
+				E4838263247BA33B002C3708 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4838267247BA33B002C3708 /* PBXTargetDependency */,
+			);
+			name = CozieUITests;
+			productName = CozieUITests;
+			productReference = E4838265247BA33B002C3708 /* CozieUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		E483826D247BA33B002C3708 /* Cozie WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4838292247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie WatchKit App" */;
+			buildPhases = (
+				E483826C247BA33B002C3708 /* Resources */,
+				E4838291247BA33C002C3708 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4838280247BA33C002C3708 /* PBXTargetDependency */,
+			);
+			name = "Cozie WatchKit App";
+			productName = "Cozie WatchKit App";
+			productReference = E483826E247BA33B002C3708 /* Cozie WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		E483827C247BA33C002C3708 /* Cozie WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E483828E247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie WatchKit Extension" */;
+			buildPhases = (
+				E4838279247BA33C002C3708 /* Sources */,
+				E483827A247BA33C002C3708 /* Frameworks */,
+				E483827B247BA33C002C3708 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cozie WatchKit Extension";
+			productName = "Cozie WatchKit Extension";
+			productReference = E483827D247BA33C002C3708 /* Cozie WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E483823C247BA33A002C3708 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = "Federico Tartarini";
+				TargetAttributes = {
+					E4838243247BA33A002C3708 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					E4838259247BA33B002C3708 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = E4838243247BA33A002C3708;
+					};
+					E4838264247BA33B002C3708 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = E4838243247BA33A002C3708;
+					};
+					E483826D247BA33B002C3708 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					E483827C247BA33C002C3708 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = E483823F247BA33A002C3708 /* Build configuration list for PBXProject "Cozie" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E483823B247BA33A002C3708;
+			productRefGroup = E4838245247BA33A002C3708 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E4838243247BA33A002C3708 /* Cozie */,
+				E4838259247BA33B002C3708 /* CozieTests */,
+				E4838264247BA33B002C3708 /* CozieUITests */,
+				E483826D247BA33B002C3708 /* Cozie WatchKit App */,
+				E483827C247BA33C002C3708 /* Cozie WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E4838242247BA33A002C3708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
+				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838258247BA33B002C3708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838263247BA33B002C3708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E483826C247BA33B002C3708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4838277247BA33C002C3708 /* Assets.xcassets in Resources */,
+				E4838275247BA33B002C3708 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E483827B247BA33C002C3708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4838289247BA33C002C3708 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E4838240247BA33A002C3708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E483824C247BA33A002C3708 /* ViewController.swift in Sources */,
+				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
+				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838256247BA33B002C3708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E483825F247BA33B002C3708 /* CozieTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838261247BA33B002C3708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E483826A247BA33B002C3708 /* CozieUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4838279247BA33C002C3708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4838287247BA33C002C3708 /* NotificationController.swift in Sources */,
+				E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */,
+				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E483825C247BA33B002C3708 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E4838243247BA33A002C3708 /* Cozie */;
+			targetProxy = E483825B247BA33B002C3708 /* PBXContainerItemProxy */;
+		};
+		E4838267247BA33B002C3708 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E4838243247BA33A002C3708 /* Cozie */;
+			targetProxy = E4838266247BA33B002C3708 /* PBXContainerItemProxy */;
+		};
+		E4838271247BA33B002C3708 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E483826D247BA33B002C3708 /* Cozie WatchKit App */;
+			targetProxy = E4838270247BA33B002C3708 /* PBXContainerItemProxy */;
+		};
+		E4838280247BA33C002C3708 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E483827C247BA33C002C3708 /* Cozie WatchKit Extension */;
+			targetProxy = E483827F247BA33C002C3708 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E483824D247BA33A002C3708 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E483824E247BA33A002C3708 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E4838252247BA33B002C3708 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4838253247BA33B002C3708 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E4838273247BA33B002C3708 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4838274247BA33B002C3708 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E483828C247BA33C002C3708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E483828D247BA33C002C3708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E483828F247BA33C002C3708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		E4838290247BA33C002C3708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		E4838293247BA33C002C3708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				IBSC_MODULE = Cozie_WatchKit_Extension;
+				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		E4838294247BA33C002C3708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				IBSC_MODULE = Cozie_WatchKit_Extension;
+				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		E4838297247BA33C002C3708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = Cozie/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E4838298247BA33C002C3708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = Cozie/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E483829A247BA33C002C3708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = CozieTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.CozieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cozie.app/Cozie";
+			};
+			name = Debug;
+		};
+		E483829B247BA33C002C3708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = CozieTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.CozieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cozie.app/Cozie";
+			};
+			name = Release;
+		};
+		E483829D247BA33C002C3708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = CozieUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.CozieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cozie;
+			};
+			name = Debug;
+		};
+		E483829E247BA33C002C3708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6729H674Z;
+				INFOPLIST_FILE = CozieUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.CozieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cozie;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E483823F247BA33A002C3708 /* Build configuration list for PBXProject "Cozie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E483828C247BA33C002C3708 /* Debug */,
+				E483828D247BA33C002C3708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E483828E247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E483828F247BA33C002C3708 /* Debug */,
+				E4838290247BA33C002C3708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4838292247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4838293247BA33C002C3708 /* Debug */,
+				E4838294247BA33C002C3708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4838297247BA33C002C3708 /* Debug */,
+				E4838298247BA33C002C3708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4838299247BA33C002C3708 /* Build configuration list for PBXNativeTarget "CozieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E483829A247BA33C002C3708 /* Debug */,
+				E483829B247BA33C002C3708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E483829C247BA33C002C3708 /* Build configuration list for PBXNativeTarget "CozieUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E483829D247BA33C002C3708 /* Debug */,
+				E483829E247BA33C002C3708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E483823C247BA33A002C3708 /* Project object */;
+}
