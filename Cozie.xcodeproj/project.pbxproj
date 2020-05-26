@@ -23,6 +23,10 @@
 		E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838284247BA33C002C3708 /* ExtensionDelegate.swift */; };
 		E4838287247BA33C002C3708 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838286247BA33C002C3708 /* NotificationController.swift */; };
 		E4838289247BA33C002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838288247BA33C002C3708 /* Assets.xcassets */; };
+		E48382B1247BA713002C3708 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48382A9247BA676002C3708 /* ResearchKit.framework */; };
+		E48382B2247BA713002C3708 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E48382A9247BA676002C3708 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E48382B5247BA95E002C3708 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48382B4247BA95E002C3708 /* ConsentDocument.swift */; };
+		E48382B7247BAB68002C3708 /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48382B6247BAB68002C3708 /* ConsentTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +58,20 @@
 			remoteGlobalIDString = E483827C247BA33C002C3708;
 			remoteInfo = "Cozie WatchKit Extension";
 		};
+		E48382A8247BA676002C3708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E48382A2247BA676002C3708 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		E48382AA247BA676002C3708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E48382A2247BA676002C3708 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +95,17 @@
 				E483826F247BA33B002C3708 /* Cozie WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E48382B3247BA713002C3708 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E48382B2247BA713002C3708 /* ResearchKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -107,6 +136,9 @@
 		E4838288247BA33C002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E483828A247BA33C002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E483828B247BA33C002C3708 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		E48382A2247BA676002C3708 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		E48382B4247BA95E002C3708 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
+		E48382B6247BAB68002C3708 /* ConsentTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E48382B1247BA713002C3708 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,12 +177,14 @@
 		E483823B247BA33A002C3708 = {
 			isa = PBXGroup;
 			children = (
+				E48382A2247BA676002C3708 /* ResearchKit.xcodeproj */,
 				E4838246247BA33A002C3708 /* Cozie */,
 				E483825D247BA33B002C3708 /* CozieTests */,
 				E4838268247BA33B002C3708 /* CozieUITests */,
 				E4838272247BA33B002C3708 /* Cozie WatchKit App */,
 				E4838281247BA33C002C3708 /* Cozie WatchKit Extension */,
 				E4838245247BA33A002C3708 /* Products */,
+				E48382AD247BA713002C3708 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +210,8 @@
 				E4838250247BA33B002C3708 /* Assets.xcassets */,
 				E4838252247BA33B002C3708 /* LaunchScreen.storyboard */,
 				E4838255247BA33B002C3708 /* Info.plist */,
+				E48382B4247BA95E002C3708 /* ConsentDocument.swift */,
+				E48382B6247BAB68002C3708 /* ConsentTask.swift */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -220,6 +257,22 @@
 			path = "Cozie WatchKit Extension";
 			sourceTree = "<group>";
 		};
+		E48382A3247BA676002C3708 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E48382A9247BA676002C3708 /* ResearchKit.framework */,
+				E48382AB247BA676002C3708 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E48382AD247BA713002C3708 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,6 +284,7 @@
 				E4838241247BA33A002C3708 /* Frameworks */,
 				E4838242247BA33A002C3708 /* Resources */,
 				E4838295247BA33C002C3708 /* Embed Watch Content */,
+				E48382B3247BA713002C3708 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -352,6 +406,12 @@
 			mainGroup = E483823B247BA33A002C3708;
 			productRefGroup = E4838245247BA33A002C3708 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E48382A3247BA676002C3708 /* Products */;
+					ProjectRef = E48382A2247BA676002C3708 /* ResearchKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E4838243247BA33A002C3708 /* Cozie */,
@@ -362,6 +422,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E48382A9247BA676002C3708 /* ResearchKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ResearchKit.framework;
+			remoteRef = E48382A8247BA676002C3708 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E48382AB247BA676002C3708 /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = E48382AA247BA676002C3708 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E4838242247BA33A002C3708 /* Resources */ = {
@@ -413,6 +490,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E483824C247BA33A002C3708 /* ViewController.swift in Sources */,
+				E48382B5247BA95E002C3708 /* ConsentDocument.swift in Sources */,
+				E48382B7247BAB68002C3708 /* ConsentTask.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
 			);
