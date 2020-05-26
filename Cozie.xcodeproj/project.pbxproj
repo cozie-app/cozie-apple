@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E47351C7247C9D230079D11A /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47351C6247C9D230079D11A /* SurveyTask.swift */; };
 		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
 		E483824C247BA33A002C3708 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483824B247BA33A002C3708 /* ViewController.swift */; };
@@ -111,6 +112,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E47351C6247C9D230079D11A /* SurveyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4838247247BA33A002C3708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4838249247BA33A002C3708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				E4838255247BA33B002C3708 /* Info.plist */,
 				E48382B4247BA95E002C3708 /* ConsentDocument.swift */,
 				E48382B6247BAB68002C3708 /* ConsentTask.swift */,
+				E47351C6247C9D230079D11A /* SurveyTask.swift */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 			files = (
 				E483824C247BA33A002C3708 /* ViewController.swift in Sources */,
 				E48382B5247BA95E002C3708 /* ConsentDocument.swift in Sources */,
+				E47351C7247C9D230079D11A /* SurveyTask.swift in Sources */,
 				E48382B7247BAB68002C3708 /* ConsentTask.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,

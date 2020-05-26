@@ -21,6 +21,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         present(taskViewController, animated: true, completion: nil)
     }
     
+    @IBAction func SurveyButton(_ sender: Any) {
+        let taskViewController = ORKTaskViewController(task: SurveyTask, taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

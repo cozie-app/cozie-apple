@@ -23,6 +23,14 @@
                                     <action selector="ConsentButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="af8-gN-7bY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiU-Gx-vJd">
+                                <rect key="frame" x="183" y="471" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Survey"/>
+                                <connections>
+                                    <action selector="SurveyButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HsR-ha-WxG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Uee-0j-aNJ"/>
