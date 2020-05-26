@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E47351C7247C9D230079D11A /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47351C6247C9D230079D11A /* SurveyTask.swift */; };
+		E47351DF247D017E0079D11A /* Onboarding in Resources */ = {isa = PBXBuildFile; fileRef = E47351DB247D017E0079D11A /* Onboarding */; };
+		E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E47351E2247D0F5D0079D11A /* HealthKit.framework */; };
 		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
 		E483824C247BA33A002C3708 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483824B247BA33A002C3708 /* ViewController.swift */; };
@@ -113,6 +115,9 @@
 
 /* Begin PBXFileReference section */
 		E47351C6247C9D230079D11A /* SurveyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
+		E47351DB247D017E0079D11A /* Onboarding */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Onboarding; path = ../../ResearchKit/samples/ORKParkinsonStudy/ORKParkinsonStudy/Onboarding; sourceTree = "<group>"; };
+		E47351E1247D0F5D0079D11A /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
+		E47351E2247D0F5D0079D11A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4838247247BA33A002C3708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4838249247BA33A002C3708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E48382B1247BA713002C3708 /* ResearchKit.framework in Frameworks */,
+				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +211,8 @@
 		E4838246247BA33A002C3708 /* Cozie */ = {
 			isa = PBXGroup;
 			children = (
+				E47351E1247D0F5D0079D11A /* Cozie.entitlements */,
+				E47351DB247D017E0079D11A /* Onboarding */,
 				E4838247247BA33A002C3708 /* AppDelegate.swift */,
 				E4838249247BA33A002C3708 /* SceneDelegate.swift */,
 				E483824B247BA33A002C3708 /* ViewController.swift */,
@@ -272,6 +280,7 @@
 		E48382AD247BA713002C3708 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E47351E2247D0F5D0079D11A /* HealthKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -449,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				E47351DF247D017E0079D11A /* Onboarding in Resources */,
 				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
 			);
@@ -780,6 +790,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6729H674Z;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -798,6 +809,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6729H674Z;
 				INFOPLIST_FILE = Cozie/Info.plist;
