@@ -84,15 +84,35 @@ class InterfaceController: WKInterfaceController {
         
         print("pressed button")
         print(questions[currentCount].options[rowIndex])
-//        pushController(withName: "InterfaceController", context: tableData[rowIndex])
 
         // increment received number by one
         currentCount = currentCount + 1
         
         if (currentCount>1){
             currentCount = 0
+            pushController(withName: "ThankYouController", context: tableData[rowIndex])
         }
         
         loadTableData(question: &questions[currentCount])
     }
+}
+
+class ThankYouController: WKInterfaceController {
+    
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
+        
+    }
+
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
 }

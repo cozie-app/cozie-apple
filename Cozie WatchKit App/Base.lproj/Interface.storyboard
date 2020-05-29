@@ -11,13 +11,13 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label alignment="center" text="Label" textAlignment="center" id="uMg-er-eCg"/>
+                        <label alignment="center" text="Question" textAlignment="center" id="uMg-er-eCg"/>
                         <table alignment="left" id="VSl-R8-QQf">
                             <items>
                                 <tableRow identifier="RowController" id="dkd-Gf-waU" customClass="RowController" customModule="Cozie_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="eiI-gO-VT7">
                                         <items>
-                                            <label width="136" height="57" alignment="center" verticalAlignment="center" text="Label" id="hLf-jC-wtF"/>
+                                            <label width="136" height="57" alignment="center" verticalAlignment="center" text="Options" id="hLf-jC-wtF"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -34,6 +34,17 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="39"/>
+        </scene>
+        <!--ThankYouController-->
+        <scene sceneID="dbT-WQ-eav">
+            <objects>
+                <controller identifier="ThankYouController" id="yx7-Sa-UIg" customClass="ThankYouController" customModule="Cozie_WatchKit_Extension">
+                    <items>
+                        <label width="136" height="175" alignment="center" verticalAlignment="center" text="Thank you for completing the Cozie survey" textAlignment="center" numberOfLines="0" id="JYx-gX-JiO"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="490" y="39"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
