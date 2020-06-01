@@ -26,13 +26,24 @@ class InterfaceController: WKInterfaceController {
         let nextQuestion: Int
     }
     
+    // structure which is used to save user's answers
+    struct Answer {
+        let question: String
+        let answer: String
+    }
+    
     // array of questions
     var questions = [Question]()
     
+    // array of answers
+    var answers = [Answer]()
     
+    // temp array to store the answers and for testing purposes
+    var answersArray: [Int] = []
+
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
+
         // append new questions to the questions array
         loadQuestions()
         
@@ -59,7 +70,7 @@ class InterfaceController: WKInterfaceController {
         // set the title of the question
         questionTitle.setText(question.title)
         
-        // set the nunmber of rows in the table
+        // set the number of rows in the table
         tableView.setNumberOfRows(question.options.count, withRowType: "RowController")
         
         // find the index of the next question to show
@@ -81,12 +92,18 @@ class InterfaceController: WKInterfaceController {
         print("pressed button")
         print(questions[currentQuestion].options[rowIndex])
 
+        // testing the answer array
+        answersArray.append(rowIndex)
+
+
         // increment received number by one
         currentQuestion = nextQuestion
         
         if (currentQuestion == 999){
             currentQuestion = 0
             pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
+            PostRequest()
+            answersArray.removeAll()
         }
         
         loadTableData(question: &questions[currentQuestion])
@@ -101,6 +118,55 @@ class InterfaceController: WKInterfaceController {
         
         questions += [q0, q1, q2, q3]
     }
+
+    private func PostRequest() {
+        //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
+
+        let parameters = ["answers": answersArray, "name": "jack"] as [String : Any]
+
+        //create the url with URL
+        let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
+
+        //create the session object
+        let session = URLSession.shared
+
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+        } catch let error {
+            print(error.localizedDescription)
+        }
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+
+            guard error == nil else {
+                return
+            }
+
+            guard let data = data else {
+                return
+            }
+
+            do {
+                //create json object from data
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print(json)
+                    // handle json...
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+    }
+
 }
 
 class ThankYouController: WKInterfaceController {
