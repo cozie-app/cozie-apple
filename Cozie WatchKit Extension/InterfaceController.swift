@@ -12,6 +12,12 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
+    // todo allow the user to go back to previous question and close the survey if need be
+    // todo get user's location
+    // todo get physiological parameters
+    // todo implement notifications
+    // todo save current survey responses if POST request was not successful
+
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
     
@@ -27,20 +33,10 @@ class InterfaceController: WKInterfaceController {
         let identifier: String
     }
     
-    // structure which is used to save user's answers
-    struct Answer {
-        let question: String
-        let answer: String
-    }
-    
     // array of questions
     var questions = [Question]()
     
-    // array of answers
-//    var answers = [Answer]()
-    
     // temp array to store the answers and for testing purposes
-    var answersArray: [Int] = []
     var answers: [String: String] = [:]
 
     override func awake(withContext context: Any?) {
@@ -48,9 +44,6 @@ class InterfaceController: WKInterfaceController {
 
         // append new questions to the questions array
         loadQuestions()
-        
-        // print the title of the question appearing on screen
-        print(questions[currentQuestion].title)
         
         // changes the text and labels in the table view
         loadTableData(question: &questions[currentQuestion])
@@ -78,7 +71,7 @@ class InterfaceController: WKInterfaceController {
         // find the index of the next question to show
         nextQuestion = question.nextQuestion
         
-        // set the label in each row of the table
+        // set the label in each row of the table and the image
         for (index, rowModel) in question.options.enumerated() {
 
             if let rowController = tableView.rowController(at: index) as? RowController {
@@ -90,12 +83,8 @@ class InterfaceController: WKInterfaceController {
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
-        
-        print("pressed button")
-        print(questions[currentQuestion].options[rowIndex])
 
-        // testing the answer array
-        answersArray.append(rowIndex)
+        // adding the response to the dictionary
         answers[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
         // increment received number by one
@@ -103,9 +92,8 @@ class InterfaceController: WKInterfaceController {
         
         if (currentQuestion == 999){
             currentQuestion = 0
-            pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
+//            pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
             PostRequest()
-            answersArray.removeAll()
         }
         
         loadTableData(question: &questions[currentQuestion])
@@ -117,9 +105,10 @@ class InterfaceController: WKInterfaceController {
         let q1 = Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"], icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met")
         let q2 = Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"], nextQuestion: 4, identifier: "location-place")
         let q3 = Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4, identifier: "mood")
-        let q4 = Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"], nextQuestion: 999, identifier: "location-in-out")
-        
-        questions += [q0, q1, q2, q3, q4]
+        let q4 = Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"], nextQuestion: 5, identifier: "location-in-out")
+        let q5 = Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"], icons: ["submit", "delete"], nextQuestion: 999, identifier: "end")
+
+        questions += [q0, q1, q2, q3, q4, q5]
     }
 
     private func PostRequest() {
@@ -170,23 +159,4 @@ class InterfaceController: WKInterfaceController {
         task.resume()
     }
 
-}
-
-class ThankYouController: WKInterfaceController {
-    
-    override func awake(withContext context: Any?) {
-        super.awake(withContext: context)
-        
-    }
-    
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-    
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-    
 }

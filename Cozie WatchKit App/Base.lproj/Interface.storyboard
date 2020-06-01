@@ -18,7 +18,7 @@
                                     <group key="rootItem" width="1" alignment="left" id="eiI-gO-VT7">
                                         <items>
                                             <imageView width="30" height="30" alignment="left" verticalAlignment="center" id="nJN-tB-LVt"/>
-                                            <label width="136" height="57" alignment="center" verticalAlignment="center" text="Options" id="hLf-jC-wtF"/>
+                                            <label width="136" height="57" alignment="center" verticalAlignment="center" text="Options" textAlignment="center" id="hLf-jC-wtF"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -36,17 +36,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="39"/>
-        </scene>
-        <!--ThankYouController-->
-        <scene sceneID="dbT-WQ-eav">
-            <objects>
-                <controller identifier="ThankYouController" id="yx7-Sa-UIg" customClass="ThankYouController" customModule="Cozie_WatchKit_Extension">
-                    <items>
-                        <label width="136" height="175" alignment="center" verticalAlignment="center" text="Thank you for completing the Cozie survey" textAlignment="center" numberOfLines="0" id="JYx-gX-JiO"/>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="490" y="39"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
