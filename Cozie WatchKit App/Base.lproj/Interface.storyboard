@@ -17,7 +17,7 @@
                                 <tableRow identifier="RowController" id="dkd-Gf-waU" customClass="RowController" customModule="Cozie_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="eiI-gO-VT7">
                                         <items>
-                                            <imageView width="30" height="30" alignment="left" verticalAlignment="center" image="green_watch" id="nJN-tB-LVt"/>
+                                            <imageView width="30" height="30" alignment="left" verticalAlignment="center" id="nJN-tB-LVt"/>
                                             <label width="136" height="57" alignment="center" verticalAlignment="center" text="Options" id="hLf-jC-wtF"/>
                                         </items>
                                     </group>
@@ -80,7 +80,4 @@
             <point key="canvasLocation" x="468" y="345"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="green_watch" width="106" height="106"/>
-    </resources>
 </document>

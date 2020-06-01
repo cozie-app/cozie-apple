@@ -94,7 +94,7 @@ class InterfaceController: WKInterfaceController {
     
     private func loadQuestions() {
         
-        let q0 = Question(title: "q1", options: ["Fine", "Happy"], icons: ["green_watch", "blue_watch"], nextQuestion: 1)
+        let q0 = Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"], icons: ["cold", "happy", "hot"], nextQuestion: 1)
         let q1 = Question(title: "q2", options: ["Good", "Bad"], icons: ["green_watch", "blue_watch"], nextQuestion: 3)
         let q2 = Question(title: "q3", options: ["Cold", "Hot"], icons: ["green_watch", "blue_watch"], nextQuestion: 3)
         let q3 = Question(title: "q4", options: ["Cold", "Hot"], icons: ["green_watch", "blue_watch"], nextQuestion: 999)
