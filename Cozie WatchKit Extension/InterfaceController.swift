@@ -13,32 +13,34 @@ import Foundation
 class InterfaceController: WKInterfaceController {
 
     @IBOutlet var questionTitle: WKInterfaceLabel!
-    
     @IBOutlet var tableView: WKInterfaceTable!
     
-    var currentCount = 0
+    var currentQuestion = 0
+    var nextQuestion = 0
     
+    // structure which is used for the questions
     struct Question {
         let title: String
         let options: Array<String>
+        let icons: Array<String>
+        let nextQuestion: Int
     }
     
-    let tableData = ["one", "two"]
+    // array of questions
+    var questions = [Question]()
+    
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        let firtsQuestion = Question(title: "thermal sensation", options: ["yes", "no", "maybe"])
-        let secondQuestion = Question(title: "thermal preference", options: ["yesss", "nooo", "maybeeee"])
+        // append new questions to the questions array
+        loadQuestions()
         
-        var questions: [Question] = []
+        // print the title of the question appearing on screen
+        print(questions[currentQuestion].title)
         
-        questions.append(firtsQuestion)
-        questions.append(secondQuestion)
-        
-        print(questions[currentCount].title)
-        
-        loadTableData(question: &questions[currentCount])
+        // changes the text and labels in the table view
+        loadTableData(question: &questions[currentQuestion])
     }
 
     
@@ -54,46 +56,50 @@ class InterfaceController: WKInterfaceController {
     
     private func loadTableData(question: inout Question) {
         
+        // set the title of the question
         questionTitle.setText(question.title)
-
+        
+        // set the nunmber of rows in the table
         tableView.setNumberOfRows(question.options.count, withRowType: "RowController")
-
+        
+        // find the index of the next question to show
+        nextQuestion = question.nextQuestion
+        
+        // set the label in each row of the table
         for (index, rowModel) in question.options.enumerated() {
 
             if let rowController = tableView.rowController(at: index) as? RowController {
                 rowController.rowLabel.setText(rowModel)
+                rowController.rowImage.setImageNamed(question.icons[index])
             }
         }
-        
-        print("Current counter: \(currentCount)")
-        
-        print(currentCount)
 
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         
-        let firtsQuestion = Question(title: "thermal sensation", options: ["yes", "no", "maybe"])
-        let secondQuestion = Question(title: "thermal preference", options: ["yesss", "nooo", "maybeeee"])
-        
-        var questions: [Question] = []
-        
-        questions.append(firtsQuestion)
-        questions.append(secondQuestion)
-        
-        
         print("pressed button")
-        print(questions[currentCount].options[rowIndex])
+        print(questions[currentQuestion].options[rowIndex])
 
         // increment received number by one
-        currentCount = currentCount + 1
+        currentQuestion = nextQuestion
         
-        if (currentCount>1){
-            currentCount = 0
-            pushController(withName: "ThankYouController", context: tableData[rowIndex])
+        if (currentQuestion == 999){
+            currentQuestion = 0
+            pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
         }
         
-        loadTableData(question: &questions[currentCount])
+        loadTableData(question: &questions[currentQuestion])
+    }
+    
+    private func loadQuestions() {
+        
+        let q0 = Question(title: "q1", options: ["Fine", "Happy"], icons: ["green_watch", "blue_watch"], nextQuestion: 1)
+        let q1 = Question(title: "q2", options: ["Good", "Bad"], icons: ["green_watch", "blue_watch"], nextQuestion: 3)
+        let q2 = Question(title: "q3", options: ["Cold", "Hot"], icons: ["green_watch", "blue_watch"], nextQuestion: 3)
+        let q3 = Question(title: "q4", options: ["Cold", "Hot"], icons: ["green_watch", "blue_watch"], nextQuestion: 999)
+        
+        questions += [q0, q1, q2, q3]
     }
 }
 
@@ -103,7 +109,6 @@ class ThankYouController: WKInterfaceController {
         super.awake(withContext: context)
         
     }
-
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user

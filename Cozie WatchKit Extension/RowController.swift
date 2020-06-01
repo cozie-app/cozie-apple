@@ -10,5 +10,6 @@ import Foundation
 import WatchKit
 
 class RowController: NSObject {
-    @IBOutlet var rowLabel: WKInterfaceLabel!
+    @IBOutlet weak var rowLabel: WKInterfaceLabel!
+    @IBOutlet weak var rowImage: WKInterfaceImage!
 }
