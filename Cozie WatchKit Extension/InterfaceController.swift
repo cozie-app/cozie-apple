@@ -24,6 +24,7 @@ class InterfaceController: WKInterfaceController {
         let options: Array<String>
         let icons: Array<String>
         let nextQuestion: Int
+        let identifier: String
     }
     
     // structure which is used to save user's answers
@@ -36,10 +37,11 @@ class InterfaceController: WKInterfaceController {
     var questions = [Question]()
     
     // array of answers
-    var answers = [Answer]()
+//    var answers = [Answer]()
     
     // temp array to store the answers and for testing purposes
     var answersArray: [Int] = []
+    var answers: [String: String] = [:]
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -94,7 +96,7 @@ class InterfaceController: WKInterfaceController {
 
         // testing the answer array
         answersArray.append(rowIndex)
-
+        answers[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
         // increment received number by one
         currentQuestion = nextQuestion
@@ -111,18 +113,19 @@ class InterfaceController: WKInterfaceController {
     
     private func loadQuestions() {
         
-        let q0 = Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"], icons: ["cold", "happy", "hot"], nextQuestion: 1)
-        let q1 = Question(title: "q2", options: ["Good", "Bad"], icons: ["green_watch", "blue_watch"], nextQuestion: 3)
-        let q2 = Question(title: "q3", options: ["Cold", "Hot"], icons: ["green_watch", "blue_watch"], nextQuestion: 3)
-        let q3 = Question(title: "q4", options: ["Cold", "Hot"], icons: ["green_watch", "blue_watch"], nextQuestion: 999)
+        let q0 = Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"], icons: ["cold", "happy", "hot"], nextQuestion: 1, identifier: "tc-preference")
+        let q1 = Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"], icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met")
+        let q2 = Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"], nextQuestion: 4, identifier: "location-place")
+        let q3 = Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4, identifier: "mood")
+        let q4 = Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"], nextQuestion: 999, identifier: "location-in-out")
         
-        questions += [q0, q1, q2, q3]
+        questions += [q0, q1, q2, q3, q4]
     }
 
     private func PostRequest() {
         //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
 
-        let parameters = ["answers": answersArray, "name": "jack"] as [String : Any]
+        let parameters = ["answers": answers, "timestamp": NSDate().timeIntervalSince1970] as [String : Any]
 
         //create the url with URL
         let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
