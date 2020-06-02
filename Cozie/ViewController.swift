@@ -10,13 +10,13 @@ import UIKit
 import ResearchKit
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate {
-    
+
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         //Handle results with taskViewController.result
         taskViewController.dismiss(animated: true, completion: nil)
-        
+
         print("Start printing results ..................")
-        
+
         if let results = taskViewController.result.results as? [ORKStepResult] {
             print("Results: \(results)")
             print("End results ........")
@@ -45,7 +45,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
 
         }
     }
-    
+
     @IBAction func ConsentButton(_ sender: Any) {
         let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
         taskViewController.delegate = self
@@ -60,14 +60,26 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
 
 }
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        let taskResult = taskViewController.result
+        // You could do something with the result here.
+
+        // Then, dismiss the task view controller.
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
     }
 
 }

@@ -112,7 +112,7 @@ class InterfaceController: WKInterfaceController {
     }
 
     private func PostRequest() {
-        //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
+        // https://stackoverflow.com/questions/26364914/http-request-in-swift-with-post-method
 
         let parameters = ["answers": answers, "timestamp": NSDate().timeIntervalSince1970] as [String : Any]
 
