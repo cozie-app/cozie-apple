@@ -9,6 +9,9 @@
 import UIKit
 import ResearchKit
 
+// todo implement function which checks if consent process was completed
+// todo save the consent form in PDF so the user can keep a copy and send a copy to the researchers
+
 class ViewController: UIViewController, ORKTaskViewControllerDelegate {
 
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
@@ -47,7 +50,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     }
 
     @IBAction func ConsentButton(_ sender: Any) {
-        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: OnBoarding, taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
     }
@@ -77,6 +80,7 @@ class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // the consent form is appearing when the user visits with tab
         let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)

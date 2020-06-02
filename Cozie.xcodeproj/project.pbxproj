@@ -30,6 +30,7 @@
 		E48382B5247BA95E002C3708 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48382B4247BA95E002C3708 /* ConsentDocument.swift */; };
 		E48382B7247BAB68002C3708 /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48382B6247BAB68002C3708 /* ConsentTask.swift */; };
 		E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCBEAA247E0AE100A5BE43 /* RowController.swift */; };
+		E4DEA3C1248603D90022570F /* ParticipantInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEA3C0248603D90022570F /* ParticipantInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		E48382B4247BA95E002C3708 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		E48382B6247BAB68002C3708 /* ConsentTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
 		E4BCBEAA247E0AE100A5BE43 /* RowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowController.swift; sourceTree = "<group>"; };
+		E4DEA3C0248603D90022570F /* ParticipantInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				E48382B4247BA95E002C3708 /* ConsentDocument.swift */,
 				E48382B6247BAB68002C3708 /* ConsentTask.swift */,
 				E47351C6247C9D230079D11A /* SurveyTask.swift */,
+				E4DEA3C0248603D90022570F /* ParticipantInformation.swift */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 			files = (
 				E483824C247BA33A002C3708 /* ViewController.swift in Sources */,
 				E48382B5247BA95E002C3708 /* ConsentDocument.swift in Sources */,
+				E4DEA3C1248603D90022570F /* ParticipantInformation.swift in Sources */,
 				E47351C7247C9D230079D11A /* SurveyTask.swift in Sources */,
 				E48382B7247BAB68002C3708 /* ConsentTask.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,

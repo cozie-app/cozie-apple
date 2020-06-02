@@ -57,8 +57,8 @@ public var ConsentDocument: ORKConsentDocument {
   section10.content = "You will receive gift vouchers."
 
   // Create additional section objects for later sections
-//  consentDocument.sections = [section1, section2, section3, section4, section5, section6, section7, section8, section9, section10]
-  consentDocument.sections = [section1, section10]
+  consentDocument.sections = [section1, section2, section3, section4, section5, section6, section7, section8, section9, section10]
+//  consentDocument.sections = [section1, section10]
 
   consentDocument.addSignature(ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: "ConsentDocumentParticipantSignature"))
 
