@@ -117,7 +117,7 @@ class InterfaceController: WKInterfaceController {
         let parameters = ["answers": answers, "timestamp": NSDate().timeIntervalSince1970] as [String : Any]
 
         //create the url with URL
-        let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
+        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url
 
         //create the session object
         let session = URLSession.shared
@@ -131,7 +131,8 @@ class InterfaceController: WKInterfaceController {
         } catch let error {
             print(error.localizedDescription)
         }
-
+        
+        request.setValue("3lvUimwWTv3UlSjSct0RS3yxQWIKFG0G7bcWtM10", forHTTPHeaderField: "x-api-key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
@@ -146,6 +147,7 @@ class InterfaceController: WKInterfaceController {
                 return
             }
 
+            // todo fix the code below since it is not parsing the JSON and not checking for response number
             do {
                 //create json object from data
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {

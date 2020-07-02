@@ -1,8 +1,8 @@
 {
     "aps": {
         "alert": {
-            "body": "Test message",
-            "title": "Optional title",
+            "body": "Complete the survey",
+            "title": "Title of the notification",
             "subtitle": "Optional subtitle"
         },
         "category": "myCategory",
