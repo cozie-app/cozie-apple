@@ -146,6 +146,12 @@ class InterfaceController: WKInterfaceController {
             guard let data = data else {
                 return
             }
+            
+            if let response = response {
+                let nsHTTPResponse = response as! HTTPURLResponse
+                let statusCode = nsHTTPResponse.statusCode
+                print ("status code = \(statusCode)")
+            }
 
             // todo fix the code below since it is not parsing the JSON and not checking for response number
             do {
