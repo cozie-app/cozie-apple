@@ -8,19 +8,19 @@
 
 import WatchKit
 import Foundation
+import CoreLocation
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     // todo allow the user to go back to previous question and close the survey if need be
-    // todo get user's location
     // todo get physiological parameters
     // todo add user ID
-    // todo implement notifications
-    // todo save current survey responses if POST request was not successful
 
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
+    
+    var locationManager: CLLocationManager = CLLocationManager()
 
     var currentQuestion = 0
     var nextQuestion = 0
@@ -44,8 +44,8 @@ class InterfaceController: WKInterfaceController {
         let heartRate: Int
         let bodyPresence: Bool
         let participantID: String
-        let latitude: Float
-        let longitude: Float
+        let latitude: Double
+        let longitude: Double
         let responses: [String: String]
     }
 
@@ -53,6 +53,9 @@ class InterfaceController: WKInterfaceController {
     var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
 
     var startTime = ""  // placeholder for the start time of the survey
+    
+    var lat: Double = 0.0
+    var long: Double = 0.0
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -62,6 +65,11 @@ class InterfaceController: WKInterfaceController {
 
         // changes the text and labels in the table view
         loadTableData(question: &questions[currentQuestion])
+        
+        locationManager.requestWhenInUseAuthorization()
+        // change if more accurate location is needed
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.delegate = self
     }
 
 
@@ -98,9 +106,10 @@ class InterfaceController: WKInterfaceController {
     }
 
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
-
+        
         if (currentQuestion == 0){
             startTime = GetDateTimeISOString()
+            let currentLocation: Void = locationManager.requestLocation()
         }
 
         // adding the response to the tmp array of strings
@@ -119,7 +128,7 @@ class InterfaceController: WKInterfaceController {
 
             // todo change the constant values below with data from Apple APIs
             SendDataDatabase(answer: Answer(startTime: startTime, endTime: endTime, heartRate: 80, bodyPresence: true,
-                    participantID: "test999", latitude: 0.5, longitude: 0.5, responses: tmpAnswers))
+                    participantID: "test999", latitude: lat, longitude: long, responses: tmpAnswers))
         }
 
         // show next question
@@ -239,7 +248,8 @@ class InterfaceController: WKInterfaceController {
         // run the async POST request
         task.resume()
         
-        // todo maybe write not blocking code or show a message or loader to informe user
+        // todo maybe write not blocking code or show a message or loader to inform user
+        // https://github.com/hirokimu/EMTLoadingIndicator
         sem.wait()
         return responseStatusCode
     }
@@ -249,6 +259,27 @@ class InterfaceController: WKInterfaceController {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions.insert(.withFractionalSeconds)
         return formatter.string(from: date)
+    }
+    
+    func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
+            
+        let currentLocation = locations[0]
+        
+        // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
+        lat = currentLocation.coordinate.latitude
+        long = currentLocation.coordinate.longitude
+        
+        print("User location", lat, long)
+
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+       if let error = error as? CLError, error.code == .denied {
+          // Location updates are not authorized.
+          manager.stopUpdatingLocation()
+          return
+       }
+       // Notify the user of any errors.
     }
 
 }
