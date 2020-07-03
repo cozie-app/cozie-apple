@@ -52,11 +52,13 @@ class InterfaceController: WKInterfaceController {
     var answers = [Answer]()  // it stores the answer after user as completed Cozie
     var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
 
+    var startTime = ""  // placeholder for the start time of the survey
+
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
         // append new questions to the questions array
-        loadQuestions()
+        defineQuestions()
 
         // changes the text and labels in the table view
         loadTableData(question: &questions[currentQuestion])
@@ -97,85 +99,119 @@ class InterfaceController: WKInterfaceController {
 
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
 
+        if (currentQuestion == 0){
+            startTime = GetDateTimeISOString()
+        }
+
         // adding the response to the tmp array of strings
         tmpAnswers[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
-        // increment received number by one
+        // updates the index of the question to be shown
         currentQuestion = nextQuestion
 
         // check if user completed the survey
         if (currentQuestion == 999) {
             currentQuestion = 0  // reset question flow to start
-//            pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
 
-            let date = Date()
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions.insert(.withFractionalSeconds)  // this is only available effective iOS 11 and macOS 10.13
-            let endTime = formatter.string(from: date)
-            
-            answers += [Answer(startTime: endTime, endTime: endTime, heartRate: 80, bodyPresence: true,
-                    participantID: "test999", latitude: 0.5, longitude: 0.5, responses: tmpAnswers)]
+            // pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
 
-            // fixme loop through answers 
-            PostRequest(message: answers[0])
+            let endTime = GetDateTimeISOString()
+
+            // todo change the constant values below with data from Apple APIs
+            SendDataDatabase(answer: Answer(startTime: startTime, endTime: endTime, heartRate: 80, bodyPresence: true,
+                    participantID: "test999", latitude: 0.5, longitude: 0.5, responses: tmpAnswers))
         }
 
+        // show next question
         loadTableData(question: &questions[currentQuestion])
     }
 
-    private func loadQuestions() {
+    private func defineQuestions() {
 
-        let q0 = Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"], 
-                icons: ["cold", "happy", "hot"], nextQuestion: 1, identifier: "tc-preference")
-        let q1 = Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"], 
-                icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met")
-        let q2 = Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"], 
-                nextQuestion: 4, identifier: "location-place")
-        let q3 = Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], 
-                nextQuestion: 4, identifier: "mood")
-        let q4 = Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"], 
-                nextQuestion: 5, identifier: "location-in-out")
-        let q5 = Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"], 
-                icons: ["submit", "delete"], nextQuestion: 999, identifier: "end")
+        // Last question MUST have nextQuestion set to 999
 
-        questions += [q0, q1, q2, q3, q4, q5]
+        questions += [
+            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"], 
+                    icons: ["cold", "happy", "hot"], nextQuestion: 1, identifier: "tc-preference"),
+            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
+                    icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met"),
+            Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
+                    nextQuestion: 4, identifier: "location-place"),
+            Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4, 
+                    identifier: "mood"),
+            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
+                    nextQuestion: 5, identifier: "location-in-out"),
+            Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
+                    icons: ["submit", "delete"], nextQuestion: 999, identifier: "end"),
+        ]
     }
 
-    private func PostRequest(message: Answer) {
+    private func SendDataDatabase(answer: Answer) {
+
         // https://stackoverflow.com/questions/26364914/http-request-in-swift-with-post-method
 
-//        let parameters = ["answers": message, "timestamp": NSDate().timeIntervalSince1970] as [String: Any]
+        // check if answers are stored locally in UserDefaults, the key is answers
+        if let data = UserDefaults.standard.value(forKey:"answers") as? Data {
 
-        //create the url with URL
-        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url
+            // decode the messages stored in the local memory and convert them back to structures
+            var messages = try? PropertyListDecoder().decode(Array<Answer>.self, from: data)
 
-        //create the session object
+            // add the last completed survey
+            messages! += [answer]
+
+            var indexMessagesToDelete = [Int]()
+            // print("Number of messages to be sent \(messages?.count)")
+            for (var index, message) in messages!.enumerated() {
+                let statusCodeHTTP = PostRequest(message: message)
+                if (statusCodeHTTP == 200){
+                    indexMessagesToDelete.append(index)
+                }
+            }
+
+            // delete the messages that have been sent
+            for index in indexMessagesToDelete.reversed() {
+                messages?.remove(at: index)
+            }
+
+            // save the messages to local storage so I replace what was previously there
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(messages), forKey:"answers")
+
+        }
+    }
+
+    private func PostRequest(message: Answer) -> Int {
+        // create the url with URL
+//        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url
+        let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
+
+        // create the session object
         let session = URLSession.shared
 
-        //now create the URLRequest object using the url object
+        // now create the URLRequest object using the url object
         var request = URLRequest(url: url)
         request.httpMethod = "POST" //set http method as POST
 
         do {
-            // pass dictionary to nsdata object and set it as request body
-//            request.httpBody = try JSONSerialization.data(withJSONObject: message, options: .prettyPrinted)
-            let jsonData = try JSONEncoder().encode(message)
-//            let jsonString = String(data: jsonData, encoding: .utf8)!
-//            request.httpBody = try JSONSerialization.data(withJSONObject: jsonString, options: .prettyPrinted)
-            request.httpBody = jsonData
+            request.httpBody = try JSONEncoder().encode(message)
         } catch let error {
             print(error.localizedDescription)
         }
 
-        request.setValue("3lvUimwWTv3UlSjSct0RS3yxQWIKFG0G7bcWtM10", forHTTPHeaderField: "x-api-key")
+//        request.setValue("3lvUimwWTv3UlSjSct0RS3yxQWIKFG0G7bcWtM10", forHTTPHeaderField: "x-api-key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+
+        var responseStatusCode = 0
+        // semaphore to wait for the function to complete
+        let sem = DispatchSemaphore.init(value: 0)
 
         //create dataTask using the session object to send data to the server
         let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
 
+            defer { sem.signal() }
+
             guard error == nil else {
-                // todo save data to storage https://stackoverflow.com/questions/44876420/save-struct-to-userdefaults
                 return
             }
 
@@ -186,21 +222,33 @@ class InterfaceController: WKInterfaceController {
             if let response = response {
                 let nsHTTPResponse = response as! HTTPURLResponse
                 let statusCode = nsHTTPResponse.statusCode
-                print("status code = \(statusCode)")
+                responseStatusCode = statusCode
             }
 
-            // todo fix the code below since it is not parsing the JSON and not checking for response number
             do {
                 //create json object from data
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    print(json)
+                    // print(json)
                     // handle json...
                 }
             } catch let error {
                 print(error.localizedDescription)
             }
         })
+
+        // run the async POST request
         task.resume()
+        
+        // todo maybe write not blocking code or show a message or loader to informe user
+        sem.wait()
+        return responseStatusCode
+    }
+
+    private func GetDateTimeISOString() -> String {
+        let date = Date()
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        return formatter.string(from: date)
     }
 
 }
