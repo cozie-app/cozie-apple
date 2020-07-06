@@ -15,7 +15,7 @@ public var OnBoarding: ORKOrderedTask {
 
     let instructionStep = ORKInstructionStep(identifier: "On-boarding")
     instructionStep.title = "On-boarding survey"
-    instructionStep.text = "We need some info from you"
+    instructionStep.text = "Please complete this survey before commencing collecting data."
     steps += [instructionStep]
 
     let heightQuestion = ORKQuestionStep(identifier: "heightQuestionStep",

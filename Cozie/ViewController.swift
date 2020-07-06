@@ -21,8 +21,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         print("Start printing results ..................")
 
         if let results = taskViewController.result.results as? [ORKStepResult] {
-            print("Results: \(results)")
-            print("End results ........")
+//            print("Results: \(results)")
+//            print("End results ........")
             for stepResult: ORKStepResult in results {
 
                 for result in stepResult.results as! [ORKResult] {
@@ -61,6 +61,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         present(taskViewController, animated: true, completion: nil)
     }
     
+    @IBAction func EligibilityButton(_ sender: Any) {
+        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,7 +87,7 @@ class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
         super.viewDidLoad()
 
         // the consent form is appearing when the user visits with tab
-        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: eligibilityTask, taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
     }
