@@ -16,27 +16,17 @@ eligibility using a navigable ordered task.
 
 public var TaskEligibility: ORKTask {
 
-    let questionTextOne = "Are you at least 21 years of age?"
-    let questionTextOneAnswer = "Yes"
-    let questionTextTwo = "Are you proficient in English?"
-    let questionTextTwoAnswer = "Yes"
-    let questionTextThree = "Have you planning to leave Singapore in the new month?"
-    let questionTextThreeAnswer = "No"
-
     // add here new identifiers if you need to add new questions
     enum Identifier {
-        case eligibilityTask
+        case EligibilityTask
         case eligibilityIntroStep
         case eligibilityFormStep
-        case eligibilityFormItem01
-        case eligibilityFormItem02
-        case eligibilityFormItem03
         case eligibilityIneligibleStep
         case eligibilityEligibleStep
     }
 
     // Intro step
-    let introStep = ORKInstructionStep(identifier: String(describing: Identifier.eligibilityIntroStep))
+    let introStep = ORKInstructionStep(identifier: "EligibilityTask")
     introStep.title = NSLocalizedString("Eligibility Task", comment: "")
     introStep.text = "Please complete this short survey to see if you are eligible in participating in the study"
     introStep.detailText = NSLocalizedString("""
@@ -58,14 +48,14 @@ public var TaskEligibility: ORKTask {
                                         ORKTextChoice(text: "N/A", value: "N/A" as NSCoding & NSCopying & NSObjectProtocol)]
     let answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
 
-    let formItem01 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem01),
-            text: questionTextOne, answerFormat: answerFormat)
+    let formItem01 = ORKFormItem(identifier: "AgeLimit",
+            text: "Are you at least 21 years of age?", answerFormat: answerFormat)
     formItem01.isOptional = false
-    let formItem02 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem02),
-            text: questionTextTwo, answerFormat: answerFormat)
+    let formItem02 = ORKFormItem(identifier: "LanguageProficiency",
+            text: "Are you proficient in English?", answerFormat: answerFormat)
     formItem02.isOptional = false
-    let formItem03 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem03),
-            text: questionTextThree, answerFormat: answerFormat)
+    let formItem03 = ORKFormItem(identifier: "LocationNextMonths",
+            text: "Have you planning to leave Singapore in the new month?", answerFormat: answerFormat)
     formItem03.isOptional = false
 
     formStep.formItems = [
@@ -85,7 +75,7 @@ public var TaskEligibility: ORKTask {
     eligibleStep.detailText = NSLocalizedString("You are eligible to join the study", comment: "")
 
     // Create the task
-    let eligibilityTask = ORKNavigableOrderedTask(identifier: String(describing: Identifier.eligibilityTask), steps: [
+    let eligibilityTask = ORKNavigableOrderedTask(identifier: String(describing: Identifier.EligibilityTask), steps: [
         introStep,
         formStep,
         ineligibleStep,
@@ -94,19 +84,19 @@ public var TaskEligibility: ORKTask {
 
     // Build navigation rules.
     var resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep),
-            resultIdentifier: String(describing: Identifier.eligibilityFormItem01))
+            resultIdentifier: "AgeLimit")
     let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector,
-            expectedAnswerValue: questionTextOneAnswer as NSCoding & NSCopying & NSObjectProtocol)
+            expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
 
     resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep),
-            resultIdentifier: String(describing: Identifier.eligibilityFormItem02))
+            resultIdentifier: "LanguageProficiency")
     let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector,
-            expectedAnswerValue: questionTextTwoAnswer as NSCoding & NSCopying & NSObjectProtocol)
+            expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
 
     resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep),
-            resultIdentifier: String(describing: Identifier.eligibilityFormItem03))
+            resultIdentifier: "LocationNextMonths")
     let predicateFormItem03 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector,
-            expectedAnswerValue: questionTextThreeAnswer as NSCoding & NSCopying & NSObjectProtocol)
+            expectedAnswerValue: "No" as NSCoding & NSCopying & NSObjectProtocol)
 
     let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01,
                                                                                 predicateFormItem02, predicateFormItem03])

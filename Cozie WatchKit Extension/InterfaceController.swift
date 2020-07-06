@@ -20,7 +20,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
-    
+
     var locationManager: CLLocationManager = CLLocationManager()
 
     var currentQuestion = 0
@@ -53,10 +53,11 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     }
 
     var answers = [Answer]()  // it stores the answer after user as completed Cozie
+    // todo delete variable below since it is not needed and in the loop update automatically answers.responses
     var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
 
     var startTime = ""  // placeholder for the start time of the survey
-    
+
     var lat: Double = 0.0
     var long: Double = 0.0
     var locationTimestamp = ""
@@ -69,7 +70,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
         // changes the text and labels in the table view
         loadTableData(question: &questions[currentQuestion])
-        
+
         locationManager.requestWhenInUseAuthorization()
         // change if more accurate location is needed
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -110,10 +111,10 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     }
 
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
-        
-        if (currentQuestion == 0){
+
+        if (currentQuestion == 0) {
             startTime = GetDateTimeISOString()
-            let currentLocation: Void = locationManager.requestLocation()
+            let _: Void = locationManager.requestLocation()
         }
 
         // adding the response to the tmp array of strings
@@ -133,7 +134,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
             // todo change the constant values below with data from Apple APIs
             SendDataDatabase(answer: Answer(startTime: startTime, endTime: endTime, heartRate: 80, bodyPresence: true,
-                    participantID: "test999", locationTimestamp: locationTimestamp, latitude: lat, longitude: long, 
+                    participantID: "test999", locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
                     responses: tmpAnswers))
 
             tmpAnswers.removeAll()
@@ -148,13 +149,13 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         // Last question MUST have nextQuestion set to 999
 
         questions += [
-            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"], 
+            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
                     icons: ["cold", "happy", "hot"], nextQuestion: 1, identifier: "tc-preference"),
             Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
                     icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met"),
             Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
                     nextQuestion: 4, identifier: "location-place"),
-            Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4, 
+            Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4,
                     identifier: "mood"),
             Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
                     nextQuestion: 5, identifier: "location-in-out"),
@@ -168,7 +169,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         // https://stackoverflow.com/questions/26364914/http-request-in-swift-with-post-method
 
         // check if answers are stored locally in UserDefaults, the key is answers
-        if let data = UserDefaults.standard.value(forKey:"answers") as? Data {
+        if let data = UserDefaults.standard.value(forKey: "answers") as? Data {
 
             // decode the messages stored in the local memory and convert them back to structures
             var messages = try? PropertyListDecoder().decode(Array<Answer>.self, from: data)
@@ -180,7 +181,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             // print("Number of messages to be sent \(messages?.count)")
             for (var index, message) in messages!.enumerated() {
                 let statusCodeHTTP = PostRequest(message: message)
-                if (statusCodeHTTP == 200){
+                if (statusCodeHTTP == 200) {
                     indexMessagesToDelete.append(index)
                 }
             }
@@ -191,7 +192,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             }
 
             // save the messages to local storage so I replace what was previously there
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(messages), forKey:"answers")
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(messages), forKey: "answers")
 
         }
     }
@@ -226,7 +227,9 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         //create dataTask using the session object to send data to the server
         let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
 
-            defer { sem.signal() }
+            defer {
+                sem.signal()
+            }
 
             guard error == nil else {
                 return
@@ -255,7 +258,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
         // run the async POST request
         task.resume()
-        
+
         // todo maybe write not blocking code or show a message or loader to inform user
         // https://github.com/hirokimu/EMTLoadingIndicator
         sem.wait()
@@ -268,32 +271,32 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         formatter.formatOptions.insert(.withFractionalSeconds)
         return formatter.string(from: date)
     }
-    
-    func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
-            
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
         let currentLocation = locations[0]
-        
+
         // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions.insert(.withFractionalSeconds)
         locationTimestamp = formatter.string(from: currentLocation.timestamp)
         lat = currentLocation.coordinate.latitude
         long = currentLocation.coordinate.longitude
-        
+
         print("User location", lat, long)
 
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-       if let error = error as? CLError, error.code == .denied {
-          // Location updates are not authorized.
-          manager.stopUpdatingLocation()
-          return
-       }
-       // Notify the user of any errors.
+        if let error = error as? CLError, error.code == .denied {
+            // Location updates are not authorized.
+            manager.stopUpdatingLocation()
+            return
+        }
+        // Notify the user of any errors.
     }
-    
-    @IBAction func backButtonAction(){
+
+    @IBAction func backButtonAction() {
         // todo the back button is working but only goes back by one question
 
         currentQuestion = previousQuestion
@@ -302,7 +305,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         loadTableData(question: &questions[currentQuestion])
     }
 
-    @IBAction func stopButtonAction(){
+    @IBAction func stopButtonAction() {
         currentQuestion = 0
 
         // show previous question
