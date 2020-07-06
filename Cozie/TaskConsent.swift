@@ -1,5 +1,5 @@
 //
-//  ConsentTask.swift
+//  TaskConsent.swift
 //  Cozie
 //
 //  Created by Federico Tartarini on 25/5/20.
@@ -9,15 +9,15 @@
 import Foundation
 import ResearchKit
 
-public var ConsentTask: ORKOrderedTask {
+public var TaskConsent: ORKOrderedTask {
 
     var steps = [ORKStep]()
 
-    var consentDocument = ConsentDocument
+    let consentDocument = ConsentInfo
     let visualConsentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
     steps += [visualConsentStep]
 
-    let signature = consentDocument.signatures!.first as! ORKConsentSignature
+    let signature = consentDocument.signatures!.first!
 
     let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
 

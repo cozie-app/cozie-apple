@@ -1,5 +1,5 @@
 //
-//  EligibilityQuestion.swift
+//  TaskEligibility.swift
 //  Cozie
 //
 //  Created by Federico Tartarini on 6/7/20.
@@ -14,7 +14,7 @@ A task demonstrating how the ResearchKit framework can be used to determine
 eligibility using a navigable ordered task.
 */
 
-public var eligibilityTask: ORKTask {
+public var TaskEligibility: ORKTask {
 
     let questionTextOne = "Are you at least 21 years of age?"
     let questionTextOneAnswer = "Yes"

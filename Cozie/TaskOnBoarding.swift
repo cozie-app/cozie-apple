@@ -1,5 +1,5 @@
 //
-//  SurveyTask.swift
+//  TaskSurvey.swift
 //  Cozie
 //
 //  Created by Federico Tartarini on 26/5/20.
@@ -9,7 +9,7 @@
 import Foundation
 import ResearchKit
 
-public var OnBoarding: ORKOrderedTask {
+public var TaskOnBoarding: ORKOrderedTask {
 
     var steps = [ORKStep]()
 

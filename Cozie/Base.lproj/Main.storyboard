@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRB-IV-ECa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Cozie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRB-IV-ECa">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzf-zJ-jQd">
-                                <rect key="frame" x="20" y="320" width="48" height="30"/>
+                                <rect key="frame" x="183" y="320" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Survey"/>
                                 <connections>
@@ -39,50 +39,73 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3D-Xd-nFX">
-                                <rect key="frame" x="20" y="282" width="88" height="30"/>
+                                <rect key="frame" x="159" y="282" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="On-boarding"/>
+                                <state key="normal" title="Consent Form"/>
                                 <connections>
                                     <action selector="ConsentButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="af8-gN-7bY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdP-mx-epC">
-                                <rect key="frame" x="20" y="358" width="61" height="30"/>
+                                <rect key="frame" x="177" y="358" width="61" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Eligibility"/>
                                 <connections>
                                     <action selector="EligibilityButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wh8-ae-mwZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49M-eg-BqZ">
+                                <rect key="frame" x="124" y="396" width="167" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Participant's information"/>
+                                <connections>
+                                    <action selector="ParticipantInfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2vc-Iz-zgP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Uee-0j-aNJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" selectedImage="house" catalog="system" id="u8a-p9-bv0"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="u8a-p9-bv0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="934.78260869565224" y="-363.61607142857139"/>
         </scene>
-        <!--User Info-->
+        <!--Other-->
         <scene sceneID="WtC-KL-8ka">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUA-Jp-CQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="AdB-sb-bBQ" customClass="SettingsController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Mq-a5-idT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello user, this view is not ready to be used. Please come back later" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4G-l6-Gta">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Z4G-l6-Gta" firstAttribute="leading" secondItem="2Mq-a5-idT" secondAttribute="leading" id="4S0-z1-OsM"/>
+                            <constraint firstAttribute="trailing" secondItem="Z4G-l6-Gta" secondAttribute="trailing" id="U4K-zX-yZK"/>
+                            <constraint firstItem="5S7-Mt-3oL" firstAttribute="bottom" secondItem="Z4G-l6-Gta" secondAttribute="bottom" id="mLd-vd-FEu"/>
+                            <constraint firstItem="Z4G-l6-Gta" firstAttribute="top" secondItem="5S7-Mt-3oL" secondAttribute="top" id="rhx-dB-8p9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5S7-Mt-3oL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="User Info" selectedImage="person.circle" catalog="system" id="QL1-u7-Opw"/>
+                    <tabBarItem key="tabBarItem" title="Other" image="gear" catalog="system" selectedImage="gear" id="QL1-u7-Opw"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YUA-Jp-CQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="302"/>
+            <point key="canvasLocation" x="936.23188405797111" y="301.33928571428572"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Inc-PM-jFM">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5k1-CL-pgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="twX-qU-vF7" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ISn-tg-N9f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -94,13 +117,12 @@
                         <segue destination="AdB-sb-bBQ" kind="relationship" relationship="viewControllers" id="Ghc-4L-IDl"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5k1-CL-pgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="16" y="-22"/>
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="house" catalog="system" width="128" height="110"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

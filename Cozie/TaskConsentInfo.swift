@@ -1,5 +1,5 @@
 //
-//  ConsentDocument.swift
+//  TaskConsentInfo.swift
 //  Cozie
 //
 //  Created by Federico Tartarini on 25/5/20.
@@ -9,7 +9,7 @@
 import Foundation
 import ResearchKit
 
-public var ConsentDocument: ORKConsentDocument {
+public var ConsentInfo: ORKConsentDocument {
   
   let consentDocument = ORKConsentDocument()
   consentDocument.title = "Example Consent"

@@ -25,16 +25,16 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
 //            print("End results ........")
             for stepResult: ORKStepResult in results {
 
-                for result in stepResult.results as! [ORKResult] {
+                for result in stepResult.results! {
 
                     if let questionResult = result as? ORKQuestionResult {
-                        print("\(questionResult.identifier), \(questionResult.answer)")
+                        print("\(questionResult.identifier), \(String(describing: questionResult.answer))")
                     }
                     if let tappingResult = result as? ORKTappingIntervalResult {
-                        print("\(tappingResult.identifier), \(tappingResult.samples), \(NSCoder.string(for: tappingResult.buttonRect1)) \(NSCoder.string(for: tappingResult.buttonRect1)))")
+                        print("\(tappingResult.identifier), \(String(describing: tappingResult.samples)), \(NSCoder.string(for: tappingResult.buttonRect1)) \(NSCoder.string(for: tappingResult.buttonRect1)))")
                     }
                     if let toneAudiometryResult = result as? ORKToneAudiometryResult {
-                        print("\(toneAudiometryResult.identifier), \(toneAudiometryResult.samples)")
+                        print("\(toneAudiometryResult.identifier), \(String(describing: toneAudiometryResult.samples))")
                     }
                     if let spatialSpanResult = result as? ORKSpatialSpanMemoryResult {
                         print("Score \(spatialSpanResult.score) Number of games \(spatialSpanResult.numberOfGames) Number of failuers \(spatialSpanResult.numberOfFailures)")
@@ -50,19 +50,25 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     }
 
     @IBAction func ConsentButton(_ sender: Any) {
-        let taskViewController = ORKTaskViewController(task: OnBoarding, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: TaskConsent, taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
     }
     
     @IBAction func SurveyButton(_ sender: Any) {
-        let taskViewController = ORKTaskViewController(task: SurveyTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: TaskSurvey, taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
     }
     
     @IBAction func EligibilityButton(_ sender: Any) {
-        let taskViewController = ORKTaskViewController(task: ConsentTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: TaskEligibility, taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func ParticipantInfo(_ sender: Any) {
+        let taskViewController = ORKTaskViewController(task: TaskOnBoarding, taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
     }
@@ -74,22 +80,11 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
 
 }
 
-class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        let taskResult = taskViewController.result
-        // You could do something with the result here.
-
-        // Then, dismiss the task view controller.
-        dismiss(animated: true, completion: nil)
-    }
+class SettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // the consent form is appearing when the user visits with tab
-        let taskViewController = ORKTaskViewController(task: eligibilityTask, taskRun: nil)
-        taskViewController.delegate = self
-        present(taskViewController, animated: true, completion: nil)
     }
 
 }
