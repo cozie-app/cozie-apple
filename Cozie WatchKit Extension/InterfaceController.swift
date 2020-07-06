@@ -46,6 +46,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let heartRate: Int
         let bodyPresence: Bool
         let participantID: String
+        let locationTimestamp: String
         let latitude: Double
         let longitude: Double
         let responses: [String: String]
@@ -58,6 +59,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     
     var lat: Double = 0.0
     var long: Double = 0.0
+    var locationTimestamp = ""
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -131,7 +133,8 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
             // todo change the constant values below with data from Apple APIs
             SendDataDatabase(answer: Answer(startTime: startTime, endTime: endTime, heartRate: 80, bodyPresence: true,
-                    participantID: "test999", latitude: lat, longitude: long, responses: tmpAnswers))
+                    participantID: "test999", locationTimestamp: locationTimestamp, latitude: lat, longitude: long, 
+                    responses: tmpAnswers))
 
             tmpAnswers.removeAll()
         }
@@ -271,6 +274,9 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let currentLocation = locations[0]
         
         // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        locationTimestamp = formatter.string(from: currentLocation.timestamp)
         lat = currentLocation.coordinate.latitude
         long = currentLocation.coordinate.longitude
         
@@ -298,10 +304,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     @IBAction func stopButtonAction(){
         currentQuestion = 0
-
-        print(tmpAnswers)
-        tmpAnswers.removeAll()
-        print(tmpAnswers)
 
         // show previous question
         loadTableData(question: &questions[currentQuestion])
