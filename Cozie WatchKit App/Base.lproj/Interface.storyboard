@@ -28,9 +28,25 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <group width="1" alignment="left" id="cb8-U0-cCa">
+                            <items>
+                                <button width="0.5" alignment="left" title="Back" id="2CG-CK-JgJ">
+                                    <connections>
+                                        <action selector="backButtonAction" destination="AgC-eL-Hgc" id="2zm-wb-PXu"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" alignment="left" title="Stop" id="RiF-rV-AnG">
+                                    <connections>
+                                        <action selector="stopButtonAction" destination="AgC-eL-Hgc" id="nLG-yL-d4k"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                     </items>
                     <connections>
+                        <outlet property="backButton" destination="2CG-CK-JgJ" id="FWm-SD-km1"/>
                         <outlet property="questionTitle" destination="uMg-er-eCg" id="p7R-LH-Qvl"/>
+                        <outlet property="stopButton" destination="RiF-rV-AnG" id="E1i-oE-gCG"/>
                         <outlet property="tableView" destination="VSl-R8-QQf" id="567-kz-aAf"/>
                     </connections>
                 </controller>

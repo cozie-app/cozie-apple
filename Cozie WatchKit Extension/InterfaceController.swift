@@ -13,10 +13,11 @@ import CoreLocation
 
 class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
-    // todo allow the user to go back to previous question and close the survey if need be
     // todo get physiological parameters
     // todo add user ID
 
+    @IBOutlet weak var stopButton: WKInterfaceButton!
+    @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
     
@@ -24,6 +25,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     var currentQuestion = 0
     var nextQuestion = 0
+    var previousQuestion = 0
 
     // structure which is used for the questions
     struct Question {
@@ -116,6 +118,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         tmpAnswers[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
         // updates the index of the question to be shown
+        previousQuestion = currentQuestion
         currentQuestion = nextQuestion
 
         // check if user completed the survey
@@ -129,6 +132,8 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             // todo change the constant values below with data from Apple APIs
             SendDataDatabase(answer: Answer(startTime: startTime, endTime: endTime, heartRate: 80, bodyPresence: true,
                     participantID: "test999", latitude: lat, longitude: long, responses: tmpAnswers))
+
+            tmpAnswers.removeAll()
         }
 
         // show next question
@@ -280,6 +285,26 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
           return
        }
        // Notify the user of any errors.
+    }
+    
+    @IBAction func backButtonAction(){
+        // todo the back button is working but only goes back by one question
+
+        currentQuestion = previousQuestion
+
+        // show previous question
+        loadTableData(question: &questions[currentQuestion])
+    }
+
+    @IBAction func stopButtonAction(){
+        currentQuestion = 0
+
+        print(tmpAnswers)
+        tmpAnswers.removeAll()
+        print(tmpAnswers)
+
+        // show previous question
+        loadTableData(question: &questions[currentQuestion])
     }
 
 }
