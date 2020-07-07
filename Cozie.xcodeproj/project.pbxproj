@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
+		1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		2E7054EA7DB2C92D7C1086C8 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -143,6 +145,7 @@
 
 /* Begin PBXFileReference section */
 		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 				E47351C6247C9D230079D11A /* TaskSurvey.swift */,
 				E4DEA3C0248603D90022570F /* TaskOnBoarding.swift */,
 				E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */,
+				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -793,6 +797,7 @@
 				E48382B7247BAB68002C3708 /* TaskConsent.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
+				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +825,7 @@
 				E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */,
 				E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */,
 				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
+				1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

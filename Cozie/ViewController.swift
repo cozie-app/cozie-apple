@@ -42,7 +42,6 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
                     if let questionResult = result as? ORKQuestionResult {
                         var resp = String(describing: questionResult.answer!).replacingOccurrences(of: "(\n", with: "")
                         resp = resp.replacingOccurrences(of: "\n)", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-//                        tmpAnswers[questionResult.identifier] = resp
                         answer.responses[questionResult.identifier] = resp
                     }
                 }
