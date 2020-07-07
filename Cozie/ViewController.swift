@@ -16,7 +16,7 @@ import ResearchKit
 // temp dictionary to store the answers and for testing purposes
 struct AnswerResearchKit: Codable {
     let questionIdentifier: String
-    let startDate: String
+    let Timestamp: String
     let participantID: String
     var responses: [String: String]
 }
@@ -28,12 +28,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         //Handle results with taskViewController.result
         taskViewController.dismiss(animated: true, completion: nil)
 
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions.insert(.withFractionalSeconds)
-
         // todo change below variables that are set equal as constant e.g., participantID
         var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
-                startDate: formatter.string(from: taskViewController.result.startDate),
+                Timestamp: GetDateTimeISOString(),
                 participantID: "test999", responses: [:])
 
         if let results = taskViewController.result.results as? [ORKStepResult] {

@@ -28,7 +28,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     var previousQuestion = 0
 
     // structure which is used for the questions
-    struct Question {
+    struct QuestionCozie {
         let title: String
         let options: Array<String>
         let icons: Array<String>
@@ -37,12 +37,12 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     }
 
     // array of questions
-    var questions = [Question]()
+    var questions = [QuestionCozie]()
 
     // temp dictionary to store the answers and for testing purposes
-    struct Answer: Codable {
-        let startTime: String
-        let endTime: String
+    struct AnswerCozie: Codable {
+        let startTimestamp: String
+        let endTimestamp: String
         let heartRate: Int
         let bodyPresence: Bool
         let participantID: String
@@ -52,7 +52,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let responses: [String: String]
     }
 
-    var answers = [Answer]()  // it stores the answer after user as completed Cozie
+    var answers = [AnswerCozie]()  // it stores the answer after user as completed Cozie
     // todo delete variable below since it is not needed and in the loop update automatically answers.responses
     var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
 
@@ -88,7 +88,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         super.didDeactivate()
     }
 
-    private func loadTableData(question: inout Question) {
+    private func loadTableData(question: inout QuestionCozie) {
 
         // set the title of the question
         questionTitle.setText(question.title)
@@ -133,7 +133,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             let endTime = GetDateTimeISOString()
 
             // todo change the constant values below with data from Apple APIs
-            SendDataDatabase(answer: Answer(startTime: startTime, endTime: endTime, heartRate: 80, bodyPresence: true,
+            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: 80, bodyPresence: true,
                     participantID: "test999", locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
                     responses: tmpAnswers))
 
@@ -149,58 +149,61 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         // Last question MUST have nextQuestion set to 999
 
         questions += [
-            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
+            QuestionCozie(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
                     icons: ["cold", "happy", "hot"], nextQuestion: 1, identifier: "tc-preference"),
-            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
+            QuestionCozie(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
                     icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met"),
-            Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
+            QuestionCozie(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
                     nextQuestion: 4, identifier: "location-place"),
-            Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4,
+            QuestionCozie(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4,
                     identifier: "mood"),
-            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
+            QuestionCozie(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
                     nextQuestion: 5, identifier: "location-in-out"),
-            Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
+            QuestionCozie(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
                     icons: ["submit", "delete"], nextQuestion: 999, identifier: "end"),
         ]
     }
 
-    private func SendDataDatabase(answer: Answer) {
+    private func SendDataDatabase(answer: AnswerCozie) {
 
         // https://stackoverflow.com/questions/26364914/http-request-in-swift-with-post-method
 
+        var messages = [AnswerCozie]()
+
         // check if answers are stored locally in UserDefaults, the key is answers
-        if let data = UserDefaults.standard.value(forKey: "answers") as? Data {
+        if let data = UserDefaults.standard.value(forKey: "AnswerCozie") as? Data {
 
             // decode the messages stored in the local memory and convert them back to structures
-            var messages = try? PropertyListDecoder().decode(Array<Answer>.self, from: data)
+            let storedMessages = try? PropertyListDecoder().decode(Array<AnswerCozie>.self, from: data)
 
             // add the last completed survey
-            messages! += [answer]
-
-            var indexMessagesToDelete = [Int]()
-            // print("Number of messages to be sent \(messages?.count)")
-            for ( index, message) in messages!.enumerated() {
-
-                do {
-                    let postMessage = try JSONEncoder().encode(message)
-                    let statusCodeHTTP = PostRequest(message: postMessage)
-                    if (statusCodeHTTP == 200) {
-                        indexMessagesToDelete.append(index)
-                    }
-                } catch let error {
-                    print(error.localizedDescription)
-                }
-            }
-
-            // delete the messages that have been sent
-            for index in indexMessagesToDelete.reversed() {
-                messages?.remove(at: index)
-            }
-
-            // save the messages to local storage so I replace what was previously there
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(messages), forKey: "answers")
-
+            messages = storedMessages!
         }
+
+        messages += [answer]
+
+        var indexMessagesToDelete = [Int]()
+        // print("Number of messages to be sent \(messages?.count)")
+        for (index, message) in messages.enumerated() {
+
+            do {
+                let postMessage = try JSONEncoder().encode(message)
+                let statusCodeHTTP = PostRequest(message: postMessage)
+                if (statusCodeHTTP == 200) {
+                    indexMessagesToDelete.append(index)
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+
+        // delete the messages that have been sent
+        for index in indexMessagesToDelete.reversed() {
+            messages.remove(at: index)
+        }
+
+        // save the messages to local storage so I replace what was previously there
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(messages), forKey: "AnswerCozie")
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
