@@ -14,6 +14,7 @@
 		2E7054EA7DB2C92D7C1086C8 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
+		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
 		E43CD59124B2F3A5003307D5 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */; };
 		E47351C7247C9D230079D11A /* TaskSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47351C6247C9D230079D11A /* TaskSurvey.swift */; };
 		E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E47351E2247D0F5D0079D11A /* HealthKit.framework */; };
@@ -162,6 +163,7 @@
 		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEligibility.swift; sourceTree = "<group>"; };
 		E47351C6247C9D230079D11A /* TaskSurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSurvey.swift; sourceTree = "<group>"; };
 		E47351E1247D0F5D0079D11A /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				E4DEA3C0248603D90022570F /* TaskOnBoarding.swift */,
 				E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
+				E43882E124B44880007EBE4C /* CollectionViewCell.swift */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -789,6 +792,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */,
 				E483824C247BA33A002C3708 /* ViewController.swift in Sources */,
 				E48382B5247BA95E002C3708 /* TaskConsentInfo.swift in Sources */,
 				E4DEA3C1248603D90022570F /* TaskOnBoarding.swift in Sources */,
