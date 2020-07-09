@@ -12,6 +12,11 @@ public func GetDateTimeISOString() -> String {
     return formatter.string(from: date)
 }
 
+public func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
 public func PostRequest(message: Data) -> Int {
     // create the url with URL
 //        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url

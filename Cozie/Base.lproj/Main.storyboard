@@ -100,19 +100,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello user, this view is not ready to be used. Please come back later" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4G-l6-Gta">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Z9-Y2-9og">
+                                <rect key="frame" x="117" y="433" width="180" height="30"/>
+                                <state key="normal" title="Review and share consent"/>
+                                <connections>
+                                    <action selector="ReviewConsent:" destination="AdB-sb-bBQ" eventType="touchUpInside" id="eTB-hg-lL1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Z4G-l6-Gta" firstAttribute="leading" secondItem="2Mq-a5-idT" secondAttribute="leading" id="4S0-z1-OsM"/>
-                            <constraint firstAttribute="trailing" secondItem="Z4G-l6-Gta" secondAttribute="trailing" id="U4K-zX-yZK"/>
-                            <constraint firstItem="5S7-Mt-3oL" firstAttribute="bottom" secondItem="Z4G-l6-Gta" secondAttribute="bottom" id="mLd-vd-FEu"/>
-                            <constraint firstItem="Z4G-l6-Gta" firstAttribute="top" secondItem="5S7-Mt-3oL" secondAttribute="top" id="rhx-dB-8p9"/>
+                            <constraint firstItem="8Z9-Y2-9og" firstAttribute="centerX" secondItem="2Mq-a5-idT" secondAttribute="centerX" id="5Qq-rH-Jsy"/>
+                            <constraint firstItem="8Z9-Y2-9og" firstAttribute="centerY" secondItem="2Mq-a5-idT" secondAttribute="centerY" id="d5k-Qo-bwh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5S7-Mt-3oL"/>
                     </view>

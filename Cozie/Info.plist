@@ -25,6 +25,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Your helath data will be used in our study</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to determine form where you completed the survey.</string>
 	<key>UIApplicationSceneManifest</key>

@@ -11,7 +11,6 @@ import ResearchKit
 
 // todo implement function which checks if consent process was completed
 // todo add registration Task https://github.com/ResearchKit/ResearchKit/blob/master/docs/Account/Account-template.markdown
-// todo save the consent form in PDF so the user can keep a copy and send a copy to the researchers
 
 // temp dictionary to store the answers and for testing purposes
 struct AnswerResearchKit: Codable {
@@ -73,7 +72,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
         switch reason {
             case .completed:
-                // todo mark the task completed
+                // todo mark the task completed by showing the check mark
 
                 // todo change below variables that are set equal as constant e.g., participantID
                 var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
@@ -85,25 +84,28 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                 if let stepResult = result.stepResult(forStepIdentifier: "ConsentReviewStep"),
                     let signatureResult = stepResult.results?.first as? ORKConsentSignatureResult {
 
-                    let consentDocument = ConsentInfo
+                    let consentDocument = ConsentForm
                     signatureResult.apply(to: consentDocument)
 
                     consentDocument.makePDF { (data, error) -> Void in
-                        let tempPath = NSTemporaryDirectory() as NSString
+                        _ = NSTemporaryDirectory() as NSString
                         
-                        // todo either save this file in the download folder or automatically send an email
-                        let path = tempPath.appendingPathComponent("consent.pdf")
+                        let path = getDocumentsDirectory().appendingPathComponent("consent.pdf")
+
                         do {
-                            try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
+                            try data?.write(to: path, options: .atomic)
                         } catch {
-                            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+                            // failed to write file – bad permissions, bad filename, missing permissions
                         }
-                        print(path)
+
+                        // display to the user the consent form in PDF
+                        let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
+                        taskViewController.delegate = self
+                        self.present(taskViewController, animated: true, completion: nil)
                     }
                 }
                 else {
 
-                    // todo the code below is not working only for consent task
                     if let results = taskViewController.result.results as? [ORKStepResult] {
                         for stepResult: ORKStepResult in results {
                             for result in stepResult.results! {
@@ -125,44 +127,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             case .discarded, .failed, .saved:
                 // Only dismiss task controller
                 // (back to onboarding controller)
-                // todo handle results with taskViewController.result
                 break
             
-            
         }
-
-//
-//        if let results = taskViewController.result.results as? [ORKStepResult] {
-////            print("Results: \(results)")
-////            print("End results ........")
-//            for stepResult: ORKStepResult in results {
-//
-//                for result in stepResult.results! {
-//
-//                    if let questionResult = result as? ORKQuestionResult {
-//                        print("\(questionResult.identifier), \(String(describing: questionResult.answer))")
-//                    }
-//                    if let tappingResult = result as? ORKTappingIntervalResult {
-//                        print("""
-//                              \(tappingResult.identifier), \(String(describing: tappingResult.samples)),
-//                              \(NSCoder.string(for: tappingResult.buttonRect1)) \(NSCoder.string(for: tappingResult.buttonRect1)))
-//                              """)
-//                    }
-//                    if let toneAudiometryResult = result as? ORKToneAudiometryResult {
-//                        print("\(toneAudiometryResult.identifier), \(String(describing: toneAudiometryResult.samples))")
-//                    }
-//                    if let spatialSpanResult = result as? ORKSpatialSpanMemoryResult {
-//                        print("""
-//                              Score \(spatialSpanResult.score) Number of games \(spatialSpanResult.numberOfGames)
-//                              Number of failuers \(spatialSpanResult.numberOfFailures)
-//                              """)
-//                    }
-//                    else{
-//                        print("No printable results.")
-//                    }
-//                }
-//            }
-//        }
     }
 
     private func SendDataDatabase(answer: AnswerResearchKit) {
@@ -205,11 +172,22 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     }
 }
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
 
+    @IBAction func ReviewConsent(_ sender: Any) {
+        
+        let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
+        taskViewController.delegate = self
+        present(taskViewController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        taskViewController.dismiss(animated: true, completion: nil)
     }
 
 }

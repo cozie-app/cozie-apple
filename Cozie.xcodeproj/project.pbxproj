@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
 		1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
+		1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */; };
+		1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */; };
+		1C4919A704932002AD992CFE /* TaskConsentShowPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */; };
+		1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */; };
+		1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491A8334E4828A5CF11B89 /* TaskConsent.swift */; };
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		2E7054EA7DB2C92D7C1086C8 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
-		E43CD59124B2F3A5003307D5 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */; };
-		E47351C7247C9D230079D11A /* TaskSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47351C6247C9D230079D11A /* TaskSurvey.swift */; };
 		E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E47351E2247D0F5D0079D11A /* HealthKit.framework */; };
 		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
@@ -36,12 +40,9 @@
 		E4838289247BA33C002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838288247BA33C002C3708 /* Assets.xcassets */; };
 		E48382B1247BA713002C3708 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48382A9247BA676002C3708 /* ResearchKit.framework */; };
 		E48382B2247BA713002C3708 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E48382A9247BA676002C3708 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E48382B5247BA95E002C3708 /* TaskConsentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48382B4247BA95E002C3708 /* TaskConsentInfo.swift */; };
-		E48382B7247BAB68002C3708 /* TaskConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48382B6247BAB68002C3708 /* TaskConsent.swift */; };
 		E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCBEAA247E0AE100A5BE43 /* RowController.swift */; };
 		E4C5D9D4249CA4B500228A15 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5D9D3249CA4B500228A15 /* NotificationService.swift */; };
 		E4C5D9D8249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E4C5D9D1249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E4DEA3C1248603D90022570F /* TaskOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEA3C0248603D90022570F /* TaskOnBoarding.swift */; };
 		F02EEE60514CE6FFE808DC40 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,12 @@
 /* Begin PBXFileReference section */
 		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
+		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
+		1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentShowPDF.swift; sourceTree = "<group>"; };
+		1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEligibility.swift; sourceTree = "<group>"; };
+		1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSurvey.swift; sourceTree = "<group>"; };
+		1C491A8334E4828A5CF11B89 /* TaskConsent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsent.swift; sourceTree = "<group>"; };
+		1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskOnBoarding.swift; sourceTree = "<group>"; };
 		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,8 +171,6 @@
 		D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEligibility.swift; sourceTree = "<group>"; };
-		E47351C6247C9D230079D11A /* TaskSurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSurvey.swift; sourceTree = "<group>"; };
 		E47351E1247D0F5D0079D11A /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
 		E47351E2247D0F5D0079D11A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,14 +199,11 @@
 		E483828A247BA33C002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E483828B247BA33C002C3708 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		E48382A2247BA676002C3708 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
-		E48382B4247BA95E002C3708 /* TaskConsentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsentInfo.swift; sourceTree = "<group>"; };
-		E48382B6247BAB68002C3708 /* TaskConsent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsent.swift; sourceTree = "<group>"; };
 		E4BCBEAA247E0AE100A5BE43 /* RowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowController.swift; sourceTree = "<group>"; };
 		E4C5D9D1249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C5D9D3249CA4B500228A15 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E4C5D9D5249CA4B500228A15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4C5D9E4249CB11C00228A15 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
-		E4DEA3C0248603D90022570F /* TaskOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOnBoarding.swift; sourceTree = "<group>"; };
 		F5D47597BF5242DB1098C356 /* Pods-CozieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.debug.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -259,6 +261,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C491128A8683B2144199B1A /* ResearchKitTasks */ = {
+			isa = PBXGroup;
+			children = (
+				1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */,
+				1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */,
+				1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */,
+				1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */,
+				1C491A8334E4828A5CF11B89 /* TaskConsent.swift */,
+				1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */,
+			);
+			path = ResearchKitTasks;
+			sourceTree = "<group>";
+		};
 		2F9E67614CD4ACF113607CBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,13 +333,9 @@
 				E4838250247BA33B002C3708 /* Assets.xcassets */,
 				E4838252247BA33B002C3708 /* LaunchScreen.storyboard */,
 				E4838255247BA33B002C3708 /* Info.plist */,
-				E48382B4247BA95E002C3708 /* TaskConsentInfo.swift */,
-				E48382B6247BAB68002C3708 /* TaskConsent.swift */,
-				E47351C6247C9D230079D11A /* TaskSurvey.swift */,
-				E4DEA3C0248603D90022570F /* TaskOnBoarding.swift */,
-				E43CD59024B2F3A5003307D5 /* TaskEligibility.swift */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E43882E124B44880007EBE4C /* CollectionViewCell.swift */,
+				1C491128A8683B2144199B1A /* ResearchKitTasks */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -794,14 +805,15 @@
 			files = (
 				E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */,
 				E483824C247BA33A002C3708 /* ViewController.swift in Sources */,
-				E48382B5247BA95E002C3708 /* TaskConsentInfo.swift in Sources */,
-				E4DEA3C1248603D90022570F /* TaskOnBoarding.swift in Sources */,
-				E43CD59124B2F3A5003307D5 /* TaskEligibility.swift in Sources */,
-				E47351C7247C9D230079D11A /* TaskSurvey.swift in Sources */,
-				E48382B7247BAB68002C3708 /* TaskConsent.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
+				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,
+				1C4911169339110949F69150 /* TaskEligibility.swift in Sources */,
+				1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */,
+				1C4919A704932002AD992CFE /* TaskConsentShowPDF.swift in Sources */,
+				1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */,
+				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

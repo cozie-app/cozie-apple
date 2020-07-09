@@ -13,7 +13,7 @@ public var TaskConsent: ORKOrderedTask {
 
     var steps = [ORKStep]()
 
-    let consentDocument = ConsentInfo
+    let consentDocument = ConsentForm
     let visualConsentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
     steps += [visualConsentStep]
 
@@ -29,8 +29,15 @@ public var TaskConsent: ORKOrderedTask {
 
     let completionStep = ORKCompletionStep(identifier: "CompletionStep")
     completionStep.title = NSLocalizedString("Welcome aboard.", comment: "")
-    completionStep.text = NSLocalizedString("Thank you for joining this study.", comment: "")
+    completionStep.text = NSLocalizedString("""
+                                            Thank you for joining this study. 
 
+                                            In the next view you will be able to review once more the consent document and 
+                                            save it locally on your device, for your future reference.
+
+                                            Please share the saved file with the principal investigator of the study.
+                                            """, comment: "")
+    
     steps += [completionStep]
 
     return ORKOrderedTask(identifier: "ConsentTask", steps: steps)
