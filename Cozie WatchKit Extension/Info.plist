@@ -35,6 +35,12 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Cozie needs to monitor your Heart Rate</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Cozie needs to monitor your Heart Rate</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Cozie needs to monitor your Heart Rate</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need the location to determine where you completed the survey</string>
 	<key>WKExtensionDelegateClassName</key>

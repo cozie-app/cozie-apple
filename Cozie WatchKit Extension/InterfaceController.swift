@@ -9,11 +9,11 @@
 import WatchKit
 import Foundation
 import CoreLocation
-
+import HealthKit
 
 class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
-    // todo get physiological parameters
+    // todo get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
     // todo add user ID
     // todo add login screen https://www.youtube.com/watch?v=1HN7usMROt8
 
@@ -21,6 +21,10 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
+
+    private var healthStore = HKHealthStore()
+    let heartRateQuantity = HKUnit(from: "count/min")
+    private var valueHR = [Int]()
 
     var locationManager: CLLocationManager = CLLocationManager()
 
@@ -44,7 +48,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     struct AnswerCozie: Codable {
         let startTimestamp: String
         let endTimestamp: String
-        let heartRate: Int
+        let heartRate: [Int]
         let bodyPresence: Bool
         let participantID: String
         let locationTimestamp: String
@@ -65,6 +69,8 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+
+        authorizeHealthKit()
 
         // append new questions to the questions array
         defineQuestions()
@@ -116,6 +122,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         if (currentQuestion == 0) {
             startTime = GetDateTimeISOString()
             let _: Void = locationManager.requestLocation()
+            startHeartRateQuery(quantityTypeIdentifier: .heartRate)
         }
 
         // adding the response to the tmp array of strings
@@ -134,11 +141,12 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             let endTime = GetDateTimeISOString()
 
             // todo change the constant values below with data from Apple APIs
-            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: 80, bodyPresence: true,
+            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: valueHR, bodyPresence: true,
                     participantID: "test999", locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
                     responses: tmpAnswers))
 
             tmpAnswers.removeAll()
+            valueHR.removeAll()
         }
 
         // show next question
@@ -229,6 +237,56 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             return
         }
         // Notify the user of any errors.
+    }
+
+    func authorizeHealthKit() {
+
+        // Used to define the identifiers that create quantity type objects.
+        let healthKitTypes: Set = [
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!]
+        // Requests permission to save and read the specified data types.
+        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in }
+    }
+
+    private func startHeartRateQuery(quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+
+        // We want data points from our current device
+        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+
+        let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+
+        // todo limit the number of data queried https://developer.apple.com/documentation/healthkit/hksamplequery/executing_sample_queries
+        // It provides us with both the ability to receive a snapshot of data, and then on subsequent calls, a snapshot of what has changed.
+//        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
+        let query = HKSampleQuery(sampleType: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!,
+                predicate: devicePredicate, limit: 10, sortDescriptors: [sortByDate]) {
+            query, results, error in
+
+            guard let samples = results as? [HKQuantitySample] else {
+                // Handle any errors here.
+                return
+            }
+
+            for sample in samples {
+                // todo I should also pass the timestamp and activity context which I am printing below
+                print(sample.startDate)
+                print(sample.metadata?[HKMetadataKeyHeartRateMotionContext] as? NSNumber)
+
+                // Process each sample here.
+                self.valueHR.append(Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min"))))
+
+            }
+
+            // The results come back on an anonymous background queue.
+            // Dispatch to the main queue before modifying the UI.
+
+            DispatchQueue.main.async {
+                // Update the UI here.
+            }
+        }
+
+        // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
+        healthStore.execute(query)
     }
 
     @IBAction func backButtonAction() {

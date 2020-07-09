@@ -43,6 +43,7 @@
 		E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCBEAA247E0AE100A5BE43 /* RowController.swift */; };
 		E4C5D9D4249CA4B500228A15 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5D9D3249CA4B500228A15 /* NotificationService.swift */; };
 		E4C5D9D8249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E4C5D9D1249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E4E3088B24B6F7840029FC0C /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E3088A24B6F7840029FC0C /* HealthKit.framework */; };
 		F02EEE60514CE6FFE808DC40 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */; };
 /* End PBXBuildFile section */
 
@@ -204,6 +205,8 @@
 		E4C5D9D3249CA4B500228A15 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E4C5D9D5249CA4B500228A15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4C5D9E4249CB11C00228A15 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		E4E3088924B6F7840029FC0C /* Cozie WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		E4E3088A24B6F7840029FC0C /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		F5D47597BF5242DB1098C356 /* Pods-CozieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.debug.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F02EEE60514CE6FFE808DC40 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */,
+				E4E3088B24B6F7840029FC0C /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +375,7 @@
 		E4838281247BA33C002C3708 /* Cozie WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E4E3088924B6F7840029FC0C /* Cozie WatchKit Extension.entitlements */,
 				E4838282247BA33C002C3708 /* InterfaceController.swift */,
 				E4838284247BA33C002C3708 /* ExtensionDelegate.swift */,
 				E4838286247BA33C002C3708 /* NotificationController.swift */,
@@ -394,6 +399,7 @@
 		E48382AD247BA713002C3708 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4E3088A24B6F7840029FC0C /* HealthKit.framework */,
 				E47351E2247D0F5D0079D11A /* HealthKit.framework */,
 				3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */,
 				C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */,
@@ -1030,6 +1036,7 @@
 			baseConfigurationReference = D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6729H674Z;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
@@ -1053,6 +1060,7 @@
 			baseConfigurationReference = BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6729H674Z;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";

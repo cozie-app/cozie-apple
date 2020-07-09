@@ -20,6 +20,12 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>We need the HR data for our experiment</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>We need the HR data for our experiment</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We need the HR data for our experiment</string>
 	<key>NSLocationUsageDescription</key>
 	<string>To determine from where you completed the survey.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

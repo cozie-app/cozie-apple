@@ -27,6 +27,10 @@
 	</dict>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Your helath data will be used in our study</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Your helath data will be used in our study</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to determine form where you completed the survey.</string>
 	<key>UIApplicationSceneManifest</key>

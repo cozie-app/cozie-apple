@@ -85,6 +85,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="top" secondItem="kGz-yd-asa" secondAttribute="bottom" constant="10" id="0cH-bU-S3k"/>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="bottom" secondItem="Uee-0j-aNJ" secondAttribute="bottom" id="GxI-UD-lza"/>
