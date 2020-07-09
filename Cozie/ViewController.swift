@@ -51,7 +51,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         // todo change checkmark if the user completed the task or alternatively hide the view or move it to the bottom
 
         // This creates the shadows and modifies the cards a little bit
-        cell.contentView.backgroundColor = UIColor.white
+//        cell.contentView.backgroundColor = UIColor.white
         cell.contentView.layer.cornerRadius = 15.0
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.borderColor = UIColor.clear.cgColor
