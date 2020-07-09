@@ -68,28 +68,68 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     }
 
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        //Handle results with taskViewController.result
+
         taskViewController.dismiss(animated: true, completion: nil)
 
-        // todo change below variables that are set equal as constant e.g., participantID
-        var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
-                Timestamp: GetDateTimeISOString(),
-                participantID: "test999", responses: [:])
+        switch reason {
+            case .completed:
+                // todo mark the task completed
 
-        // todo the code below is not working only for consent task
-        if let results = taskViewController.result.results as? [ORKStepResult] {
-            for stepResult: ORKStepResult in results {
-                for result in stepResult.results! {
-                    if let questionResult = result as? ORKQuestionResult {
-                        var resp = String(describing: questionResult.answer!).replacingOccurrences(of: "(\n", with: "")
-                        resp = resp.replacingOccurrences(of: "\n)", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                        answer.responses[questionResult.identifier] = resp
+                // todo change below variables that are set equal as constant e.g., participantID
+                var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
+                        Timestamp: GetDateTimeISOString(),
+                        participantID: "test999", responses: [:])
+
+                let result = taskViewController.result
+
+                if let stepResult = result.stepResult(forStepIdentifier: "ConsentReviewStep"),
+                    let signatureResult = stepResult.results?.first as? ORKConsentSignatureResult {
+
+                    let consentDocument = ConsentInfo
+                    signatureResult.apply(to: consentDocument)
+
+                    consentDocument.makePDF { (data, error) -> Void in
+                        let tempPath = NSTemporaryDirectory() as NSString
+                        
+                        // todo either save this file in the download folder or automatically send an email
+                        let path = tempPath.appendingPathComponent("consent.pdf")
+                        do {
+                            try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
+                        } catch {
+                            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+                        }
+                        print(path)
                     }
                 }
-            }
-        }
+                else {
 
-        SendDataDatabase(answer: answer)
+                    // todo the code below is not working only for consent task
+                    if let results = taskViewController.result.results as? [ORKStepResult] {
+                        for stepResult: ORKStepResult in results {
+                            for result in stepResult.results! {
+                                if let questionResult = result as? ORKQuestionResult {
+                                    var resp = String(describing: questionResult.answer!).replacingOccurrences(of: "(\n", with: "")
+                                    resp = resp.replacingOccurrences(of: "\n)", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                                    answer.responses[questionResult.identifier] = resp
+                                }
+                            }
+                        }
+                    }
+
+                    SendDataDatabase(answer: answer)
+
+                }
+
+                break
+
+            case .discarded, .failed, .saved:
+                // Only dismiss task controller
+                // (back to onboarding controller)
+                // todo handle results with taskViewController.result
+                break
+            
+            
+        }
 
 //
 //        if let results = taskViewController.result.results as? [ORKStepResult] {

@@ -15,6 +15,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     // todo get physiological parameters
     // todo add user ID
+    // todo add login screen https://www.youtube.com/watch?v=1HN7usMROt8
 
     @IBOutlet weak var stopButton: WKInterfaceButton!
     @IBOutlet weak var backButton: WKInterfaceButton!
