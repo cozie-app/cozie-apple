@@ -25,6 +25,7 @@
 		E469469524BC4CF20013134B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469424BC4CF20013134B /* LoginViewController.swift */; };
 		E469469724BC4D090013134B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469624BC4D090013134B /* StartViewController.swift */; };
 		E469469E24BC54EC0013134B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469D24BC54EC0013134B /* Utilities.swift */; };
+		E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E46946A124BC5D3F0013134B /* GoogleService-Info.plist */; };
 		E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E47351E2247D0F5D0079D11A /* HealthKit.framework */; };
 		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
@@ -180,6 +181,7 @@
 		E469469424BC4CF20013134B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E469469624BC4D090013134B /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		E469469D24BC54EC0013134B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		E46946A124BC5D3F0013134B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E47351E1247D0F5D0079D11A /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
 		E47351E2247D0F5D0079D11A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,6 +368,7 @@
 				E483824D247BA33A002C3708 /* Main.storyboard */,
 				E4838250247BA33B002C3708 /* Assets.xcassets */,
 				E4838252247BA33B002C3708 /* LaunchScreen.storyboard */,
+				E46946A124BC5D3F0013134B /* GoogleService-Info.plist */,
 				E4838255247BA33B002C3708 /* Info.plist */,
 				1C491128A8683B2144199B1A /* ResearchKitTasks */,
 			);
@@ -463,6 +466,7 @@
 				E4838295247BA33C002C3708 /* Embed Watch Content */,
 				E48382B3247BA713002C3708 /* Embed Frameworks */,
 				E4C5D9D9249CA4B500228A15 /* Embed App Extensions */,
+				C02AD124388A70568E9AEE22 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -502,6 +506,7 @@
 				E4838261247BA33B002C3708 /* Sources */,
 				E4838262247BA33B002C3708 /* Frameworks */,
 				E4838263247BA33B002C3708 /* Resources */,
+				5483A0945BB460405220934F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -652,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */,
 				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
 			);
@@ -764,6 +770,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5483A0945BB460405220934F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AA8407B4119D3706D17454F8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -806,6 +829,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C02AD124388A70568E9AEE22 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cozie/Pods-Cozie-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cozie/Pods-Cozie-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cozie/Pods-Cozie-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA9B2C11522202656E5FDA44 /* [CP] Check Pods Manifest.lock */ = {

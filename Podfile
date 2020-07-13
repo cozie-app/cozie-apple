@@ -6,6 +6,9 @@ target 'Cozie' do
   use_frameworks!
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
 
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+
   # Pods for Cozie
 
   target 'CozieTests' do
