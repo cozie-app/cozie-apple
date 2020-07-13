@@ -1,10 +1,10 @@
 module.exports = {
   title: "Cozie Apple",
   tagline: "Cozie Apple - an IOS app for human comfort data collection",
-  url: "https://your-docusaurus-test-site.com",
+  url: "https://federicotartarini.github.io",
   baseUrl: "/",
   favicon: "img/favicon.ico",
-  organizationName: "BEARS", // Usually your GitHub org/user name.
+  organizationName: "FedericoTartarini", // Usually your GitHub org/user name.
   projectName: "cozie-apple", // Usually your repo name.
   themeConfig: {
     navbar: {
