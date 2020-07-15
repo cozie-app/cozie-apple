@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var firstNameTextField: UITextField!
-    
-    @IBOutlet weak var lastNameTextField: UITextField!
-    
+    @IBOutlet weak var emailTextField: UITextField!
+
+    @IBOutlet weak var passwordTextField: UITextField!
+
     @IBOutlet weak var loginButton: UIButton!
-    
+
     @IBOutlet weak var errorLabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,23 +29,75 @@ class LoginViewController: UIViewController {
     func setUpElements() {
 
         errorLabel.alpha = 0
-        Utilties.styledTextField(firstNameTextField)
-        Utilties.styledTextField(lastNameTextField)
+        Utilties.styledTextField(emailTextField)
+        Utilties.styledTextField(passwordTextField)
 
         Utilties.styleFilledButton(loginButton)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func loginTapped(_ sender: Any) {
+
+        let error = validateFields()
+
+        if error != nil {
+            // There is something wrong with the values the user entered
+            showErrorMessage(error!)
+        } else {
+
+            let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+                if let error = error {
+                    print("Error adding document: \(error)")
+                    self.showErrorMessage("Could not Sign In, incorrect user or password")
+                } else {
+
+                    self.transitionToHome()
+
+                }
+            }
+
+        }
+    }
+
+    // check that the data entered are correct. If so, return nil otherwise error
+    func validateFields() -> String? {
+
+        // check that all fields are filled in
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "Please fill in your email"
+        } else if passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "Please fill in your password"
+        }
+
+        // check that the password is secure
+        let cleanPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if Utilties.isValidPassword(cleanPassword) == false {
+            return "Invalid password"
+        }
+
+        // check that the password is secure
+        let cleanEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if Utilties.isValidEmail(testStr: cleanEmail) == false {
+            return "Invalid email format"
+        }
+
+        return nil
+    }
+
+    func showErrorMessage(_ message: String) {
+        errorLabel.text = message
+        errorLabel.alpha = 1
+    }
+
+    func transitionToHome() {
+
+        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
+
+        view.window?.rootViewController = homeViewController
+        view.window?.makeKeyAndVisible()
     }
 }
