@@ -32,8 +32,9 @@ class StartViewController: UIViewController {
 
     func setUpElements() {
 
-        Utilties.styleFilledButton(signUpButton)
-        Utilties.styleHollowButton(loginButton)
+        Utilties.stylePrimaryButton(signUpButton)
+        Utilties.styleSecondaryButton(loginButton)
+
     }
 
     func setUpVideo() {

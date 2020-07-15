@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
         Utilties.styledTextField(emailTextField)
         Utilties.styledTextField(passwordTextField)
 
-        Utilties.styleFilledButton(loginButton)
+        Utilties.stylePrimaryButton(loginButton)
     }
 
     @IBAction func loginTapped(_ sender: Any) {

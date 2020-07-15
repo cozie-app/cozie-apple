@@ -39,7 +39,7 @@ class SignUpViewController: UIViewController {
         Utilties.styledTextField(emailTextField)
         Utilties.styledTextField(passwordTextField)
 
-        Utilties.styleFilledButton(signUpButton)
+        Utilties.stylePrimaryButton(signUpButton)
     }
 
     // check that the data entered are correct. If so, return nil otherwise error
