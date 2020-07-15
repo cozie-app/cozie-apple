@@ -15,7 +15,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     // todo get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
     // todo add user ID
-    // todo add login screen https://www.youtube.com/watch?v=1HN7usMROt8
 
     @IBOutlet weak var stopButton: WKInterfaceButton!
     @IBOutlet weak var backButton: WKInterfaceButton!
@@ -255,7 +254,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
         let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
 
-        // todo limit the number of data queried https://developer.apple.com/documentation/healthkit/hksamplequery/executing_sample_queries
         // It provides us with both the ability to receive a snapshot of data, and then on subsequent calls, a snapshot of what has changed.
 //        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
         let query = HKSampleQuery(sampleType: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!,

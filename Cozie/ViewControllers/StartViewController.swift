@@ -32,7 +32,6 @@ class StartViewController: UIViewController {
             setUpVideo()
             setUpElements()
         } else {
-            // todo implement here the code that redirects user to home view
 
             let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
 

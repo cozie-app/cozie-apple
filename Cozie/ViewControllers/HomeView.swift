@@ -11,7 +11,6 @@ import ResearchKit
 import FirebaseAuth
 
 // todo implement function which checks if consent process was completed
-// todo add registration Task https://github.com/ResearchKit/ResearchKit/blob/master/docs/Account/Account-template.markdown
 
 // temp dictionary to store the answers and for testing purposes
 struct AnswerResearchKit: Codable {
@@ -208,9 +207,9 @@ class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
         do {
             try Auth.auth().signOut()
 
-            let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.startViewController)
+            let startViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.startViewController)
 
-            view.window?.rootViewController = homeViewController
+            view.window?.rootViewController = startViewController
             view.window?.makeKeyAndVisible()
 
         } catch let error {
