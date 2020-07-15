@@ -84,27 +84,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="emM-0Y-KoR"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbC-Qb-CUa">
-                                <rect key="frame" x="298" y="44" width="61" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="top" secondItem="kGz-yd-asa" secondAttribute="bottom" constant="10" id="0cH-bU-S3k"/>
-                            <constraint firstItem="fbC-Qb-CUa" firstAttribute="top" secondItem="Uee-0j-aNJ" secondAttribute="top" id="ETm-Tg-2N2"/>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="bottom" secondItem="Uee-0j-aNJ" secondAttribute="bottom" id="GxI-UD-lza"/>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="leading" secondItem="Uee-0j-aNJ" secondAttribute="leading" id="Mrn-s8-03V"/>
                             <constraint firstItem="Uee-0j-aNJ" firstAttribute="trailing" secondItem="kGz-yd-asa" secondAttribute="trailing" constant="10" id="Pbz-1c-ltL"/>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="top" secondItem="kGz-yd-asa" secondAttribute="bottom" constant="10" id="PqZ-gH-88T"/>
                             <constraint firstItem="kGz-yd-asa" firstAttribute="top" secondItem="Uee-0j-aNJ" secondAttribute="top" constant="10" id="R46-dX-2YK"/>
                             <constraint firstItem="twy-nV-IgS" firstAttribute="trailing" secondItem="Uee-0j-aNJ" secondAttribute="trailing" id="fm2-gV-4fW"/>
-                            <constraint firstItem="Uee-0j-aNJ" firstAttribute="trailing" secondItem="fbC-Qb-CUa" secondAttribute="trailing" constant="16" id="m1x-Ys-Lj0"/>
                             <constraint firstItem="kGz-yd-asa" firstAttribute="leading" secondItem="Uee-0j-aNJ" secondAttribute="leading" constant="10" id="tsH-uZ-DV8"/>
-                            <constraint firstItem="Uee-0j-aNJ" firstAttribute="trailing" secondItem="fbC-Qb-CUa" secondAttribute="trailing" id="wso-yR-6gy"/>
-                            <constraint firstItem="fbC-Qb-CUa" firstAttribute="top" secondItem="Uee-0j-aNJ" secondAttribute="top" id="yiw-nT-Dtw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uee-0j-aNJ"/>
                     </view>

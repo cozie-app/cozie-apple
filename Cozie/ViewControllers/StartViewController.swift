@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import FirebaseAuth
 
 class StartViewController: UIViewController {
 
@@ -22,12 +23,25 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         // Do any additional setup after loading the view.
-        setUpElements()
+        if Auth.auth().currentUser == nil {
+            setUpVideo()
+            setUpElements()
+        } else {
+            // todo implement here the code that redirects user to home view
+
+            let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
+
+            view.window?.rootViewController = homeViewController
+            view.window?.makeKeyAndVisible()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setUpVideo()
     }
 
     func setUpElements() {

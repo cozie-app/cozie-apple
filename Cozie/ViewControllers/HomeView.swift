@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeView.swift
 //  Cozie
 //
 //  Created by Federico Tartarini on 25/5/20.
