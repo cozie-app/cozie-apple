@@ -21,6 +21,7 @@
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E42F7C0B24BEE6B100FAE422 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42F7C0A24BEE6B100FAE422 /* Constants.swift */; };
+		E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */ = {isa = PBXBuildFile; fileRef = E42F7C1124BEF32400FAE422 /* login-video.mov */; };
 		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
 		E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469468E24BC4C590013134B /* SignUpViewController.swift */; };
 		E469469524BC4CF20013134B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469424BC4CF20013134B /* LoginViewController.swift */; };
@@ -178,6 +179,7 @@
 		D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42F7C0A24BEE6B100FAE422 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E42F7C1124BEF32400FAE422 /* login-video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "login-video.mov"; sourceTree = "<group>"; };
 		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		E469468E24BC4C590013134B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E469469424BC4CF20013134B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,14 @@
 			path = ResearchKitTasks;
 			sourceTree = "<group>";
 		};
+		1C4914E68D82DEB261A2DDD1 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				E42F7C1124BEF32400FAE422 /* login-video.mov */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		2F9E67614CD4ACF113607CBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +384,7 @@
 				E46946A124BC5D3F0013134B /* GoogleService-Info.plist */,
 				E4838255247BA33B002C3708 /* Info.plist */,
 				1C491128A8683B2144199B1A /* ResearchKitTasks */,
+				1C4914E68D82DEB261A2DDD1 /* Media */,
 			);
 			path = Cozie;
 			sourceTree = "<group>";
@@ -660,6 +671,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */,
 				E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */,
 				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,

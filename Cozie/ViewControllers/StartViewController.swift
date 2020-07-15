@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import AVKit
 
 class StartViewController: UIViewController {
+
+    var videoPlayer: AVPlayer?
+
+    var videoPlayerLayer: AVPlayerLayer?
 
     @IBOutlet weak var signUpButton: UIButton!
 
@@ -21,21 +26,40 @@ class StartViewController: UIViewController {
         setUpElements()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        setUpVideo()
+    }
+
     func setUpElements() {
 
         Utilties.styleFilledButton(signUpButton)
         Utilties.styleHollowButton(loginButton)
     }
 
+    func setUpVideo() {
 
-    /*
-    // MARK: - Navigation
+        let bundlePathVideo = Bundle.main.path(forResource: "login-video", ofType: "mov")
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard bundlePathVideo != nil else {
+            return
+        }
+
+        let url = URL(fileURLWithPath: bundlePathVideo!)
+
+        let item = AVPlayerItem(url: url)
+
+        videoPlayer = AVPlayer(playerItem: item)
+
+        videoPlayerLayer = AVPlayerLayer(player: videoPlayer)
+
+        videoPlayerLayer?.frame = CGRect(x: -self.view.frame.size.width * 1.5,
+                y: 0,
+                width: self.view.frame.size.width * 4,
+                height: self.view.frame.size.height)
+        view.layer.insertSublayer(videoPlayerLayer!, at: 0)
+
+        videoPlayer?.playImmediately(atRate: 0.5)
+
     }
-    */
 
 }
