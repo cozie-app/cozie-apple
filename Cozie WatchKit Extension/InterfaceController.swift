@@ -36,7 +36,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let title: String
         let options: Array<String>
         let icons: Array<String>
-        let nextQuestion: Int
+        let nextQuestion: Array<Int>
         let identifier: String
     }
 
@@ -102,9 +102,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         // set the number of rows in the table
         tableView.setNumberOfRows(question.options.count, withRowType: "RowController")
 
-        // find the index of the next question to show
-        nextQuestion = question.nextQuestion
-
         // set the label in each row of the table and the image
         for (index, rowModel) in question.options.enumerated() {
 
@@ -117,6 +114,9 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     }
 
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+
+        // find the index of the next question to show
+        nextQuestion = questions[currentQuestion].nextQuestion[rowIndex]
 
         if (currentQuestion == 0) {
             startTime = GetDateTimeISOString()
@@ -155,20 +155,19 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     private func defineQuestions() {
 
         // Last question MUST have nextQuestion set to 999
-
         questions += [
             QuestionCozie(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
-                    icons: ["cold", "happy", "hot"], nextQuestion: 1, identifier: "tc-preference"),
+                    icons: ["cold", "happy", "hot"], nextQuestion: [1, 2, 3], identifier: "tc-preference"),
             QuestionCozie(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
-                    icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: 2, identifier: "met"),
+                    icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: [2, 2, 2], identifier: "met"),
             QuestionCozie(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
-                    nextQuestion: 4, identifier: "location-place"),
-            QuestionCozie(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: 4,
+                    nextQuestion: [4, 4, 4], identifier: "location-place"),
+            QuestionCozie(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: [4, 4, 4],
                     identifier: "mood"),
             QuestionCozie(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
-                    nextQuestion: 5, identifier: "location-in-out"),
+                    nextQuestion: [5, 5, 5], identifier: "location-in-out"),
             QuestionCozie(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
-                    icons: ["submit", "delete"], nextQuestion: 999, identifier: "end"),
+                    icons: ["submit", "delete"], nextQuestion: [999, 999, 999], identifier: "end"),
         ]
     }
 
