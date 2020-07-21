@@ -12,29 +12,31 @@ import FirebaseAuth
 
 class StartViewController: UIViewController {
 
+    // to show the video
     var videoPlayer: AVPlayer?
-
     var videoPlayerLayer: AVPlayerLayer?
 
+    // two buttons in the start page
     @IBOutlet weak var signUpButton: UIButton!
-
     @IBOutlet weak var loginButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-    
+
+    // I put the code in the View did appear otherwise it was not working in the viewDidLoad
     override func viewDidAppear(_ animated: Bool) {
         
-        // Do any additional setup after loading the view.
+        // Check if the user has already logged in.
         if Auth.auth().currentUser == nil {
+
             setUpVideo()
-            setUpElements()
+            styleButtons()
+
         } else {
 
             let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
-
             view.window?.rootViewController = homeViewController
             view.window?.makeKeyAndVisible()
         }
@@ -43,7 +45,7 @@ class StartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
     }
 
-    func setUpElements() {
+    func styleButtons() {
 
         Utilties.stylePrimaryButton(signUpButton)
         Utilties.styleSecondaryButton(loginButton)

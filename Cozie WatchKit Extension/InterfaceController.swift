@@ -29,7 +29,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     var currentQuestion = 0
     var nextQuestion = 0
-    var previousQuestion = 0
 
     // structure which is used for the questions
     struct QuestionCozie {
@@ -57,10 +56,12 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     }
 
     var answers = [AnswerCozie]()  // it stores the answer after user as completed Cozie
-    // todo delete variable below since it is not needed and in the loop update automatically answers.responses
     var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
 
     var startTime = ""  // placeholder for the start time of the survey
+    var userID = "user999" // placeholder for the user ID
+
+    var questionsDisplayed = [0] // this holds in memory which questions was previously shown
 
     var lat: Double = 0.0
     var long: Double = 0.0
@@ -75,7 +76,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         defineQuestions()
 
         // changes the text and labels in the table view
-        loadTableData(question: &questions[currentQuestion])
+        loadTableData(question: &questions[currentQuestion], backPressed: false)
 
         locationManager.requestWhenInUseAuthorization()
         // change if more accurate location is needed
@@ -94,7 +95,16 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         super.didDeactivate()
     }
 
-    private func loadTableData(question: inout QuestionCozie) {
+    private func loadTableData(question: inout QuestionCozie, backPressed: Bool) {
+
+        // updates the index of the question to be shown
+        if (backPressed == false){
+            questionsDisplayed.append(currentQuestion)
+        } else {
+            if (questionsDisplayed.count == 1) {
+                questionsDisplayed.append(0)
+            }
+        }
 
         // set the title of the question
         questionTitle.setText(question.title)
@@ -119,6 +129,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         nextQuestion = questions[currentQuestion].nextQuestion[rowIndex]
 
         if (currentQuestion == 0) {
+
             startTime = GetDateTimeISOString()
             let _: Void = locationManager.requestLocation()
             startHeartRateQuery(quantityTypeIdentifier: .heartRate)
@@ -127,8 +138,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         // adding the response to the tmp array of strings
         tmpAnswers[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
-        // updates the index of the question to be shown
-        previousQuestion = currentQuestion
         currentQuestion = nextQuestion
 
         // check if user completed the survey
@@ -141,7 +150,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
             // todo change the constant values below with data from Apple APIs
             SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: valueHR, bodyPresence: true,
-                    participantID: "test999", locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
+                    participantID: userID, locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
                     responses: tmpAnswers))
 
             tmpAnswers.removeAll()
@@ -149,7 +158,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         }
 
         // show next question
-        loadTableData(question: &questions[currentQuestion])
+        loadTableData(question: &questions[currentQuestion], backPressed: false)
     }
 
     private func defineQuestions() {
@@ -266,8 +275,8 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
             for sample in samples {
                 // todo I should also pass the timestamp and activity context which I am printing below
-                print(sample.startDate)
-                print(sample.metadata?[HKMetadataKeyHeartRateMotionContext] as? NSNumber)
+//                print(sample.startDate)
+//                print(sample.metadata?[HKMetadataKeyHeartRateMotionContext] as? NSNumber)
 
                 // Process each sample here.
                 self.valueHR.append(Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min"))))
@@ -287,19 +296,25 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     }
 
     @IBAction func backButtonAction() {
-        // todo the back button is working but only goes back by one question
 
-        currentQuestion = previousQuestion
+        // remove the last element of the array since was the last question shows
+        questionsDisplayed.removeLast()
+        // set current question to previous question shown
+        currentQuestion = questionsDisplayed.last!
 
         // show previous question
-        loadTableData(question: &questions[currentQuestion])
+        loadTableData(question: &questions[currentQuestion], backPressed: true)
+
     }
 
     @IBAction func stopButtonAction() {
+
+        // re-initiate the variables
         currentQuestion = 0
+        questionsDisplayed = [0]
 
         // show previous question
-        loadTableData(question: &questions[currentQuestion])
+        loadTableData(question: &questions[currentQuestion], backPressed: false)
     }
 
 }
