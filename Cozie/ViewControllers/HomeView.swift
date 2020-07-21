@@ -10,8 +10,6 @@ import UIKit
 import ResearchKit
 import FirebaseAuth
 
-// todo implement function which checks if consent process was completed
-
 // temp dictionary to store the answers and for testing purposes
 struct AnswerResearchKit: Codable {
     let questionIdentifier: String
@@ -23,30 +21,41 @@ struct AnswerResearchKit: Codable {
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    // todo implement function which checks if consent process was completed
+    // todo add checkmark to those cards which have been completed
+    // todo move completed cards to the end of the list
+
     let tasksToCompleteLabels = ["Consent", "Eligibility", "Survey", "On-boarding"]
     let tasksImages = [UIImage(named: "consentForm"), UIImage(named: "eligibility"), UIImage(named: "survey"), UIImage(named: "onBoarding")]
     let tasksToPerform = [TaskConsent, TaskEligibility, TaskSurvey, TaskOnBoarding]
+    var tasksCompleted = [false, false, false, false]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
+    // calculates how many cards to display
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         tasksToCompleteLabels.count
     }
 
+    // perform an action when a card was pressed
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let taskViewController = ORKTaskViewController(task: tasksToPerform[indexPath.row], taskRun: nil)
         taskViewController.delegate = self
         present(taskViewController, animated: true, completion: nil)
     }
 
+    // populate the card programmatically
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
 
         cell.TaskImage.image = tasksImages[indexPath.row]
         cell.TaskLabel.text = tasksToCompleteLabels[indexPath.row]
+        if (tasksCompleted[indexPath.row]) {
+            cell.TaskCompletedIndicator.alpha = 1
+        } else { cell.TaskCompletedIndicator.alpha = 0}
 
         // todo change checkmark if the user completed the task or alternatively hide the view or move it to the bottom
 
@@ -66,6 +75,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         return cell
     }
 
+    // handles the responses to the tasks from ResearchKit
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
 
         taskViewController.dismiss(animated: true, completion: nil)
@@ -174,6 +184,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
 
     @IBAction func ReviewConsent(_ sender: Any) {
+
+        // todo show this button only if the consent form was previously completed
 
         let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
         taskViewController.delegate = self

@@ -12,5 +12,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var TaskImage: UIImageView!
     @IBOutlet weak var TaskLabel: UILabel!
+    @IBOutlet weak var TaskCompletedIndicator: UIImageView!
     
 }

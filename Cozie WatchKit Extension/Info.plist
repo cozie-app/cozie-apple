@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.3</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -36,13 +36,19 @@
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Cozie needs to monitor your Heart Rate</string>
+	<string>Your helath data will be used in our study</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Cozie needs to monitor your Heart Rate</string>
+	<string>Your helath data will be used in our study</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Cozie needs to monitor your Heart Rate</string>
+	<string>Your health data will be used in our study</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need the location to determine where you completed the survey</string>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>

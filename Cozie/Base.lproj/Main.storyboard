@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -74,6 +74,7 @@
                                         <color key="backgroundColor" red="0.99117674635320385" green="1" blue="0.95507668953191494" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="customSize" width="348.5" height="160"/>
                                         <connections>
+                                            <outlet property="TaskCompletedIndicator" destination="RfD-rP-4U8" id="6bg-Gc-hKQ"/>
                                             <outlet property="TaskImage" destination="8Yz-81-F8v" id="atB-Vb-9Kz"/>
                                             <outlet property="TaskLabel" destination="YsF-uq-QHH" id="qYK-0q-2gC"/>
                                         </connections>

@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -25,13 +25,27 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Your helath data will be used in our study</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Your helath data will be used in our study</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string></string>
+	<string>Your health data will be used in our study</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Used to determine form where you completed the survey.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Used to determine form where you completed the survey.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
