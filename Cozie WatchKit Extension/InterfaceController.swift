@@ -23,7 +23,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     private var healthStore = HKHealthStore()
     let heartRateQuantity = HKUnit(from: "count/min")
-    private var valueHR = [Int]()
 
     var locationManager: CLLocationManager = CLLocationManager()
 
@@ -46,7 +45,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     struct AnswerCozie: Codable {
         let startTimestamp: String
         let endTimestamp: String
-        let heartRate: [Int]
+        let heartRate: [String: Int]
         let bodyPresence: Bool
         let participantID: String
         let locationTimestamp: String
@@ -57,6 +56,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
     var answers = [AnswerCozie]()  // it stores the answer after user as completed Cozie
     var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
+    var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
 
     var startTime = ""  // placeholder for the start time of the survey
     var userID = "user999" // placeholder for the user ID
@@ -149,12 +149,12 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             let endTime = GetDateTimeISOString()
 
             // todo change the constant values below with data from Apple APIs
-            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: valueHR, bodyPresence: true,
+            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate, bodyPresence: true,
                     participantID: userID, locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
                     responses: tmpAnswers))
 
             tmpAnswers.removeAll()
-            valueHR.removeAll()
+            tmpHearthRate.removeAll()
         }
 
         // show next question
@@ -227,9 +227,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let currentLocation = locations[0]
 
         // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions.insert(.withFractionalSeconds)
-        locationTimestamp = formatter.string(from: currentLocation.timestamp)
+        locationTimestamp = FormatDateISOString(date: currentLocation.timestamp)
         lat = currentLocation.coordinate.latitude
         long = currentLocation.coordinate.longitude
 
@@ -264,7 +262,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
         // It provides us with both the ability to receive a snapshot of data, and then on subsequent calls, a snapshot of what has changed.
 //        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
-        let query = HKSampleQuery(sampleType: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!,
+        let query: HKSampleQuery = HKSampleQuery(sampleType: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!,
                 predicate: devicePredicate, limit: 10, sortDescriptors: [sortByDate]) {
             query, results, error in
 
@@ -274,12 +272,10 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             }
 
             for sample in samples {
-                // todo I should also pass the timestamp and activity context which I am printing below
-//                print(sample.startDate)
-//                print(sample.metadata?[HKMetadataKeyHeartRateMotionContext] as? NSNumber)
 
-                // Process each sample here.
-                self.valueHR.append(Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min"))))
+                // date when the HR was sampled
+                let sampledDate =  FormatDateISOString(date: sample.startDate)
+                self.tmpHearthRate[sampledDate] = Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min")))
 
             }
 
