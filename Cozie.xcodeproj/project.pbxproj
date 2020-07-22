@@ -180,6 +180,7 @@
 		E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42F7C0A24BEE6B100FAE422 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E42F7C1124BEF32400FAE422 /* login-video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "login-video.mov"; sourceTree = "<group>"; };
+		E437EF5E24C6F1A5008BC6FF /* Cozie WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit App.entitlements"; sourceTree = "<group>"; };
 		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		E469468E24BC4C590013134B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E469469424BC4CF20013134B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -410,6 +411,7 @@
 		E4838272247BA33B002C3708 /* Cozie WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				E437EF5E24C6F1A5008BC6FF /* Cozie WatchKit App.entitlements */,
 				E4838273247BA33B002C3708 /* Interface.storyboard */,
 				E4838276247BA33C002C3708 /* Assets.xcassets */,
 				E4838278247BA33C002C3708 /* Info.plist */,
@@ -610,6 +612,7 @@
 					};
 					E483826D247BA33B002C3708 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1160;
 					};
 					E483827C247BA33C002C3708 = {
 						CreatedOnToolsVersion = 11.5;
@@ -1173,16 +1176,25 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Y6729H674Z;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Cozie/Cozie WatchKit App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.2;
@@ -1195,16 +1207,24 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Y6729H674Z;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Cozie/Cozie WatchKit App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.2;

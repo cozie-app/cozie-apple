@@ -33,6 +33,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // todo pass this to watch kit app
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let uid = user.uid
+        }
+
     }
 
     // calculates how many cards to display
@@ -55,7 +61,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         cell.TaskLabel.text = tasksToCompleteLabels[indexPath.row]
         if (tasksCompleted[indexPath.row]) {
             cell.TaskCompletedIndicator.alpha = 1
-        } else { cell.TaskCompletedIndicator.alpha = 0}
+        } else {
+            cell.TaskCompletedIndicator.alpha = 0
+        }
 
         // todo change checkmark if the user completed the task or alternatively hide the view or move it to the bottom
 
@@ -194,10 +202,10 @@ class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
 
     @IBAction func logOutButton(_ sender: Any) {
 
-        let alertController = UIAlertController(title: nil, message: "Are you sure you want to Log Out?", 
+        let alertController = UIAlertController(title: nil, message: "Are you sure you want to Log Out?",
                 preferredStyle: .actionSheet)
 
-        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, 
+        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive,
                 handler: { (alert: UIAlertAction!) in self.signOut() }))
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

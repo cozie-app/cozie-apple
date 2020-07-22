@@ -133,6 +133,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             startTime = GetDateTimeISOString()
             let _: Void = locationManager.requestLocation()
             startHeartRateQuery(quantityTypeIdentifier: .heartRate)
+
         }
 
         // adding the response to the tmp array of strings
