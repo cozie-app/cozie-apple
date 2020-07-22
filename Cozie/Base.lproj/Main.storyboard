@@ -105,48 +105,17 @@
             </objects>
             <point key="canvasLocation" x="2151" y="-839"/>
         </scene>
-        <!--Other-->
+        <!--Settings-->
         <scene sceneID="WtC-KL-8ka">
             <objects>
-                <viewController id="AdB-sb-bBQ" customClass="SettingsController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AdB-sb-bBQ" customClass="SettingsViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Mq-a5-idT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Z9-Y2-9og">
-                                <rect key="frame" x="97.666666666666686" y="391" width="180" height="30"/>
-                                <state key="normal" title="Review and share consent"/>
-                                <connections>
-                                    <action selector="ReviewConsent:" destination="AdB-sb-bBQ" eventType="touchUpInside" id="eTB-hg-lL1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGp-D2-V2a">
-                                <rect key="frame" x="160" y="461" width="55" height="30"/>
-                                <state key="normal" title="Log Out"/>
-                                <connections>
-                                    <action selector="logOutButton:" destination="AdB-sb-bBQ" eventType="touchUpInside" id="Ji6-7D-xlF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Oa-gP-KCm">
-                                <rect key="frame" x="121.66666666666669" y="531" width="132" height="30"/>
-                                <state key="normal" title="Send Participant ID"/>
-                                <connections>
-                                    <action selector="sendParticipantID:" destination="AdB-sb-bBQ" eventType="touchUpInside" id="pRq-ah-oCg"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="yGp-D2-V2a" firstAttribute="centerX" secondItem="2Mq-a5-idT" secondAttribute="centerX" id="0wo-Ai-Ddk"/>
-                            <constraint firstItem="8Z9-Y2-9og" firstAttribute="centerX" secondItem="2Mq-a5-idT" secondAttribute="centerX" id="5Qq-rH-Jsy"/>
-                            <constraint firstItem="yGp-D2-V2a" firstAttribute="top" secondItem="8Z9-Y2-9og" secondAttribute="bottom" constant="40" id="H3u-UF-UJ4"/>
-                            <constraint firstItem="3Oa-gP-KCm" firstAttribute="top" secondItem="yGp-D2-V2a" secondAttribute="bottom" constant="40" id="MEh-ZZ-H7Y"/>
-                            <constraint firstItem="8Z9-Y2-9og" firstAttribute="centerY" secondItem="2Mq-a5-idT" secondAttribute="centerY" id="d5k-Qo-bwh"/>
-                            <constraint firstItem="3Oa-gP-KCm" firstAttribute="centerX" secondItem="2Mq-a5-idT" secondAttribute="centerX" id="m8r-Yj-Gcg"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5S7-Mt-3oL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Other" image="gear" catalog="system" selectedImage="gear" id="QL1-u7-Opw"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" selectedImage="gear" id="QL1-u7-Opw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUA-Jp-CQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

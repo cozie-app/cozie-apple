@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  HomeViewController.swift
 //  Cozie
 //
 //  Created by Federico Tartarini on 25/5/20.
@@ -184,95 +184,4 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         // save the messages to local storage so I replace what was previously there
         UserDefaults.standard.set(try? PropertyListEncoder().encode(messages), forKey: "AnswerResearchKit")
     }
-}
-
-class SettingsController: UIViewController, WCSessionDelegate, ORKTaskViewControllerDelegate {
-
-    // session is the connection session between the phone and the watch
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    }
-
-    func sessionDidBecomeInactive(_ session: WCSession) {
-    }
-
-    func sessionDidDeactivate(_ session: WCSession) {
-    }
-
-    var session: WCSession?
-
-    @IBAction func ReviewConsent(_ sender: Any) {
-
-        // fixme show this button only if the consent form was previously completed
-
-        let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
-        taskViewController.delegate = self
-        present(taskViewController, animated: true, completion: nil)
-    }
-
-    @IBAction func logOutButton(_ sender: Any) {
-
-        let alertController = UIAlertController(title: nil, message: "Are you sure you want to Log Out?",
-                preferredStyle: .actionSheet)
-
-        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive,
-                handler: { (alert: UIAlertAction!) in self.signOut() }))
-
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(alertController, animated: true, completion: nil)
-
-    }
-
-    @IBAction func sendParticipantID(_ sender: Any) {
-
-        sendParticipantID()
-
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        taskViewController.dismiss(animated: true, completion: nil)
-    }
-
-    func signOut() {
-        do {
-            try Auth.auth().signOut()
-
-            let startViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.startViewController)
-
-            view.window?.rootViewController = startViewController
-            view.window?.makeKeyAndVisible()
-
-        } catch let error {
-            print("Failed to sign out with error", error)
-        }
-
-    }
-
-    func sendParticipantID() {
-
-        // check if watch connectivity is supported and activate it
-        if WCSession.isSupported() {
-            session = WCSession.default
-            session?.delegate = self
-            session?.activate()
-
-            do {
-                try session?.updateApplicationContext(["participantID": participantID])
-                print("Sent user ID")
-            } catch {
-                let alertController = UIAlertController(title: nil, message: "Something went wrong. Please ensure that the phone and the watch are both on and connected then press the button again.",
-                        preferredStyle: .actionSheet)
-
-                alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-
-                present(alertController, animated: true, completion: nil)
-            }
-        }
-    }
-
 }
