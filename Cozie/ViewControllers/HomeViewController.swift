@@ -24,10 +24,13 @@ var participantID = "undefined"
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    let tasksToCompleteLabels = ["Consent", "Eligibility", "Survey", "On-boarding"]
-    let tasksImages = [UIImage(named: "consentForm"), UIImage(named: "eligibility"), UIImage(named: "survey"), UIImage(named: "onBoarding")]
-    let tasksToPerform = [TaskConsent, TaskEligibility, TaskSurvey, TaskOnBoarding]
+    var tasksToCompleteLabels = ["Consent", "Eligibility", "Survey", "On-boarding"]
+    var tasksImages = [UIImage(named: "consentForm"), UIImage(named: "eligibility"), UIImage(named: "survey"), UIImage(named: "onBoarding")]
+    var tasksToPerform = [TaskConsent, TaskEligibility, TaskSurvey, TaskOnBoarding]
     var tasksCompleted = [false, false, false, false]
+    var taskPerformed = 0
+
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,13 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             participantID = user.uid
         }
 
+        // when task is completed this notification center fires and reload the collection View
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection(notification:)), name: NSNotification.Name(rawValue: "taskCompleted"), object: nil)
+
+    }
+
+    @objc func reloadCollection(notification: NSNotification) {
+        self.collectionView.reloadData()
     }
 
     // calculates how many cards to display
@@ -46,8 +56,13 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
     // perform an action when a card was pressed
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        // keep track of which task was performed
+        taskPerformed = indexPath.row
+
         let taskViewController = ORKTaskViewController(task: tasksToPerform[indexPath.row], taskRun: nil)
         taskViewController.delegate = self
+
         present(taskViewController, animated: true, completion: nil)
     }
 
@@ -63,11 +78,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             cell.TaskCompletedIndicator.alpha = 0
         }
 
-        // improvement change checkmark if the user completed the task
-        // improvement move the card to the bottom
-
         // This creates the shadows and modifies the cards a little bit
 //        cell.contentView.backgroundColor = UIColor.white
+        // improvement programmatically resize the card size
         cell.contentView.layer.cornerRadius = 15.0
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -93,6 +106,16 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
                     Timestamp: GetDateTimeISOString(), participantID: participantID,
                     deviceUUID: UUID().uuidString, responses: [:])
+
+            // improvement the code is poorly written
+            // improvement save this locally
+            tasksToCompleteLabels = rearrange(array: tasksToCompleteLabels, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
+            tasksImages = rearrange(array: tasksImages, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
+            tasksToPerform = rearrange(array: tasksToPerform, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
+            tasksCompleted[taskPerformed] = true
+            tasksCompleted = rearrange(array: tasksCompleted, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
+
+            NotificationCenter.default.post(name: NSNotification.Name("taskCompleted"), object: nil)
 
             let result = taskViewController.result
 
@@ -124,9 +147,11 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                     for stepResult: ORKStepResult in results {
                         for result in stepResult.results! {
                             if let questionResult = result as? ORKQuestionResult {
-                                var resp = String(describing: questionResult.answer!).replacingOccurrences(of: "(\n", with: "")
-                                resp = resp.replacingOccurrences(of: "\n)", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                                answer.responses[questionResult.identifier] = resp
+                                if (questionResult.answer != nil){
+                                    var resp = String(describing: questionResult.answer!).replacingOccurrences(of: "(\n", with: "")
+                                    resp = resp.replacingOccurrences(of: "\n)", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                                    answer.responses[questionResult.identifier] = resp
+                                }
                             }
                         }
                     }
@@ -144,6 +169,14 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             break
 
         }
+    }
+
+    func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T>{
+        var arr = array
+        let element = arr.remove(at: fromIndex)
+        arr.insert(element, at: toIndex)
+
+        return arr
     }
 
     private func SendDataDatabase(answer: AnswerResearchKit) {
