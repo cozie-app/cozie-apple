@@ -10,11 +10,17 @@ import WatchKit
 import Foundation
 import CoreLocation
 import HealthKit
+import WatchConnectivity
 
-class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
+class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate {
 
-    // todo get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
-    // todo add user ID
+    // code related to the watch connectivity
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+
+    let session = WCSession.default
+
+    // improvement get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
 
     @IBOutlet weak var stopButton: WKInterfaceButton!
     @IBOutlet weak var backButton: WKInterfaceButton!
@@ -46,8 +52,8 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let startTimestamp: String
         let endTimestamp: String
         let heartRate: [String: Int]
-        let bodyPresence: Bool
         let participantID: String
+        let deviceUUID: String
         let locationTimestamp: String
         let latitude: Double
         let longitude: Double
@@ -59,7 +65,8 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
 
     var startTime = ""  // placeholder for the start time of the survey
-    var userID = "user999" // placeholder for the user ID
+
+    var participantID = "undefined" // placeholder for the user ID
 
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
 
@@ -72,6 +79,10 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
         authorizeHealthKit()
 
+        // start connection session with the phone
+        session.delegate = self
+        session.activate()
+
         // append new questions to the questions array
         defineQuestions()
 
@@ -82,6 +93,10 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         // change if more accurate location is needed
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.delegate = self
+
+        if let messageReceived = session.receivedApplicationContext as? [String: String] {
+            participantID = messageReceived["participantID"] ?? participantID
+        }
     }
 
 
@@ -98,7 +113,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
     private func loadTableData(question: inout QuestionCozie, backPressed: Bool) {
 
         // updates the index of the question to be shown
-        if (backPressed == false){
+        if (backPressed == false) {
             questionsDisplayed.append(currentQuestion)
         } else {
             if (questionsDisplayed.count == 1) {
@@ -149,10 +164,9 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
             let endTime = GetDateTimeISOString()
 
-            // todo change the constant values below with data from Apple APIs
-            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate, bodyPresence: true,
-                    participantID: userID, locationTimestamp: locationTimestamp, latitude: lat, longitude: long,
-                    responses: tmpAnswers))
+            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
+                    participantID: participantID, deviceUUID: UUID().uuidString,
+                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpAnswers))
 
             tmpAnswers.removeAll()
             tmpHearthRate.removeAll()
@@ -227,7 +241,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
         let currentLocation = locations[0]
 
-        // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
+        // optimize I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
         locationTimestamp = FormatDateISOString(date: currentLocation.timestamp)
         lat = currentLocation.coordinate.latitude
         long = currentLocation.coordinate.longitude
@@ -251,7 +265,14 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
         let healthKitTypes: Set = [
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!]
         // Requests permission to save and read the specified data types.
-        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in }
+        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in
+        }
+    }
+
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        DispatchQueue.main.async() {
+            print("data received from the iPhone")
+        }
     }
 
     private func startHeartRateQuery(quantityTypeIdentifier: HKQuantityTypeIdentifier) {
@@ -275,7 +296,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             for sample in samples {
 
                 // date when the HR was sampled
-                let sampledDate =  FormatDateISOString(date: sample.startDate)
+                let sampledDate = FormatDateISOString(date: sample.startDate)
                 self.tmpHearthRate[sampledDate] = Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min")))
 
             }
@@ -288,7 +309,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate {
             }
         }
 
-        // todo I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
+        // optimize I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
         healthStore.execute(query)
     }
 

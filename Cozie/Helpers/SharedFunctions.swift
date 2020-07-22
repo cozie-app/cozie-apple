@@ -80,7 +80,7 @@ public func PostRequest(message: Data) -> Int {
     // run the async POST request
     task.resume()
 
-    // todo maybe write not blocking code or show a message or loader to inform user
+    // optimize maybe write not blocking code or show a message or loader to inform user
     // https://github.com/hirokimu/EMTLoadingIndicator
     sem.wait()
     return responseStatusCode

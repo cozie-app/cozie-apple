@@ -9,21 +9,20 @@
 import UIKit
 import ResearchKit
 import FirebaseAuth
+import WatchConnectivity
 
 // temp dictionary to store the answers and for testing purposes
 struct AnswerResearchKit: Codable {
     let questionIdentifier: String
     let Timestamp: String
     let participantID: String
+    let deviceUUID: String
     var responses: [String: String]
 }
 
+var participantID = "undefined"
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
-
-    // todo implement function which checks if consent process was completed
-    // todo add checkmark to those cards which have been completed
-    // todo move completed cards to the end of the list
 
     let tasksToCompleteLabels = ["Consent", "Eligibility", "Survey", "On-boarding"]
     let tasksImages = [UIImage(named: "consentForm"), UIImage(named: "eligibility"), UIImage(named: "survey"), UIImage(named: "onBoarding")]
@@ -33,10 +32,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // todo pass this to watch kit app
         let user = Auth.auth().currentUser
         if let user = user {
-            let uid = user.uid
+            participantID = user.uid
         }
 
     }
@@ -65,7 +63,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             cell.TaskCompletedIndicator.alpha = 0
         }
 
-        // todo change checkmark if the user completed the task or alternatively hide the view or move it to the bottom
+        // improvement change checkmark if the user completed the task
+        // improvement move the card to the bottom
 
         // This creates the shadows and modifies the cards a little bit
 //        cell.contentView.backgroundColor = UIColor.white
@@ -90,12 +89,10 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
         switch reason {
         case .completed:
-            // todo mark the task completed by showing the check mark
 
-            // todo change below variables that are set equal as constant e.g., participantID
             var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
-                    Timestamp: GetDateTimeISOString(),
-                    participantID: "test999", responses: [:])
+                    Timestamp: GetDateTimeISOString(), participantID: participantID,
+                    deviceUUID: UUID().uuidString, responses: [:])
 
             let result = taskViewController.result
 
@@ -189,11 +186,23 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     }
 }
 
-class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
+class SettingsController: UIViewController, WCSessionDelegate, ORKTaskViewControllerDelegate {
+
+    // session is the connection session between the phone and the watch
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+    }
+
+    var session: WCSession?
 
     @IBAction func ReviewConsent(_ sender: Any) {
 
-        // todo show this button only if the consent form was previously completed
+        // fixme show this button only if the consent form was previously completed
 
         let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
         taskViewController.delegate = self
@@ -211,6 +220,12 @@ class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         present(alertController, animated: true, completion: nil)
+
+    }
+
+    @IBAction func sendParticipantID(_ sender: Any) {
+
+        sendParticipantID()
 
     }
 
@@ -236,6 +251,28 @@ class SettingsController: UIViewController, ORKTaskViewControllerDelegate {
             print("Failed to sign out with error", error)
         }
 
+    }
+
+    func sendParticipantID() {
+
+        // check if watch connectivity is supported and activate it
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+
+            do {
+                try session?.updateApplicationContext(["participantID": participantID])
+                print("Sent user ID")
+            } catch {
+                let alertController = UIAlertController(title: nil, message: "Something went wrong. Please ensure that the phone and the watch are both on and connected then press the button again.",
+                        preferredStyle: .actionSheet)
+
+                alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+
+                present(alertController, animated: true, completion: nil)
+            }
+        }
     }
 
 }
