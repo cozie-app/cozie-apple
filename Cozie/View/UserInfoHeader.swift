@@ -18,7 +18,7 @@ class UserInfoHeader: UIView {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
-        // improvement change image to person profile image
+        // improvement increase image resolution
         iv.image = UIImage(named: "AppIcon")
         return iv
     }()

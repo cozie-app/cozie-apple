@@ -10,14 +10,25 @@ import UIKit
 import ResearchKit
 import FirebaseAuth
 import WatchConnectivity
+import FirebaseFirestore
 
 // temp dictionary to store the answers and for testing purposes
 struct AnswerResearchKit: Codable {
     let questionIdentifier: String
     let Timestamp: String
-    let participantID: String
+    let uid: String
     let deviceUUID: String
     var responses: [String: String]
+
+    // convert the structure into dictionary that can be sent to Firebase
+    var asDictionary : [String:Any] {
+        let mirror = Mirror(reflecting: self)
+        let dict = Dictionary(uniqueKeysWithValues: mirror.children.lazy.map({ (label:String?, value:Any) -> (String, Any)? in
+            guard let label = label else { return nil }
+            return (label, value)
+        }).compactMap { $0 })
+        return dict
+    }
 }
 
 var participantID = "undefined"
@@ -104,11 +115,13 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         case .completed:
 
             var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
-                    Timestamp: GetDateTimeISOString(), participantID: participantID,
+                    Timestamp: GetDateTimeISOString(), uid: participantID,
                     deviceUUID: UUID().uuidString, responses: [:])
 
             // improvement the code is poorly written
-            // improvement save this locally
+            // improvement save this on Firebase and locally
+            // improvement show red cross if the user is not eligible
+            // improvement I may not want to add green checkmark to survey
             tasksToCompleteLabels = rearrange(array: tasksToCompleteLabels, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
             tasksImages = rearrange(array: tasksImages, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
             tasksToPerform = rearrange(array: tasksToPerform, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
@@ -157,6 +170,22 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                     }
                 }
 
+                // User was created successfully, now also store name and surname
+                let db = Firestore.firestore()
+
+                // Storing the document in Firebase
+                var ref: DocumentReference? = nil
+                ref = db.collection("tasksResponses").addDocument(data: 
+                    answer.asDictionary
+                ) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added.")
+                    }
+                }
+
+                // sending the data into Influx
                 SendDataDatabase(answer: answer)
 
             }

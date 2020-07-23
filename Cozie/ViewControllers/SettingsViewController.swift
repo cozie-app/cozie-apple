@@ -190,7 +190,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-                    // fixme notify the user if he has not yet completed consent form
+                    // fixme hide this button if the user has not yet completed consent form
             case .emailConsent: sendConsentForm()
                     // fixme when the button below is clicked it throws an error
             case .notification: print("user asked to disable notifications")
