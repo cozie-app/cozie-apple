@@ -185,8 +185,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                     }
                 }
 
-                // sending the data into Influx
-                SendDataDatabase(answer: answer)
+//                // sending the data into Influx
+//                SendDataDatabase(answer: answer)
 
             }
 
