@@ -17,41 +17,71 @@ struct AnswerResearchKit: Codable {
     let questionIdentifier: String
     let Timestamp: String
     let uid: String
-    let deviceUUID: String
     var responses: [String: String]
 
     // convert the structure into dictionary that can be sent to Firebase
-    var asDictionary : [String:Any] {
+    var asDictionary: [String: Any] {
         let mirror = Mirror(reflecting: self)
-        let dict = Dictionary(uniqueKeysWithValues: mirror.children.lazy.map({ (label:String?, value:Any) -> (String, Any)? in
-            guard let label = label else { return nil }
+        let dict = Dictionary(uniqueKeysWithValues: mirror.children.lazy.map({ (label: String?, value: Any) -> (String, Any)? in
+            guard let label = label else {
+                return nil
+            }
             return (label, value)
-        }).compactMap { $0 })
+        }).compactMap {
+            $0
+        })
         return dict
     }
+}
+
+struct Task: Codable {
+    let label: String
+    let image: String
+    let taskID: Int
+    var completed: Bool
 }
 
 var participantID = "undefined"
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    var tasksToCompleteLabels = ["Consent", "Eligibility", "Survey", "On-boarding"]
-    var tasksImages = [UIImage(named: "consentForm"), UIImage(named: "eligibility"), UIImage(named: "survey"), UIImage(named: "onBoarding")]
-    var tasksToPerform = [TaskConsent, TaskEligibility, TaskSurvey, TaskOnBoarding]
-    var tasksCompleted = [false, false, false, false]
+    // task id that was last performed
     var taskPerformed = 0
+
+    var tasks = [Task]()
+    // improvement the following variable should be embedded into tasks
+    var tasksToPerform = [TaskConsent, TaskEligibility, TaskSurvey, TaskOnBoarding]
 
     @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // save the uid from firebase
         let user = Auth.auth().currentUser
         if let user = user {
             participantID = user.uid
         }
 
-        // when task is completed this notification center fires and reload the collection View
+        // check if is the first time the app load up
+        if let data = UserDefaults.standard.value(forKey: "tasks") as? Data {
+
+            let storedValues = try? PropertyListDecoder().decode(Array<Task>.self, from: data)
+            tasks = storedValues!
+
+        } else {
+            // improvement the code is poorly written since taskID is linked to taskToPerform
+            // initialize the tasks to be presented
+            tasks += [
+                Task(label: "Consent", image: "consentForm", taskID: 0, completed: false),
+                Task(label: "Eligibility", image: "eligibility", taskID: 1, completed: false),
+                Task(label: "Survey", image: "survey", taskID: 2, completed: false),
+                Task(label: "On-boarding", image: "onBoarding", taskID: 3, completed: false)
+            ]
+
+        }
+
+        // when a task is completed this notification center fires and reload the collection View
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection(notification:)), name: NSNotification.Name(rawValue: "taskCompleted"), object: nil)
 
     }
@@ -62,7 +92,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
     // calculates how many cards to display
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        tasksToCompleteLabels.count
+        tasks.count
     }
 
     // perform an action when a card was pressed
@@ -71,7 +101,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         // keep track of which task was performed
         taskPerformed = indexPath.row
 
-        let taskViewController = ORKTaskViewController(task: tasksToPerform[indexPath.row], taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: tasksToPerform[tasks[indexPath.row].taskID], taskRun: nil)
         taskViewController.delegate = self
 
         present(taskViewController, animated: true, completion: nil)
@@ -81,16 +111,15 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
 
-        cell.TaskImage.image = tasksImages[indexPath.row]
-        cell.TaskLabel.text = tasksToCompleteLabels[indexPath.row]
-        if (tasksCompleted[indexPath.row]) {
+        cell.TaskImage.image = UIImage(named: tasks[indexPath.row].image)
+        cell.TaskLabel.text = tasks[indexPath.row].label
+        if (tasks[indexPath.row].completed) {
             cell.TaskCompletedIndicator.alpha = 1
         } else {
             cell.TaskCompletedIndicator.alpha = 0
         }
 
         // This creates the shadows and modifies the cards a little bit
-//        cell.contentView.backgroundColor = UIColor.white
         // improvement programmatically resize the card size
         cell.contentView.layer.cornerRadius = 15.0
         cell.contentView.layer.borderWidth = 1.0
@@ -116,17 +145,15 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
             var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
                     Timestamp: GetDateTimeISOString(), uid: participantID,
-                    deviceUUID: UUID().uuidString, responses: [:])
+                    responses: [:])
 
-            // improvement the code is poorly written
-            // improvement save this on Firebase and locally
             // improvement show red cross if the user is not eligible
             // improvement I may not want to add green checkmark to survey
-            tasksToCompleteLabels = rearrange(array: tasksToCompleteLabels, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
-            tasksImages = rearrange(array: tasksImages, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
-            tasksToPerform = rearrange(array: tasksToPerform, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
-            tasksCompleted[taskPerformed] = true
-            tasksCompleted = rearrange(array: tasksCompleted, fromIndex: taskPerformed, toIndex: tasksToCompleteLabels.count - 1)
+            tasks[taskPerformed].completed = true
+            tasks = rearrageArray(array: tasks, fromIndex: taskPerformed, toIndex: tasks.count - 1)
+
+            // save the messages to local storage so I replace what was previously there
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(tasks), forKey: "tasks")
 
             NotificationCenter.default.post(name: NSNotification.Name("taskCompleted"), object: nil)
 
@@ -160,7 +187,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                     for stepResult: ORKStepResult in results {
                         for result in stepResult.results! {
                             if let questionResult = result as? ORKQuestionResult {
-                                if (questionResult.answer != nil){
+                                if (questionResult.answer != nil) {
                                     var resp = String(describing: questionResult.answer!).replacingOccurrences(of: "(\n", with: "")
                                     resp = resp.replacingOccurrences(of: "\n)", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
                                     answer.responses[questionResult.identifier] = resp
@@ -175,8 +202,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
                 // Storing the document in Firebase
                 var ref: DocumentReference? = nil
-                ref = db.collection("tasksResponses").addDocument(data: 
-                    answer.asDictionary
+                ref = db.collection("tasksResponses").addDocument(data:
+                answer.asDictionary
                 ) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
@@ -200,7 +227,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         }
     }
 
-    func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T>{
+    func rearrageArray<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
         var arr = array
         let element = arr.remove(at: fromIndex)
         arr.insert(element, at: toIndex)

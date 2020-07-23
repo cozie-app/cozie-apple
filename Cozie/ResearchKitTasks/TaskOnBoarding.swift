@@ -33,5 +33,10 @@ public var TaskOnBoarding: ORKOrderedTask {
                         ORKTextChoice(text: "Female", value: NSNumber(integerLiteral: 1))]))
     steps += [happyQuestion]
 
+    let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
+    summaryStep.title = "Thank you!"
+    summaryStep.text = "That was easy!"
+    steps += [summaryStep]
+
     return ORKOrderedTask(identifier: "On-boarding", steps: steps)
 }
