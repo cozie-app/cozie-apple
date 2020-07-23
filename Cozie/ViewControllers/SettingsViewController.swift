@@ -124,7 +124,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Social: return SocialOptions.allCases.count
+        case .Settings: return SocialOptions.allCases.count
         case .Communications: return CommunicationOptions.allCases.count
         }
     }
@@ -159,7 +159,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Social:
+        case .Settings:
             let social = SocialOptions(rawValue: indexPath.row)
             cell.sectionType = social
         case .Communications:
@@ -177,7 +177,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Social:
+        case .Settings:
             guard let buttonClicked = SocialOptions(rawValue: indexPath.row) else {
                 return
             }

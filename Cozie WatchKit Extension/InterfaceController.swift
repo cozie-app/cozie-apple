@@ -58,6 +58,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         let latitude: Double
         let longitude: Double
         let responses: [String: String]
+        let voteLog: Int
     }
 
     var answers = [AnswerCozie]()  // it stores the answer after user as completed Cozie
@@ -74,10 +75,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var long: Double = 0.0
     var locationTimestamp = ""
 
+    var uuid = ""
+    var voteLog = 0
+
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
         authorizeHealthKit()
+
+        // save on first startup the UUID in user defaults so it does not change
+        // improvement make sure uuid persists between installs
+        let userDefaults = UserDefaults.standard
+        uuid = userDefaults.string(forKey: "uuid") ?? ""
+        if (uuid == "") {
+            uuid = UUID().uuidString
+            userDefaults.set(uuid, forKey: "uuid")
+        }
 
         // start connection session with the phone
         session.delegate = self
@@ -149,6 +162,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             let _: Void = locationManager.requestLocation()
             startHeartRateQuery(quantityTypeIdentifier: .heartRate)
 
+            // increase the voteLog by one and then store it
+            let userDefaults = UserDefaults.standard
+            voteLog = userDefaults.integer(forKey: "voteLog")
+            voteLog += 1
+            userDefaults.set(voteLog, forKey: "voteLog")
+
         }
 
         // adding the response to the tmp array of strings
@@ -165,8 +184,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             let endTime = GetDateTimeISOString()
 
             SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
-                    participantID: participantID, deviceUUID: UUID().uuidString,
-                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpAnswers))
+                    participantID: participantID, deviceUUID: uuid,
+                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpAnswers, voteLog: voteLog))
 
             tmpAnswers.removeAll()
             tmpHearthRate.removeAll()

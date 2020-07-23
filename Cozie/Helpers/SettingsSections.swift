@@ -9,11 +9,11 @@ protocol SectionType: CustomStringConvertible {
 
 enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
 
-    case Social
+    case Settings
     case Communications
     var description: String {
         switch self{
-        case .Social: return "Social"
+        case .Settings: return "Settings"
         case .Communications: return "Communications"
         }
     }
