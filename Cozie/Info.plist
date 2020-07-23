@@ -26,27 +26,27 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>We are not using not storing this data.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Your helath data will be used in our study</string>
+	<string>We are logging the heart rate data.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Your helath data will be used in our study</string>
+	<string>We are logging the heart rate data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Your health data will be used in our study</string>
+	<string>We are logging the heart rate data.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

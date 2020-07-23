@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -36,19 +36,19 @@
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Your helath data will be used in our study</string>
+	<string>We are logging the heart rate data.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Your helath data will be used in our study</string>
+	<string>We are logging the heart rate data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Your health data will be used in our study</string>
+	<string>We are logging the heart rate data.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Used to determine form where you completed the survey.</string>
+	<string>Used it to determine form where you completed the survey.</string>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>
