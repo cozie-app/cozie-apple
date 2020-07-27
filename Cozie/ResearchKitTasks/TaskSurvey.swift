@@ -20,22 +20,21 @@ public var TaskSurvey: ORKOrderedTask {
 
     let nameAnswerFormat = ORKTextAnswerFormat(maximumLength: 20)
     nameAnswerFormat.multipleLines = false
-    let nameQuestionStepTitle = "What is your name?"
-    let nameQuestionStep = ORKQuestionStep(identifier: "QuestionStep", title: nameQuestionStepTitle, answer: nameAnswerFormat)
+    let nameQuestionStep = ORKQuestionStep(identifier: "QuestionStep", title: "Personal info", 
+            question: "What is your name", answer: nameAnswerFormat)
     steps += [nameQuestionStep]
 
 
-    let questQuestionStepTitle = "What is your quest?"
     let textChoices = [
         ORKTextChoice(text: "Create a ResearchKit App", value: 0 as NSNumber),
         ORKTextChoice(text: "Seek the Holy Grail", value: 1 as NSNumber),
         ORKTextChoice(text: "Find a shrubbery", value: 2 as NSNumber)
     ]
     let questAnswerFormat: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
-    let questQuestionStep = ORKQuestionStep(identifier: "TextChoiceQuestionStep", title: questQuestionStepTitle, answer: questAnswerFormat)
+    let questQuestionStep = ORKQuestionStep(identifier: "TextChoiceQuestionStep", title: "Tell us about your quest", 
+            question:"What is your quest?", answer: questAnswerFormat)
     steps += [questQuestionStep]
 
-    let colorQuestionStepTitle = "What is your favorite color?"
     let colorTuples = [
         (UIImage(named: "red")!, "Red"),
         (UIImage(named: "orange")!, "Orange"),
@@ -49,7 +48,8 @@ public var TaskSurvey: ORKOrderedTask {
         return ORKImageChoice(normalImage: $0.0, selectedImage: nil, text: $0.1, value: $0.1 as NSCoding & NSCopying & NSObjectProtocol)
     }
     let colorAnswerFormat: ORKImageChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
-    let colorQuestionStep = ORKQuestionStep(identifier: "ImageChoiceQuestionStep", title: colorQuestionStepTitle, answer: colorAnswerFormat)
+    let colorQuestionStep = ORKQuestionStep(identifier: "ImageChoiceQuestionStep", title: "Tell us about your favourite colour", 
+            question: "What is your favorite color?", answer: colorAnswerFormat)
     steps += [colorQuestionStep]
 
     let summaryStep = ORKCompletionStep(identifier: "SummaryStep")

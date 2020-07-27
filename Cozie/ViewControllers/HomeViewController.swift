@@ -224,6 +224,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
             // (back to onboarding controller)
             break
 
+        @unknown default:
+            break
         }
     }
 
