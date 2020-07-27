@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.4</string>
+	<string>1.0.5</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -35,20 +35,6 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
-	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>
