@@ -202,15 +202,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             QuestionCozie(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
                     icons: ["cold", "happy", "hot"], nextQuestion: [1, 2, 3], identifier: "tc-preference"),
             QuestionCozie(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
-                    icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: [2, 2, 2], identifier: "met"),
+                    icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: [2, 2, 2, 2], identifier: "met"),
             QuestionCozie(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
-                    nextQuestion: [4, 4, 4], identifier: "location-place"),
-            QuestionCozie(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: [4, 4, 4],
+                    nextQuestion: [4, 4], identifier: "location-place"),
+            QuestionCozie(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: [4, 4],
                     identifier: "mood"),
             QuestionCozie(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
-                    nextQuestion: [5, 5, 5], identifier: "location-in-out"),
+                    nextQuestion: [5, 5], identifier: "location-in-out"),
             QuestionCozie(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
-                    icons: ["submit", "delete"], nextQuestion: [999, 999, 999], identifier: "end"),
+                    icons: ["submit", "delete"], nextQuestion: [999, 999], identifier: "end"),
         ]
     }
 
