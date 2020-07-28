@@ -82,7 +82,7 @@ public var TaskEligibility: ORKTask {
         eligibleStep
     ])
 
-    // Build navigation rules.
+    // Define here the expected answers
     var resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep),
             resultIdentifier: "AgeLimit")
     let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector,

@@ -3,23 +3,28 @@
 // Copyright (c) 2020 Federico Tartarini. All rights reserved.
 //
 
+// this file contains the enum used to generate the Settings page programmatically
+
 protocol SectionType: CustomStringConvertible {
     var constrainsSwitch: Bool { get }
 }
 
+// define the sections to appear in the setting menu
 enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
 
-    case Settings
+    case Utilities
     case Communications
+
     var description: String {
         switch self{
-        case .Settings: return "Settings"
+        case .Utilities: return "Utilities"
         case .Communications: return "Communications"
         }
     }
 }
 
-enum SocialOptions: Int, CaseIterable, SectionType {
+// define the options in the utilities menu
+enum UtilitiesOptions: Int, CaseIterable, SectionType {
 
     case sendParticipantIDWatch
     case logout
@@ -35,6 +40,7 @@ enum SocialOptions: Int, CaseIterable, SectionType {
     }
 }
 
+// define the options in the communication menu
 enum CommunicationOptions: Int, CaseIterable, SectionType {
 
     case notification

@@ -14,7 +14,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Timeline Configuration
 
-    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
+    func getSupportedTimeTravelDirections(for complication: CLKComplication,
+                                          withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         handler([])
     }
 
@@ -31,7 +32,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
 
     // MARK: - Timeline Population
-    
     // guide https://stackoverflow.com/questions/39708407/watchos3-complication-that-launches-app
 
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
@@ -94,12 +94,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     }
 
-    func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int,
+                            withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries prior to the given date
         handler(nil)
     }
 
-    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int,
+                            withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after to the given date
         handler(nil)
     }

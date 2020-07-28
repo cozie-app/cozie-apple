@@ -36,7 +36,7 @@ class StartViewController: UIViewController {
 
         } else {
 
-            let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
+            let homeViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.homeViewController)
             view.window?.rootViewController = homeViewController
             view.window?.makeKeyAndVisible()
         }
@@ -47,8 +47,8 @@ class StartViewController: UIViewController {
 
     func styleButtons() {
 
-        Utilties.stylePrimaryButton(signUpButton)
-        Utilties.styleSecondaryButton(loginButton)
+        Utilities.stylePrimaryButton(signUpButton)
+        Utilities.styleSecondaryButton(loginButton)
 
     }
 

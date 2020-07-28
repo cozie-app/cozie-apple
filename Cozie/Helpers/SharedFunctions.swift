@@ -5,24 +5,26 @@
 
 import Foundation
 
+// convert current time in ISO string
 public func GetDateTimeISOString() -> String {
     let date = Date()
-    let formatter = ISO8601DateFormatter()
-    formatter.formatOptions.insert(.withFractionalSeconds)
-    return formatter.string(from: date)
+    return FormatDateISOString(date: date)
 }
 
+// convert a date into ISO string
 public func FormatDateISOString(date: Date) -> String {
     let formatter = ISO8601DateFormatter()
     formatter.formatOptions.insert(.withFractionalSeconds)
     return formatter.string(from: date)
 }
 
+// get document directory
 public func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
 }
 
+// send data via a POST request, the function it is synchronous
 public func PostRequest(message: Data) -> Int {
     // create the url with URL
 //        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url

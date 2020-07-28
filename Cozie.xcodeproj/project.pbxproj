@@ -16,12 +16,12 @@
 		1C4919A704932002AD992CFE /* TaskConsentShowPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */; };
 		1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */; };
 		1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491A8334E4828A5CF11B89 /* TaskConsent.swift */; };
+		1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */; };
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		2E7054EA7DB2C92D7C1086C8 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
-		E42F7C0B24BEE6B100FAE422 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42F7C0A24BEE6B100FAE422 /* Constants.swift */; };
 		E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */ = {isa = PBXBuildFile; fileRef = E42F7C1124BEF32400FAE422 /* login-video.mov */; };
 		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
 		E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */; };
@@ -162,6 +162,7 @@
 		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
+		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
 		1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentShowPDF.swift; sourceTree = "<group>"; };
 		1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEligibility.swift; sourceTree = "<group>"; };
 		1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSurvey.swift; sourceTree = "<group>"; };
@@ -184,7 +185,6 @@
 		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E42F7C0A24BEE6B100FAE422 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E42F7C1124BEF32400FAE422 /* login-video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "login-video.mov"; sourceTree = "<group>"; };
 		E437EF5E24C6F1A5008BC6FF /* Cozie WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit App.entitlements"; sourceTree = "<group>"; };
 		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 			children = (
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
-				E42F7C0A24BEE6B100FAE422 /* Constants.swift */,
 				1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */,
+				1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -925,7 +925,6 @@
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
-				E42F7C0B24BEE6B100FAE422 /* Constants.swift in Sources */,
 				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,
 				E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */,
 				1C4911169339110949F69150 /* TaskEligibility.swift in Sources */,
@@ -938,6 +937,7 @@
 				E469469524BC4CF20013134B /* LoginViewController.swift in Sources */,
 				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
 				1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */,
+				1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

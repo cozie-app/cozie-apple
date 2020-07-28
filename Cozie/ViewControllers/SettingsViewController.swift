@@ -42,6 +42,7 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     // MARK: - Helper Functions
 
     func configureTableView() {
+
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -56,9 +57,11 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
         userInfoHeader = UserInfoHeader(frame: frame)
         tableView.tableHeaderView = userInfoHeader
         tableView.tableFooterView = UIView()
+
     }
 
     func configureUI() {
+
         configureTableView()
 
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -66,17 +69,20 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
         navigationController?.navigationBar.barStyle = .black
 //        navigationController?.navigationBar.barTintColor = UIColor(red: 55 / 255, green: 120 / 255, blue: 250 / 255, alpha: 1)
         navigationItem.title = "Settings"
+
     }
 
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         taskViewController.dismiss(animated: true, completion: nil)
     }
 
     func signOut() {
+
         do {
             try Auth.auth().signOut()
 
-            let startViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.startViewController)
+            let startViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.startViewController)
 
             view.window?.rootViewController = startViewController
             view.window?.makeKeyAndVisible()
@@ -87,6 +93,8 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
     }
 
+    // fixme this function is not really working
+    // send the Firebase participant uid to the watch so the value will be appended to the POST request
     func sendParticipantID() {
 
         // check if watch connectivity is supported and activate it
@@ -96,14 +104,17 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
             session?.activate()
 
             do {
-                try session?.updateApplicationContext(["participantID": participantID])
+                try session?.updateApplicationContext(["participantID": userFirebaseUID])
                 print("Sent user ID")
             } catch {
-                let alertController = UIAlertController(title: nil, message: "Something went wrong. Please ensure that the phone and the watch are both on and connected then press the button again.",
+                let alertController = UIAlertController(title: nil, message: """
+                                                                             Something went wrong. Please ensure that the phone 
+                                                                             and the watch are both on and connected then press 
+                                                                             the button again.
+                                                                             """,
                         preferredStyle: .actionSheet)
 
                 alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-
                 present(alertController, animated: true, completion: nil)
             }
         }
@@ -113,6 +124,7 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
+    // programmatically populate and format settings table
     public func numberOfSections(in tableView: UITableView) -> Int {
         return SettingsSections.allCases.count
     }
@@ -124,7 +136,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Settings: return SocialOptions.allCases.count
+        case .Utilities: return UtilitiesOptions.allCases.count
         case .Communications: return CommunicationOptions.allCases.count
         }
     }
@@ -159,8 +171,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Settings:
-            let social = SocialOptions(rawValue: indexPath.row)
+        case .Utilities:
+            let social = UtilitiesOptions(rawValue: indexPath.row)
             cell.sectionType = social
         case .Communications:
             let communication = CommunicationOptions(rawValue: indexPath.row)
@@ -177,8 +189,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Settings:
-            guard let buttonClicked = SocialOptions(rawValue: indexPath.row) else {
+        case .Utilities:
+            guard let buttonClicked = UtilitiesOptions(rawValue: indexPath.row) else {
                 return
             }
             switch buttonClicked {

@@ -13,12 +13,14 @@ public var TaskConsent: ORKOrderedTask {
 
     var steps = [ORKStep]()
 
+    // import the consent document from TaskConsentFormBuild
     let consentDocument = ConsentForm
     let visualConsentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
     steps += [visualConsentStep]
 
     let signature = consentDocument.signatures!.first!
 
+    // add review section
     let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
 
     reviewConsentStep.title = "Participant information"
@@ -27,6 +29,7 @@ public var TaskConsent: ORKOrderedTask {
 
     steps += [reviewConsentStep]
 
+    // add completion step
     let completionStep = ORKCompletionStep(identifier: "CompletionStep")
     completionStep.title = NSLocalizedString("Welcome aboard.", comment: "")
     completionStep.text = NSLocalizedString("""
@@ -41,4 +44,5 @@ public var TaskConsent: ORKOrderedTask {
     steps += [completionStep]
 
     return ORKOrderedTask(identifier: "ConsentTask", steps: steps)
+
 }

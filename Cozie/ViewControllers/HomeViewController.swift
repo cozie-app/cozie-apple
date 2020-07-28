@@ -12,11 +12,12 @@ import FirebaseAuth
 import WatchConnectivity
 import FirebaseFirestore
 
-// temp dictionary to store the answers and for testing purposes
+// structure to store the answers from ResearchKit
 struct AnswerResearchKit: Codable {
-    let questionIdentifier: String
+
+    let questionIdentifier: String  // researchKit task identifier
     let Timestamp: String
-    let uid: String
+    let uid: String  // user id from Firebase
     var responses: [String: String]
 
     // convert the structure into dictionary that can be sent to Firebase
@@ -34,6 +35,7 @@ struct AnswerResearchKit: Codable {
     }
 }
 
+// struct to store ResearchKit tasks to be presented to the user
 struct Task: Codable {
     let label: String
     let image: String
@@ -41,15 +43,17 @@ struct Task: Codable {
     var completed: Bool
 }
 
-var participantID = "undefined"
+var userFirebaseUID = "undefined"
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    // task id that was last performed
+    // task id that was performed
     var taskPerformed = 0
 
     var tasks = [Task]()
-    // improvement the following variable should be embedded into tasks
+    // improvement the following variable should be embedded into tasks and should not be a separate array
+    // I am storing it as a separate array at the moment since inside a struct I cannot have an item of type ResearchKit task
+    // if I want to save the list of structures in the User Defaults. I need to save it in user defaults so i can keep track of tasks performed
     var tasksToPerform = [TaskConsent, TaskEligibility, TaskSurvey, TaskOnBoarding]
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -60,10 +64,10 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         // save the uid from firebase
         let user = Auth.auth().currentUser
         if let user = user {
-            participantID = user.uid
+            userFirebaseUID = user.uid
         }
 
-        // check if is the first time the app load up
+        // if the app loads for the first time define tasks to be presented to the participant alternatively import array stored tasks
         if let data = UserDefaults.standard.value(forKey: "tasks") as? Data {
 
             let storedValues = try? PropertyListDecoder().decode(Array<Task>.self, from: data)
@@ -82,7 +86,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         }
 
         // when a task is completed this notification center fires and reload the collection View
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection(notification:)), name: NSNotification.Name(rawValue: "taskCompleted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection(notification:)),
+                name: NSNotification.Name(rawValue: "taskCompleted"), object: nil)
 
     }
 
@@ -136,7 +141,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
     }
 
     // handles the responses to the tasks from ResearchKit
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
 
         taskViewController.dismiss(animated: true, completion: nil)
 
@@ -144,24 +150,28 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         case .completed:
 
             var answer = AnswerResearchKit(questionIdentifier: taskViewController.result.identifier,
-                    Timestamp: GetDateTimeISOString(), uid: participantID,
-                    responses: [:])
+                    Timestamp: GetDateTimeISOString(), uid: userFirebaseUID, responses: [:])
 
             // improvement show red cross if the user is not eligible
-            // improvement I may not want to add green checkmark to survey
+            // improvement I may not want to add green checkmark to survey since the user may need to complete it more than once
+
+            // mark task performed as completed and move its card to the end of the list
             tasks[taskPerformed].completed = true
-            tasks = rearrageArray(array: tasks, fromIndex: taskPerformed, toIndex: tasks.count - 1)
+            tasks = reArrangeArray(array: tasks, fromIndex: taskPerformed, toIndex: tasks.count - 1)
 
             // save the messages to local storage so I replace what was previously there
             UserDefaults.standard.set(try? PropertyListEncoder().encode(tasks), forKey: "tasks")
 
+            // fire notification center so the view is reloaded and cards are rearranged
             NotificationCenter.default.post(name: NSNotification.Name("taskCompleted"), object: nil)
 
             let result = taskViewController.result
 
+            // if consent task was performed
             if let stepResult = result.stepResult(forStepIdentifier: "ConsentReviewStep"),
                let signatureResult = stepResult.results?.first as? ORKConsentSignatureResult {
 
+                // save the consent as a PDF
                 let consentDocument = ConsentForm
                 signatureResult.apply(to: consentDocument)
 
@@ -181,8 +191,10 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                     taskViewController.delegate = self
                     self.present(taskViewController, animated: true, completion: nil)
                 }
+
             } else {
 
+                // loop and extract the participant's answers which are nested and store them
                 if let results = taskViewController.result.results as? [ORKStepResult] {
                     for stepResult: ORKStepResult in results {
                         for result in stepResult.results! {
@@ -197,10 +209,10 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                     }
                 }
 
-                // User was created successfully, now also store name and surname
+                // initiate firestore
                 let db = Firestore.firestore()
 
-                // Storing the document in Firebase
+                // Storing the answer in Firebase
                 var ref: DocumentReference? = nil
                 ref = db.collection("tasksResponses").addDocument(data:
                 answer.asDictionary
@@ -221,7 +233,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
         case .discarded, .failed, .saved:
             // Only dismiss task controller
-            // (back to onboarding controller)
+            // (back to on-boarding controller)
             break
 
         @unknown default:
@@ -229,7 +241,8 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         }
     }
 
-    func rearrageArray<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
+    func reArrangeArray<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
+
         var arr = array
         let element = arr.remove(at: fromIndex)
         arr.insert(element, at: toIndex)

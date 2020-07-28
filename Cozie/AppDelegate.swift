@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //START OneSignal initialization code
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
         
-        // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
+        // Code needed for OneSignal to work properly
         OneSignal.initWithLaunchOptions(launchOptions,
           appId: "cf1e2d1e-733b-4aa0-9f40-fe30a8de5c11",
           handleNotificationAction: nil,
@@ -32,11 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
 
-        // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 6)
+        // The promptForPushNotifications function code will show the iOS push notification prompt.
         OneSignal.promptForPushNotifications(userResponse: { accepted in
           print("User accepted notifications: \(accepted)")
         })
-        //END OneSignal initializataion code
+        //END OneSignal initialization code
 
         FirebaseApp.configure()
         
@@ -45,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: UISceneSession Lifecycle
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession:
+            UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)

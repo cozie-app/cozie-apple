@@ -14,7 +14,7 @@ import WatchConnectivity
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate {
 
-    // code related to the watch connectivity
+    // code related to the watch connectivity with the phone
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
 
@@ -35,8 +35,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var currentQuestion = 0
     var nextQuestion = 0
 
-    // structure which is used for the questions
-    struct QuestionCozie {
+    // structure which is used to store the questions prompted to the user
+    struct Question {
         let title: String
         let options: Array<String>
         let icons: Array<String>
@@ -45,10 +45,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     // array of questions
-    var questions = [QuestionCozie]()
+    var questions = [Question]()
 
-    // temp dictionary to store the answers and for testing purposes
-    struct AnswerCozie: Codable {
+    // temp dictionary to store the answers
+    struct Answer: Codable {
         let startTimestamp: String
         let endTimestamp: String
         let heartRate: [String: Int]
@@ -61,8 +61,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         let voteLog: Int
     }
 
-    var answers = [AnswerCozie]()  // it stores the answer after user as completed Cozie
-    var tmpAnswers: [String: String] = [:]  // it temporally stores user's answers
+    // array of
+    var answers = [Answer]()  // it stores the answer after user as completed Cozie
+    var tmpResponses: [String: String] = [:]  // it temporally stores user's answers
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
 
     var startTime = ""  // placeholder for the start time of the survey
@@ -123,7 +124,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         super.didDeactivate()
     }
 
-    private func loadTableData(question: inout QuestionCozie, backPressed: Bool) {
+    private func loadTableData(question: inout Question, backPressed: Bool) {
 
         // updates the index of the question to be shown
         if (backPressed == false) {
@@ -132,6 +133,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             if (questionsDisplayed.count == 1) {
                 questionsDisplayed.append(0)
             }
+        }
+
+        // hide stop and back buttons if first question is displayed
+        if (currentQuestion == 0) {
+            backButton.setAlpha(0)
+            stopButton.setAlpha(0)
+        } else {
+            backButton.setAlpha(1)
+            stopButton.setAlpha(1)
         }
 
         // set the title of the question
@@ -171,7 +181,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         }
 
         // adding the response to the tmp array of strings
-        tmpAnswers[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
+        tmpResponses[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
         currentQuestion = nextQuestion
 
@@ -183,11 +193,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
             let endTime = GetDateTimeISOString()
 
-            SendDataDatabase(answer: AnswerCozie(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
+            SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
                     participantID: participantID, deviceUUID: uuid,
-                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpAnswers, voteLog: voteLog))
+                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses, voteLog: voteLog))
 
-            tmpAnswers.removeAll()
+            // clear temporary arrays
+            tmpResponses.removeAll()
             tmpHearthRate.removeAll()
         }
 
@@ -199,32 +210,32 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         // Last question MUST have nextQuestion set to 999
         questions += [
-            QuestionCozie(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
+            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
                     icons: ["cold", "happy", "hot"], nextQuestion: [1, 2, 3], identifier: "tc-preference"),
-            QuestionCozie(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
+            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
                     icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: [2, 2, 2, 2], identifier: "met"),
-            QuestionCozie(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
+            Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
                     nextQuestion: [4, 4], identifier: "location-place"),
-            QuestionCozie(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: [4, 4],
+            Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: [4, 4],
                     identifier: "mood"),
-            QuestionCozie(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
+            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
                     nextQuestion: [5, 5], identifier: "location-in-out"),
-            QuestionCozie(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
+            Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
                     icons: ["submit", "delete"], nextQuestion: [999, 999], identifier: "end"),
         ]
     }
 
-    private func SendDataDatabase(answer: AnswerCozie) {
+    private func SendDataDatabase(answer: Answer) {
 
         // https://stackoverflow.com/questions/26364914/http-request-in-swift-with-post-method
 
-        var messages = [AnswerCozie]()
+        var messages = [Answer]()
 
         // check if answers are stored locally in UserDefaults, the key is answers
         if let data = UserDefaults.standard.value(forKey: "AnswerCozie") as? Data {
 
             // decode the messages stored in the local memory and convert them back to structures
-            let storedMessages = try? PropertyListDecoder().decode(Array<AnswerCozie>.self, from: data)
+            let storedMessages = try? PropertyListDecoder().decode(Array<Answer>.self, from: data)
 
             // add the last completed survey
             messages = storedMessages!

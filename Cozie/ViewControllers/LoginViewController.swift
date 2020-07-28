@@ -29,10 +29,10 @@ class LoginViewController: UIViewController {
     func setUpElements() {
 
         errorLabel.alpha = 0
-        Utilties.styledTextField(emailTextField)
-        Utilties.styledTextField(passwordTextField)
+        Utilities.styledTextField(emailTextField)
+        Utilities.styledTextField(passwordTextField)
+        Utilities.stylePrimaryButton(loginButton)
 
-        Utilties.stylePrimaryButton(loginButton)
     }
 
     @IBAction func loginTapped(_ sender: Any) {
@@ -49,11 +49,13 @@ class LoginViewController: UIViewController {
 
             Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
                 if let error = error {
+
                     print("Error adding document: \(error)")
                     self.showErrorMessage("Could not Sign In, incorrect user or password")
+
                 } else {
 
-                    self.transitionToHome()
+                    self.transitionToHomeViewController()
 
                 }
             }
@@ -74,14 +76,14 @@ class LoginViewController: UIViewController {
         // check that the password is secure
         let cleanPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if Utilties.isValidPassword(cleanPassword) == false {
+        if Utilities.isValidPassword(cleanPassword) == false {
             return "Invalid password"
         }
 
         // check that the password is secure
         let cleanEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if Utilties.isValidEmail(testStr: cleanEmail) == false {
+        if Utilities.isValidEmail(testStr: cleanEmail) == false {
             return "Invalid email format"
         }
 
@@ -89,15 +91,18 @@ class LoginViewController: UIViewController {
     }
 
     func showErrorMessage(_ message: String) {
+
         errorLabel.text = message
         errorLabel.alpha = 1
+
     }
 
-    func transitionToHome() {
+    func transitionToHomeViewController() {
 
-        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
+        let homeViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.homeViewController)
 
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
+
     }
 }

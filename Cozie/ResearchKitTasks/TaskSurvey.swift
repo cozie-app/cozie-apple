@@ -24,7 +24,6 @@ public var TaskSurvey: ORKOrderedTask {
             question: "What is your name", answer: nameAnswerFormat)
     steps += [nameQuestionStep]
 
-
     let textChoices = [
         ORKTextChoice(text: "Create a ResearchKit App", value: 0 as NSNumber),
         ORKTextChoice(text: "Seek the Holy Grail", value: 1 as NSNumber),

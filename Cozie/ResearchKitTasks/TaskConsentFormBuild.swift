@@ -16,6 +16,7 @@ public var ConsentForm: ORKConsentDocument {
     let consentDocument = ORKConsentDocument()
     consentDocument.title = "Example Consent"
 
+    // defined below are all the consent sections
     let section1 = ORKConsentSection(type: .overview)
     section1.summary = "Cozie Apple is a platform for human comfort data collection"
     section1.content = "We are using Cozie Apple to better understand how you perceive your thermal environment."
@@ -58,9 +59,8 @@ public var ConsentForm: ORKConsentDocument {
     section10.summary = "You will receive non monetary compensation"
     section10.content = "You will receive gift vouchers."
 
-    // Create additional section objects for later sections
-//    consentDocument.sections = [section1, section2, section3, section4, section5, section6, section7, section8, section9, section10]
-    consentDocument.sections = [section1, section10]
+    // You can add or remove sections based on the IRB document
+    consentDocument.sections = [section1, section2, section3, section4, section5, section6, section7, section8, section9, section10]
 
     consentDocument.addSignature(ORKConsentSignature(forPersonWithTitle: "Participant", dateFormatString: nil,
             identifier: "ConsentDocumentParticipantSignature"))

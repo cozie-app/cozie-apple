@@ -25,7 +25,7 @@ class UserInfoHeader: UIView {
 
     let usernameLabel: UILabel = {
         let label = UILabel()
-        // improvement query data from Firebase if needed when the user login
+        // improvement query data from Firebase to display user name and surname
         label.text = "Participant"
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Utilties {
+class Utilities {
     static func styledTextField(_ textField: UITextField) {
         let bottomLine = CALayer()
 

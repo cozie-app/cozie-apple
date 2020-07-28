@@ -2,16 +2,15 @@
 //  SettingsCell.swift
 //  SettingsTemplate
 //
-//  Created by Stephen Dowless on 2/10/19.
-//  Copyright © 2019 Stephan Dowless. All rights reserved.
+//  Created by Federico Tartarini on 25/6/20.
+//  Copyright © 2020 Federico Tartarini. All rights reserved.
 //
 
 import UIKit
 
 class SettingsCell: UITableViewCell {
     
-    // MARK: - Properties
-
+    // define settings cell properties
     var sectionType: SectionType? {
         didSet {
             guard let sectionType = sectionType else { return }
@@ -20,6 +19,7 @@ class SettingsCell: UITableViewCell {
         }
     }
 
+    // define initial state of the switch and color
     lazy var switchControl: UISwitch = {
 
         let switchControl = UISwitch()
@@ -30,9 +30,8 @@ class SettingsCell: UITableViewCell {
 
         return switchControl
     }()
-    
-    // MARK: - Init
-    
+
+    // add switch control to settings
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -46,6 +45,7 @@ class SettingsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // triggers an action when the switch button is pressed
     @objc func handleSwitchAction(sender: UISwitch){
         if sender.isOn {
             print("Turned On")

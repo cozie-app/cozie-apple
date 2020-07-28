@@ -34,12 +34,12 @@ class SignUpViewController: UIViewController {
     func setUpElements() {
 
         errorLabel.alpha = 0
-        Utilties.styledTextField(firstNameTextField)
-        Utilties.styledTextField(lastNameTextField)
-        Utilties.styledTextField(emailTextField)
-        Utilties.styledTextField(passwordTextField)
+        Utilities.styledTextField(firstNameTextField)
+        Utilities.styledTextField(lastNameTextField)
+        Utilities.styledTextField(emailTextField)
+        Utilities.styledTextField(passwordTextField)
+        Utilities.stylePrimaryButton(signUpButton)
 
-        Utilties.stylePrimaryButton(signUpButton)
     }
 
     // check that the data entered are correct. If so, return nil otherwise error
@@ -56,17 +56,17 @@ class SignUpViewController: UIViewController {
         // check that the password is secure
         let cleanPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if Utilties.isValidPassword(cleanPassword) == false {
+        if Utilities.isValidPassword(cleanPassword) == false {
             return """
                    Please make sure your password is at least 8 characters long, 
                    contains a special character and a number
                    """
         }
 
-        // check that the password is secure
+        // check that the email format is correct
         let cleanEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if Utilties.isValidEmail(testStr: cleanEmail) == false {
+        if Utilities.isValidEmail(testStr: cleanEmail) == false {
             return """
                    The email you entered is not valid.
                    """
@@ -130,10 +130,11 @@ class SignUpViewController: UIViewController {
     
     func transitionToHome () {
         
-        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
+        let homeViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.homeViewController)
         
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
+
     }
 
 }
