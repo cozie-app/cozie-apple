@@ -1,6 +1,6 @@
 module.exports = {
   title: "Cozie Apple",
-  tagline: "Cozie Apple - an IOS app for human comfort data collection",
+  tagline: "Cozie Apple - an iOS app for human comfort data collection.",
   url: "https://federicotartarini.github.io",
   baseUrl: "/",
   favicon: "img/favicon.ico",
