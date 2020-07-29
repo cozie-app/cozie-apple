@@ -1,8 +1,8 @@
 module.exports = {
   title: "Cozie Apple",
   tagline: "Cozie Apple - an iOS app for human comfort data collection.",
-  url: "https://federicotartarini.github.io",
-  baseUrl: "/cozie-apple",
+  url: "https://cozie-apple.netlify.app",
+  baseUrl: "/",
   favicon: "img/favicon.ico",
   organizationName: "FedericoTartarini", // Usually your GitHub org/user name.
   projectName: "cozie-apple", // Usually your repo name.
