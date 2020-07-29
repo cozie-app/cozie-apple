@@ -19,13 +19,14 @@ const features = [
     ),
   },
   {
-    title: <>Focus on What it Matters</>,
+    title: <>Open Source</>,
     imageUrl: "img/undraw_dev_productivity_umsq.svg",
     description: (
       <>
-        Cozie Apple is an Open Source project and together with Cozie Fitbit,
-        allows researchers to focus on the data collection. We have taken care
-        of all the programming for you!
+        Cozie Apple is an Open Source project and together with{" "}
+        <a href={"https://cozie.app"}>Cozie Fitbit</a>, allows researchers to
+        focus on the data collection. We have taken care of all the programming
+        for you!
       </>
     ),
   },
@@ -34,8 +35,12 @@ const features = [
     imageUrl: "img/undraw_drag_5i9w.svg",
     description: (
       <>
-        Cozie Apple iOS app uses Research Kit. A software framework for Apple
-        apps that let researchers gather robust and meaningful data.
+        Cozie Apple iOS app uses{" "}
+        <a href={"https://www.researchandcare.org/researchkit/"}>
+          Apple's Research Kit
+        </a>
+        . A software framework for Apple apps that let researchers gather robust
+        and meaningful data.
       </>
     ),
   },
@@ -113,27 +118,22 @@ function Home() {
             <div className={clsx("col", styles.profileHeroContainer)}>
               <h1 className="hero__title">{siteConfig.title}</h1>
               <p className="hero__subtitle">{siteConfig.tagline}</p>
-
-              <div class="row row--align-center">
-                <div class="col col--4 margin--md">
-                  <Link
-                    className={clsx(
-                      "button button--outline button--active button--secondary button--lg"
-                    )}
-                    to={useBaseUrl("blog/")}
-                  >
-                    Coming soon!
-                  </Link>
-                </div>
-                <div class="col col--4 margin--md">
-                  <a href={"https://cozie.app"} className={""}>
-                    <button className="button button--outline button--active button--secondary button--lg padding--sm text--center">
-                      <img src="img/fitbit.png" height="20" alt="Fitbit logo" />{" "}
-                      Cozie Fitbit
-                    </button>
-                  </a>
-                </div>
-              </div>
+              <Link
+                className={clsx(
+                  "button button--outline button--active button--secondary button--lg margin--sm"
+                )}
+                to={useBaseUrl("blog/")}
+              >
+                Coming soon!
+              </Link>
+              <a
+                className={clsx(
+                  "button button--outline button--active button--secondary button--lg margin--sm"
+                )}
+                href={"mailto:cozie.app@gmail.com"}
+              >
+                Contact us
+              </a>
             </div>
           </div>
         </div>
@@ -160,7 +160,7 @@ function Home() {
               <div className={clsx("col col--9")}>
                 <h1 class="hero__title">Taylor your survey</h1>
                 <p class="hero__subtitle">
-                  Choose which questions to show to the study participant
+                  Choose which questions to show to the study participants
                 </p>
                 <img src={"img/sequence cozie apple.png"} />
               </div>

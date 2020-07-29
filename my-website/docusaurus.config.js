@@ -14,46 +14,47 @@ module.exports = {
         src: "img/logo.png",
       },
       links: [
-        // {
-        //   to: "docs/",
-        //   activeBasePath: "docs",
-        //   label: "Docs",
-        //   position: "left",
-        // },
+        {
+          to: "docs/",
+          activeBasePath: "docs",
+          label: "Docs",
+          position: "left",
+        },
         { to: "blog", label: "Blog", position: "left" },
         {
           href: "https://github.com/FedericoTartarini",
           label: "GitHub",
           position: "right",
         },
+        {
+          href: "https://cozie.app",
+          label: "Cozie Fitbit",
+          position: "right",
+        },
       ],
     },
     footer: {
-      style: "dark",
+      style: "light",
       links: [
-        // {
-        //   title: "Docs",
-        //   items: [
-        //     {
-        //       label: "Style Guide",
-        //       to: "docs/",
-        //     },
-        //     {
-        //       label: "Second Doc",
-        //       to: "docs/doc2/",
-        //     },
-        //   ],
-        // },
+        {
+          title: "Docs",
+          items: [
+            {
+              label: "Introduction",
+              to: "docs/",
+            },
+          ],
+        },
         {
           title: "Community",
           items: [
             {
-              label: "SinBerBEST",
-              href: "https://sinberbest.berkeley.edu",
-            },
-            {
               label: "BUDS Lab",
               href: "https://www.budslab.org",
+            },
+            {
+              label: "SinBerBEST",
+              href: "https://sinberbest.berkeley.edu",
             },
             {
               label: "Twitter",
@@ -84,17 +85,17 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: "doc1",
+          homePageId: "introduction",
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
-            "https://github.com/facebook/docusaurus/edit/master/website/",
+            "https://github.com/FedericoTartarini/cozie-apple/tree/master/my-website",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            "https://github.com/facebook/docusaurus/edit/master/website/blog/",
+            "https://github.com/FedericoTartarini/cozie-apple/tree/master/my-website/blog",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
