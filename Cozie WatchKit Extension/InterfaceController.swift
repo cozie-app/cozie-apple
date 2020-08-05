@@ -119,7 +119,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         userDefaults.set(participantID, forKey: "participantID")
 
-        // improvement add short vibration to tell user it worked
+        // vibrate the watch to notify the user that it worked
+        WKInterfaceDevice.current().play(.notification)
     }
 
     override func willActivate() {
