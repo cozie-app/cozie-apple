@@ -125,7 +125,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
         }
 
         // This creates the shadows and modifies the cards a little bit
-        // improvement programmatically resize the card size
+        // improvement change from a collection view to a tabular view
         cell.contentView.layer.cornerRadius = 15.0
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -196,6 +196,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
                 // loop and extract the participant's answers which are nested and store them
                 if let results = taskViewController.result.results as? [ORKStepResult] {
+                    print(results)
                     for stepResult: ORKStepResult in results {
                         for result in stepResult.results! {
                             if let questionResult = result as? ORKQuestionResult {

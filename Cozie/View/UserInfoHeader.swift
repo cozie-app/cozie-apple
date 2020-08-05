@@ -18,15 +18,13 @@ class UserInfoHeader: UIView {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
-        // improvement increase image resolution
         iv.image = UIImage(named: "AppIcon")
         return iv
     }()
 
     let usernameLabel: UILabel = {
         let label = UILabel()
-        // improvement query data from Firebase to display user name and surname
-        label.text = "Participant"
+        label.text = "Welcome"
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
