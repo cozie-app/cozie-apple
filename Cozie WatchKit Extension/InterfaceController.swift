@@ -208,18 +208,26 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
     private func defineQuestions() {
 
-        // Last question MUST have nextQuestion set to 999
+        // Last question MUST have nextQuestion set to 999, the first question is question 0
         questions += [
             Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
-                    icons: ["cold", "happy", "hot"], nextQuestion: [1, 2, 3], identifier: "tc-preference"),
-            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Typing", "Standing", "Exercising"],
-                    icons: ["relaxing", "sitting", "standing", "walking"], nextQuestion: [2, 2, 2, 2], identifier: "met"),
-            Question(title: "Where are you?", options: ["Home", "Office"], icons: ["house", "office"],
-                    nextQuestion: [4, 4], identifier: "location-place"),
-            Question(title: "Mood", options: ["Happy", "Sad"], icons: ["house", "office"], nextQuestion: [4, 4],
-                    identifier: "mood"),
-            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["house", "outdoor"],
-                    nextQuestion: [5, 5], identifier: "location-in-out"),
+                    icons: ["tp-cooler", "comfortable", "tp-warmer"], nextQuestion: [1, 1, 1], identifier: "tc-preference"),
+            Question(title: "Where are you?", options: ["Home", "Office"], icons: ["loc-home", "loc-office"],
+                    nextQuestion: [2, 2], identifier: "location-place"),
+            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["loc-indoor", "loc-outdoor"],
+                    nextQuestion: [3, 3], identifier: "location-in-out"),
+            Question(title: "What clothes are you wearing?", options: ["Very light", "Light", "Medium", "Heavy"],
+                    icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [4, 4, 4, 4], 
+                    identifier: "clo"),
+            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Sitting", "Standing", "Exercising"],
+                    icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercizing"], nextQuestion: [5, 5, 5, 5], 
+                    identifier: "met"),
+            Question(title: "Can you perceive air movement?", options: ["Yes", "No"],
+                    icons: ["yes", "no"], nextQuestion: [6, 6], identifier: "air-speed"),
+            Question(title: "Is the space?", options: ["Too dim", "Okay", "Too bright"], 
+                    icons: ["light-dim", "light-comf", "light-bright"], nextQuestion: [7, 7, 7], identifier: "light"),
+            Question(title: "Any changes in the last 10-min?", 
+                    options: ["Yes", "No"], icons: ["yes", "no"], nextQuestion: [8, 8], identifier: "any-change"),
             Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
                     icons: ["submit", "delete"], nextQuestion: [999, 999], identifier: "end"),
         ]
