@@ -20,6 +20,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
     let session = WCSession.default
 
+    let userDefaults = UserDefaults.standard
+
     // improvement get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
 
     @IBOutlet weak var stopButton: WKInterfaceButton!
@@ -86,12 +88,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         // save on first startup the UUID in user defaults so it does not change
         // improvement make sure uuid persists between installs
-        let userDefaults = UserDefaults.standard
         uuid = userDefaults.string(forKey: "uuid") ?? ""
         if (uuid == "") {
             uuid = UUID().uuidString
             userDefaults.set(uuid, forKey: "uuid")
         }
+
+        // get participantID from the defaults if available
+        participantID = userDefaults.string(forKey: "participantID") ?? "undefined"
 
         // start connection session with the phone
         session.delegate = self
@@ -107,12 +111,16 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // change if more accurate location is needed
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.delegate = self
-
-        if let messageReceived = session.receivedApplicationContext as? [String: String] {
-            participantID = messageReceived["participantID"] ?? participantID
-        }
     }
 
+    // this function fires when a message from the phone is received
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        participantID = message["participantID"] as! String
+
+        userDefaults.set(participantID, forKey: "participantID")
+
+        // improvement add short vibration to tell user it worked
+    }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -304,12 +312,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!]
         // Requests permission to save and read the specified data types.
         healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in
-        }
-    }
-
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        DispatchQueue.main.async() {
-            print("data received from the iPhone")
         }
     }
 

@@ -9,7 +9,6 @@
 import UIKit
 import ResearchKit
 import FirebaseAuth
-import WatchConnectivity
 import FirebaseFirestore
 
 // structure to store the answers from ResearchKit

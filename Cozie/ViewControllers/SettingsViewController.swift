@@ -37,6 +37,11 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
         // Do any additional setup after loading the view.
         configureUI()
+
+        // activate the connectivity session
+        session = WCSession.default
+        session?.delegate = self
+        session?.activate()
     }
 
     // MARK: - Helper Functions
@@ -93,30 +98,16 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
     }
 
-    // fixme this function is not really working
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     func sendParticipantID() {
-
+        
         // check if watch connectivity is supported and activate it
         if WCSession.isSupported() {
-            session = WCSession.default
-            session?.delegate = self
-            session?.activate()
-
-            do {
-                try session?.updateApplicationContext(["participantID": userFirebaseUID])
-                print("Sent user ID")
-            } catch {
-                let alertController = UIAlertController(title: nil, message: """
-                                                                             Something went wrong. Please ensure that the phone 
-                                                                             and the watch are both on and connected then press 
-                                                                             the button again.
-                                                                             """,
-                        preferredStyle: .actionSheet)
-
-                alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-                present(alertController, animated: true, completion: nil)
-            }
+            
+            // send participant id to watch
+            // improvement show popup if message failed
+            session?.sendMessage(["participantID": userFirebaseUID], replyHandler: nil, errorHandler: {err in print("did not send participant id")}
+            )
         }
     }
 
