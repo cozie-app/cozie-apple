@@ -34,6 +34,7 @@
 		E469469E24BC54EC0013134B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469D24BC54EC0013134B /* Utilities.swift */; };
 		E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E46946A124BC5D3F0013134B /* GoogleService-Info.plist */; };
 		E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E47351E2247D0F5D0079D11A /* HealthKit.framework */; };
+		E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E474676E24DBA49200D1F7AC /* HealthStore.swift */; };
 		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
 		E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483824B247BA33A002C3708 /* HomeViewController.swift */; };
@@ -199,6 +200,7 @@
 		E46946A124BC5D3F0013134B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E47351E1247D0F5D0079D11A /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
 		E47351E2247D0F5D0079D11A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		E474676E24DBA49200D1F7AC /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
 		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4838247247BA33A002C3708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4838249247BA33A002C3708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				E483828B247BA33C002C3708 /* PushNotificationPayload.apns */,
 				E4BCBEAA247E0AE100A5BE43 /* RowController.swift */,
 				E43CAA9624CE805F00461DD1 /* ComplicationController.swift */,
+				E474676E24DBA49200D1F7AC /* HealthStore.swift */,
 			);
 			path = "Cozie WatchKit Extension";
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
 				1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */,
 				E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */,
+				E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

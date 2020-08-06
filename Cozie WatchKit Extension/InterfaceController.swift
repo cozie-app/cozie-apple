@@ -19,8 +19,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     let session = WCSession.default
-
     let userDefaults = UserDefaults.standard
+    let healthStore = HealthStore()
+    let heartRateQuantity = HKUnit(from: "count/min")
+    var locationManager: CLLocationManager = CLLocationManager()
 
     // improvement get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
 
@@ -28,14 +30,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
-
-    private var healthStore = HKHealthStore()
-    let heartRateQuantity = HKUnit(from: "count/min")
-
-    var locationManager: CLLocationManager = CLLocationManager()
-
-    var currentQuestion = 0
-    var nextQuestion = 0
 
     // structure which is used to store the questions prompted to the user
     struct Question {
@@ -45,9 +39,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         let nextQuestion: Array<Int>
         let identifier: String
     }
-
-    // array of questions
-    var questions = [Question]()
 
     // temp dictionary to store the answers
     struct Answer: Codable {
@@ -61,33 +52,30 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         let longitude: Double
         let responses: [String: String]
         let voteLog: Int
+        let bodyMass: Double
     }
 
-    // array of
+    // initialize variables
+    var questions = [Question]()
     var answers = [Answer]()  // it stores the answer after user as completed Cozie
     var tmpResponses: [String: String] = [:]  // it temporally stores user's answers
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
-
+    var bodyMass: Double = 0.0
     var startTime = ""  // placeholder for the start time of the survey
-
     var participantID = "undefined" // placeholder for the user ID
-
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
-
     var lat: Double = 0.0
     var long: Double = 0.0
     var locationTimestamp = ""
-
     var uuid = ""
     var voteLog = 0
+    var currentQuestion = 0
+    var nextQuestion = 0
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
-        authorizeHealthKit()
-
         // save on first startup the UUID in user defaults so it does not change
-        // improvement make sure uuid persists between installs
         uuid = userDefaults.string(forKey: "uuid") ?? ""
         if (uuid == "") {
             uuid = UUID().uuidString
@@ -126,6 +114,30 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+
+        print("App shown to the user")
+
+        // I am requesting the location when the app is shown in the foreground
+        let _: Void = locationManager.requestLocation()
+
+        healthStore.authorizeHealthKit { (success, error) in
+            if success {
+                //get weight
+                self.healthStore.bodyMassKg(completion: { (mass, bodyMassDate) in
+                    if mass != nil {
+//                        print("bodyMass: \(mass)   date: \(bodyMassDate)")
+                        self.bodyMass = mass!
+                    }
+                })
+                //get HR
+                self.healthStore.queryHeartRate(completion: { (heartRate) in
+                    if heartRate != nil {
+//                        print("bodyMass: \(heartRate)")
+                        self.tmpHearthRate = heartRate!
+                    }
+                })
+            }
+        }
     }
 
     override func didDeactivate() {
@@ -178,8 +190,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         if (currentQuestion == 0) {
 
             startTime = GetDateTimeISOString()
-            let _: Void = locationManager.requestLocation()
-            startHeartRateQuery(quantityTypeIdentifier: .heartRate)
 
             // increase the voteLog by one and then store it
             let userDefaults = UserDefaults.standard
@@ -204,7 +214,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
             SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
                     participantID: participantID, deviceUUID: uuid,
-                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses, voteLog: voteLog))
+                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses,
+                    voteLog: voteLog, bodyMass: bodyMass))
 
             // clear temporary arrays
             tmpResponses.removeAll()
@@ -226,16 +237,16 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["loc-indoor", "loc-outdoor"],
                     nextQuestion: [3, 3], identifier: "location-in-out"),
             Question(title: "What clothes are you wearing?", options: ["Very light", "Light", "Medium", "Heavy"],
-                    icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [4, 4, 4, 4], 
+                    icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [4, 4, 4, 4],
                     identifier: "clo"),
             Question(title: "Activity last 10-minutes", options: ["Relaxing", "Sitting", "Standing", "Exercising"],
-                    icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercizing"], nextQuestion: [5, 5, 5, 5], 
+                    icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercising"], nextQuestion: [5, 5, 5, 5],
                     identifier: "met"),
             Question(title: "Can you perceive air movement?", options: ["Yes", "No"],
                     icons: ["yes", "no"], nextQuestion: [6, 6], identifier: "air-speed"),
-            Question(title: "Is the space?", options: ["Too dim", "Okay", "Too bright"], 
+            Question(title: "Is the space?", options: ["Too dim", "Okay", "Too bright"],
                     icons: ["light-dim", "light-comf", "light-bright"], nextQuestion: [7, 7, 7], identifier: "light"),
-            Question(title: "Any changes in the last 10-min?", 
+            Question(title: "Any changes in the last 10-min?",
                     options: ["Yes", "No"], icons: ["yes", "no"], nextQuestion: [8, 8], identifier: "any-change"),
             Question(title: "Thank you for completing the survey", options: ["Submit", "Delete"],
                     icons: ["submit", "delete"], nextQuestion: [999, 999], identifier: "end"),
@@ -304,54 +315,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             return
         }
         // Notify the user of any errors.
-    }
-
-    func authorizeHealthKit() {
-
-        // Used to define the identifiers that create quantity type objects.
-        let healthKitTypes: Set = [
-            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!]
-        // Requests permission to save and read the specified data types.
-        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in
-        }
-    }
-
-    private func startHeartRateQuery(quantityTypeIdentifier: HKQuantityTypeIdentifier) {
-
-        // We want data points from our current device
-        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
-
-        let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
-
-        // It provides us with both the ability to receive a snapshot of data, and then on subsequent calls, a snapshot of what has changed.
-//        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
-        let query: HKSampleQuery = HKSampleQuery(sampleType: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!,
-                predicate: devicePredicate, limit: 10, sortDescriptors: [sortByDate]) {
-            query, results, error in
-
-            guard let samples = results as? [HKQuantitySample] else {
-                // Handle any errors here.
-                return
-            }
-
-            for sample in samples {
-
-                // date when the HR was sampled
-                let sampledDate = FormatDateISOString(date: sample.startDate)
-                self.tmpHearthRate[sampledDate] = Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min")))
-
-            }
-
-            // The results come back on an anonymous background queue.
-            // Dispatch to the main queue before modifying the UI.
-
-            DispatchQueue.main.async {
-                // Update the UI here.
-            }
-        }
-
-        // optimize I am not waiting for this assignment hence it may be that the survey it is sent before these values are updated
-        healthStore.execute(query)
     }
 
     @IBAction func backButtonAction() {

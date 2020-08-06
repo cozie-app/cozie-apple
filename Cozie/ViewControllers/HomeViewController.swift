@@ -217,6 +217,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
                 ref = db.collection("tasksResponses").addDocument(data:
                 answer.asDictionary
                 ) { err in
+                    // improvement display error to the user
                     if let err = err {
                         print("Error adding document: \(err)")
                     } else {
