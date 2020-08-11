@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Cozie Apple",
-  tagline: "Cozie Apple - an iOS app for human comfort data collection.",
+  title: "Cozie an iOS app for human comfort data collection",
+  tagline: "Allow building occupants to provide feedback in real time",
   url: "https://cozie-apple.netlify.app",
   baseUrl: "/",
   favicon: "img/favicon.ico",
@@ -8,10 +8,10 @@ module.exports = {
   projectName: "cozie-apple", // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: "Cozie Apple",
+      title: "Cozie",
       logo: {
-        alt: "Cozie Apple Logo",
-        src: "img/logo.png",
+        alt: "Cozie Logo",
+        src: "img/logo-round.png",
       },
       links: [
         {
@@ -76,7 +76,10 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Cozie Apple, BEARS and BUDS Lab. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Cozie, BEARS and BUDS Lab. Built with Docusaurus.`,
+    },
+    googleAnalytics: {
+      trackingID: "UA-151445384-5",
     },
   },
   presets: [

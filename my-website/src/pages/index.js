@@ -13,7 +13,7 @@ const features = [
     description: (
       <>
         Building occupants can complete a right-here-right now survey directly
-        from their Apple watch. Without the need of having to open an app in
+        from their Apple watch. Without the need of having to open an app on
         their Phone or a survey link.
       </>
     ),
@@ -23,7 +23,7 @@ const features = [
     imageUrl: "img/undraw_dev_productivity_umsq.svg",
     description: (
       <>
-        Cozie Apple is an Open Source project and together with{" "}
+        Cozie is an Open Source project and together with{" "}
         <a href={"https://cozie.app"}>Cozie Fitbit</a>, allows researchers to
         focus on the data collection. We have taken care of all the programming
         for you!
@@ -35,7 +35,7 @@ const features = [
     imageUrl: "img/undraw_drag_5i9w.svg",
     description: (
       <>
-        Cozie Apple iOS app uses{" "}
+        Cozie iOS app uses{" "}
         <a href={"https://www.researchandcare.org/researchkit/"}>
           Apple's Research Kit
         </a>
@@ -65,21 +65,27 @@ const contributors = [
   {
     name: <>Federico Tartarini</>,
     imageUrl: "img/federico.jpg",
-    description: <>Lead developer</>,
+    role: <>Lead developer</>,
+    profession: <>Postdoctoral scholar at SinBerBEST</>,
+    link: "https://federicotartarini.github.io",
   },
   {
     name: <>Clayton Miller</>,
     imageUrl: "img/clayton.png",
-    description: <>Project coordinator and supervisor</>,
+    role: <>Project coordinator and supervisor</>,
+    profession: <>Assistant Professor at NUS</>,
+    link: "https://www.linkedin.com/in/stefanoschiavon/",
   },
   {
     name: <>Stefano Schiavon</>,
     imageUrl: "img/stefano.jpeg",
-    description: <>Project coordinator and supervisor</>,
+    role: <>Project coordinator and supervisor</>,
+    profession: <>Associate Professor at UC Berkeley</>,
+    link: "https://www.linkedin.com/in/claytonmiller/",
   },
 ];
 
-function Contributor({ imageUrl, name, description }) {
+function Contributor({ imageUrl, name, profession, role, link }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div
@@ -93,10 +99,11 @@ function Contributor({ imageUrl, name, description }) {
         src={imgUrl}
         alt={name}
       />
-      <div className="avatar__intro">
+      <a className="avatar__intro" href={link}>
         <h4 className="avatar__name">{name}</h4>
-        <small className="avatar__subtitle">{description}</small>
-      </div>
+        <small className="avatar__subtitle">{profession}</small>
+        <small className="avatar__subtitle">{role}</small>
+      </a>
     </div>
   );
 }
@@ -107,7 +114,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Cozie Apple - an iOS app for human comfort data collection."
+      description="Cozie - an iOS app for human comfort data collection."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
@@ -133,6 +140,14 @@ function Home() {
                 href={"mailto:cozie.app@gmail.com"}
               >
                 Contact us
+              </a>
+              <a
+                className={clsx(
+                  "button button--outline button--active button--secondary button--lg margin--sm"
+                )}
+                href={"mailto:cozie.app@gmail.com"}
+              >
+                Become a tester
               </a>
             </div>
           </div>
