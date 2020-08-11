@@ -24,7 +24,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     let heartRateQuantity = HKUnit(from: "count/min")
     var locationManager: CLLocationManager = CLLocationManager()
 
-    // improvement get  other physiological parameters, activity, energy burned last hour, steps, body mass, pressure
+    // improvement get  other physiological parameters, activity, energy burned last hour, steps
 
     @IBOutlet weak var stopButton: WKInterfaceButton!
     @IBOutlet weak var backButton: WKInterfaceButton!
@@ -120,6 +120,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // I am requesting the location when the app is shown in the foreground
         let _: Void = locationManager.requestLocation()
 
+        // improvement some of the following query do not need to be performed everytime willActivate is triggered
         healthStore.authorizeHealthKit { (success, error) in
             if success {
                 //get weight
@@ -127,6 +128,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                     if mass != nil {
 //                        print("bodyMass: \(mass)   date: \(bodyMassDate)")
                         self.bodyMass = mass!
+                    }
+                })
+                //get basal energy
+                self.healthStore.basalEnergy(completion: { (energy, date) in
+                    if energy != nil {
+//                        print("basal energy: \(energy)   date: \(date)")
+//                        self.bodyMass = energy!
                     }
                 })
                 //get HR
@@ -192,10 +200,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             startTime = GetDateTimeISOString()
 
             // increase the voteLog by one and then store it
-            let userDefaults = UserDefaults.standard
-            voteLog = userDefaults.integer(forKey: "voteLog")
-            voteLog += 1
-            userDefaults.set(voteLog, forKey: "voteLog")
 
         }
 
@@ -207,6 +211,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // check if user completed the survey
         if (currentQuestion == 999) {
             currentQuestion = 0  // reset question flow to start
+            
+            let userDefaults = UserDefaults.standard
+            voteLog = userDefaults.integer(forKey: "voteLog")
+            voteLog += 1
+            userDefaults.set(voteLog, forKey: "voteLog")
 
             // pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
 

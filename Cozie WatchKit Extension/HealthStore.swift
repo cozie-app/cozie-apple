@@ -15,6 +15,7 @@ class HealthStore {
     private let healthStore = HKHealthStore()
     private let bodyMassType = HKSampleType.quantityType(forIdentifier: .bodyMass)!
     private let heartRateType = HKObjectType.quantityType(forIdentifier: .heartRate)!
+    private let basalEnergyType = HKObjectType.quantityType(forIdentifier: .basalEnergyBurned)!
     let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
 
     func authorizeHealthKit(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void)) {
@@ -26,14 +27,15 @@ class HealthStore {
         // Used to define the identifiers that create quantity type objects.
         let healthKitTypes: Set = [
             heartRateType,
-            bodyMassType]
+            bodyMassType,
+            basalEnergyType,
+        ]
         // Requests permission to save and read the specified data types.
-        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { (success, error) in
+        healthStore.requestAuthorization(toShare: [], read: healthKitTypes) { (success, error) in
             completion(success, error)
         }
 
     }
-
 
     //returns the weight entry in Kilos or nil if no data
     func bodyMassKg(completion: @escaping ((_ bodyMass: Double?, _ date: Date?) -> Void)) {
@@ -41,8 +43,28 @@ class HealthStore {
         let query = HKSampleQuery(sampleType: bodyMassType, predicate: nil, limit: 1,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
             if let result = results?.first as? HKQuantitySample {
+//                print(result)
                 let bodyMassKg = result.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
                 completion(bodyMassKg, result.endDate)
+                return
+            }
+
+            //no data
+            completion(nil, nil)
+        }
+        healthStore.execute(query)
+    }
+
+    //returns the weight entry in Kilos or nil if no data
+    func basalEnergy(completion: @escaping ((_ basalEnergy: Double?, _ date: Date?) -> Void)) {
+
+        let query = HKSampleQuery(sampleType: basalEnergyType, predicate: nil, limit: 1,
+                sortDescriptors: [sortByDate]) { (query, results, error) in
+            if let result = results?.first as? HKQuantitySample {
+//                print(result)
+                let energy = result.quantity.doubleValue(for: HKUnit.init(from: .kilocalorie))
+//                let energy = result.quantity.doubleValue(for: HKUnit.(from: HKUnit.kilocalorie()))
+                completion(energy, result.endDate)
                 return
             }
 

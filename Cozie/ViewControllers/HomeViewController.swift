@@ -153,6 +153,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate, UICollect
 
             // improvement show red cross if the user is not eligible
             // improvement I may not want to add green checkmark to survey since the user may need to complete it more than once
+            // improvement the checkmarks persist even if another user login
 
             // mark task performed as completed and move its card to the end of the list
             tasks[taskPerformed].completed = true
