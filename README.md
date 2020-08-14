@@ -38,8 +38,8 @@ We would love you for the contribution to our project, check the ``LICENSE`` fil
 
 ## Authors
 
-[Federico Tartarini](https://github.com/FedericoTartarini)
-Clayton Miller
-Stefano Schiavon
+* [Federico Tartarini](https://github.com/FedericoTartarini) - Main developer
+* Clayton Miller - Supervisor
+* Stefano Schiavon - Supervisor
 
 See ``LICENSE`` file for more information.
