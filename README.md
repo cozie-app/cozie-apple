@@ -16,7 +16,21 @@ Cozie allows building occupants to provide feedback in real time
 
 ## Installation
 
-1. 
+I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) so you can see all the steps required to clone Cozie on your computer.
+
+1. Clone the `cozie-app` repository on your computer. 
+
+```git clone https://github.com/FedericoTartarini/cozie-apple.git```
+
+2. Clone the latest stable release of ResearchKit. 
+
+```git clone -b stable https://github.com/ResearchKit/ResearchKit.git```
+
+3. Open the `Cozie.xcworkspace` file with XCode.
+
+4. [Add the ResearchKit framework](https://github.com/ResearchKit/ResearchKit/blob/master/README.md#1-add-the-researchkit-framework-to-your-project) to your project
+
+5. Select Cozie as Target and press play button in XCode.
 
 ## Contribute
 
