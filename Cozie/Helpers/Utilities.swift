@@ -15,7 +15,7 @@ class Utilities {
 
         bottomLine.frame = CGRect(x: 0, y: textField.frame.height - 2, width: textField.frame.width, height: 2)
 
-        bottomLine.backgroundColor = UIColor.init(red: 58 / 255, green: 134 / 255, blue: 255 / 255, alpha: 1).cgColor
+        bottomLine.backgroundColor = UIColor.init(red: 255 / 255, green: 98 / 255, blue: 20 / 255, alpha: 1).cgColor
 
         textField.borderStyle = .none
 
@@ -23,7 +23,8 @@ class Utilities {
     }
 
     static func stylePrimaryButton(_ button: UIButton) {
-        button.backgroundColor = UIColor.init(red: 58 / 255, green: 134 / 255, blue: 255 / 255, alpha: 1)
+        
+        button.backgroundColor = UIColor.init(red: 255 / 255, green: 98 / 255, blue: 20 / 255, alpha: 1)
 
         button.layer.cornerRadius = 25
 
@@ -35,7 +36,7 @@ class Utilities {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 25
         button.tintColor = UIColor.black
-        button.backgroundColor = UIColor.init(red: 131 / 255, green: 56 / 255, blue: 236 / 255, alpha: 1)
+        button.backgroundColor = UIColor.init(red: 13 / 255, green: 165 / 255, blue: 255 / 255, alpha: 1)
     }
 
     static func isValidPassword(_ password: String) -> Bool {
