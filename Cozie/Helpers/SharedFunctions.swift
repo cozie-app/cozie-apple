@@ -70,7 +70,7 @@ public func PostRequest(message: Data) -> Int {
 
         do {
             //create json object from data
-            if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+            if (try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) != nil {
                 // print(json)
                 // handle json...
             }
