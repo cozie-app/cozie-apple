@@ -22,6 +22,8 @@ Being Apple one of the major players in wearable devices market and with the App
 
 Cozie is now in Beta version and it will be soon available for download on the Apple Store. To find out more about Cozie or to become a tested please contact us at cozie.app@gmail.com
 
+To find out more about Cozie please watch the following video.
+
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/5e4FwVydYRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Compatibility

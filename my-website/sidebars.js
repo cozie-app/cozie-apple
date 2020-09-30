@@ -1,6 +1,24 @@
 module.exports = {
   someSidebar: {
-    "Getting Started": ["introduction", "installation"],
-    // "Create your survey": ["editCozie"],
+    "Project Overview": ["introduction", "installation"],
+    "Customize Cozie": [
+      "gettingStarted",
+      "cloneCozie",
+      "projectStructure",
+      "iosOverview",
+      "home",
+      "viewsOne",
+      "settings",
+      "firebaseIntro",
+      "secureFirebase",
+      "researchKit",
+      "notifications",
+      "watchIntro",
+      "watchMain",
+      "watchSecondary",
+      "validateDistribute",
+      "testFlight",
+      "documentationWebsite",
+    ],
   },
 };
