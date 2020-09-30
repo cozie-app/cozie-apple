@@ -20,15 +20,15 @@ Cozie for iOS builds on the knowledge that the [BUDS Lab](https://www.budslab.or
 
 Being Apple one of the major players in wearable devices market and with the Apple Watch dominating the global smartwatch market share, we decided to develop Cozie for iOS. 
 
-Cozie is still in Alpha version and is not yet available for download on the Apple Store. To find out more about Cozie or to become a tested please contact us at cozie.app@gmail.com
+Cozie is now in Beta version and it will be soon available for download on the Apple Store. To find out more about Cozie or to become a tested please contact us at cozie.app@gmail.com
 
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/5e4FwVydYRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Compatibility
 
-While Cozie Apple was developed using iPhone 11 and Apple watch 5, it is compatible with all iPhones and Apple watches models.
+While Cozie Apple was developed using iPhone 11 and Apple watch 6, it is compatible with iOS 9 or newer and with the Apple Watch gen 3 or newer..
 
 ## License
 
-The Cozie clockface is open sourced under at GPLv3 License.
+The Cozie is released under at GPLv3 License.
 
