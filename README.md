@@ -21,7 +21,7 @@ I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) s
 
 1. Clone the `cozie-app` repository on your computer. 
 
-```git clone https://github.com/FedericoTartarini/cozie-apple.git```
+```git clone https://github.com/Cozie-IEQ/cozie-apple.git```
 
 2. Clone the latest stable release of ResearchKit. 
 
@@ -33,6 +33,8 @@ I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) s
 
 5. Select Cozie as Target and press play button in XCode.
 
+For more information please visit the [official documentation website](https://cozie-apple.netlify.app/docs/)
+
 ## Contribute
 
 We would love you for the contribution to our project, check the ``LICENSE`` file for more info.
@@ -40,7 +42,7 @@ We would love you for the contribution to our project, check the ``LICENSE`` fil
 ## Authors
 
 * [Federico Tartarini](https://github.com/FedericoTartarini) - Main developer
-* Clayton Miller - Supervisor
-* Stefano Schiavon - Supervisor
+* [Clayton Miller](https://www.linkedin.com/in/claytonmiller/) - Supervisor
+* [Stefano Schiavon](https://www.linkedin.com/in/stefanoschiavon/) - Supervisor
 
 See ``LICENSE`` file for more information.
