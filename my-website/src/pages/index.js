@@ -185,7 +185,10 @@ function Home() {
                 <p className="hero__subtitle">
                   Choose which questions to show to the study participants
                 </p>
-                <img alt="Cozie flow of questions" src={"img/sequence cozie apple.png"} />
+                <img
+                  alt="Cozie flow of questions"
+                  src={"img/sequence cozie apple.png"}
+                />
               </div>
             </div>
           </div>
