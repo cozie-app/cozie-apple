@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Cozie an iOS app for human comfort data collection",
-  tagline: "Allow building occupants to provide feedback in real time",
+  title: "Cozie An iOS application for IEQ and physiological data collection",
+  tagline: "Allows building occupants to provide feedback in real time",
   url: "https://cozie-apple.netlify.app",
   baseUrl: "/",
   favicon: "img/favicon.ico",

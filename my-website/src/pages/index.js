@@ -114,13 +114,17 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Cozie - an iOS app for human comfort data collection."
+      description="Cozie - An iOS application for indoor environmental quality satisfaction and physiological data collection."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <div className="row">
             <div className={clsx("col", styles.profileImgContainer)}>
-              <img className={styles.mainImage} src={"img/main face.png"} />
+              <img
+                alt="cozie main question"
+                className={styles.mainImage}
+                src={"img/main face.png"}
+              />
             </div>
             <div className={clsx("col", styles.profileHeroContainer)}>
               <h1 className="hero__title">{siteConfig.title}</h1>
@@ -170,14 +174,18 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className={clsx("col col--3")}>
-                <img className={styles.mainImage} src={"img/main face.png"} />
+                <img
+                  alt="cozie main question"
+                  className={styles.mainImage}
+                  src={"img/main face.png"}
+                />
               </div>
               <div className={clsx("col col--9")}>
-                <h1 class="hero__title">Taylor your survey</h1>
-                <p class="hero__subtitle">
+                <h1 className="hero__title">Taylor your survey</h1>
+                <p className="hero__subtitle">
                   Choose which questions to show to the study participants
                 </p>
-                <img src={"img/sequence cozie apple.png"} />
+                <img alt="Cozie flow of questions" src={"img/sequence cozie apple.png"} />
               </div>
             </div>
           </div>

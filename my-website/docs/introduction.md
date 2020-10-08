@@ -26,6 +26,12 @@ To find out more about Cozie please watch the following video.
 
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/5e4FwVydYRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Taylor your survey
+
+Choose the questions to display to the users by changing the soruce code.
+
+<img alt="Cozie apple survey" src={useBaseUrl('img/cozie_flow.png')}  width="100%" />
+
 ## Compatibility
 
 While Cozie Apple was developed using iPhone 11 and Apple watch 6, it is compatible with iOS 9 or newer and with the Apple Watch gen 3 or newer..
