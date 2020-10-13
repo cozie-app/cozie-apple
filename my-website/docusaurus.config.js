@@ -1,10 +1,10 @@
 module.exports = {
   title: "Cozie An iOS application for IEQ and physiological data collection",
   tagline: "Allows building occupants to provide feedback in real time",
-  url: "https://cozie-apple.netlify.app",
+  url: "https://cozie-apple.app",
   baseUrl: "/",
   favicon: "img/favicon.ico",
-  organizationName: "FedericoTartarini", // Usually your GitHub org/user name.
+  organizationName: "cozie-app", // Usually your GitHub org/user name.
   projectName: "cozie-apple", // Usually your repo name.
   themeConfig: {
     navbar: {
