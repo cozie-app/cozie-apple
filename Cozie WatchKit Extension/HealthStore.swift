@@ -16,7 +16,7 @@ class HealthStore {
     private let bodyMassType = HKSampleType.quantityType(forIdentifier: .bodyMass)!
     private let heartRateType = HKObjectType.quantityType(forIdentifier: .heartRate)!
     private let basalEnergyType = HKObjectType.quantityType(forIdentifier: .basalEnergyBurned)!
-    let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+    let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
 
     func authorizeHealthKit(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void)) {
 
