@@ -171,7 +171,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         // set the title of the question
         questionTitle.setText(question.title)
-
+        
+        // scroll back the view to the top of the page
+        scroll(to: questionTitle, at: .top, animated: true)
+        
         // set the number of rows in the table
         tableView.setNumberOfRows(question.options.count, withRowType: "RowController")
 
