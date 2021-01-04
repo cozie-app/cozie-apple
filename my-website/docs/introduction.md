@@ -2,6 +2,7 @@
 id: introduction
 title: Introduction
 sidebar_label: Introduction
+slug: /
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl'; 
