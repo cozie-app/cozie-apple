@@ -76,11 +76,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         super.awake(withContext: context)
 
         // save on first startup the UUID in user defaults so it does not change
-        uuid = userDefaults.string(forKey: "uuid") ?? ""
-        if (uuid == "") {
-            uuid = UUID().uuidString
-            userDefaults.set(uuid, forKey: "uuid")
-        }
+        uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
 
         // get participantID from the defaults if available
         participantID = userDefaults.string(forKey: "participantID") ?? "undefined"
@@ -199,7 +195,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
             startTime = GetDateTimeISOString()
 
-            // increase the voteLog by one and then store it
+            if (uuid == "undefined") {
+                uuid = UUID().uuidString
+                userDefaults.set(uuid, forKey: "uuid")
+            }
 
         }
 

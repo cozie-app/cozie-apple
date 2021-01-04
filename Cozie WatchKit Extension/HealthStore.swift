@@ -18,7 +18,7 @@ class HealthStore {
     private let basalEnergyType = HKObjectType.quantityType(forIdentifier: .basalEnergyBurned)!
     let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
 
-    func authorizeHealthKit(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void)) {
+    func authorizeHealthKit(completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
 
         if !HKHealthStore.isHealthDataAvailable() {
             return
@@ -38,7 +38,7 @@ class HealthStore {
     }
 
     //returns the weight entry in Kilos or nil if no data
-    func bodyMassKg(completion: @escaping ((_ bodyMass: Double?, _ date: Date?) -> Void)) {
+    func bodyMassKg(completion: @escaping (_ bodyMass: Double?, _ date: Date?) -> Void) {
 
         let query = HKSampleQuery(sampleType: bodyMassType, predicate: nil, limit: 1,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
@@ -56,7 +56,7 @@ class HealthStore {
     }
 
     //returns the weight entry in Kilos or nil if no data
-    func basalEnergy(completion: @escaping ((_ basalEnergy: Double?, _ date: Date?) -> Void)) {
+    func basalEnergy(completion: @escaping (_ basalEnergy: Double?, _ date: Date?) -> Void) {
 
         let query = HKSampleQuery(sampleType: basalEnergyType, predicate: nil, limit: 1,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
@@ -74,7 +74,7 @@ class HealthStore {
         healthStore.execute(query)
     }
 
-    func queryHeartRate(completion: @escaping ((_ hr: [String: Int]?) -> Void)) {
+    func queryHeartRate(completion: @escaping (_ hr: [String: Int]?) -> Void) {
 
         // We want data points from our current device
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
@@ -83,7 +83,7 @@ class HealthStore {
 
         // It provides us with both the ability to receive a snapshot of data, and then on subsequent calls, a snapshot of what has changed.
 //        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
-        let query: HKSampleQuery = HKSampleQuery(sampleType: heartRateType, predicate: devicePredicate, limit: 10,
+        let query: HKSampleQuery = HKSampleQuery(sampleType: heartRateType, predicate: nil, limit: 30,
                 sortDescriptors: [sortByDate]) { query, results, error in
 
             if let results = results as? [HKQuantitySample] {
