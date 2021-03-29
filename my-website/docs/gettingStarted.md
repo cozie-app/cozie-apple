@@ -21,7 +21,7 @@ Optional but recommended:
 
 To find out more about Cozie please watch the following video.
 
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/5e4FwVydYRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/5e4FwVydYRE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 
 ## Steps you will need to follow
 
