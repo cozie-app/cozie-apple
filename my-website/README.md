@@ -26,6 +26,7 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
+On Linux (or using Git Bash on Windows) you can deploy using the following command:
 ```
 $ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
