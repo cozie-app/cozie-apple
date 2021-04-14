@@ -18,3 +18,8 @@ View logs
 ```
 gcloud functions logs read get_cozie_data_influx --project testbed-310521
 ```
+
+Testing the function, more info [here](https://github.com/GoogleCloudPlatform/functions-framework-python)
+```bash
+functions-framework --target get_cozie_data_influx --debug
+```

@@ -1,4 +1,77 @@
 from flask import escape
+import json
+import datetime
+import pandas as pd
+from influxdb import DataFrameClient
+from influxdb.exceptions import InfluxDBClientError
+import functions_framework
+
+
+@functions_framework.errorhandler(InfluxDBClientError)
+def special_exception_handler(e):
+    return {
+        "statusCode": 500,
+        "body": "Database connection failed, please contact us at cozie.app@gmail.com",
+        "error": str(e),
+    }
+
+
+@functions_framework.errorhandler(KeyError)
+def no_data_available(e):
+    return {
+        "statusCode": 500,
+        "body": "No data for that specific user are available in the selected time period. "
+                "Please ensure you have entered the correct userid. "
+                "If you have any questions please contact us at cozie.app@gmail.com",
+        "error": str(e),
+    }
+
+
+def get_from_time_string(weeks):
+    now = datetime.datetime.utcnow()
+    # the time x weeks ago
+    time_ago = now - datetime.timedelta(weeks=weeks)
+    from_time_str = time_ago.strftime("%Y-%m-%dT%H:%M:%SZ")
+    return from_time_str
+
+
+def get_data(userid, weeks=1, limit=5):
+    client = DataFrameClient(
+        "lonepine-64d016d6.influxcloud.net",
+        8086,
+        "google-cloud-function",
+        "81fD99W9ItD@3k",
+        "testingDB",
+        ssl=True,
+        verify_ssl=True,
+    )
+
+    # Set time strings to query data from influx
+    from_time_str = get_from_time_string(weeks=weeks)
+
+    result = client.query(
+        f"SELECT * FROM testingDB.autogen.cozieApple WHERE time > '{from_time_str}'"
+        f"AND user_id='{userid}' LIMIT {limit}"
+    )
+
+    cozie_df = pd.DataFrame.from_dict(result["cozieApple"])
+
+    return {
+        "statusCode": 200,
+        "data": cozie_df.to_json(orient="index"),
+        "query_parameters": {"userid": userid, "weeks": weeks, "limit": limit},
+    }
+
+
+def parse_args(key, default_value, request_json, request_args):
+    if request_json and key in request_json:
+        key = request_json[key]
+    elif request_args and key in request_args:
+        key = request_args[key]
+    else:
+        key = default_value
+    return key
+
 
 def get_cozie_data_influx(request):
     """HTTP Cloud Function.
@@ -13,10 +86,18 @@ def get_cozie_data_influx(request):
     request_json = request.get_json(silent=True)
     request_args = request.args
 
-    if request_json and 'name' in request_json:
-        name = request_json['name']
-    elif request_args and 'name' in request_args:
-        name = request_args['name']
+    limit = parse_args("limit", 100, request_json, request_args)
+    weeks = parse_args("weeks", 2, request_json, request_args)
+    userid = parse_args("userid", False, request_json, request_args)
+
+    if userid:
+        return get_data(userid, weeks=weeks, limit=limit)
     else:
-        name = 'World'
-    return 'Hello {}!'.format(escape(name))
+        return {
+            "statusCode": 400,
+            "body": json.dumps(
+                "Please indicate the userid in the query string of the user you would like to query the data."
+                "For example: https://us-central1-testbed-310521.cloudfunctions.net"
+                "/get_cozie_data_influx?userid=xxxxxxxxxxxx"
+            ),
+        }
