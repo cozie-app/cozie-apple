@@ -9,22 +9,34 @@ import functions_framework
 
 @functions_framework.errorhandler(InfluxDBClientError)
 def special_exception_handler(e):
-    return {
-        "statusCode": 500,
-        "body": "Database connection failed, please contact us at cozie.app@gmail.com",
-        "error": str(e),
-    }
+    return (
+        json.dumps(
+            {
+                "success": False,
+                "body": "Database connection failed, please contact us at cozie.app@gmail.com",
+                "error": str(e),
+            }
+        ),
+        500,
+        {"ContentType": "application/json"},
+    )
 
 
 @functions_framework.errorhandler(KeyError)
 def no_data_available(e):
-    return {
-        "statusCode": 500,
-        "body": "No data for that specific user are available in the selected time period. "
+    return (
+        json.dumps(
+            {
+                "success": False,
+                "body": "No data for that specific user are available in the selected time period. "
                 "Please ensure you have entered the correct userid. "
                 "If you have any questions please contact us at cozie.app@gmail.com",
-        "error": str(e),
-    }
+                "error": str(e),
+            }
+        ),
+        500,
+        {"ContentType": "application/json"},
+    )
 
 
 def get_from_time_string(weeks):
@@ -56,11 +68,7 @@ def get_data(userid, weeks=1, limit=5):
 
     cozie_df = pd.DataFrame.from_dict(result["cozieApple"])
 
-    return {
-        "statusCode": 200,
-        "data": cozie_df.to_json(orient="index"),
-        "query_parameters": {"userid": userid, "weeks": weeks, "limit": limit},
-    }
+    return cozie_df.to_json(orient="index")
 
 
 def parse_args(key, default_value, request_json, request_args):
@@ -91,13 +99,17 @@ def get_cozie_data_influx(request):
     userid = parse_args("userid", False, request_json, request_args)
 
     if userid:
-        return get_data(userid, weeks=weeks, limit=limit)
+        return str(get_data(userid, weeks=weeks, limit=limit))
     else:
-        return {
-            "statusCode": 400,
-            "body": json.dumps(
-                "Please indicate the userid in the query string of the user you would like to query the data."
-                "For example: https://us-central1-testbed-310521.cloudfunctions.net"
-                "/get_cozie_data_influx?userid=xxxxxxxxxxxx"
+        return (
+            json.dumps(
+                {
+                    "success": False,
+                    "body": "Please indicate the userid in the query string of the user you would like to query the data."
+                    "For example: https://us-central1-testbed-310521.cloudfunctions.net"
+                    "/get_cozie_data_influx?userid=xxxxxxxxxxxx",
+                }
             ),
-        }
+            400,
+            {"ContentType": "application/json"},
+        )

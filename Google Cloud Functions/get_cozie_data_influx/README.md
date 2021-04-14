@@ -23,3 +23,25 @@ Testing the function, more info [here](https://github.com/GoogleCloudPlatform/fu
 ```bash
 functions-framework --target get_cozie_data_influx --debug
 ```
+
+Python code to query the data
+```python
+import pandas as pd
+import json
+import requests
+
+YOUR_TIMEZONE = 'Asia/Singapore'
+USER_ID = 'VVeuFDZkVzObhRgZkA6UuSnrBCF2'
+LIMIT = 1000
+
+payload = {'userid': USER_ID, 'limit': LIMIT}
+
+response = requests.get( 'https://us-central1-testbed-310521.cloudfunctions.net/get_cozie_data_influx', params=payload)
+my_json = response.content.decode('utf8')
+data = json.loads(my_json)
+df = pd.DataFrame.from_dict(data).T
+df.index = pd.to_datetime(df.index.astype("int64"),unit='ms')
+df.index = df.index.tz_localize('UTC').tz_convert(YOUR_TIMEZONE)
+
+print(df.sort_values(["voteLog"], ascending=False).head())
+```
