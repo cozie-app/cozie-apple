@@ -7,7 +7,7 @@
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "upgrade": "yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest",
+    "upgrade": "yarn upgrade && yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest",
     "deploy-gh-pages": "GIT_USER=FedericoTartarini yarn deploy"
   },
   "dependencies": {
