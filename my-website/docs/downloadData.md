@@ -19,6 +19,10 @@ Keep also in mind that some records (rows of the dataframe) only contain heart r
 Consequently if you are interested in analysing only the responses that a participant (USER_ID) provided using the apple watch, please first filter out all the records which contain 'NaN' in the VoteLog column using the following command `df = df.dropna(subset=['voteLog'])`
 
 ```
+import requests
+import json
+import pandas as pd
+
 YOUR_TIMEZONE = 'Asia/Singapore'
 USER_ID = 'XXXXXXX'
 WEEKS = "10"
