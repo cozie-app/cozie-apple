@@ -29,7 +29,7 @@ To find out more about Cozie please watch the following video.
 
 ## Taylor your survey
 
-Choose the questions to display to the users by changing the soruce code.
+Choose the questions to display to the users by changing the source code.
 
 <img alt="Cozie apple survey" src={useBaseUrl('img/cozie_flow.png')}  width="100%" />
 
