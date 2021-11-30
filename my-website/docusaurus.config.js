@@ -22,7 +22,7 @@ module.exports = {
         },
         { to: "blog", label: "Blog", position: "left" },
         {
-          href: "https://github.com/FedericoTartarini",
+          href: "https://github.com/cozie-app/cozie-apple",
           label: "GitHub",
           position: "right",
         },
