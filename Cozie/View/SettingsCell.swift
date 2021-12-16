@@ -16,6 +16,8 @@ class SettingsCell: UITableViewCell {
             guard let sectionType = sectionType else { return }
             textLabel?.text = sectionType.description
             switchControl.isHidden = !sectionType.constrainsSwitch
+            imageViewProperty.image = UIImage(named: sectionType.imageName)
+            imageViewProperty.isHidden = !sectionType.imageView
         }
     }
 
@@ -30,6 +32,13 @@ class SettingsCell: UITableViewCell {
 
         return switchControl
     }()
+    
+    // define initial state of imageView
+    let imageViewProperty: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 
     // add switch control to settings
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,6 +48,16 @@ class SettingsCell: UITableViewCell {
         switchControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         switchControl.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
 
+        addSubview(imageViewProperty)
+        imageViewConstraints()
+    }
+
+    private func imageViewConstraints() {
+        imageViewProperty.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        imageViewProperty.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        imageViewProperty.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        imageViewProperty.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        imageViewProperty.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

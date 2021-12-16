@@ -14,7 +14,9 @@ import FirebaseAuth
 private let reuseIdentifier = "SettingsCell"
 
 class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewControllerDelegate {
-
+    
+    @IBOutlet weak var settingsTableView: UITableView!
+    
     // session is the connection session between the phone and the watch
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
@@ -29,7 +31,6 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
     // MARK: - Properties
 
-    var tableView: UITableView!
     var userInfoHeader: UserInfoHeader!
 
     override func viewDidLoad() {
@@ -46,26 +47,20 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
     // MARK: - Helper Functions
 
-    func configureTableView() {
+    private func configureTableView() {
 
-        tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 60
-        tableView.sectionHeaderHeight = 40
-
-        tableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        view.addSubview(tableView)
-        tableView.frame = view.frame
-
+        self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
+        if #available(iOS 15.0, *) {
+            self.settingsTableView.sectionHeaderTopPadding = 0
+        }
+        
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
         userInfoHeader = UserInfoHeader(frame: frame)
-        tableView.tableHeaderView = userInfoHeader
-        tableView.tableFooterView = UIView()
-
+        self.settingsTableView.tableHeaderView = userInfoHeader
+        self.settingsTableView.tableFooterView = UIView()
     }
 
-    func configureUI() {
+    private func configureUI() {
 
         configureTableView()
 
@@ -82,7 +77,7 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
         taskViewController.dismiss(animated: true, completion: nil)
     }
 
-    func signOut() {
+    private func signOut() {
 
         do {
             try Auth.auth().signOut()
@@ -99,7 +94,7 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     }
 
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
-    func sendParticipantID() {
+    private func sendParticipantID() {
         
         // check if watch connectivity is supported and activate it
         if WCSession.isSupported() {
@@ -127,8 +122,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Utilities: return UtilitiesOptions.allCases.count
-        case .Communications: return CommunicationOptions.allCases.count
+        case .GeneralSettings: return GeneralSettingOptions.allCases.count
+        case .Communications: return CommunicationOptions.allCases.count - (false ? 1 : 0) // TODO: hide sendConsentForm button if the user has not yet completed consent form
+        case .UserSettings: return UserSettingOptions.allCases.count
+        case .ExperimentSettings: return ExperimentSettingOptions.allCases.count
+        case .OnboardingProcess: return OnboardingProcessOptions.allCases.count
+        case .About: return AboutOptions.allCases.count
         }
     }
 
@@ -149,8 +148,16 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return view
 
     }
-
-    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return nil
+//    }
+//
+//    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return .leastNormalMagnitude
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
 
@@ -162,12 +169,24 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Utilities:
-            let social = UtilitiesOptions(rawValue: indexPath.row)
+        case .GeneralSettings:
+            let social = GeneralSettingOptions(rawValue: indexPath.row)
             cell.sectionType = social
         case .Communications:
             let communication = CommunicationOptions(rawValue: indexPath.row)
             cell.sectionType = communication
+        case .UserSettings:
+            let userSettings = UserSettingOptions(rawValue: indexPath.row)
+            cell.sectionType = userSettings
+        case .ExperimentSettings:
+            let experimentSettings = ExperimentSettingOptions(rawValue: indexPath.row)
+            cell.sectionType = experimentSettings
+        case .OnboardingProcess:
+            let onboarding = OnboardingProcessOptions(rawValue: indexPath.row)
+            cell.sectionType = onboarding
+        case .About:
+            let about = AboutOptions(rawValue: indexPath.row)
+            cell.sectionType = about
         }
 
         return cell
@@ -180,12 +199,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Utilities:
-            guard let buttonClicked = UtilitiesOptions(rawValue: indexPath.row) else {
+        case .UserSettings:
+            guard let buttonClicked = UserSettingOptions(rawValue: indexPath.row) else {
                 return
             }
             switch buttonClicked {
-            case .logout: logOutPressed()
+            case .participantID: print("participantID clicked")
+            case .experimentID: print("experimentID clicked")
+            }
+        case .GeneralSettings:
+            guard let buttonClicked = GeneralSettingOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .permissions: print("permission clicked")
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -193,16 +220,45 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-                    // fixme hide this button if the user has not yet completed consent form
-            case .emailConsent: sendConsentForm()
-                    // fixme when the button below is clicked it throws an error
+                // fixme when the button below is clicked it throws an error
             case .notification: print("user asked to disable notifications")
+                // fixme hide this button if the user has not yet completed consent form
+            case .emailConsent: sendConsentForm()
+            }
+        case .ExperimentSettings:
+            guard let buttonClicked = ExperimentSettingOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .questionFlow: print("questionFlow clicked")
+            case .notificationFrequency: print("notificationFrequency clicked")
+            case .participationDays: print("participationDays clicked")
+            case .dailyParticipationHours: print("dailyParticipationHours clicked")
+            case .downloadData: print("downloadData clicked")
+            }
+        case .OnboardingProcess:
+            guard let buttonClicked = OnboardingProcessOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .eligibility: print("eligibility clicked")
+            case .consent: print("consent clicked")
+            case .survey: print("survey clicked")
+            case .onboarding: print("onboarding clicked")
+            }
+        case .About:
+            guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .cozie: print("cozie clicked")
+            case .budsLab: print("budsLab clicked")
             }
         }
 
     }
 
-    func logOutPressed() {
+    private func logOutPressed() {
 
         let alertController = UIAlertController(title: nil, message: "Are you sure you want to Log Out?",
                 preferredStyle: .actionSheet)
@@ -216,7 +272,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    func sendConsentForm() {
+    private func sendConsentForm() {
 
         let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
         taskViewController.delegate = self
