@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444BB13276B56D700D7F0E9 /* Permissions.xib */; };
 		0444BB16276B6AD800D7F0E9 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444BB15276B6AD800D7F0E9 /* TextView.xib */; };
+		046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD749276C46BD0011A883 /* QuestionFlow.xib */; };
+		046BD756276C6C860011A883 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD755276C6C860011A883 /* Permissions.swift */; };
+		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
+		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
 		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
@@ -173,6 +177,10 @@
 		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		0444BB13276B56D700D7F0E9 /* Permissions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Permissions.xib; sourceTree = "<group>"; };
 		0444BB15276B6AD800D7F0E9 /* TextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		046BD749276C46BD0011A883 /* QuestionFlow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionFlow.xib; sourceTree = "<group>"; };
+		046BD755276C6C860011A883 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
@@ -323,6 +331,10 @@
 				29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */,
 				29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */,
 				29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */,
+				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
+				046BD755276C6C860011A883 /* Permissions.swift */,
+				046BD75A276C6D5C0011A883 /* TextView.swift */,
+				046BD75C276C6D8E0011A883 /* QuestionFlow.swift */,
 			);
 			path = PopUps;
 			sourceTree = "<group>";
@@ -738,6 +750,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */,
 				E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */,
 				29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */,
 				0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */,
@@ -988,6 +1001,9 @@
 				E469469524BC4CF20013134B /* LoginViewController.swift in Sources */,
 				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
 				1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */,
+				046BD75B276C6D5C0011A883 /* TextView.swift in Sources */,
+				046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */,
+				046BD756276C6C860011A883 /* Permissions.swift in Sources */,
 				1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
