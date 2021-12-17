@@ -15,6 +15,7 @@ extension UserDefaults {
     enum UserDefaultKeys: String {
         case ParticipationDays
         case questions
+        case permissions
         case participantID
         case experimentID
     }
