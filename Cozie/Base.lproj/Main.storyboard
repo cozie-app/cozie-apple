@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -111,7 +111,7 @@
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-839.40886699507394"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="WtC-KL-8ka">
             <objects>
                 <viewController id="AdB-sb-bBQ" customClass="SettingsViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
@@ -120,7 +120,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="l9T-vD-hE8">
-                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="AdB-sb-bBQ" id="1em-fN-k6m"/>
@@ -137,14 +137,14 @@
                             <constraint firstItem="5S7-Mt-3oL" firstAttribute="trailing" secondItem="l9T-vD-hE8" secondAttribute="trailing" id="sIz-PK-fJa"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" selectedImage="gear" id="QL1-u7-Opw"/>
+                    <navigationItem key="navigationItem" id="ddv-l4-U3A"/>
                     <connections>
                         <outlet property="settingsTableView" destination="l9T-vD-hE8" id="2BZ-9J-FPY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUA-Jp-CQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="-151"/>
+            <point key="canvasLocation" x="3092" y="-151.47783251231527"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="k9y-wj-1cr">
@@ -353,7 +353,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Y3Q-VF-4u1"/>
-                        <segue destination="AdB-sb-bBQ" kind="relationship" relationship="viewControllers" id="Ghc-4L-IDl"/>
+                        <segue destination="N6w-Fx-r8Q" kind="relationship" relationship="viewControllers" id="Ghc-4L-IDl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5k1-CL-pgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -377,6 +377,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXU-ur-8lU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1311.2" y="-631.0344827586207"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="bhe-Ps-OVi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N6w-Fx-r8Q" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" selectedImage="gear" id="QL1-u7-Opw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="flK-YO-etK">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AdB-sb-bBQ" kind="relationship" relationship="rootViewController" id="pr7-An-5dv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4CJ-KT-QgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2149.5999999999999" y="-151.47783251231527"/>
         </scene>
     </scenes>
     <resources>

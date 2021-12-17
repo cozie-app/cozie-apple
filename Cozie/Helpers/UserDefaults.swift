@@ -9,16 +9,19 @@
 import Foundation
 
 extension UserDefaults {
+    
+    static var shared = UserDefaults()
+    
     enum UserDefaultKeys: String {
-        case test
+        case ParticipationDays
     }
     
     func setValue(for key: String, value: Any) {
-        setValue(value, forKey: UserDefaultKeys.test.rawValue)
+        setValue(value, forKey: key)
         synchronize()
     }
     
     func getValue(for key: String) -> Any {
-        return (value(forKey: UserDefaultKeys.test.rawValue) ?? nil)
+        return value(forKey: key) ?? 0
     }
 }
