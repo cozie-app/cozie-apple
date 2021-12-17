@@ -70,6 +70,6 @@ class Permissions: UIViewController {
     @IBAction func onClickSet(_ sender: UIButton) {
         
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.permissions.rawValue, value: self.permissions)
+        NavigationManager.dismiss(self)
     }
-    
 }

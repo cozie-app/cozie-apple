@@ -26,7 +26,7 @@ class NotificationFrequency: UIViewController {
         self.setupFilledData()
     }
     
-    private func setupFilledData() {
+    func setupFilledData() {
         switch viewType {
         case .NotificationFrequency:
             self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? Date()
@@ -52,6 +52,6 @@ class NotificationFrequency: UIViewController {
         case .To:
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue, value: self.timePicker.date)
         }
-        self.dismiss(animated: true, completion: nil)
+        NavigationManager.dismiss(self)
     }
 }

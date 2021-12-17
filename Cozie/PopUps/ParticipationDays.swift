@@ -44,7 +44,7 @@ class ParticipationDays: UIViewController {
     
     @IBAction func onClickSet(_ sender: Any) {
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue, value: self.days)
-        self.dismiss(animated: true, completion: nil)
+        NavigationManager.dismiss(self)
     }
     
     @IBAction func daysValueChanged(_ sender: UISwitch) {

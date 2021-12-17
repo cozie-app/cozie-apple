@@ -204,15 +204,18 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .participantID: print("participantID clicked")
-            case .experimentID: print("experimentID clicked")
+            case .participantID:
+                NavigationManager.openTextView(self, isParticipantID: true)
+            case .experimentID:
+                NavigationManager.openTextView(self, isParticipantID: false)
             }
         case .GeneralSettings:
             guard let buttonClicked = GeneralSettingOptions(rawValue: indexPath.row) else {
                 return
             }
             switch buttonClicked {
-            case .permissions: print("permission clicked")
+            case .permissions:
+                NavigationManager.openPermissions(self)
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -231,10 +234,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .questionFlow: print("questionFlow clicked")
-            case .notificationFrequency: print("notificationFrequency clicked")
-            case .participationDays: print("participationDays clicked")
-            case .dailyParticipationHours: print("dailyParticipationHours clicked")
+            case .questionFlow:
+                NavigationManager.openQuestionFlow(self)
+            case .notificationFrequency:
+                NavigationManager.openNotificationFrequency(self, for: .NotificationFrequency)
+            case .participationDays:
+                NavigationManager.openParticipationDays(self)
+            case .dailyParticipationHours:
+                NavigationManager.openDailyParticipation(self)
             case .downloadData: print("downloadData clicked")
             }
         case .OnboardingProcess:

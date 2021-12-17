@@ -103,7 +103,7 @@ class QuestionFlow: UIViewController {
     @IBAction func onClickSet(_ sender: Any) {
         
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.questions.rawValue, value: self.questions)
-        
+        NavigationManager.dismiss(self)
     }
     
 

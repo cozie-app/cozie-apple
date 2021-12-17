@@ -62,6 +62,6 @@ class DailyParticipation: UIViewController {
         if selected != .None {
             NavigationManager.openNotificationFrequency(self, for: self.selected == .To ? .To : .From)
         }
-//        self.dismiss(animated: true, completion: nil)
+//        NavigationManager.dismiss(self)
     }
 }
