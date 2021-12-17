@@ -25,6 +25,12 @@
 		29CCF16F276AF97600AA3E32 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */; };
 		29CCF170276AF97600AA3E32 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF171276B10D700AA3E32 /* UserDefaults.swift */; };
+		29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */; };
+		29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */; };
+		29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */; };
+		29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */; };
+		29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */; };
+		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -182,6 +188,12 @@
 		24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		29CCF165276AF95A00AA3E32 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		29CCF171276B10D700AA3E32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationDays.swift; sourceTree = "<group>"; };
+		29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipationDays.xib; sourceTree = "<group>"; };
+		29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFrequency.swift; sourceTree = "<group>"; };
+		29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationFrequency.xib; sourceTree = "<group>"; };
+		29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyParticipation.swift; sourceTree = "<group>"; };
+		29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyParticipation.xib; sourceTree = "<group>"; };
 		36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +317,12 @@
 			children = (
 				0444BB13276B56D700D7F0E9 /* Permissions.xib */,
 				0444BB15276B6AD800D7F0E9 /* TextView.xib */,
+				29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */,
+				29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */,
+				29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */,
+				29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */,
+				29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */,
+				29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */,
 			);
 			path = PopUps;
 			sourceTree = "<group>";
@@ -721,11 +739,14 @@
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
 				E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */,
+				29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */,
 				0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */,
 				E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */,
 				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
 				0444BB16276B6AD800D7F0E9 /* TextView.xib in Resources */,
+				29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
+				29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */,
 				1C4913AD630B92A241DE121E /* CNAME in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -949,8 +970,11 @@
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
+				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
 				29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
+				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
+				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
 				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,
 				E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */,
