@@ -14,6 +14,9 @@ extension UserDefaults {
     
     enum UserDefaultKeys: String {
         case ParticipationDays
+        case questions
+        case participantID
+        case experimentID
     }
     
     func setValue(for key: String, value: Any) {
