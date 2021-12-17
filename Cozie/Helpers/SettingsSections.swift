@@ -3,10 +3,12 @@
 // Copyright (c) 2020 Federico Tartarini. All rights reserved.
 //
 
+import Foundation
 // this file contains the enum used to generate the Settings page programmatically
 
 protocol SectionType: CustomStringConvertible {
     var constrainsSwitch: Bool { get }
+    var isSwitchEnable: Bool { get }
     var imageView: Bool { get }
     var imageName: String { get }
 }
@@ -48,6 +50,9 @@ enum UserSettingOptions: Int, CaseIterable, SectionType {
     var constrainsSwitch: Bool {
         return false
     }
+    var isSwitchEnable: Bool {
+        return false
+    }
     var description: String {
         switch self {
         case .participantID: return "Participant ID"
@@ -69,6 +74,9 @@ enum GeneralSettingOptions: Int, CaseIterable, SectionType {
         return ""
     }
     var constrainsSwitch: Bool {
+        return false
+    }
+    var isSwitchEnable: Bool {
         return false
     }
     var description: String {
@@ -95,6 +103,13 @@ enum CommunicationOptions: Int, CaseIterable, SectionType {
         switch self {
         case .notification: return true
         case .emailConsent: return false
+        }
+    }
+    var isSwitchEnable: Bool {
+        switch self {
+        case .notification: return UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true
+        case .emailConsent:
+            return false
         }
     }
     var description: String {
@@ -133,6 +148,9 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     var constrainsSwitch: Bool {
         return false
     }
+    var isSwitchEnable: Bool {
+        return false
+    }
     var description: String {
         switch self{
         case .questionFlow: return "Question Flow"
@@ -161,6 +179,9 @@ enum OnboardingProcessOptions: Int, CaseIterable, SectionType {
     var constrainsSwitch: Bool {
         return false
     }
+    var isSwitchEnable: Bool {
+        return false
+    }
     var description: String {
         switch self{
         case .eligibility: return "Eligibility"
@@ -184,6 +205,9 @@ enum AboutOptions: Int, CaseIterable, SectionType {
         return "consentForm"
     }
     var constrainsSwitch: Bool {
+        return false
+    }
+    var isSwitchEnable: Bool {
         return false
     }
     var description: String {

@@ -10,7 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DailyParticipation" customModule="Cozie" customModuleProvider="target">
             <connections>
+                <outlet property="fromLabel" destination="zGa-zc-YTL" id="f4f-tg-612"/>
                 <outlet property="fromView" destination="v34-lF-r5z" id="WTu-sO-UYH"/>
+                <outlet property="toLabel" destination="2Zp-ge-hE0" id="cRd-FE-246"/>
                 <outlet property="toView" destination="LvN-Fc-ZZS" id="uPC-1D-ANw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -54,7 +56,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="zGa-zc-YTL" firstAttribute="centerY" secondItem="v34-lF-r5z" secondAttribute="centerY" id="0JX-cW-btg"/>
                                         <constraint firstAttribute="trailing" secondItem="zGa-zc-YTL" secondAttribute="trailing" constant="20" id="Ege-Z7-y3D"/>
@@ -110,6 +112,9 @@
                     <state key="normal" title="SET">
                         <color key="titleColor" systemColor="labelColor"/>
                     </state>
+                    <connections>
+                        <action selector="onClickSet:" destination="-1" eventType="touchUpInside" id="1bV-ug-Wt1"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

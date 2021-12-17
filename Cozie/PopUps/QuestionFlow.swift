@@ -34,8 +34,6 @@ class QuestionFlow: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.questions = UserDefaults.
-
         questionFlowSetBtn.layer.cornerRadius = 5
     }
     

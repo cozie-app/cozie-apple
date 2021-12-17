@@ -14,6 +14,10 @@ extension UserDefaults {
     
     enum UserDefaultKeys: String {
         case ParticipationDays
+        case NotificationFrequency
+        case FromTime
+        case ToTime
+        case NotificationEnable
     }
     
     func setValue(for key: String, value: Any) {

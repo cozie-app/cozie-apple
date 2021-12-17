@@ -10,7 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationFrequency" customModule="Cozie" customModuleProvider="target">
             <connections>
+                <outlet property="subtitleLabel" destination="pbU-G9-EsU" id="5Lz-gf-9CB"/>
                 <outlet property="timePicker" destination="ngJ-Vb-djm" id="Ckq-G4-TVJ"/>
+                <outlet property="titleLabel" destination="Jx3-nO-oS5" id="l7h-6a-K4H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

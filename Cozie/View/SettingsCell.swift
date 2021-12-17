@@ -16,6 +16,7 @@ class SettingsCell: UITableViewCell {
             guard let sectionType = sectionType else { return }
             textLabel?.text = sectionType.description
             switchControl.isHidden = !sectionType.constrainsSwitch
+            switchControl.isOn = !sectionType.isSwitchEnable
             imageViewProperty.image = UIImage(named: sectionType.imageName)
             imageViewProperty.isHidden = !sectionType.imageView
         }
