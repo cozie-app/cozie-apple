@@ -329,16 +329,16 @@
 			children = (
 				0444BB13276B56D700D7F0E9 /* Permissions.xib */,
 				0444BB15276B6AD800D7F0E9 /* TextView.xib */,
+				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
+				046BD755276C6C860011A883 /* Permissions.swift */,
+				046BD75A276C6D5C0011A883 /* TextView.swift */,
+				046BD75C276C6D8E0011A883 /* QuestionFlow.swift */,
 				29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */,
 				29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */,
 				29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */,
 				29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */,
 				29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */,
 				29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */,
-				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
-				046BD755276C6C860011A883 /* Permissions.swift */,
-				046BD75A276C6D5C0011A883 /* TextView.swift */,
-				046BD75C276C6D8E0011A883 /* QuestionFlow.swift */,
 			);
 			path = PopUps;
 			sourceTree = "<group>";

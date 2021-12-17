@@ -18,6 +18,10 @@ extension UserDefaults {
         case FromTime
         case ToTime
         case NotificationEnable
+        case questions
+        case permissions
+        case participantID
+        case experimentID
     }
     
     func setValue(for key: String, value: Any) {

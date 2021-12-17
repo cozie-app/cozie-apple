@@ -29,49 +29,80 @@ class QuestionFlow: UIViewController {
     @IBOutlet weak var viewPDPMINI: UIView!
     @IBOutlet weak var viewMFMINI: UIView!
     
-    var questions:[Bool] = [false,false,false,false,false,false,false,false]
+    var questions:[Bool] = []
+    var buttonArray:[UIButton] = []
+    var viewArray:[UIView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.questions = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
+
         questionFlowSetBtn.layer.cornerRadius = 5
+        
+        buttonArray = [thermalBtn, IDRPBtn, PDPBtn, MFBtn, thermalMINIBtn, IDRPMINIBtn, PDPMINIBtn, MFMINIBtn]
+        
+        viewArray = [viewThermal, viewIDRP, viewPDP, viewMF, viewThermalMINI, viewIDRPMINI, viewPDPMINI, viewMFMINI]
+        
+        self.fillUpdata()
+    
+        
     }
+    
+    private func fillUpdata(){
+        
+        for i in 0...7 {
+            
+            buttonArray[i].isSelected = questions[i]
+            viewArray[i].backgroundColor = buttonArray[i].isSelected ? UIColor.lightGray : UIColor.systemBackground
+            let imgName = buttonArray[i].isSelected ? "green" : "blue"
+            buttonArray[i].setImage(UIImage(named: imgName), for: .normal)
+            
+        }
+    }
+
     
     @IBAction func questionValueChanged(_ sender: UIButton) {
         
         switch sender.tag {
+        
         case 0:
-            self.questions[0] = sender.isSelected
-            viewThermal.backgroundColor = UIColor.lightGray
+            functionality(i: 0, view: viewThermal, button: sender)
         case 1:
-            self.questions[1] = sender.isSelected
-            viewIDRP.backgroundColor = UIColor.lightGray
+            functionality(i: 1, view: viewIDRP, button: sender)
         case 2:
-            self.questions[2] = sender.isSelected
-            viewPDP.backgroundColor = UIColor.lightGray
+            functionality(i: 2, view: viewPDP, button: sender)
         case 3:
-            self.questions[3] = sender.isSelected
-            viewMF.backgroundColor = UIColor.lightGray
+            functionality(i: 3, view: viewMF, button: sender)
         case 4:
-            self.questions[4] = sender.isSelected
-            viewThermalMINI.backgroundColor = UIColor.lightGray
+            functionality(i: 4, view: viewThermalMINI, button: sender)
         case 5:
-            self.questions[5] = sender.isSelected
-            viewIDRPMINI.backgroundColor = UIColor.lightGray
+            functionality(i: 5, view: viewIDRPMINI, button: sender)
         case 6:
-            self.questions[6] = sender.isSelected
-            viewPDPMINI.backgroundColor = UIColor.lightGray
+            functionality(i: 6, view: viewPDPMINI, button: sender)
         case 7:
-            self.questions[7] = sender.isSelected
-            viewMFMINI.backgroundColor = UIColor.lightGray
+            functionality(i: 7, view: viewMFMINI, button: sender)
+            
         default:
             return
         }
         
     }
     
+    private func functionality(i: Int, view: UIView, button: UIButton){
+        
+        button.isSelected = !button.isSelected
+        self.questions[i] = button.isSelected
+        view.backgroundColor = button.isSelected ? UIColor.lightGray : UIColor.systemBackground
+        let imgName = button.isSelected ? "green" : "blue"
+        button.setImage(UIImage(named: imgName), for: .normal)
+        
+    }
+    
     
     @IBAction func onClickSet(_ sender: Any) {
+        
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.questions.rawValue, value: self.questions)
         
     }
     

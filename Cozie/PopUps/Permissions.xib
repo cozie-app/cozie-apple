@@ -11,9 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Permissions" customModule="Cozie" customModuleProvider="target">
             <connections>
-                <outlet property="locationDataSwitch" destination="NXz-wg-Lz1" id="xlk-7y-jWk"/>
+                <outlet property="bluetoothDataSwitch" destination="ZMa-Xr-46I" id="Uz3-TW-y0P"/>
+                <outlet property="dataSwitch" destination="rTT-Vz-9ZJ" id="Yy4-tZ-iws"/>
+                <outlet property="heartDataSwitch" destination="Lcd-dY-Kus" id="2jW-jv-wNo"/>
+                <outlet property="locationDataSwitch" destination="NXz-wg-Lz1" id="hvf-24-Plx"/>
+                <outlet property="motionDataSwitch" destination="G05-RQ-ouz" id="xtz-VV-MHM"/>
+                <outlet property="noiseDataSwitch" destination="xlU-gu-CaV" id="S1l-nP-c9F"/>
                 <outlet property="setButton" destination="aHv-2P-Afr" id="M8A-Jz-SgR"/>
                 <outlet property="view" destination="iN0-l3-epB" id="eSw-Pf-BY8"/>
+                <outlet property="wifiDataSwitch" destination="Tvw-MN-E2L" id="vkH-gm-P6c"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -54,7 +60,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlU-gu-CaV">
                                                     <rect key="frame" x="301" y="9.5" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="permissionValueChanged:" destination="-1" eventType="valueChanged" id="wUR-li-PVD"/>
+                                                        <action selector="permissionValueChanged:" destination="-1" eventType="valueChanged" id="Lgh-tc-TKs"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -127,7 +133,7 @@
                                                 <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G05-RQ-ouz">
                                                     <rect key="frame" x="301" y="9.5" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="permissionValueChanged:" destination="-1" eventType="valueChanged" id="fH3-Ct-GaL"/>
+                                                        <action selector="permissionValueChanged:" destination="-1" eventType="valueChanged" id="fk8-Kb-eH4"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -320,7 +326,7 @@
                         <color key="titleColor" systemColor="labelColor"/>
                     </state>
                     <connections>
-                        <action selector="onSetClick:" destination="-1" eventType="touchUpInside" id="pmJ-AV-r1I"/>
+                        <action selector="onClickSet:" destination="-1" eventType="touchUpInside" id="vLB-Wo-y5a"/>
                     </connections>
                 </button>
             </subviews>
