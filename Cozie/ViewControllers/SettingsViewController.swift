@@ -50,9 +50,9 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     private func configureTableView() {
 
         self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        if #available(iOS 15.0, *) {
-            self.settingsTableView.sectionHeaderTopPadding = 0
-        }
+//        if #available(iOS 15.0, *) {
+//            self.settingsTableView.sectionHeaderTopPadding = 0
+//        }
         
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
         userInfoHeader = UserInfoHeader(frame: frame)
@@ -273,8 +273,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .cozie: print("cozie clicked")
-            case .budsLab: print("budsLab clicked")
+            case .cozie:
+                let url = URL(string: "https://cozie.app")!
+                let alert = Utilities.alert(url: url, title: "Cozie")
+                present(alert, animated: true, completion: nil)
+            case .budsLab:
+                let url = URL(string: "https://www.budslab.org")!
+                let alert = Utilities.alert(url: url, title: "BUDS Lab")
+                present(alert, animated: true, completion: nil)
             }
         }
 
