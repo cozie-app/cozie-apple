@@ -37,7 +37,6 @@ class Permissions: UIViewController {
         for i in 0...6{
             switch i {
             case 0: noiseDataSwitch.setOn(self.permissions[0], animated: true)
-                print(noiseDataSwitch.isOn)
             case 1: heartDataSwitch.setOn(self.permissions[1], animated: true)
             case 2: motionDataSwitch.setOn(self.permissions[2], animated: true)
             case 3: locationDataSwitch.setOn(self.permissions[3], animated: true)
