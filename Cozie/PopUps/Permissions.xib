@@ -28,13 +28,13 @@
                         <rect key="frame" x="21.5" y="164.5" width="371" height="567"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Permissions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzH-7B-gou">
-                                <rect key="frame" x="20" y="20" width="331" height="30"/>
+                                <rect key="frame" x="40" y="20" width="311" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Data shared" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGn-sD-iIx">
-                                <rect key="frame" x="20" y="60" width="331" height="20.5"/>
+                                <rect key="frame" x="40" y="60" width="311" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -335,7 +335,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="371" id="5ge-6F-g7N"/>
-                            <constraint firstItem="SzH-7B-gou" firstAttribute="leading" secondItem="1Y7-tb-MTp" secondAttribute="leading" constant="20" id="6F9-Ef-lD6"/>
+                            <constraint firstItem="SzH-7B-gou" firstAttribute="leading" secondItem="1Y7-tb-MTp" secondAttribute="leading" constant="40" id="6F9-Ef-lD6"/>
                             <constraint firstItem="dRx-1r-h0T" firstAttribute="top" secondItem="beT-uW-D4T" secondAttribute="bottom" constant="20" id="8Qd-Gn-LHh"/>
                             <constraint firstItem="beT-uW-D4T" firstAttribute="centerX" secondItem="1Y7-tb-MTp" secondAttribute="centerX" id="F8A-Os-loZ"/>
                             <constraint firstItem="SzH-7B-gou" firstAttribute="top" secondItem="1Y7-tb-MTp" secondAttribute="top" constant="20" id="Ody-Ii-RqB"/>
@@ -346,8 +346,13 @@
                             <constraint firstAttribute="trailing" secondItem="SzH-7B-gou" secondAttribute="trailing" constant="20" id="dmK-hZ-7Y2"/>
                             <constraint firstItem="wGn-sD-iIx" firstAttribute="top" secondItem="SzH-7B-gou" secondAttribute="bottom" constant="10" id="fKO-bM-hcW"/>
                             <constraint firstItem="dRx-1r-h0T" firstAttribute="centerX" secondItem="1Y7-tb-MTp" secondAttribute="centerX" id="jaC-RB-qbS"/>
-                            <constraint firstItem="wGn-sD-iIx" firstAttribute="leading" secondItem="1Y7-tb-MTp" secondAttribute="leading" constant="20" id="oOk-Uh-o1u"/>
+                            <constraint firstItem="wGn-sD-iIx" firstAttribute="leading" secondItem="1Y7-tb-MTp" secondAttribute="leading" constant="40" id="oOk-Uh-o1u"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="60"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <viewLayoutGuide key="safeArea" id="baK-qw-KRE"/>

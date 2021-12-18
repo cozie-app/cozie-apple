@@ -28,13 +28,13 @@
                         <rect key="frame" x="21.5" y="173" width="371" height="550"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Participation Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZ5-eN-clQ">
-                                <rect key="frame" x="20" y="20" width="331" height="30"/>
+                                <rect key="frame" x="40" y="20" width="331" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Days I would like to get notity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOB-T3-X9C">
-                                <rect key="frame" x="20" y="60" width="331" height="20.5"/>
+                                <rect key="frame" x="40" y="60" width="331" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,6 +50,11 @@
                                 <state key="normal" title="SET">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onClickSet:" destination="3PA-3w-cWF" eventType="touchUpInside" id="A1h-rA-ojt"/>
                                 </connections>
@@ -329,12 +334,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TOB-T3-X9C" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="20" id="2vH-td-3sC"/>
-                            <constraint firstAttribute="trailing" secondItem="zZ5-eN-clQ" secondAttribute="trailing" constant="20" id="AaM-Ey-jiI"/>
+                            <constraint firstItem="TOB-T3-X9C" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="40" id="2vH-td-3sC"/>
+                            <constraint firstAttribute="trailing" secondItem="zZ5-eN-clQ" secondAttribute="trailing" id="AaM-Ey-jiI"/>
                             <constraint firstItem="TOB-T3-X9C" firstAttribute="top" secondItem="zZ5-eN-clQ" secondAttribute="bottom" constant="10" id="Eka-JR-8T1"/>
-                            <constraint firstItem="zZ5-eN-clQ" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="20" id="Lbr-J2-7GG"/>
+                            <constraint firstItem="zZ5-eN-clQ" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="40" id="Lbr-J2-7GG"/>
                             <constraint firstItem="HFT-90-BRR" firstAttribute="top" secondItem="hsf-FN-sIs" secondAttribute="bottom" constant="20" id="S8c-le-Eie"/>
-                            <constraint firstAttribute="trailing" secondItem="TOB-T3-X9C" secondAttribute="trailing" constant="20" id="W2l-cB-Mco"/>
+                            <constraint firstAttribute="trailing" secondItem="TOB-T3-X9C" secondAttribute="trailing" id="W2l-cB-Mco"/>
                             <constraint firstAttribute="width" constant="371" id="Yze-0T-yL8"/>
                             <constraint firstItem="hsf-FN-sIs" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="20" id="bpd-VG-EJQ"/>
                             <constraint firstAttribute="height" constant="550" id="hjF-EI-hvR"/>
@@ -343,6 +348,11 @@
                             <constraint firstAttribute="trailing" secondItem="hsf-FN-sIs" secondAttribute="trailing" constant="20" id="whv-23-2aZ"/>
                             <constraint firstItem="hsf-FN-sIs" firstAttribute="top" secondItem="TOB-T3-X9C" secondAttribute="bottom" constant="10" id="yag-Fp-oXl"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="60"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <viewLayoutGuide key="safeArea" id="eNK-Je-ADb"/>

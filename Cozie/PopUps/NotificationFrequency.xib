@@ -25,28 +25,28 @@
                         <blurEffect style="dark"/>
                     </visualEffectView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwj-jI-rjs">
-                        <rect key="frame" x="21.5" y="283" width="371" height="330"/>
+                        <rect key="frame" x="21.5" y="273" width="371" height="350"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Notification Frequeny" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jx3-nO-oS5">
-                                <rect key="frame" x="20" y="20" width="331" height="30"/>
+                                <rect key="frame" x="40" y="20" width="311" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Notify me every..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbU-G9-EsU">
-                                <rect key="frame" x="20" y="60" width="331" height="20.5"/>
+                                <rect key="frame" x="40" y="60" width="311" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngJ-Vb-djm">
-                                <rect key="frame" x="25.5" y="80.5" width="320" height="150"/>
+                                <rect key="frame" x="25.5" y="88.5" width="320" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="am3-oo-x3W"/>
                                 </constraints>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzM-Hr-1GM">
-                                <rect key="frame" x="135.5" y="250.5" width="100" height="40"/>
+                                <rect key="frame" x="135.5" y="258.5" width="100" height="40"/>
                                 <color key="backgroundColor" red="0.26456308690000002" green="0.82780988980000003" blue="0.3957371395" alpha="0.35824352539999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="bmh-6d-QnP"/>
@@ -56,6 +56,11 @@
                                 <state key="normal" title="SET">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onClickSet:" destination="ST6-wg-iP7" eventType="touchUpInside" id="u8j-NF-B1e"/>
                                 </connections>
@@ -63,19 +68,24 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pbU-G9-EsU" firstAttribute="leading" secondItem="cwj-jI-rjs" secondAttribute="leading" constant="20" id="JdF-3I-YDm"/>
+                            <constraint firstItem="pbU-G9-EsU" firstAttribute="leading" secondItem="cwj-jI-rjs" secondAttribute="leading" constant="40" id="JdF-3I-YDm"/>
                             <constraint firstItem="Jx3-nO-oS5" firstAttribute="top" secondItem="cwj-jI-rjs" secondAttribute="top" constant="20" id="K4h-hB-PAT"/>
                             <constraint firstItem="pbU-G9-EsU" firstAttribute="top" secondItem="Jx3-nO-oS5" secondAttribute="bottom" constant="10" id="Rot-P8-iNk"/>
                             <constraint firstAttribute="trailing" secondItem="Jx3-nO-oS5" secondAttribute="trailing" constant="20" id="T0Y-Aw-Hy5"/>
-                            <constraint firstItem="ngJ-Vb-djm" firstAttribute="top" secondItem="pbU-G9-EsU" secondAttribute="bottom" id="TKX-GL-KCm"/>
-                            <constraint firstAttribute="height" constant="330" id="g1j-Ze-ohy"/>
-                            <constraint firstItem="Jx3-nO-oS5" firstAttribute="leading" secondItem="cwj-jI-rjs" secondAttribute="leading" constant="20" id="g29-Oh-Fku"/>
+                            <constraint firstItem="ngJ-Vb-djm" firstAttribute="top" secondItem="pbU-G9-EsU" secondAttribute="bottom" constant="8" id="TKX-GL-KCm"/>
+                            <constraint firstAttribute="height" constant="350" id="g1j-Ze-ohy"/>
+                            <constraint firstItem="Jx3-nO-oS5" firstAttribute="leading" secondItem="cwj-jI-rjs" secondAttribute="leading" constant="40" id="g29-Oh-Fku"/>
                             <constraint firstItem="ngJ-Vb-djm" firstAttribute="centerX" secondItem="cwj-jI-rjs" secondAttribute="centerX" id="gG6-dw-IvM"/>
                             <constraint firstAttribute="trailing" secondItem="pbU-G9-EsU" secondAttribute="trailing" constant="20" id="oms-cu-vUx"/>
                             <constraint firstItem="AzM-Hr-1GM" firstAttribute="centerX" secondItem="cwj-jI-rjs" secondAttribute="centerX" id="q9j-rK-SFb"/>
                             <constraint firstItem="AzM-Hr-1GM" firstAttribute="top" secondItem="ngJ-Vb-djm" secondAttribute="bottom" constant="20" id="v1C-qW-0dO"/>
                             <constraint firstAttribute="width" constant="371" id="wWn-Uj-xsA"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="60"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <viewLayoutGuide key="safeArea" id="sKv-f7-gSw"/>

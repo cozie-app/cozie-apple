@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TimePickerDelegate {
+    func dailyPicker(selected type: NotificationFrequency.TimePickerType)
+}
+
 class DailyParticipation: UIViewController {
 
     @IBOutlet weak var fromView: UIView!
@@ -21,6 +25,7 @@ class DailyParticipation: UIViewController {
         case None
     }
     private var selected = selectedType.None
+    var delegate: TimePickerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +65,8 @@ class DailyParticipation: UIViewController {
     
     @IBAction func onClickSet(_ sender: Any) {
         if selected != .None {
-            NavigationManager.openNotificationFrequency(self, for: self.selected == .To ? .To : .From)
+            delegate?.dailyPicker(selected: self.selected == .To ? .To : .From)
         }
-//        NavigationManager.dismiss(self)
+        NavigationManager.dismiss(self)
     }
 }

@@ -163,7 +163,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SettingsCell
-
+        cell.selectionStyle = .none
         guard let section = SettingsSections(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
@@ -288,4 +288,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+}
+
+extension SettingsViewController: TimePickerDelegate {
+    func dailyPicker(selected type: NotificationFrequency.TimePickerType) {
+        NavigationManager.openNotificationFrequency(self, for: type)
+    }
 }
