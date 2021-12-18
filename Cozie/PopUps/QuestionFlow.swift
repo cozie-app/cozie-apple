@@ -29,10 +29,21 @@ class QuestionFlow: UIViewController {
     @IBOutlet weak var viewPDPMINI: UIView!
     @IBOutlet weak var viewMFMINI: UIView!
     
+    
+    @IBOutlet weak var viewThermalBtn: UIView!
+    @IBOutlet weak var viewIDRPBtn: UIView!
+    @IBOutlet weak var viewPDPBtn: UIView!
+    @IBOutlet weak var viewMFBtn: UIView!
+    @IBOutlet weak var viewThermalMINIBtn: UIView!
+    @IBOutlet weak var viewIDRPMINIBtn: UIView!
+    @IBOutlet weak var viewPDPMINIBtn: UIView!
+    @IBOutlet weak var viewMFMINIBtn: UIView!
+    
     var questions:[Bool] = []
     var buttonArray:[UIButton] = []
     var viewArray:[UIView] = []
-    
+    var viewBtnArray:[UIView] = []
+    var customColor:UIColor?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +55,10 @@ class QuestionFlow: UIViewController {
         
         viewArray = [viewThermal, viewIDRP, viewPDP, viewMF, viewThermalMINI, viewIDRPMINI, viewPDPMINI, viewMFMINI]
         
+        viewBtnArray = [viewThermalBtn, viewIDRPBtn, viewPDPBtn, viewMFBtn, viewThermalMINIBtn, viewIDRPMINIBtn, viewPDPMINIBtn, viewMFMINIBtn]
+        
+        customColor = UIColor(red: 222 / 255.0, green: 222 / 255.0, blue: 222 / 255, alpha: 1)
+        
         self.fillUpdata()
     
         
@@ -52,12 +67,15 @@ class QuestionFlow: UIViewController {
     private func fillUpdata(){
         
         for i in 0...7 {
+            self.buttonArray[i].isSelected = questions[i]
+            self.buttonArray[i].backgroundColor = buttonArray[i].isSelected ? UIColor.lightGray : UIColor.systemBackground
+            self.buttonArray[i].layer.cornerRadius = buttonArray[i].frame.height / 2
             
-            buttonArray[i].isSelected = questions[i]
-            viewArray[i].backgroundColor = buttonArray[i].isSelected ? UIColor.lightGray : UIColor.systemBackground
-            let imgName = buttonArray[i].isSelected ? "green" : "blue"
-            buttonArray[i].setImage(UIImage(named: imgName), for: .normal)
+            self.viewBtnArray[i].layer.cornerRadius = viewBtnArray[i].frame.height / 2
+            self.viewBtnArray[i].layer.borderWidth = 1
+            self.viewBtnArray[i].layer.borderColor = UIColor.lightGray.cgColor
             
+            self.viewArray[i].backgroundColor = buttonArray[i].isSelected ? self.customColor : UIColor.systemBackground
         }
     }
 
@@ -84,7 +102,7 @@ class QuestionFlow: UIViewController {
             functionality(i: 7, view: viewMFMINI, button: sender)
             
         default:
-            return
+            break
         }
         
     }
@@ -93,9 +111,8 @@ class QuestionFlow: UIViewController {
         
         button.isSelected = !button.isSelected
         self.questions[i] = button.isSelected
-        view.backgroundColor = button.isSelected ? UIColor.lightGray : UIColor.systemBackground
-        let imgName = button.isSelected ? "green" : "blue"
-        button.setImage(UIImage(named: imgName), for: .normal)
+        view.backgroundColor = button.isSelected ? self.customColor : UIColor.systemBackground
+        button.backgroundColor = button.isSelected ? UIColor.lightGray : UIColor.systemBackground
         
     }
     
