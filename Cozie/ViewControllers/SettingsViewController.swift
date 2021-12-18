@@ -205,9 +205,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .participantID:
-                NavigationManager.openTextView(self, isParticipantID: true)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: true)
+                }
             case .experimentID:
-                NavigationManager.openTextView(self, isParticipantID: false)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: false)
+                }
             }
         case .GeneralSettings:
             guard let buttonClicked = GeneralSettingOptions(rawValue: indexPath.row) else {
@@ -215,7 +219,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .permissions:
-                NavigationManager.openPermissions(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openPermissions(viewController)
+                }
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -235,13 +241,21 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .questionFlow:
-                NavigationManager.openQuestionFlow(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openQuestionFlow(viewController)
+                }
             case .notificationFrequency:
-                NavigationManager.openNotificationFrequency(self, for: .NotificationFrequency)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openNotificationFrequency(viewController, for: .NotificationFrequency)
+                }
             case .participationDays:
-                NavigationManager.openParticipationDays(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openParticipationDays(viewController)
+                }
             case .dailyParticipationHours:
-                NavigationManager.openDailyParticipation(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openDailyParticipation(viewController)
+                }
             case .downloadData: print("downloadData clicked")
             }
         case .OnboardingProcess:
@@ -298,6 +312,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SettingsViewController: TimePickerDelegate {
     func dailyPicker(selected type: NotificationFrequency.TimePickerType) {
-        NavigationManager.openNotificationFrequency(self, for: type)
+        if let viewController = self.tabBarController {
+            NavigationManager.openNotificationFrequency(viewController, for: type)
+        }
     }
 }
