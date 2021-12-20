@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aNA-9C-xps">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Survey-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,7 +103,7 @@
                             <constraint firstItem="kGz-yd-asa" firstAttribute="leading" secondItem="Uee-0j-aNJ" secondAttribute="leading" constant="10" id="tsH-uZ-DV8"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="u8a-p9-bv0"/>
+                    <tabBarItem key="tabBarItem" title="Survey" image="lasso" catalog="system" selectedImage="lasso" id="u8a-p9-bv0"/>
                     <connections>
                         <outlet property="collectionView" destination="twy-nV-IgS" id="Rg3-2p-Wfa"/>
                     </connections>
@@ -352,6 +353,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="aNA-9C-xps" kind="relationship" relationship="viewControllers" id="OVA-aA-2cT"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Y3Q-VF-4u1"/>
                         <segue destination="N6w-Fx-r8Q" kind="relationship" relationship="viewControllers" id="Ghc-4L-IDl"/>
                     </connections>
@@ -397,7 +399,7 @@
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-151.47783251231527"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Home-->
         <scene sceneID="gRb-rz-YZk">
             <objects>
                 <viewController id="aNA-9C-xps" customClass="HomePageViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
@@ -492,13 +494,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uw7-Li-DL1">
-                                                        <rect key="frame" x="112" y="45.666666666666657" width="111" height="20.333333333333329"/>
+                                                        <rect key="frame" x="112.33333333333334" y="45.666666666666657" width="110.66666666666666" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3q-4V-vGJ">
-                                                        <rect key="frame" x="116.33333333333334" y="66" width="102.66666666666666" height="20.333333333333329"/>
+                                                        <rect key="frame" x="116.33333333333334" y="66" width="102.33333333333334" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -619,7 +621,7 @@
                                                 <rect key="frame" x="20" y="515" width="335" height="50.666666666666629"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participation Days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXI-Ks-Asu">
-                                                        <rect key="frame" x="90.666666666666686" y="5" width="154" height="20.333333333333332"/>
+                                                        <rect key="frame" x="90.666666666666671" y="5" width="153.66666666666663" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -737,6 +739,9 @@
                             <constraint firstItem="17S-f3-amp" firstAttribute="top" secondItem="Y4g-x5-OVK" secondAttribute="top" id="Md3-xf-i8T"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" selectedImage="homekit" catalog="system" id="389-cT-xEr">
+                        <imageReference key="image" image="homekit" catalog="system" symbolScale="small"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="labelIDRP" destination="1Nu-Lr-VZC" id="olf-mt-dmf"/>
                         <outlet property="labelIDRPMINI" destination="FnC-hB-aNf" id="9Ti-Vp-7u0"/>
@@ -760,7 +765,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPu-yy-r69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104.8" y="522.41379310344826"/>
+            <point key="canvasLocation" x="1250" y="219"/>
         </scene>
     </scenes>
     <resources>
@@ -768,7 +773,8 @@
         <image name="blue" width="106" height="106"/>
         <image name="completed" width="240" height="240"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="house" catalog="system" width="128" height="106"/>
+        <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="lasso" catalog="system" width="128" height="118"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
