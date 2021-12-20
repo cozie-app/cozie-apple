@@ -24,8 +24,10 @@ class TextView: UIViewController {
     }
     
     func fillUpData() {
-        switch isParticipantID {
+        switch self.isParticipantID {
         case true:
+            idLabel.text = "Participant ID"
+            msgLabel.text = "Please fill your specified Participant ID"
             idTextField.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? ""
         case false:
             idLabel.text = "Experiment ID"
@@ -38,10 +40,8 @@ class TextView: UIViewController {
     @IBAction func onClickSet(_ sender: Any) {
         if isParticipantID {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: self.idTextField.text!)
-            print("Set Participant ID")
         } else {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: self.idTextField.text!)
-            print("Set Experiment ID")
         }
         NavigationManager.dismiss(self)
     }

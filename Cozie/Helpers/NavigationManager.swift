@@ -33,6 +33,7 @@ final class NavigationManager {
     static func openDailyParticipation(_ sender: UIViewController) {
         let nib = UINib(nibName: "DailyParticipation", bundle: nil)
         let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! DailyParticipation
+        myCustomView.delegate = sender as? TimePickerDelegate
         sender.addChild(myCustomView)
         myCustomView.view.frame = sender.view.bounds
         sender.view.addSubview(myCustomView.view)

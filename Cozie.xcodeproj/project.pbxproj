@@ -37,6 +37,8 @@
 		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
 		69CBBDD0277094F6000D1C2B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDCD277094E8000D1C2B /* ResearchKit.framework */; };
 		69CBBDD1277094F6000D1C2B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDCD277094E8000D1C2B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
+		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -205,6 +207,8 @@
 		29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationFrequency.xib; sourceTree = "<group>"; };
 		29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyParticipation.swift; sourceTree = "<group>"; };
 		29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyParticipation.xib; sourceTree = "<group>"; };
+		29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
+		29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataStore.swift; sourceTree = "<group>"; };
 		36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,12 +331,12 @@
 		0444BB12276B567D00D7F0E9 /* PopUps */ = {
 			isa = PBXGroup;
 			children = (
-				0444BB13276B56D700D7F0E9 /* Permissions.xib */,
-				0444BB15276B6AD800D7F0E9 /* TextView.xib */,
-				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
 				046BD755276C6C860011A883 /* Permissions.swift */,
+				0444BB13276B56D700D7F0E9 /* Permissions.xib */,
 				046BD75A276C6D5C0011A883 /* TextView.swift */,
+				0444BB15276B6AD800D7F0E9 /* TextView.xib */,
 				046BD75C276C6D8E0011A883 /* QuestionFlow.swift */,
+				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
 				29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */,
 				29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */,
 				29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */,
@@ -362,6 +366,24 @@
 				E42F7C1124BEF32400FAE422 /* login-video.mov */,
 			);
 			path = Media;
+			sourceTree = "<group>";
+		};
+		29CCF166276AF95A00AA3E32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */,
+				29CCF16E276AF95B00AA3E32 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29E7F943276DEDF2008B0E8D /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */,
+				29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */,
+			);
+			path = Health;
 			sourceTree = "<group>";
 		};
 		2F9E67614CD4ACF113607CBD /* Pods */ = {
@@ -417,6 +439,7 @@
 		E469469924BC54AF0013134B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				29E7F943276DEDF2008B0E8D /* Health */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
 				1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */,
@@ -985,6 +1008,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */,
+				29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */,
 				E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
@@ -993,6 +1017,7 @@
 				29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
 				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
+				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
 				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,

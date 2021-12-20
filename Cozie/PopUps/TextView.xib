@@ -77,6 +77,11 @@
                             <constraint firstItem="8fG-3k-EbV" firstAttribute="centerX" secondItem="pqg-5b-T5R" secondAttribute="centerX" id="xge-Af-ILj"/>
                             <constraint firstItem="Y5Q-eY-YSX" firstAttribute="top" secondItem="rha-ck-ybl" secondAttribute="bottom" constant="45" id="ybK-Mz-8jU"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="60"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <viewLayoutGuide key="safeArea" id="Bwq-K3-gzZ"/>

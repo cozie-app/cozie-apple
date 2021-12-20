@@ -50,9 +50,9 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     private func configureTableView() {
 
         self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        if #available(iOS 15.0, *) {
-            self.settingsTableView.sectionHeaderTopPadding = 0
-        }
+//        if #available(iOS 15.0, *) {
+//            self.settingsTableView.sectionHeaderTopPadding = 0
+//        }
         
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
         userInfoHeader = UserInfoHeader(frame: frame)
@@ -163,7 +163,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SettingsCell
-
+        cell.selectionStyle = .none
         guard let section = SettingsSections(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
@@ -205,9 +205,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .participantID:
-                NavigationManager.openTextView(self, isParticipantID: true)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: true)
+                }
             case .experimentID:
-                NavigationManager.openTextView(self, isParticipantID: false)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: false)
+                }
             }
         case .GeneralSettings:
             guard let buttonClicked = GeneralSettingOptions(rawValue: indexPath.row) else {
@@ -215,7 +219,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .permissions:
-                NavigationManager.openPermissions(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openPermissions(viewController)
+                }
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -235,13 +241,21 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .questionFlow:
-                NavigationManager.openQuestionFlow(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openQuestionFlow(viewController)
+                }
             case .notificationFrequency:
-                NavigationManager.openNotificationFrequency(self, for: .NotificationFrequency)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openNotificationFrequency(viewController, for: .NotificationFrequency)
+                }
             case .participationDays:
-                NavigationManager.openParticipationDays(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openParticipationDays(viewController)
+                }
             case .dailyParticipationHours:
-                NavigationManager.openDailyParticipation(self)
+                if let viewController = self.tabBarController {
+                    NavigationManager.openDailyParticipation(viewController)
+                }
             case .downloadData: print("downloadData clicked")
             }
         case .OnboardingProcess:
@@ -259,8 +273,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .cozie: print("cozie clicked")
-            case .budsLab: print("budsLab clicked")
+            case .cozie:
+                let url = URL(string: "https://cozie.app")!
+                let alert = Utilities.alert(url: url, title: "Cozie")
+                present(alert, animated: true, completion: nil)
+            case .budsLab:
+                let url = URL(string: "https://www.budslab.org")!
+                let alert = Utilities.alert(url: url, title: "BUDS Lab")
+                present(alert, animated: true, completion: nil)
             }
         }
 
@@ -288,4 +308,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+}
+
+extension SettingsViewController: TimePickerDelegate {
+    func dailyPicker(selected type: NotificationFrequency.TimePickerType) {
+        if let viewController = self.tabBarController {
+            NavigationManager.openNotificationFrequency(viewController, for: type)
+        }
+    }
 }
