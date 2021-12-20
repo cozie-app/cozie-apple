@@ -13,6 +13,7 @@
 		046BD756276C6C860011A883 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD755276C6C860011A883 /* Permissions.swift */; };
 		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
 		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
+		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
 		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
@@ -183,6 +184,7 @@
 		046BD755276C6C860011A883 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
+		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				E469469424BC4CF20013134B /* LoginViewController.swift */,
 				E469469624BC4D090013134B /* StartViewController.swift */,
 				E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */,
+				04B14C94277045C800A4B989 /* HomePageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
 				29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
+				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
 				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
