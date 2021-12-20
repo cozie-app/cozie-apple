@@ -38,6 +38,8 @@
 		29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */; };
 		29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */; };
 		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
+		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
+		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -208,6 +210,8 @@
 		29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationFrequency.xib; sourceTree = "<group>"; };
 		29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyParticipation.swift; sourceTree = "<group>"; };
 		29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyParticipation.xib; sourceTree = "<group>"; };
+		29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
+		29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataStore.swift; sourceTree = "<group>"; };
 		36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -375,6 +379,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		29E7F943276DEDF2008B0E8D /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */,
+				29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */,
+			);
+			path = Health;
+			sourceTree = "<group>";
+		};
 		2F9E67614CD4ACF113607CBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +433,7 @@
 		E469469924BC54AF0013134B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				29E7F943276DEDF2008B0E8D /* Health */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
 				1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */,
@@ -988,6 +1002,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */,
+				29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */,
 				E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
@@ -997,6 +1012,7 @@
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
 				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
 				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
+				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
 				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,
