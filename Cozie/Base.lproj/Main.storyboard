@@ -354,6 +354,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Y3Q-VF-4u1"/>
                         <segue destination="N6w-Fx-r8Q" kind="relationship" relationship="viewControllers" id="Ghc-4L-IDl"/>
+                        <segue destination="md6-gd-GcL" kind="relationship" relationship="viewControllers" id="xZ6-eu-a4c"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5k1-CL-pgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -397,7 +398,7 @@
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-151.47783251231527"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Item-->
         <scene sceneID="F1z-QM-vZG">
             <objects>
                 <viewController id="md6-gd-GcL" customClass="HomePageViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
@@ -406,7 +407,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gw-Ta-QYM">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fc5-eM-Ln8" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="720"/>
@@ -749,6 +750,7 @@
                             <constraint firstItem="9Gw-Ta-QYM" firstAttribute="top" secondItem="Wvj-3m-BEa" secondAttribute="top" id="g5m-T9-iyk"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="98Z-xN-YM7"/>
                     <connections>
                         <outlet property="labelIDRP" destination="zvF-EQ-Lan" id="aci-rX-BbK"/>
                         <outlet property="labelIDRPMINI" destination="Gww-jH-AxJ" id="W1Q-5X-uZQ"/>
@@ -773,7 +775,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72K-co-3L9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1311" y="712"/>
+            <point key="canvasLocation" x="1199" y="293"/>
         </scene>
     </scenes>
     <resources>
