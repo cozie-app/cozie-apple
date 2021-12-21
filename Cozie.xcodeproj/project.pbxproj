@@ -35,8 +35,6 @@
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		29B824A0276CA5AA00BB002D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B8249F276CA5AA00BB002D /* Extension.swift */; };
 		29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B824A4276CBAD600BB002D /* NavigationManager.swift */; };
-		29CCF16F276AF97600AA3E32 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */; };
-		29CCF170276AF97600AA3E32 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF171276B10D700AA3E32 /* UserDefaults.swift */; };
 		29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */; };
 		29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */; };
@@ -44,6 +42,8 @@
 		29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */; };
 		29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */; };
 		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
+		69CBBDD0277094F6000D1C2B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDCD277094E8000D1C2B /* ResearchKit.framework */; };
+		69CBBDD1277094F6000D1C2B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDCD277094E8000D1C2B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
@@ -86,16 +86,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		29CCF16B276AF95B00AA3E32 /* PBXContainerItemProxy */ = {
+		69CBBDCC277094E8000D1C2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 29CCF165276AF95A00AA3E32 /* ResearchKit.xcodeproj */;
+			containerPortal = 69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = ResearchKit;
 		};
-		29CCF16D276AF95B00AA3E32 /* PBXContainerItemProxy */ = {
+		69CBBDCE277094E8000D1C2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 29CCF165276AF95A00AA3E32 /* ResearchKit.xcodeproj */;
+			containerPortal = 69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
 			remoteInfo = ResearchKitTests;
@@ -166,7 +166,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				29CCF170276AF97600AA3E32 /* ResearchKit.framework in Embed Frameworks */,
+				69CBBDD1277094F6000D1C2B /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,7 +214,6 @@
 		24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		29B8249F276CA5AA00BB002D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		29B824A4276CBAD600BB002D /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
-		29CCF165276AF95A00AA3E32 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		29CCF171276B10D700AA3E32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationDays.swift; sourceTree = "<group>"; };
 		29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipationDays.xib; sourceTree = "<group>"; };
@@ -232,6 +231,7 @@
 		5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
 		5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,7 +302,7 @@
 			files = (
 				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
 				6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */,
-				29CCF16F276AF97600AA3E32 /* ResearchKit.framework in Frameworks */,
+				69CBBDD0277094F6000D1C2B /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +425,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		69CBBDC7277094E7000D1C2B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69CBBDCD277094E8000D1C2B /* ResearchKit.framework */,
+				69CBBDCF277094E8000D1C2B /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E43CAA8024C80F1600461DD1 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,7 +475,7 @@
 		E483823B247BA33A002C3708 = {
 			isa = PBXGroup;
 			children = (
-				29CCF165276AF95A00AA3E32 /* ResearchKit.xcodeproj */,
+				69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */,
 				E4838246247BA33A002C3708 /* Cozie */,
 				E483825D247BA33B002C3708 /* CozieTests */,
 				E4838268247BA33B002C3708 /* CozieUITests */,
@@ -752,8 +761,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 29CCF166276AF95A00AA3E32 /* Products */;
-					ProjectRef = 29CCF165276AF95A00AA3E32 /* ResearchKit.xcodeproj */;
+					ProductGroup = 69CBBDC7277094E7000D1C2B /* Products */;
+					ProjectRef = 69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -769,18 +778,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */ = {
+		69CBBDCD277094E8000D1C2B /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 29CCF16B276AF95B00AA3E32 /* PBXContainerItemProxy */;
+			remoteRef = 69CBBDCC277094E8000D1C2B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		29CCF16E276AF95B00AA3E32 /* ResearchKitTests.xctest */ = {
+		69CBBDCF277094E8000D1C2B /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 29CCF16D276AF95B00AA3E32 /* PBXContainerItemProxy */;
+			remoteRef = 69CBBDCE277094E8000D1C2B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1332,6 +1341,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1342,6 +1352,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1364,6 +1375,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1374,6 +1386,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1394,6 +1407,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1401,6 +1415,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1417,6 +1432,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1424,6 +1440,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
