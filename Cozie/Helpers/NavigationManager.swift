@@ -30,6 +30,15 @@ final class NavigationManager {
         myCustomView.didMove(toParent: sender)
     }
     
+    static func openWeeklySurvey(_ sender: UIViewController){
+        let nib = UINib(nibName: "WeeklySurvey", bundle: nil)
+        let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! WeeklySurvey
+        sender.addChild(myCustomView)
+        myCustomView.view.frame = sender.view.bounds
+        sender.view.addSubview(myCustomView.view)
+        myCustomView.didMove(toParent: sender)
+    }
+    
     static func openDailyParticipation(_ sender: UIViewController) {
         let nib = UINib(nibName: "DailyParticipation", bundle: nil)
         let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! DailyParticipation

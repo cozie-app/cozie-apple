@@ -16,7 +16,6 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var viewParticipationDays: UIView!
     @IBOutlet weak var viewParticipationHours: UIView!
     @IBOutlet weak var viewQuestionnairs: UIView!
-    @IBOutlet weak var questionStack: UIStackView!
     
     @IBOutlet weak var labelThermal: UILabel!
     @IBOutlet weak var labelIDRP: UILabel!
@@ -32,6 +31,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var labelNotificationFreq: UILabel!
     @IBOutlet weak var labelParticipationDays: UILabel!
     @IBOutlet weak var labelParticipationHours: UILabel!
+    @IBOutlet weak var viewSurvey: UIView!
     
     var questionFlag:[Bool] = []
     var labelArray:[UILabel] = []
@@ -39,6 +39,7 @@ class HomePageViewController: UIViewController {
     var days:String = ""
     var fromTime:String = ""
     var ToTime:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,8 +58,17 @@ class HomePageViewController: UIViewController {
         viewQuestionnairs.layer.borderColor = UIColor.lightGray.cgColor
         viewQuestionnairs.layer.borderWidth = 1
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClickSurveyView(_:)))
+        viewSurvey.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.fillUpData()
-        
+    }
+    
+    @objc func onClickSurveyView(_: UITapGestureRecognizer){
+        NavigationManager.openWeeklySurvey(self)
     }
     
     private func fillUpData(){
@@ -75,7 +85,7 @@ class HomePageViewController: UIViewController {
         for i in 0...7{
             switch questionFlag[i] {
             case true:
-                self.labelArray[i].text = "\(count). " + self.labelArray[i].text!
+                self.labelArray[i].text = "\(count). " + (self.labelArray[i].text?.components(separatedBy: ".").last ?? "")
                 self.labelArray[i].isHidden = false
                 count += 1
             case false:
@@ -84,26 +94,23 @@ class HomePageViewController: UIViewController {
         }
         
         self.daysFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,true,true]
+        self.days = ""
         
         for i in 0...6{
-            
-            if daysFlag[i]{
-                days += ", "
-            }
             switch i {
-            case 0:   days += daysFlag[i] ? "Mon" : ""
-            case 1:   days += daysFlag[i] ? "Tue" : ""
-            case 2:   days += daysFlag[i] ? "Wed" : ""
-            case 3:   days += daysFlag[i] ? "Thu" : ""
-            case 4:   days += daysFlag[i] ? "Fri" : ""
-            case 5:   days += daysFlag[i] ? "Sat" : ""
-            case 6:   days += daysFlag[i] ? "Sun" : ""
+            case 0:   days += daysFlag[i] ? "Mon, " : ""
+            case 1:   days += daysFlag[i] ? "Tue, " : ""
+            case 2:   days += daysFlag[i] ? "Wed, " : ""
+            case 3:   days += daysFlag[i] ? "Thu, " : ""
+            case 4:   days += daysFlag[i] ? "Fri, " : ""
+            case 5:   days += daysFlag[i] ? "Sat, " : ""
+            case 6:   days += daysFlag[i] ? "Sun, " : ""
             default:
                 break
             }
         }
         
-        self.labelParticipationDays.text = days
+        self.labelParticipationDays.text = String(days.dropLast(2))
         
         self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? Date()).get24FormateTimeString() + "hrs"
         self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? Date()).get24FormateTimeString() + "hrs"
