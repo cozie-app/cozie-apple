@@ -310,10 +310,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-extension SettingsViewController: TimePickerDelegate {
+extension UITabBarController: TimePickerDelegate {
     func dailyPicker(selected type: NotificationFrequency.TimePickerType) {
-        if let viewController = self.tabBarController {
-            NavigationManager.openNotificationFrequency(viewController, for: type)
-        }
+        NavigationManager.openNotificationFrequency(self, for: type)
     }
 }
