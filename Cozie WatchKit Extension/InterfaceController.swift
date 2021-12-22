@@ -238,42 +238,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     private func defineQuestions() {
-
-        // Last question MUST have nextQuestion set to 999, the first question is question 0
-        questions += [
-            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
-                    icons: ["tp-cooler", "comfortable", "tp-warmer"], nextQuestion: [1, 1, 1], identifier: "tc-preference"),
-            Question(title: "Where are you?", options: ["Home", "Office", "Vehicle", "Other"], icons: ["loc-home", "loc-office", "loc-vehicle", "loc-other"],
-                    nextQuestion: [2, 2, 2, 2], identifier: "location-place"),
-//            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["loc-indoor", "loc-outdoor"],
-//                    nextQuestion: [3, 3], identifier: "location-in-out"),
-//            Question(title: "What clothes are you wearing?", options: ["Very light", "Light", "Medium", "Heavy"],
-//                    icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [4, 4, 4, 4],
-//                    identifier: "clo"),
-//            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Sitting", "Standing", "Exercising"],
-//                    icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercising"], nextQuestion: [5, 5, 5, 5],
-//                    identifier: "met"),
-//            Question(title: "Can you perceive air movement?", options: ["Yes", "No"],
-//                    icons: ["yes", "no"], nextQuestion: [6, 6], identifier: "air-speed"),
-//            Question(title: "Should the light be?", options: ["Dimmer", "No change", "Brighter"],
-//                    icons: ["light-dim", "light-comf", "light-bright"], nextQuestion: [7, 7, 7], identifier: "light"),
-//            Question(title: "Any changes in the last 10-min?",
-//                    options: ["Yes", "No"], icons: ["yes", "no"], nextQuestion: [8, 8], identifier: "any-change"),
-//            Question(title: "The air is ...", options: ["Stuffy", "Fresh"],
-//                    icons: ["air-quality-smelly", "air-quality-fresh"], nextQuestion: [9, 9],
-//                    identifier: "air-quality"),
-//            Question(title: "Do you feel ... ?", options: ["Sleepy", "Alert"],
-//                    icons: ["alertness-sleepy", "alertness-alert"], nextQuestion: [10, 10],
-//                    identifier: "alertness"),
-//            Question(title: "The space is ...", options: ["Too Quiet", "Comfortable", "Too noisy"],
-//                    icons: ["noise-quiet", "noise-no-change", "noise-noisy"], nextQuestion: [11, 11, 11],
-//                    identifier: "noise"),
-//            Question(title: "Should the air movement be?", options: ["Less", "No Change", "More"],
-//                    icons: ["air-mov-less", "air-mov-no-change", "air-mov-more"], nextQuestion: [12, 12, 12],
-//                    identifier: "air-movement"),
-            Question(title: "Thank you!!!", options: ["Submit survey"],
-                    icons: ["submit"], nextQuestion: [999], identifier: "end"),
-        ]
+        // TODO: get types from userDefaults (make it shared btn mobile and watch) or through same login
+        self.addQuestions(ofType: [.Thermal, .IDRP])
     }
 
     private func SendDataDatabase(answer: Answer) {
@@ -362,4 +328,96 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         loadTableData(question: &questions[currentQuestion], backPressed: false)
     }
 
+}
+
+extension InterfaceController {
+    enum QuestionFlow {
+        case Thermal
+        case IDRP
+        case PDP
+        case MF
+        case ThermalMini
+        case IDRPMini
+        case PDPMini
+        case MFMini
+    }
+    
+    private func addQuestions(ofType flows: [QuestionFlow]) {
+        flows.forEach { flow in
+            switch flow {
+            case .Thermal: self.thermalQuestion()
+            case .IDRP: self.IDRPQuestion()
+            case .PDP: self.PDPQuestion()
+            case .MF: self.MFQuestion()
+            case .ThermalMini: self.thermalMiniQuestion()
+            case .IDRPMini: self.IDRPMiniQuestion()
+            case .PDPMini: self.PDPMiniQuestion()
+            case .MFMini: self.MFMiniQuestion()
+            }
+        }
+        self.lastQuestion()
+    }
+    
+    private func thermalQuestion() {
+        let index = self.questions.count
+        self.questions += [
+            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
+                    icons: ["tp-cooler", "comfortable", "tp-warmer"], nextQuestion: [index + 1,index +  1,index +  1], identifier: "tc-preference"),
+            Question(title: "Where are you?", options: ["Home", "Office", "Vehicle", "Other"], icons: ["loc-home", "loc-office", "loc-vehicle", "loc-other"],
+                    nextQuestion: [index + 2,index +  2,index +  2,index +  2], identifier: "location-place"),
+            Question(title: "What clothes are you wearing?", options: ["Very light", "Light", "Medium", "Heavy"],
+                     icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [index + 3, index + 3,index + 3,index + 3], identifier: "clo")]
+    }
+    
+    private func IDRPQuestion() {
+        let index = self.questions.count
+        self.questions += [
+            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["loc-indoor", "loc-outdoor"],
+                     nextQuestion: [index + 1, index + 1], identifier: "location-in-out"),
+            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Sitting", "Standing", "Exercising"],
+                     icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercising"], nextQuestion: [index + 2, index + 2, index + 2, index + 2],
+                     identifier: "met"),
+            Question(title: "Can you perceive air movement?", options: ["Yes", "No"],
+                     icons: ["yes", "no"], nextQuestion: [index + 3, index + 3], identifier: "air-speed"),
+            Question(title: "Should the light be?", options: ["Dimmer", "No change", "Brighter"],
+                     icons: ["light-dim", "light-comf", "light-bright"], nextQuestion: [index + 4, index + 4, index + 4], identifier: "light"),
+            Question(title: "Any changes in the last 10-min?",
+                     options: ["Yes", "No"], icons: ["yes", "no"], nextQuestion: [index + 5, index + 5], identifier: "any-change"),
+            Question(title: "The air is ...", options: ["Stuffy", "Fresh"],
+                     icons: ["air-quality-smelly", "air-quality-fresh"], nextQuestion: [index + 6, index + 6],
+                     identifier: "air-quality"),
+            Question(title: "Do you feel ... ?", options: ["Sleepy", "Alert"],
+                     icons: ["alertness-sleepy", "alertness-alert"], nextQuestion: [index + 7, index + 7],
+                     identifier: "alertness"),
+            Question(title: "The space is ...", options: ["Too Quiet", "Comfortable", "Too noisy"],
+                     icons: ["noise-quiet", "noise-no-change", "noise-noisy"], nextQuestion: [index + 8, index + 8, index + 8],
+                     identifier: "noise"),
+            Question(title: "Should the air movement be?", options: ["Less", "No Change", "More"],
+                     icons: ["air-mov-less", "air-mov-no-change", "air-mov-more"], nextQuestion: [index + 9, index + 9, index + 9],
+                     identifier: "air-movement")]
+    }
+    
+    private func PDPQuestion() {
+    }
+    
+    private func MFQuestion() {
+    }
+    
+    private func thermalMiniQuestion() {
+    }
+    
+    private func IDRPMiniQuestion() {
+    }
+    
+    private func PDPMiniQuestion() {
+    }
+    
+    private func MFMiniQuestion() {
+    }
+    
+    private func lastQuestion() {
+        // Last question MUST have nextQuestion set to 999, the first question is question 0
+        self.questions += [Question(title: "Thank you!!!", options: ["Submit survey"],
+                                   icons: ["submit"], nextQuestion: [999], identifier: "end")]
+    }
 }

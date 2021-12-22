@@ -67,8 +67,10 @@ class HomePageViewController: UIViewController {
         self.fillUpData()
     }
     
-    @objc func onClickSurveyView(_: UITapGestureRecognizer){
-        NavigationManager.openWeeklySurvey(self)
+    @objc private func onClickSurveyView(_: UITapGestureRecognizer){
+        if let viewController = self.tabBarController {
+            NavigationManager.openWeeklySurvey(viewController)
+        }
     }
     
     private func fillUpData(){
