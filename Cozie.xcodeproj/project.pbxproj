@@ -9,10 +9,17 @@
 /* Begin PBXBuildFile section */
 		0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444BB13276B56D700D7F0E9 /* Permissions.xib */; };
 		0444BB16276B6AD800D7F0E9 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444BB15276B6AD800D7F0E9 /* TextView.xib */; };
+		0465B60E27718F720062228C /* WeeklySurvey.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0465B60D27718F720062228C /* WeeklySurvey.xib */; };
+		0465B61427719A910062228C /* WeeklySurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465B61227719A910062228C /* WeeklySurvey.swift */; };
+		0465B61A27719E990062228C /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465B61827719E990062228C /* QuestionCell.swift */; };
+		0465B61B27719E990062228C /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0465B61927719E990062228C /* QuestionCell.xib */; };
+		0465B628277216480062228C /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465B626277216480062228C /* Reminder.swift */; };
+		0465B629277216480062228C /* Reminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0465B627277216480062228C /* Reminder.xib */; };
 		046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD749276C46BD0011A883 /* QuestionFlow.xib */; };
 		046BD756276C6C860011A883 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD755276C6C860011A883 /* Permissions.swift */; };
 		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
 		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
+		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
 		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
@@ -35,10 +42,10 @@
 		29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */; };
 		29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */; };
 		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
-		69CBBDD0277094F6000D1C2B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDCD277094E8000D1C2B /* ResearchKit.framework */; };
-		69CBBDD1277094F6000D1C2B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDCD277094E8000D1C2B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
+		69CBBDE32770EFDD000D1C2B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDE02770EF80000D1C2B /* ResearchKit.framework */; };
+		69CBBDE42770EFDD000D1C2B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDE02770EF80000D1C2B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -79,16 +86,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		69CBBDCC277094E8000D1C2B /* PBXContainerItemProxy */ = {
+		69CBBDDF2770EF80000D1C2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */;
+			containerPortal = 69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = ResearchKit;
 		};
-		69CBBDCE277094E8000D1C2B /* PBXContainerItemProxy */ = {
+		69CBBDE12770EF80000D1C2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */;
+			containerPortal = 69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
 			remoteInfo = ResearchKitTests;
@@ -159,7 +166,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				69CBBDD1277094F6000D1C2B /* ResearchKit.framework in Embed Frameworks */,
+				69CBBDE42770EFDD000D1C2B /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,10 +188,17 @@
 		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		0444BB13276B56D700D7F0E9 /* Permissions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Permissions.xib; sourceTree = "<group>"; };
 		0444BB15276B6AD800D7F0E9 /* TextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		0465B60D27718F720062228C /* WeeklySurvey.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeeklySurvey.xib; sourceTree = "<group>"; };
+		0465B61227719A910062228C /* WeeklySurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySurvey.swift; sourceTree = "<group>"; };
+		0465B61827719E990062228C /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		0465B61927719E990062228C /* QuestionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
+		0465B626277216480062228C /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		0465B627277216480062228C /* Reminder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Reminder.xib; sourceTree = "<group>"; };
 		046BD749276C46BD0011A883 /* QuestionFlow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionFlow.xib; sourceTree = "<group>"; };
 		046BD755276C6C860011A883 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
+		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
@@ -217,7 +231,7 @@
 		5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
 		5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,7 +302,7 @@
 			files = (
 				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
 				6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */,
-				69CBBDD0277094F6000D1C2B /* ResearchKit.framework in Frameworks */,
+				69CBBDE32770EFDD000D1C2B /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +357,12 @@
 				29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */,
 				29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */,
 				29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */,
+				0465B60D27718F720062228C /* WeeklySurvey.xib */,
+				0465B61227719A910062228C /* WeeklySurvey.swift */,
+				0465B626277216480062228C /* Reminder.swift */,
+				0465B627277216480062228C /* Reminder.xib */,
+				0465B61827719E990062228C /* QuestionCell.swift */,
+				0465B61927719E990062228C /* QuestionCell.xib */,
 			);
 			path = PopUps;
 			sourceTree = "<group>";
@@ -366,15 +386,6 @@
 				E42F7C1124BEF32400FAE422 /* login-video.mov */,
 			);
 			path = Media;
-			sourceTree = "<group>";
-		};
-		29CCF166276AF95A00AA3E32 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				29CCF16C276AF95B00AA3E32 /* ResearchKit.framework */,
-				29CCF16E276AF95B00AA3E32 /* ResearchKitTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		29E7F943276DEDF2008B0E8D /* Health */ = {
@@ -405,11 +416,11 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		69CBBDC7277094E7000D1C2B /* Products */ = {
+		69CBBDDA2770EF80000D1C2B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				69CBBDCD277094E8000D1C2B /* ResearchKit.framework */,
-				69CBBDCF277094E8000D1C2B /* ResearchKitTests.xctest */,
+				69CBBDE02770EF80000D1C2B /* ResearchKit.framework */,
+				69CBBDE22770EF80000D1C2B /* ResearchKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -432,6 +443,7 @@
 				E469469424BC4CF20013134B /* LoginViewController.swift */,
 				E469469624BC4D090013134B /* StartViewController.swift */,
 				E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */,
+				04B14C94277045C800A4B989 /* HomePageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -454,7 +466,7 @@
 		E483823B247BA33A002C3708 = {
 			isa = PBXGroup;
 			children = (
-				69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */,
+				69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */,
 				E4838246247BA33A002C3708 /* Cozie */,
 				E483825D247BA33B002C3708 /* CozieTests */,
 				E4838268247BA33B002C3708 /* CozieUITests */,
@@ -740,8 +752,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 69CBBDC7277094E7000D1C2B /* Products */;
-					ProjectRef = 69CBBDC6277094E7000D1C2B /* ResearchKit.xcodeproj */;
+					ProductGroup = 69CBBDDA2770EF80000D1C2B /* Products */;
+					ProjectRef = 69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -757,18 +769,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		69CBBDCD277094E8000D1C2B /* ResearchKit.framework */ = {
+		69CBBDE02770EF80000D1C2B /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 69CBBDCC277094E8000D1C2B /* PBXContainerItemProxy */;
+			remoteRef = 69CBBDDF2770EF80000D1C2B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		69CBBDCF277094E8000D1C2B /* ResearchKitTests.xctest */ = {
+		69CBBDE22770EF80000D1C2B /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 69CBBDCE277094E8000D1C2B /* PBXContainerItemProxy */;
+			remoteRef = 69CBBDE12770EF80000D1C2B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -779,7 +791,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				0465B61B27719E990062228C /* QuestionCell.xib in Resources */,
 				046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */,
+				0465B60E27718F720062228C /* WeeklySurvey.xib in Resources */,
 				E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */,
 				29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */,
 				0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */,
@@ -787,6 +801,7 @@
 				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
 				0444BB16276B6AD800D7F0E9 /* TextView.xib in Resources */,
 				29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */,
+				0465B629277216480062228C /* Reminder.xib in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
 				29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */,
 				1C4913AD630B92A241DE121E /* CNAME in Resources */,
@@ -1014,8 +1029,10 @@
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
 				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
+				0465B61A27719E990062228C /* QuestionCell.swift in Sources */,
 				29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
+				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
 				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
 				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
@@ -1024,6 +1041,7 @@
 				E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */,
 				29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */,
 				1C4911169339110949F69150 /* TaskEligibility.swift in Sources */,
+				0465B61427719A910062228C /* WeeklySurvey.swift in Sources */,
 				1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */,
 				E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */,
 				E43CAA8524C80F5500461DD1 /* UserInfoHeader.swift in Sources */,
@@ -1033,6 +1051,7 @@
 				E469469524BC4CF20013134B /* LoginViewController.swift in Sources */,
 				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
 				1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */,
+				0465B628277216480062228C /* Reminder.swift in Sources */,
 				29B824A0276CA5AA00BB002D /* Extension.swift in Sources */,
 				046BD75B276C6D5C0011A883 /* TextView.swift in Sources */,
 				046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */,
@@ -1258,7 +1277,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1266,7 +1285,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1284,7 +1303,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1292,7 +1311,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1312,7 +1331,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1322,7 +1341,7 @@
 					"@loader_path/../Frameworks",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1344,7 +1363,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1354,7 +1373,7 @@
 					"@loader_path/../Frameworks",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1374,14 +1393,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1397,14 +1416,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1506,7 +1525,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1514,7 +1533,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1529,7 +1548,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1537,7 +1556,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
