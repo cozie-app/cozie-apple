@@ -18,7 +18,7 @@ class Reminder: UIViewController {
     @IBOutlet weak var labelConsent: UILabel!
     @IBOutlet weak var labelSurvey: UILabel!
     @IBOutlet weak var labelOnBording: UILabel!
-    var reminder:[Bool] = [true,false,false,false]
+    var reminder:[Bool] = [false,false,false,false]
     var images:[UIImageView] = []
     var labels:[UILabel] = []
     override func viewDidLoad() {

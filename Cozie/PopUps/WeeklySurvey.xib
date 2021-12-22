@@ -77,7 +77,7 @@
                     </view>
                 </subviews>
                 <viewLayoutGuide key="safeArea" id="4Tg-Ge-AGr"/>
-                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="yOB-B4-zXF" firstAttribute="centerX" secondItem="N6d-tE-1fW" secondAttribute="centerX" id="6t6-iI-734"/>
                     <constraint firstItem="coq-Tt-wSc" firstAttribute="top" secondItem="N6d-tE-1fW" secondAttribute="top" id="Dez-Tk-gEL"/>

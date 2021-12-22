@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iBM-id-FCK">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -398,6 +398,66 @@
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-151.47783251231527"/>
         </scene>
+        <!--Data View Controller-->
+        <scene sceneID="RNv-LR-ByF">
+            <objects>
+                <viewController id="iBM-id-FCK" customClass="DataViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dtB-rY-Sgu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" My Data:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n86-3j-znN">
+                                <rect key="frame" x="-12" y="64" width="130" height="40"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="7fz-YV-UkD"/>
+                                    <constraint firstAttribute="height" constant="40" id="gPW-ks-PIw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are You?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAD-N0-8nl">
+                                <rect key="frame" x="150.33333333333334" y="114" width="74.333333333333343" height="21.666666666666657"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMH-JK-fw6">
+                                <rect key="frame" x="10" y="145.66666666666666" width="355" height="179.99999999999997"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="80V-rD-ELZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="B21-E6-XIe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B21-E6-XIe" firstAttribute="trailing" secondItem="vMH-JK-fw6" secondAttribute="trailing" constant="10" id="B8J-Uo-hgU"/>
+                            <constraint firstItem="PAD-N0-8nl" firstAttribute="centerX" secondItem="dtB-rY-Sgu" secondAttribute="centerX" id="Eyz-Hq-rHV"/>
+                            <constraint firstItem="vMH-JK-fw6" firstAttribute="leading" secondItem="B21-E6-XIe" secondAttribute="leading" constant="10" id="MP3-XA-MhY"/>
+                            <constraint firstItem="n86-3j-znN" firstAttribute="leading" secondItem="dtB-rY-Sgu" secondAttribute="leading" constant="-12" id="Mcd-Tu-bZm"/>
+                            <constraint firstItem="n86-3j-znN" firstAttribute="top" secondItem="B21-E6-XIe" secondAttribute="top" constant="20" id="Ua1-QX-UYE"/>
+                            <constraint firstItem="B21-E6-XIe" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="n86-3j-znN" secondAttribute="trailing" id="Us5-hz-Wae"/>
+                            <constraint firstItem="PAD-N0-8nl" firstAttribute="top" secondItem="n86-3j-znN" secondAttribute="bottom" constant="10" id="c6g-bC-VyG"/>
+                            <constraint firstItem="vMH-JK-fw6" firstAttribute="top" secondItem="PAD-N0-8nl" secondAttribute="bottom" constant="10" id="jVh-4e-vdY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="graphView" destination="vMH-JK-fw6" id="oxy-qE-dUx"/>
+                        <outlet property="labelData" destination="n86-3j-znN" id="fvh-R4-23k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAr-HI-NSX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1050.4000000000001" y="241.62561576354682"/>
+        </scene>
         <!--Home-->
         <scene sceneID="F1z-QM-vZG">
             <objects>
@@ -493,13 +553,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4b-9d-QO8">
-                                                        <rect key="frame" x="112.33333333333334" y="45.666666666666657" width="110.66666666666666" height="20.333333333333329"/>
+                                                        <rect key="frame" x="112" y="45.666666666666657" width="111" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHc-Hp-xWw">
-                                                        <rect key="frame" x="116.33333333333334" y="66" width="102.33333333333334" height="20.333333333333329"/>
+                                                        <rect key="frame" x="116.33333333333334" y="66" width="102.66666666666666" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -542,8 +602,8 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  P&amp;DP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zci-hZ-VbX">
-                                                                <rect key="frame" x="24.666666666666682" y="40.666666666666629" width="52.666666666666657" height="20.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P&amp;DP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zci-hZ-VbX">
+                                                                <rect key="frame" x="29" y="40.666666666666629" width="44" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -620,7 +680,7 @@
                                                 <rect key="frame" x="20" y="515" width="335" height="50.666666666666629"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participation Days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4j-Lh-8U3">
-                                                        <rect key="frame" x="90.666666666666671" y="5" width="153.66666666666663" height="20.333333333333332"/>
+                                                        <rect key="frame" x="90.666666666666686" y="5" width="154" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -731,6 +791,7 @@
                                     <constraint firstItem="Fc5-eM-Ln8" firstAttribute="top" secondItem="m80-9u-czn" secondAttribute="top" id="4uZ-Ba-l2M"/>
                                     <constraint firstItem="Fc5-eM-Ln8" firstAttribute="trailing" secondItem="rWj-W5-Iet" secondAttribute="trailing" id="Cbk-Ja-ug6"/>
                                     <constraint firstItem="Fc5-eM-Ln8" firstAttribute="bottom" secondItem="rWj-W5-Iet" secondAttribute="bottom" id="KGa-SG-FbY"/>
+                                    <constraint firstAttribute="width" secondItem="Fc5-eM-Ln8" secondAttribute="width" id="Nnh-gR-RjN"/>
                                     <constraint firstItem="Fc5-eM-Ln8" firstAttribute="top" secondItem="rWj-W5-Iet" secondAttribute="top" id="REA-UY-MCv"/>
                                     <constraint firstItem="Fc5-eM-Ln8" firstAttribute="leading" secondItem="m80-9u-czn" secondAttribute="leading" id="YIT-V6-4bn"/>
                                     <constraint firstItem="m80-9u-czn" firstAttribute="trailing" secondItem="Fc5-eM-Ln8" secondAttribute="trailing" id="byl-Yf-kH9"/>
