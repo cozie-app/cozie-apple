@@ -12,7 +12,6 @@ target 'Cozie' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'Charts'
-  pod 'IQKeyboardManager'
   # Pods for Cozie
 
   target 'CozieTests' do
