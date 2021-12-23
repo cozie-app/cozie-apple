@@ -19,6 +19,7 @@
 		046BD756276C6C860011A883 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD755276C6C860011A883 /* Permissions.swift */; };
 		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
 		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
+		049BCA8D2773075500481C95 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C2773075500481C95 /* DataViewController.swift */; };
 		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
 		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
@@ -198,6 +199,7 @@
 		046BD755276C6C860011A883 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
+		049BCA8C2773075500481C95 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				E469469624BC4D090013134B /* StartViewController.swift */,
 				E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */,
 				04B14C94277045C800A4B989 /* HomePageViewController.swift */,
+				049BCA8C2773075500481C95 /* DataViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */,
 				E469469524BC4CF20013134B /* LoginViewController.swift in Sources */,
 				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
+				049BCA8D2773075500481C95 /* DataViewController.swift in Sources */,
 				1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */,
 				0465B628277216480062228C /* Reminder.swift in Sources */,
 				29B824A0276CA5AA00BB002D /* Extension.swift in Sources */,
