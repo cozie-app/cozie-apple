@@ -50,9 +50,9 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     private func configureTableView() {
 
         self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        if #available(iOS 15.0, *) {
-            self.settingsTableView.sectionHeaderTopPadding = 0
-        }
+//        if #available(iOS 15.0, *) {
+//            self.settingsTableView.sectionHeaderTopPadding = 0
+//        }
         
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
         userInfoHeader = UserInfoHeader(frame: frame)
