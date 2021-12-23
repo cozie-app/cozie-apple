@@ -24,6 +24,7 @@ class NotificationFrequency: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupFilledData()
+        self.timePicker.minuteInterval = 5
     }
     
     func setupFilledData() {

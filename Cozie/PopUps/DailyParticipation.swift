@@ -30,10 +30,6 @@ class DailyParticipation: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.setupFilledData()
     }
     

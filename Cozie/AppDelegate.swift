@@ -9,6 +9,7 @@
 import UIKit
 import OneSignal
 import Firebase
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           print("User accepted notifications: \(accepted)")
         })
         //END OneSignal initialization code
-
+        IQKeyboardManager.shared().isEnabled = true
         FirebaseApp.configure()
         
         return true

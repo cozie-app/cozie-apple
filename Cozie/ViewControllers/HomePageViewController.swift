@@ -10,7 +10,6 @@ import UIKit
 
 class HomePageViewController: UIViewController {
     
-
     @IBOutlet weak var viewID: UIView!
     @IBOutlet weak var viewNotificationFreq: UIView!
     @IBOutlet weak var viewParticipationDays: UIView!
@@ -81,7 +80,6 @@ class HomePageViewController: UIViewController {
         
         self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
         self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]
-        
         
         var count = 1
         for i in 0...7{
