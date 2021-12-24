@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dS-p7-Qbm">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="twy-nV-IgS">
-                                <rect key="frame" x="0.0" y="94" width="375" height="635"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="684"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yxr-xe-ceF">
                                     <size key="itemSize" width="354.5" height="160"/>
@@ -354,7 +354,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="md6-gd-GcL" kind="relationship" relationship="viewControllers" id="xZ6-eu-a4c"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Y3Q-VF-4u1"/>
+                        <segue destination="iBM-id-FCK" kind="relationship" relationship="viewControllers" id="s8Y-4a-nfg"/>
                         <segue destination="N6w-Fx-r8Q" kind="relationship" relationship="viewControllers" id="Ghc-4L-IDl"/>
                     </connections>
                 </tabBarController>
@@ -399,7 +399,7 @@
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-151.47783251231527"/>
         </scene>
-        <!--Data View Controller-->
+        <!--My Data-->
         <scene sceneID="RNv-LR-ByF">
             <objects>
                 <viewController id="iBM-id-FCK" customClass="DataViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
@@ -519,6 +519,7 @@
                             <constraint firstItem="AJh-A5-6gg" firstAttribute="leading" secondItem="B21-E6-XIe" secondAttribute="leading" constant="20" id="oNb-uh-s0Q"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="My Data" image="person.circle" catalog="system" selectedImage="person.circle" id="GzU-QH-cqq"/>
                     <connections>
                         <outlet property="dataDownloadView" destination="AJh-A5-6gg" id="JsV-1O-cGz"/>
                         <outlet property="graphView1" destination="vMH-JK-fw6" id="JxI-6N-ErY"/>
@@ -528,7 +529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAr-HI-NSX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1050.4000000000001" y="241.62561576354682"/>
+            <point key="canvasLocation" x="2111" y="607"/>
         </scene>
         <!--Home-->
         <scene sceneID="F1z-QM-vZG">
@@ -625,13 +626,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4b-9d-QO8">
-                                                        <rect key="frame" x="112.33333333333334" y="45.666666666666657" width="110.66666666666666" height="20.333333333333329"/>
+                                                        <rect key="frame" x="112" y="45.666666666666657" width="111" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHc-Hp-xWw">
-                                                        <rect key="frame" x="116.33333333333334" y="66" width="102.33333333333334" height="20.333333333333329"/>
+                                                        <rect key="frame" x="116.33333333333334" y="66" width="102.66666666666666" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -752,7 +753,7 @@
                                                 <rect key="frame" x="20" y="515" width="335" height="50.666666666666629"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participation Days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4j-Lh-8U3">
-                                                        <rect key="frame" x="90.666666666666671" y="5" width="153.66666666666663" height="20.333333333333332"/>
+                                                        <rect key="frame" x="90.666666666666686" y="5" width="154" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -918,6 +919,7 @@
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="paperclip" catalog="system" width="121" height="128"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.down.fill" catalog="system" width="121" height="128"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
