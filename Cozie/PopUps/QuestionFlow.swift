@@ -57,7 +57,7 @@ class QuestionFlow: UIViewController {
         
         viewBtnArray = [viewThermalBtn, viewIDRPBtn, viewPDPBtn, viewMFBtn, viewThermalMINIBtn, viewIDRPMINIBtn, viewPDPMINIBtn, viewMFMINIBtn]
         
-        customColor = UIColor(red: 222 / 255.0, green: 222 / 255.0, blue: 222 / 255, alpha: 1)
+        customColor = UIColor(red: 232 / 255.0, green: 232 / 255.0, blue: 232 / 255, alpha: 1)
         
         self.fillUpdata()
     

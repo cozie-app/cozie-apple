@@ -18,7 +18,7 @@ class DailyParticipation: UIViewController {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toView: UIView!
     @IBOutlet weak var toLabel: UILabel!
-    
+    var customColor = UIColor(red: 232 / 255.0, green: 232 / 255.0, blue: 232 / 255, alpha: 1)
     enum selectedType {
         case From
         case To
@@ -48,14 +48,14 @@ class DailyParticipation: UIViewController {
     }
     
     @objc private func onClickFromView() {
-        self.fromView.backgroundColor = .lightGray
+        self.fromView.backgroundColor = customColor
         self.toView.backgroundColor = .systemBackground
         self.selected = .From
     }
     
     @objc private func onClickToView() {
         self.fromView.backgroundColor = .systemBackground
-        self.toView.backgroundColor = .lightGray
+        self.toView.backgroundColor = customColor
         self.selected = .To
     }
     

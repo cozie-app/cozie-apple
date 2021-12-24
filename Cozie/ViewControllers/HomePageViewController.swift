@@ -31,6 +31,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var labelParticipationDays: UILabel!
     @IBOutlet weak var labelParticipationHours: UILabel!
     @IBOutlet weak var viewSurvey: UIView!
+    @IBOutlet weak var appIconImg: UIImageView!
     
     var questionFlag:[Bool] = []
     var labelArray:[UILabel] = []
@@ -41,7 +42,7 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        appIconImg.image = UIImage(named: "AppIcon")
         viewID.layer.borderColor = UIColor.lightGray.cgColor
         viewID.layer.borderWidth = 1
         
@@ -74,8 +75,12 @@ class HomePageViewController: UIViewController {
     
     private func fillUpData(){
         
-        self.lableExperimentId.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? ""
-        self.labelParticipantID.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? ""
+        let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String
+        let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String
+        
+        self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
+        self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
+        
         self.labelNotificationFreq.text = "every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? Date()).get24FormateTimeString() + " hrs"
         
         self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
