@@ -12,6 +12,30 @@ import CoreLocation
 import HealthKit
 import WatchConnectivity
 
+// structure which is used to store the questions prompted to the user
+struct Question {
+    let title: String
+    let options: Array<String>
+    let icons: Array<String>
+    let nextQuestion: Array<Int>
+    let identifier: String
+}
+
+// temp dictionary to store the answers
+struct Answer: Codable {
+    let startTimestamp: String
+    let endTimestamp: String
+    let heartRate: [String: Int]
+    let participantID: String
+    let deviceUUID: String
+    let locationTimestamp: String
+    let latitude: Double
+    let longitude: Double
+    let responses: [String: String]
+    let voteLog: Int
+    let bodyMass: Double
+}
+
 class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate {
 
     // code related to the watch connectivity with the phone
@@ -30,31 +54,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
-
-    // structure which is used to store the questions prompted to the user
-    struct Question {
-        let title: String
-        let options: Array<String>
-        let icons: Array<String>
-        let nextQuestion: Array<Int>
-        let identifier: String
-    }
-
-    // temp dictionary to store the answers
-    struct Answer: Codable {
-        let startTimestamp: String
-        let endTimestamp: String
-        let heartRate: [String: Int]
-        let participantID: String
-        let deviceUUID: String
-        let locationTimestamp: String
-        let latitude: Double
-        let longitude: Double
-        let responses: [String: String]
-        let voteLog: Int
-        let bodyMass: Double
-    }
-
+    
     // initialize variables
     var questions = [Question]()
     var answers = [Answer]()  // it stores the answer after user as completed Cozie

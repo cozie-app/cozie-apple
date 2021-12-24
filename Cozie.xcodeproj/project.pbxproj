@@ -45,6 +45,7 @@
 		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
 		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
+		29EB37EB2775914E00914F6D /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB37EA2775914E00914F6D /* Controllers.swift */; };
 		69CBBDE32770EFDD000D1C2B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDE02770EF80000D1C2B /* ResearchKit.framework */; };
 		69CBBDE42770EFDD000D1C2B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDE02770EF80000D1C2B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
@@ -225,6 +226,7 @@
 		29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyParticipation.xib; sourceTree = "<group>"; };
 		29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
 		29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataStore.swift; sourceTree = "<group>"; };
+		29EB37EA2775914E00914F6D /* Controllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controllers.swift; sourceTree = "<group>"; };
 		36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -549,6 +551,7 @@
 		E4838281247BA33C002C3708 /* Cozie WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				29EB37EA2775914E00914F6D /* Controllers.swift */,
 				E4E3088924B6F7840029FC0C /* Cozie WatchKit Extension.entitlements */,
 				E4838282247BA33C002C3708 /* InterfaceController.swift */,
 				E4838284247BA33C002C3708 /* ExtensionDelegate.swift */,
@@ -1084,6 +1087,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29EB37EB2775914E00914F6D /* Controllers.swift in Sources */,
 				E4838287247BA33C002C3708 /* NotificationController.swift in Sources */,
 				E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */,
 				E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */,
