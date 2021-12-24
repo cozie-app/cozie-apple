@@ -66,9 +66,13 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barStyle = .black
+        //navigationController?.navigationBar.barStyle = .black
 //        navigationController?.navigationBar.barTintColor = UIColor(red: 55 / 255, green: 120 / 255, blue: 250 / 255, alpha: 1)
         navigationItem.title = "Settings"
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .white
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
 
     }
 
@@ -263,10 +267,22 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .eligibility: print("eligibility clicked")
-            case .consent: print("consent clicked")
-            case .survey: print("survey clicked")
-            case .onboarding: print("onboarding clicked")
+            case .eligibility:
+                let taskViewController = ORKTaskViewController(task: TaskEligibility, taskRun: nil)
+                taskViewController.delegate = self
+                present(taskViewController, animated: true, completion: nil)
+            case .consent:
+                let taskViewController = ORKTaskViewController(task: TaskConsent, taskRun: nil)
+                taskViewController.delegate = self
+                present(taskViewController, animated: true, completion: nil)
+            case .survey:
+                let taskViewController = ORKTaskViewController(task: TaskSurvey, taskRun: nil)
+                taskViewController.delegate = self
+                present(taskViewController, animated: true, completion: nil)
+            case .onboarding:
+                let taskViewController = ORKTaskViewController(task: TaskOnBoarding, taskRun: nil)
+                taskViewController.delegate = self
+                present(taskViewController, animated: true, completion: nil)
             }
         case .About:
             guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {
@@ -274,7 +290,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .cozie:
-                let url = URL(string: "https://cozie.app")!
+                let url = URL(string: "https://www.cozie-apple.app")!
                 let alert = Utilities.alert(url: url, title: "Cozie")
                 present(alert, animated: true, completion: nil)
             case .budsLab:
