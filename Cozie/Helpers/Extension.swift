@@ -48,3 +48,11 @@ extension UIViewController {
         return nil
     }
 }
+
+extension UITableView {
+    func setupPadding() {
+        if #available(iOS 15.0, *) {
+            self.sectionHeaderTopPadding = 0
+        }
+    }
+}

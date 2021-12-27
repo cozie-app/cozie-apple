@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionFlow: UIViewController {
+class QuestionFlow: BasePopupVC {
 
     @IBOutlet weak var thermalBtn: UIButton!
     @IBOutlet weak var IDRPBtn: UIButton!
@@ -29,7 +29,6 @@ class QuestionFlow: UIViewController {
     @IBOutlet weak var viewPDPMINI: UIView!
     @IBOutlet weak var viewMFMINI: UIView!
     
-    
     @IBOutlet weak var viewThermalBtn: UIView!
     @IBOutlet weak var viewIDRPBtn: UIView!
     @IBOutlet weak var viewPDPBtn: UIView!
@@ -43,7 +42,7 @@ class QuestionFlow: UIViewController {
     var buttonArray:[UIButton] = []
     var viewArray:[UIView] = []
     var viewBtnArray:[UIView] = []
-    var customColor:UIColor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,16 +55,11 @@ class QuestionFlow: UIViewController {
         viewArray = [viewThermal, viewIDRP, viewPDP, viewMF, viewThermalMINI, viewIDRPMINI, viewPDPMINI, viewMFMINI]
         
         viewBtnArray = [viewThermalBtn, viewIDRPBtn, viewPDPBtn, viewMFBtn, viewThermalMINIBtn, viewIDRPMINIBtn, viewPDPMINIBtn, viewMFMINIBtn]
-        
-        customColor = UIColor(red: 232 / 255.0, green: 232 / 255.0, blue: 232 / 255, alpha: 1)
-        
+                
         self.fillUpdata()
-    
-        
     }
     
     private func fillUpdata(){
-        
         for i in 0...7 {
             self.buttonArray[i].isSelected = questions[i]
             self.buttonArray[i].backgroundColor = buttonArray[i].isSelected ? UIColor.lightGray : UIColor.systemBackground
@@ -74,14 +68,11 @@ class QuestionFlow: UIViewController {
             self.viewBtnArray[i].layer.cornerRadius = viewBtnArray[i].frame.height / 2
             self.viewBtnArray[i].layer.borderWidth = 1
             self.viewBtnArray[i].layer.borderColor = UIColor.lightGray.cgColor
-            
-            self.viewArray[i].backgroundColor = buttonArray[i].isSelected ? self.customColor : UIColor.systemBackground
         }
     }
 
     
     @IBAction func questionValueChanged(_ sender: UIButton) {
-        
         switch sender.tag {
         
         case 0:
@@ -104,24 +95,17 @@ class QuestionFlow: UIViewController {
         default:
             break
         }
-        
     }
     
     private func functionality(i: Int, view: UIView, button: UIButton){
-        
         button.isSelected = !button.isSelected
         self.questions[i] = button.isSelected
-        view.backgroundColor = button.isSelected ? self.customColor : UIColor.systemBackground
         button.backgroundColor = button.isSelected ? UIColor.lightGray : UIColor.systemBackground
-        
     }
     
     
     @IBAction func onClickSet(_ sender: Any) {
-        
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.questions.rawValue, value: self.questions)
         NavigationManager.dismiss(self)
     }
-    
-
 }

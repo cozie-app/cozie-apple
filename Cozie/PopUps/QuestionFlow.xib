@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,11 +28,24 @@
                         <rect key="frame" x="21.5" y="183" width="371" height="530"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Flow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWU-W9-Nvy">
-                                <rect key="frame" x="20" y="20" width="166.5" height="30"/>
+                                <rect key="frame" x="20" y="20" width="291" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSV-QN-jB1">
+                                <rect key="frame" x="311" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Khx-pK-Uoq"/>
+                                    <constraint firstAttribute="width" secondItem="uSV-QN-jB1" secondAttribute="height" multiplier="1:1" id="gOT-r1-NfM"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="onClickCancel:" destination="NsH-8Y-z8V" eventType="touchUpInside" id="MTz-di-TRc"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(multiple selection is allowed)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rp6-MP-Ek5">
                                 <rect key="frame" x="20" y="58" width="224.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -476,12 +489,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PRQ-Ph-rjY" secondAttribute="trailing" id="5GI-q4-1ww"/>
+                            <constraint firstAttribute="trailing" secondItem="uSV-QN-jB1" secondAttribute="trailing" constant="30" id="6J3-G8-Wpo"/>
                             <constraint firstAttribute="width" constant="371" id="813-S0-e9u"/>
+                            <constraint firstItem="uSV-QN-jB1" firstAttribute="leading" secondItem="gWU-W9-Nvy" secondAttribute="trailing" id="BrC-VH-T0b"/>
                             <constraint firstItem="PRQ-Ph-rjY" firstAttribute="leading" secondItem="hqF-pa-Yef" secondAttribute="leading" id="GQ0-fu-9rn"/>
                             <constraint firstItem="gWU-W9-Nvy" firstAttribute="top" secondItem="hqF-pa-Yef" secondAttribute="top" constant="20" id="Lhd-vM-YyM"/>
                             <constraint firstItem="rp6-MP-Ek5" firstAttribute="leading" secondItem="hqF-pa-Yef" secondAttribute="leading" constant="20" id="bF5-ka-8po"/>
                             <constraint firstItem="rp6-MP-Ek5" firstAttribute="top" secondItem="gWU-W9-Nvy" secondAttribute="bottom" constant="8" symbolic="YES" id="cce-p7-Fqs"/>
                             <constraint firstItem="Dla-Cb-wzf" firstAttribute="centerX" secondItem="hqF-pa-Yef" secondAttribute="centerX" id="dI9-QF-DKQ"/>
+                            <constraint firstItem="uSV-QN-jB1" firstAttribute="centerY" secondItem="gWU-W9-Nvy" secondAttribute="centerY" id="kuI-Pz-425"/>
                             <constraint firstItem="Dla-Cb-wzf" firstAttribute="top" secondItem="PRQ-Ph-rjY" secondAttribute="bottom" constant="30" id="qTm-sI-35H"/>
                             <constraint firstAttribute="height" constant="530" id="rbl-Fs-8ck"/>
                             <constraint firstItem="PRQ-Ph-rjY" firstAttribute="top" secondItem="rp6-MP-Ek5" secondAttribute="bottom" constant="20" id="yls-Iy-Jaa"/>
@@ -537,6 +553,7 @@
         </viewController>
     </objects>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

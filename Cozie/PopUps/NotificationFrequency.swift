@@ -8,7 +8,11 @@
 
 import UIKit
 
-class NotificationFrequency: UIViewController {
+protocol timeSetDelegate {
+    func reload()
+}
+
+class NotificationFrequency: BasePopupVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -20,6 +24,7 @@ class NotificationFrequency: UIViewController {
         case To
     }
     var viewType = TimePickerType.NotificationFrequency
+    var delegate: timeSetDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,5 +59,6 @@ class NotificationFrequency: UIViewController {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue, value: self.timePicker.date)
         }
         NavigationManager.dismiss(self)
+        self.delegate?.reload()
     }
 }

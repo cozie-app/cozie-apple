@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextView: UIViewController {
+class TextView: BasePopupVC {
 
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var msgLabel: UILabel!
@@ -32,7 +32,6 @@ class TextView: UIViewController {
         case false:
             idLabel.text = "Experiment ID"
             msgLabel.text = "Please fill your specified Experiment ID"
-            
             idTextField.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? ""
         }
     }

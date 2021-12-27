@@ -8,13 +8,13 @@
 
 import UIKit
 
-class WeeklySurvey: UIViewController {
+class WeeklySurvey: BasePopupVC {
     
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
     var headerTitles = ["Are you...?", "Do you prefer to be...?"]
-    var section1:[String] = ["ABCD", "EFGH", "IJKL", "MNOP"]
-    var section2:[String] = ["QRST", "UVWX"]
+    var section1:[String] = ["XXXX XXX XXXXX", "XXXX XXX XXXXX", "XXXX XXX XXXXX", "XXXX XXX XXXXX"]
+    var section2:[String] = ["XXXX XXX XXXXX", "XXXX XXX XXXXX"]
     var button1:[UIButton] = []
     var button2:[UIButton] = []
     override func viewDidLoad() {
@@ -24,6 +24,7 @@ class WeeklySurvey: UIViewController {
         tableQuestions.delegate = self
         let nib = UINib(nibName: "QuestionCell", bundle: nil)
         tableQuestions.register(nib, forCellReuseIdentifier: "cell")
+        self.tableQuestions.setupPadding()
     }
     
     @IBAction func onClickSubmit(_ sender: UIButton) {
@@ -41,7 +42,7 @@ extension WeeklySurvey: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let view = UIView()
-        view.backgroundColor = UIColor.secondarySystemBackground
+        view.backgroundColor = .systemBackground
 
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -93,14 +94,14 @@ extension WeeklySurvey: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    @objc func section1ButtonClicked(_ sender: UIButton){
+    @objc private func section1ButtonClicked(_ sender: UIButton){
         
         button1.forEach({$0.backgroundColor = .systemBackground})
         button1[sender.tag].isSelected = true
         sender.backgroundColor = .lightGray
     }
     
-    @objc func section2ButtonClicked(_ sender: UIButton){
+    @objc private func section2ButtonClicked(_ sender: UIButton){
         
         button2.forEach({$0.backgroundColor = .systemBackground})
         button2[sender.tag].isSelected = true

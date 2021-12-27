@@ -50,9 +50,7 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     private func configureTableView() {
 
         self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
-//        if #available(iOS 15.0, *) {
-//            self.settingsTableView.sectionHeaderTopPadding = 0
-//        }
+        self.settingsTableView.setupPadding()
         
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
         userInfoHeader = UserInfoHeader(frame: frame)
@@ -250,7 +248,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             case .notificationFrequency:
                 if let viewController = self.tabBarController {
-                    NavigationManager.openNotificationFrequency(viewController, for: .NotificationFrequency)
+                    NavigationManager.openNotificationFrequency(viewController, for: .NotificationFrequency, view: self)
                 }
             case .participationDays:
                 if let viewController = self.tabBarController {
@@ -327,7 +325,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension UITabBarController: TimePickerDelegate {
-    func dailyPicker(selected type: NotificationFrequency.TimePickerType) {
-        NavigationManager.openNotificationFrequency(self, for: type)
+    func dailyPicker(selected type: NotificationFrequency.TimePickerType, view: UIViewController) {
+        NavigationManager.openNotificationFrequency(self, for: type, view: view)
     }
 }

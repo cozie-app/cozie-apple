@@ -10,10 +10,11 @@ import UIKit
 
 final class NavigationManager {
     
-    static func openNotificationFrequency(_ sender: UIViewController, for type: NotificationFrequency.TimePickerType) {
+    static func openNotificationFrequency(_ sender: UIViewController, for type: NotificationFrequency.TimePickerType, view: UIViewController) {
         let nib = UINib(nibName: "NotificationFrequency", bundle: nil)
         let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! NotificationFrequency
         myCustomView.viewType = type
+        myCustomView.delegate = view as? timeSetDelegate
         myCustomView.setupFilledData()
         sender.addChild(myCustomView)
         myCustomView.view.frame = sender.view.bounds
@@ -72,6 +73,15 @@ final class NavigationManager {
     static func openPermissions(_ sender: UIViewController) {
         let nib = UINib(nibName: "Permissions", bundle: nil)
         let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! Permissions
+        sender.addChild(myCustomView)
+        myCustomView.view.frame = sender.view.bounds
+        sender.view.addSubview(myCustomView.view)
+        myCustomView.didMove(toParent: sender)
+    }
+    
+    static func openReminder(_ sender: UIViewController) {
+        let nib = UINib(nibName: "Reminder", bundle: nil)
+        let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! Reminder
         sender.addChild(myCustomView)
         myCustomView.view.frame = sender.view.bounds
         sender.view.addSubview(myCustomView.view)

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,11 +29,24 @@
                         <rect key="frame" x="21.5" y="173" width="371" height="550"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Participation Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZ5-eN-clQ">
-                                <rect key="frame" x="40" y="20" width="331" height="30"/>
+                                <rect key="frame" x="40" y="20" width="271" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3N-Ry-gqT">
+                                <rect key="frame" x="311" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="EAa-68-g4s"/>
+                                    <constraint firstAttribute="width" secondItem="y3N-Ry-gqT" secondAttribute="height" multiplier="1:1" id="jFw-1Y-TJ0"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="onClickCancel:" destination="3PA-3w-cWF" eventType="touchUpInside" id="IH3-Ar-ALv"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Days I would like to get notity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOB-T3-X9C">
                                 <rect key="frame" x="40" y="60" width="331" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -79,6 +93,7 @@
                                                             </label>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgP-Ll-gI9">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="tUg-wO-Ydr"/>
                                                                 </connections>
@@ -115,6 +130,7 @@
                                                             </label>
                                                             <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fFZ-8Q-KFP">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="PFl-ph-f6h"/>
                                                                 </connections>
@@ -151,6 +167,7 @@
                                                             </label>
                                                             <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Je-sW-3Zs">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="44a-wv-Z9D"/>
                                                                 </connections>
@@ -187,6 +204,7 @@
                                                             </label>
                                                             <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UEy-Yl-AbO">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="h7w-xh-889"/>
                                                                 </connections>
@@ -223,6 +241,7 @@
                                                             </label>
                                                             <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QYk-Bo-Gw8">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="IBu-Qq-mbM"/>
                                                                 </connections>
@@ -259,6 +278,7 @@
                                                             </label>
                                                             <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l4z-oQ-A5S">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="bwr-46-3eb"/>
                                                                 </connections>
@@ -295,6 +315,7 @@
                                                             </label>
                                                             <switch opaque="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vkt-8S-APk">
                                                                 <rect key="frame" x="260" y="9.5" width="51" height="31"/>
+                                                                <color key="onTintColor" name="primaryColour"/>
                                                                 <connections>
                                                                     <action selector="daysValueChanged:" destination="3PA-3w-cWF" eventType="valueChanged" id="158-1P-2oE"/>
                                                                 </connections>
@@ -333,9 +354,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="TOB-T3-X9C" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="40" id="2vH-td-3sC"/>
-                            <constraint firstAttribute="trailing" secondItem="zZ5-eN-clQ" secondAttribute="trailing" id="AaM-Ey-jiI"/>
+                            <constraint firstItem="y3N-Ry-gqT" firstAttribute="centerY" secondItem="zZ5-eN-clQ" secondAttribute="centerY" id="6sP-36-tQH"/>
+                            <constraint firstItem="y3N-Ry-gqT" firstAttribute="leading" secondItem="zZ5-eN-clQ" secondAttribute="trailing" id="AaM-Ey-jiI"/>
                             <constraint firstItem="TOB-T3-X9C" firstAttribute="top" secondItem="zZ5-eN-clQ" secondAttribute="bottom" constant="10" id="Eka-JR-8T1"/>
                             <constraint firstItem="zZ5-eN-clQ" firstAttribute="leading" secondItem="KzT-pf-v8I" secondAttribute="leading" constant="40" id="Lbr-J2-7GG"/>
+                            <constraint firstAttribute="trailing" secondItem="y3N-Ry-gqT" secondAttribute="trailing" constant="30" id="Rhs-EI-ggy"/>
                             <constraint firstItem="HFT-90-BRR" firstAttribute="top" secondItem="hsf-FN-sIs" secondAttribute="bottom" constant="20" id="S8c-le-Eie"/>
                             <constraint firstAttribute="trailing" secondItem="TOB-T3-X9C" secondAttribute="trailing" id="W2l-cB-Mco"/>
                             <constraint firstAttribute="width" constant="371" id="Yze-0T-yL8"/>
@@ -377,6 +400,10 @@
         </viewController>
     </objects>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="primaryColour">
+            <color red="1" green="0.5725490196078431" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

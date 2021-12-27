@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Permissions: UIViewController {
+class Permissions: BasePopupVC {
 
     @IBOutlet weak var noiseDataSwitch: UISwitch!
     @IBOutlet weak var motionDataSwitch: UISwitch!

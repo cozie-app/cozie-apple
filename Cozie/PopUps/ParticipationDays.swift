@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParticipationDays: UIViewController {
+class ParticipationDays: BasePopupVC {
 
     @IBOutlet weak var switchMon: UISwitch!
     @IBOutlet weak var switchTue: UISwitch!
@@ -61,13 +61,3 @@ class ParticipationDays: UIViewController {
         }
     }
 }
-
-//    enum days1: Int {
-//        case Monday
-//        case Tuesday
-//        case Wednesday
-//        case Thursday
-//        case Friday
-//        case Saturday
-//        case Sunday
-//    }

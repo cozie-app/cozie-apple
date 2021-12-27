@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Reminder: UIViewController {
+class Reminder: BasePopupVC {
 
     @IBOutlet weak var img1: UIImageView!
     @IBOutlet weak var img2: UIImageView!
@@ -18,7 +18,8 @@ class Reminder: UIViewController {
     @IBOutlet weak var labelConsent: UILabel!
     @IBOutlet weak var labelSurvey: UILabel!
     @IBOutlet weak var labelOnBording: UILabel!
-    var reminder:[Bool] = [false,false,false,false]
+    
+    var reminder:[Bool] = [true,false,false,false]
     var images:[UIImageView] = []
     var labels:[UILabel] = []
     override func viewDidLoad() {
@@ -35,10 +36,11 @@ class Reminder: UIViewController {
         for i in 0...3{
             switch reminder[i] {
             case true:
-                //images[i].image = UIImage(named: <#T##String#>)
+                images[i].image = UIImage(named: "checked")
                 images[i].layer.borderWidth = 0
                 labels[i].textColor = .lightGray
             case false:
+                images[i].image = nil
                 images[i].layer.borderWidth = 2
                 images[i].layer.borderColor = UIColor.red.cgColor
             }

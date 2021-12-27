@@ -28,7 +28,7 @@
                         <rect key="frame" x="21.5" y="273" width="371" height="350"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Notification Frequeny" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jx3-nO-oS5">
-                                <rect key="frame" x="40" y="20" width="311" height="30"/>
+                                <rect key="frame" x="40" y="20" width="271" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -65,13 +65,28 @@
                                     <action selector="onClickSet:" destination="ST6-wg-iP7" eventType="touchUpInside" id="u8j-NF-B1e"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOg-YO-aqo">
+                                <rect key="frame" x="311" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ala-BR-5rR"/>
+                                    <constraint firstAttribute="width" secondItem="xOg-YO-aqo" secondAttribute="height" multiplier="1:1" id="IpS-w3-v6C"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="onClickCancel:" destination="ST6-wg-iP7" eventType="touchUpInside" id="8dA-c4-V7y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="xOg-YO-aqo" firstAttribute="centerY" secondItem="Jx3-nO-oS5" secondAttribute="centerY" id="HDZ-Zt-xv1"/>
                             <constraint firstItem="pbU-G9-EsU" firstAttribute="leading" secondItem="cwj-jI-rjs" secondAttribute="leading" constant="40" id="JdF-3I-YDm"/>
                             <constraint firstItem="Jx3-nO-oS5" firstAttribute="top" secondItem="cwj-jI-rjs" secondAttribute="top" constant="20" id="K4h-hB-PAT"/>
                             <constraint firstItem="pbU-G9-EsU" firstAttribute="top" secondItem="Jx3-nO-oS5" secondAttribute="bottom" constant="10" id="Rot-P8-iNk"/>
-                            <constraint firstAttribute="trailing" secondItem="Jx3-nO-oS5" secondAttribute="trailing" constant="20" id="T0Y-Aw-Hy5"/>
+                            <constraint firstItem="xOg-YO-aqo" firstAttribute="leading" secondItem="Jx3-nO-oS5" secondAttribute="trailing" id="T0Y-Aw-Hy5"/>
+                            <constraint firstAttribute="trailing" secondItem="xOg-YO-aqo" secondAttribute="trailing" constant="30" id="TKT-KR-5r8"/>
                             <constraint firstItem="ngJ-Vb-djm" firstAttribute="top" secondItem="pbU-G9-EsU" secondAttribute="bottom" constant="8" id="TKX-GL-KCm"/>
                             <constraint firstAttribute="height" constant="350" id="g1j-Ze-ohy"/>
                             <constraint firstItem="Jx3-nO-oS5" firstAttribute="leading" secondItem="cwj-jI-rjs" secondAttribute="leading" constant="40" id="g29-Oh-Fku"/>
@@ -108,6 +123,7 @@
         </viewController>
     </objects>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

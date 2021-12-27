@@ -32,6 +32,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var labelParticipationHours: UILabel!
     @IBOutlet weak var viewSurvey: UIView!
     @IBOutlet weak var appIconImg: UIImageView!
+    @IBOutlet weak var reminder: UIImageView!
     
     var questionFlag:[Bool] = []
     var labelArray:[UILabel] = []
@@ -58,13 +59,22 @@ class HomePageViewController: UIViewController {
         viewQuestionnairs.layer.borderColor = UIColor.lightGray.cgColor
         viewQuestionnairs.layer.borderWidth = 1
         
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        self.reminder.addGestureRecognizer(imageTap)
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClickSurveyView(_:)))
-        viewSurvey.addGestureRecognizer(tap)
+        self.viewSurvey.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fillUpData()
+    }
+    
+    @objc private func imageTapped(_: UITapGestureRecognizer) {
+        if let viewController = self.tabBarController {
+            NavigationManager.openReminder(viewController)
+        }
     }
     
     @objc private func onClickSurveyView(_: UITapGestureRecognizer){
@@ -81,7 +91,7 @@ class HomePageViewController: UIViewController {
         self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
         self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
         
-        self.labelNotificationFreq.text = "every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? Date()).get24FormateTimeString() + " hrs"
+        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? Date()).get24FormateTimeString() + " hour"
         
         self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
         self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]
@@ -90,7 +100,7 @@ class HomePageViewController: UIViewController {
         for i in 0...7{
             switch questionFlag[i] {
             case true:
-                self.labelArray[i].text = "\(count). " + (self.labelArray[i].text?.components(separatedBy: ".").last ?? "")
+                self.labelArray[i].text = "\(count). " + (self.labelArray[i].text?.components(separatedBy: ".").last ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
                 self.labelArray[i].isHidden = false
                 count += 1
             case false:

@@ -9,16 +9,16 @@
 import UIKit
 
 protocol TimePickerDelegate {
-    func dailyPicker(selected type: NotificationFrequency.TimePickerType)
+    func dailyPicker(selected type: NotificationFrequency.TimePickerType, view: UIViewController)
 }
 
-class DailyParticipation: UIViewController {
+class DailyParticipation: BasePopupVC {
 
     @IBOutlet weak var fromView: UIView!
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toView: UIView!
     @IBOutlet weak var toLabel: UILabel!
-    var customColor = UIColor(red: 232 / 255.0, green: 232 / 255.0, blue: 232 / 255, alpha: 1)
+    
     enum selectedType {
         case From
         case To
@@ -48,21 +48,27 @@ class DailyParticipation: UIViewController {
     }
     
     @objc private func onClickFromView() {
-        self.fromView.backgroundColor = customColor
-        self.toView.backgroundColor = .systemBackground
         self.selected = .From
+        self.onClickSet(0)
     }
     
     @objc private func onClickToView() {
-        self.fromView.backgroundColor = .systemBackground
-        self.toView.backgroundColor = customColor
         self.selected = .To
+        self.onClickSet(0)
     }
     
     @IBAction func onClickSet(_ sender: Any) {
         if selected != .None {
-            delegate?.dailyPicker(selected: self.selected == .To ? .To : .From)
+            delegate?.dailyPicker(selected: self.selected == .To ? .To : .From, view: self)
+        } else {
+            NavigationManager.dismiss(self)
         }
-        NavigationManager.dismiss(self)
+    }
+}
+
+extension DailyParticipation: timeSetDelegate {
+    func reload() {
+        self.selected = .None
+        self.setupFilledData()
     }
 }

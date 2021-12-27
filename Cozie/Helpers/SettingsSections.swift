@@ -202,7 +202,12 @@ enum AboutOptions: Int, CaseIterable, SectionType {
         return true
     }
     var imageName: String {
-        return "consentForm"
+        switch self {
+        case .cozie:
+            return "githubLogo"
+        case .budsLab:
+            return "consentForm"//"budsLabIcon"
+        }
     }
     var constrainsSwitch: Bool {
         return false
