@@ -17,9 +17,11 @@ class SettingsCell: UITableViewCell {
             textLabel?.text = sectionType.description
             switchControl.isHidden = !sectionType.constrainsSwitch
             switchControl.isOn = !sectionType.isSwitchEnable
-            imageViewProperty.image = UIImage(named: sectionType.imageName)
             imageViewProperty.isHidden = !sectionType.imageView
-            self.setupImage(image: UIImage(named: sectionType.imageName))
+            if sectionType.imageView {
+                imageViewProperty.image = UIImage(named: sectionType.imageName)
+                self.setupImage(name: sectionType.imageName)
+            }
         }
     }
 
@@ -61,13 +63,15 @@ class SettingsCell: UITableViewCell {
         imageViewProperty.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     }
     
-    private func setupImage(image: UIImage?) {
-        let heightConstraints = imageViewProperty.constraints.filter{$0.firstAttribute == .height}
-        if let imageViewHeight = heightConstraints.first?.constant {
-            let desiredImageViewWidth = (imageViewHeight / (image?.size.height ?? 30)) * (image?.size.width ?? 30)
-            let widthConstraints = imageViewProperty.constraints.filter{$0.firstAttribute == .width}
-            widthConstraints.first?.isActive = false
-            imageViewProperty.widthAnchor.constraint(equalToConstant: desiredImageViewWidth).isActive = true
+    private func setupImage(name: String) {
+        let widthConstraints = imageViewProperty.constraints.filter{$0.firstAttribute == .width}
+        widthConstraints.forEach { constrain in
+            constrain.isActive = false
+        }
+        if name == imgBudsLab {
+            imageViewProperty.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        } else {
+            imageViewProperty.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
     
