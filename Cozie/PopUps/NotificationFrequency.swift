@@ -25,6 +25,7 @@ class NotificationFrequency: BasePopupVC {
     }
     var viewType = TimePickerType.NotificationFrequency
     var delegate: timeSetDelegate?
+    var isForSubview = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class NotificationFrequency: BasePopupVC {
         case .To:
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue, value: self.timePicker.date)
         }
-        NavigationManager.dismiss(self)
+        NavigationManager.dismiss(self, isForSubview: isForSubview)
         self.delegate?.reload()
     }
 }

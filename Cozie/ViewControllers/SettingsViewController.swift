@@ -268,18 +268,22 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             case .eligibility:
                 let taskViewController = ORKTaskViewController(task: TaskEligibility, taskRun: nil)
                 taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
                 present(taskViewController, animated: true, completion: nil)
             case .consent:
                 let taskViewController = ORKTaskViewController(task: TaskConsent, taskRun: nil)
                 taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
                 present(taskViewController, animated: true, completion: nil)
             case .survey:
                 let taskViewController = ORKTaskViewController(task: TaskSurvey, taskRun: nil)
                 taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
                 present(taskViewController, animated: true, completion: nil)
             case .onboarding:
                 let taskViewController = ORKTaskViewController(task: TaskOnBoarding, taskRun: nil)
                 taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
                 present(taskViewController, animated: true, completion: nil)
             }
         case .About:
@@ -318,6 +322,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
         let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
         taskViewController.delegate = self
+        taskViewController.navigationBar.backgroundColor = .white
         present(taskViewController, animated: true, completion: nil)
 
     }
@@ -326,6 +331,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension UITabBarController: TimePickerDelegate {
     func dailyPicker(selected type: NotificationFrequency.TimePickerType, view: UIViewController) {
-        NavigationManager.openNotificationFrequency(self, for: type, view: view)
+        NavigationManager.openNotificationFrequency(self, for: type, view: view, isForSubview: true)
     }
 }

@@ -59,7 +59,7 @@ class DailyParticipation: BasePopupVC {
     
     @IBAction func onClickSet(_ sender: Any) {
         if selected != .None {
-            delegate?.dailyPicker(selected: self.selected == .To ? .To : .From, view: self)
+            NavigationManager.openNotificationFrequency(self, for: self.selected == .To ? .To : .From, view: self, isForSubview: true)
         } else {
             NavigationManager.dismiss(self)
         }
