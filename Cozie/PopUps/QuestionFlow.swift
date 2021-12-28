@@ -62,7 +62,7 @@ class QuestionFlow: BasePopupVC {
     private func fillUpdata(){
         for i in 0...7 {
             self.buttonArray[i].isSelected = questions[i]
-            self.buttonArray[i].backgroundColor = buttonArray[i].isSelected ? UIColor.lightGray : UIColor.systemBackground
+            self.buttonArray[i].backgroundColor = buttonArray[i].isSelected ? primaryColour : UIColor.systemBackground
             self.buttonArray[i].layer.cornerRadius = buttonArray[i].frame.height / 2
             
             self.viewBtnArray[i].layer.cornerRadius = viewBtnArray[i].frame.height / 2
@@ -100,7 +100,7 @@ class QuestionFlow: BasePopupVC {
     private func functionality(i: Int, view: UIView, button: UIButton){
         button.isSelected = !button.isSelected
         self.questions[i] = button.isSelected
-        button.backgroundColor = button.isSelected ? UIColor.lightGray : UIColor.systemBackground
+        button.backgroundColor = button.isSelected ? primaryColour : UIColor.systemBackground
     }
     
     

@@ -91,7 +91,7 @@ class HomePageViewController: UIViewController {
         self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
         self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
         
-        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? Date()).get24FormateTimeString() + " hour"
+        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq).get24FormateTimeString() + " hour"
         
         self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
         self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]
@@ -127,8 +127,8 @@ class HomePageViewController: UIViewController {
         
         self.labelParticipationDays.text = String(days.dropLast(2))
         
-        self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? Date()).get24FormateTimeString() + "hrs"
-        self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? Date()).get24FormateTimeString() + "hrs"
+        self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormateTimeString() + "hrs"
+        self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormateTimeString() + "hrs"
         self.labelParticipationHours.text = self.fromTime + " - " + self.ToTime
     }
 }

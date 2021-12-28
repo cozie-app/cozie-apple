@@ -142,7 +142,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
         case .questionFlow, .notificationFrequency, .participationDays, .dailyParticipationHours:
             return ""
         case .downloadData:
-            return "consentForm"
+            return imgDownload
         }
     }
     var constrainsSwitch: Bool {
@@ -204,9 +204,9 @@ enum AboutOptions: Int, CaseIterable, SectionType {
     var imageName: String {
         switch self {
         case .cozie:
-            return "githubLogo"
+            return imgGithub
         case .budsLab:
-            return "consentForm"//"budsLabIcon"
+            return imgBudsLab
         }
     }
     var constrainsSwitch: Bool {

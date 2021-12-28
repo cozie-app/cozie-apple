@@ -36,14 +36,14 @@ class NotificationFrequency: BasePopupVC {
     func setupFilledData() {
         switch viewType {
         case .NotificationFrequency:
-            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? Date()
+            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq
         case .From:
-            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? Date()
+            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime
             self.titleLabel.text = TimePickerType.From.rawValue
             self.titleLabel.textAlignment = .center
             self.subtitleLabel.isHidden = true
         case .To:
-            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? Date()
+            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime
             self.titleLabel.text = TimePickerType.To.rawValue
             self.titleLabel.textAlignment = .center
             self.subtitleLabel.isHidden = true

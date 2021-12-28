@@ -203,6 +203,9 @@ class OptionsIC: WKInterfaceController {
             self.pushController(withName: "OptionsIC", context: index)
         } else {
             self.pushController(withName: "feedback", context: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.popToRootController()
+            }
         }
     }
     
