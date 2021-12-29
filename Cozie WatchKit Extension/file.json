@@ -1,0 +1,328 @@
+{
+  "Thermal": [
+    {
+      "title": "How would you prefer to be?",
+      "identifier": "tc-preference",
+      "options": [
+        "Cooler",
+        "No Change",
+        "Warmer"
+      ],
+      "icons": [
+        "tp-cooler",
+        "comfortable",
+        "tp-warmer"
+      ],
+      "nextQuestion": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "title": "Where are you?",
+      "identifier": "location-place",
+      "options": [
+        "Home",
+        "Office",
+        "Vehicle",
+        "Other"
+      ],
+      "icons": [
+        "loc-home",
+        "loc-office",
+        "loc-vehicle",
+        "loc-other"
+      ],
+      "nextQuestion": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "title": "What clothes are you wearing?",
+      "identifier": "clo",
+      "options": [
+        "Very light",
+        "Light",
+        "Medium",
+        "Heavy"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium",
+        "clo-heavy"
+      ],
+      "nextQuestion": [
+        3,
+        3,
+        3,
+        3
+      ]
+    }
+  ],
+  "Privacy": [
+    {
+      "title": "Alone or in a group?",
+      "identifier": "",
+      "options": [
+        "Alone",
+        "Online",
+        "Group"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium"
+      ],
+      "nextQuestion": [
+        4,
+        1,
+        1
+      ]
+    },
+    {
+      "title": "Category of activity?",
+      "identifier": "",
+      "options": [
+        "Socialize",
+        "Collaborate",
+        "Learn"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium"
+      ],
+      "nextQuestion": [
+        2,
+        3,
+        3
+      ]
+    },
+    {
+      "title": "Possibly distracting others?",
+      "identifier": "",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "icons": [
+        "yes",
+        "no"
+      ],
+      "nextQuestion": [
+        3,
+        3
+      ]
+    },
+    {
+      "title": "Distractions nearby?",
+      "identifier": "",
+      "options": [
+        "None",
+        "A little",
+        "A lot"
+      ],
+      "icons": [
+        "yes",
+        "no",
+        "no"
+      ],
+      "nextQuestion": [
+        5,
+        6,
+        6
+      ]
+    },
+    {
+      "title": "Category of activity?",
+      "identifier": "",
+      "options": [
+        "Focus",
+        "Leisure"
+      ],
+      "icons": [
+        "met-sitting",
+        "no"
+      ],
+      "nextQuestion": [
+        3,
+        3
+      ]
+    },
+    {
+      "title": "Feeling like you need more privacy?",
+      "identifier": "",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "icons": [
+        "yes",
+        "no"
+      ],
+      "nextQuestion": [
+        7,
+        10
+      ]
+    },
+    {
+      "title": "What kind of distraction",
+      "identifier": "",
+      "options": [
+        "Visual",
+        "Audio",
+        "Others"
+      ],
+      "icons": [
+        "yes",
+        "no",
+        "yes"
+      ],
+      "nextQuestion": [
+        5,
+        5,
+        8
+      ]
+    },
+    {
+      "title": "Why is more privacy needed?",
+      "identifier": "",
+      "options": [
+        "See me",
+        "Hear me",
+        "Both"
+      ],
+      "icons": [
+        "yes",
+        "no",
+        "yes"
+      ],
+      "nextQuestion": [
+        9,
+        10,
+        10
+      ]
+    },
+    {
+      "title": "What is it?",
+      "identifier": "",
+      "options": [
+        "Thermal",
+        "Scent",
+        "Glare"
+      ],
+      "icons": [
+        "yes",
+        "no",
+        "yes"
+      ],
+      "nextQuestion": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "title": "What do people see?",
+      "identifier": "",
+      "options": [
+        "Appearance",
+        "Work",
+        "Behaviour"
+      ],
+      "icons": [
+        "yes",
+        "no",
+        "yes"
+      ],
+      "nextQuestion": [
+        10,
+        10,
+        10
+      ]
+    }
+  ],
+  "IDRP": [
+    {
+      "title": "Do your surroundings increase infection risk?",
+      "identifier": "",
+      "options": [
+        "A ittle",
+        "Not at all",
+        "A lot"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium"
+      ],
+      "nextQuestion": [
+        2,
+        1,
+        2
+      ]
+    },
+    {
+      "title": "Currently, how many people are within 5m?",
+      "identifier": "",
+      "options": [
+        "0 pax",
+        "1-3 pax",
+        "5+ pax"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium"
+      ],
+      "nextQuestion": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "title": "What cause more risk?",
+      "identifier": "",
+      "options": [
+        "Ventilation",
+        "People",
+        "Surface"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium"
+      ],
+      "nextQuestion": [
+        1,
+        3,
+        1
+      ]
+    },
+    {
+      "title": "Specifically, what concerns you?",
+      "identifier": "",
+      "options": [
+        "Density",
+        "Proximity",
+        "Both"
+      ],
+      "icons": [
+        "clo-very-light",
+        "clo-light",
+        "clo-medium"
+      ],
+      "nextQuestion": [
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}

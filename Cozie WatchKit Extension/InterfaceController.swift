@@ -12,12 +12,18 @@ import CoreLocation
 import HealthKit
 import WatchConnectivity
 
+struct QuestionResponse: Codable {
+    var Thermal: [Question]
+    var Privacy: [Question]
+    var IDRP: [Question]
+}
+
 // structure which is used to store the questions prompted to the user
-struct Question {
+struct Question: Codable {
     let title: String
     let options: Array<String>
     let icons: Array<String>
-    let nextQuestion: Array<Int>
+    var nextQuestion: Array<Int>
     let identifier: String
 }
 
@@ -359,42 +365,11 @@ extension InterfaceController {
     }
     
     private func thermalQuestion() {
-        let index = self.questions.count
-        self.questions += [
-            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
-                    icons: ["tp-cooler", "comfortable", "tp-warmer"], nextQuestion: [index + 1,index +  1,index +  1], identifier: "tc-preference"),
-            Question(title: "Where are you?", options: ["Home", "Office", "Vehicle", "Other"], icons: ["loc-home", "loc-office", "loc-vehicle", "loc-other"],
-                    nextQuestion: [index + 2,index +  2,index +  2,index +  2], identifier: "location-place"),
-            Question(title: "What clothes are you wearing?", options: ["Very light", "Light", "Medium", "Heavy"],
-                     icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [index + 3, index + 3,index + 3,index + 3], identifier: "clo")]
+        self.read(type: .Thermal)
     }
     
     private func IDRPQuestion() {
-        let index = self.questions.count
-        self.questions += [
-            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["loc-indoor", "loc-outdoor"],
-                     nextQuestion: [index + 1, index + 1], identifier: "location-in-out"),
-            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Sitting", "Standing", "Exercising"],
-                     icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercising"], nextQuestion: [index + 2, index + 2, index + 2, index + 2],
-                     identifier: "met"),
-            Question(title: "Can you perceive air movement?", options: ["Yes", "No"],
-                     icons: ["yes", "no"], nextQuestion: [index + 3, index + 3], identifier: "air-speed"),
-            Question(title: "Should the light be?", options: ["Dimmer", "No change", "Brighter"],
-                     icons: ["light-dim", "light-comf", "light-bright"], nextQuestion: [index + 4, index + 4, index + 4], identifier: "light"),
-            Question(title: "Any changes in the last 10-min?",
-                     options: ["Yes", "No"], icons: ["yes", "no"], nextQuestion: [index + 5, index + 5], identifier: "any-change"),
-            Question(title: "The air is ...", options: ["Stuffy", "Fresh"],
-                     icons: ["air-quality-smelly", "air-quality-fresh"], nextQuestion: [index + 6, index + 6],
-                     identifier: "air-quality"),
-            Question(title: "Do you feel ... ?", options: ["Sleepy", "Alert"],
-                     icons: ["alertness-sleepy", "alertness-alert"], nextQuestion: [index + 7, index + 7],
-                     identifier: "alertness"),
-            Question(title: "The space is ...", options: ["Too Quiet", "Comfortable", "Too noisy"],
-                     icons: ["noise-quiet", "noise-no-change", "noise-noisy"], nextQuestion: [index + 8, index + 8, index + 8],
-                     identifier: "noise"),
-            Question(title: "Should the air movement be?", options: ["Less", "No Change", "More"],
-                     icons: ["air-mov-less", "air-mov-no-change", "air-mov-more"], nextQuestion: [index + 9, index + 9, index + 9],
-                     identifier: "air-movement")]
+        self.read(type: .IDRP)
     }
     
     private func PDPQuestion() {
@@ -419,5 +394,48 @@ extension InterfaceController {
         // Last question MUST have nextQuestion set to 999, the first question is question 0
         self.questions += [Question(title: "Thank you!!!", options: ["Submit survey"],
                                    icons: ["submit"], nextQuestion: [999], identifier: "end")]
+    }
+}
+
+extension InterfaceController {
+    private func read(type: QuestionFlow) {
+        if let data = self.readLocalFile(forName: "file") {
+            do {
+                var data = try JSONDecoder().decode(QuestionResponse.self, from: data)
+                switch type {
+                case .Thermal: self.add(questions: &data.Thermal)
+                case .IDRP: self.add(questions: &data.IDRP)
+                case .PDP: self.add(questions: &data.Privacy)
+                case .MF: break
+                case .ThermalMini: break
+                case .IDRPMini: break
+                case .PDPMini: break
+                case .MFMini: break
+                }
+            } catch (let error) {
+                print(error)
+            }
+        }
+    }
+    
+    private func add(questions: inout [Question]) {
+        let index = self.questions.count
+        for (i, question) in questions.enumerated() {
+            questions[i].nextQuestion = question.nextQuestion.map{$0}.map{$0+index}
+        }
+        self.questions += questions
+    }
+    
+    private func readLocalFile(forName name: String) -> Data? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name,
+                                                 ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch {
+            print(error)
+        }
+        return nil
     }
 }

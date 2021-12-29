@@ -6,7 +6,6 @@
 //  Copyright © 2021 Federico Tartarini. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 let defaultFromTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
