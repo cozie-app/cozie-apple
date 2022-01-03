@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TimePickerDelegate {
+protocol TimePickerDelegate: AnyObject {
     func dailyPicker(selected type: NotificationFrequency.TimePickerType, view: UIViewController)
 }
 

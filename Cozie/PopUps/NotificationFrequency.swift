@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol timeSetDelegate {
+protocol timeSetDelegate: AnyObject {
     func reload()
 }
 
