@@ -17,3 +17,4 @@ let primaryColour = UIColor(named: "primaryColour")
 let imgGithub = "githubLogo"
 let imgBudsLab = "budsLabIcon"
 let imgDownload = "downloadData"
+let folderName = "Cozie"
