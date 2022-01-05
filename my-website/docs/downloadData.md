@@ -25,7 +25,7 @@ import pandas as pd
 
 YOUR_TIMEZONE = 'Asia/Singapore'
 USER_ID = 'XXXXXXX'
-WEEKS = "10"
+WEEKS = "10"         # Number of weeks from which the data is retrived, starting from now
 API_KEY = 'YYYYYY'
 
 payload = {'user_id': USER_ID, 'weeks': WEEKS}
