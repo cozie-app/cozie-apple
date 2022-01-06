@@ -35,10 +35,16 @@
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29048F2E27797D190086DCC5 /* BasePopupVC.swift */; };
+		294A9A8A2786EBE1003416BA /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C268652786C17E00DC5C22 /* PersistentStorage.swift */; };
+		294A9A8E2786EBE8003416BA /* Cozie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */; };
+		294A9A8F2786EBEC003416BA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */; };
 		2978ADE4277C18B3005E49C7 /* file.json in Resources */ = {isa = PBXBuildFile; fileRef = 2978ADE3277C18B2005E49C7 /* file.json */; };
 		299604CF277B1734003A326E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299604CE277B1734003A326E /* Constant.swift */; };
 		29B824A0276CA5AA00BB002D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B8249F276CA5AA00BB002D /* Extension.swift */; };
 		29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B824A4276CBAD600BB002D /* NavigationManager.swift */; };
+		29C268662786C17E00DC5C22 /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C268652786C17E00DC5C22 /* PersistentStorage.swift */; };
+		29C268692786C1A800DC5C22 /* Cozie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */; };
+		29C2686B2786C6C500DC5C22 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */; };
 		29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF171276B10D700AA3E32 /* UserDefaults.swift */; };
 		29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */; };
 		29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */; };
@@ -223,6 +229,9 @@
 		299604CE277B1734003A326E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		29B8249F276CA5AA00BB002D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		29B824A4276CBAD600BB002D /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		29C268652786C17E00DC5C22 /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
+		29C268682786C1A800DC5C22 /* Cozie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cozie.xcdatamodel; sourceTree = "<group>"; };
+		29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		29CCF171276B10D700AA3E32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationDays.swift; sourceTree = "<group>"; };
 		29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipationDays.xib; sourceTree = "<group>"; };
@@ -399,6 +408,16 @@
 			path = Media;
 			sourceTree = "<group>";
 		};
+		29C268612786C12300DC5C22 /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				29C268652786C17E00DC5C22 /* PersistentStorage.swift */,
+				29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */,
+				29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */,
+			);
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
 		29E7F943276DEDF2008B0E8D /* Health */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +482,7 @@
 		E469469924BC54AF0013134B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				29C268612786C12300DC5C22 /* LocalStorage */,
 				29E7F943276DEDF2008B0E8D /* Health */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
@@ -1042,6 +1062,7 @@
 				29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */,
 				E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
+				29C268692786C1A800DC5C22 /* Cozie.xcdatamodeld in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
 				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
@@ -1050,6 +1071,7 @@
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
 				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
 				29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */,
+				29C268662786C17E00DC5C22 /* PersistentStorage.swift in Sources */,
 				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
 				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
@@ -1059,6 +1081,7 @@
 				29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */,
 				1C4911169339110949F69150 /* TaskEligibility.swift in Sources */,
 				0465B61427719A910062228C /* WeeklySurvey.swift in Sources */,
+				29C2686B2786C6C500DC5C22 /* CoreDataManager.swift in Sources */,
 				1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */,
 				E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */,
 				E43CAA8524C80F5500461DD1 /* UserInfoHeader.swift in Sources */,
@@ -1102,11 +1125,14 @@
 				29EB37EB2775914E00914F6D /* Controllers.swift in Sources */,
 				E4838287247BA33C002C3708 /* NotificationController.swift in Sources */,
 				E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */,
+				294A9A8A2786EBE1003416BA /* PersistentStorage.swift in Sources */,
+				294A9A8E2786EBE8003416BA /* Cozie.xcdatamodeld in Sources */,
 				E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */,
 				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
 				1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */,
 				E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */,
 				E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */,
+				294A9A8F2786EBEC003416BA /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1652,6 +1678,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				29C268682786C1A800DC5C22 /* Cozie.xcdatamodel */,
+			);
+			currentVersion = 29C268682786C1A800DC5C22 /* Cozie.xcdatamodel */;
+			path = Cozie.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E483823C247BA33A002C3708 /* Project object */;
 }
