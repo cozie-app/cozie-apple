@@ -67,7 +67,7 @@
   "Privacy": [
     {
       "title": "Alone or in a group?",
-      "identifier": "",
+      "identifier": "alone-group",
       "options": [
         "Alone",
         "Online",
@@ -86,7 +86,7 @@
     },
     {
       "title": "Category of activity?",
-      "identifier": "",
+      "identifier": "activity",
       "options": [
         "Socialize",
         "Collaborate",
@@ -105,7 +105,7 @@
     },
     {
       "title": "Possibly distracting others?",
-      "identifier": "",
+      "identifier": "distracting",
       "options": [
         "Yes",
         "No"
@@ -121,7 +121,7 @@
     },
     {
       "title": "Distractions nearby?",
-      "identifier": "",
+      "identifier": "distractions",
       "options": [
         "None",
         "A little",
@@ -140,7 +140,7 @@
     },
     {
       "title": "Category of activity?",
-      "identifier": "",
+      "identifier": "activity",
       "options": [
         "Focus",
         "Leisure"
@@ -156,7 +156,7 @@
     },
     {
       "title": "Feeling like you need more privacy?",
-      "identifier": "",
+      "identifier": "more-privacy",
       "options": [
         "Yes",
         "No"
@@ -172,7 +172,7 @@
     },
     {
       "title": "What kind of distraction",
-      "identifier": "",
+      "identifier": "kind-distraction",
       "options": [
         "Visual",
         "Audio",
@@ -191,7 +191,7 @@
     },
     {
       "title": "Why is more privacy needed?",
-      "identifier": "",
+      "identifier": "more-privacy",
       "options": [
         "See me",
         "Hear me",
@@ -210,7 +210,7 @@
     },
     {
       "title": "What is it?",
-      "identifier": "",
+      "identifier": "what-privacy",
       "options": [
         "Thermal",
         "Scent",
@@ -229,7 +229,7 @@
     },
     {
       "title": "What do people see?",
-      "identifier": "",
+      "identifier": "people-see",
       "options": [
         "Appearance",
         "Work",
@@ -250,7 +250,7 @@
   "IDRP": [
     {
       "title": "Do your surroundings increase infection risk?",
-      "identifier": "",
+      "identifier": "surroundings-infection",
       "options": [
         "A ittle",
         "Not at all",
@@ -269,7 +269,7 @@
     },
     {
       "title": "Currently, how many people are within 5m?",
-      "identifier": "",
+      "identifier": "within-5m",
       "options": [
         "0 pax",
         "1-3 pax",
@@ -288,7 +288,7 @@
     },
     {
       "title": "What cause more risk?",
-      "identifier": "",
+      "identifier": "cause-risk",
       "options": [
         "Ventilation",
         "People",
@@ -307,7 +307,7 @@
     },
     {
       "title": "Specifically, what concerns you?",
-      "identifier": "",
+      "identifier": "concerns",
       "options": [
         "Density",
         "Proximity",
