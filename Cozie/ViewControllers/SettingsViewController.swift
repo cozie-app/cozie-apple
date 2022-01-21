@@ -13,22 +13,9 @@ import FirebaseAuth
 
 private let reuseIdentifier = "SettingsCell"
 
-class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewControllerDelegate {
+class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
     
     @IBOutlet weak var settingsTableView: UITableView!
-    
-    // session is the connection session between the phone and the watch
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    }
-
-    func sessionDidBecomeInactive(_ session: WCSession) {
-    }
-
-    func sessionDidDeactivate(_ session: WCSession) {
-    }
-    
-    func sessionReachabilityDidChange(_ session: WCSession) {
-    }
 
     var session: WCSession?
 
@@ -101,14 +88,17 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
         
-        // check if watch connectivity is supported and activate it
-        if WCSession.isSupported() {
-            
-            // send participant id to watch
-            // improvement show popup if message failed
-            session?.sendMessage(["participantID": userFirebaseUID], replyHandler: nil, errorHandler: {err in print("did not send participant id")}
-            )
+        WCSession.default.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? ""], replyHandler: nil) { error in
+            print(error.localizedDescription)
         }
+        // check if watch connectivity is supported and activate it
+//        if WCSession.isSupported() {
+//
+//            // send participant id to watch
+//            // improvement show popup if message failed
+//            session?.sendMessage(["participantID": userFirebaseUID], replyHandler: nil, errorHandler: {err in print("did not send participant id")}
+//            )
+//        }
     }
 
 }
@@ -224,9 +214,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .permissions:
-                if let viewController = self.tabBarController {
-                    NavigationManager.openPermissions(viewController)
-                }
+//                CoreDataManager.shared.createSurvey(surveys: [SurveyDetails(voteLog: 2, locationTimestamp: FormatDateISOString(date: Date()), startTimestamp: FormatDateISOString(date: Date()), endTimestamp: FormatDateISOString(date: Date()), participantID: "partId1111", deviceUUID: "deviId1", latitude: 1.11, longitude: 2.121, bodyMass: 34, responses: [QuestionAnswer(voteLog: 2, question: "how?", answer: "fine"), QuestionAnswer(voteLog: 2, question: "why?", answer: "joke")], heartRate: 87, isSync: false)])
+//                CoreDataManager.shared.readAllSurvey()
+                CoreDataManager.shared.deleteAllLocalStorage()
+                
+//                if let viewController = self.tabBarController {
+//                    NavigationManager.openPermissions(viewController)
+//                }
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -363,5 +357,28 @@ extension SettingsViewController {
         } catch {
             print("error creating file")
         }
+    }
+}
+
+extension SettingsViewController: WCSessionDelegate {
+//     session is the connection session between the phone and the watch
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+    }
+
+    func sessionReachabilityDidChange(_ session: WCSession) {
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        if let msg = message["isSurveyAdded"] as? Bool, msg == true {
+            // TODO: reload graph
+            print("reload graph")
+        }
+        print("receive \(message)")
     }
 }

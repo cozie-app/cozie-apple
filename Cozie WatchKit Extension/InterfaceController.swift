@@ -83,7 +83,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         // save on first startup the UUID in user defaults so it does not change
         uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
-
         // get participantID from the defaults if available
         participantID = userDefaults.string(forKey: "participantID") ?? "undefined"
 
@@ -102,8 +101,24 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.delegate = self
     }
+    
+    func sendMessageToPhone(message: [String:Any]) {
+        session.sendMessage(message) { message in
+            print("sent[\(message.values)]")
+        } errorHandler: { err in
+            print(err)
+        }
+    }
 
     // this function fires when a message from the phone is received
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        if let id = message["participantID"] as? String {
+            participantID = id
+            userDefaults.set(id, forKey: "participantID")
+        }
+        WKInterfaceDevice.current().play(.notification)
+    }
+    
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         participantID = message["participantID"] as! String
 
@@ -215,7 +230,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         tmpResponses[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
         currentQuestion = nextQuestion
-
         // check if user completed the survey
         if (currentQuestion == 999) {
             currentQuestion = 0  // reset question flow to start
@@ -229,11 +243,16 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
             let endTime = GetDateTimeISOString()
 
+            var qa: [QuestionAnswer] = []
+            tmpResponses.forEach { (question, answer) in
+                qa.append(QuestionAnswer(voteLog: voteLog, question: question, answer: answer))
+            }
+            CoreDataManager.shared.createSurvey(surveys: [SurveyDetails(voteLog: voteLog, locationTimestamp: locationTimestamp, startTimestamp: startTime, endTimestamp: endTime, participantID: participantID, deviceUUID: uuid, latitude: lat, longitude: long, bodyMass: bodyMass, responses: qa, heartRate: 1, isSync: false)])
             SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
                     participantID: participantID, deviceUUID: uuid,
                     locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses,
                     voteLog: voteLog, bodyMass: bodyMass))
-
+            self.sendMessageToPhone(message: ["isSurveyAdded":true])
             // clear temporary arrays
             tmpResponses.removeAll()
             tmpHearthRate.removeAll()
