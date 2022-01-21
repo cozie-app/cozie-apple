@@ -21,6 +21,7 @@ class DataViewController: UIViewController, ChartViewDelegate{
     private var responseValues = [Double]()
     private var chart1: BarChartView?
     private var chart2: BarChartView?
+    private var response = [Response]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +127,14 @@ class DataViewController: UIViewController, ChartViewDelegate{
     @objc func onClickDataDownloadView(_ :UITapGestureRecognizer ){
         let alert = UIAlertController(title: "Download Data", message: "Are you sure you want to download your data? This might take a few moments", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Download", style: .default, handler: { _ in
-            print("download")
+            Utilities.createJSON(dic: self.response)
+            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
+            let activityItems = [pathWithFilename]
+            let vc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            vc.popoverPresentationController?.sourceView = self.view
+            self.present(vc, animated: true, completion: nil)
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -135,6 +143,7 @@ class DataViewController: UIViewController, ChartViewDelegate{
 
 extension DataViewController {
     func reloadPage(forData: [Response]) {
+        self.response = forData
         let actualResponse = forData.filter { $0.voteLog != nil }
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
         var dateData = [String: Int]()

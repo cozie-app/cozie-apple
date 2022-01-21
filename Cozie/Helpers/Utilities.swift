@@ -67,6 +67,27 @@ class Utilities {
         return emailTest.evaluate(with: testStr)
     }
     
+    static func createJSON(dic: [Response]) {
+        var jsonString = ""
+        do {
+            let encoder = JSONEncoder()
+            let encoded = try encoder.encode(dic)
+            jsonString = String(decoding: encoded, as: UTF8.self)
+        } catch {
+            print(error)
+        }
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
+            do {
+                try jsonString.write(to: pathWithFilename,
+                                     atomically: true,
+                                     encoding: .utf8)
+            } catch {
+                print("failed to write JSON file :\(error.localizedDescription)")
+            }
+        }
+    }
+    
     static func getData(completion: @escaping ([Response]) -> Void) {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
@@ -109,4 +130,15 @@ struct Response: Codable {
     let longitude: Double?
     let user_id: String
     let voteLog: Int?
+    
+    func encode(to encoder: Encoder) throws {
+        var val = encoder.container(keyedBy: CodingKeys.self)
+        try val.encode(startTimestamp, forKey: .startTimestamp)
+        try val.encode(endTimestamp, forKey: .endTimestamp)
+        try val.encode(locationTimestamp, forKey: .locationTimestamp)
+        try val.encode(latitude, forKey: .latitude)
+        try val.encode(longitude, forKey: .longitude)
+        try val.encode(user_id, forKey: .user_id)
+        try val.encode(voteLog, forKey: .voteLog)
+    }
 }

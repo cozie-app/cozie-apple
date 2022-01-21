@@ -350,9 +350,7 @@ extension SettingsViewController {
             dic.updateValue("NameForEmployee id = \(i)" as AnyObject, forKey: "EmpName")
             employeeArray.append(dic)
         }
-        
-        checkFilePath()
-        
+                
         var csvString = "\("Employee ID"), \("Employee Name")\n\n"
         for dic in employeeArray {
             csvString = csvString.appending("\(String(describing: dic["EmpID"]!)) , \(String(describing: dic["EmpName"]!))\n")
@@ -360,54 +358,10 @@ extension SettingsViewController {
         
         do {
             let path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false).appendingPathComponent(folderName)
-            let fileURL = path.appendingPathComponent(randomName + ".csv")
+            let fileURL = path.appendingPathComponent("data.csv")
             try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
         } catch {
             print("error creating file")
         }
-        createJSON()
-    }
-    
-    func createJSON() {
-        var jsonString = ""
-        
-        let dic = ["HeartRate": "107", "Noise": "12", "BloodOxygen": "98", "Date": "2022-01-01T03:32:30.755Z", "Question1": "Answer1", "Question2": "Answer2"]
-        
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
-            jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
-        } catch {
-            print("failed to convert to json String (BadString):\(error.localizedDescription)")
-        }
-
-        if let documentDirectory = FileManager.default.urls(for: .documentDirectory,
-                                                            in: .userDomainMask).first {
-            let pathWithFilename = documentDirectory.appendingPathComponent(folderName).appendingPathComponent(randomName + ".json")
-            do {
-                try jsonString.write(to: pathWithFilename,
-                                     atomically: true,
-                                     encoding: .utf8)
-            } catch {
-                print("failed to write JSON file :\(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func checkFilePath() {
-        let a = ((NSHomeDirectory() as NSString).appendingPathComponent("Documents") as String) + "/" + folderName
-        if !FileManager.default.fileExists(atPath: a) {
-            do {
-                try FileManager.default.createDirectory(atPath: a, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print("failed to create folder :\(error.localizedDescription)")
-            }
-        }
-    }
-    
-    var randomName: String {
-        UUID().uuidString
-        // TODO: uniqe fileName?
-        // UUID().uuidString
-        // return String(Date().timeIntervalSinceReferenceDate)
     }
 }
