@@ -15,8 +15,12 @@ class DataViewController: UIViewController, ChartViewDelegate{
     @IBOutlet weak var graphView1: UIView!
     @IBOutlet weak var graphView2: UIView!
     @IBOutlet weak var dataDownloadView: UIView!
-    var stringVal1 = ["02/12/2021", "03/12/2021", "04/12/2021"]
-    let stringVal2 = ["Valid Responses", "Goal"]
+    
+    private var dateValues = [String]()
+    private let validResValues = ["Valid Responses", "Goal"]
+    private var responseValues = [Double]()
+    private var chart1: BarChartView?
+    private var chart2: BarChartView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,7 @@ class DataViewController: UIViewController, ChartViewDelegate{
         dataDownloadView.addGestureRecognizer(tap)
         
         let barChartView1 = barChart()
+        self.chart1 = barChartView1
         graphView1.addSubview(barChartView1)
         
         barChartView1.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +40,7 @@ class DataViewController: UIViewController, ChartViewDelegate{
         barChartView1.bottomAnchor.constraint(equalTo: self.graphView1.layoutMarginsGuide.bottomAnchor).isActive = true
         
         let barChartView2 = barChart()
+        self.chart2 = barChartView2
         graphView2.addSubview(barChartView2)
         
         barChartView2.translatesAutoresizingMaskIntoConstraints = false
@@ -43,23 +49,42 @@ class DataViewController: UIViewController, ChartViewDelegate{
         barChartView2.topAnchor.constraint(equalTo: self.graphView2.layoutMarginsGuide.topAnchor).isActive = true
         barChartView2.bottomAnchor.constraint(equalTo: self.graphView2.layoutMarginsGuide.bottomAnchor).isActive = true
         
-        let yValues1:[BarChartDataEntry] = [
-            BarChartDataEntry(x: 0, y: 9),
-            BarChartDataEntry(x: 1, y: 6),
-            BarChartDataEntry(x: 2, y: 12)
-        ]
+        self.setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Utilities.getData { data in
+            self.reloadPage(forData: data)
+        }
+    }
+    
+    private func setupUI() {
+        
+        dateValues.removeAll()
+        responseValues.removeAll()
+        let data = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.dayData.rawValue) as? [String: Int]
+        data?.forEach({ (date,response) in
+            dateValues.append(date)
+            responseValues.append(Double(response))
+        })
+        
+        var yValues1:[BarChartDataEntry] = []
+        for (index, value) in self.responseValues.enumerated() {
+            yValues1.append(BarChartDataEntry(x: Double(index), y: value))
+        }
         
         let yValues2:[BarChartDataEntry] = [
-            BarChartDataEntry(x: 0, y: 55),
-            BarChartDataEntry(x: 1, y: 80)
+            BarChartDataEntry(x: 0, y: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Double ?? 0.0),
+            BarChartDataEntry(x: 1, y: 20)
         ]
         
-        self.setChartValue(values: yValues1,barChartView: barChartView1)
-        barChartView1.xAxis.labelCount = self.stringVal1.count
-        barChartView1.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.stringVal1)
-        self.setChartValue(values: yValues2, barChartView: barChartView2)
-        barChartView2.xAxis.labelCount = self.stringVal2.count
-        barChartView2.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.stringVal2)
+        self.setChartValue(values: yValues1,barChartView: self.chart1!)
+        self.chart1?.xAxis.labelCount = self.dateValues.count
+        self.chart1?.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.dateValues)
+        self.setChartValue(values: yValues2, barChartView: self.chart2!)
+        self.chart2?.xAxis.labelCount = self.validResValues.count
+        self.chart2?.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.validResValues)
     }
     
     private func barChart() -> BarChartView{
@@ -105,5 +130,25 @@ class DataViewController: UIViewController, ChartViewDelegate{
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension DataViewController {
+    func reloadPage(forData: [Response]) {
+        let actualResponse = forData.filter { $0.voteLog != nil }
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
+        var dateData = [String: Int]()
+        actualResponse.forEach { response in
+            if let date = FormateISOStringDate(ISO: response.endTimestamp) {
+                print(date.getDayString())
+                if dateData[date.getDayString()] != nil {
+                    dateData[date.getDayString()]? += 1
+                } else {
+                    dateData[date.getDayString()] = 1
+                }
+            }
+        }
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.dayData.rawValue, value: dateData)
+        self.setupUI()
     }
 }

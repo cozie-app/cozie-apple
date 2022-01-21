@@ -13,6 +13,7 @@ target 'Cozie' do
   pod 'FirebaseFirestoreSwift'
   pod 'Charts'
   pod 'IQKeyboardManagerSwift'
+  pod 'Alamofire', '~> 4.5'
   # Pods for Cozie
 
   target 'CozieTests' do

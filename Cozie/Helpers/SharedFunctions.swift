@@ -18,6 +18,12 @@ public func FormatDateISOString(date: Date) -> String {
     return formatter.string(from: date)
 }
 
+public func FormateISOStringDate(ISO: String) -> Date? {
+    let formatter = ISO8601DateFormatter()
+    formatter.formatOptions.insert(.withFractionalSeconds)
+    return formatter.date(from: ISO)
+}
+
 // get document directory
 public func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

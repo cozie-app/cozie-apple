@@ -22,6 +22,8 @@ extension UserDefaults {
         case permissions
         case participantID
         case experimentID
+        case totalValidResponse
+        case dayData
     }
     
     func setValue(for key: String, value: Any) {

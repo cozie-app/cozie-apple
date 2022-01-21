@@ -15,6 +15,26 @@ extension Date {
         timeFormatter.dateFormat = "HH:mm"
         return timeFormatter.string(from: self)
     }
+    
+    func getDayString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let stringDate = dateFormatter.string(from: self)
+        return stringDate
+    }
+}
+
+extension String {
+    func date() -> Date {
+        if self != "" {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            guard let date = dateFormatter.date(from: self) else { return Date() }
+            return date
+        } else {
+            return Date()
+        }
+    }
 }
 
 extension UIView {

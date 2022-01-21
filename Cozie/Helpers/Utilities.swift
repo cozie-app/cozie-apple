@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 class Utilities {
     static func styledTextField(_ textField: UITextField) {
@@ -65,5 +66,47 @@ class Utilities {
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
     }
+    
+    static func getData(completion: @escaping ([Response]) -> Void) {
+        
+        let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
+        
+        let headers = ["x-api-key":"k6iy7nxkBn9hTvScq2vHV8qhXMLl95oA2zlNdA8h",
+                       "Accept":"application/json",
+                       "Content-Type":"application/json"]
+        
+        let req = Alamofire.request("https://0iecjae656.execute-api.us-east-1.amazonaws.com/default/CozieApple_Read_Influx", method: .get, parameters: param, headers: headers).responseJSON { (response) in
+            if let responseCode = response.response?.statusCode {
+                if responseCode == 200 {
+                    if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? String {
+                        if let ana = (try? JSONSerialization.jsonObject(with: Data(data.utf8), options: .fragmentsAllowed) as? NSDictionary) {
+                            var totalData = [Response]()
+                            ana.forEach { element in
+                                do {
+                                    let data = try JSONSerialization.data(withJSONObject:element.value , options: .prettyPrinted)
+                                    let responseData = try JSONDecoder().decode(Response.self, from: data)
+                                    totalData.append(responseData)
+                                } catch {
+                                }
+                            }
+                            completion(totalData)
+                        }
+                    } else {
+                        print("error")
+                    }
+                }
+            }
+        }
+        debugPrint(req)
+    }
+}
 
+struct Response: Codable {
+    let startTimestamp: String
+    let endTimestamp: String
+    let locationTimestamp: String
+    let latitude: Double?
+    let longitude: Double?
+    let user_id: String
+    let voteLog: Int?
 }
