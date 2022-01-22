@@ -251,7 +251,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 if let viewController = self.tabBarController {
                     NavigationManager.openDailyParticipation(viewController)
                 }
-            case .downloadData: print("downloadData clicked")
+            case .downloadData: Utilities.downloadData(self)
             }
         case .OnboardingProcess:
             guard let buttonClicked = OnboardingProcessOptions(rawValue: indexPath.row) else {

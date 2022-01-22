@@ -88,6 +88,19 @@ class Utilities {
         }
     }
     
+    static func downloadData(_ sender: UIViewController) {
+        self.getData { data in
+            self.createJSON(dic: data)
+            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
+            let activityItems = [pathWithFilename]
+            let vc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            vc.popoverPresentationController?.sourceView = sender.view
+            sender.present(vc, animated: true, completion: nil)
+            }
+        }
+    }
+    
     static func getData(completion: @escaping ([Response]) -> Void) {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
