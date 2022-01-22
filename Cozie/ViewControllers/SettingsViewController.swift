@@ -88,7 +88,7 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
         
-        WCSession.default.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? ""], replyHandler: nil) { error in
+        WCSession.default.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
             print(error.localizedDescription)
         }
         // check if watch connectivity is supported and activate it
@@ -214,13 +214,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .permissions:
-//                CoreDataManager.shared.createSurvey(surveys: [SurveyDetails(voteLog: 2, locationTimestamp: FormatDateISOString(date: Date()), startTimestamp: FormatDateISOString(date: Date()), endTimestamp: FormatDateISOString(date: Date()), participantID: "partId1111", deviceUUID: "deviId1", latitude: 1.11, longitude: 2.121, bodyMass: 34, responses: [QuestionAnswer(voteLog: 2, question: "how?", answer: "fine"), QuestionAnswer(voteLog: 2, question: "why?", answer: "joke")], heartRate: 87, isSync: false)])
-//                CoreDataManager.shared.readAllSurvey()
-                CoreDataManager.shared.deleteAllLocalStorage()
-                
-//                if let viewController = self.tabBarController {
-//                    NavigationManager.openPermissions(viewController)
-//                }
+                if let viewController = self.tabBarController {
+                    NavigationManager.openPermissions(viewController)
+                }
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:

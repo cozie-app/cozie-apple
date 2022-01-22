@@ -148,7 +148,8 @@ extension ProfileDataStore {
         healthStore.execute(sampleQuery)
     }
     
-    static private func setUpBackgroundDeliveryForDataTypes(types: Set<HKObjectType>) {
+    static func setUpBackgroundDeliveryForDataTypes() {
+        let types = self.dataTypesToRead()
         for type in types {
             guard let sampleType = type as? HKSampleType else { print("ERROR: \(type) is not an HKSampleType"); continue }
             self.backgroundQuery = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
@@ -172,11 +173,26 @@ extension ProfileDataStore {
         // }
         switch type {
         case HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!:
-            debugPrint("HKQuantityTypeIdentifier environmentalAudioExposure")
+            self.getNoise { noise in
+                if let noise = noise {
+                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue, value: noise)
+                    Utilities.sendHealthData()
+                }
+            }
         case HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.oxygenSaturation)!:
-            debugPrint("HKQuantityTypeIdentifier oxygenSaturation")
+            self.getBloodOxygen { bloodOxygen in
+                if let bloodOxygen = bloodOxygen {
+                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBloodOxygen.rawValue, value: bloodOxygen)
+                    Utilities.sendHealthData()
+                }
+            }
         case HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!:
-            debugPrint("HKQuantityTypeIdentifier heartRate")
+            self.getHeartRate { heartRate in
+                if let heartRate = heartRate {
+                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue, value: heartRate)
+                    Utilities.sendHealthData()
+                }
+            }
         case is HKWorkoutType:
             debugPrint("HKWorkoutType")
         default: debugPrint("Unhandled HKObjectType: \(type)")
@@ -185,12 +201,8 @@ extension ProfileDataStore {
     
     static private func dataTypesToRead() -> Set<HKObjectType> {
         return Set(arrayLiteral:
-                    HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.dateOfBirth)!,
-                   HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.biologicalSex)!,
-                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!,
-                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!,
-                   HKObjectType.workoutType())
+                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.environmentalAudioExposure)!,
+                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.oxygenSaturation)!,
+                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!)
     }
 }
-
-//self.setUpBackgroundDeliveryForDataTypes(types: dataTypesToRead())

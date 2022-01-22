@@ -116,14 +116,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             participantID = id
             userDefaults.set(id, forKey: "participantID")
         }
+        if let question = message["questions"] as? [Bool] {
+            userDefaults.set(question, forKey: "questions")
+            defineQuestions()
+        }
         WKInterfaceDevice.current().play(.notification)
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        participantID = message["participantID"] as! String
-
-        userDefaults.set(participantID, forKey: "participantID")
-
+        if let question = message["questions"] as? [Bool] {
+            userDefaults.set(question, forKey: "questions")
+            defineQuestions()
+        }
+        if let id = message["participantID"] as? String {
+            participantID = id
+            userDefaults.set(id, forKey: "participantID")
+        }
         // vibrate the watch to notify the user that it worked
         WKInterfaceDevice.current().play(.notification)
     }
@@ -263,8 +271,37 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     private func defineQuestions() {
-        // TODO: get types from userDefaults (make it shared btn mobile and watch) or through same login
-        self.addQuestions(ofType: [.Thermal, .IDRP])
+        let questions = userDefaults.object(forKey: "questions") as? [Bool] ?? [false,false,false,false,false,false,false,false]
+        var questionsFlow = [QuestionFlow]()
+        var question = [Int]()
+        for (index,value) in questions.enumerated() {
+            if value == true {
+                question.append(index)
+            }
+        }
+        question.forEach {
+            switch $0 {
+            case 0:
+                questionsFlow.append(.Thermal)
+            case 1:
+                questionsFlow.append(.IDRP)
+            case 2:
+                questionsFlow.append(.PDP)
+            case 3:
+                questionsFlow.append(.MF)
+            case 4:
+                questionsFlow.append(.ThermalMini)
+            case 5:
+                questionsFlow.append(.IDRPMini)
+            case 6:
+                questionsFlow.append(.PDPMini)
+            case 7:
+                questionsFlow.append(.MFMini)
+            default:
+                break
+            }
+        }
+        self.addQuestions(ofType: questionsFlow)
     }
 
     private func SendDataDatabase(answer: Answer) {

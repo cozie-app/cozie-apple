@@ -108,6 +108,7 @@ class Utilities {
                                     let responseData = try JSONDecoder().decode(Response.self, from: data)
                                     totalData.append(responseData)
                                 } catch {
+                                    print(error)
                                 }
                             }
                             completion(totalData)
@@ -119,6 +120,15 @@ class Utilities {
             }
         }
         debugPrint(req)
+    }
+    
+    static func sendHealthData() {
+        do {
+            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["oxygenSaturation":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBloodOxygen.rawValue) as? Double ?? 0)", "heartRate":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue) as? Double ?? 0) ","noise":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue) as? Double ?? 0)"]))
+            PostRequest(message: postMessage)
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
 }
 
@@ -141,4 +151,12 @@ struct Response: Codable {
         try val.encode(user_id, forKey: .user_id)
         try val.encode(voteLog, forKey: .voteLog)
     }
+}
+
+struct APIFormate: Codable {
+    let locationTimestamp: String
+    let startTimestamp: String
+    let endTimestamp: String
+    let participantID: String
+    let responses: [String:String]
 }

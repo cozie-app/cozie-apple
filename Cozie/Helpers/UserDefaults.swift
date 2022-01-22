@@ -24,10 +24,19 @@ extension UserDefaults {
         case experimentID
         case totalValidResponse
         case dayData
+        case recentHeartRate
+        case recentNoise
+        case recentBloodOxygen
     }
     
     func setValue(for key: String, value: Any) {
         setValue(value, forKey: key)
+        do {
+            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: self.getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["question_participation_Days":"\(self.getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])", "question_notification_frequency":"\(self.getValue(for: UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq) ","question_from_time":"\(self.getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"]))
+            PostRequest(message: postMessage)
+        } catch let error {
+            print(error.localizedDescription)
+        }
         synchronize()
     }
     
