@@ -96,7 +96,7 @@ final class ProfileDataStore {
             }
             return
           }
-            blood = sample.quantity.doubleValue(for: HKUnit(from: "%/min")) //HKUnit(from: "%") * 100.0
+            blood = sample.quantity.doubleValue(for: HKUnit(from: "%"))
             completion(blood)
         }
     }
