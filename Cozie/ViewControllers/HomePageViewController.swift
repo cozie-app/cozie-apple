@@ -98,7 +98,7 @@ class HomePageViewController: UIViewController {
         self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
         self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
         
-        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq).get24FormateTimeString() + " hour"
+        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
         
         self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
         self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]
@@ -115,7 +115,7 @@ class HomePageViewController: UIViewController {
             }
         }
         
-        self.daysFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,true,true]
+        self.daysFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,false,false]
         self.days = ""
         
         for i in 0...6{

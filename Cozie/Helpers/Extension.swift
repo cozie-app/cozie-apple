@@ -22,6 +22,18 @@ extension Date {
         let stringDate = dateFormatter.string(from: self)
         return stringDate
     }
+    
+    func getHour() -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "H"
+        return timeFormatter.string(from: self)
+    }
+    
+    func getMinutes() -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "mm"
+        return timeFormatter.string(from: self)
+    }
 }
 
 extension String {
