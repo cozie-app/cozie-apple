@@ -12,11 +12,11 @@ class WeeklySurvey: BasePopupVC {
     
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    var headerTitles = ["Are you...?", "Do you prefer to be...?"]
-    var section1:[String] = ["XXXX XXX XXXXX", "XXXX XXX XXXXX", "XXXX XXX XXXXX", "XXXX XXX XXXXX"]
-    var section2:[String] = ["XXXX XXX XXXXX", "XXXX XXX XXXXX"]
-    var button1:[UIButton] = []
-    var button2:[UIButton] = []
+    var questions = ["On which days did you work from home this week?", "Are you experiencing any of the following symptoms? (Select all that apply)","How much fatigue are you currently experiencing?","Please indicate your satisfaction levels with the overall indoor air quality in your office.","How much fatigue have you been experiencing throught the week?"]
+    var options:[[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],["None Hoarse/dry throat", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"],["Not at all", "Slightly", "Moderately", "Very", "Extremely"],["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"],["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
+    var answers = [-1,-1,-1,-1,-1]
+    var buttons:[Set<UIButton>] = [[],[],[],[],[]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonSubmit.layer.cornerRadius = 5
@@ -28,7 +28,14 @@ class WeeklySurvey: BasePopupVC {
     }
     
     @IBAction func onClickSubmit(_ sender: UIButton) {
-        NavigationManager.dismiss(self)
+        if self.answers.contains(-1) {
+            let alert = UIAlertController(title: "Question remaining", message: "Make sure to answer every question in survey", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            //TODO: API call
+            NavigationManager.dismiss(self)
+        }
     }
     
 }
@@ -36,75 +43,60 @@ class WeeklySurvey: BasePopupVC {
 extension WeeklySurvey: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return questions.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20))
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        return CGFloat(label.calculateMaxLines(forText: self.questions[section])) * 20
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let view = UIView()
         view.backgroundColor = .systemBackground
 
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .left
-        
-        switch section {
-        case 0:
-            label.text = "Are you...?"
-        case 1:
-            label.text = "Do you prefer to be...?"
-        default:
-            label.text = ""
-        }
-        
+        label.numberOfLines = 0
+        label.text = self.questions[section]
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 2).isActive = true
+
         return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 4
-        case 1:
-            return 2
-        default:
-            return 0
-        }
+        return self.options[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableQuestions.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! QuestionCell
-        switch indexPath.section {
-        case 0:
-            cell.labelQuestion.text = section1[indexPath.row]
-            cell.button.addTarget(self, action: #selector(section1ButtonClicked(_:)), for: .touchUpInside)
-            button1.append(cell.button)
-        case 1:
-            cell.labelQuestion.text = section2[indexPath.row]
-            cell.button.addTarget(self, action: #selector(section2ButtonClicked(_:)), for: .touchUpInside)
-            button2.append(cell.button)
-        default:
-            break
-        }
-        cell.button.tag = indexPath.row
+        cell.labelQuestion.text = options[indexPath.section][indexPath.row]
+        cell.delegate = self
+        self.buttons[indexPath.section].insert(cell.button)
+        cell.button.isSelected = self.answers[indexPath.section] == indexPath.row
+        cell.button.backgroundColor = cell.button.isSelected ? .lightGray : .systemBackground
         return cell
     }
-    
-    @objc private func section1ButtonClicked(_ sender: UIButton){
-        
-        button1.forEach({$0.backgroundColor = .systemBackground})
-        button1[sender.tag].isSelected = true
-        sender.backgroundColor = .lightGray
-    }
-    
-    @objc private func section2ButtonClicked(_ sender: UIButton){
-        
-        button2.forEach({$0.backgroundColor = .systemBackground})
-        button2[sender.tag].isSelected = true
-        sender.backgroundColor = .lightGray
+}
+
+extension WeeklySurvey: selectAnswerDelegate {
+    func onClickOption(cell: QuestionCell) {
+        if let indexPath = tableQuestions.indexPath(for: cell) {
+            buttons[indexPath.section].forEach({$0.backgroundColor = .systemBackground})
+            cell.button.isSelected = true
+            cell.button.backgroundColor = .lightGray
+            self.answers[indexPath.section] = indexPath.row
+            DispatchQueue.main.async {
+                self.tableQuestions.reloadData()
+            }
+        }
     }
 }

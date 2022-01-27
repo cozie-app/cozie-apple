@@ -76,3 +76,17 @@ extension UITableView {
         }
     }
 }
+
+extension UILabel {
+    func calculateMaxLines(forText: String = "") -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        var text = (self.text ?? "") as NSString
+        if forText != "" {
+            text = forText as NSString
+        }
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.font as Any], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
+    }
+}
