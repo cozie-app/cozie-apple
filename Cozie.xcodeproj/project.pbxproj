@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,8 +55,8 @@
 		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		29EB37EB2775914E00914F6D /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB37EA2775914E00914F6D /* Controllers.swift */; };
-		69CBBDE32770EFDD000D1C2B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDE02770EF80000D1C2B /* ResearchKit.framework */; };
-		69CBBDE42770EFDD000D1C2B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBBDE02770EF80000D1C2B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; platformFilter = ios; };
+		69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -97,16 +97,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		69CBBDDF2770EF80000D1C2B /* PBXContainerItemProxy */ = {
+		69A2E36C27A27C180051EF37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */;
+			containerPortal = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = ResearchKit;
 		};
-		69CBBDE12770EF80000D1C2B /* PBXContainerItemProxy */ = {
+		69A2E36E27A27C180051EF37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */;
+			containerPortal = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
 			remoteInfo = ResearchKitTests;
@@ -177,7 +177,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				69CBBDE42770EFDD000D1C2B /* ResearchKit.framework in Embed Frameworks */,
+				69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +250,7 @@
 		5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
 		5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -321,7 +321,7 @@
 			files = (
 				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
 				6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */,
-				69CBBDE32770EFDD000D1C2B /* ResearchKit.framework in Frameworks */,
+				69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,11 +446,11 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		69CBBDDA2770EF80000D1C2B /* Products */ = {
+		69A2E36727A27C180051EF37 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				69CBBDE02770EF80000D1C2B /* ResearchKit.framework */,
-				69CBBDE22770EF80000D1C2B /* ResearchKitTests.xctest */,
+				69A2E36D27A27C180051EF37 /* ResearchKit.framework */,
+				69A2E36F27A27C180051EF37 /* ResearchKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 		E483823B247BA33A002C3708 = {
 			isa = PBXGroup;
 			children = (
-				69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */,
+				69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */,
 				E4838246247BA33A002C3708 /* Cozie */,
 				E483825D247BA33B002C3708 /* CozieTests */,
 				E4838268247BA33B002C3708 /* CozieUITests */,
@@ -787,8 +787,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 69CBBDDA2770EF80000D1C2B /* Products */;
-					ProjectRef = 69CBBDD92770EF80000D1C2B /* ResearchKit.xcodeproj */;
+					ProductGroup = 69A2E36727A27C180051EF37 /* Products */;
+					ProjectRef = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -804,18 +804,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		69CBBDE02770EF80000D1C2B /* ResearchKit.framework */ = {
+		69A2E36D27A27C180051EF37 /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 69CBBDDF2770EF80000D1C2B /* PBXContainerItemProxy */;
+			remoteRef = 69A2E36C27A27C180051EF37 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		69CBBDE22770EF80000D1C2B /* ResearchKitTests.xctest */ = {
+		69A2E36F27A27C180051EF37 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 69CBBDE12770EF80000D1C2B /* PBXContainerItemProxy */;
+			remoteRef = 69A2E36E27A27C180051EF37 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1377,7 +1377,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1409,7 +1409,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1439,7 +1439,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1462,7 +1462,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
