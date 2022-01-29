@@ -271,6 +271,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     private func defineQuestions() {
+        self.questions.removeAll()
         let questions = userDefaults.object(forKey: "questions") as? [Bool] ?? [false,false,false,false,false,false,false,false]
         var questionsFlow = [QuestionFlow]()
         var question = [Int]()
@@ -450,6 +451,7 @@ extension InterfaceController {
         // Last question MUST have nextQuestion set to 999, the first question is question 0
         self.questions += [Question(title: "Thank you!!!", options: ["Submit survey"],
                                    icons: ["submit"], nextQuestion: [999], identifier: "end")]
+        loadTableData(question: &questions[0], backPressed: false)
     }
 }
 

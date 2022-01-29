@@ -81,7 +81,7 @@ enum GeneralSettingOptions: Int, CaseIterable, SectionType {
     }
     var description: String {
         switch self{
-        case .sendParticipantIDWatch: return "Send participant ID to watch"
+        case .sendParticipantIDWatch: return "Sync settings with watch"
         case .permissions: return "Permissions"
         }
     }

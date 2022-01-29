@@ -22,6 +22,18 @@ extension Date {
         let stringDate = dateFormatter.string(from: self)
         return stringDate
     }
+    
+    func getHour() -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "H"
+        return timeFormatter.string(from: self)
+    }
+    
+    func getMinutes() -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "mm"
+        return timeFormatter.string(from: self)
+    }
 }
 
 extension String {
@@ -74,5 +86,19 @@ extension UITableView {
         if #available(iOS 15.0, *) {
             self.sectionHeaderTopPadding = 0
         }
+    }
+}
+
+extension UILabel {
+    func calculateMaxLines(forText: String = "") -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        var text = (self.text ?? "") as NSString
+        if forText != "" {
+            text = forText as NSString
+        }
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.font as Any], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
     }
 }

@@ -26,7 +26,7 @@ class ParticipationDays: BasePopupVC {
     }
     
     private func setupFilledData() {
-        self.days = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,true,true]
+        self.days = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,false,false]
         for i in Range(0...6) {
             switch i {
             case 0: switchMon.isOn = self.days[i]

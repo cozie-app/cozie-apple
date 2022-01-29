@@ -88,8 +88,14 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
         
-        WCSession.default.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
-            print(error.localizedDescription)
+        if WCSession.default.isReachable {
+            WCSession.default.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
+                print(error.localizedDescription)
+            }
+        } else {
+            let alert = UIAlertController(title: "Connection Error", message: "Your watch is not connected, please connect watch to sync settings", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         // check if watch connectivity is supported and activate it
 //        if WCSession.isSupported() {
