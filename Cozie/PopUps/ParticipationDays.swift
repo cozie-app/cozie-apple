@@ -44,6 +44,7 @@ class ParticipationDays: BasePopupVC {
     
     @IBAction func onClickSet(_ sender: Any) {
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue, value: self.days)
+        LocalNotificationManager.shared.scheduleReminderNotification()
         NavigationManager.dismiss(self)
     }
     

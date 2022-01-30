@@ -60,6 +60,7 @@ class NotificationFrequency: BasePopupVC {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue, value: self.timePicker.date)
         }
         NavigationManager.dismiss(self, isForSubview: isForSubview)
+        LocalNotificationManager.shared.scheduleReminderNotification()
         self.delegate?.reload()
     }
 }

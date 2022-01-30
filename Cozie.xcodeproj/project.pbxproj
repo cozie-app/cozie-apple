@@ -55,6 +55,7 @@
 		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		29EB37EB2775914E00914F6D /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB37EA2775914E00914F6D /* Controllers.swift */; };
+		6923254D27A5050600DBE6C5 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923254C27A5050600DBE6C5 /* NotificationHelper.swift */; };
 		69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; platformFilter = ios; };
 		69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
@@ -250,6 +251,7 @@
 		5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
 		5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6923254C27A5050600DBE6C5 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 				29E7F943276DEDF2008B0E8D /* Health */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
+				6923254C27A5050600DBE6C5 /* NotificationHelper.swift */,
 				1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */,
 				1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */,
 				29CCF171276B10D700AA3E32 /* UserDefaults.swift */,
@@ -1064,6 +1067,7 @@
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				29C268692786C1A800DC5C22 /* Cozie.xcdatamodeld in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
+				6923254D27A5050600DBE6C5 /* NotificationHelper.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
 				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
 				0465B61A27719E990062228C /* QuestionCell.swift in Sources */,
