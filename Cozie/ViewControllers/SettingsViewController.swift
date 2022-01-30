@@ -220,9 +220,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .permissions:
-                if let viewController = self.tabBarController {
-                    NavigationManager.openPermissions(viewController)
-                }
+//                if let viewController = self.tabBarController {
+                    //NavigationManager.openPermissions(viewController)
+                    let alert = UIAlertController(title: "Open health app to check health data permission", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+//                }
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -232,6 +235,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             switch buttonClicked {
             case .notification: print("user asked to disable notifications")
                 UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue, value: !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true))
+                if !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
+                    LocalNotificationManager.shared.clearNotifications()
+                }
                 self.settingsTableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
                 // fixme hide this button if the user has not yet completed consent form
             case .emailConsent: sendConsentForm()

@@ -35,7 +35,10 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     func scheduleReminderNotification() {
         self.clearNotifications()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        if !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 
             let allowedDays = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,false,false]
             var fromTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime
@@ -124,8 +127,8 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             triggerDate.timeZone = .current
             triggerDate.weekday = weekDay
             let content = UNMutableNotificationContent()
-            content.title = "Test not"
-            content.body = "Test not body \(weekDay)\(hr)\(mi)\(weekDayStr)"
+            content.title = "Survey reminder"
+            content.body = "Survey reminder"
             content.sound = .default
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
             let request = UNNotificationRequest(identifier: "\(weekDay)\(hr)\(mi)\(weekDayStr)\(Date().timeIntervalSinceNow)", content: content, trigger: trigger)
