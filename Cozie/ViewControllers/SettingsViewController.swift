@@ -88,8 +88,8 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
         
-        if WCSession.default.isReachable {
-            WCSession.default.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
+        if self.session?.isReachable == true {
+            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
                 print(error.localizedDescription)
             }
         } else {
