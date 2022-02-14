@@ -93,9 +93,7 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
                 print(error.localizedDescription)
             }
         } else {
-            let alert = UIAlertController(title: "Connection Error", message: "Your watch is not connected, please connect watch to sync settings", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Connection Error", message: "Your watch is not connected, please connect watch to sync settings")
         }
         // check if watch connectivity is supported and activate it
 //        if WCSession.isSupported() {
@@ -332,6 +330,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+    private func showAlert(title:String, message:String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension UITabBarController: TimePickerDelegate {
@@ -371,6 +376,9 @@ extension SettingsViewController {
 extension SettingsViewController: WCSessionDelegate {
 //     session is the connection session between the phone and the watch
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let err = error {
+            self.showAlert(title: "Connection Error while activation", message: err.localizedDescription)
+        }
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {

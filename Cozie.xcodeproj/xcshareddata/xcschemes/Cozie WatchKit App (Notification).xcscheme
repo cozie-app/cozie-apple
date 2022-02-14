@@ -59,7 +59,7 @@
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Cozie WatchKit App">
+         RemotePath = "/Cozie">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E483826D247BA33B002C3708"
@@ -80,7 +80,7 @@
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Cozie WatchKit App">
+         RemotePath = "/Cozie">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E483826D247BA33B002C3708"
