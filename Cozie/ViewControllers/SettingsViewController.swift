@@ -91,9 +91,11 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
         if self.session?.isReachable == true {
             self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
                 print(error.localizedDescription)
+                self.showAlert(title: "Sync failed", message: error.localizedDescription)
             }
+            //                self.showAlert(title: "Sync success", message: "The settings have been successfully synced, you will feel a slight vibration in your watch.")
         } else {
-            self.showAlert(title: "Connection Error", message: "Your watch is not connected, please connect watch to sync settings")
+            self.showAlert(title: "Sync failed", message: "Unable to sync your watch settings, please open the Cozie app in watch and make sure the watch is not locked.")
         }
         // check if watch connectivity is supported and activate it
 //        if WCSession.isSupported() {
