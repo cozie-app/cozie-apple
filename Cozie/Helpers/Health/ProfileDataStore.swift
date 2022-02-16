@@ -11,7 +11,7 @@ import HealthKit
 final class ProfileDataStore {
     
     static let healthStore = HKHealthStore()
-    static var backgroundQuery: HKQuery?
+    static var backgroundQuery: [HKQuery]?
     
     static private func getMostRecentSample(for sampleType: HKSampleType,
                                    completion: @escaping (HKQuantitySample?, Error?) -> Swift.Void) {
@@ -96,7 +96,7 @@ final class ProfileDataStore {
             }
             return
           }
-            blood = sample.quantity.doubleValue(for: HKUnit(from: "%"))
+            blood = sample.quantity.doubleValue(for: HKUnit(from: "%")) * 100 //HKUnit(from: "%") * 100.0
             completion(blood)
         }
     }
@@ -152,16 +152,19 @@ extension ProfileDataStore {
         let types = self.dataTypesToRead()
         for type in types {
             guard let sampleType = type as? HKSampleType else { print("ERROR: \(type) is not an HKSampleType"); continue }
-            self.backgroundQuery = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
+            let query = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
                 debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
                 self.queryForUpdates(type: type)
                 completionHandler()
             }
-            if let query = self.backgroundQuery {
+            self.backgroundQuery?.append(query)
+            if let query = self.backgroundQuery?.last {
                 healthStore.execute(query)
                 healthStore.enableBackgroundDelivery(for: type, frequency: .immediate) { (success, error) in
                     debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
                 }
+            } else {
+                self.queryForUpdates(type: type)
             }
         }
     }

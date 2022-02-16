@@ -91,11 +91,11 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
         if self.session?.isReachable == true {
             self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
                 print(error.localizedDescription)
+                self.showAlert(title: "Sync failed", message: error.localizedDescription)
             }
+            //                self.showAlert(title: "Sync success", message: "The settings have been successfully synced, you will feel a slight vibration in your watch.")
         } else {
-            let alert = UIAlertController(title: "Connection Error", message: "Your watch is not connected, please connect watch to sync settings", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Sync failed", message: "Unable to sync your watch settings, please open the Cozie app in watch and make sure the watch is not locked.")
         }
         // check if watch connectivity is supported and activate it
 //        if WCSession.isSupported() {
@@ -220,9 +220,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .permissions:
-                if let viewController = self.tabBarController {
-                    NavigationManager.openPermissions(viewController)
-                }
+//                if let viewController = self.tabBarController {
+                    //NavigationManager.openPermissions(viewController)
+                    let alert = UIAlertController(title: "Open health app to check health data permission", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+//                }
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -232,6 +235,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             switch buttonClicked {
             case .notification: print("user asked to disable notifications")
                 UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue, value: !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true))
+                if !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
+                    LocalNotificationManager.shared.clearNotifications()
+                }
                 self.settingsTableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
                 // fixme hide this button if the user has not yet completed consent form
             case .emailConsent: sendConsentForm()
@@ -326,6 +332,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+    private func showAlert(title:String, message:String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension UITabBarController: TimePickerDelegate {
@@ -365,6 +378,9 @@ extension SettingsViewController {
 extension SettingsViewController: WCSessionDelegate {
 //     session is the connection session between the phone and the watch
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let err = error {
+            self.showAlert(title: "Connection Error while activation", message: err.localizedDescription)
+        }
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {

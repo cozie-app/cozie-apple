@@ -26,13 +26,19 @@ extension Date {
     func getHour() -> String {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "H"
-        return timeFormatter.string(from: self)
+        return "\(Calendar.current.component(.hour, from: self))"
     }
     
     func getMinutes() -> String {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "mm"
-        return timeFormatter.string(from: self)
+        return "\(Calendar.current.component(.minute, from: self))"
+    }
+    
+    func getTimeInt() -> Int {
+        let hour = self.getHour()
+        let mins = self.getMinutes()
+        return Int("\(hour)\(mins)") ?? 0
     }
 }
 
