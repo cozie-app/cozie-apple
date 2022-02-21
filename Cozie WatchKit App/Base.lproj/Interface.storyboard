@@ -38,7 +38,7 @@
             <objects>
                 <controller identifier="Thermal" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label width="136" height="50" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="uMg-er-eCg"/>
+                        <label width="136" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="uMg-er-eCg"/>
                         <table alignment="left" id="VSl-R8-QQf">
                             <items>
                                 <tableRow identifier="RowController" id="dkd-Gf-waU" customClass="RowController" customModule="Cozie_WatchKit_Extension">

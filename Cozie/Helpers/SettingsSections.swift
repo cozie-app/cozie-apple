@@ -153,7 +153,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     }
     var description: String {
         switch self{
-        case .questionFlow: return "Question Flow"
+        case .questionFlow: return "Question Flows"
         case .notificationFrequency: return "Notification Frequency"
         case .participationDays: return "Participation Days"
         case .dailyParticipationHours: return "Daily Participation Hours"
