@@ -30,9 +30,7 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
         configureUI()
 
         // activate the connectivity session
-        session = WCSession.default
-        session?.delegate = self
-        session?.activate()
+        self.configWCSession()
     }
 
     // MARK: - Helper Functions
@@ -64,6 +62,12 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
 
     }
 
+    private func configWCSession() {
+        session = WCSession.default
+        session?.delegate = self
+        session?.activate()
+    }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController,
                             didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         taskViewController.dismiss(animated: true, completion: nil)
@@ -95,6 +99,7 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
             }
             //                self.showAlert(title: "Sync success", message: "The settings have been successfully synced, you will feel a slight vibration in your watch.")
         } else {
+            self.configWCSession()
             self.showAlert(title: "Sync failed", message: "Unable to sync your watch settings, please open the Cozie app in watch and make sure the watch is not locked.")
         }
         // check if watch connectivity is supported and activate it
