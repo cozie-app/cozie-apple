@@ -89,7 +89,7 @@
       },
       {
           "title": "Took lift, why?",
-          "identifier": "tc-preference",
+          "identifier": "lift-why",
           "options": [
               "Convenience",
               "Less effort",
@@ -108,7 +108,7 @@
       },
       {
           "title": "Took stairs, why?",
-          "identifier": "tc-preference",
+          "identifier": "stairs-why",
           "options": [
               "Convenience",
               "Save time",
@@ -130,7 +130,7 @@
       },
       {
           "title": "Lift convenient because?",
-          "identifier": "tc-preference",
+          "identifier": "lift-con",
           "options": [
               "Easiest",
               "Fastest",
@@ -149,7 +149,7 @@
       },
       {
           "title": "Stairs convenient because",
-          "identifier": "tc-preference",
+          "identifier": "stairs-con",
           "options": [
               "Easiest",
               "Fastest",
@@ -168,7 +168,7 @@
       },
       {
           "title": "Are you working right now?",
-          "identifier": "tc-preference",
+          "identifier": "working",
           "options": [
               "Yes",
               "No"
@@ -184,7 +184,7 @@
       },
       {
           "title": "What kind of workstation?",
-          "identifier": "tc-preference",
+          "identifier": "workstation",
           "options": [
               "Adjustable",
               "Standing",
@@ -203,7 +203,7 @@
       },
       {
           "title": "Adjusted height today?",
-          "identifier": "tc-preference",
+          "identifier": "adj-height",
           "options": [
               "Up & down",
               "Down",
@@ -225,7 +225,7 @@
       },
       {
           "title": "Are you",
-          "identifier": "tc-preference",
+          "identifier": "current",
           "options": [
               "Standing",
               "Sitting"
@@ -367,7 +367,7 @@
     },
     {
       "title": "Why is more privacy needed?",
-      "identifier": "more-privacy",
+      "identifier": "why-more-privacy",
       "options": [
         "See me",
         "Hear me",
@@ -428,7 +428,7 @@
       "title": "Do your surroundings increase infection risk?",
       "identifier": "surroundings-infection",
       "options": [
-        "A ittle",
+        "A Little",
         "Not at all",
         "A lot"
       ],
