@@ -15,7 +15,8 @@ import WatchConnectivity
 struct QuestionResponse: Codable {
     var Thermal: [Question]
     var Privacy: [Question]
-    var IDRP: [Question]
+    var Movement: [Question]
+    var InfectionRisk: [Question]
 }
 
 // structure which is used to store the questions prompted to the user
@@ -430,21 +431,27 @@ extension InterfaceController {
     }
     
     private func PDPQuestion() {
+        self.read(type: .PDP)
     }
     
     private func MFQuestion() {
+        self.read(type: .MF)
     }
     
     private func thermalMiniQuestion() {
+        self.read(type: .ThermalMini)
     }
     
     private func IDRPMiniQuestion() {
+        self.read(type: .IDRPMini)
     }
     
     private func PDPMiniQuestion() {
+        self.read(type: .PDPMini)
     }
     
     private func MFMiniQuestion() {
+        self.read(type: .MFMini)
     }
     
     private func lastQuestion() {
@@ -462,11 +469,11 @@ extension InterfaceController {
                 var data = try JSONDecoder().decode(QuestionResponse.self, from: data)
                 switch type {
                 case .Thermal: self.add(questions: &data.Thermal)
-                case .IDRP: self.add(questions: &data.IDRP)
+                case .IDRP: break
                 case .PDP: self.add(questions: &data.Privacy)
-                case .MF: break
+                case .MF: self.add(questions: &data.Movement)
                 case .ThermalMini: break
-                case .IDRPMini: break
+                case .IDRPMini: self.add(questions: &data.InfectionRisk)
                 case .PDPMini: break
                 case .MFMini: break
                 }

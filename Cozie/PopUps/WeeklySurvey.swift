@@ -17,6 +17,7 @@ class WeeklySurvey: BasePopupVC {
     var multipleAnswer = [true,true,false,false,false]
     var answers: [Int:[Int]] = [:]
     var buttons: [Int:[UIButton]] = [:]
+    var otherAnswer = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,11 @@ class WeeklySurvey: BasePopupVC {
                     var answers1 = ""
                     answers[index]?.forEach { option in
                         answers1 += answers1 == "" ? "" : ", "
-                        answers1 += "\(options[index][option])"
+                        if index == 1 && option == 6 {
+                            answers1 += self.otherAnswer
+                        } else {
+                            answers1 += "\(options[index][option])"
+                        }
                     }
                     tmpResponses[question] = answers1
                 } else {
@@ -102,6 +107,12 @@ extension WeeklySurvey: UITableViewDelegate, UITableViewDataSource {
         self.buttons[indexPath.section]?.append(cell.button)
         cell.button.isSelected = self.answers[indexPath.section]?.contains(indexPath.row) == true
         cell.button.backgroundColor = cell.button.isSelected ? .lightGray : .systemBackground
+        if indexPath.section == 1 && indexPath.row == 6 && self.answers[indexPath.section]?.contains(indexPath.row) == true {
+            cell.otherTextField.isHidden = false
+            cell.otherTextField.text = self.otherAnswer
+        } else {
+            cell.otherTextField.isHidden = true
+        }
         return cell
     }
 }
@@ -132,5 +143,9 @@ extension WeeklySurvey: selectAnswerDelegate {
                 self.tableQuestions.reloadData()
             }
         }
+    }
+    
+    func otherAnswer(text: String) {
+        self.otherAnswer = text
     }
 }

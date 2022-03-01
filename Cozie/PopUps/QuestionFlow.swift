@@ -64,7 +64,6 @@ class QuestionFlow: BasePopupVC {
             self.buttonArray[i].isSelected = questions[i]
             self.buttonArray[i].backgroundColor = buttonArray[i].isSelected ? primaryColour : UIColor.systemBackground
             self.buttonArray[i].layer.cornerRadius = buttonArray[i].frame.height / 2
-            
             self.viewBtnArray[i].layer.cornerRadius = viewBtnArray[i].frame.height / 2
             self.viewBtnArray[i].layer.borderWidth = 1
             self.viewBtnArray[i].layer.borderColor = UIColor.lightGray.cgColor

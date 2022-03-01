@@ -64,10 +64,13 @@ class DataViewController: UIViewController, ChartViewDelegate{
         dateValues.removeAll()
         responseValues.removeAll()
         let data = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.dayData.rawValue) as? [String: Int]
-        data?.forEach({ (date,response) in
-            dateValues.append(date)
-            responseValues.append(Double(response))
-        })
+        if let data = data {
+            let data1 = data.sorted{($0.key.date()) < ($1.key.date())}
+            data1.forEach { (date,response) in
+                dateValues.append(date)
+                responseValues.append(Double(response))
+            }
+        }
         
         var yValues1:[BarChartDataEntry] = []
         for (index, value) in self.responseValues.enumerated() {
