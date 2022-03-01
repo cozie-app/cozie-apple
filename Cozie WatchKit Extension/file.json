@@ -64,6 +64,182 @@
       ]
     }
   ],
+  "Movement": [
+      {
+          "title": "In the past 60min, I used",
+          "identifier": "last-60min",
+          "options": [
+              "Lift",
+              "Stairs",
+              "Both",
+              "Neither"
+          ],
+          "icons": [
+              "tp-cooler",
+              "comfortable",
+              "tp-warmer",
+              "tp-warmer"
+          ],
+          "nextQuestion": [
+              1,
+              2,
+              2,
+              5
+          ]
+      },
+      {
+          "title": "Took lift, why?",
+          "identifier": "tc-preference",
+          "options": [
+              "Convenience",
+              "Less effort",
+              "No stairs"
+          ],
+          "icons": [
+              "tp-cooler",
+              "comfortable",
+              "tp-warmer"
+          ],
+          "nextQuestion": [
+              3,
+              5,
+              5
+          ]
+      },
+      {
+          "title": "Took stairs, why?",
+          "identifier": "tc-preference",
+          "options": [
+              "Convenience",
+              "Save time",
+              "Save energy",
+              "Fitness"
+          ],
+          "icons": [
+              "tp-cooler",
+              "comfortable",
+              "tp-warmer",
+              "tp-warmer"
+          ],
+          "nextQuestion": [
+              4,
+              5,
+              5,
+              5
+          ]
+      },
+      {
+          "title": "Lift convenient because?",
+          "identifier": "tc-preference",
+          "options": [
+              "Easiest",
+              "Fastest",
+              "Both"
+          ],
+          "icons": [
+              "tp-cooler",
+              "comfortable",
+              "tp-warmer"
+          ],
+          "nextQuestion": [
+              5,
+              5,
+              5
+          ]
+      },
+      {
+          "title": "Stairs convenient because",
+          "identifier": "tc-preference",
+          "options": [
+              "Easiest",
+              "Fastest",
+              "Both"
+          ],
+          "icons": [
+              "tp-cooler",
+              "comfortable",
+              "tp-warmer"
+          ],
+          "nextQuestion": [
+              5,
+              5,
+              5
+          ]
+      },
+      {
+          "title": "Are you working right now?",
+          "identifier": "tc-preference",
+          "options": [
+              "Yes",
+              "No"
+          ],
+          "icons": [
+              "yes",
+              "no"
+          ],
+          "nextQuestion": [
+              6,
+              8
+          ]
+      },
+      {
+          "title": "What kind of workstation?",
+          "identifier": "tc-preference",
+          "options": [
+              "Adjustable",
+              "Standing",
+              "Sitting"
+          ],
+          "icons": [
+              "yes",
+              "no",
+              "yes"
+          ],
+          "nextQuestion": [
+              7,
+              8,
+              8
+          ]
+      },
+      {
+          "title": "Adjusted height today?",
+          "identifier": "tc-preference",
+          "options": [
+              "Up & down",
+              "Down",
+              "Up",
+              "Never"
+          ],
+          "icons": [
+              "yes",
+              "no",
+              "yes",
+              "no"
+          ],
+          "nextQuestion": [
+              8,
+              8,
+              8,
+              8
+          ]
+      },
+      {
+          "title": "Are you",
+          "identifier": "tc-preference",
+          "options": [
+              "Standing",
+              "Sitting"
+          ],
+          "icons": [
+              "yes",
+              "no"
+          ],
+          "nextQuestion": [
+              9,
+              9
+          ]
+      }
+  ],
   "Privacy": [
     {
       "title": "Alone or in a group?",
@@ -247,7 +423,7 @@
       ]
     }
   ],
-  "IDRP": [
+  "InfectionRisk": [
     {
       "title": "Do your surroundings increase infection risk?",
       "identifier": "surroundings-infection",
