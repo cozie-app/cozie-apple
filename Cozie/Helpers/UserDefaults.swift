@@ -27,6 +27,7 @@ extension UserDefaults {
         case recentHeartRate
         case recentNoise
         case recentBloodOxygen
+//        case recentBodyMass
     }
     
     func setValue(for key: String, value: Any) {

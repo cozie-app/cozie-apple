@@ -37,14 +37,14 @@ final class ProfileDataStore {
         healthStore.execute(sampleQuery)
     }
     
-    static func getNoise(completion:@escaping(Double?) ->  Void) {
-        guard let noice = HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure) else {
-            print("noice Sample Type is no longer available in HealthKit")
+    static func getData(type: HKSampleType?, completion:@escaping(Double?) ->  Void) {
+        guard let type = type else {
+            print("\(String(describing: type)) Sample Type is no longer available in HealthKit")
             return
         }
-        var result: Double? = nil
+        var data: Double? = nil
         
-        self.getMostRecentSample(for: noice) { (sample, error) in
+        self.getMostRecentSample(for: type) { (sample, error) in
             
             guard let sample = sample else {
                 
@@ -53,54 +53,21 @@ final class ProfileDataStore {
                 }
                 return
             }
-            result = sample.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
-            completion(result)
-        }
-    }
-    
-    static func getHeartRate(completion:@escaping(Double?) ->  Void) {
-        
-        guard let heartRate = HKSampleType.quantityType(forIdentifier: .heartRate) else {
-          print("heartRate Sample Type is no longer available in HealthKit")
-          return
-        }
-        var result: Double? = nil
-        
-        self.getMostRecentSample(for: heartRate) { (sample, error) in
-          
-          guard let sample = sample else {
-          
-            if let error = error {
-                print("error: \(error)")
+            switch type {
+            case HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure):
+                data = sample.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
+            case HKSampleType.quantityType(forIdentifier: .heartRate):
+                data = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
+            case HKObjectType.quantityType(forIdentifier: .oxygenSaturation):
+                data = sample.quantity.doubleValue(for: HKUnit(from: "%")) * 100
+//            case HKObjectType.quantityType(forIdentifier: .bodyMass):
+//                data = sample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))//.count()
+            default:
+                break
             }
-            return
-          }
-            result = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
-            completion(result)
+            completion(data)
         }
     }
-    
-    static func getBloodOxygen(completion:@escaping(Double?) ->  Void) {
-        guard let bloodOxygen = HKSampleType.quantityType(forIdentifier: .oxygenSaturation) else {
-          print("bloodOxygen Sample Type is no longer available in HealthKit")
-          return
-        }
-        var blood: Double? = nil
-        
-        self.getMostRecentSample(for: bloodOxygen) { (sample, error) in
-          
-          guard let sample = sample else {
-          
-            if let error = error {
-                print("error: \(error)")
-            }
-            return
-          }
-            blood = sample.quantity.doubleValue(for: HKUnit(from: "%")) * 100 //HKUnit(from: "%") * 100.0
-            completion(blood)
-        }
-    }
-    
 }
 
 extension ProfileDataStore {
@@ -176,26 +143,33 @@ extension ProfileDataStore {
         // }
         switch type {
         case HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!:
-            self.getNoise { noise in
+            self.getData(type: HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure)) { noise in
                 if let noise = noise {
                     UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue, value: noise)
                     Utilities.sendHealthData()
                 }
             }
         case HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.oxygenSaturation)!:
-            self.getBloodOxygen { bloodOxygen in
+            self.getData(type: HKSampleType.quantityType(forIdentifier: .oxygenSaturation)) { bloodOxygen in
                 if let bloodOxygen = bloodOxygen {
                     UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBloodOxygen.rawValue, value: bloodOxygen)
                     Utilities.sendHealthData()
                 }
             }
         case HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!:
-            self.getHeartRate { heartRate in
+            self.getData(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { heartRate in
                 if let heartRate = heartRate {
                     UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue, value: heartRate)
                     Utilities.sendHealthData()
                 }
             }
+//        case HKObjectType.quantityType(forIdentifier: .bodyMass)!:
+//            self.getData(type: HKSampleType.quantityType(forIdentifier: .bodyMass)) { bodyMass in
+//                if let bodyMass = bodyMass {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBodyMass.rawValue, value: bodyMass)
+//                    Utilities.sendHealthData()
+//                }
+//            }
         case is HKWorkoutType:
             debugPrint("HKWorkoutType")
         default: debugPrint("Unhandled HKObjectType: \(type)")
@@ -203,9 +177,41 @@ extension ProfileDataStore {
     }
     
     static private func dataTypesToRead() -> Set<HKObjectType> {
+        // TODO: manage
         return Set(arrayLiteral:
-                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.environmentalAudioExposure)!,
-                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.oxygenSaturation)!,
-                   HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!)
+                    HKObjectType.quantityType(forIdentifier: .bodyMass)!,
+                   HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
+                   HKObjectType.quantityType(forIdentifier: .leanBodyMass)!,
+                   HKObjectType.quantityType(forIdentifier: .heartRate)!,
+                   HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
+                   HKObjectType.quantityType(forIdentifier: .bodyTemperature)!,
+                   HKObjectType.quantityType(forIdentifier: .respiratoryRate)!,
+                   HKObjectType.quantityType(forIdentifier: .stepCount)!,
+//                   HKObjectType.quantityType(forIdentifier: .walkingSpeed)!,
+//                   HKObjectType.quantityType(forIdentifier: .walkingStepLength)!,
+                   HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
+                   HKObjectType.quantityType(forIdentifier: .uvExposure)!,
+                   HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+                   HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
+                   HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
+                   HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
+                   HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
+                   HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                   HKObjectType.quantityType(forIdentifier: .vo2Max)!,
+                   HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!,
+                   HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
+                   HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!,
+                   HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
+                   HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
+                   HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!,
+//                   HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness)!,
+//                   HKObjectType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)!,
+//                   HKObjectType.quantityType(forIdentifier: .walkingAsymmetryPercentage)!,
+//                   HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)!,
+//                   HKObjectType.quantityType(forIdentifier: .stairAscentSpeed)!,
+//                   HKObjectType.quantityType(forIdentifier: .stairDescentSpeed)!,
+//                   HKObjectType.quantityType(forIdentifier: .workou)!,
+                   HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!,
+                   HKObjectType.quantityType(forIdentifier: .dietaryWater)!)
     }
 }
