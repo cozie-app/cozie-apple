@@ -75,10 +75,10 @@
               "Neither"
           ],
           "icons": [
-              "tp-cooler",
-              "comfortable",
-              "tp-warmer",
-              "tp-warmer"
+              "placeholder",
+              "placeholder",
+              "both",
+              "placeholder"
           ],
           "nextQuestion": [
               1,
@@ -96,9 +96,9 @@
               "No stairs"
           ],
           "icons": [
-              "tp-cooler",
-              "comfortable",
-              "tp-warmer"
+              "placeholder",
+              "placeholder",
+              "placeholder"
           ],
           "nextQuestion": [
               3,
@@ -116,10 +116,10 @@
               "Fitness"
           ],
           "icons": [
-              "tp-cooler",
-              "comfortable",
-              "tp-warmer",
-              "tp-warmer"
+              "placeholder",
+              "placeholder",
+              "placeholder",
+              "placeholder"
           ],
           "nextQuestion": [
               4,
@@ -137,9 +137,9 @@
               "Both"
           ],
           "icons": [
-              "tp-cooler",
-              "comfortable",
-              "tp-warmer"
+              "placeholder",
+              "placeholder",
+              "both"
           ],
           "nextQuestion": [
               5,
@@ -156,9 +156,9 @@
               "Both"
           ],
           "icons": [
-              "tp-cooler",
-              "comfortable",
-              "tp-warmer"
+              "placeholder",
+              "placeholder",
+              "both"
           ],
           "nextQuestion": [
               5,
@@ -191,9 +191,9 @@
               "Sitting"
           ],
           "icons": [
-              "yes",
-              "no",
-              "yes"
+              "placeholder",
+              "placeholder",
+              "placeholder"
           ],
           "nextQuestion": [
               7,
@@ -211,10 +211,10 @@
               "Never"
           ],
           "icons": [
-              "yes",
-              "no",
-              "yes",
-              "no"
+              "placeholder",
+              "placeholder",
+              "placeholder",
+              "placeholder"
           ],
           "nextQuestion": [
               8,
@@ -231,8 +231,8 @@
               "Sitting"
           ],
           "icons": [
-              "yes",
-              "no"
+              "met-walking",
+              "met-sitting"
           ],
           "nextQuestion": [
               9,
@@ -250,9 +250,9 @@
         "Group"
       ],
       "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium"
+        "met-relaxing",
+        "met-sitting",
+        "density"
       ],
       "nextQuestion": [
         4,
@@ -269,9 +269,9 @@
         "Learn"
       ],
       "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium"
+        "placeholder",
+        "density",
+        "met-sitting"
       ],
       "nextQuestion": [
         2,
@@ -304,9 +304,9 @@
         "A lot"
       ],
       "icons": [
-        "yes",
-        "no",
-        "no"
+        "placeholder",
+        "placeholder",
+        "placeholder"
       ],
       "nextQuestion": [
         5,
@@ -323,7 +323,7 @@
       ],
       "icons": [
         "met-sitting",
-        "no"
+        "met-relaxing"
       ],
       "nextQuestion": [
         3,
@@ -355,9 +355,9 @@
         "Others"
       ],
       "icons": [
-        "yes",
-        "no",
-        "yes"
+        "placeholder",
+        "placeholder",
+        "placeholder"
       ],
       "nextQuestion": [
         5,
@@ -374,9 +374,9 @@
         "Both"
       ],
       "icons": [
-        "yes",
-        "no",
-        "yes"
+        "placeholder",
+        "placeholder",
+        "both"
       ],
       "nextQuestion": [
         9,
@@ -393,9 +393,9 @@
         "Glare"
       ],
       "icons": [
-        "yes",
-        "no",
-        "yes"
+        "placeholder",
+        "placeholder",
+        "placeholder"
       ],
       "nextQuestion": [
         5,
@@ -412,9 +412,9 @@
         "Behaviour"
       ],
       "icons": [
-        "yes",
-        "no",
-        "yes"
+        "placeholder",
+        "placeholder",
+        "placeholder"
       ],
       "nextQuestion": [
         10,
@@ -428,18 +428,18 @@
       "title": "Do your surroundings increase infection risk?",
       "identifier": "surroundings-infection",
       "options": [
-        "A Little",
         "Not at all",
+        "A Little",
         "A lot"
       ],
       "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium"
+        "air-quality-fresh",
+        "1virus",
+        "3virus"
       ],
       "nextQuestion": [
-        2,
         1,
+        2,
         2
       ]
     },
@@ -448,13 +448,13 @@
       "identifier": "within-5m",
       "options": [
         "0 pax",
-        "1-3 pax",
+        "1-4 pax",
         "5+ pax"
       ],
       "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium"
+        "0pax",
+        "0-4pax",
+        "5pax"
       ],
       "nextQuestion": [
         4,
@@ -471,9 +471,9 @@
         "Surface"
       ],
       "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium"
+        "ventilation",
+        "people",
+        "surface"
       ],
       "nextQuestion": [
         1,
@@ -490,9 +490,9 @@
         "Both"
       ],
       "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium"
+        "density",
+        "proximity",
+        "both"
       ],
       "nextQuestion": [
         1,
