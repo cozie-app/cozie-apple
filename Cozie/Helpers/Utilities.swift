@@ -137,7 +137,7 @@ class Utilities {
     
     static func sendHealthData() {
         do {
-            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["oxygenSaturation":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBloodOxygen.rawValue) as? Double ?? 0)", "heartRate":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue) as? Double ?? 0) ","noise":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue) as? Double ?? 0)"]))
+            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["oxygenSaturation":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBloodOxygen.rawValue) as? Double ?? 0)", "heartRate2":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue) as? Double ?? 0) ","hearingEnvironmentalExposure":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue) as? Double ?? 0)"]))
             PostRequest(message: postMessage)
         } catch let error {
             print(error.localizedDescription)
