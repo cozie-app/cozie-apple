@@ -36,7 +36,7 @@ class NotificationFrequency: BasePopupVC {
     func setupFilledData() {
         switch viewType {
         case .NotificationFrequency:
-            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq
+            self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq
         case .From:
             self.timePicker.date = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime
             self.titleLabel.text = TimePickerType.From.rawValue
@@ -53,7 +53,7 @@ class NotificationFrequency: BasePopupVC {
     @IBAction func onClickSet(_ sender: Any) {
         switch viewType {
         case .NotificationFrequency:
-            UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue, value: self.timePicker.date)
+            UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue, value: self.timePicker.date)
         case .From:
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue, value: self.timePicker.date)
         case .To:

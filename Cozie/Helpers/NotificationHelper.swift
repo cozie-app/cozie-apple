@@ -45,7 +45,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             var toTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime
             var intervalTimeInMins: Int {
                 get {
-                    let tempInterTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq
+                    let tempInterTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq
                     let hours = Int(tempInterTime.getHour()) ?? 0
                     var minis = Int(tempInterTime.getMinutes()) ?? 0
                     minis = minis + (hours * 60)

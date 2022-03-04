@@ -251,7 +251,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 if let viewController = self.tabBarController {
                     NavigationManager.openQuestionFlow(viewController)
                 }
-            case .notificationFrequency:
+            case .ReminderFrequency:
                 if let viewController = self.tabBarController {
                     NavigationManager.openNotificationFrequency(viewController, for: .NotificationFrequency, view: self)
                 }

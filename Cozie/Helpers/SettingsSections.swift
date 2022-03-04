@@ -124,14 +124,14 @@ enum CommunicationOptions: Int, CaseIterable, SectionType {
 enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
 
     case questionFlow
-    case notificationFrequency
+    case ReminderFrequency
     case participationDays
     case dailyParticipationHours
     case downloadData
 
     var imageView: Bool {
         switch self {
-        case .questionFlow, .notificationFrequency, .participationDays, .dailyParticipationHours:
+        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours:
             return false
         case .downloadData:
             return true
@@ -139,7 +139,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     }
     var imageName: String {
         switch self {
-        case .questionFlow, .notificationFrequency, .participationDays, .dailyParticipationHours:
+        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours:
             return ""
         case .downloadData:
             return imgDownload
@@ -154,7 +154,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     var description: String {
         switch self{
         case .questionFlow: return "Question Flows"
-        case .notificationFrequency: return "Notification Frequency"
+        case .ReminderFrequency: return "Reminder Frequency"
         case .participationDays: return "Participation Days"
         case .dailyParticipationHours: return "Daily Participation Hours"
         case .downloadData: return "Download Data"

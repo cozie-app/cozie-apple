@@ -48,7 +48,7 @@
 		29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF171276B10D700AA3E32 /* UserDefaults.swift */; };
 		29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */; };
 		29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */; };
-		29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */; };
+		29CCF1B7276C91BB00AA3E32 /* ReminderFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */; };
 		29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */; };
 		29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */; };
 		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
@@ -236,7 +236,7 @@
 		29CCF171276B10D700AA3E32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationDays.swift; sourceTree = "<group>"; };
 		29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipationDays.xib; sourceTree = "<group>"; };
-		29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFrequency.swift; sourceTree = "<group>"; };
+		29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequency.swift; sourceTree = "<group>"; };
 		29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationFrequency.xib; sourceTree = "<group>"; };
 		29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyParticipation.swift; sourceTree = "<group>"; };
 		29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyParticipation.xib; sourceTree = "<group>"; };
@@ -374,7 +374,7 @@
 				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
 				29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */,
 				29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */,
-				29CCF1B5276C91BB00AA3E32 /* NotificationFrequency.swift */,
+				29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */,
 				29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */,
 				29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */,
 				29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */,
@@ -1076,7 +1076,7 @@
 				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
 				29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */,
 				29C268662786C17E00DC5C22 /* PersistentStorage.swift in Sources */,
-				29CCF1B7276C91BB00AA3E32 /* NotificationFrequency.swift in Sources */,
+				29CCF1B7276C91BB00AA3E32 /* ReminderFrequency.swift in Sources */,
 				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
