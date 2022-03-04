@@ -27,7 +27,28 @@ extension UserDefaults {
         case recentHeartRate
         case recentNoise
         case recentBloodOxygen
-//        case recentBodyMass
+        case recentBodyMass
+        case recentBodyMassIndex
+        case recentLeanBodyMass
+        case recentRestingHeartRate
+        case recentBodyTemperature
+        case recentRespiratoryRate
+        case recentStepCount
+        case recentDistanceCycling
+        case recentUVExposure
+        case recentFlightsClimbed
+        case recentAppleStandTime
+        case recentHeadphoneAudioExposure
+        case recentDistanceSwimming
+        case recentDistanceWalkingRunning
+        case recentVo2Max
+        case recentPeakExpiratoryFlowRate
+        case recentHeartRateVariabilitySDNN
+        case recentWalkingHeartRateAverage
+        case recentBloodPressureSystolic
+        case recentBloodPressureDiastolic
+        case recentBasalBodyTemperature
+        case recentDietaryWater
     }
     
     func setValue(for key: String, value: Any) {
