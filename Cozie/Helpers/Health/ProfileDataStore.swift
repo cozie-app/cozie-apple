@@ -37,7 +37,7 @@ final class ProfileDataStore {
         healthStore.execute(sampleQuery)
     }
     
-    static func getData(type: HKSampleType?, completion:@escaping(Double?) ->  Void) {
+    static private func getData(type: HKSampleType?, completion:@escaping(Double?) ->  Void) {
         guard let type = type else {
             print("\(String(describing: type)) Sample Type is no longer available in HealthKit")
             return
