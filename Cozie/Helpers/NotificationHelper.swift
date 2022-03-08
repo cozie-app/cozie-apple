@@ -35,7 +35,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     func scheduleReminderNotification() {
         self.clearNotifications()
-        if !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
+        if (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

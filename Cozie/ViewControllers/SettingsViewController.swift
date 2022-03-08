@@ -235,8 +235,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             switch buttonClicked {
             case .notification: print("user asked to disable notifications")
                 UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue, value: !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true))
-                if !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
+                if (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
                     LocalNotificationManager.shared.clearNotifications()
+                } else {
+                    LocalNotificationManager.shared.scheduleReminderNotification()
                 }
                 self.settingsTableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
                 // fixme hide this button if the user has not yet completed consent form
