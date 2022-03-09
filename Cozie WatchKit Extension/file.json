@@ -83,7 +83,7 @@
           "nextQuestion": [
               1,
               2,
-              2,
+              9,
               5
           ]
       },
@@ -235,8 +235,65 @@
               "sitting"
           ],
           "nextQuestion": [
-              9,
-              9
+              12,
+              12
+          ]
+      }, {
+          "title": "Took lift, why?",
+          "identifier": "lift-why",
+          "options": [
+              "Convenient",
+              "Less effort",
+              "No stairs"
+          ],
+          "icons": [
+              "convenience",
+              "less-effort",
+              "nostairs"
+          ],
+          "nextQuestion": [
+              11,
+              10,
+              10
+          ]
+      },{
+          "title": "Took stairs, why?",
+          "identifier": "stairs-why",
+          "options": [
+              "Convenient",
+              "No lift",
+              "Save energy",
+              "Healthy"
+          ],
+          "icons": [
+              "convenience",
+              "no-elevator",
+              "save-energy",
+              "fitness"
+          ],
+          "nextQuestion": [
+              4,
+              5,
+              5,
+              5
+          ]
+      },{
+          "title": "Lift convenient because?",
+          "identifier": "lift-con",
+          "options": [
+              "Easiest",
+              "Fastest",
+              "Both"
+          ],
+          "icons": [
+              "easier",
+              "faster",
+              "both"
+          ],
+          "nextQuestion": [
+              10,
+              10,
+              10
           ]
       }
   ],
