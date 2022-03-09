@@ -912,6 +912,7 @@
                         <outlet property="labelThermalMINI" destination="zFo-6c-ypK" id="iqk-bI-WIi"/>
                         <outlet property="lableExperimentId" destination="fec-YZ-f5j" id="7Wk-HT-vD1"/>
                         <outlet property="reminder" destination="75Z-2U-y7r" id="lGZ-Ud-JQ7"/>
+                        <outlet property="totalQuestionnairesLabel" destination="gkV-KX-zkk" id="sho-la-tcy"/>
                         <outlet property="viewID" destination="FOg-Ah-Npu" id="Gy9-ci-5WT"/>
                         <outlet property="viewNotificationFreq" destination="wYf-8M-xoc" id="wXA-6E-jTh"/>
                         <outlet property="viewParticipationDays" destination="jNJ-If-G78" id="eSE-fR-XCH"/>

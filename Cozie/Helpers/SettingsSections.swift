@@ -65,7 +65,6 @@ enum UserSettingOptions: Int, CaseIterable, SectionType {
 enum GeneralSettingOptions: Int, CaseIterable, SectionType {
 
     case sendParticipantIDWatch
-    case permissions
 
     var imageView: Bool {
         return false
@@ -82,7 +81,6 @@ enum GeneralSettingOptions: Int, CaseIterable, SectionType {
     var description: String {
         switch self{
         case .sendParticipantIDWatch: return "Sync settings with watch"
-        case .permissions: return "Permissions"
         }
     }
 }
@@ -90,7 +88,7 @@ enum GeneralSettingOptions: Int, CaseIterable, SectionType {
 // define the options in the communication menu
 enum CommunicationOptions: Int, CaseIterable, SectionType {
 
-    case notification
+    case reminders
     case emailConsent
 
     var imageView: Bool {
@@ -101,20 +99,20 @@ enum CommunicationOptions: Int, CaseIterable, SectionType {
     }
     var constrainsSwitch: Bool {
         switch self {
-        case .notification: return true
+        case .reminders: return true
         case .emailConsent: return false
         }
     }
     var isSwitchEnable: Bool {
         switch self {
-        case .notification: return UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true
+        case .reminders: return UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true
         case .emailConsent:
             return false
         }
     }
     var description: String {
         switch self{
-        case .notification: return "Notification"
+        case .reminders: return "Reminders"
         case .emailConsent: return "Email consent form"
         }
     }

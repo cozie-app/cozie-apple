@@ -91,7 +91,7 @@
           "title": "Took lift, why?",
           "identifier": "lift-why",
           "options": [
-              "Convenience",
+              "Convenient",
               "Less effort",
               "No stairs"
           ],
@@ -110,14 +110,14 @@
           "title": "Took stairs, why?",
           "identifier": "stairs-why",
           "options": [
-              "Convenience",
-              "Save time",
+              "Convenient",
+              "No lift",
               "Save energy",
-              "Fitness"
+              "Healthy"
           ],
           "icons": [
               "convenience",
-              "faster",
+              "no-elevator",
               "save-energy",
               "fitness"
           ],
