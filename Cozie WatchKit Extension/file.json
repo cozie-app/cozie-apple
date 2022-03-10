@@ -75,15 +75,15 @@
               "Neither"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
+              "elevator",
+              "stairs",
               "both",
-              "placeholder"
+              "neither"
           ],
           "nextQuestion": [
               1,
               2,
-              2,
+              9,
               5
           ]
       },
@@ -91,14 +91,14 @@
           "title": "Took lift, why?",
           "identifier": "lift-why",
           "options": [
-              "Convenience",
+              "Convenient",
               "Less effort",
               "No stairs"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
-              "placeholder"
+              "convenience",
+              "less-effort",
+              "nostairs"
           ],
           "nextQuestion": [
               3,
@@ -110,16 +110,16 @@
           "title": "Took stairs, why?",
           "identifier": "stairs-why",
           "options": [
-              "Convenience",
-              "Save time",
+              "Convenient",
+              "No lift",
               "Save energy",
-              "Fitness"
+              "Healthy"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
-              "placeholder",
-              "placeholder"
+              "convenience",
+              "no-elevator",
+              "save-energy",
+              "fitness"
           ],
           "nextQuestion": [
               4,
@@ -137,8 +137,8 @@
               "Both"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
+              "easier",
+              "faster",
               "both"
           ],
           "nextQuestion": [
@@ -156,8 +156,8 @@
               "Both"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
+              "easier",
+              "faster",
               "both"
           ],
           "nextQuestion": [
@@ -191,9 +191,9 @@
               "Sitting"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
-              "placeholder"
+              "adjustable",
+              "standing",
+              "sitting"
           ],
           "nextQuestion": [
               7,
@@ -211,10 +211,10 @@
               "Never"
           ],
           "icons": [
-              "placeholder",
-              "placeholder",
-              "placeholder",
-              "placeholder"
+              "adjustable",
+              "down",
+              "up",
+              "no"
           ],
           "nextQuestion": [
               8,
@@ -231,12 +231,69 @@
               "Sitting"
           ],
           "icons": [
-              "met-walking",
-              "met-sitting"
+              "standing",
+              "sitting"
           ],
           "nextQuestion": [
-              9,
-              9
+              12,
+              12
+          ]
+      }, {
+          "title": "Took lift, why?",
+          "identifier": "lift-why",
+          "options": [
+              "Convenient",
+              "Less effort",
+              "No stairs"
+          ],
+          "icons": [
+              "convenience",
+              "less-effort",
+              "nostairs"
+          ],
+          "nextQuestion": [
+              11,
+              10,
+              10
+          ]
+      },{
+          "title": "Took stairs, why?",
+          "identifier": "stairs-why",
+          "options": [
+              "Convenient",
+              "No lift",
+              "Save energy",
+              "Healthy"
+          ],
+          "icons": [
+              "convenience",
+              "no-elevator",
+              "save-energy",
+              "fitness"
+          ],
+          "nextQuestion": [
+              4,
+              5,
+              5,
+              5
+          ]
+      },{
+          "title": "Lift convenient because?",
+          "identifier": "lift-con",
+          "options": [
+              "Easiest",
+              "Fastest",
+              "Both"
+          ],
+          "icons": [
+              "easier",
+              "faster",
+              "both"
+          ],
+          "nextQuestion": [
+              10,
+              10,
+              10
           ]
       }
   ],
@@ -250,9 +307,9 @@
         "Group"
       ],
       "icons": [
-        "met-relaxing",
-        "met-sitting",
-        "density"
+        "alone-privacy",
+        "online-privacy",
+        "group-privacy"
       ],
       "nextQuestion": [
         4,
@@ -269,9 +326,9 @@
         "Learn"
       ],
       "icons": [
-        "placeholder",
-        "density",
-        "met-sitting"
+        "socialize-privacy",
+        "collaborate-privacy",
+        "learn-privacy"
       ],
       "nextQuestion": [
         2,
@@ -304,9 +361,9 @@
         "A lot"
       ],
       "icons": [
-        "placeholder",
-        "placeholder",
-        "placeholder"
+        "none",
+        "little",
+        "lot"
       ],
       "nextQuestion": [
         5,
@@ -322,8 +379,8 @@
         "Leisure"
       ],
       "icons": [
-        "met-sitting",
-        "met-relaxing"
+        "focus-privacy",
+        "leisure-privacy"
       ],
       "nextQuestion": [
         3,
@@ -355,9 +412,9 @@
         "Others"
       ],
       "icons": [
-        "placeholder",
-        "placeholder",
-        "placeholder"
+        "visual-privacy",
+        "noise-privacy",
+        "others"
       ],
       "nextQuestion": [
         5,
@@ -374,8 +431,8 @@
         "Both"
       ],
       "icons": [
-        "placeholder",
-        "placeholder",
+        "visual-privacy",
+        "noise-privacy",
         "both"
       ],
       "nextQuestion": [
@@ -393,9 +450,9 @@
         "Glare"
       ],
       "icons": [
-        "placeholder",
-        "placeholder",
-        "placeholder"
+        "thermal-privacy",
+        "scent-privacy",
+        "glare-privacy"
       ],
       "nextQuestion": [
         5,

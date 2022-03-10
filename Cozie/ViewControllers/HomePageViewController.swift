@@ -10,6 +10,7 @@ import UIKit
 
 class HomePageViewController: UIViewController {
     
+    @IBOutlet weak var totalQuestionnairesLabel: UILabel!
     @IBOutlet weak var viewID: UIView!
     @IBOutlet weak var viewNotificationFreq: UIView!
     @IBOutlet weak var viewParticipationDays: UIView!
@@ -95,10 +96,11 @@ class HomePageViewController: UIViewController {
         let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String
         
+        self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
         self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
         self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
         
-        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
+        self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
         
         self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
         self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]

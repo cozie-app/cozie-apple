@@ -76,6 +76,10 @@ class Utilities {
         } catch {
             print(error)
         }
+        self.saveJSON(jsonString: jsonString)
+    }
+    
+    static func saveJSON(jsonString: String) {
         if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
             do {
@@ -89,8 +93,7 @@ class Utilities {
     }
     
     static func downloadData(_ sender: UIViewController) {
-        self.getData { data in
-            self.createJSON(dic: data)
+        self.getData(isForDownload: true) { data in
             if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
             let activityItems = [pathWithFilename]
@@ -101,7 +104,7 @@ class Utilities {
         }
     }
     
-    static func getData(completion: @escaping ([Response]) -> Void) {
+    static func getData(isForDownload: Bool = false, completion: @escaping ([Response]) -> Void) {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
         
@@ -113,18 +116,23 @@ class Utilities {
             if let responseCode = response.response?.statusCode {
                 if responseCode == 200 {
                     if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? String {
-                        if let ana = (try? JSONSerialization.jsonObject(with: Data(data.utf8), options: .fragmentsAllowed) as? NSDictionary) {
-                            var totalData = [Response]()
-                            ana.forEach { element in
-                                do {
-                                    let data = try JSONSerialization.data(withJSONObject:element.value , options: .prettyPrinted)
-                                    let responseData = try JSONDecoder().decode(Response.self, from: data)
-                                    totalData.append(responseData)
-                                } catch {
-                                    print(error)
+                        if isForDownload {
+                            self.saveJSON(jsonString: data)
+                            completion([Response]())
+                        } else {
+                            if let ana = (try? JSONSerialization.jsonObject(with: Data(data.utf8), options: .fragmentsAllowed) as? NSDictionary) {
+                                var totalData = [Response]()
+                                ana.forEach { element in
+                                    do {
+                                        let data = try JSONSerialization.data(withJSONObject:element.value , options: .prettyPrinted)
+                                        let responseData = try JSONDecoder().decode(Response.self, from: data)
+                                        totalData.append(responseData)
+                                    } catch {
+                                        print(error)
+                                    }
                                 }
+                                completion(totalData)
                             }
-                            completion(totalData)
                         }
                     } else {
                         print("error")
@@ -135,9 +143,9 @@ class Utilities {
         debugPrint(req)
     }
     
-    static func sendHealthData() {
+    static func sendHealthData(data: [String:String]) {
         do {
-            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["oxygenSaturation":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBloodOxygen.rawValue) as? Double ?? 0)", "heartRate2":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue) as? Double ?? 0) ","hearingEnvironmentalExposure":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue) as? Double ?? 0)"]))
+            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: data))
             PostRequest(message: postMessage)
         } catch let error {
             print(error.localizedDescription)
