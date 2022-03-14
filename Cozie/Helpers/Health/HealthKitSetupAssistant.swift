@@ -52,7 +52,34 @@ class HealthKitSetupAssistant {
         
         let healthKitTypesToWrite: Set<HKSampleType> = []
         
-        let healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHertRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature]
+        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHertRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature]
+        
+        if #available(iOS 14.0, *) {
+            guard let walkingSpeed = HKObjectType.quantityType(forIdentifier: .walkingSpeed),
+                  let walkingStepLength = HKObjectType.quantityType(forIdentifier: .walkingStepLength),
+                  let sixMinuteWalkTestDistance = HKObjectType.quantityType(forIdentifier: .sixMinuteWalkTestDistance),
+                  let walkingAsymmetryPercentage = HKObjectType.quantityType(forIdentifier: .walkingAsymmetryPercentage),
+                  let walkingDoubleSupportPercentage = HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage),
+                  let stairAscentSpeed = HKObjectType.quantityType(forIdentifier: .stairAscentSpeed),
+                  let stairDescentSpeed = HKObjectType.quantityType(forIdentifier: .stairDescentSpeed) else {
+                      return
+                  }
+            healthKitTypesToRead.insert(walkingSpeed)
+            healthKitTypesToRead.insert(walkingStepLength)
+            healthKitTypesToRead.insert(sixMinuteWalkTestDistance)
+            healthKitTypesToRead.insert(walkingAsymmetryPercentage)
+            healthKitTypesToRead.insert(walkingDoubleSupportPercentage)
+            healthKitTypesToRead.insert(stairAscentSpeed)
+            healthKitTypesToRead.insert(stairDescentSpeed)
+        }
+        
+        if #available(iOS 15.0, *) {
+            guard let appleWalkingSteadiness = HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness) else {
+                return
+            }
+            healthKitTypesToRead.insert(appleWalkingSteadiness)
+        }
+        
         HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite,
                                              read: healthKitTypesToRead) { (success, error) in
             completion(success, error)

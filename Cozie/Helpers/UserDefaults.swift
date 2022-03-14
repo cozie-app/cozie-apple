@@ -49,6 +49,14 @@ extension UserDefaults {
         case recentBloodPressureDiastolic
         case recentBasalBodyTemperature
         case recentDietaryWater
+        case recentWalkingSpeed
+        case recentWalkingStepLength
+        case recentSixMinuteWalkTestDistance
+        case recentWalkingAsymmetryPercentage
+        case recentWalkingDoubleSupportPercentage
+        case recentStairAscentSpeed
+        case recentStairDescentSpeed
+        case recentAppleWalkingSteadiness
     }
     
     func setValue(for key: String, value: Any) {
