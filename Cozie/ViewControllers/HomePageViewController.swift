@@ -70,8 +70,8 @@ class HomePageViewController: UIViewController {
             if let error = error {
                 print(error.localizedDescription)
             }
+            ProfileDataStore.setUpBackgroundDeliveryForDataTypes()
         }
-        ProfileDataStore.setUpBackgroundDeliveryForDataTypes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
