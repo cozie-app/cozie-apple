@@ -89,6 +89,8 @@ final class ProfileDataStore {
                 data = sample.quantity.doubleValue(for: HKUnit(from: "L/min"))
             case HKObjectType.quantityType(forIdentifier: .vo2Max):
                 data = sample.quantity.doubleValue(for: HKUnit(from: "ml/kg*min"))
+            case HKObjectType.quantityType(forIdentifier: .dietaryWater):
+                data = sample.quantity.doubleValue(for: HKUnit(from: "ml"))
             default:
                 break
             }

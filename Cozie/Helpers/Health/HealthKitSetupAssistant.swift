@@ -45,14 +45,15 @@ class HealthKitSetupAssistant {
               let bloodOxygen = HKObjectType.quantityType(forIdentifier: .oxygenSaturation),
               let bloodPressureSystolic = HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic),
               let bloodPressureDiastolic = HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic),
-              let basalBodyTemperature = HKObjectType.quantityType(forIdentifier: .basalBodyTemperature) else {
+              let basalBodyTemperature = HKObjectType.quantityType(forIdentifier: .basalBodyTemperature),
+              let dietaryWater = HKObjectType.quantityType(forIdentifier: .dietaryWater) else {
                   completion(false, HealthkitSetupError.dataTypeNotAvailable)
             return
         }
         
         let healthKitTypesToWrite: Set<HKSampleType> = []
         
-        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHertRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature]
+        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHertRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature, dietaryWater]
         
         if #available(iOS 14.0, *) {
             guard let walkingSpeed = HKObjectType.quantityType(forIdentifier: .walkingSpeed),
