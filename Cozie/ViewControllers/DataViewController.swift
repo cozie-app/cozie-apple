@@ -54,8 +54,10 @@ class DataViewController: UIViewController, ChartViewDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Utilities.getData { data in
-            self.reloadPage(forData: data)
+        Utilities.getData { (isSuccess, data) in
+            if isSuccess {
+                self.reloadPage(forData: data)
+            }
         }
     }
     
