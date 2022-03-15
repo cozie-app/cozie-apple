@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Surface.png",
+      "filename" : "surface_64x64.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

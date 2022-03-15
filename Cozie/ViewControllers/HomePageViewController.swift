@@ -70,12 +70,17 @@ class HomePageViewController: UIViewController {
             if let error = error {
                 print(error.localizedDescription)
             }
+            ProfileDataStore.setUpBackgroundDeliveryForDataTypes()
         }
-        ProfileDataStore.setUpBackgroundDeliveryForDataTypes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Utilities.getData { (isSuccess, data) in
+            if isSuccess {
+                self.reloadPage(forData: data)                
+            }
+        }
         self.fillUpData()
     }
     
@@ -139,5 +144,13 @@ class HomePageViewController: UIViewController {
         self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormateTimeString() + "hrs"
         self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormateTimeString() + "hrs"
         self.labelParticipationHours.text = self.fromTime + " - " + self.ToTime
+    }
+}
+
+extension HomePageViewController {
+    func reloadPage(forData: [Response]) {
+        let actualResponse = forData.filter { $0.voteLog != nil }
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
+        self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
     }
 }

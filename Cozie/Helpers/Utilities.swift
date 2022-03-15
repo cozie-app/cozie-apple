@@ -93,18 +93,31 @@ class Utilities {
     }
     
     static func downloadData(_ sender: UIViewController) {
-        self.getData(isForDownload: true) { data in
-            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
-            let activityItems = [pathWithFilename]
-            let vc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-            vc.popoverPresentationController?.sourceView = sender.view
-            sender.present(vc, animated: true, completion: nil)
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        sender.present(alert, animated: true, completion: nil)
+        
+        self.getData(isForDownload: true) { (isSuccess, data) in
+            sender.dismiss(animated: false, completion: nil)
+            if isSuccess {
+                if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let pathWithFilename = documentDirectory.appendingPathComponent("data.json")
+                    let activityItems = [pathWithFilename]
+                    let vc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+                    vc.popoverPresentationController?.sourceView = sender.view
+                    sender.present(vc, animated: true, completion: nil)
+                }
             }
         }
     }
     
-    static func getData(isForDownload: Bool = false, completion: @escaping ([Response]) -> Void) {
+    static func getData(isForDownload: Bool = false, completion: @escaping (Bool, [Response]) -> Void) {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
         
@@ -118,7 +131,7 @@ class Utilities {
                     if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? String {
                         if isForDownload {
                             self.saveJSON(jsonString: data)
-                            completion([Response]())
+                            completion(true, [Response]())
                         } else {
                             if let ana = (try? JSONSerialization.jsonObject(with: Data(data.utf8), options: .fragmentsAllowed) as? NSDictionary) {
                                 var totalData = [Response]()
@@ -131,12 +144,14 @@ class Utilities {
                                         print(error)
                                     }
                                 }
-                                completion(totalData)
+                                completion(true, totalData)
                             }
                         }
                     } else {
                         print("error")
                     }
+                } else {
+                    completion(false, [])
                 }
             }
         }

@@ -89,7 +89,6 @@ enum GeneralSettingOptions: Int, CaseIterable, SectionType {
 enum CommunicationOptions: Int, CaseIterable, SectionType {
 
     case reminders
-    case emailConsent
 
     var imageView: Bool {
         return false
@@ -100,20 +99,16 @@ enum CommunicationOptions: Int, CaseIterable, SectionType {
     var constrainsSwitch: Bool {
         switch self {
         case .reminders: return true
-        case .emailConsent: return false
         }
     }
     var isSwitchEnable: Bool {
         switch self {
         case .reminders: return UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true
-        case .emailConsent:
-            return false
         }
     }
     var description: String {
         switch self{
         case .reminders: return "Reminders"
-        case .emailConsent: return "Email consent form"
         }
     }
 }
@@ -167,6 +162,7 @@ enum OnboardingProcessOptions: Int, CaseIterable, SectionType {
     case consent
     case survey
     case onboarding
+    case emailConsent
 
     var imageView: Bool {
         return false
@@ -186,6 +182,7 @@ enum OnboardingProcessOptions: Int, CaseIterable, SectionType {
         case .consent: return "Consent"
         case .survey: return "Survey"
         case .onboarding: return "On-boarding"
+        case .emailConsent: return "Email consent form"
         }
     }
 }

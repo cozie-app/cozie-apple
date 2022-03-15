@@ -239,8 +239,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     LocalNotificationManager.shared.scheduleReminderNotification()
                 }
                 self.settingsTableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
-                // fixme hide this button if the user has not yet completed consent form
-            case .emailConsent: sendConsentForm()
             }
         case .ExperimentSettings:
             guard let buttonClicked = ExperimentSettingOptions(rawValue: indexPath.row) else {
@@ -290,6 +288,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 taskViewController.delegate = self
                 taskViewController.navigationBar.backgroundColor = .white
                 present(taskViewController, animated: true, completion: nil)
+                // fixme hide this button if the user has not yet completed consent form
+            case .emailConsent: sendConsentForm()
             }
         case .About:
             guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {
