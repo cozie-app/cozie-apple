@@ -20,6 +20,60 @@
       ]
     },
     {
+      "title": "Light preference",
+      "identifier": "light-preference",
+      "options": [
+        "Dimmer",
+        "No Change",
+        "Brighter"
+      ],
+      "icons": [
+        "dimmer",
+        "comfortable",
+        "brighter"
+      ],
+      "nextQuestion": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "title": "Sound preference",
+      "identifier": "sound-preference",
+      "options": [
+        "Quieter",
+        "No Change",
+        "Louder"
+      ],
+      "icons": [
+        "quieter",
+        "comfortable",
+        "louder"
+      ],
+      "nextQuestion": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "title": "Are you?",
+      "identifier": "are-you",
+      "options": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "icons": [
+        "outdoor",
+        "indoor"
+      ],
+      "nextQuestion": [
+        4,
+        4
+      ]
+    },
+    {
       "title": "Where are you?",
       "identifier": "location-place",
       "options": [
@@ -35,10 +89,51 @@
         "loc-other"
       ],
       "nextQuestion": [
-        2,
-        2,
-        2,
-        2
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "title": "Are you near a sensor?",
+      "identifier": "near-sensor?",
+      "options": [
+        "Home",
+        "Work",
+        "Portable",
+        "No"
+      ],
+      "icons": [
+        "loc-home",
+        "loc-office",
+        "backpack",
+        "no2"
+      ],
+      "nextQuestion": [
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "title": "What mood are you in?",
+      "identifier": "mood",
+      "options": [
+        "Bad",
+        "Good",
+        "Neither"
+      ],
+      "icons": [
+        "mood-good",
+        "mood-good",
+        "mood-neutral"
+      ],
+      "nextQuestion": [
+        7,
+        7,
+        7
       ]
     },
     {
@@ -57,10 +152,26 @@
         "clo-heavy"
       ],
       "nextQuestion": [
-        3,
-        3,
-        3,
-        3
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "title": "Have you changed location, activity or clothing over the last 10-min?",
+      "identifier": "changed-loaction",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "icons": [
+        "yes",
+        "no"
+      ],
+      "nextQuestion": [
+        9,
+        9
       ]
     }
   ],
@@ -214,7 +325,7 @@
               "adjustable",
               "down",
               "up",
-              "no"
+              "never"
           ],
           "nextQuestion": [
               8,
@@ -438,7 +549,7 @@
       "nextQuestion": [
         9,
         10,
-        10
+        9
       ]
     },
     {
@@ -469,9 +580,9 @@
         "Behaviour"
       ],
       "icons": [
-        "placeholder",
-        "placeholder",
-        "placeholder"
+        "appearance",
+        "work",
+        "activity"
       ],
       "nextQuestion": [
         10,
@@ -490,7 +601,7 @@
         "A lot"
       ],
       "icons": [
-        "air-quality-fresh",
+        "shield",
         "1virus",
         "3virus"
       ],
