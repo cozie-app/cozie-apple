@@ -59,7 +59,7 @@ module.exports = {
             {
               label: "Twitter",
               href: "https://twitter.com/FedericoTartar1",
-            },
+            }
           ],
         },
         {
@@ -77,9 +77,6 @@ module.exports = {
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Cozie, BEARS and BUDS Lab. Built with Docusaurus.`,
-    },
-    googleAnalytics: {
-      trackingID: "UA-151445384-5",
     },
   },
   presets: [
@@ -102,6 +99,10 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        googleAnalytics: {
+          trackingID: 'UA-151445384-5',
+          anonymizeIP: true,
         },
       },
     ],
