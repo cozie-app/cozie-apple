@@ -66,12 +66,6 @@ class HomePageViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClickSurveyView(_:)))
         self.viewSurvey.addGestureRecognizer(tap)
         
-        HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            ProfileDataStore.setUpBackgroundDeliveryForDataTypes()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

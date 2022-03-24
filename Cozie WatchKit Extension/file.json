@@ -111,10 +111,10 @@
         "no2"
       ],
       "nextQuestion": [
-        7,
-        7,
-        7,
-        7
+        6,
+        6,
+        6,
+        6
       ]
     },
     {
@@ -126,7 +126,7 @@
         "Neither"
       ],
       "icons": [
-        "mood-good",
+        "mood-bad",
         "mood-good",
         "mood-neutral"
       ],
@@ -425,7 +425,7 @@
       "nextQuestion": [
         4,
         1,
-        1
+        10
       ]
     },
     {
@@ -442,7 +442,7 @@
         "learn-privacy"
       ],
       "nextQuestion": [
-        2,
+        3,
         3,
         3
       ]
@@ -585,9 +585,28 @@
         "activity"
       ],
       "nextQuestion": [
-        10,
-        10,
-        10
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "title": "Category of activity?",
+      "identifier": "activity",
+      "options": [
+        "Socialize",
+        "Collaborate",
+        "Learn"
+      ],
+      "icons": [
+        "socialize-privacy",
+        "collaborate-privacy",
+        "learn-privacy"
+      ],
+      "nextQuestion": [
+        2,
+        2,
+        2
       ]
     }
   ],

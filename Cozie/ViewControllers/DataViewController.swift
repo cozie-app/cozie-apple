@@ -90,6 +90,12 @@ class DataViewController: UIViewController, ChartViewDelegate{
         self.setChartValue(values: yValues2, barChartView: self.chart2!)
         self.chart2?.xAxis.labelCount = self.validResValues.count
         self.chart2?.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.validResValues)
+        if self.dateValues.count > 0 {
+            self.chart1?.scaleYEnabled = false
+            self.chart1?.isUserInteractionEnabled = true
+            self.chart1?.setVisibleXRangeMaximum(4)
+            self.chart1?.setVisibleXRangeMinimum(4)            
+        }
     }
     
     private func barChart() -> BarChartView{
@@ -103,6 +109,7 @@ class DataViewController: UIViewController, ChartViewDelegate{
         let xAxis = chartView.xAxis
         xAxis.labelTextColor = .lightGray
         xAxis.labelPosition = .bottom
+        xAxis.granularityEnabled = true
         xAxis.drawGridLinesEnabled = false
         chartView.leftAxis.enabled = false
         chartView.leftAxis.axisMinimum = 0.0
