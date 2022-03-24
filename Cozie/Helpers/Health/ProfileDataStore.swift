@@ -166,28 +166,7 @@ extension ProfileDataStore {
         healthStore.execute(sampleQuery)
     }
     
-    static func setUpBackgroundDeliveryForDataTypes() {
-        let types = self.dataTypesToRead()
-        for type in types {
-            guard let sampleType = type as? HKSampleType else { print("ERROR: \(type) is not an HKSampleType"); continue }
-            let query = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
-                debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
-                self.queryForUpdates(type: type)
-                completionHandler()
-            }
-            self.backgroundQuery?.append(query)
-            if let query = self.backgroundQuery?.last {
-                healthStore.execute(query)
-                healthStore.enableBackgroundDelivery(for: type, frequency: .immediate) { (success, error) in
-                    debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
-                }
-            } else {
-                self.queryForUpdates(type: type)
-            }
-        }
-    }
-    
-    static private func queryForUpdates(type: HKObjectType) {
+    static func queryForUpdates(type: HKObjectType) {
         // TODO: stop query after receive data 4 times a day
         // if let query = self.backgroundQuery {
         //     healthStore.stop(query)
@@ -442,7 +421,7 @@ extension ProfileDataStore {
         }
     }
     
-    static private func dataTypesToRead() -> Set<HKObjectType> {
+    static func dataTypesToRead() -> Set<HKObjectType> {
         var set = Set(arrayLiteral:
                         HKObjectType.quantityType(forIdentifier: .bodyMass)!,
                       HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
