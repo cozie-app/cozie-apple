@@ -29,17 +29,16 @@ class StartViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // Check if the user has already logged in.
-        if Auth.auth().currentUser == nil {
-
-            setUpVideo()
-            styleButtons()
-
-        } else {
-
+//        if Auth.auth().currentUser == nil {
+//
+//            setUpVideo()
+//            styleButtons()
+//
+//        } else {
             let homeViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.homeViewController)
             view.window?.rootViewController = homeViewController
             view.window?.makeKeyAndVisible()
-        }
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
