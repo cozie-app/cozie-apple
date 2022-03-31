@@ -13,6 +13,29 @@ final class ProfileDataStore {
     static let healthStore = HKHealthStore()
     static var backgroundQuery: [HKQuery]?
     
+    static private func getLastDaySamples(for sampleType: HKSampleType,
+                                          completion: @escaping ([HKQuantitySample], Error?) -> Swift.Void) {
+        
+        let predicate = HKQuery.predicateForSamples(withStart: Calendar.current.date(byAdding: .day, value: -1, to: Date()),
+                                                    end: Date(),
+                                                    options: .strictEndDate)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
+                                              ascending: false)
+        let sampleQuery = HKSampleQuery(sampleType: sampleType,
+                                        predicate: predicate,
+                                        limit: HKObjectQueryNoLimit,
+                                        sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+            DispatchQueue.main.async {
+                guard let samples = samples as? [HKQuantitySample] else {
+                    completion([], error)
+                    return
+                }
+                completion(samples, nil)
+            }
+        }
+        healthStore.execute(sampleQuery)
+    }
+    
     static private func fetchData(sample: HKQuantitySample, type: HKSampleType, completion:@escaping(Double?) ->  Void) {
         
         var data: Double? = nil
@@ -124,18 +147,16 @@ final class ProfileDataStore {
             return
         }
         
-        self.getMostRecentSample(for: type) { (sample, error) in
+        self.getLastDaySamples(for: type) { (samples, error) in
             
-            guard let sample = sample else {
-                
-                if let error = error {
-                    print("error: \(error)")
-                }
-                return
-            }
-            
-            self.fetchData(sample: sample, type: type) { value in
-                completion(value)
+            if samples.count > 0 {
+                samples.forEach({
+                    self.fetchData(sample: $0, type: type) { value in
+                        completion(value)
+                    }
+                })
+            } else if let error = error {
+                print("error: \(error)")
             }
         }
     }
