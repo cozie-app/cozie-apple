@@ -40,17 +40,6 @@ final class ProfileDataStore {
         
         var data: Double? = nil
         
-        if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String] {
-            if syncedData.contains(sample.uuid.uuidString) {
-                return
-            } else {
-                syncedData.append(sample.uuid.uuidString)
-                UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: syncedData)
-            }
-        } else {
-            UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: [sample.uuid.uuidString])
-        }
-        
         switch type {
         case HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure),
             HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure):
@@ -151,10 +140,63 @@ final class ProfileDataStore {
             
             if samples.count > 0 {
                 samples.forEach({
+                    
+                    if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String] {
+                        if syncedData.contains($0.uuid.uuidString) {
+                            return
+                        } else {
+                            syncedData.append($0.uuid.uuidString)
+                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: syncedData)
+                        }
+                    } else {
+                        UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: [$0.uuid.uuidString])
+                    }
+                    
                     self.fetchData(sample: $0, type: type) { value in
                         completion(value)
                     }
                 })
+            } else if let error = error {
+                print("error: \(error)")
+            }
+        }
+    }
+    
+    static private func getDataObject(type: HKSampleType?, completion:@escaping([String:Double]) ->  Void) {
+        guard let type = type else {
+            print("\(String(describing: type)) Sample Type is no longer available in HealthKit")
+            return
+        }
+        
+        self.getLastDaySamples(for: type) { (samples, error) in
+            
+            var dataObj: [String:Double] = [:]
+            
+            let group = DispatchGroup()
+            if samples.count > 0 {
+                samples.forEach({
+                    
+                    if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String] {
+                        if syncedData.contains($0.uuid.uuidString) {
+                            return
+                        } else {
+                            syncedData.append($0.uuid.uuidString)
+                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: syncedData)
+                        }
+                    } else {
+                        UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: [$0.uuid.uuidString])
+                    }
+                    
+                    let sample = $0
+                    group.enter()
+                    self.fetchData(sample: $0, type: type) { value in
+                        dataObj[FormatDateISOString(date: sample.startDate)] = value
+                        group.leave()
+                    }
+                })
+                group.notify(queue: .main) {
+                    completion(dataObj)
+                }
             } else if let error = error {
                 print("error: \(error)")
             }
@@ -238,11 +280,8 @@ extension ProfileDataStore {
                 }
             }
         case HKObjectType.quantityType(forIdentifier: .heartRate)!:
-            self.getData(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { heartRate in
-                if let heartRate = heartRate {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue, value: heartRate)
-                    Utilities.sendHealthData(data: ["ts_heartRate2":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRate.rawValue) as? Double ?? 0) "])
-                }
+            self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { heartRate in
+                Utilities.sendHealthData(data: heartRate)
             }
         case HKObjectType.quantityType(forIdentifier: .restingHeartRate)!:
             self.getData(type: HKSampleType.quantityType(forIdentifier: .restingHeartRate)) { restingHeartRate in

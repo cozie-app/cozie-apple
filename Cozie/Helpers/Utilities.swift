@@ -166,6 +166,15 @@ class Utilities {
             print(error.localizedDescription)
         }
     }
+    
+    static func sendHealthData(data: [String:Double]) {
+        do {
+            let postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: data))
+            PostRequest(message: postMessage)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
 
 struct Response: Codable {
@@ -195,4 +204,12 @@ struct APIFormate: Codable {
     let endTimestamp: String
     let participantID: String
     let responses: [String:String]
+}
+
+struct HeartData: Codable {
+    let locationTimestamp: String
+    let startTimestamp: String
+    let endTimestamp: String
+    let participantID: String
+    let heartRate: [String: Double]
 }
