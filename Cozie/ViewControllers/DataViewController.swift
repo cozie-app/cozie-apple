@@ -94,7 +94,8 @@ class DataViewController: UIViewController, ChartViewDelegate{
             self.chart1?.scaleYEnabled = false
             self.chart1?.isUserInteractionEnabled = true
             self.chart1?.setVisibleXRangeMaximum(4)
-            self.chart1?.setVisibleXRangeMinimum(4)            
+            self.chart1?.setVisibleXRangeMinimum(4)
+            self.chart1?.moveViewToX(Double(self.dateValues.count))
         }
     }
     
