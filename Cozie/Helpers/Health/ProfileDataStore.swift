@@ -53,6 +53,16 @@ final class ProfileDataStore {
                 }
                 return
             }
+            if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String] {
+                if syncedData.contains(sample.uuid.uuidString) {
+                    return
+                } else {
+                    syncedData.append(sample.uuid.uuidString)
+                    UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: syncedData)
+                }
+            } else {
+                UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: [sample.uuid.uuidString])
+            }
             switch type {
             case HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure),
                 HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure):
@@ -171,6 +181,9 @@ extension ProfileDataStore {
         // if let query = self.backgroundQuery {
         //     healthStore.stop(query)
         // }
+        if UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String == "" || UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String == nil {
+            return
+        }
         switch type {
         case HKObjectType.quantityType(forIdentifier: .bodyMass)!:
             self.getData(type: HKSampleType.quantityType(forIdentifier: .bodyMass)) { bodyMass in

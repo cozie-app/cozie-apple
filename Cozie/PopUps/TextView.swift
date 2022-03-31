@@ -39,6 +39,10 @@ class TextView: BasePopupVC {
     @IBAction func onClickSet(_ sender: Any) {
         if isParticipantID {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: self.idTextField.text!)
+            DispatchQueue.main.async {
+                let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+                appDelegate?.setUpBackgroundDeliveryForDataTypes()
+            }
         } else {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: self.idTextField.text!)
         }
