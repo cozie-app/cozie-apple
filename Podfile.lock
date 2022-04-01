@@ -340,6 +340,7 @@ PODS:
   - nanopb/encode (1.30905.0)
   - OneSignal (2.14.2)
   - PromisesObjC (1.2.9)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -351,6 +352,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - IQKeyboardManagerSwift
   - OneSignal (< 3.0, >= 2.11.2)
+  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
@@ -378,6 +380,7 @@ SPEC REPOS:
     - nanopb
     - OneSignal
     - PromisesObjC
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -404,7 +407,8 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   OneSignal: 1dcb1fd96f9c15a5c352dcfcab9106a7c15eced7
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 07775d09d97e4042021eebea7ebced637fa975ad
+PODFILE CHECKSUM: c9fbda88a2e71d820350e7800cc96d09d1140d15
 
 COCOAPODS: 1.11.2
