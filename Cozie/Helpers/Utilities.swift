@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Alamofire
+import HealthKit
 
 class Utilities {
     static func styledTextField(_ textField: UITextField) {
@@ -167,10 +168,34 @@ class Utilities {
         }
     }
     
-    static func sendHealthData(data: [String:Double]) {
+    static func sendHealthData(data: [String:Double], type: healthType, samples: [HKQuantitySample]) {
         do {
-            let postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: data))
-            PostRequest(message: postMessage)
+            var postMessage = Data()
+            switch type {
+            case .heartRate:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: data, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil))
+            case .ts_bloodPressureSystolic:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: data, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil))
+            case .ts_bloodPressureDiastolic:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: data, ts_hearingEnvironmentalExposure: nil))
+            case .ts_hearingEnvironmentalExposure:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: data))
+            }
+            let code = PostRequest(message: postMessage)
+            if code == 200 {
+                samples.forEach{
+                    if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: $0.sampleType))") as? [String] {
+                        if syncedData.contains($0.uuid.uuidString) {
+                            return
+                        } else {
+                            syncedData.append($0.uuid.uuidString)
+                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: $0.sampleType))", value: syncedData)
+                        }
+                    } else {
+                        UserDefaults.shared.setValue(for: "syncedData\(String(describing: $0.sampleType))", value: [$0.uuid.uuidString])
+                    }
+                }
+            }
         } catch let error {
             print(error.localizedDescription)
         }
@@ -198,6 +223,13 @@ struct Response: Codable {
     }
 }
 
+enum healthType {
+    case heartRate
+    case ts_bloodPressureSystolic
+    case ts_bloodPressureDiastolic
+    case ts_hearingEnvironmentalExposure
+}
+
 struct APIFormate: Codable {
     let locationTimestamp: String
     let startTimestamp: String
@@ -211,5 +243,8 @@ struct HeartData: Codable {
     let startTimestamp: String
     let endTimestamp: String
     let participantID: String
-    let heartRate: [String: Double]
+    let heartRate: [String: Double]?
+    let ts_bloodPressureSystolic: [String: Double]?
+    let ts_bloodPressureDiastolic: [String: Double]?
+    let ts_hearingEnvironmentalExposure: [String: Double]?
 }

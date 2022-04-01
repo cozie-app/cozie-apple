@@ -16,24 +16,26 @@ final class ProfileDataStore {
     static private func getLastDaySamples(for sampleType: HKSampleType,
                                           completion: @escaping ([HKQuantitySample], Error?) -> Swift.Void) {
         
-        let predicate = HKQuery.predicateForSamples(withStart: Calendar.current.date(byAdding: .day, value: -1, to: Date()),
-                                                    end: Date(),
-                                                    options: .strictEndDate)
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
-                                              ascending: false)
-        let sampleQuery = HKSampleQuery(sampleType: sampleType,
-                                        predicate: predicate,
-                                        limit: HKObjectQueryNoLimit,
-                                        sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-            DispatchQueue.main.async {
-                guard let samples = samples as? [HKQuantitySample] else {
-                    completion([], error)
-                    return
+        DispatchQueue.global(qos: .background).async {
+            let predicate = HKQuery.predicateForSamples(withStart: Calendar.current.date(byAdding: .day, value: -4, to: Date()),
+                                                        end: Date(),
+                                                        options: .strictEndDate)
+            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
+                                                  ascending: false)
+            let sampleQuery = HKSampleQuery(sampleType: sampleType,
+                                            predicate: predicate,
+                                            limit: HKObjectQueryNoLimit,
+                                            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                DispatchQueue.main.async {
+                    guard let samples = samples as? [HKQuantitySample] else {
+                        completion([], error)
+                        return
+                    }
+                    completion(samples, nil)
                 }
-                completion(samples, nil)
             }
+            healthStore.execute(sampleQuery)
         }
-        healthStore.execute(sampleQuery)
     }
     
     static private func fetchData(sample: HKQuantitySample, type: HKSampleType, completion:@escaping(Double?) ->  Void) {
@@ -141,15 +143,8 @@ final class ProfileDataStore {
             if samples.count > 0 {
                 samples.forEach({
                     
-                    if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String] {
-                        if syncedData.contains($0.uuid.uuidString) {
-                            return
-                        } else {
-                            syncedData.append($0.uuid.uuidString)
-                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: syncedData)
-                        }
-                    } else {
-                        UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: [$0.uuid.uuidString])
+                    if let syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String], syncedData.contains($0.uuid.uuidString) {
+                        return
                     }
                     
                     self.fetchData(sample: $0, type: type) { value in
@@ -162,7 +157,7 @@ final class ProfileDataStore {
         }
     }
     
-    static private func getDataObject(type: HKSampleType?, completion:@escaping([String:Double]) ->  Void) {
+    static private func getDataObject(type: HKSampleType?, completion:@escaping([String:Double], [HKQuantitySample]) ->  Void) {
         guard let type = type else {
             print("\(String(describing: type)) Sample Type is no longer available in HealthKit")
             return
@@ -176,15 +171,8 @@ final class ProfileDataStore {
             if samples.count > 0 {
                 samples.forEach({
                     
-                    if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String] {
-                        if syncedData.contains($0.uuid.uuidString) {
-                            return
-                        } else {
-                            syncedData.append($0.uuid.uuidString)
-                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: syncedData)
-                        }
-                    } else {
-                        UserDefaults.shared.setValue(for: "syncedData\(String(describing: type))", value: [$0.uuid.uuidString])
+                    if let syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: type))") as? [String], syncedData.contains($0.uuid.uuidString) {
+                        return
                     }
                     
                     let sample = $0
@@ -195,7 +183,7 @@ final class ProfileDataStore {
                     }
                 })
                 group.notify(queue: .main) {
-                    completion(dataObj)
+                    completion(dataObj, samples)
                 }
             } else if let error = error {
                 print("error: \(error)")
@@ -280,8 +268,8 @@ extension ProfileDataStore {
                 }
             }
         case HKObjectType.quantityType(forIdentifier: .heartRate)!:
-            self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { heartRate in
-                Utilities.sendHealthData(data: heartRate)
+            self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { (heartRate, samples) in
+                Utilities.sendHealthData(data: heartRate, type: .heartRate, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .restingHeartRate)!:
             self.getData(type: HKSampleType.quantityType(forIdentifier: .restingHeartRate)) { restingHeartRate in
@@ -340,11 +328,8 @@ extension ProfileDataStore {
                 }
             }
         case HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!:
-            self.getData(type: HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure)) { noise in
-                if let noise = noise {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue, value: noise)
-                    Utilities.sendHealthData(data: ["ts_hearingEnvironmentalExposure":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentNoise.rawValue) as? Double ?? 0)"])
-                }
+            self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure)) { (noise, samples) in
+                Utilities.sendHealthData(data: noise, type: .ts_hearingEnvironmentalExposure, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!:
             self.getData(type: HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure)) { headphoneAudioExposure in
@@ -403,18 +388,12 @@ extension ProfileDataStore {
                 }
             }
         case HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!:
-            self.getData(type: HKSampleType.quantityType(forIdentifier: .bloodPressureSystolic)) { bloodPressureSystolic in
-                if let bloodPressureSystolic = bloodPressureSystolic {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBloodPressureSystolic.rawValue, value: bloodPressureSystolic)
-                    Utilities.sendHealthData(data: ["ts_bloodPressureSystolic":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBloodPressureSystolic.rawValue) as? Double ?? 0)"])
-                }
+            self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .bloodPressureSystolic)) { (bloodPressureSystolic, samples) in
+                Utilities.sendHealthData(data: bloodPressureSystolic, type: .ts_bloodPressureSystolic, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!:
-            self.getData(type: HKSampleType.quantityType(forIdentifier: .bloodPressureDiastolic)) { bloodPressureDiastolic in
-                if let bloodPressureDiastolic = bloodPressureDiastolic {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBloodPressureDiastolic.rawValue, value: bloodPressureDiastolic)
-                    Utilities.sendHealthData(data: ["ts_bloodPressureDiastolic":"\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBloodPressureDiastolic.rawValue) as? Double ?? 0)"])
-                }
+            self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .bloodPressureDiastolic)) { (bloodPressureDiastolic, samples) in
+                Utilities.sendHealthData(data: bloodPressureDiastolic, type: .ts_bloodPressureDiastolic, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!:
             self.getData(type: HKSampleType.quantityType(forIdentifier: .basalBodyTemperature)) { basalBodyTemperature in
@@ -506,45 +485,46 @@ extension ProfileDataStore {
     
     static func dataTypesToRead() -> Set<HKObjectType> {
         var set = Set(arrayLiteral:
-                        HKObjectType.quantityType(forIdentifier: .bodyMass)!,
-                      HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
-                      HKObjectType.quantityType(forIdentifier: .leanBodyMass)!,
+//                        HKObjectType.quantityType(forIdentifier: .bodyMass)!,
+//                      HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
+//                      HKObjectType.quantityType(forIdentifier: .leanBodyMass)!,
                       HKObjectType.quantityType(forIdentifier: .heartRate)!,
                       HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
-                      HKObjectType.quantityType(forIdentifier: .bodyTemperature)!,
-                      HKObjectType.quantityType(forIdentifier: .respiratoryRate)!,
-                      HKObjectType.quantityType(forIdentifier: .stepCount)!,
-                      HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
-                      HKObjectType.quantityType(forIdentifier: .uvExposure)!,
-                      HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-                      HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
+//                      HKObjectType.quantityType(forIdentifier: .bodyTemperature)!,
+//                      HKObjectType.quantityType(forIdentifier: .respiratoryRate)!,
+//                      HKObjectType.quantityType(forIdentifier: .stepCount)!,
+//                      HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
+//                      HKObjectType.quantityType(forIdentifier: .uvExposure)!,
+//                      HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+//                      HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
                       HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
-                      HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
-                      HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
-                      HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                      HKObjectType.quantityType(forIdentifier: .vo2Max)!,
-                      HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!,
-                      HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
-                      HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!,
-                      HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
+//                      HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
+//                      HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
+//                      HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+//                      HKObjectType.quantityType(forIdentifier: .vo2Max)!,
+//                      HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!,
+//                      HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
+//                      HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!,
+//                      HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
                       HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
-                      HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!,
-                      HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!,
-                      HKObjectType.quantityType(forIdentifier: .dietaryWater)!)
+                      HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!
+//                      HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!,
+//                      HKObjectType.quantityType(forIdentifier: .dietaryWater)!
+        )
         
-        if #available(iOS 14.0, *) {
-            set.insert(HKObjectType.quantityType(forIdentifier: .walkingSpeed)!)
-            set.insert(HKObjectType.quantityType(forIdentifier: .walkingStepLength)!)
-            set.insert(HKObjectType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)!)
-            set.insert(HKObjectType.quantityType(forIdentifier: .walkingAsymmetryPercentage)!)
-            set.insert(HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)!)
-            set.insert(HKObjectType.quantityType(forIdentifier: .stairAscentSpeed)!)
-            set.insert(HKObjectType.quantityType(forIdentifier: .stairDescentSpeed)!)
-        }
+//        if #available(iOS 14.0, *) {
+//            set.insert(HKObjectType.quantityType(forIdentifier: .walkingSpeed)!)
+//            set.insert(HKObjectType.quantityType(forIdentifier: .walkingStepLength)!)
+//            set.insert(HKObjectType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)!)
+//            set.insert(HKObjectType.quantityType(forIdentifier: .walkingAsymmetryPercentage)!)
+//            set.insert(HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)!)
+//            set.insert(HKObjectType.quantityType(forIdentifier: .stairAscentSpeed)!)
+//            set.insert(HKObjectType.quantityType(forIdentifier: .stairDescentSpeed)!)
+//        }
         
-        if #available(iOS 15.0, *) {
-            set.insert(HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness)!)
-        }
+//        if #available(iOS 15.0, *) {
+//            set.insert(HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness)!)
+//        }
         
         return set
     }

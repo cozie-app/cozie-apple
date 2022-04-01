@@ -11,6 +11,7 @@ import OneSignal
 import Firebase
 import IQKeyboardManagerSwift
 import HealthKit
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,7 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error {
                 print(error.localizedDescription)
             }
-            self.setUpBackgroundDeliveryForDataTypes()
+            DispatchQueue.main.async {
+                self.setUpBackgroundDeliveryForDataTypes()
+            }
         }
         return true
     }
@@ -68,6 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setUpBackgroundDeliveryForDataTypes() {
+        SVProgressHUD.show()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+            SVProgressHUD.dismiss()
+        }
+        
         let types = ProfileDataStore.dataTypesToRead()
         for type in types {
             guard let sampleType = type as? HKSampleType else { print("ERROR: \(type) is not an HKSampleType"); continue }
@@ -76,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ProfileDataStore.queryForUpdates(type: type)
                 completionHandler()
             }
-            if ProfileDataStore.backgroundQuery == nil {
+            if ProfileDataStore.backgroundQuery == nil || ProfileDataStore.backgroundQuery?.count == 0 {
                 ProfileDataStore.backgroundQuery = [query]
             } else {
                 ProfileDataStore.backgroundQuery?.append(query)
