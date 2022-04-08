@@ -237,18 +237,20 @@ class Utilities {
 //            case .ts_appleWalkingSteadiness:
 //                break
             }
-            let code = PostRequest(message: postMessage)
-            if code == 200 {
-                samples.forEach{
-                    if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: $0.sampleType))") as? [String] {
-                        if syncedData.contains($0.uuid.uuidString) {
-                            return
+            DispatchQueue.global(qos: .background).async {
+                let code = PostRequest(message: postMessage)
+                if code == 200 {
+                    samples.forEach{
+                        if var syncedData = UserDefaults.shared.getValue(for: "syncedData\(String(describing: $0.sampleType))") as? [String] {
+                            if syncedData.contains($0.uuid.uuidString) {
+                                return
+                            } else {
+                                syncedData.append($0.uuid.uuidString)
+                                UserDefaults.shared.setValue(for: "syncedData\(String(describing: $0.sampleType))", value: syncedData)
+                            }
                         } else {
-                            syncedData.append($0.uuid.uuidString)
-                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: $0.sampleType))", value: syncedData)
+                            UserDefaults.shared.setValue(for: "syncedData\(String(describing: $0.sampleType))", value: [$0.uuid.uuidString])
                         }
-                    } else {
-                        UserDefaults.shared.setValue(for: "syncedData\(String(describing: $0.sampleType))", value: [$0.uuid.uuidString])
                     }
                 }
             }

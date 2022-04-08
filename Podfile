@@ -14,7 +14,6 @@ target 'Cozie' do
   pod 'Charts'
   pod 'IQKeyboardManagerSwift'
   pod 'Alamofire', '~> 4.5'
-  pod 'SVProgressHUD'
   # Pods for Cozie
 
   target 'CozieTests' do

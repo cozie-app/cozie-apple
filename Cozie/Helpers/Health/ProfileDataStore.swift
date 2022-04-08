@@ -16,26 +16,22 @@ final class ProfileDataStore {
     static private func getLastDaySamples(for sampleType: HKSampleType,
                                           completion: @escaping ([HKQuantitySample], Error?) -> Swift.Void) {
         
-        DispatchQueue.global(qos: .background).async {
-            let predicate = HKQuery.predicateForSamples(withStart: Calendar.current.date(byAdding: .day, value: -4, to: Date()),
-                                                        end: Date(),
-                                                        options: .strictEndDate)
-            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
-                                                  ascending: false)
-            let sampleQuery = HKSampleQuery(sampleType: sampleType,
-                                            predicate: predicate,
-                                            limit: HKObjectQueryNoLimit,
-                                            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-                DispatchQueue.main.async {
-                    guard let samples = samples as? [HKQuantitySample] else {
-                        completion([], error)
-                        return
-                    }
-                    completion(samples, nil)
-                }
+        let predicate = HKQuery.predicateForSamples(withStart: Calendar.current.date(byAdding: .day, value: -4, to: Date()),
+                                                    end: Date(),
+                                                    options: .strictEndDate)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
+                                              ascending: false)
+        let sampleQuery = HKSampleQuery(sampleType: sampleType,
+                                        predicate: predicate,
+                                        limit: HKObjectQueryNoLimit,
+                                        sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+            guard let samples = samples as? [HKQuantitySample] else {
+                completion([], error)
+                return
             }
-            healthStore.execute(sampleQuery)
+            completion(samples, nil)
         }
+        healthStore.execute(sampleQuery)
     }
     
     static private func fetchData(sample: HKQuantitySample, type: HKSampleType, completion:@escaping(Double?) ->  Void) {
