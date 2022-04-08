@@ -129,24 +129,22 @@ class Utilities {
         let req = Alamofire.request("https://0iecjae656.execute-api.us-east-1.amazonaws.com/default/CozieApple_Read_Influx", method: .get, parameters: param, headers: headers).responseJSON { (response) in
             if let responseCode = response.response?.statusCode {
                 if responseCode == 200 {
-                    if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? String {
+                    if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? NSDictionary {
                         if isForDownload {
-                            self.saveJSON(jsonString: data)
+//                            self.saveJSON(jsonString: data)
                             completion(true, [Response]())
                         } else {
-                            if let ana = (try? JSONSerialization.jsonObject(with: Data(data.utf8), options: .fragmentsAllowed) as? NSDictionary) {
-                                var totalData = [Response]()
-                                ana.forEach { element in
-                                    do {
-                                        let data = try JSONSerialization.data(withJSONObject:element.value , options: .prettyPrinted)
-                                        let responseData = try JSONDecoder().decode(Response.self, from: data)
-                                        totalData.append(responseData)
-                                    } catch {
-                                        print(error)
-                                    }
+                            var totalData = [Response]()
+                            data.forEach { element in
+                                do {
+                                    let data = try JSONSerialization.data(withJSONObject:element.value , options: .prettyPrinted)
+                                    let responseData = try JSONDecoder().decode(Response.self, from: data)
+                                    totalData.append(responseData)
+                                } catch {
+                                    print(error)
                                 }
-                                completion(true, totalData)
                             }
+                            completion(true, totalData)
                         }
                     } else {
                         print("error")
@@ -203,9 +201,7 @@ class Utilities {
 }
 
 struct Response: Codable {
-    let startTimestamp: String
-    let endTimestamp: String
-    let locationTimestamp: String
+    let timestamp: String?
     let latitude: Double?
     let longitude: Double?
     let user_id: String
@@ -213,9 +209,7 @@ struct Response: Codable {
     
     func encode(to encoder: Encoder) throws {
         var val = encoder.container(keyedBy: CodingKeys.self)
-        try val.encode(startTimestamp, forKey: .startTimestamp)
-        try val.encode(endTimestamp, forKey: .endTimestamp)
-        try val.encode(locationTimestamp, forKey: .locationTimestamp)
+        try val.encode(timestamp, forKey: .timestamp)
         try val.encode(latitude, forKey: .latitude)
         try val.encode(longitude, forKey: .longitude)
         try val.encode(user_id, forKey: .user_id)
