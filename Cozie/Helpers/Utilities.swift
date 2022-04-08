@@ -170,14 +170,72 @@ class Utilities {
         do {
             var postMessage = Data()
             switch type {
+            case .ts_bodyMass:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: data, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+            case .ts_bodyMassIndex:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: data, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+//            case .ts_leanBodyMass:
+//                break
             case .heartRate:
-                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: data, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil))
-            case .ts_bloodPressureSystolic:
-                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: data, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil))
-            case .ts_bloodPressureDiastolic:
-                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: data, ts_hearingEnvironmentalExposure: nil))
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: data, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+            case .ts_restingHeartRate:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: data))
+//            case .ts_bodyTemperature:
+//                break
+//            case .ts_respiratoryRate:
+//                break
+            case .ts_stepCount:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: data, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+//            case .ts_distanceCycling:
+//                break
+//            case .ts_uvExposure:
+//                break
+//            case .ts_flightsClimbed:
+//                break
+            case .ts_appleStandTime:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: data, ts_walkingDistance: nil, ts_restingHeartRate: nil))
             case .ts_hearingEnvironmentalExposure:
-                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: data))
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: data, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+//            case .ts_headphoneAudioExposure:
+//                break
+//            case .ts_distanceSwimming:
+//                break
+            case .ts_distanceWalkingRunning:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: data, ts_restingHeartRate: nil))
+//            case .ts_vo2Max:
+//                break
+//            case .ts_peakExpiratoryFlowRate:
+//                break
+//            case .ts_heartRateVariabilitySDNN:
+//                break
+//            case .ts_walkingHeartRateAverage:
+//                break
+            case .ts_oxygenSaturation:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: data, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+            case .ts_bloodPressureSystolic:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: data, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+            case .ts_bloodPressureDiastolic:
+                postMessage = try JSONEncoder().encode(HeartData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: data, ts_hearingEnvironmentalExposure: nil, ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
+//            case .ts_basalBodyTemperature:
+//                break
+//            case .ts_dietaryWater:
+//                break
+//            case .ts_walkingSpeed:
+//                break
+//            case .ts_walkingStepLength:
+//                break
+//            case .ts_sixMinuteWalkTestDistance:
+//                break
+//            case .ts_walkingAsymmetryPercentage:
+//                break
+//            case .ts_walkingDoubleSupportPercentage:
+//                break
+//            case .ts_stairAscentSpeed:
+//                break
+//            case .ts_stairDescentSpeed:
+//                break
+//            case .ts_appleWalkingSteadiness:
+//                break
             }
             let code = PostRequest(message: postMessage)
             if code == 200 {
@@ -218,10 +276,39 @@ struct Response: Codable {
 }
 
 enum healthType {
+    case ts_bodyMass
+    case ts_bodyMassIndex
+//    case ts_leanBodyMass
     case heartRate
+    case ts_restingHeartRate
+//    case ts_bodyTemperature
+//    case ts_respiratoryRate
+    case ts_stepCount
+//    case ts_distanceCycling
+//    case ts_uvExposure
+//    case ts_flightsClimbed
+    case ts_appleStandTime
+    case ts_hearingEnvironmentalExposure
+//    case ts_headphoneAudioExposure
+//    case ts_distanceSwimming
+    case ts_distanceWalkingRunning
+//    case ts_vo2Max
+//    case ts_peakExpiratoryFlowRate
+//    case ts_heartRateVariabilitySDNN
+//    case ts_walkingHeartRateAverage
+    case ts_oxygenSaturation
     case ts_bloodPressureSystolic
     case ts_bloodPressureDiastolic
-    case ts_hearingEnvironmentalExposure
+//    case ts_basalBodyTemperature
+//    case ts_dietaryWater
+//    case ts_walkingSpeed
+//    case ts_walkingStepLength
+//    case ts_sixMinuteWalkTestDistance
+//    case ts_walkingAsymmetryPercentage
+//    case ts_walkingDoubleSupportPercentage
+//    case ts_stairAscentSpeed
+//    case ts_stairDescentSpeed
+//    case ts_appleWalkingSteadiness
 }
 
 struct APIFormate: Codable {
@@ -232,6 +319,7 @@ struct APIFormate: Codable {
     let responses: [String:String]
 }
 
+// NOTE: HeartData model have 10 heath data for now (add others later)
 struct HeartData: Codable {
     let locationTimestamp: String
     let startTimestamp: String
@@ -241,4 +329,11 @@ struct HeartData: Codable {
     let ts_bloodPressureSystolic: [String: Double]?
     let ts_bloodPressureDiastolic: [String: Double]?
     let ts_hearingEnvironmentalExposure: [String: Double]?
+    let ts_bodyMass: [String: Double]?
+    let ts_BMI: [String: Double]?
+    let ts_oxygenSaturation: [String: Double]?
+    let ts_stepCount: [String: Double]?
+    let ts_standTime: [String: Double]?
+    let ts_walkingDistance: [String: Double]?
+    let ts_restingHeartRate: [String: Double]?
 }
