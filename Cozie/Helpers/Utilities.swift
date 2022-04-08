@@ -148,6 +148,12 @@ class Utilities {
                         }
                     } else {
                         print("error")
+                        completion(false, [])
+                    }
+                    if let values = response.result.value as? NSArray, let dictionary = values.firstObject as? NSDictionary, let date = dictionary["last_sync_timestamp"] as? Double {
+                        if UserDefaults.shared.getValue(for: "last_sync_timestamp") as? Double == nil {
+                            UserDefaults.shared.setValue(for: "last_sync_timestamp", value: date)          
+                        }
                     }
                 } else {
                     completion(false, [])

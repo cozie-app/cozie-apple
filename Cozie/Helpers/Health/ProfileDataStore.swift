@@ -16,7 +16,7 @@ final class ProfileDataStore {
     static private func getLastDaySamples(for sampleType: HKSampleType,
                                           completion: @escaping ([HKQuantitySample], Error?) -> Swift.Void) {
         
-        let predicate = HKQuery.predicateForSamples(withStart: Calendar.current.date(byAdding: .day, value: -4, to: Date()),
+        let predicate = HKQuery.predicateForSamples(withStart: Date(timeIntervalSince1970: TimeInterval(UserDefaults.shared.getValue(for: "last_sync_timestamp") as? Double ?? 1649417151.404414)),
                                                     end: Date(),
                                                     options: .strictEndDate)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
