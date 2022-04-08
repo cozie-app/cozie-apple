@@ -64,7 +64,7 @@ final class ProfileDataStore {
             data = sample.quantity.doubleValue(for: HKUnit.second())
         case HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage),
             HKObjectType.quantityType(forIdentifier: .restingHeartRate):
-            data = sample.quantity.doubleValue(for: HKUnit(from: "count/s"))
+            data = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
         case HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning),
             HKObjectType.quantityType(forIdentifier: .distanceCycling):
             data = sample.quantity.doubleValue(for: HKUnit.meter())
