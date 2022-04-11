@@ -152,13 +152,11 @@ extension DataViewController {
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
         var dateData = [String: Int]()
         actualResponse.forEach { response in
-            if let date = FormateISOStringDate(ISO: response.endTimestamp) {
-                print(date.getDayString())
-                if dateData[date.getDayString()] != nil {
-                    dateData[date.getDayString()]? += 1
-                } else {
-                    dateData[date.getDayString()] = 1
-                }
+            let date = Date(timeIntervalSince1970: TimeInterval(Int(response.timestamp ?? "") ?? 0) / 1000)
+            if dateData[date.getDayString()] != nil {
+                dateData[date.getDayString()]? += 1
+            } else {
+                dateData[date.getDayString()] = 1
             }
         }
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.dayData.rawValue, value: dateData)
