@@ -48,8 +48,11 @@ class HomePageViewController: UIViewController {
         // set defaults
         let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? defaultExperimentID
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? defaultParticipantID
+        let questionFlow = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [true,false,false,false,false,false,false,false]
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: experimentID)
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: participantID)
+        // improvement we should not pass an array
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.questions.rawValue, value: questionFlow)
 
         appIconImg.image = UIImage(named: "AppIcon")
         viewID.layer.borderColor = UIColor.lightGray.cgColor
