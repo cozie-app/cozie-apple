@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17156" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="19529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17034"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19514"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--WelcomeInterfaceController-->
+        <scene sceneID="lnd-JY-5EA">
+            <objects>
+                <controller identifier="WelcomeInterfaceController" id="Kw1-Hw-DLn" customClass="WelcomeInterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label width="1" alignment="left" text="Cozie" textAlignment="center" id="QVo-dZ-C4z"/>
+                        <group width="1" alignment="left" layout="vertical" id="LiO-Mo-JaD">
+                            <items>
+                                <button width="1" alignment="left" title="Thermal" id="cNS-m2-1ZR">
+                                    <connections>
+                                        <action selector="onClickThermal" destination="Kw1-Hw-DLn" id="RIG-D1-DfV"/>
+                                    </connections>
+                                </button>
+                                <button width="1" alignment="left" title="Other" id="kNa-0B-fsr">
+                                    <connections>
+                                        <action selector="onClickOther" destination="Kw1-Hw-DLn" id="qJP-Ls-ryh"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="6" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-25" y="345"/>
+        </scene>
+        <!--Thermal-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
+                <controller identifier="Thermal" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label width="136" height="50" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="uMg-er-eCg"/>
+                        <label width="136" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="uMg-er-eCg"/>
                         <table alignment="left" id="VSl-R8-QQf">
                             <items>
                                 <tableRow identifier="RowController" id="dkd-Gf-waU" customClass="RowController" customModule="Cozie_WatchKit_Extension">
@@ -85,5 +111,212 @@
             </objects>
             <point key="canvasLocation" x="530" y="345"/>
         </scene>
+        <!--Other-->
+        <scene sceneID="h6D-Is-eGU">
+            <objects>
+                <controller identifier="Other" id="lQo-XX-nVk" customClass="OtherIC" customModule="Cozie_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="148" alignment="left" layout="vertical" spacing="5" id="ZxQ-ci-GRo">
+                            <items>
+                                <group width="1" alignment="left" layout="vertical" spacing="0.0" id="0ex-ft-v8h">
+                                    <items>
+                                        <dateLabel width="1" alignment="left" textAlignment="center" format="hh:mm" id="NyB-Ap-JMz">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                        </dateLabel>
+                                        <dateLabel width="1" alignment="left" textAlignment="center" format="E, MMM d" id="IRK-N8-7mk"/>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" spacing="19" id="Oga-Xg-MfQ">
+                                    <items>
+                                        <button alignment="center" verticalAlignment="center" id="pEZ-LO-Kd6">
+                                            <group key="contentGroup" alignment="left" layout="vertical" id="UtU-7q-LBQ">
+                                                <items>
+                                                    <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="no" id="8lx-tF-nTO"/>
+                                                    <label alignment="center" verticalAlignment="bottom" text="Not Comfy" textAlignment="center" id="i0c-ho-BtZ"/>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <action selector="onClickLeftOption" destination="lQo-XX-nVk" id="oqh-cm-8kI"/>
+                                            </connections>
+                                        </button>
+                                        <button alignment="center" verticalAlignment="center" id="UU2-QR-ltj">
+                                            <group key="contentGroup" alignment="left" layout="vertical" id="QxU-1f-rFn">
+                                                <items>
+                                                    <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="comfortable" id="J6v-cH-bFy"/>
+                                                    <label alignment="center" verticalAlignment="center" text="Comfy" textAlignment="center" id="uj2-eY-llj"/>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <action selector="onClickRightOption" destination="lQo-XX-nVk" id="Uck-fF-DwG"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="15" bottom="0.0"/>
+                                </group>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="6" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1087" y="643"/>
+        </scene>
+        <!--OptionsIC-->
+        <scene sceneID="of3-ww-J4U">
+            <objects>
+                <controller identifier="OptionsIC" id="BhA-Nx-Ymp" customClass="OptionsIC" customModule="Cozie_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" id="fdf-Mf-B3W">
+                            <items>
+                                <label alignment="center" text="Can you perceive air movement?" textAlignment="center" numberOfLines="0" id="cSK-pv-ZZa"/>
+                            </items>
+                            <edgeInsets key="margins" left="4" right="4" top="4" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="center" spacing="19" id="Bxc-m0-SUG">
+                            <items>
+                                <button alignment="left" id="kAg-6g-EX0">
+                                    <group key="contentGroup" alignment="left" id="VFs-67-QNK">
+                                        <items>
+                                            <imageView width="18" height="18" alignment="left" image="arrow.backward.circle" catalog="system" id="XzZ-MI-XaU">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickBack" destination="BhA-Nx-Ymp" id="gN9-Eo-hq9"/>
+                                    </connections>
+                                </button>
+                                <button alignment="center" verticalAlignment="center" id="VUg-r6-lXy">
+                                    <group key="contentGroup" alignment="left" layout="vertical" id="ORa-Tw-oB1">
+                                        <items>
+                                            <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="light-bright" id="YVq-P1-2rf"/>
+                                            <label alignment="center" verticalAlignment="center" text="Bright" textAlignment="center" id="uO2-7M-Ybu"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickCenterOption" destination="BhA-Nx-Ymp" id="y1V-eT-jhX"/>
+                                    </connections>
+                                </button>
+                                <button alignment="right" id="4w4-9Z-Zgw">
+                                    <group key="contentGroup" alignment="left" id="Wii-gA-MsM">
+                                        <items>
+                                            <imageView width="18" height="18" alignment="right" image="x.circle" catalog="system" id="fhb-hm-Ucl">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickCancel" destination="BhA-Nx-Ymp" id="4e4-lj-XSa"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="2" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="center" spacing="19" id="aaf-hv-trr">
+                            <items>
+                                <button alignment="center" verticalAlignment="center" id="GPo-Gt-Lol">
+                                    <group key="contentGroup" alignment="left" layout="vertical" id="khi-d7-jJg">
+                                        <items>
+                                            <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="light-comf" id="zS9-6Z-Je6"/>
+                                            <label alignment="center" verticalAlignment="bottom" text="Comfy" textAlignment="center" id="raN-ff-Fez"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickTopLeftOption" destination="BhA-Nx-Ymp" id="Tnq-1J-XyT"/>
+                                    </connections>
+                                </button>
+                                <button alignment="center" verticalAlignment="center" id="YOd-95-fuv">
+                                    <group key="contentGroup" alignment="left" layout="vertical" id="Yzl-1H-Zfo">
+                                        <items>
+                                            <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="light-dim" id="LD4-A3-cYK"/>
+                                            <label alignment="center" verticalAlignment="center" text="Dim" textAlignment="center" id="xLF-e0-nHV"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickTopRightOption" destination="BhA-Nx-Ymp" id="ez2-IR-uRU"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="15" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="center" spacing="19" id="eRb-6o-7Q3">
+                            <items>
+                                <button alignment="center" verticalAlignment="center" id="O9X-gg-h4a">
+                                    <group key="contentGroup" alignment="left" layout="vertical" id="9lb-zK-U66">
+                                        <items>
+                                            <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="light-comf" id="qMu-lT-xWq"/>
+                                            <label alignment="center" verticalAlignment="bottom" text="Comfy" textAlignment="center" id="uUd-o8-eza"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickBottomLeftOption" destination="BhA-Nx-Ymp" id="j4W-ov-gNp"/>
+                                    </connections>
+                                </button>
+                                <button alignment="center" verticalAlignment="center" id="GrQ-TT-mDO">
+                                    <group key="contentGroup" alignment="left" layout="vertical" id="ihE-PF-jRa">
+                                        <items>
+                                            <imageView width="30" height="30" alignment="center" verticalAlignment="center" image="light-dim" id="Wql-Ax-wVK"/>
+                                            <label alignment="center" verticalAlignment="center" text="Dim" textAlignment="center" id="6b5-hy-4fV"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <action selector="onClickBottomRight" destination="BhA-Nx-Ymp" id="wbH-1W-I48"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="15" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="bottomLeftImage" destination="qMu-lT-xWq" id="xwL-Rm-Y7T"/>
+                        <outlet property="bottomLeftOption" destination="uUd-o8-eza" id="MXt-Yn-3PL"/>
+                        <outlet property="bottomRightImage" destination="Wql-Ax-wVK" id="QLF-h4-ihn"/>
+                        <outlet property="bottomRightOption" destination="6b5-hy-4fV" id="11p-Iy-fJd"/>
+                        <outlet property="centerImage" destination="YVq-P1-2rf" id="Yjg-Df-38d"/>
+                        <outlet property="centerOption" destination="uO2-7M-Ybu" id="1u3-1R-mo7"/>
+                        <outlet property="question" destination="cSK-pv-ZZa" id="XLE-na-fdM"/>
+                        <outlet property="topLeftImage" destination="zS9-6Z-Je6" id="Ne3-uE-f4M"/>
+                        <outlet property="topLeftOption" destination="raN-ff-Fez" id="UhE-dF-qUr"/>
+                        <outlet property="topRightImage" destination="LD4-A3-cYK" id="D33-Gx-eBh"/>
+                        <outlet property="topRightOption" destination="xLF-e0-nHV" id="KHw-2b-LUU"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1335" y="643"/>
+        </scene>
+        <!--feedback-->
+        <scene sceneID="uZq-Ot-77t">
+            <objects>
+                <controller identifier="feedback" fullScreen="YES" id="4Zd-l4-YOF" customClass="FeedbackIc" customModule="Cozie_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="148" alignment="center" verticalAlignment="center" layout="vertical" spacing="5" id="LGh-YM-pAC">
+                            <items>
+                                <group width="1" alignment="left" layout="vertical" spacing="0.0" id="RNA-N0-0qi">
+                                    <items>
+                                        <dateLabel width="1" alignment="left" textAlignment="center" format="hh:mm" id="Wgm-vX-lUY">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                        </dateLabel>
+                                        <dateLabel width="1" alignment="left" textAlignment="center" format="E, MMM d" id="Wa1-LD-tRg"/>
+                                    </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="10"/>
+                                </group>
+                                <label width="1" alignment="left" text="Your feedback has been received" textAlignment="center" numberOfLines="0" id="QXA-vO-k1f"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="797" y="643"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="arrow.backward.circle" catalog="system" width="128" height="121"/>
+        <image name="comfortable" width="215" height="215"/>
+        <image name="light-bright" width="215" height="215"/>
+        <image name="light-comf" width="215" height="215"/>
+        <image name="light-dim" width="215" height="215"/>
+        <image name="no" width="215" height="215"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

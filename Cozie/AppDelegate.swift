@@ -9,11 +9,14 @@
 import UIKit
 import OneSignal
 import Firebase
+import IQKeyboardManagerSwift
+import HealthKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let healthStore = HKHealthStore()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Code needed for OneSignal to work properly
         OneSignal.initWithLaunchOptions(launchOptions,
-          appId: "cf1e2d1e-733b-4aa0-9f40-fe30a8de5c11",
+          appId: "4d2b287e-603c-47db-a2b8-80b2a5d93473",
           handleNotificationAction: nil,
           settings: onesignalInitSettings)
 
@@ -37,9 +40,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           print("User accepted notifications: \(accepted)")
         })
         //END OneSignal initialization code
-
+        IQKeyboardManager.shared.enable = true
         FirebaseApp.configure()
-        
+        LocalNotificationManager.shared.registerForPushNotifications()
+        HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            DispatchQueue.main.async {
+                self.setUpBackgroundDeliveryForDataTypes()
+            }
+        }
         return true
     }
 
@@ -57,7 +68,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
+    
+    func setUpBackgroundDeliveryForDataTypes() {
+        let types = ProfileDataStore.dataTypesToRead()
+        for type in types {
+            guard let sampleType = type as? HKSampleType else { print("ERROR: \(type) is not an HKSampleType"); continue }
+            let query = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
+                debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
+                DispatchQueue.global(qos: .background).async {
+                    ProfileDataStore.queryForUpdates(type: type)
+                }
+                completionHandler()
+            }
+            if ProfileDataStore.backgroundQuery == nil || ProfileDataStore.backgroundQuery?.count == 0 {
+                ProfileDataStore.backgroundQuery = [query]
+            } else {
+                ProfileDataStore.backgroundQuery?.append(query)
+            }
+            if let query = ProfileDataStore.backgroundQuery?.last {
+                healthStore.execute(query)
+                healthStore.enableBackgroundDelivery(for: type, frequency: .immediate) { (success, error) in
+                    debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
+                }
+            } else {
+                ProfileDataStore.queryForUpdates(type: type)
+            }
+        }
+    }
 }
-

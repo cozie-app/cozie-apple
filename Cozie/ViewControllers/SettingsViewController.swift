@@ -13,23 +13,14 @@ import FirebaseAuth
 
 private let reuseIdentifier = "SettingsCell"
 
-class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewControllerDelegate {
-
-    // session is the connection session between the phone and the watch
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    }
-
-    func sessionDidBecomeInactive(_ session: WCSession) {
-    }
-
-    func sessionDidDeactivate(_ session: WCSession) {
-    }
+class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
+    
+    @IBOutlet weak var settingsTableView: UITableView!
 
     var session: WCSession?
 
     // MARK: - Properties
 
-    var tableView: UITableView!
     var userInfoHeader: UserInfoHeader!
 
     override func viewDidLoad() {
@@ -39,50 +30,50 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
         configureUI()
 
         // activate the connectivity session
-        session = WCSession.default
-        session?.delegate = self
-        session?.activate()
+        self.configWCSession()
     }
 
     // MARK: - Helper Functions
 
-    func configureTableView() {
+    private func configureTableView() {
 
-        tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 60
-        tableView.sectionHeaderHeight = 40
-
-        tableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        view.addSubview(tableView)
-        tableView.frame = view.frame
-
+        self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
+        self.settingsTableView.setupPadding()
+        
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
         userInfoHeader = UserInfoHeader(frame: frame)
-        tableView.tableHeaderView = userInfoHeader
-        tableView.tableFooterView = UIView()
-
+        self.settingsTableView.tableHeaderView = userInfoHeader
+        self.settingsTableView.tableFooterView = UIView()
     }
 
-    func configureUI() {
+    private func configureUI() {
 
         configureTableView()
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barStyle = .black
+        //navigationController?.navigationBar.barStyle = .black
 //        navigationController?.navigationBar.barTintColor = UIColor(red: 55 / 255, green: 120 / 255, blue: 250 / 255, alpha: 1)
         navigationItem.title = "Settings"
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .white
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
 
     }
 
+    private func configWCSession() {
+        session = WCSession.default
+        session?.delegate = self
+        session?.activate()
+    }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController,
                             didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         taskViewController.dismiss(animated: true, completion: nil)
     }
 
-    func signOut() {
+    private func signOut() {
 
         do {
             try Auth.auth().signOut()
@@ -99,16 +90,26 @@ class SettingsViewController: UIViewController, WCSessionDelegate, ORKTaskViewCo
     }
 
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
-    func sendParticipantID() {
-        
-        // check if watch connectivity is supported and activate it
-        if WCSession.isSupported() {
-            
-            // send participant id to watch
-            // improvement show popup if message failed
-            session?.sendMessage(["participantID": userFirebaseUID], replyHandler: nil, errorHandler: {err in print("did not send participant id")}
-            )
+    private func sendParticipantID() {
+        session?.activate()
+        if self.session?.isReachable == true {
+            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
+                print(error.localizedDescription)
+                self.showAlert(title: "Sync failed", message: error.localizedDescription)
+            }
+            //                self.showAlert(title: "Sync success", message: "The settings have been successfully synced, you will feel a slight vibration in your watch.")
+        } else {
+            self.configWCSession()
+            self.showAlert(title: "Sync failed", message: "Unable to sync your watch settings, please open the Cozie app in watch and make sure the watch is not locked.")
         }
+        // check if watch connectivity is supported and activate it
+//        if WCSession.isSupported() {
+//
+//            // send participant id to watch
+//            // improvement show popup if message failed
+//            session?.sendMessage(["participantID": userFirebaseUID], replyHandler: nil, errorHandler: {err in print("did not send participant id")}
+//            )
+//        }
     }
 
 }
@@ -127,8 +128,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Utilities: return UtilitiesOptions.allCases.count
-        case .Communications: return CommunicationOptions.allCases.count
+        case .GeneralSettings: return GeneralSettingOptions.allCases.count
+        case .Communications: return CommunicationOptions.allCases.count - (false ? 1 : 0) // TODO: hide sendConsentForm button if the user has not yet completed consent form
+        case .UserSettings: return UserSettingOptions.allCases.count
+        case .ExperimentSettings: return ExperimentSettingOptions.allCases.count
+        case .OnboardingProcess: return OnboardingProcessOptions.allCases.count
+        case .About: return AboutOptions.allCases.count
         }
     }
 
@@ -149,25 +154,45 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return view
 
     }
-
-    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return nil
+//    }
+//
+//    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return .leastNormalMagnitude
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SettingsCell
-
+        cell.selectionStyle = .none
         guard let section = SettingsSections(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
 
         switch section {
-        case .Utilities:
-            let social = UtilitiesOptions(rawValue: indexPath.row)
+        case .GeneralSettings:
+            let social = GeneralSettingOptions(rawValue: indexPath.row)
             cell.sectionType = social
         case .Communications:
             let communication = CommunicationOptions(rawValue: indexPath.row)
             cell.sectionType = communication
+        case .UserSettings:
+            let userSettings = UserSettingOptions(rawValue: indexPath.row)
+            cell.sectionType = userSettings
+        case .ExperimentSettings:
+            let experimentSettings = ExperimentSettingOptions(rawValue: indexPath.row)
+            cell.sectionType = experimentSettings
+        case .OnboardingProcess:
+            let onboarding = OnboardingProcessOptions(rawValue: indexPath.row)
+            cell.sectionType = onboarding
+        case .About:
+            let about = AboutOptions(rawValue: indexPath.row)
+            cell.sectionType = about
         }
 
         return cell
@@ -180,12 +205,25 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         switch section {
-        case .Utilities:
-            guard let buttonClicked = UtilitiesOptions(rawValue: indexPath.row) else {
+        case .UserSettings:
+            guard let buttonClicked = UserSettingOptions(rawValue: indexPath.row) else {
                 return
             }
             switch buttonClicked {
-            case .logout: logOutPressed()
+            case .participantID:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: true)
+                }
+            case .experimentID:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: false)
+                }
+            }
+        case .GeneralSettings:
+            guard let buttonClicked = GeneralSettingOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
             case .sendParticipantIDWatch: sendParticipantID()
             }
         case .Communications:
@@ -193,16 +231,85 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-                    // fixme hide this button if the user has not yet completed consent form
+            case .reminders: print("user asked to disable reminders")
+                UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue, value: !(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true))
+                if (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
+                    LocalNotificationManager.shared.clearNotifications()
+                } else {
+                    LocalNotificationManager.shared.scheduleReminderNotification()
+                }
+                self.settingsTableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
+            }
+        case .ExperimentSettings:
+            guard let buttonClicked = ExperimentSettingOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .questionFlow:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openQuestionFlow(viewController)
+                }
+            case .ReminderFrequency:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openNotificationFrequency(viewController, for: .NotificationFrequency, view: self)
+                }
+            case .participationDays:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openParticipationDays(viewController)
+                }
+            case .dailyParticipationHours:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openDailyParticipation(viewController)
+                }
+            case .downloadData: Utilities.downloadData(self)
+            }
+        case .OnboardingProcess:
+            guard let buttonClicked = OnboardingProcessOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .eligibility:
+                let taskViewController = ORKTaskViewController(task: TaskEligibility, taskRun: nil)
+                taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
+                present(taskViewController, animated: true, completion: nil)
+            case .consent:
+                let taskViewController = ORKTaskViewController(task: TaskConsent, taskRun: nil)
+                taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
+                present(taskViewController, animated: true, completion: nil)
+            case .survey:
+                let taskViewController = ORKTaskViewController(task: TaskSurvey, taskRun: nil)
+                taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
+                present(taskViewController, animated: true, completion: nil)
+            case .onboarding:
+                let taskViewController = ORKTaskViewController(task: TaskOnBoarding, taskRun: nil)
+                taskViewController.delegate = self
+                taskViewController.navigationBar.backgroundColor = .white
+                present(taskViewController, animated: true, completion: nil)
+                // fixme hide this button if the user has not yet completed consent form
             case .emailConsent: sendConsentForm()
-                    // fixme when the button below is clicked it throws an error
-            case .notification: print("user asked to disable notifications")
+            }
+        case .About:
+            guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {
+                return
+            }
+            switch buttonClicked {
+            case .cozie:
+                let url = URL(string: "https://www.cozie-apple.app")!
+                let alert = Utilities.alert(url: url, title: "Cozie")
+                present(alert, animated: true, completion: nil)
+            case .budsLab:
+                let url = URL(string: "https://www.budslab.org")!
+                let alert = Utilities.alert(url: url, title: "BUDS Lab")
+                present(alert, animated: true, completion: nil)
             }
         }
 
     }
 
-    func logOutPressed() {
+    private func logOutPressed() {
 
         let alertController = UIAlertController(title: nil, message: "Are you sure you want to Log Out?",
                 preferredStyle: .actionSheet)
@@ -216,12 +323,80 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    func sendConsentForm() {
+    private func sendConsentForm() {
 
         let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
         taskViewController.delegate = self
+        taskViewController.navigationBar.backgroundColor = .white
         present(taskViewController, animated: true, completion: nil)
 
     }
 
+    private func showAlert(title:String, message:String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+extension UITabBarController: TimePickerDelegate {
+    func dailyPicker(selected type: NotificationFrequency.TimePickerType, view: UIViewController) {
+        NavigationManager.openNotificationFrequency(self, for: type, view: view, isForSubview: true)
+    }
+}
+
+extension SettingsViewController {
+    
+    // TODO: change demo data to actual data
+    func createCSV(from array:[Dictionary<String, AnyObject>]?) {
+        
+        var employeeArray:[Dictionary<String, AnyObject>] =  Array()
+        for i in 1...10 {
+            var dic = Dictionary<String, AnyObject>()
+            dic.updateValue(i as AnyObject, forKey: "EmpID")
+            dic.updateValue("NameForEmployee id = \(i)" as AnyObject, forKey: "EmpName")
+            employeeArray.append(dic)
+        }
+                
+        var csvString = "\("Employee ID"), \("Employee Name")\n\n"
+        for dic in employeeArray {
+            csvString = csvString.appending("\(String(describing: dic["EmpID"]!)) , \(String(describing: dic["EmpName"]!))\n")
+        }
+        
+        do {
+            let path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false).appendingPathComponent(folderName)
+            let fileURL = path.appendingPathComponent("data.csv")
+            try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
+        } catch {
+            print("error creating file")
+        }
+    }
+}
+
+extension SettingsViewController: WCSessionDelegate {
+//     session is the connection session between the phone and the watch
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let err = error {
+            self.showAlert(title: "Connection Error while activation", message: err.localizedDescription)
+        }
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+    }
+
+    func sessionReachabilityDidChange(_ session: WCSession) {
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        if let msg = message["isSurveyAdded"] as? Bool, msg == true {
+            // TODO: reload graph
+            print("reload graph")
+        }
+        print("receive \(message)")
+    }
 }

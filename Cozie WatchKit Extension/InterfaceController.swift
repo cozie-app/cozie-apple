@@ -12,6 +12,37 @@ import CoreLocation
 import HealthKit
 import WatchConnectivity
 
+struct QuestionResponse: Codable {
+    var Thermal: [Question]
+    var Privacy: [Question]
+    var Movement: [Question]
+    var InfectionRisk: [Question]
+}
+
+// structure which is used to store the questions prompted to the user
+struct Question: Codable {
+    let title: String
+    let options: Array<String>
+    let icons: Array<String>
+    var nextQuestion: Array<Int>
+    let identifier: String
+}
+
+// temp dictionary to store the answers
+struct Answer: Codable {
+    let startTimestamp: String
+    let endTimestamp: String
+    let heartRate: [String: Int]
+    let participantID: String
+    let deviceUUID: String
+    let locationTimestamp: String
+    let latitude: Double
+    let longitude: Double
+    let responses: [String: String]
+    let voteLog: Int
+    let bodyMass: Double
+}
+
 class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate {
 
     // code related to the watch connectivity with the phone
@@ -30,31 +61,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
-
-    // structure which is used to store the questions prompted to the user
-    struct Question {
-        let title: String
-        let options: Array<String>
-        let icons: Array<String>
-        let nextQuestion: Array<Int>
-        let identifier: String
-    }
-
-    // temp dictionary to store the answers
-    struct Answer: Codable {
-        let startTimestamp: String
-        let endTimestamp: String
-        let heartRate: [String: Int]
-        let participantID: String
-        let deviceUUID: String
-        let locationTimestamp: String
-        let latitude: Double
-        let longitude: Double
-        let responses: [String: String]
-        let voteLog: Int
-        let bodyMass: Double
-    }
-
+    
     // initialize variables
     var questions = [Question]()
     var answers = [Answer]()  // it stores the answer after user as completed Cozie
@@ -77,7 +84,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         // save on first startup the UUID in user defaults so it does not change
         uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
-
         // get participantID from the defaults if available
         participantID = userDefaults.string(forKey: "participantID") ?? "undefined"
 
@@ -96,13 +102,37 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.delegate = self
     }
+    
+    func sendMessageToPhone(message: [String:Any]) {
+        session.sendMessage(message) { message in
+            print("sent[\(message.values)]")
+        } errorHandler: { err in
+            print(err)
+        }
+    }
 
     // this function fires when a message from the phone is received
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        if let id = message["participantID"] as? String {
+            participantID = id
+            userDefaults.set(id, forKey: "participantID")
+        }
+        if let question = message["questions"] as? [Bool] {
+            userDefaults.set(question, forKey: "questions")
+            defineQuestions()
+        }
+        WKInterfaceDevice.current().play(.notification)
+    }
+    
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        participantID = message["participantID"] as! String
-
-        userDefaults.set(participantID, forKey: "participantID")
-
+        if let question = message["questions"] as? [Bool] {
+            userDefaults.set(question, forKey: "questions")
+            defineQuestions()
+        }
+        if let id = message["participantID"] as? String {
+            participantID = id
+            userDefaults.set(id, forKey: "participantID")
+        }
         // vibrate the watch to notify the user that it worked
         WKInterfaceDevice.current().play(.notification)
     }
@@ -209,7 +239,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         tmpResponses[questions[currentQuestion].identifier] = questions[currentQuestion].options[rowIndex]
 
         currentQuestion = nextQuestion
-
         // check if user completed the survey
         if (currentQuestion == 999) {
             currentQuestion = 0  // reset question flow to start
@@ -223,11 +252,16 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
             let endTime = GetDateTimeISOString()
 
+            var qa: [QuestionAnswer] = []
+            tmpResponses.forEach { (question, answer) in
+                qa.append(QuestionAnswer(voteLog: voteLog, question: question, answer: answer))
+            }
+            CoreDataManager.shared.createSurvey(surveys: [SurveyDetails(voteLog: voteLog, locationTimestamp: locationTimestamp, startTimestamp: startTime, endTimestamp: endTime, participantID: participantID, deviceUUID: uuid, latitude: lat, longitude: long, bodyMass: bodyMass, responses: qa, heartRate: 1, isSync: false)])
             SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
                     participantID: participantID, deviceUUID: uuid,
                     locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses,
                     voteLog: voteLog, bodyMass: bodyMass))
-
+            self.sendMessageToPhone(message: ["isSurveyAdded":true])
             // clear temporary arrays
             tmpResponses.removeAll()
             tmpHearthRate.removeAll()
@@ -238,42 +272,38 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     private func defineQuestions() {
-
-        // Last question MUST have nextQuestion set to 999, the first question is question 0
-        questions += [
-            Question(title: "How would you prefer to be?", options: ["Cooler", "No Change", "Warmer"],
-                    icons: ["tp-cooler", "comfortable", "tp-warmer"], nextQuestion: [1, 1, 1], identifier: "tc-preference"),
-            Question(title: "Where are you?", options: ["Home", "Office", "Vehicle", "Other"], icons: ["loc-home", "loc-office", "loc-vehicle", "loc-other"],
-                    nextQuestion: [2, 2, 2, 2], identifier: "location-place"),
-//            Question(title: "Are you?", options: ["Indoor", "Outdoor"], icons: ["loc-indoor", "loc-outdoor"],
-//                    nextQuestion: [3, 3], identifier: "location-in-out"),
-//            Question(title: "What clothes are you wearing?", options: ["Very light", "Light", "Medium", "Heavy"],
-//                    icons: ["clo-very-light", "clo-light", "clo-medium", "clo-heavy"], nextQuestion: [4, 4, 4, 4],
-//                    identifier: "clo"),
-//            Question(title: "Activity last 10-minutes", options: ["Relaxing", "Sitting", "Standing", "Exercising"],
-//                    icons: ["met-relaxing", "met-sitting", "met-walking", "met-exercising"], nextQuestion: [5, 5, 5, 5],
-//                    identifier: "met"),
-//            Question(title: "Can you perceive air movement?", options: ["Yes", "No"],
-//                    icons: ["yes", "no"], nextQuestion: [6, 6], identifier: "air-speed"),
-//            Question(title: "Should the light be?", options: ["Dimmer", "No change", "Brighter"],
-//                    icons: ["light-dim", "light-comf", "light-bright"], nextQuestion: [7, 7, 7], identifier: "light"),
-//            Question(title: "Any changes in the last 10-min?",
-//                    options: ["Yes", "No"], icons: ["yes", "no"], nextQuestion: [8, 8], identifier: "any-change"),
-//            Question(title: "The air is ...", options: ["Stuffy", "Fresh"],
-//                    icons: ["air-quality-smelly", "air-quality-fresh"], nextQuestion: [9, 9],
-//                    identifier: "air-quality"),
-//            Question(title: "Do you feel ... ?", options: ["Sleepy", "Alert"],
-//                    icons: ["alertness-sleepy", "alertness-alert"], nextQuestion: [10, 10],
-//                    identifier: "alertness"),
-//            Question(title: "The space is ...", options: ["Too Quiet", "Comfortable", "Too noisy"],
-//                    icons: ["noise-quiet", "noise-no-change", "noise-noisy"], nextQuestion: [11, 11, 11],
-//                    identifier: "noise"),
-//            Question(title: "Should the air movement be?", options: ["Less", "No Change", "More"],
-//                    icons: ["air-mov-less", "air-mov-no-change", "air-mov-more"], nextQuestion: [12, 12, 12],
-//                    identifier: "air-movement"),
-            Question(title: "Thank you!!!", options: ["Submit survey"],
-                    icons: ["submit"], nextQuestion: [999], identifier: "end"),
-        ]
+        self.questions.removeAll()
+        let questions = userDefaults.object(forKey: "questions") as? [Bool] ?? [false,false,false,false,false,false,false,false]
+        var questionsFlow = [QuestionFlow]()
+        var question = [Int]()
+        for (index,value) in questions.enumerated() {
+            if value == true {
+                question.append(index)
+            }
+        }
+        question.forEach {
+            switch $0 {
+            case 0:
+                questionsFlow.append(.Thermal)
+            case 1:
+                questionsFlow.append(.IDRP)
+            case 2:
+                questionsFlow.append(.PDP)
+            case 3:
+                questionsFlow.append(.MF)
+            case 4:
+                questionsFlow.append(.ThermalMini)
+            case 5:
+                questionsFlow.append(.IDRPMini)
+            case 6:
+                questionsFlow.append(.PDPMini)
+            case 7:
+                questionsFlow.append(.MFMini)
+            default:
+                break
+            }
+        }
+        self.addQuestions(ofType: questionsFlow)
     }
 
     private func SendDataDatabase(answer: Answer) {
@@ -362,4 +392,115 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         loadTableData(question: &questions[currentQuestion], backPressed: false)
     }
 
+}
+
+extension InterfaceController {
+    enum QuestionFlow {
+        case Thermal
+        case IDRP
+        case PDP
+        case MF
+        case ThermalMini
+        case IDRPMini
+        case PDPMini
+        case MFMini
+    }
+    
+    private func addQuestions(ofType flows: [QuestionFlow]) {
+        flows.forEach { flow in
+            switch flow {
+            case .Thermal: self.thermalQuestion()
+            case .IDRP: self.IDRPQuestion()
+            case .PDP: self.PDPQuestion()
+            case .MF: self.MFQuestion()
+            case .ThermalMini: self.thermalMiniQuestion()
+            case .IDRPMini: self.IDRPMiniQuestion()
+            case .PDPMini: self.PDPMiniQuestion()
+            case .MFMini: self.MFMiniQuestion()
+            }
+        }
+        self.lastQuestion()
+    }
+    
+    private func thermalQuestion() {
+        self.read(type: .Thermal)
+    }
+    
+    private func IDRPQuestion() {
+        self.read(type: .IDRP)
+    }
+    
+    private func PDPQuestion() {
+        self.read(type: .PDP)
+    }
+    
+    private func MFQuestion() {
+        self.read(type: .MF)
+    }
+    
+    private func thermalMiniQuestion() {
+        self.read(type: .ThermalMini)
+    }
+    
+    private func IDRPMiniQuestion() {
+        self.read(type: .IDRPMini)
+    }
+    
+    private func PDPMiniQuestion() {
+        self.read(type: .PDPMini)
+    }
+    
+    private func MFMiniQuestion() {
+        self.read(type: .MFMini)
+    }
+    
+    private func lastQuestion() {
+        // Last question MUST have nextQuestion set to 999, the first question is question 0
+        self.questions += [Question(title: "Thank you!!!", options: ["Submit survey"],
+                                   icons: ["submit"], nextQuestion: [999], identifier: "end")]
+        loadTableData(question: &questions[0], backPressed: false)
+    }
+}
+
+extension InterfaceController {
+    private func read(type: QuestionFlow) {
+        if let data = self.readLocalFile(forName: "file") {
+            do {
+                var data = try JSONDecoder().decode(QuestionResponse.self, from: data)
+                switch type {
+                case .Thermal: self.add(questions: &data.Thermal)
+                case .IDRP: break
+                case .PDP: self.add(questions: &data.Privacy)
+                case .MF: self.add(questions: &data.Movement)
+                case .ThermalMini: break
+                case .IDRPMini: self.add(questions: &data.InfectionRisk)
+                case .PDPMini: break
+                case .MFMini: break
+                }
+            } catch (let error) {
+                print(error)
+            }
+        }
+    }
+    
+    private func add(questions: inout [Question]) {
+        let index = self.questions.count
+        for (i, question) in questions.enumerated() {
+            questions[i].nextQuestion = question.nextQuestion.map{$0}.map{$0+index}
+        }
+        self.questions += questions
+    }
+    
+    private func readLocalFile(forName name: String) -> Data? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name,
+                                                 ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch {
+            print(error)
+        }
+        return nil
+    }
 }

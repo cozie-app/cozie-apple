@@ -16,6 +16,12 @@ class SettingsCell: UITableViewCell {
             guard let sectionType = sectionType else { return }
             textLabel?.text = sectionType.description
             switchControl.isHidden = !sectionType.constrainsSwitch
+            switchControl.isOn = !sectionType.isSwitchEnable
+            imageViewProperty.isHidden = !sectionType.imageView
+            if sectionType.imageView {
+                imageViewProperty.image = UIImage(named: sectionType.imageName)
+                self.setupImage(name: sectionType.imageName)
+            }
         }
     }
 
@@ -24,11 +30,18 @@ class SettingsCell: UITableViewCell {
 
         let switchControl = UISwitch()
         switchControl.isOn = true
-        switchControl.onTintColor = UIColor(red: 0 / 255, green: 181 / 255, blue: 32 / 255, alpha: 1)
+        switchControl.onTintColor = primaryColour
         switchControl.translatesAutoresizingMaskIntoConstraints = false
         switchControl.addTarget(self, action: #selector(handleSwitchAction), for: .valueChanged)
 
         return switchControl
+    }()
+    
+    // define initial state of imageView
+    let imageViewProperty: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     // add switch control to settings
@@ -39,6 +52,27 @@ class SettingsCell: UITableViewCell {
         switchControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         switchControl.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
 
+        addSubview(imageViewProperty)
+        imageViewConstraints()
+    }
+
+    private func imageViewConstraints() {
+        imageViewProperty.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        imageViewProperty.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imageViewProperty.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        imageViewProperty.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
+    }
+    
+    private func setupImage(name: String) {
+        let widthConstraints = imageViewProperty.constraints.filter{$0.firstAttribute == .width}
+        widthConstraints.forEach { constrain in
+            constrain.isActive = false
+        }
+        if name == imgBudsLab {
+            imageViewProperty.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        } else {
+            imageViewProperty.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +86,6 @@ class SettingsCell: UITableViewCell {
         } else {
             print("Turned Off")
         }
-
     }
     
 }

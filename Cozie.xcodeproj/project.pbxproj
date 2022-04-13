@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444BB13276B56D700D7F0E9 /* Permissions.xib */; };
+		0444BB16276B6AD800D7F0E9 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444BB15276B6AD800D7F0E9 /* TextView.xib */; };
+		0465B60E27718F720062228C /* WeeklySurvey.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0465B60D27718F720062228C /* WeeklySurvey.xib */; };
+		0465B61427719A910062228C /* WeeklySurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465B61227719A910062228C /* WeeklySurvey.swift */; };
+		0465B61A27719E990062228C /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465B61827719E990062228C /* QuestionCell.swift */; };
+		0465B61B27719E990062228C /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0465B61927719E990062228C /* QuestionCell.xib */; };
+		0465B628277216480062228C /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465B626277216480062228C /* Reminder.swift */; };
+		0465B629277216480062228C /* Reminder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0465B627277216480062228C /* Reminder.xib */; };
+		046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD749276C46BD0011A883 /* QuestionFlow.xib */; };
+		046BD756276C6C860011A883 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD755276C6C860011A883 /* Permissions.swift */; };
+		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
+		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
+		049BCA8D2773075500481C95 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C2773075500481C95 /* DataViewController.swift */; };
+		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
 		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
@@ -20,6 +34,28 @@
 		1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */; };
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
+		29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29048F2E27797D190086DCC5 /* BasePopupVC.swift */; };
+		294A9A8A2786EBE1003416BA /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C268652786C17E00DC5C22 /* PersistentStorage.swift */; };
+		294A9A8E2786EBE8003416BA /* Cozie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */; };
+		294A9A8F2786EBEC003416BA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */; };
+		2978ADE4277C18B3005E49C7 /* file.json in Resources */ = {isa = PBXBuildFile; fileRef = 2978ADE3277C18B2005E49C7 /* file.json */; };
+		299604CF277B1734003A326E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299604CE277B1734003A326E /* Constant.swift */; };
+		29B824A0276CA5AA00BB002D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B8249F276CA5AA00BB002D /* Extension.swift */; };
+		29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B824A4276CBAD600BB002D /* NavigationManager.swift */; };
+		29C268662786C17E00DC5C22 /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C268652786C17E00DC5C22 /* PersistentStorage.swift */; };
+		29C268692786C1A800DC5C22 /* Cozie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */; };
+		29C2686B2786C6C500DC5C22 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */; };
+		29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF171276B10D700AA3E32 /* UserDefaults.swift */; };
+		29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */; };
+		29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */; };
+		29CCF1B7276C91BB00AA3E32 /* ReminderFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */; };
+		29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */; };
+		29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */; };
+		29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */; };
+		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
+		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
+		29EB37EB2775914E00914F6D /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB37EA2775914E00914F6D /* Controllers.swift */; };
+		6923254D27A5050600DBE6C5 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923254C27A5050600DBE6C5 /* NotificationHelper.swift */; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -57,11 +93,23 @@
 		E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCBEAA247E0AE100A5BE43 /* RowController.swift */; };
 		E4C5D9D4249CA4B500228A15 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5D9D3249CA4B500228A15 /* NotificationService.swift */; };
 		E4C5D9D8249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E4C5D9D1249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E4D8876D251C616600342381 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4D88763251C612300342381 /* ResearchKit.framework */; };
-		E4D8876E251C616600342381 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E4D88763251C612300342381 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		69A2E36C27A27C180051EF37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		69A2E36E27A27C180051EF37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
 		E483825B247BA33B002C3708 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E483823C247BA33A002C3708 /* Project object */;
@@ -97,20 +145,6 @@
 			remoteGlobalIDString = E4C5D9D0249CA4B500228A15;
 			remoteInfo = OneSignalNotificationServiceExtension;
 		};
-		E4D88762251C612300342381 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E4D8875C251C612300342381 /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B183A5951A8535D100C76870;
-			remoteInfo = ResearchKit;
-		};
-		E4D88764251C612300342381 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E4D8875C251C612300342381 /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
-			remoteInfo = ResearchKitTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,17 +170,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E48382B3247BA713002C3708 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				E4D8876E251C616600342381 /* ResearchKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E4C5D9D9249CA4B500228A15 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +185,20 @@
 
 /* Begin PBXFileReference section */
 		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		0444BB13276B56D700D7F0E9 /* Permissions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Permissions.xib; sourceTree = "<group>"; };
+		0444BB15276B6AD800D7F0E9 /* TextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		0465B60D27718F720062228C /* WeeklySurvey.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeeklySurvey.xib; sourceTree = "<group>"; };
+		0465B61227719A910062228C /* WeeklySurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySurvey.swift; sourceTree = "<group>"; };
+		0465B61827719E990062228C /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		0465B61927719E990062228C /* QuestionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
+		0465B626277216480062228C /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		0465B627277216480062228C /* Reminder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Reminder.xib; sourceTree = "<group>"; };
+		046BD749276C46BD0011A883 /* QuestionFlow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionFlow.xib; sourceTree = "<group>"; };
+		046BD755276C6C860011A883 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
+		049BCA8C2773075500481C95 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
+		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
@@ -175,6 +212,24 @@
 		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		29048F2E27797D190086DCC5 /* BasePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupVC.swift; sourceTree = "<group>"; };
+		2978ADE3277C18B2005E49C7 /* file.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file.json; sourceTree = "<group>"; };
+		299604CE277B1734003A326E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		29B8249F276CA5AA00BB002D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		29B824A4276CBAD600BB002D /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		29C268652786C17E00DC5C22 /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
+		29C268682786C1A800DC5C22 /* Cozie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cozie.xcdatamodel; sourceTree = "<group>"; };
+		29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		29CCF171276B10D700AA3E32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationDays.swift; sourceTree = "<group>"; };
+		29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipationDays.xib; sourceTree = "<group>"; };
+		29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequency.swift; sourceTree = "<group>"; };
+		29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationFrequency.xib; sourceTree = "<group>"; };
+		29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyParticipation.swift; sourceTree = "<group>"; };
+		29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyParticipation.xib; sourceTree = "<group>"; };
+		29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
+		29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataStore.swift; sourceTree = "<group>"; };
+		29EB37EA2775914E00914F6D /* Controllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controllers.swift; sourceTree = "<group>"; };
 		36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +238,8 @@
 		5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
 		5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6923254C27A5050600DBE6C5 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,7 +290,6 @@
 		E4C5D9D3249CA4B500228A15 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E4C5D9D5249CA4B500228A15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4C5D9E4249CB11C00228A15 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
-		E4D8875C251C612300342381 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "../ResearchKit-master/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		E4E3088924B6F7840029FC0C /* Cozie WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		E4E3088A24B6F7840029FC0C /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		F5D47597BF5242DB1098C356 /* Pods-CozieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.debug.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -254,7 +310,6 @@
 			files = (
 				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
 				6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */,
-				E4D8876D251C616600342381 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +349,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0444BB12276B567D00D7F0E9 /* PopUps */ = {
+			isa = PBXGroup;
+			children = (
+				046BD755276C6C860011A883 /* Permissions.swift */,
+				0444BB13276B56D700D7F0E9 /* Permissions.xib */,
+				046BD75A276C6D5C0011A883 /* TextView.swift */,
+				0444BB15276B6AD800D7F0E9 /* TextView.xib */,
+				046BD75C276C6D8E0011A883 /* QuestionFlow.swift */,
+				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
+				29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */,
+				29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */,
+				29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */,
+				29CCF1B6276C91BB00AA3E32 /* NotificationFrequency.xib */,
+				29CCF1BC276C93CB00AA3E32 /* DailyParticipation.swift */,
+				29CCF1BD276C93CB00AA3E32 /* DailyParticipation.xib */,
+				0465B61227719A910062228C /* WeeklySurvey.swift */,
+				0465B60D27718F720062228C /* WeeklySurvey.xib */,
+				0465B626277216480062228C /* Reminder.swift */,
+				0465B627277216480062228C /* Reminder.xib */,
+				0465B61827719E990062228C /* QuestionCell.swift */,
+				0465B61927719E990062228C /* QuestionCell.xib */,
+				29048F2E27797D190086DCC5 /* BasePopupVC.swift */,
+			);
+			path = PopUps;
+			sourceTree = "<group>";
+		};
 		1C491128A8683B2144199B1A /* ResearchKitTasks */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +396,25 @@
 			path = Media;
 			sourceTree = "<group>";
 		};
+		29C268612786C12300DC5C22 /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				29C268652786C17E00DC5C22 /* PersistentStorage.swift */,
+				29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */,
+				29C2686A2786C6C500DC5C22 /* CoreDataManager.swift */,
+			);
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
+		29E7F943276DEDF2008B0E8D /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */,
+				29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */,
+			);
+			path = Health;
+			sourceTree = "<group>";
+		};
 		2F9E67614CD4ACF113607CBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +432,15 @@
 				029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		69A2E36727A27C180051EF37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69A2E36D27A27C180051EF37 /* ResearchKit.framework */,
+				69A2E36F27A27C180051EF37 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E43CAA8024C80F1600461DD1 /* View */ = {
@@ -352,6 +461,8 @@
 				E469469424BC4CF20013134B /* LoginViewController.swift */,
 				E469469624BC4D090013134B /* StartViewController.swift */,
 				E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */,
+				04B14C94277045C800A4B989 /* HomePageViewController.swift */,
+				049BCA8C2773075500481C95 /* DataViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -359,10 +470,17 @@
 		E469469924BC54AF0013134B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				29C268612786C12300DC5C22 /* LocalStorage */,
+				29E7F943276DEDF2008B0E8D /* Health */,
 				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
+				6923254C27A5050600DBE6C5 /* NotificationHelper.swift */,
 				1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */,
 				1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */,
+				29CCF171276B10D700AA3E32 /* UserDefaults.swift */,
+				29B8249F276CA5AA00BB002D /* Extension.swift */,
+				29B824A4276CBAD600BB002D /* NavigationManager.swift */,
+				299604CE277B1734003A326E /* Constant.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -370,7 +488,7 @@
 		E483823B247BA33A002C3708 = {
 			isa = PBXGroup;
 			children = (
-				E4D8875C251C612300342381 /* ResearchKit.xcodeproj */,
+				69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */,
 				E4838246247BA33A002C3708 /* Cozie */,
 				E483825D247BA33B002C3708 /* CozieTests */,
 				E4838268247BA33B002C3708 /* CozieUITests */,
@@ -400,6 +518,7 @@
 		E4838246247BA33A002C3708 /* Cozie */ = {
 			isa = PBXGroup;
 			children = (
+				0444BB12276B567D00D7F0E9 /* PopUps */,
 				E43CAA8024C80F1600461DD1 /* View */,
 				E469469924BC54AF0013134B /* Helpers */,
 				E469469324BC4C720013134B /* ViewControllers */,
@@ -449,6 +568,8 @@
 		E4838281247BA33C002C3708 /* Cozie WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2978ADE3277C18B2005E49C7 /* file.json */,
+				29EB37EA2775914E00914F6D /* Controllers.swift */,
 				E4E3088924B6F7840029FC0C /* Cozie WatchKit Extension.entitlements */,
 				E4838282247BA33C002C3708 /* InterfaceController.swift */,
 				E4838284247BA33C002C3708 /* ExtensionDelegate.swift */,
@@ -488,15 +609,6 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
-		E4D8875D251C612300342381 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E4D88763251C612300342381 /* ResearchKit.framework */,
-				E4D88765251C612300342381 /* ResearchKitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -509,7 +621,6 @@
 				E4838241247BA33A002C3708 /* Frameworks */,
 				E4838242247BA33A002C3708 /* Resources */,
 				E4838295247BA33C002C3708 /* Embed Watch Content */,
-				E48382B3247BA713002C3708 /* Embed Frameworks */,
 				E4C5D9D9249CA4B500228A15 /* Embed App Extensions */,
 				C02AD124388A70568E9AEE22 /* [CP] Embed Pods Frameworks */,
 			);
@@ -664,8 +775,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E4D8875D251C612300342381 /* Products */;
-					ProjectRef = E4D8875C251C612300342381 /* ResearchKit.xcodeproj */;
+					ProductGroup = 69A2E36727A27C180051EF37 /* Products */;
+					ProjectRef = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -681,18 +792,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E4D88763251C612300342381 /* ResearchKit.framework */ = {
+		69A2E36D27A27C180051EF37 /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = E4D88762251C612300342381 /* PBXContainerItemProxy */;
+			remoteRef = 69A2E36C27A27C180051EF37 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E4D88765251C612300342381 /* ResearchKitTests.xctest */ = {
+		69A2E36F27A27C180051EF37 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = E4D88764251C612300342381 /* PBXContainerItemProxy */;
+			remoteRef = 69A2E36E27A27C180051EF37 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -703,10 +814,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
+				0465B61B27719E990062228C /* QuestionCell.xib in Resources */,
+				046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */,
+				0465B60E27718F720062228C /* WeeklySurvey.xib in Resources */,
 				E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */,
+				29CCF1BF276C93CB00AA3E32 /* DailyParticipation.xib in Resources */,
+				0444BB14276B56D700D7F0E9 /* Permissions.xib in Resources */,
 				E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */,
 				E4838251247BA33B002C3708 /* Assets.xcassets in Resources */,
+				0444BB16276B6AD800D7F0E9 /* TextView.xib in Resources */,
+				29CCF1B3276C6F0700AA3E32 /* ParticipationDays.xib in Resources */,
+				0465B629277216480062228C /* Reminder.xib in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
+				29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */,
 				1C4913AD630B92A241DE121E /* CNAME in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,6 +859,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4838289247BA33C002C3708 /* Assets.xcassets in Resources */,
+				2978ADE4277C18B3005E49C7 /* file.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,24 +1047,46 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */,
+				29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */,
 				E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
+				29C268692786C1A800DC5C22 /* Cozie.xcdatamodeld in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
+				6923254D27A5050600DBE6C5 /* NotificationHelper.swift in Sources */,
 				E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */,
+				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
+				0465B61A27719E990062228C /* QuestionCell.swift in Sources */,
+				29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */,
 				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
+				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
+				29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */,
+				29C268662786C17E00DC5C22 /* PersistentStorage.swift in Sources */,
+				29CCF1B7276C91BB00AA3E32 /* ReminderFrequency.swift in Sources */,
+				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
+				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
 				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,
 				E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */,
+				29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */,
 				1C4911169339110949F69150 /* TaskEligibility.swift in Sources */,
+				0465B61427719A910062228C /* WeeklySurvey.swift in Sources */,
+				29C2686B2786C6C500DC5C22 /* CoreDataManager.swift in Sources */,
 				1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */,
 				E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */,
 				E43CAA8524C80F5500461DD1 /* UserInfoHeader.swift in Sources */,
 				1C4919A704932002AD992CFE /* TaskConsentShowPDF.swift in Sources */,
 				1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */,
 				E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */,
+				299604CF277B1734003A326E /* Constant.swift in Sources */,
 				E469469524BC4CF20013134B /* LoginViewController.swift in Sources */,
 				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
+				049BCA8D2773075500481C95 /* DataViewController.swift in Sources */,
 				1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */,
+				0465B628277216480062228C /* Reminder.swift in Sources */,
+				29B824A0276CA5AA00BB002D /* Extension.swift in Sources */,
+				046BD75B276C6D5C0011A883 /* TextView.swift in Sources */,
+				046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */,
+				046BD756276C6C860011A883 /* Permissions.swift in Sources */,
 				1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -968,13 +1111,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29EB37EB2775914E00914F6D /* Controllers.swift in Sources */,
 				E4838287247BA33C002C3708 /* NotificationController.swift in Sources */,
 				E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */,
+				294A9A8A2786EBE1003416BA /* PersistentStorage.swift in Sources */,
+				294A9A8E2786EBE8003416BA /* Cozie.xcdatamodeld in Sources */,
 				E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */,
 				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
 				1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */,
 				E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */,
 				E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */,
+				294A9A8F2786EBEC003416BA /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,16 +1312,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp.watchkitextension;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1191,16 +1338,16 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp.watchkitextension;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1219,8 +1366,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1229,8 +1376,9 @@
 					"@loader_path/../Frameworks",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp;
+				MARKETING_VERSION = 1.0.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1251,8 +1399,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1261,8 +1409,9 @@
 					"@loader_path/../Frameworks",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.watchkitapp;
+				MARKETING_VERSION = 1.0.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1281,15 +1430,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1304,16 +1453,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1326,7 +1477,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = CozieTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1349,7 +1500,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = CozieTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1371,7 +1522,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = CozieUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1392,7 +1543,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = CozieUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1413,16 +1564,16 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.OneSignalNotificationServiceExtension;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1436,16 +1587,16 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y6729H674Z;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.Cozie.OneSignalNotificationServiceExtension;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1520,6 +1671,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				29C268682786C1A800DC5C22 /* Cozie.xcdatamodel */,
+			);
+			currentVersion = 29C268682786C1A800DC5C22 /* Cozie.xcdatamodel */;
+			path = Cozie.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E483823C247BA33A002C3708 /* Project object */;
 }
