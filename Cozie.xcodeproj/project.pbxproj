@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,8 +32,7 @@
 		1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */; };
 		1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491A8334E4828A5CF11B89 /* TaskConsent.swift */; };
 		1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */; };
-		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
-		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
+		2769A9B0B10CD16C354E2FAE /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE0C01DB4C2445508DDA420 /* Pods_Cozie_WatchKit_App.framework */; };
 		29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29048F2E27797D190086DCC5 /* BasePopupVC.swift */; };
 		294A9A8A2786EBE1003416BA /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C268652786C17E00DC5C22 /* PersistentStorage.swift */; };
 		294A9A8E2786EBE8003416BA /* Cozie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C268672786C1A800DC5C22 /* Cozie.xcdatamodeld */; };
@@ -55,14 +54,14 @@
 		29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */; };
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		29EB37EB2775914E00914F6D /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB37EA2775914E00914F6D /* Controllers.swift */; };
+		3E3F26024446BC78B04B1130 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAB3D2A430BF425741FEEB4 /* Pods_Cozie.framework */; };
+		4605683B90EEC92030EBCF82 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F23E143C62D172CBC65175 /* Pods_Cozie_WatchKit_Extension.framework */; };
 		6923254D27A5050600DBE6C5 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923254C27A5050600DBE6C5 /* NotificationHelper.swift */; };
-		69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; platformFilter = ios; };
-		69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
-		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
-		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
+		A5B64FA5F58FFA863753FA39 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA78A7A4CAA1A77B239F85D0 /* Pods_Cozie_CozieUITests.framework */; };
+		AC6B006C2805BFEE003EA6C2 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6B00692805BFE1003EA6C2 /* ResearchKit.framework */; };
+		AC6B006D2805BFEE003EA6C2 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC6B00692805BFE1003EA6C2 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB0DEBC828D5B4120FCEC733 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4A18DC1EA53B3D1703F7CD /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		E4256F90251C4E6D00CF32A4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E3088A24B6F7840029FC0C /* HealthKit.framework */; };
-		E4256F96251C4E6F00CF32A4 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */; };
 		E42F7C1524BEF32400FAE422 /* login-video.mov in Resources */ = {isa = PBXBuildFile; fileRef = E42F7C1124BEF32400FAE422 /* login-video.mov */; };
 		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
 		E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */; };
@@ -95,19 +94,20 @@
 		E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCBEAA247E0AE100A5BE43 /* RowController.swift */; };
 		E4C5D9D4249CA4B500228A15 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5D9D3249CA4B500228A15 /* NotificationService.swift */; };
 		E4C5D9D8249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E4C5D9D1249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EE404554E73C9350D5BDE42E /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB024A3160D274CAA21460BB /* Pods_CozieTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		69A2E36C27A27C180051EF37 /* PBXContainerItemProxy */ = {
+		AC6B00682805BFE1003EA6C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
+			containerPortal = AC6B00622805BFE1003EA6C2 /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = ResearchKit;
 		};
-		69A2E36E27A27C180051EF37 /* PBXContainerItemProxy */ = {
+		AC6B006A2805BFE1003EA6C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
+			containerPortal = AC6B00622805BFE1003EA6C2 /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
 			remoteInfo = ResearchKitTests;
@@ -178,7 +178,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */,
+				AC6B006D2805BFEE003EA6C2 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +197,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		0444BB13276B56D700D7F0E9 /* Permissions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Permissions.xib; sourceTree = "<group>"; };
 		0444BB15276B6AD800D7F0E9 /* TextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
 		0465B60D27718F720062228C /* WeeklySurvey.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeeklySurvey.xib; sourceTree = "<group>"; };
@@ -212,6 +211,7 @@
 		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
 		049BCA8C2773075500481C95 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		0E8969B951AD105DF79B304C /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
@@ -222,9 +222,8 @@
 		1C491A8334E4828A5CF11B89 /* TaskConsent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsent.swift; sourceTree = "<group>"; };
 		1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskOnBoarding.swift; sourceTree = "<group>"; };
 		1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
-		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
-		23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
-		24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		2106A2D7519631A0B7EB0D4F /* Pods-CozieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.debug.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.debug.xcconfig"; sourceTree = "<group>"; };
+		26FA8DD38D95975FBBC5137F /* Pods-Cozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.debug.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.debug.xcconfig"; sourceTree = "<group>"; };
 		29048F2E27797D190086DCC5 /* BasePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopupVC.swift; sourceTree = "<group>"; };
 		2978ADE3277C18B2005E49C7 /* file.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file.json; sourceTree = "<group>"; };
 		299604CE277B1734003A326E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -243,21 +242,21 @@
 		29E7F941276DEA7C008B0E8D /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
 		29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataStore.swift; sourceTree = "<group>"; };
 		29EB37EA2775914E00914F6D /* Controllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controllers.swift; sourceTree = "<group>"; };
-		36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BB80C40C6B15250CD0AFD92 /* Pods-Cozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.debug.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.debug.xcconfig"; sourceTree = "<group>"; };
-		5AB05C20320F1CE38697D8EF /* Pods-Cozie-CozieUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.release.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.release.xcconfig"; sourceTree = "<group>"; };
-		5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
-		5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		49F6E2C8380CD0D1541EEE5A /* Pods-Cozie-CozieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		59357C4AC99A11927D8FB98F /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		5A6AA1272403C47BAEE9AC16 /* Pods-Cozie-CozieUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie-CozieUITests.release.xcconfig"; path = "Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6923254C27A5050600DBE6C5 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
-		69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
-		AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
-		BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
-		C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99143E6B45B7CD77204861CB /* Pods-Cozie WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		994A811E81E726432B389EF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		9AAB3D2A430BF425741FEEB4 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC6B00622805BFE1003EA6C2 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		B4F23E143C62D172CBC65175 /* Pods_Cozie_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B94A173B2544F36895C63AE7 /* Pods-Cozie WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit Extension/Pods-Cozie WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		BA78A7A4CAA1A77B239F85D0 /* Pods_Cozie_CozieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_CozieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAE0C01DB4C2445508DDA420 /* Pods_Cozie_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C87423C8181CEAB43685CB4E /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
+		DA4A18DC1EA53B3D1703F7CD /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA6BF78BCBD92E6898A020B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		E42F7C1124BEF32400FAE422 /* login-video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "login-video.mov"; sourceTree = "<group>"; };
 		E437EF5E24C6F1A5008BC6FF /* Cozie WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit App.entitlements"; sourceTree = "<group>"; };
 		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -305,7 +304,8 @@
 		E4C5D9E4249CB11C00228A15 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		E4E3088924B6F7840029FC0C /* Cozie WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		E4E3088A24B6F7840029FC0C /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
-		F5D47597BF5242DB1098C356 /* Pods-CozieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.debug.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB024A3160D274CAA21460BB /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F22637FA72B02D8250E8DE27 /* Pods-Cozie WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */,
+				2769A9B0B10CD16C354E2FAE /* Pods_Cozie_WatchKit_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,8 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
-				6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */,
-				69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */,
+				AC6B006C2805BFEE003EA6C2 /* ResearchKit.framework in Frameworks */,
+				3E3F26024446BC78B04B1130 /* Pods_Cozie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */,
+				EE404554E73C9350D5BDE42E /* Pods_CozieTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */,
+				A5B64FA5F58FFA863753FA39 /* Pods_Cozie_CozieUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,8 +347,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4256F96251C4E6F00CF32A4 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */,
 				E4256F90251C4E6D00CF32A4 /* HealthKit.framework in Frameworks */,
+				4605683B90EEC92030EBCF82 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
+				BB0DEBC828D5B4120FCEC733 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,27 +432,27 @@
 		2F9E67614CD4ACF113607CBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4BB80C40C6B15250CD0AFD92 /* Pods-Cozie.debug.xcconfig */,
-				5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */,
-				23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */,
-				AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */,
-				D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */,
-				BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */,
-				6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */,
-				5AB05C20320F1CE38697D8EF /* Pods-Cozie-CozieUITests.release.xcconfig */,
-				F5D47597BF5242DB1098C356 /* Pods-CozieTests.debug.xcconfig */,
-				20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */,
-				24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
+				26FA8DD38D95975FBBC5137F /* Pods-Cozie.debug.xcconfig */,
+				C87423C8181CEAB43685CB4E /* Pods-Cozie.release.xcconfig */,
+				0E8969B951AD105DF79B304C /* Pods-Cozie WatchKit App.debug.xcconfig */,
+				F22637FA72B02D8250E8DE27 /* Pods-Cozie WatchKit App.release.xcconfig */,
+				99143E6B45B7CD77204861CB /* Pods-Cozie WatchKit Extension.debug.xcconfig */,
+				B94A173B2544F36895C63AE7 /* Pods-Cozie WatchKit Extension.release.xcconfig */,
+				49F6E2C8380CD0D1541EEE5A /* Pods-Cozie-CozieUITests.debug.xcconfig */,
+				5A6AA1272403C47BAEE9AC16 /* Pods-Cozie-CozieUITests.release.xcconfig */,
+				2106A2D7519631A0B7EB0D4F /* Pods-CozieTests.debug.xcconfig */,
+				DCA6BF78BCBD92E6898A020B /* Pods-CozieTests.release.xcconfig */,
+				994A811E81E726432B389EF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				59357C4AC99A11927D8FB98F /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		69A2E36727A27C180051EF37 /* Products */ = {
+		AC6B00632805BFE1003EA6C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				69A2E36D27A27C180051EF37 /* ResearchKit.framework */,
-				69A2E36F27A27C180051EF37 /* ResearchKitTests.xctest */,
+				AC6B00692805BFE1003EA6C2 /* ResearchKit.framework */,
+				AC6B006B2805BFE1003EA6C2 /* ResearchKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -502,7 +502,7 @@
 		E483823B247BA33A002C3708 = {
 			isa = PBXGroup;
 			children = (
-				69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */,
+				AC6B00622805BFE1003EA6C2 /* ResearchKit.xcodeproj */,
 				E4838246247BA33A002C3708 /* Cozie */,
 				E483825D247BA33B002C3708 /* CozieTests */,
 				E4838268247BA33B002C3708 /* CozieUITests */,
@@ -603,12 +603,12 @@
 			children = (
 				E4E3088A24B6F7840029FC0C /* HealthKit.framework */,
 				E47351E2247D0F5D0079D11A /* HealthKit.framework */,
-				3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */,
-				C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */,
-				5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */,
-				E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */,
-				36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */,
-				4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */,
+				9AAB3D2A430BF425741FEEB4 /* Pods_Cozie.framework */,
+				BAE0C01DB4C2445508DDA420 /* Pods_Cozie_WatchKit_App.framework */,
+				B4F23E143C62D172CBC65175 /* Pods_Cozie_WatchKit_Extension.framework */,
+				BA78A7A4CAA1A77B239F85D0 /* Pods_Cozie_CozieUITests.framework */,
+				EB024A3160D274CAA21460BB /* Pods_CozieTests.framework */,
+				DA4A18DC1EA53B3D1703F7CD /* Pods_OneSignalNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -630,14 +630,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie" */;
 			buildPhases = (
-				EA9B2C11522202656E5FDA44 /* [CP] Check Pods Manifest.lock */,
+				1FD62883B7515D191700C936 /* [CP] Check Pods Manifest.lock */,
 				E4838240247BA33A002C3708 /* Sources */,
 				E4838241247BA33A002C3708 /* Frameworks */,
 				E4838242247BA33A002C3708 /* Resources */,
 				E4838295247BA33C002C3708 /* Embed Watch Content */,
 				E48382B3247BA713002C3708 /* Embed Frameworks */,
 				E4C5D9D9249CA4B500228A15 /* Embed App Extensions */,
-				C02AD124388A70568E9AEE22 /* [CP] Embed Pods Frameworks */,
+				C1A4C23C1D37FFE21C55ADE8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -654,7 +654,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4838299247BA33C002C3708 /* Build configuration list for PBXNativeTarget "CozieTests" */;
 			buildPhases = (
-				B67527DDEFB82C1629B44275 /* [CP] Check Pods Manifest.lock */,
+				5DAE3B55718B99843510FD8E /* [CP] Check Pods Manifest.lock */,
 				E4838256247BA33B002C3708 /* Sources */,
 				E4838257247BA33B002C3708 /* Frameworks */,
 				E4838258247BA33B002C3708 /* Resources */,
@@ -673,11 +673,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E483829C247BA33C002C3708 /* Build configuration list for PBXNativeTarget "CozieUITests" */;
 			buildPhases = (
-				41E453A568A55126861A2F26 /* [CP] Check Pods Manifest.lock */,
+				20472BA69CAC6E43E7F167FD /* [CP] Check Pods Manifest.lock */,
 				E4838261247BA33B002C3708 /* Sources */,
 				E4838262247BA33B002C3708 /* Frameworks */,
 				E4838263247BA33B002C3708 /* Resources */,
-				5483A0945BB460405220934F /* [CP] Embed Pods Frameworks */,
+				4A6963994D9190099C4F7099 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -693,7 +693,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4838292247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie WatchKit App" */;
 			buildPhases = (
-				335C18F5AFEE673AA65D54CE /* [CP] Check Pods Manifest.lock */,
+				FFB73DCDB9316872CA426E77 /* [CP] Check Pods Manifest.lock */,
 				E483826C247BA33B002C3708 /* Resources */,
 				E4838291247BA33C002C3708 /* Embed App Extensions */,
 				7563C92532FCD3EAE76C7CF2 /* Frameworks */,
@@ -712,7 +712,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E483828E247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie WatchKit Extension" */;
 			buildPhases = (
-				1EBAC3C263F9F9ECF7F784DC /* [CP] Check Pods Manifest.lock */,
+				2DDD0D047C15D1C3A1A70527 /* [CP] Check Pods Manifest.lock */,
 				E4838279247BA33C002C3708 /* Sources */,
 				E483827A247BA33C002C3708 /* Frameworks */,
 				E483827B247BA33C002C3708 /* Resources */,
@@ -730,7 +730,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4C5D9DF249CA4B500228A15 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
 			buildPhases = (
-				AA8407B4119D3706D17454F8 /* [CP] Check Pods Manifest.lock */,
+				EA781C5B31E0D2551F1ACF99 /* [CP] Check Pods Manifest.lock */,
 				E4C5D9CD249CA4B500228A15 /* Sources */,
 				E4C5D9CE249CA4B500228A15 /* Frameworks */,
 				E4C5D9CF249CA4B500228A15 /* Resources */,
@@ -790,8 +790,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 69A2E36727A27C180051EF37 /* Products */;
-					ProjectRef = 69A2E36627A27C180051EF37 /* ResearchKit.xcodeproj */;
+					ProductGroup = AC6B00632805BFE1003EA6C2 /* Products */;
+					ProjectRef = AC6B00622805BFE1003EA6C2 /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -807,18 +807,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		69A2E36D27A27C180051EF37 /* ResearchKit.framework */ = {
+		AC6B00692805BFE1003EA6C2 /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 69A2E36C27A27C180051EF37 /* PBXContainerItemProxy */;
+			remoteRef = AC6B00682805BFE1003EA6C2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		69A2E36F27A27C180051EF37 /* ResearchKitTests.xctest */ = {
+		AC6B006B2805BFE1003EA6C2 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 69A2E36E27A27C180051EF37 /* PBXContainerItemProxy */;
+			remoteRef = AC6B006A2805BFE1003EA6C2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -888,7 +888,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1EBAC3C263F9F9ECF7F784DC /* [CP] Check Pods Manifest.lock */ = {
+		1FD62883B7515D191700C936 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -903,36 +903,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cozie WatchKit Extension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Cozie-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		335C18F5AFEE673AA65D54CE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cozie WatchKit App-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		41E453A568A55126861A2F26 /* [CP] Check Pods Manifest.lock */ = {
+		20472BA69CAC6E43E7F167FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -954,7 +932,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5483A0945BB460405220934F /* [CP] Embed Pods Frameworks */ = {
+		2DDD0D047C15D1C3A1A70527 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cozie WatchKit Extension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A6963994D9190099C4F7099 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -971,29 +971,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AA8407B4119D3706D17454F8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B67527DDEFB82C1629B44275 /* [CP] Check Pods Manifest.lock */ = {
+		5DAE3B55718B99843510FD8E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1015,7 +993,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C02AD124388A70568E9AEE22 /* [CP] Embed Pods Frameworks */ = {
+		C1A4C23C1D37FFE21C55ADE8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1032,7 +1010,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cozie/Pods-Cozie-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA9B2C11522202656E5FDA44 /* [CP] Check Pods Manifest.lock */ = {
+		EA781C5B31E0D2551F1ACF99 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1047,7 +1025,29 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cozie-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFB73DCDB9316872CA426E77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cozie WatchKit App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1322,7 +1322,7 @@
 		};
 		E483828F247BA33C002C3708 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D11CE09FE61289B084867083 /* Pods-Cozie WatchKit Extension.debug.xcconfig */;
+			baseConfigurationReference = 99143E6B45B7CD77204861CB /* Pods-Cozie WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
@@ -1348,7 +1348,7 @@
 		};
 		E4838290247BA33C002C3708 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB8D34C0F968BCA86B97D168 /* Pods-Cozie WatchKit Extension.release.xcconfig */;
+			baseConfigurationReference = B94A173B2544F36895C63AE7 /* Pods-Cozie WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
@@ -1374,7 +1374,7 @@
 		};
 		E4838293247BA33C002C3708 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */;
+			baseConfigurationReference = 0E8969B951AD105DF79B304C /* Pods-Cozie WatchKit App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1407,7 +1407,7 @@
 		};
 		E4838294247BA33C002C3708 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC4C40BFE7DD8E6AF6ECFB9F /* Pods-Cozie WatchKit App.release.xcconfig */;
+			baseConfigurationReference = F22637FA72B02D8250E8DE27 /* Pods-Cozie WatchKit App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1439,7 +1439,7 @@
 		};
 		E4838297247BA33C002C3708 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BB80C40C6B15250CD0AFD92 /* Pods-Cozie.debug.xcconfig */;
+			baseConfigurationReference = 26FA8DD38D95975FBBC5137F /* Pods-Cozie.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1462,7 +1462,7 @@
 		};
 		E4838298247BA33C002C3708 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BF82B1BDF5D667872E7DE48 /* Pods-Cozie.release.xcconfig */;
+			baseConfigurationReference = C87423C8181CEAB43685CB4E /* Pods-Cozie.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1487,7 +1487,7 @@
 		};
 		E483829A247BA33C002C3708 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5D47597BF5242DB1098C356 /* Pods-CozieTests.debug.xcconfig */;
+			baseConfigurationReference = 2106A2D7519631A0B7EB0D4F /* Pods-CozieTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1510,7 +1510,7 @@
 		};
 		E483829B247BA33C002C3708 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */;
+			baseConfigurationReference = DCA6BF78BCBD92E6898A020B /* Pods-CozieTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1533,7 +1533,7 @@
 		};
 		E483829D247BA33C002C3708 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6369B47D4E1243CA06BCE652 /* Pods-Cozie-CozieUITests.debug.xcconfig */;
+			baseConfigurationReference = 49F6E2C8380CD0D1541EEE5A /* Pods-Cozie-CozieUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1554,7 +1554,7 @@
 		};
 		E483829E247BA33C002C3708 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AB05C20320F1CE38697D8EF /* Pods-Cozie-CozieUITests.release.xcconfig */;
+			baseConfigurationReference = 5A6AA1272403C47BAEE9AC16 /* Pods-Cozie-CozieUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1575,7 +1575,7 @@
 		};
 		E4C5D9DA249CA4B500228A15 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24EBB708F02EA81173799CD6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 994A811E81E726432B389EF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1598,7 +1598,7 @@
 		};
 		E4C5D9DB249CA4B500228A15 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 029739FA684C19B22A89AEA0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 59357C4AC99A11927D8FB98F /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;

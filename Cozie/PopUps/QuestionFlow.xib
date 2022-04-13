@@ -16,14 +16,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jC0-Yk-Zbh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gK8-RW-K2i">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </view>
-                        <blurEffect style="dark"/>
-                    </visualEffectView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqF-pa-Yef">
                         <rect key="frame" x="21.5" y="268" width="371" height="360"/>
                         <subviews>
@@ -509,6 +501,14 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jC0-Yk-Zbh">
+                        <rect key="frame" x="0.0" y="14" width="414" height="896"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gK8-RW-K2i">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <blurEffect style="dark"/>
+                    </visualEffectView>
                 </subviews>
                 <viewLayoutGuide key="safeArea" id="dhV-3r-lMz"/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -549,7 +549,7 @@
                 <outlet property="viewThermalMINI" destination="Odg-yw-BAb" id="Q73-OC-b93"/>
                 <outlet property="viewThermalMINIBtn" destination="VLP-2s-qMz" id="tYp-w0-dbV"/>
             </connections>
-            <point key="canvasLocation" x="-1236" y="56"/>
+            <point key="canvasLocation" x="-1236.231884057971" y="55.580357142857139"/>
         </viewController>
     </objects>
     <resources>
