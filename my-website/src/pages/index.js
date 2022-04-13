@@ -88,6 +88,13 @@ const contributors = [
     profession: <>Associate Professor at UC Berkeley</>,
     link: "https://www.linkedin.com/in/claytonmiller/",
   },
+  {
+    name: <>Mario Frei</>,
+    imageUrl: "img/mario.jpeg",
+    role: <>Developer</>,
+    profession: <>Research Fellow at NUS</>,
+    link: "https://sg.linkedin.com/in/mario-frei",
+  },
 ];
 
 function Contributor({ imageUrl, name, profession, role, link }) {
@@ -95,7 +102,7 @@ function Contributor({ imageUrl, name, profession, role, link }) {
   return (
     <div
       className={clsx(
-        "avatar avatar--vertical col col--4 text--center",
+        "avatar avatar--vertical col col--3 text--center",
         styles.features
       )}
     >
