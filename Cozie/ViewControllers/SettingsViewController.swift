@@ -168,11 +168,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             switch buttonClicked {
             case .participantID:
                 if let viewController = self.tabBarController {
-                    NavigationManager.openTextView(viewController, isParticipantID: true)
+                    NavigationManager.openTextView(viewController, isParticipantID: 1)
                 }
             case .experimentID:
                 if let viewController = self.tabBarController {
-                    NavigationManager.openTextView(viewController, isParticipantID: false)
+                    NavigationManager.openTextView(viewController, isParticipantID: 2)
                 }
             }
         case .GeneralSettings:
@@ -218,6 +218,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     NavigationManager.openDailyParticipation(viewController)
                 }
             case .downloadData: Utilities.downloadData(self)
+            case .studyGoal:
+                if let viewController = self.tabBarController {
+                    NavigationManager.openTextView(viewController, isParticipantID: 3)
+                }
             }
         case .About:
             guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {

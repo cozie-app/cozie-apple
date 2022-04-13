@@ -119,10 +119,11 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     case participationDays
     case dailyParticipationHours
     case downloadData
+    case studyGoal
 
     var imageView: Bool {
         switch self {
-        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours:
+        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours, .studyGoal:
             return false
         case .downloadData:
             return true
@@ -130,7 +131,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     }
     var imageName: String {
         switch self {
-        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours:
+        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours, .studyGoal:
             return ""
         case .downloadData:
             return imgDownload
@@ -149,6 +150,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
         case .participationDays: return "Participation Days"
         case .dailyParticipationHours: return "Daily Participation Hours"
         case .downloadData: return "Download Data"
+        case .studyGoal: return "Set Goal"
         }
     }
 }
