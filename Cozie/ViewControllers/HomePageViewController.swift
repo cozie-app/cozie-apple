@@ -44,6 +44,13 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // set defaults
+        let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? defaultExperimentID
+        let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? defaultParticipantID
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: experimentID)
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: participantID)
+
         appIconImg.image = UIImage(named: "AppIcon")
         viewID.layer.borderColor = UIColor.lightGray.cgColor
         viewID.layer.borderWidth = 1
@@ -105,8 +112,8 @@ class HomePageViewController: UIViewController {
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String
 
         self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
-        self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
-        self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
+        self.lableExperimentId.text = experimentID
+        self.labelParticipantID.text = participantID
         
         self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
         
