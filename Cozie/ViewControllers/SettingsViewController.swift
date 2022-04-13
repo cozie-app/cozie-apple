@@ -8,12 +8,10 @@
 
 import UIKit
 import WatchConnectivity
-import ResearchKit
-import FirebaseAuth
 
 private let reuseIdentifier = "SettingsCell"
 
-class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
+class SettingsViewController: UIViewController {
     
     @IBOutlet weak var settingsTableView: UITableView!
 
@@ -67,27 +65,6 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
         session?.delegate = self
         session?.activate()
     }
-    
-    func taskViewController(_ taskViewController: ORKTaskViewController,
-                            didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        taskViewController.dismiss(animated: true, completion: nil)
-    }
-
-    private func signOut() {
-
-        do {
-            try Auth.auth().signOut()
-
-            let startViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.startViewController)
-
-            view.window?.rootViewController = startViewController
-            view.window?.makeKeyAndVisible()
-
-        } catch let error {
-            print("Failed to sign out with error", error)
-        }
-
-    }
 
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
@@ -97,19 +74,10 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
                 print(error.localizedDescription)
                 self.showAlert(title: "Sync failed", message: error.localizedDescription)
             }
-            //                self.showAlert(title: "Sync success", message: "The settings have been successfully synced, you will feel a slight vibration in your watch.")
         } else {
             self.configWCSession()
             self.showAlert(title: "Sync failed", message: "Unable to sync your watch settings, please open the Cozie app in watch and make sure the watch is not locked.")
         }
-        // check if watch connectivity is supported and activate it
-//        if WCSession.isSupported() {
-//
-//            // send participant id to watch
-//            // improvement show popup if message failed
-//            session?.sendMessage(["participantID": userFirebaseUID], replyHandler: nil, errorHandler: {err in print("did not send participant id")}
-//            )
-//        }
     }
 
 }
@@ -132,7 +100,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .Communications: return CommunicationOptions.allCases.count - (false ? 1 : 0) // TODO: hide sendConsentForm button if the user has not yet completed consent form
         case .UserSettings: return UserSettingOptions.allCases.count
         case .ExperimentSettings: return ExperimentSettingOptions.allCases.count
-        case .OnboardingProcess: return OnboardingProcessOptions.allCases.count
         case .About: return AboutOptions.allCases.count
         }
     }
@@ -154,14 +121,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return view
 
     }
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return nil
-//    }
-//
-//    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return .leastNormalMagnitude
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -187,9 +146,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .ExperimentSettings:
             let experimentSettings = ExperimentSettingOptions(rawValue: indexPath.row)
             cell.sectionType = experimentSettings
-        case .OnboardingProcess:
-            let onboarding = OnboardingProcessOptions(rawValue: indexPath.row)
-            cell.sectionType = onboarding
         case .About:
             let about = AboutOptions(rawValue: indexPath.row)
             cell.sectionType = about
@@ -263,34 +219,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             case .downloadData: Utilities.downloadData(self)
             }
-        case .OnboardingProcess:
-            guard let buttonClicked = OnboardingProcessOptions(rawValue: indexPath.row) else {
-                return
-            }
-            switch buttonClicked {
-            case .eligibility:
-                let taskViewController = ORKTaskViewController(task: TaskEligibility, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-            case .consent:
-                let taskViewController = ORKTaskViewController(task: TaskConsent, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-            case .survey:
-                let taskViewController = ORKTaskViewController(task: TaskSurvey, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-            case .onboarding:
-                let taskViewController = ORKTaskViewController(task: TaskOnBoarding, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-                // fixme hide this button if the user has not yet completed consent form
-            case .emailConsent: sendConsentForm()
-            }
         case .About:
             guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {
                 return
@@ -306,29 +234,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 present(alert, animated: true, completion: nil)
             }
         }
-
-    }
-
-    private func logOutPressed() {
-
-        let alertController = UIAlertController(title: nil, message: "Are you sure you want to Log Out?",
-                preferredStyle: .actionSheet)
-
-        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive,
-                handler: { (alert: UIAlertAction!) in self.signOut() }))
-
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(alertController, animated: true, completion: nil)
-
-    }
-
-    private func sendConsentForm() {
-
-        let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
-        taskViewController.delegate = self
-        taskViewController.navigationBar.backgroundColor = .white
-        present(taskViewController, animated: true, completion: nil)
 
     }
 

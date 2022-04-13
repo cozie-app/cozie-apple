@@ -21,16 +21,10 @@
 		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
 		049BCA8D2773075500481C95 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C2773075500481C95 /* DataViewController.swift */; };
 		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
-		1C4911169339110949F69150 /* TaskEligibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
 		1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
-		1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */; };
-		1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */; };
 		1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */; };
-		1C4919A704932002AD992CFE /* TaskConsentShowPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */; };
-		1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */; };
-		1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491A8334E4828A5CF11B89 /* TaskConsent.swift */; };
 		1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */; };
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
@@ -68,7 +62,6 @@
 		E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA8424C80F5500461DD1 /* SettingsCell.swift */; };
 		E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA9624CE805F00461DD1 /* ComplicationController.swift */; };
 		E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469468E24BC4C590013134B /* SignUpViewController.swift */; };
-		E469469524BC4CF20013134B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469424BC4CF20013134B /* LoginViewController.swift */; };
 		E469469724BC4D090013134B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469624BC4D090013134B /* StartViewController.swift */; };
 		E469469E24BC54EC0013134B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469D24BC54EC0013134B /* Utilities.swift */; };
 		E46946A524BC5D400013134B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E46946A124BC5D3F0013134B /* GoogleService-Info.plist */; };
@@ -76,7 +69,6 @@
 		E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E474676E24DBA49200D1F7AC /* HealthStore.swift */; };
 		E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838247247BA33A002C3708 /* AppDelegate.swift */; };
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
-		E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483824B247BA33A002C3708 /* HomeViewController.swift */; };
 		E483824F247BA33A002C3708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E483824D247BA33A002C3708 /* Main.storyboard */; };
 		E4838251247BA33B002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838250247BA33B002C3708 /* Assets.xcassets */; };
 		E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4838252247BA33B002C3708 /* LaunchScreen.storyboard */; };
@@ -200,14 +192,8 @@
 		049BCA8C2773075500481C95 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
-		1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentFormBuild.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
-		1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsentShowPDF.swift; sourceTree = "<group>"; };
-		1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEligibility.swift; sourceTree = "<group>"; };
-		1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSurvey.swift; sourceTree = "<group>"; };
 		1C491A478BD7051B28E220BD /* CNAME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CNAME; path = "my-website/static/CNAME"; sourceTree = "<group>"; };
-		1C491A8334E4828A5CF11B89 /* TaskConsent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskConsent.swift; sourceTree = "<group>"; };
-		1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskOnBoarding.swift; sourceTree = "<group>"; };
 		1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
 		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,7 +239,6 @@
 		E43CAA8424C80F5500461DD1 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		E43CAA9624CE805F00461DD1 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		E469468E24BC4C590013134B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		E469469424BC4CF20013134B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E469469624BC4D090013134B /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		E469469D24BC54EC0013134B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		E46946A124BC5D3F0013134B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -263,7 +248,6 @@
 		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4838247247BA33A002C3708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4838249247BA33A002C3708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E483824B247BA33A002C3708 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E483824E247BA33A002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4838250247BA33B002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4838253247BA33B002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -375,19 +359,6 @@
 			path = PopUps;
 			sourceTree = "<group>";
 		};
-		1C491128A8683B2144199B1A /* ResearchKitTasks */ = {
-			isa = PBXGroup;
-			children = (
-				1C491AB1C659CB6DCC7A56A8 /* TaskOnBoarding.swift */,
-				1C4918EE6B416C6F58C65076 /* TaskEligibility.swift */,
-				1C4913B291F6A40BCA7044EC /* TaskConsentFormBuild.swift */,
-				1C491797ADAF0C57148BBBAE /* TaskConsentShowPDF.swift */,
-				1C491A8334E4828A5CF11B89 /* TaskConsent.swift */,
-				1C49197761D2A4F08861CFE5 /* TaskSurvey.swift */,
-			);
-			path = ResearchKitTasks;
-			sourceTree = "<group>";
-		};
 		1C4914E68D82DEB261A2DDD1 /* Media */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,8 +428,6 @@
 			isa = PBXGroup;
 			children = (
 				E469468E24BC4C590013134B /* SignUpViewController.swift */,
-				E483824B247BA33A002C3708 /* HomeViewController.swift */,
-				E469469424BC4CF20013134B /* LoginViewController.swift */,
 				E469469624BC4D090013134B /* StartViewController.swift */,
 				E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */,
 				04B14C94277045C800A4B989 /* HomePageViewController.swift */,
@@ -530,7 +499,6 @@
 				E4838252247BA33B002C3708 /* LaunchScreen.storyboard */,
 				E46946A124BC5D3F0013134B /* GoogleService-Info.plist */,
 				E4838255247BA33B002C3708 /* Info.plist */,
-				1C491128A8683B2144199B1A /* ResearchKitTasks */,
 				1C4914E68D82DEB261A2DDD1 /* Media */,
 			);
 			path = Cozie;
@@ -1048,7 +1016,6 @@
 			files = (
 				E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */,
 				29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */,
-				E483824C247BA33A002C3708 /* HomeViewController.swift in Sources */,
 				E4838248247BA33A002C3708 /* AppDelegate.swift in Sources */,
 				29C268692786C1A800DC5C22 /* Cozie.xcdatamodeld in Sources */,
 				E469469E24BC54EC0013134B /* Utilities.swift in Sources */,
@@ -1065,21 +1032,14 @@
 				29E7F942276DEA7C008B0E8D /* HealthKitSetupAssistant.swift in Sources */,
 				29CCF1B2276C6F0700AA3E32 /* ParticipationDays.swift in Sources */,
 				E469469724BC4D090013134B /* StartViewController.swift in Sources */,
-				1C4917F7DF1B6A3207393954 /* TaskOnBoarding.swift in Sources */,
 				E469468F24BC4C590013134B /* SignUpViewController.swift in Sources */,
 				29B824A5276CBAD600BB002D /* NavigationManager.swift in Sources */,
-				1C4911169339110949F69150 /* TaskEligibility.swift in Sources */,
 				0465B61427719A910062228C /* WeeklySurvey.swift in Sources */,
 				29C2686B2786C6C500DC5C22 /* CoreDataManager.swift in Sources */,
-				1C4916B931195BB4912DD009 /* TaskConsentFormBuild.swift in Sources */,
 				E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */,
 				E43CAA8524C80F5500461DD1 /* UserInfoHeader.swift in Sources */,
-				1C4919A704932002AD992CFE /* TaskConsentShowPDF.swift in Sources */,
-				1C491D82972131CBDC6C663A /* TaskConsent.swift in Sources */,
 				E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */,
 				299604CF277B1734003A326E /* Constant.swift in Sources */,
-				E469469524BC4CF20013134B /* LoginViewController.swift in Sources */,
-				1C491C2015DC076D50DCF55D /* TaskSurvey.swift in Sources */,
 				049BCA8D2773075500481C95 /* DataViewController.swift in Sources */,
 				1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */,
 				0465B628277216480062228C /* Reminder.swift in Sources */,
