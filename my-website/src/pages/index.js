@@ -12,7 +12,7 @@ const features = [
     imageUrl: "img/undraw_watch_application.svg",
     description: (
       <>
-        Building occupants can complete a right-here-right now survey directly
+        Building occupants can complete a right-here-right-now survey directly
         from their Apple watch. Without the need of having to open an app on
         their Phone or a survey link.
       </>
