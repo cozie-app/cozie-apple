@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -56,8 +56,6 @@
 		29E7F945276DEE25008B0E8D /* ProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7F944276DEE25008B0E8D /* ProfileDataStore.swift */; };
 		29EB37EB2775914E00914F6D /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB37EA2775914E00914F6D /* Controllers.swift */; };
 		6923254D27A5050600DBE6C5 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923254C27A5050600DBE6C5 /* NotificationHelper.swift */; };
-		69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; platformFilter = ios; };
-		69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E36D27A27C180051EF37 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9806C8543340A04AEF2006 /* Pods_Cozie.framework */; };
 		8E57EB93499DCC05D1B85DFB /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36683D0C593EEC4970C0D5D4 /* Pods_CozieTests.framework */; };
 		E4256F86251C4E5A00CF32A4 /* Pods_Cozie_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18B444E3E86547088180A30 /* Pods_Cozie_WatchKit_App.framework */; };
@@ -170,17 +168,6 @@
 				E483826F247BA33B002C3708 /* Cozie WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E48382B3247BA713002C3708 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				69A2E37127A27D290051EF37 /* ResearchKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E4C5D9D9249CA4B500228A15 /* Embed App Extensions */ = {
@@ -323,7 +310,6 @@
 			files = (
 				E47351E3247D0F5D0079D11A /* HealthKit.framework in Frameworks */,
 				6B49B9EEB64A434ACFCF6443 /* Pods_Cozie.framework in Frameworks */,
-				69A2E37027A27D290051EF37 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,7 +621,6 @@
 				E4838241247BA33A002C3708 /* Frameworks */,
 				E4838242247BA33A002C3708 /* Resources */,
 				E4838295247BA33C002C3708 /* Embed Watch Content */,
-				E48382B3247BA713002C3708 /* Embed Frameworks */,
 				E4C5D9D9249CA4B500228A15 /* Embed App Extensions */,
 				C02AD124388A70568E9AEE22 /* [CP] Embed Pods Frameworks */,
 			);
