@@ -6,11 +6,6 @@ target 'Cozie' do
   use_frameworks!
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
 
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Core'
-  pod 'Firebase/Firestore'
-  pod 'FirebaseFirestoreSwift'
   pod 'Charts'
   pod 'IQKeyboardManagerSwift'
   pod 'Alamofire', '~> 4.5'
