@@ -8,7 +8,6 @@
 
 import UIKit
 import OneSignal
-import Firebase
 import IQKeyboardManagerSwift
 import HealthKit
 
@@ -41,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         //END OneSignal initialization code
         IQKeyboardManager.shared.enable = true
-        FirebaseApp.configure()
         LocalNotificationManager.shared.registerForPushNotifications()
         HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
             if let error = error {

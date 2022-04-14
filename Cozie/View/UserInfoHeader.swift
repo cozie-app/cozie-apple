@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class UserInfoHeader: UIView {
 
@@ -44,12 +43,6 @@ class UserInfoHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let user = Auth.auth().currentUser
-        var userEmail = ""
-        if let user = user {
-            userEmail = user.email ?? ""
-        }
-
         let profileImageDimension: CGFloat = 60
 
         addSubview(profileImageView)
@@ -66,7 +59,7 @@ class UserInfoHeader: UIView {
         addSubview(emailLabel)
         emailLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor, constant: 10).isActive = true
         emailLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 12).isActive = true
-        emailLabel.text = userEmail
+        emailLabel.text = "user"
     }
 
     required init?(coder aDecoder: NSCoder) {
