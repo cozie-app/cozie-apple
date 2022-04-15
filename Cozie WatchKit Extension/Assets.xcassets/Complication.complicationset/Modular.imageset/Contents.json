@@ -1,28 +1,28 @@
 {
   "images" : [
     {
-      "filename" : "52.png",
-      "idiom" : "watch",
       "scale" : "2x",
-      "screen-width" : "<=145"
+      "filename" : "modular38mm@2x.png",
+      "screen-width" : "<=145",
+      "idiom" : "watch"
     },
     {
-      "filename" : "58-1.png",
-      "idiom" : "watch",
       "scale" : "2x",
+      "filename" : "modular40mm@2x.png",
+      "idiom" : "watch",
       "screen-width" : ">161"
     },
     {
-      "filename" : "58.png",
-      "idiom" : "watch",
       "scale" : "2x",
+      "filename" : "modular42mm@2x.png",
+      "idiom" : "watch",
       "screen-width" : ">145"
     },
     {
-      "filename" : "64.png",
+      "filename" : "modular44mm@2x.png",
+      "screen-width" : ">183",
       "idiom" : "watch",
-      "scale" : "2x",
-      "screen-width" : ">183"
+      "scale" : "2x"
     }
   ],
   "info" : {

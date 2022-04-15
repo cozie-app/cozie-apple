@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "surface1.png",
+      "filename" : "Surface.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "surface.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "surface_64x64.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

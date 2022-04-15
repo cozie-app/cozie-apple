@@ -41,6 +41,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
             let template = CLKComplicationTemplateCircularSmallRingImage()
             template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Circular")!)
+            template.tintColor = .orange
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
 
@@ -49,6 +50,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
             let template = CLKComplicationTemplateUtilitarianSmallRingImage()
             template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Utilitarian")!)
+            template.tintColor = .orange
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
 
@@ -57,6 +59,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
             let template = CLKComplicationTemplateModularSmallRingImage()
             template.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Modular")!)
+            template.tintColor = .orange
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
 
@@ -67,6 +70,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 let template = CLKComplicationTemplateGraphicCornerCircularImage()
                 let image = UIImage(named: "Complication/Graphic Corner")!
                 template.imageProvider = CLKFullColorImageProvider(fullColorImage: image)
+                template.tintColor = .orange
                 let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
                 handler(timelineEntry)
             } else {
@@ -80,6 +84,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 let template = CLKComplicationTemplateGraphicCircularImage()
                 let image = UIImage(named: "Complication/Graphic Circular")!
                 template.imageProvider = CLKFullColorImageProvider(fullColorImage: image)
+                template.tintColor = .orange
                 let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
                 handler(timelineEntry)
             } else {
@@ -118,22 +123,26 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 let image: UIImage = UIImage(named: "Complication/Circular")!
                 let template = CLKComplicationTemplateCircularSmallSimpleImage()
                 template.imageProvider = CLKImageProvider(onePieceImage: image)
+                template.tintColor = .orange
                 handler(template)
             case .utilitarianSmall:
                 let image: UIImage = UIImage(named: "Complication/Utilitarian")!
                 let template = CLKComplicationTemplateUtilitarianSmallSquare()
                 template.imageProvider = CLKImageProvider(onePieceImage: image)
+                template.tintColor = .orange
                 handler(template)
             case .modularSmall:
                 let image: UIImage = UIImage(named: "Complication/Modular")!
                 let template = CLKComplicationTemplateModularSmallSimpleImage()
                 template.imageProvider = CLKImageProvider(onePieceImage: image)
+                template.tintColor = .orange
                 handler(template)
             case .graphicCorner:
                 if #available(watchOSApplicationExtension 5.0, *) {
                     let template = CLKComplicationTemplateGraphicCornerCircularImage()
                     let image = UIImage(named: "Complication/Graphic Corner")!
                     template.imageProvider = CLKFullColorImageProvider(fullColorImage: image)
+                    template.tintColor = .orange
                     handler(template)
                 } else {
                     handler(nil)
@@ -143,6 +152,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     let template = CLKComplicationTemplateGraphicCircularImage()
                     let image = UIImage(named: "Complication/Graphic Circular")!
                     template.imageProvider = CLKFullColorImageProvider(fullColorImage: image)
+                    template.tintColor = .orange
                     handler(template)
                 } else {
                     handler(nil)
