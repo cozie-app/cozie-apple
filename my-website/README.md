@@ -37,4 +37,5 @@ If you are using GitHub pages for hosting, this command is a convenient way to b
 
 ```
 yarn upgrade docusaurus --latest
+yarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latestyarn upgrade @docusaurus/core@latest @docusaurus/preset-classic@latest
 ```

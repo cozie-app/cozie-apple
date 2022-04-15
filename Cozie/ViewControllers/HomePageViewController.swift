@@ -44,6 +44,16 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // set defaults
+        let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? defaultExperimentID
+        let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? defaultParticipantID
+        let questionFlow = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [true,false,false,false,false,false,false,false]
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: experimentID)
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: participantID)
+        // improvement we should not pass an array
+        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.questions.rawValue, value: questionFlow)
+
         appIconImg.image = UIImage(named: "AppIcon")
         viewID.layer.borderColor = UIColor.lightGray.cgColor
         viewID.layer.borderWidth = 1
@@ -103,10 +113,10 @@ class HomePageViewController: UIViewController {
         
         let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String
-        
+
         self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
-        self.lableExperimentId.text = experimentID != "" && experimentID != nil ? experimentID : "-"
-        self.labelParticipantID.text = participantID != "" && participantID != nil ? participantID : "-"
+        self.lableExperimentId.text = experimentID
+        self.labelParticipantID.text = participantID
         
         self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
         

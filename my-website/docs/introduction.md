@@ -21,7 +21,7 @@ Cozie for iOS builds on the knowledge that the [BUDS Lab](https://www.budslab.or
 
 Being Apple one of the major players in wearable devices market and with the Apple Watch dominating the global smartwatch market share, we decided to develop Cozie for iOS. 
 
-Cozie is now in Beta version and it will be soon available for download on the Apple Store. To find out more about Cozie or to become a tested please contact us at cozie.app@gmail.com
+Cozie is now in Beta version and it will be soon available for download on the Apple Store. To find out more about Cozie or to become a tester please contact us at cozie.app@gmail.com
 
 To find out more about Cozie please watch the following video.
 
@@ -29,7 +29,7 @@ To find out more about Cozie please watch the following video.
 
 ## Taylor your survey
 
-Choose the questions to display to the users by changing the soruce code.
+Choose the questions to display to the users by changing the source code.
 
 <img alt="Cozie apple survey" src={useBaseUrl('img/cozie_flow.png')}  width="100%" />
 

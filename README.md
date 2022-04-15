@@ -11,9 +11,9 @@ Cozie allows building occupants to provide feedback in real time
 
 ## Documentation and tutorials
 
-- [Documentation](https://cozie-apple.netlify.app/docs/)
+- [Documentation](https://www.cozie-apple.app/docs/)
 - [Overview](https://www.youtube.com/watch?v=5e4FwVydYRE&t=109s)
-- [Official website](https://cozie-apple.netlify.app)
+- [Official website](https://www.cozie-apple.app/)
 
 ## Installation
 
