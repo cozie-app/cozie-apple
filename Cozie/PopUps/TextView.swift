@@ -15,7 +15,7 @@ class TextView: BasePopupVC {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var setBtn: UIButton!
     
-    var isParticipantID: Int = 1
+    var isParticipantID: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,28 +25,19 @@ class TextView: BasePopupVC {
     
     func fillUpData() {
         switch self.isParticipantID {
-        case 1:
+        case true:
             idLabel.text = "Participant ID"
             msgLabel.text = "Please fill your specified Participant ID"
             idTextField.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? ""
-        case 2:
+        case false:
             idLabel.text = "Experiment ID"
             msgLabel.text = "Please fill your specified Experiment ID"
             idTextField.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? ""
-        case 3:
-            idLabel.text = "Set Goal"
-            msgLabel.text = "Please enter the study goal"
-            idTextField.text = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue) as? String ?? ""
-        default:
-            idLabel.text = "Not defined"
-            msgLabel.text = "Note defined"
-            idTextField.text = ""
         }
     }
     
     @IBAction func onClickSet(_ sender: Any) {
-        switch self.isParticipantID {
-        case 1:
+        if isParticipantID {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: self.idTextField.text!)
             Utilities.getData { (isSuccess, data) in
                 DispatchQueue.main.async {
@@ -54,12 +45,9 @@ class TextView: BasePopupVC {
                     appDelegate?.setUpBackgroundDeliveryForDataTypes()
                 }
             }
-        case 2:
+        } else {
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: self.idTextField.text!)
-        case 3:
-            UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue, value: Double(self.idTextField.text!))
-        default:
-            var a = 2
         }
-        NavigationManager.dismiss(self)}
+        NavigationManager.dismiss(self)
+    }
 }

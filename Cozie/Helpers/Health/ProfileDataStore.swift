@@ -259,7 +259,7 @@ extension ProfileDataStore {
             }
         case HKObjectType.quantityType(forIdentifier: .heartRate)!:
             self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { (heartRate, samples) in
-                Utilities.sendHealthData(data: heartRate, type: .ts_heartRate, samples: samples)
+                Utilities.sendHealthData(data: heartRate, type: .heartRate, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .restingHeartRate)!:
             self.getDataObject(type: HKSampleType.quantityType(forIdentifier: .restingHeartRate)) { (restingHeartRate, samples) in

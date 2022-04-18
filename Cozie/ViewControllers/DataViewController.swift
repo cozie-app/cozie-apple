@@ -81,7 +81,7 @@ class DataViewController: UIViewController, ChartViewDelegate{
         
         let yValues2:[BarChartDataEntry] = [
             BarChartDataEntry(x: 0, y: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Double ?? 0.0),
-            BarChartDataEntry(x: 1, y: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue) as? Double ?? 0.0)
+            BarChartDataEntry(x: 1, y: 20)
         ]
         
         self.setChartValue(values: yValues1,barChartView: self.chart1!)

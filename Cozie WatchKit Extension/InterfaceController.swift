@@ -69,7 +69,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
     var bodyMass: Double = 0.0
     var startTime = ""  // placeholder for the start time of the survey
-    var participantID = "ExternalTester" // placeholder for the user ID
+    var participantID = "undefined" // placeholder for the user ID
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
     var lat: Double = 0.0
     var long: Double = 0.0
@@ -85,7 +85,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // save on first startup the UUID in user defaults so it does not change
         uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
         // get participantID from the defaults if available
-        participantID = userDefaults.string(forKey: "participantID") ?? participantID
+        participantID = userDefaults.string(forKey: "participantID") ?? "undefined"
 
         // start connection session with the phone
         session.delegate = self

@@ -20,6 +20,7 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
     case GeneralSettings
     case Communications
     case ExperimentSettings
+    case OnboardingProcess
     case About
 
     var description: String {
@@ -28,6 +29,7 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
         case .GeneralSettings: return "General Settings"
         case .Communications: return "Communications"
         case .ExperimentSettings: return "Experiment Settings"
+        case .OnboardingProcess: return "Onboarding Process"
         case .About: return "About"
         }
     }
@@ -119,11 +121,10 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     case participationDays
     case dailyParticipationHours
     case downloadData
-    case studyGoal
 
     var imageView: Bool {
         switch self {
-        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours, .studyGoal:
+        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours:
             return false
         case .downloadData:
             return true
@@ -131,7 +132,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     }
     var imageName: String {
         switch self {
-        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours, .studyGoal:
+        case .questionFlow, .ReminderFrequency, .participationDays, .dailyParticipationHours:
             return ""
         case .downloadData:
             return imgDownload
@@ -150,7 +151,38 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
         case .participationDays: return "Participation Days"
         case .dailyParticipationHours: return "Daily Participation Hours"
         case .downloadData: return "Download Data"
-        case .studyGoal: return "Set Goal"
+        }
+    }
+}
+
+// define the options in the OnboardingProcess menu
+enum OnboardingProcessOptions: Int, CaseIterable, SectionType {
+
+    case eligibility
+    case consent
+    case survey
+    case onboarding
+    case emailConsent
+
+    var imageView: Bool {
+        return false
+    }
+    var imageName: String {
+        return ""
+    }
+    var constrainsSwitch: Bool {
+        return false
+    }
+    var isSwitchEnable: Bool {
+        return false
+    }
+    var description: String {
+        switch self{
+        case .eligibility: return "Eligibility"
+        case .consent: return "Consent"
+        case .survey: return "Survey"
+        case .onboarding: return "On-boarding"
+        case .emailConsent: return "Email consent form"
         }
     }
 }

@@ -12,7 +12,7 @@ const features = [
     imageUrl: "img/undraw_watch_application.svg",
     description: (
       <>
-        Building occupants can complete a right-here-right-now survey directly
+        Building occupants can complete a right-here-right now survey directly
         from their Apple watch. Without the need of having to open an app on
         their Phone or a survey link.
       </>
@@ -88,13 +88,6 @@ const contributors = [
     profession: <>Associate Professor at UC Berkeley</>,
     link: "https://www.linkedin.com/in/claytonmiller/",
   },
-  {
-    name: <>Mario Frei</>,
-    imageUrl: "img/mario.jpeg",
-    role: <>Developer</>,
-    profession: <>Research Fellow at NUS</>,
-    link: "https://sg.linkedin.com/in/mario-frei",
-  },
 ];
 
 function Contributor({ imageUrl, name, profession, role, link }) {
@@ -102,7 +95,7 @@ function Contributor({ imageUrl, name, profession, role, link }) {
   return (
     <div
       className={clsx(
-        "avatar avatar--vertical col col--3 text--center",
+        "avatar avatar--vertical col col--4 text--center",
         styles.features
       )}
     >

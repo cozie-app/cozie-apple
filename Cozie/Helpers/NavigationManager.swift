@@ -57,7 +57,7 @@ final class NavigationManager {
         sender.present(myCustomView, animated: true, completion: nil)
     }
     
-    static func openTextView(_ sender: UIViewController, isParticipantID: Int) {
+    static func openTextView(_ sender: UIViewController, isParticipantID: Bool) {
         let nib = UINib(nibName: "TextView", bundle: nil)
         let myCustomView = nib.instantiate(withOwner: sender, options: nil).first as! TextView
         myCustomView.isParticipantID = isParticipantID
