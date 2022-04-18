@@ -17,6 +17,7 @@ struct QuestionResponse: Codable {
     var Privacy: [Question]
     var Movement: [Question]
     var InfectionRisk: [Question]
+    var Noise: [Question]
 }
 
 // structure which is used to store the questions prompted to the user
@@ -299,6 +300,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 questionsFlow.append(.PDPMini)
             case 7:
                 questionsFlow.append(.MFMini)
+            case 8:
+                questionsFlow.append(.Noise)
             default:
                 break
             }
@@ -404,6 +407,7 @@ extension InterfaceController {
         case IDRPMini
         case PDPMini
         case MFMini
+        case Noise
     }
     
     private func addQuestions(ofType flows: [QuestionFlow]) {
@@ -417,6 +421,7 @@ extension InterfaceController {
             case .IDRPMini: self.IDRPMiniQuestion()
             case .PDPMini: self.PDPMiniQuestion()
             case .MFMini: self.MFMiniQuestion()
+            case .Noise: self.NoiseQuestion()
             }
         }
         self.lastQuestion()
@@ -454,6 +459,10 @@ extension InterfaceController {
         self.read(type: .MFMini)
     }
     
+    private func NoiseQuestion() {
+        self.read(type: .Noise)
+    }
+    
     private func lastQuestion() {
         // Last question MUST have nextQuestion set to 999, the first question is question 0
         self.questions += [Question(title: "Thank you!!!", options: ["Submit survey"],
@@ -476,6 +485,7 @@ extension InterfaceController {
                 case .IDRPMini: self.add(questions: &data.InfectionRisk)
                 case .PDPMini: break
                 case .MFMini: break
+                case .Noise: self.add(questions: &data.Noise)
                 }
             } catch (let error) {
                 print(error)
