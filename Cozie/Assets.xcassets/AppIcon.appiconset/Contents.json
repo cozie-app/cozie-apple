@@ -31,7 +31,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "80.png",
+      "filename" : "80-3.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -55,7 +55,7 @@
       "size" : "57x57"
     },
     {
-      "filename" : "120.png",
+      "filename" : "120-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
@@ -73,31 +73,31 @@
       "size" : "20x20"
     },
     {
-      "filename" : "40.png",
+      "filename" : "40-2.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "29.png",
+      "filename" : "29-1.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "58.png",
+      "filename" : "58-2.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "40.png",
+      "filename" : "40-1.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
     },
     {
-      "filename" : "80.png",
+      "filename" : "80-2.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
@@ -167,21 +167,21 @@
       "subtype" : "42mm"
     },
     {
-      "filename" : "58.png",
+      "filename" : "58-1.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "87.png",
+      "filename" : "87-1.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "66.png",
+      "filename" : "66-1.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -189,7 +189,7 @@
       "subtype" : "45mm"
     },
     {
-      "filename" : "80.png",
+      "filename" : "80-1.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -213,7 +213,7 @@
       "subtype" : "41mm"
     },
     {
-      "filename" : "100.png",
+      "filename" : "100-1.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -261,7 +261,7 @@
       "subtype" : "45mm"
     },
     {
-      "filename" : "1024.png",
+      "filename" : "1024-1.png",
       "idiom" : "watch-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
