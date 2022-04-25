@@ -408,7 +408,7 @@
           ]
       }
   ],
-  "Privacy": [
+  "PrivacyOld": [
     {
       "title": "Alone or in a group?",
       "identifier": "alone-group",
@@ -688,276 +688,276 @@
       ]
     }
   ],
-  "Noise":[
-          {
-              "title": "Any noise distractions nearby?",
-              "identifier": "noise-nearby",
-              "options": [
-                  "None",
-                  "A Little",
-                  "A lot"
-              ],
-              "icons": [
-                  "none",
-                  "a-little",
-                  "a-lot"
-              ],
-              "nextQuestion": [
-                  2,
-                  3,
-                  3
-              ]
-          },
-          {
-              "title": "What kind of noise?",
-              "identifier": "noise-kind",
-              "options": [
-                  "Talking",
-                  "Traffic",
-                  "Weather",
-                  "Appliances",
-                  "Others"
-              ],
-              "icons": [
-                  "talking",
-                  "traffic",
-                  "weather",
-                  "appliances",
-                  "others"
-              ],
-              "nextQuestion": [
-                  4,
-                  4,
-                  4,
-                  4,
-                  4
-              ]
-          },
-          {
-              "title": "Thermally, what do you prefer now?",
-              "identifier": "thermal-preference",
-              "options": [
-                  "Cooler",
-                  "No change",
-                  "Warmer"
-              ],
-              "icons": [
-                  "prefer-cooler",
-                  "no-change",
-                  "prefer-warmer"
-              ],
-              "nextQuestion": [
-                  5,
-                  6,
-                  5
-              ]
-          },
-          {
-              "title": "What clothes are you wearing?",
-              "identifier": "thermal-clo",
-              "options": [
-                  "Very light",
-                  "Light",
-                  "Medium",
-                  "Heavy"
-              ],
-              "icons": [
-                  "clothes-very-light",
-                  "clothes-light",
-                  "clothes-medium",
-                  "clothes-heavy"
-              ],
-              "nextQuestion": [
-                  6,
-                  6,
-                  6,
-                  6
-              ]
-          },
-          {
-              "title": "Where are you?",
-              "identifier": "location",
-              "options":[
-                  "Indoor",
-                  "Outdoor",
-                  "Transportation"
-              ],
-              "icons": [
-                  "indoor",
-                  "outdoor",
-                  "transportation"
-              ],
-              "nextQuestion": [
-                  7,
-                  10,
-                  8
-              ]
-          },
-          {
-              "title": "Where are you indoors?",
-              "identifier": "location-indoor",
-              "options": [
-                  "Office",
-                  "Home",
-                  "Food and beverage",
-                  "Shopping",
-                  "Entertainment",
-                  "Sports",
-                  "Others"
-              ],
-              "icons": [
-                  "office",
-                  "home",
-                  "food-and-beverage",
-                  "shopping",
-                  "entertainment",
-                  "sports",
-                  "others"
-              ],
-              "nextQuestion": [
-                  9,
-                  10,
-                  10,
-                  10,
-                  10,
-                  10,
-                  10
-              ]
-          },
-          {
-              "title": "What kind of office?",
-              "identifier": "location-office",
-              "options": [
-                  "Personal",
-                  "Shared",
-                  "Open space",
-                  "Cubicles",
-                  "Conference room"
-              ],
-              "icons": [
-                  "personal",
-                  "shared",
-                  "open-space",
-                  "cubicles",
-                  "conference-room"
-              ],
-              "nextQuestion": [
-                  10,
-                  10,
-                  10,
-                  10,
-                  10
-              ]
-          },
-          {
-              "title": "What kind of transport",
-              "identifier": "location-transport",
-              "options":[
-                  "Bus",
-                  "Train",
-                  "Car",
-                  "Taxi",
-                  "Others"
-              ],
-              "icons": [
-                  "bus",
-                  "train",
-                  "car",
-                  "taxi",
-                  "others"
-              ],
-              "nextQuestion": [
-                  10,
-                  10,
-                  10,
-                  10,
-                  10
-              ]
-          },
-          {
-              "title": "Alone or in a group?",
-              "identifier": "alone-group",
-              "options": [
-                  "Alone",
-                  "Online",
-                  "Group"
-              ],
-              "icons": [
-                  "alone",
-                  "online",
-                  "group"
-              ],
-              "nextQuestion": [
-                  11,
-                  12,
-                  12
-              ]
-          },
-          {
-              "title": "Category of activity?",
-              "identifier": "activity-category",
-              "options":[
-                  "Focus",
-                  "Leisure"
-              ],
-              "icons": [
-                  "focus",
-                  "leisure"
-              ],
-              "nextQuestion": [
-                  13,
-                  13
-              ]
-          },
-          {
-              "title": "Category of activity",
-              "identifier": "activity-category",
-              "options": [
-                  "Socialize",
-                  "Collaborate",
-                  "Learn"
-              ],
-              "icons": [
-                  "socialize",
-                  "collaborate",
-                  "learn"
-              ],
-              "nextQuestion": [
-                  13,
-                  13,
-                  13
-              ]
-          },
-          {
-              "title": "What best describes your mood?",
-              "identifier": "mood",
-              "options": [
-                  "Productive",
-                  "Stressed",
-                  "Sad",
-                  "Distracted",
-                  "Bored",
-                  "Happy",
-                  "Angry"
-              ],
-              "icons": [
-                  "productive",
-                  "stressed",
-                  "sad",
-                  "distracted",
-                  "bored",
-                  "happy",
-                  "angry"
-              ],
-              "nextQuestion": [
-                  14,
-                  14,
-                  14,
-                  14,
-                  14,
-                  14,
-                  14
-              ]
-          }
-      ]
+  "Privacy":[
+      {
+          "title": "Noise distractions nearby?",
+          "identifier": "noise-nearby",
+          "options": [
+              "None",
+              "A Little",
+              "A lot"
+          ],
+          "icons": [
+              "none",
+              "a-little",
+              "a-lot"
+          ],
+          "nextQuestion": [
+              2,
+              1,
+              1
+          ]
+      },
+      {
+          "title": "What kind of noise?",
+          "identifier": "noise-kind",
+          "options": [
+              "Talking",
+              "Traffic",
+              "Weather",
+              "Appliances",
+              "Others"
+          ],
+          "icons": [
+              "talking",
+              "traffic",
+              "weather",
+              "appliances",
+              "others"
+          ],
+          "nextQuestion": [
+              2,
+              2,
+              2,
+              2,
+              2
+          ]
+      },
+      {
+          "title": "Thermally, what do you prefer now?",
+          "identifier": "thermal-preference",
+          "options": [
+              "Cooler",
+              "No change",
+              "Warmer"
+          ],
+          "icons": [
+              "prefer-cooler",
+              "no-change",
+              "prefer-warmer"
+          ],
+          "nextQuestion": [
+              3,
+              4,
+              3
+          ]
+      },
+      {
+          "title": "What clothes are you wearing?",
+          "identifier": "thermal-clo",
+          "options": [
+              "Very light",
+              "Light",
+              "Medium",
+              "Heavy"
+          ],
+          "icons": [
+              "clothes-very-light",
+              "clothes-light",
+              "clothes-medium",
+              "clothes-heavy"
+          ],
+          "nextQuestion": [
+              4,
+              4,
+              4,
+              4
+          ]
+      },
+      {
+          "title": "Where are you?",
+          "identifier": "location",
+          "options":[
+              "Indoor",
+              "Outdoor",
+              "Transportation"
+          ],
+          "icons": [
+              "indoor",
+              "outdoor",
+              "transportation"
+          ],
+          "nextQuestion": [
+              5,
+              8,
+              6
+          ]
+      },
+      {
+          "title": "Where are you indoors?",
+          "identifier": "location-indoor",
+          "options": [
+              "Office",
+              "Home",
+              "Food and beverage",
+              "Shopping",
+              "Entertainment",
+              "Sports",
+              "Others"
+          ],
+          "icons": [
+              "office",
+              "home",
+              "food-and-beverage",
+              "shopping",
+              "entertainment",
+              "sports",
+              "others"
+          ],
+          "nextQuestion": [
+              7,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+          ]
+      },
+      {
+          "title": "What kind of transport",
+          "identifier": "location-transport",
+          "options":[
+              "Bus",
+              "Train",
+              "Car",
+              "Taxi",
+              "Others"
+          ],
+          "icons": [
+              "bus",
+              "train",
+              "car",
+              "taxi",
+              "others"
+          ],
+          "nextQuestion": [
+              8,
+              8,
+              8,
+              8,
+              8
+          ]
+      },
+      {
+          "title": "What kind of office?",
+          "identifier": "location-office",
+          "options": [
+              "Personal",
+              "Shared",
+              "Open space",
+              "Cubicles",
+              "Conference room"
+          ],
+          "icons": [
+              "personal",
+              "shared",
+              "open-space",
+              "cubicles",
+              "conference-room"
+          ],
+          "nextQuestion": [
+              8,
+              8,
+              8,
+              8,
+              8
+          ]
+      },
+      {
+          "title": "Alone or in a group?",
+          "identifier": "alone-group",
+          "options": [
+              "Alone",
+              "Online",
+              "Group"
+          ],
+          "icons": [
+              "alone",
+              "online",
+              "group"
+          ],
+          "nextQuestion": [
+              9,
+              10,
+              10
+          ]
+      },
+      {
+          "title": "Category of activity?",
+          "identifier": "activity-category",
+          "options":[
+              "Focus",
+              "Leisure"
+          ],
+          "icons": [
+              "focus",
+              "leisure"
+          ],
+          "nextQuestion": [
+              11,
+              11
+          ]
+      },
+      {
+          "title": "Category of activity",
+          "identifier": "activity-category",
+          "options": [
+              "Socialize",
+              "Collaborate",
+              "Learn"
+          ],
+          "icons": [
+              "socialize",
+              "collaborate",
+              "learn"
+          ],
+          "nextQuestion": [
+              11,
+              11,
+              11
+          ]
+      },
+      {
+          "title": "What best describes your mood?",
+          "identifier": "mood",
+          "options": [
+              "Productive",
+              "Stressed",
+              "Sad",
+              "Distracted",
+              "Bored",
+              "Happy",
+              "Angry"
+          ],
+          "icons": [
+              "productive",
+              "stressed",
+              "sad",
+              "distracted",
+              "bored",
+              "happy",
+              "angry"
+          ],
+          "nextQuestion": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              12,
+              12
+          ]
+      }
+  ]
 }
