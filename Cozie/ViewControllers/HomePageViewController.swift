@@ -25,7 +25,6 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var labelIDRPMINI: UILabel!
     @IBOutlet weak var labelPDPMINI: UILabel!
     @IBOutlet weak var labelMFMINI: UILabel!
-    @IBOutlet weak var labelNoise: UILabel!
     
     @IBOutlet weak var lableExperimentId: UILabel!
     @IBOutlet weak var labelParticipantID: UILabel!
@@ -111,8 +110,8 @@ class HomePageViewController: UIViewController {
         
         self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
         
-        self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false,false]
-        self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI, labelNoise]
+        self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
+        self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]
         
         var count = 1
         for i in 0...7{

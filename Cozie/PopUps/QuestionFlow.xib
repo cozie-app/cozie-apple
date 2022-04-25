@@ -450,56 +450,6 @@
                                                     <constraint firstAttribute="height" constant="40" id="GOt-OA-IGP"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVi-Vj-vQk">
-                                                <rect key="frame" x="0.0" y="163" width="371" height="40"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOD-hV-lrB" userLabel="View Noise">
-                                                        <rect key="frame" x="0.0" y="0.0" width="371" height="40"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhB-hU-6Of" userLabel="View Noise Btn">
-                                                                <rect key="frame" x="20" y="4.5" width="31" height="31"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" tag="7" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtd-p3-ggE" userLabel="Noise Btn">
-                                                                        <rect key="frame" x="3" y="3" width="25" height="25"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="25" id="HEF-60-RcE"/>
-                                                                            <constraint firstAttribute="height" constant="25" id="WNc-mq-qac"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                                                        <state key="normal" title=" "/>
-                                                                        <connections>
-                                                                            <action selector="questionValueChanged:" destination="NsH-8Y-z8V" eventType="touchUpInside" id="8jG-UW-VTJ"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="wtd-p3-ggE" firstAttribute="centerY" secondItem="MhB-hU-6Of" secondAttribute="centerY" id="4zA-5Z-qr5"/>
-                                                                    <constraint firstItem="wtd-p3-ggE" firstAttribute="centerX" secondItem="MhB-hU-6Of" secondAttribute="centerX" id="Gr6-Xq-Znx"/>
-                                                                    <constraint firstItem="wtd-p3-ggE" firstAttribute="leading" secondItem="MhB-hU-6Of" secondAttribute="leading" constant="3" id="VUQ-mf-PKh"/>
-                                                                    <constraint firstItem="wtd-p3-ggE" firstAttribute="top" secondItem="MhB-hU-6Of" secondAttribute="top" constant="3" id="oea-gJ-FWl"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement &amp; Fitness MINI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4U-M8-ior" userLabel="Noise">
-                                                                <rect key="frame" x="71" y="11" width="300" height="18"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstItem="Q4U-M8-ior" firstAttribute="leading" secondItem="MhB-hU-6Of" secondAttribute="trailing" constant="20" id="4Zl-aH-BXg"/>
-                                                            <constraint firstItem="MhB-hU-6Of" firstAttribute="leading" secondItem="IOD-hV-lrB" secondAttribute="leading" constant="20" id="SPK-nt-6Bn"/>
-                                                            <constraint firstItem="MhB-hU-6Of" firstAttribute="centerY" secondItem="IOD-hV-lrB" secondAttribute="centerY" id="UDP-gw-Elo"/>
-                                                            <constraint firstItem="Q4U-M8-ior" firstAttribute="centerY" secondItem="IOD-hV-lrB" secondAttribute="centerY" id="xBO-OI-off"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Q4U-M8-ior" secondAttribute="trailing" id="xd8-GW-RXn"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="GXS-p9-oFe"/>
-                                                </constraints>
-                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>

@@ -19,7 +19,6 @@ class QuestionFlow: BasePopupVC {
     @IBOutlet weak var PDPMINIBtn: UIButton!
     @IBOutlet weak var MFMINIBtn: UIButton!
     @IBOutlet weak var questionFlowSetBtn: UIButton!
-    @IBOutlet weak var NoiseBtn: UIButton!
     
     @IBOutlet weak var viewThermal: UIView!
     @IBOutlet weak var viewIDRP: UIView!
@@ -29,7 +28,6 @@ class QuestionFlow: BasePopupVC {
     @IBOutlet weak var viewIDRPMINI: UIView!
     @IBOutlet weak var viewPDPMINI: UIView!
     @IBOutlet weak var viewMFMINI: UIView!
-    @IBOutlet weak var viewNoise: UIView!
     
     @IBOutlet weak var viewThermalBtn: UIView!
     @IBOutlet weak var viewIDRPBtn: UIView!
@@ -39,7 +37,6 @@ class QuestionFlow: BasePopupVC {
     @IBOutlet weak var viewIDRPMINIBtn: UIView!
     @IBOutlet weak var viewPDPMINIBtn: UIView!
     @IBOutlet weak var viewMFMINIBtn: UIView!
-    @IBOutlet weak var viewNoiseBtn: UIView!
     
     var questions:[Bool] = []
     var buttonArray:[UIButton] = []
@@ -53,11 +50,11 @@ class QuestionFlow: BasePopupVC {
 
         questionFlowSetBtn.layer.cornerRadius = 5
         
-        buttonArray = [thermalBtn, IDRPBtn, PDPBtn, MFBtn, thermalMINIBtn, IDRPMINIBtn, PDPMINIBtn, MFMINIBtn, NoiseBtn]
+        buttonArray = [thermalBtn, IDRPBtn, PDPBtn, MFBtn, thermalMINIBtn, IDRPMINIBtn, PDPMINIBtn, MFMINIBtn]
         
-        viewArray = [viewThermal, viewIDRP, viewPDP, viewMF, viewThermalMINI, viewIDRPMINI, viewPDPMINI, viewMFMINI, viewNoise]
+        viewArray = [viewThermal, viewIDRP, viewPDP, viewMF, viewThermalMINI, viewIDRPMINI, viewPDPMINI, viewMFMINI]
         
-        viewBtnArray = [viewThermalBtn, viewIDRPBtn, viewPDPBtn, viewMFBtn, viewThermalMINIBtn, viewIDRPMINIBtn, viewPDPMINIBtn, viewMFMINIBtn, viewNoiseBtn]
+        viewBtnArray = [viewThermalBtn, viewIDRPBtn, viewPDPBtn, viewMFBtn, viewThermalMINIBtn, viewIDRPMINIBtn, viewPDPMINIBtn, viewMFMINIBtn]
                 
         self.fillUpdata()
     }
@@ -93,8 +90,6 @@ class QuestionFlow: BasePopupVC {
             functionality(i: 6, view: viewPDPMINI, button: sender)
         case 7:
             functionality(i: 7, view: viewMFMINI, button: sender)
-        case 8:
-            functionality(i: 8, view: viewNoise, button: sender)
             
         default:
             break
