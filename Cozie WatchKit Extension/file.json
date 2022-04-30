@@ -895,7 +895,7 @@
       },
       {
           "title": "Category of activity?",
-          "identifier": "activity-category",
+          "identifier": "activity-category-1",
           "options":[
               "Focus",
               "Leisure"
@@ -911,7 +911,7 @@
       },
       {
           "title": "Category of activity",
-          "identifier": "activity-category",
+          "identifier": "activity-category-2",
           "options": [
               "Socialize",
               "Collaborate",
