@@ -825,7 +825,7 @@
           ]
       },
       {
-          "title": "What kind of transport",
+          "title": "What kind of transport?",
           "identifier": "location-transport",
           "options":[
               "Bus",
@@ -895,7 +895,7 @@
       },
       {
           "title": "Category of activity?",
-          "identifier": "activity-category-1",
+          "identifier": "activity-category",
           "options":[
               "Focus",
               "Leisure"
@@ -910,8 +910,8 @@
           ]
       },
       {
-          "title": "Category of activity",
-          "identifier": "activity-category-2",
+          "title": "Category of activity?",
+          "identifier": "activity-category",
           "options": [
               "Socialize",
               "Collaborate",
