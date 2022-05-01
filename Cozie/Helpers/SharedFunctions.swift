@@ -33,8 +33,9 @@ public func getDocumentsDirectory() -> URL {
 // send data via a POST request, the function it is synchronous
 public func PostRequest(message: Data) -> Int {
     // create the url with URL
-//        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url
-    let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
+    //let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url
+    //let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
+    let url = URL(string: "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-app-write-influx")! // Singapore Lambda API
 
     // create the session object
     let session = URLSession.shared
@@ -45,10 +46,11 @@ public func PostRequest(message: Data) -> Int {
 
     request.httpBody = message
 
-//        request.setValue("3lvUimwWTv3UlSjSct0RS3yxQWIKFG0G7bcWtM10", forHTTPHeaderField: "x-api-key")
+
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
-
+    request.setValue("5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd", forHTTPHeaderField: "x-api-key")
+    
     var responseStatusCode = 0
     // semaphore to wait for the function to complete
     let sem = DispatchSemaphore.init(value: 0)
@@ -91,5 +93,11 @@ public func PostRequest(message: Data) -> Int {
     // optimize maybe write not blocking code or show a message or loader to inform user
     // https://github.com/hirokimu/EMTLoadingIndicator
     sem.wait()
+    print("+++++++++++++++++++++++++++++++++")
+    print("Post Request:")
+    print(url)
+    print(responseStatusCode)
+    print(message)
+    print("+++++++++++++++++++++++++++++++++")
     return responseStatusCode
 }

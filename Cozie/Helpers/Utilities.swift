@@ -122,11 +122,20 @@ class Utilities {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
         
-        let headers = ["x-api-key":"k6iy7nxkBn9hTvScq2vHV8qhXMLl95oA2zlNdA8h",
+        /*
+        let headers = ["x-api-key":"k6iy7nxkBn9hTvScq2vHV8qhXMLl95oA2zlNdA8h",  // N. Viriginia API key
+                       "Accept":"application/json",
+                       "Content-Type":"application/json"]
+         \
+        // North Virginia API
+        let req = Alamofire.request("https://0iecjae656.execute-api.us-east-1.amazonaws.com/default/CozieApple_Read_Influx", method: .get, parameters: param, headers: headers).responseJSON { (response) in
+        */
+        let headers = ["x-api-key":"5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd",   // Singpore API key
                        "Accept":"application/json",
                        "Content-Type":"application/json"]
         
-        let req = Alamofire.request("https://0iecjae656.execute-api.us-east-1.amazonaws.com/default/CozieApple_Read_Influx", method: .get, parameters: param, headers: headers).responseJSON { (response) in
+        // Dedicated app read API in Singpore region
+        let req = Alamofire.request("https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-app-read-influx", method: .get, parameters: param, headers:headers).responseJSON { (response) in
             if let responseCode = response.response?.statusCode {
                 if responseCode == 200 {
                     if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? NSDictionary {
