@@ -1,180 +1,66 @@
 {
-  "Thermal": [
-    {
-      "title": "How would you prefer to be?",
-      "identifier": "tc-preference",
-      "options": [
-        "Cooler",
-        "No Change",
-        "Warmer"
+    "Thermal":[
+          {
+              "title": "Do you accept the overall thermal environment now?",
+              "identifier": "nern-thermal",
+              "options": [
+                  "Clearly unacceptable",
+                  "Just unacceptable",
+                  "Just acceptable",
+                  "Clearly acceptable"
+              ],
+              "icons": [
+                  "circle",
+                  "circle",
+                  "circle",
+                  "circle"
+              ],
+              "nextQuestion": [
+                  1,
+                  1,
+                  2,
+            2
+              ]
+          },
+          {
+              "title": "Would you like the environment to be:",
+              "identifier": "nern-preference-thermal",
+              "options": [
+                  "Warmer",
+                  "No change",
+                  "Cooler"
+              ],
+              "icons": [
+                  "circle",
+                  "circle",
+                  "circle"
+              ],
+              "nextQuestion": [
+                  2,
+                  2,
+                  2
+              ]
+          },
+          {
+              "title": "Would you like:",
+              "identifier": "nern-preference-air",
+              "options": [
+                  "More air movement",
+                  "No change",
+                  "Less air movement"
+              ],
+              "icons": [
+                  "circle",
+                  "circle",
+                  "circle"
+              ],
+              "nextQuestion": [
+                  3,
+                  3,
+                  3
+              ]
+          }
       ],
-      "icons": [
-        "tp-cooler",
-        "comfortable",
-        "tp-warmer"
-      ],
-      "nextQuestion": [
-        1,
-        1,
-        1
-      ]
-    },
-    {
-      "title": "Light preference",
-      "identifier": "light-preference",
-      "options": [
-        "Dimmer",
-        "No Change",
-        "Brighter"
-      ],
-      "icons": [
-        "dimmer",
-        "comfortable",
-        "brighter"
-      ],
-      "nextQuestion": [
-        2,
-        2,
-        2
-      ]
-    },
-    {
-      "title": "Sound preference",
-      "identifier": "sound-preference",
-      "options": [
-        "Quieter",
-        "No Change",
-        "Louder"
-      ],
-      "icons": [
-        "quieter",
-        "comfortable",
-        "louder"
-      ],
-      "nextQuestion": [
-        3,
-        3,
-        3
-      ]
-    },
-    {
-      "title": "Are you?",
-      "identifier": "are-you",
-      "options": [
-        "Outdoor",
-        "Indoor"
-      ],
-      "icons": [
-        "outdoor",
-        "indoor"
-      ],
-      "nextQuestion": [
-        4,
-        4
-      ]
-    },
-    {
-      "title": "Where are you?",
-      "identifier": "location-place",
-      "options": [
-        "Home",
-        "Office",
-        "Vehicle",
-        "Other"
-      ],
-      "icons": [
-        "loc-home",
-        "loc-office",
-        "loc-vehicle",
-        "loc-other"
-      ],
-      "nextQuestion": [
-        5,
-        5,
-        5,
-        5
-      ]
-    },
-    {
-      "title": "Are you near a sensor?",
-      "identifier": "near-sensor?",
-      "options": [
-        "Home",
-        "Work",
-        "Portable",
-        "No"
-      ],
-      "icons": [
-        "loc-home",
-        "loc-office",
-        "backpack",
-        "no2"
-      ],
-      "nextQuestion": [
-        6,
-        6,
-        6,
-        6
-      ]
-    },
-    {
-      "title": "What mood are you in?",
-      "identifier": "mood",
-      "options": [
-        "Bad",
-        "Good",
-        "Neither"
-      ],
-      "icons": [
-        "mood-bad",
-        "mood-good",
-        "mood-neutral"
-      ],
-      "nextQuestion": [
-        7,
-        7,
-        7
-      ]
-    },
-    {
-      "title": "What clothes are you wearing?",
-      "identifier": "clo",
-      "options": [
-        "Very light",
-        "Light",
-        "Medium",
-        "Heavy"
-      ],
-      "icons": [
-        "clo-very-light",
-        "clo-light",
-        "clo-medium",
-        "clo-heavy"
-      ],
-      "nextQuestion": [
-        8,
-        8,
-        8,
-        8
-      ]
-    },
-    {
-      "title": "Have you changed location, activity or clothing over the last 10-min?",
-      "identifier": "changed-loaction",
-      "options": [
-        "Yes",
-        "No"
-      ],
-      "icons": [
-        "yes",
-        "no"
-      ],
-      "nextQuestion": [
-        9,
-        9
-      ]
-    }
-  ],
   "Movement": [
       {
           "title": "In the past 60min, I used",
