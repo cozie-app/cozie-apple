@@ -3,6 +3,13 @@
 
 Cozie allows building occupants to provide feedback in real time
 
+## Changes for Nern experiment (CoT)
+ - Add Nern question flow (Thermal short)
+ - Remove symbol from response options in question flow
+ - Reduce font size for question flows on Apple Watch
+ - Add green and Nern-themed app icons
+ - Use new API (Lambda functions in Singapore region on AWS)
+
 ## Features
 
 - [x] **Free and Easy to Use** - Building occupants can complete a right-here-right now survey directly from their Apple watch. Without the need of having to open an app on their Phone or a survey link.
