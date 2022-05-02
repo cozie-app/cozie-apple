@@ -4,22 +4,16 @@
               "title": "Do you accept the overall thermal environment now?",
               "identifier": "nern-thermal",
               "options": [
-                  "Clearly unacceptable",
-                  "Just unacceptable",
-                  "Just acceptable",
-                  "Clearly acceptable"
+                  "Unacceptable",
+                  "Acceptable"
               ],
               "icons": [
-                  "circle",
-                  "circle",
                   "circle",
                   "circle"
               ],
               "nextQuestion": [
                   1,
-                  1,
-                  2,
-            2
+                  2
               ]
           },
           {
