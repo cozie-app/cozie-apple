@@ -33,7 +33,7 @@ I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) s
 
 5. Select Cozie as Target and press play button in XCode.
 
-For more information please visit the [official documentation website](https://cozie-apple.netlify.app/docs/)
+For more information please visit the [official documentation website](https://cozie-apple.app/docs/)
 
 ## Contribute
 
