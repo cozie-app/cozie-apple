@@ -1336,7 +1336,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1362,7 +1362,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1381,7 +1381,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1393,7 +1393,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1414,7 +1414,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1426,7 +1426,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1445,7 +1445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1453,7 +1453,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1468,7 +1468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -1477,7 +1477,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1588,7 +1588,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.OneSignalNotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1611,7 +1611,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cozie.ios.OneSignalNotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.orenth.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
