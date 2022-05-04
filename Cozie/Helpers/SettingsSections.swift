@@ -20,7 +20,7 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
     case GeneralSettings
     case Communications
     case ExperimentSettings
-    case OnboardingProcess
+    //case OnboardingProcess
     case About
 
     var description: String {
@@ -29,7 +29,7 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
         case .GeneralSettings: return "General Settings"
         case .Communications: return "Communications"
         case .ExperimentSettings: return "Experiment Settings"
-        case .OnboardingProcess: return "Onboarding Process"
+        //case .OnboardingProcess: return "Onboarding Process"
         case .About: return "About"
         }
     }
