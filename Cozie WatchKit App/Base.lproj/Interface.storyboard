@@ -39,15 +39,15 @@
                 <controller identifier="Thermal" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
                     <items>
                         <label width="136" alignment="center" text="Question" textAlignment="center" numberOfLines="0" id="uMg-er-eCg">
-                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
                         </label>
                         <table alignment="left" id="VSl-R8-QQf">
                             <items>
                                 <tableRow identifier="RowController" id="dkd-Gf-waU" customClass="RowController" customModule="Cozie_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="eiI-gO-VT7">
+                                    <group key="rootItem" width="1" height="44" alignment="left" id="eiI-gO-VT7">
                                         <items>
-                                            <label width="136" height="37" alignment="center" verticalAlignment="center" text="Options" textAlignment="center" id="hLf-jC-wtF">
-                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            <label width="136" height="100" alignment="center" verticalAlignment="center" text="Options" textAlignment="center" id="hLf-jC-wtF">
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
                                             </label>
                                         </items>
                                     </group>

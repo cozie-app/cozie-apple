@@ -8,12 +8,11 @@
 
 import UIKit
 import WatchConnectivity
-import ResearchKit
 import FirebaseAuth
 
 private let reuseIdentifier = "SettingsCell"
 
-class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
+class SettingsViewController: UIViewController{
     
     @IBOutlet weak var settingsTableView: UITableView!
 
@@ -66,11 +65,6 @@ class SettingsViewController: UIViewController, ORKTaskViewControllerDelegate {
         session = WCSession.default
         session?.delegate = self
         session?.activate()
-    }
-    
-    func taskViewController(_ taskViewController: ORKTaskViewController,
-                            didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        taskViewController.dismiss(animated: true, completion: nil)
     }
 
     private func signOut() {
@@ -132,7 +126,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .Communications: return CommunicationOptions.allCases.count - (false ? 1 : 0) // TODO: hide sendConsentForm button if the user has not yet completed consent form
         case .UserSettings: return UserSettingOptions.allCases.count
         case .ExperimentSettings: return ExperimentSettingOptions.allCases.count
-        case .OnboardingProcess: return OnboardingProcessOptions.allCases.count
         case .About: return AboutOptions.allCases.count
         }
     }
@@ -187,9 +180,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .ExperimentSettings:
             let experimentSettings = ExperimentSettingOptions(rawValue: indexPath.row)
             cell.sectionType = experimentSettings
-        case .OnboardingProcess:
-            let onboarding = OnboardingProcessOptions(rawValue: indexPath.row)
-            cell.sectionType = onboarding
         case .About:
             let about = AboutOptions(rawValue: indexPath.row)
             cell.sectionType = about
@@ -263,34 +253,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             case .downloadData: Utilities.downloadData(self)
             }
-        case .OnboardingProcess:
-            guard let buttonClicked = OnboardingProcessOptions(rawValue: indexPath.row) else {
-                return
-            }
-            switch buttonClicked {
-            case .eligibility:
-                let taskViewController = ORKTaskViewController(task: TaskEligibility, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-            case .consent:
-                let taskViewController = ORKTaskViewController(task: TaskConsent, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-            case .survey:
-                let taskViewController = ORKTaskViewController(task: TaskSurvey, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-            case .onboarding:
-                let taskViewController = ORKTaskViewController(task: TaskOnBoarding, taskRun: nil)
-                taskViewController.delegate = self
-                taskViewController.navigationBar.backgroundColor = .white
-                present(taskViewController, animated: true, completion: nil)
-                // fixme hide this button if the user has not yet completed consent form
-            case .emailConsent: sendConsentForm()
-            }
+        
         case .About:
             guard let buttonClicked = AboutOptions(rawValue: indexPath.row) else {
                 return
@@ -323,14 +286,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    private func sendConsentForm() {
-
-        let taskViewController = ORKTaskViewController(task: consentPDFViewerTask(), taskRun: nil)
-        taskViewController.delegate = self
-        taskViewController.navigationBar.backgroundColor = .white
-        present(taskViewController, animated: true, completion: nil)
-
-    }
 
     private func showAlert(title:String, message:String) {
         DispatchQueue.main.async {

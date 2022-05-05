@@ -20,7 +20,6 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
     case GeneralSettings
     case Communications
     case ExperimentSettings
-    case OnboardingProcess
     case About
 
     var description: String {
@@ -29,7 +28,6 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
         case .GeneralSettings: return "General Settings"
         case .Communications: return "Communications"
         case .ExperimentSettings: return "Experiment Settings"
-        case .OnboardingProcess: return "Onboarding Process"
         case .About: return "About"
         }
     }
@@ -155,37 +153,6 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
     }
 }
 
-// define the options in the OnboardingProcess menu
-enum OnboardingProcessOptions: Int, CaseIterable, SectionType {
-
-    case eligibility
-    case consent
-    case survey
-    case onboarding
-    case emailConsent
-
-    var imageView: Bool {
-        return false
-    }
-    var imageName: String {
-        return ""
-    }
-    var constrainsSwitch: Bool {
-        return false
-    }
-    var isSwitchEnable: Bool {
-        return false
-    }
-    var description: String {
-        switch self{
-        case .eligibility: return "Eligibility"
-        case .consent: return "Consent"
-        case .survey: return "Survey"
-        case .onboarding: return "On-boarding"
-        case .emailConsent: return "Email consent form"
-        }
-    }
-}
 
 // define the options in the About menu
 enum AboutOptions: Int, CaseIterable, SectionType {
