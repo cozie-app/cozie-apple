@@ -36,12 +36,12 @@
               ]
           },
           {
-              "title": "Would you like:",
+              "title": "Would you like the air movement to be:",
               "identifier": "nern-preference-air",
               "options": [
-                  "More air movement",
+                  "More",
                   "No change",
-                  "Less air movement"
+                  "Less"
               ],
               "icons": [
                   "circle",
