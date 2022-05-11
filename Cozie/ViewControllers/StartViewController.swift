@@ -8,7 +8,6 @@
 
 import UIKit
 import AVKit
-import FirebaseAuth
 
 class StartViewController: UIViewController {
 
@@ -48,32 +47,6 @@ class StartViewController: UIViewController {
 
         Utilities.stylePrimaryButton(signUpButton)
         Utilities.styleSecondaryButton(loginButton)
-
-    }
-
-    func setUpVideo() {
-
-        let bundlePathVideo = Bundle.main.path(forResource: "login-video", ofType: "mov")
-
-        guard bundlePathVideo != nil else {
-            return
-        }
-
-        let url = URL(fileURLWithPath: bundlePathVideo!)
-
-        let item = AVPlayerItem(url: url)
-
-        videoPlayer = AVPlayer(playerItem: item)
-
-        videoPlayerLayer = AVPlayerLayer(player: videoPlayer)
-
-        videoPlayerLayer?.frame = CGRect(x: -self.view.frame.size.width * 1.5,
-                y: 0,
-                width: self.view.frame.size.width * 4,
-                height: self.view.frame.size.height)
-        view.layer.insertSublayer(videoPlayerLayer!, at: 0)
-
-        videoPlayer?.playImmediately(atRate: 0.5)
 
     }
 
