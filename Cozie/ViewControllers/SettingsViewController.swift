@@ -17,10 +17,6 @@ class SettingsViewController: UIViewController {
 
     var session: WCSession?
 
-    // MARK: - Properties
-
-    var userInfoHeader: UserInfoHeader!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,11 +33,6 @@ class SettingsViewController: UIViewController {
 
         self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
         self.settingsTableView.setupPadding()
-        
-        let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
-        userInfoHeader = UserInfoHeader(frame: frame)
-        self.settingsTableView.tableHeaderView = userInfoHeader
-        self.settingsTableView.tableFooterView = UIView()
     }
 
     private func configureUI() {

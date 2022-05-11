@@ -57,7 +57,6 @@
 		E4256F96251C4E6F00CF32A4 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */; };
 		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
 		E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */; };
-		E43CAA8524C80F5500461DD1 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA8324C80F5400461DD1 /* UserInfoHeader.swift */; };
 		E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA8424C80F5500461DD1 /* SettingsCell.swift */; };
 		E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA9624CE805F00461DD1 /* ComplicationController.swift */; };
 		E469469724BC4D090013134B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E469469624BC4D090013134B /* StartViewController.swift */; };
@@ -69,7 +68,6 @@
 		E483824A247BA33A002C3708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838249247BA33A002C3708 /* SceneDelegate.swift */; };
 		E483824F247BA33A002C3708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E483824D247BA33A002C3708 /* Main.storyboard */; };
 		E4838251247BA33B002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838250247BA33B002C3708 /* Assets.xcassets */; };
-		E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4838252247BA33B002C3708 /* LaunchScreen.storyboard */; };
 		E483825F247BA33B002C3708 /* CozieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E483825E247BA33B002C3708 /* CozieTests.swift */; };
 		E483826A247BA33B002C3708 /* CozieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838269247BA33B002C3708 /* CozieUITests.swift */; };
 		E483826F247BA33B002C3708 /* Cozie WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E483826E247BA33B002C3708 /* Cozie WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -217,7 +215,6 @@
 		E437EF5E24C6F1A5008BC6FF /* Cozie WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie WatchKit App.entitlements"; sourceTree = "<group>"; };
 		E43882E124B44880007EBE4C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		E43CAA8324C80F5400461DD1 /* UserInfoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		E43CAA8424C80F5500461DD1 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		E43CAA9624CE805F00461DD1 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		E469469624BC4D090013134B /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +228,6 @@
 		E4838249247BA33A002C3708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E483824E247BA33A002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4838250247BA33B002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E4838253247BA33B002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4838255247BA33B002C3708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E483825A247BA33B002C3708 /* CozieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CozieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E483825E247BA33B002C3708 /* CozieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieTests.swift; sourceTree = "<group>"; };
@@ -383,7 +379,6 @@
 			children = (
 				E43882E124B44880007EBE4C /* CollectionViewCell.swift */,
 				E43CAA8424C80F5500461DD1 /* SettingsCell.swift */,
-				E43CAA8324C80F5400461DD1 /* UserInfoHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -458,7 +453,6 @@
 				E4838249247BA33A002C3708 /* SceneDelegate.swift */,
 				E483824D247BA33A002C3708 /* Main.storyboard */,
 				E4838250247BA33B002C3708 /* Assets.xcassets */,
-				E4838252247BA33B002C3708 /* LaunchScreen.storyboard */,
 				E46946A124BC5D3F0013134B /* GoogleService-Info.plist */,
 				E4838255247BA33B002C3708 /* Info.plist */,
 			);
@@ -719,7 +713,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4838254247BA33B002C3708 /* LaunchScreen.storyboard in Resources */,
 				0465B61B27719E990062228C /* QuestionCell.xib in Resources */,
 				046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */,
 				0465B60E27718F720062228C /* WeeklySurvey.xib in Resources */,
@@ -973,7 +966,6 @@
 				0465B61427719A910062228C /* WeeklySurvey.swift in Sources */,
 				29C2686B2786C6C500DC5C22 /* CoreDataManager.swift in Sources */,
 				E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */,
-				E43CAA8524C80F5500461DD1 /* UserInfoHeader.swift in Sources */,
 				E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */,
 				299604CF277B1734003A326E /* Constant.swift in Sources */,
 				049BCA8D2773075500481C95 /* DataViewController.swift in Sources */,
@@ -1066,14 +1058,6 @@
 				E483824E247BA33A002C3708 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E4838252247BA33B002C3708 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4838253247BA33B002C3708 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		E4838273247BA33B002C3708 /* Interface.storyboard */ = {

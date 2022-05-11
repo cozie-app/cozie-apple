@@ -26,28 +26,13 @@ class StartViewController: UIViewController {
 
     // I put the code in the View did appear otherwise it was not working in the viewDidLoad
     override func viewDidAppear(_ animated: Bool) {
-        
-        // Check if the user has already logged in.
-//        if Auth.auth().currentUser == nil {
-//
-//            setUpVideo()
-//            styleButtons()
-//
-//        } else {
-            let homeViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.homeViewController)
-            view.window?.rootViewController = homeViewController
-            view.window?.makeKeyAndVisible()
-//        }
+
+        let homeViewController = storyboard?.instantiateViewController(identifier: ViewControllersNames.Storyboard.homeViewController)
+        view.window?.rootViewController = homeViewController
+        view.window?.makeKeyAndVisible()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-    }
-
-    func styleButtons() {
-
-        Utilities.stylePrimaryButton(signUpButton)
-        Utilities.styleSecondaryButton(loginButton)
-
     }
 
 }
