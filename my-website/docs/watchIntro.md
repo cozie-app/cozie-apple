@@ -1,7 +1,7 @@
 ---
 id: watchIntro
 title: Watch OS App Intro
-sidebar_label: Watch OS - Into
+sidebar_label: Watch OS - Intro
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
