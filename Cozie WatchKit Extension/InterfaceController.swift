@@ -462,7 +462,7 @@ extension InterfaceController {
 
 extension InterfaceController {
     private func read(type: QuestionFlow) {
-        if let data = self.readLocalFile(forName: "file") {
+        if let data = self.readLocalFile(forName: "question_flows") {
             do {
                 var data = try JSONDecoder().decode(QuestionResponse.self, from: data)
                 switch type {
