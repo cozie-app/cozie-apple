@@ -7,32 +7,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19514"/>
     </dependencies>
     <scenes>
-        <!--WelcomeInterfaceController-->
-        <scene sceneID="lnd-JY-5EA">
-            <objects>
-                <controller identifier="WelcomeInterfaceController" id="Kw1-Hw-DLn" customClass="WelcomeInterfaceController" customModule="Cozie_WatchKit_App" customModuleProvider="target">
-                    <items>
-                        <label width="1" alignment="left" text="Cozie" textAlignment="center" id="QVo-dZ-C4z"/>
-                        <group width="1" alignment="left" layout="vertical" id="LiO-Mo-JaD">
-                            <items>
-                                <button width="1" alignment="left" title="Thermal" id="cNS-m2-1ZR">
-                                    <connections>
-                                        <action selector="onClickThermal" destination="Kw1-Hw-DLn" id="RIG-D1-DfV"/>
-                                    </connections>
-                                </button>
-                                <button width="1" alignment="left" title="Other" id="kNa-0B-fsr">
-                                    <connections>
-                                        <action selector="onClickOther" destination="Kw1-Hw-DLn" id="qJP-Ls-ryh"/>
-                                    </connections>
-                                </button>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="6" bottom="0.0"/>
-                        </group>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="-25" y="345"/>
-        </scene>
         <!--Thermal-->
         <scene sceneID="aou-V4-d1y">
             <objects>
@@ -134,7 +108,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="797" y="643"/>
+            <point key="canvasLocation" x="-168" y="345"/>
         </scene>
     </scenes>
 </document>

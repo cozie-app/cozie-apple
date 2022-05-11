@@ -152,7 +152,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 //get weight
                 self.healthStore.bodyMassKg(completion: { (mass, bodyMassDate) in
                     if mass != nil {
-//                        print("bodyMass: \(mass)   date: \(bodyMassDate)")
                         self.bodyMass = mass!
                     }
                 })
@@ -166,7 +165,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 //get HR
                 self.healthStore.queryHeartRate(completion: { (heartRate) in
                     if heartRate != nil {
-//                        print("bodyMass: \(heartRate)")
                         self.tmpHearthRate = heartRate!
                     }
                 })
