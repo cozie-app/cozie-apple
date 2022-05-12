@@ -24,6 +24,7 @@ struct Answer: Codable {
     let startTimestamp: String
     let endTimestamp: String
     let heartRate: [String: Int]
+    let noiseWatch: [String: Int]
     let participantID: String
     let deviceUUID: String
     let locationTimestamp: String
@@ -271,7 +272,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 qa.append(QuestionAnswer(voteLog: voteLog, question: question, answer: answer))
             }
             CoreDataManager.shared.createSurvey(surveys: [SurveyDetails(voteLog: voteLog, locationTimestamp: locationTimestamp, startTimestamp: startTime, endTimestamp: endTime, participantID: participantID, deviceUUID: uuid, latitude: lat, longitude: long, bodyMass: bodyMass, responses: qa, heartRate: 1, isSync: false)])
-            SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate,
+            SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate, noiseWatch: audioExposure,
                     participantID: participantID, deviceUUID: uuid,
                     locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses,
                     voteLog: voteLog, bodyMass: bodyMass))

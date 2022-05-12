@@ -75,7 +75,7 @@ class HealthStore {
 
                     // date when the HR was sampled
                     let sampledDate = FormatDateISOString(date: sample.startDate)
-                    tmpNoise[sampledDate] = Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min")))
+                    tmpNoise[sampledDate] = Int(sample.quantity.doubleValue(for: HKUnit(from: "dBASPL")))
                 }
 
                 completion(tmpNoise)
