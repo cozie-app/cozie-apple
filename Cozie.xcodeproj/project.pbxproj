@@ -20,12 +20,12 @@
 		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
 		049BCA8D2773075500481C95 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C2773075500481C95 /* DataViewController.swift */; };
 		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
+		1C491022D63C0CA5B15EB214 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163FDF42B00199E54702 /* SharedFunctions.swift */; };
 		1C491222D118D576114E5619 /* QuestionFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49103482D37F76A9CDB070 /* QuestionFlows.swift */; };
 		1C49134A427E4EC80D5907E8 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491B91F3532D760A3649CB /* QuestionFlow.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
-		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
-		1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
 		1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */; };
+		1C491B3550D9FA5FCBF53FAB /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163FDF42B00199E54702 /* SharedFunctions.swift */; };
 		1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */; };
 		225505435BC966E4AEDF2799 /* Pods_Cozie_CozieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3453AB1591C9514FAB3D5F0 /* Pods_Cozie_CozieUITests.framework */; };
 		269A1B12C72080077E2CC424 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209BB7BEF91765C76FF708C /* Pods_OneSignalNotificationServiceExtension.framework */; };
@@ -173,9 +173,9 @@
 		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		049BCA8C2773075500481C95 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C49103482D37F76A9CDB070 /* QuestionFlows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFlows.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
+		1C49163FDF42B00199E54702 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		1C491A478BD7051B28E220BD /* CNAME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CNAME; path = "my-website/static/CNAME"; sourceTree = "<group>"; };
 		1C491B91F3532D760A3649CB /* QuestionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
 		1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
@@ -400,7 +400,6 @@
 			children = (
 				29C268612786C12300DC5C22 /* LocalStorage */,
 				29E7F943276DEDF2008B0E8D /* Health */,
-				1C49101156379B67038DB031 /* SharedFunctions.swift */,
 				E469469D24BC54EC0013134B /* Utilities.swift */,
 				6923254C27A5050600DBE6C5 /* NotificationHelper.swift */,
 				1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */,
@@ -410,6 +409,7 @@
 				29B824A4276CBAD600BB002D /* NavigationManager.swift */,
 				299604CE277B1734003A326E /* Constant.swift */,
 				1C49103482D37F76A9CDB070 /* QuestionFlows.swift */,
+				1C49163FDF42B00199E54702 /* SharedFunctions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -955,7 +955,6 @@
 				29CCF1BE276C93CB00AA3E32 /* DailyParticipation.swift in Sources */,
 				0465B61A27719E990062228C /* QuestionCell.swift in Sources */,
 				29CCF172276B10D700AA3E32 /* UserDefaults.swift in Sources */,
-				1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */,
 				04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */,
 				29048F2F27797D190086DCC5 /* BasePopupVC.swift in Sources */,
 				29C268662786C17E00DC5C22 /* PersistentStorage.swift in Sources */,
@@ -978,6 +977,7 @@
 				1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */,
 				1C491222D118D576114E5619 /* QuestionFlows.swift in Sources */,
 				1C49134A427E4EC80D5907E8 /* QuestionFlow.swift in Sources */,
+				1C491022D63C0CA5B15EB214 /* SharedFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,10 +1008,10 @@
 				E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */,
 				E43B70ED282CA1EF0030873B /* QuestionFlows.swift in Sources */,
 				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
-				1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */,
 				E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */,
 				E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */,
 				294A9A8F2786EBEC003416BA /* CoreDataManager.swift in Sources */,
+				1C491B3550D9FA5FCBF53FAB /* SharedFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

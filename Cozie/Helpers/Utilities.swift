@@ -110,12 +110,12 @@ class Utilities {
     static func getData(isForDownload: Bool = false, completion: @escaping (Bool, [Response]) -> Void) {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
-        
-        let headers = ["x-api-key":"k6iy7nxkBn9hTvScq2vHV8qhXMLl95oA2zlNdA8h",
+
+        let headers = ["x-api-key":"5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd",   // Singpore API key
                        "Accept":"application/json",
                        "Content-Type":"application/json"]
         
-        let req = Alamofire.request("https://0iecjae656.execute-api.us-east-1.amazonaws.com/default/CozieApple_Read_Influx", method: .get, parameters: param, headers: headers).responseJSON { (response) in
+        let req = Alamofire.request("https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-app-read-influx", method: .get, parameters: param, headers: headers).responseJSON { (response) in
             if let responseCode = response.response?.statusCode {
                 if responseCode == 200 {
                     if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? NSDictionary {
@@ -152,7 +152,7 @@ class Utilities {
     
     static func sendHealthData(data: [String:String]) {
         do {
-            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: data, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
+            let postMessage = try JSONEncoder().encode(FormatAPI(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: data, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
             PostRequest(message: postMessage)
         } catch let error {
             print(error.localizedDescription)
@@ -306,7 +306,7 @@ enum healthType {
 //    case ts_appleWalkingSteadiness
 }
 
-struct APIFormate: Codable {
+struct FormatAPI: Codable {
     let locationTimestamp: String
     let startTimestamp: String
     let endTimestamp: String

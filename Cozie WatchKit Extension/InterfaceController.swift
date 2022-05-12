@@ -100,7 +100,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         session.sendMessage(message) { message in
             print("sent[\(message.values)]")
         } errorHandler: { err in
-            print(err)
+            print("error: \(err)")
         }
     }
 
@@ -266,8 +266,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         self.questions.removeAll()
         
         print(userDefaults.object(forKey: "questions") as? Int ?? 0)
-        print(questionFlows)
-        
+
         self.questions = questionFlows[userDefaults.object(forKey: "questions") as? Int ?? 0].questions
 
         self.questions += [Question(title: "Thank you.", identifier: "end", options: ["Submit survey"],
@@ -304,7 +303,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                     indexMessagesToDelete.append(index)
                 }
             } catch let error {
-                print(error.localizedDescription)
+                print("error IC: \(error.localizedDescription)")
             }
         }
 

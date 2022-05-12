@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocalNotificationManager.shared.registerForPushNotifications()
         HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
             if let error = error {
-                print(error.localizedDescription)
+                print("error app delegate: \(error.localizedDescription)")
             }
             DispatchQueue.main.async {
                 self.setUpBackgroundDeliveryForDataTypes()

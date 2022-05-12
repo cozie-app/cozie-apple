@@ -64,10 +64,10 @@ extension UserDefaults {
     func setValue(for key: String, value: Any) {
         setValue(value, forKey: key)
         do {
-            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: self.getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["settings_participation_Days": "\(self.getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])", "settings_notification_frequency": "\(self.getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ", "settings_from_time": "\(self.getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"], deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
+            let postMessage = try JSONEncoder().encode(FormatAPI(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: self.getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["settings_participation_Days": "\(self.getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])", "settings_notification_frequency": "\(self.getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ", "settings_from_time": "\(self.getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"], deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
             PostRequest(message: postMessage)
         } catch let error {
-            print(error.localizedDescription)
+            print("error UD: \(error.localizedDescription)")
         }
         synchronize()
     }

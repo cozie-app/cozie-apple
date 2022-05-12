@@ -43,7 +43,6 @@ class HealthStore {
         let query = HKSampleQuery(sampleType: bodyMassType, predicate: nil, limit: 1,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
             if let result = results?.first as? HKQuantitySample {
-//                print(result)
                 let bodyMassKg = result.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
                 completion(bodyMassKg, result.endDate)
                 return
@@ -61,7 +60,6 @@ class HealthStore {
         let query = HKSampleQuery(sampleType: basalEnergyType, predicate: nil, limit: 1,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
             if let result = results?.first as? HKQuantitySample {
-//                print(result)
                 let energy = result.quantity.doubleValue(for: HKUnit.init(from: .kilocalorie))
 //                let energy = result.quantity.doubleValue(for: HKUnit.(from: HKUnit.kilocalorie()))
                 completion(energy, result.endDate)

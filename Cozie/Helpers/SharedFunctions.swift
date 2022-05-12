@@ -18,12 +18,6 @@ public func FormatDateISOString(date: Date) -> String {
     return formatter.string(from: date)
 }
 
-public func FormateISOStringDate(ISO: String) -> Date? {
-    let formatter = ISO8601DateFormatter()
-    formatter.formatOptions.insert(.withFractionalSeconds)
-    return formatter.date(from: ISO)
-}
-
 // get document directory
 public func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -33,8 +27,7 @@ public func getDocumentsDirectory() -> URL {
 // send data via a POST request, the function it is synchronous
 public func PostRequest(message: Data) -> Int {
     // create the url with URL
-//        let url = URL(string: "https://qepkde7ul7.execute-api.us-east-1.amazonaws.com/default/CozieApple-to-influx")! //change the url
-    let url = URL(string: "http://ec2-52-76-31-138.ap-southeast-1.compute.amazonaws.com:1880/cozie-apple")! //change the url
+    let url = URL(string: "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-app-write-influx")! // Singapore Lambda API
 
     // create the session object
     let session = URLSession.shared
@@ -45,7 +38,7 @@ public func PostRequest(message: Data) -> Int {
 
     request.httpBody = message
 
-//        request.setValue("3lvUimwWTv3UlSjSct0RS3yxQWIKFG0G7bcWtM10", forHTTPHeaderField: "x-api-key")
+    request.setValue("5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd", forHTTPHeaderField: "x-api-key")
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
 
@@ -74,15 +67,15 @@ public func PostRequest(message: Data) -> Int {
             responseStatusCode = statusCode
         }
 
-        do {
-            //create json object from data
-            if (try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) != nil {
-                // print(json)
-                // handle json...
-            }
-        } catch let error {
-            print(error.localizedDescription)
-        }
+//        do {
+//            //create json object from data
+//            if (try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) != nil {
+//                // print(json)
+//                // handle json...
+//            }
+//        } catch let error {
+//            print("error SF: \(error.localizedDescription)")
+//        }
     })
 
     // run the async POST request
