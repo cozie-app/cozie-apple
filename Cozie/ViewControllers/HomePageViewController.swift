@@ -15,18 +15,11 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var viewNotificationFreq: UIView!
     @IBOutlet weak var viewParticipationDays: UIView!
     @IBOutlet weak var viewParticipationHours: UIView!
-    @IBOutlet weak var viewQuestionnairs: UIView!
+    @IBOutlet weak var viewQuestionnaires: UIView!
     
-    @IBOutlet weak var labelThermal: UILabel!
-    @IBOutlet weak var labelIDRP: UILabel!
-    @IBOutlet weak var labelPDP: UILabel!
-    @IBOutlet weak var labelMF: UILabel!
-    @IBOutlet weak var labelThermalMINI: UILabel!
-    @IBOutlet weak var labelIDRPMINI: UILabel!
-    @IBOutlet weak var labelPDPMINI: UILabel!
-    @IBOutlet weak var labelMFMINI: UILabel!
+    @IBOutlet weak var labelFlow: UILabel!
     
-    @IBOutlet weak var lableExperimentId: UILabel!
+    @IBOutlet weak var labelExperimentID: UILabel!
     @IBOutlet weak var labelParticipantID: UILabel!
     @IBOutlet weak var labelNotificationFreq: UILabel!
     @IBOutlet weak var labelParticipationDays: UILabel!
@@ -35,7 +28,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var appIconImg: UIImageView!
     @IBOutlet weak var reminder: UIImageView!
     
-    var questionFlag:[Bool] = []
+    var selectedQuestionFlow:Int = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0
     var labelArray:[UILabel] = []
     var daysFlag:[Bool] = []
     var days:String = ""
@@ -45,30 +38,46 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // define question flows
+        defineQuestionFlows()
+
         // set defaults
         let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? defaultExperimentID
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? defaultParticipantID
-        let questionFlow = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [true,false,false,false,false,false,false,false]
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: experimentID)
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: participantID)
-        // improvement we should not pass an array
-        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.questions.rawValue, value: questionFlow)
 
         appIconImg.image = UIImage(named: "AppIcon")
-        viewID.layer.borderColor = UIColor.lightGray.cgColor
-        viewID.layer.borderWidth = 1
-        
-        viewNotificationFreq.layer.borderColor = UIColor.lightGray.cgColor
-        viewNotificationFreq.layer.borderWidth = 1
-        
-        viewParticipationDays.layer.borderColor = UIColor.lightGray.cgColor
-        viewParticipationDays.layer.borderWidth = 1
-        
-        viewParticipationHours.layer.borderColor = UIColor.lightGray.cgColor
-        viewParticipationHours.layer.borderWidth = 1
-        
-        viewQuestionnairs.layer.borderColor = UIColor.lightGray.cgColor
-        viewQuestionnairs.layer.borderWidth = 1
+
+        viewID.layer.cornerRadius = 5
+        viewID.layer.shadowColor = UIColor.lightGray.cgColor
+        viewID.layer.shadowOpacity = 0.6
+        viewID.layer.shadowOffset = .zero
+        viewID.layer.shadowRadius = 5
+
+        viewParticipationDays.layer.cornerRadius = 5
+        viewParticipationDays.layer.shadowColor = UIColor.lightGray.cgColor
+        viewParticipationDays.layer.shadowOpacity = 0.6
+        viewParticipationDays.layer.shadowOffset = .zero
+        viewParticipationDays.layer.shadowRadius = 5
+
+        viewNotificationFreq.layer.cornerRadius = 5
+        viewNotificationFreq.layer.shadowColor = UIColor.lightGray.cgColor
+        viewNotificationFreq.layer.shadowOpacity = 0.6
+        viewNotificationFreq.layer.shadowOffset = .zero
+        viewNotificationFreq.layer.shadowRadius = 5
+
+        viewParticipationHours.layer.cornerRadius = 5
+        viewParticipationHours.layer.shadowColor = UIColor.lightGray.cgColor
+        viewParticipationHours.layer.shadowOpacity = 0.6
+        viewParticipationHours.layer.shadowOffset = .zero
+        viewParticipationHours.layer.shadowRadius = 5
+
+        viewQuestionnaires.layer.cornerRadius = 5
+        viewQuestionnaires.layer.shadowColor = UIColor.lightGray.cgColor
+        viewQuestionnaires.layer.shadowOpacity = 0.6
+        viewQuestionnaires.layer.shadowOffset = .zero
+        viewQuestionnaires.layer.shadowRadius = 5
         
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         self.reminder.addGestureRecognizer(imageTap)
@@ -115,25 +124,12 @@ class HomePageViewController: UIViewController {
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String
 
         self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
-        self.lableExperimentId.text = experimentID
+        self.labelExperimentID.text = experimentID
         self.labelParticipantID.text = participantID
         
         self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
         
-        self.questionFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]
-        self.labelArray = [labelThermal, labelIDRP, labelPDP, labelMF, labelThermalMINI, labelIDRPMINI, labelPDPMINI, labelMFMINI]
-        
-        var count = 1
-        for i in 0...7{
-            switch questionFlag[i] {
-            case true:
-                self.labelArray[i].text = "\(count). " + (self.labelArray[i].text?.components(separatedBy: ".").last ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-                self.labelArray[i].isHidden = false
-                count += 1
-            case false:
-                self.labelArray[i].isHidden = true
-            }
-        }
+        self.labelFlow.text = questionFlows[UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0].title
         
         self.daysFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,false,false]
         self.days = ""
@@ -154,8 +150,8 @@ class HomePageViewController: UIViewController {
         
         self.labelParticipationDays.text = String(days.dropLast(2))
         
-        self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormateTimeString() + "hrs"
-        self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormateTimeString() + "hrs"
+        self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormatTimeString() + "hrs"
+        self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormatTimeString() + "hrs"
         self.labelParticipationHours.text = self.fromTime + " - " + self.ToTime
     }
 }

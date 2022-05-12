@@ -19,7 +19,7 @@ extension UserDefaults {
         case FromTime
         case ToTime
         case NotificationEnable
-        case questions
+        case selectedQuestionFlow
         case permissions
         case participantID
         case experimentID

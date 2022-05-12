@@ -18,9 +18,10 @@
 		046BD74A276C46BD0011A883 /* QuestionFlow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD749276C46BD0011A883 /* QuestionFlow.xib */; };
 		046BD756276C6C860011A883 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD755276C6C860011A883 /* Permissions.swift */; };
 		046BD75B276C6D5C0011A883 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75A276C6D5C0011A883 /* TextView.swift */; };
-		046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD75C276C6D8E0011A883 /* QuestionFlow.swift */; };
 		049BCA8D2773075500481C95 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C2773075500481C95 /* DataViewController.swift */; };
 		04B14C95277045C800A4B989 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B14C94277045C800A4B989 /* HomePageViewController.swift */; };
+		1C491222D118D576114E5619 /* QuestionFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49103482D37F76A9CDB070 /* QuestionFlows.swift */; };
+		1C49134A427E4EC80D5907E8 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491B91F3532D760A3649CB /* QuestionFlow.swift */; };
 		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C491536D8EFD1737413DCE1 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
 		1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49101156379B67038DB031 /* SharedFunctions.swift */; };
@@ -55,6 +56,7 @@
 		E4256F90251C4E6D00CF32A4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E3088A24B6F7840029FC0C /* HealthKit.framework */; };
 		E4256F96251C4E6F00CF32A4 /* Pods_Cozie_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D13B295106D8AE1F96907F3 /* Pods_Cozie_WatchKit_Extension.framework */; };
 		E43882E224B44880007EBE4C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43882E124B44880007EBE4C /* CollectionViewCell.swift */; };
+		E43B70ED282CA1EF0030873B /* QuestionFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49103482D37F76A9CDB070 /* QuestionFlows.swift */; };
 		E43CAA7C24C80DE600461DD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA7B24C80DE600461DD1 /* SettingsViewController.swift */; };
 		E43CAA8624C80F5500461DD1 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA8424C80F5500461DD1 /* SettingsCell.swift */; };
 		E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CAA9624CE805F00461DD1 /* ComplicationController.swift */; };
@@ -169,12 +171,13 @@
 		046BD749276C46BD0011A883 /* QuestionFlow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionFlow.xib; sourceTree = "<group>"; };
 		046BD755276C6C860011A883 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		046BD75A276C6D5C0011A883 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		046BD75C276C6D8E0011A883 /* QuestionFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
 		049BCA8C2773075500481C95 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		04B14C94277045C800A4B989 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1C49101156379B67038DB031 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
+		1C49103482D37F76A9CDB070 /* QuestionFlows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFlows.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
 		1C491A478BD7051B28E220BD /* CNAME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CNAME; path = "my-website/static/CNAME"; sourceTree = "<group>"; };
+		1C491B91F3532D760A3649CB /* QuestionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
 		1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
 		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		23683DAA0C5C23122C666635 /* Pods-Cozie WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie WatchKit App/Pods-Cozie WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -315,8 +318,6 @@
 				0444BB13276B56D700D7F0E9 /* Permissions.xib */,
 				046BD75A276C6D5C0011A883 /* TextView.swift */,
 				0444BB15276B6AD800D7F0E9 /* TextView.xib */,
-				046BD75C276C6D8E0011A883 /* QuestionFlow.swift */,
-				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
 				29CCF1B0276C6F0700AA3E32 /* ParticipationDays.swift */,
 				29CCF1B1276C6F0700AA3E32 /* ParticipationDays.xib */,
 				29CCF1B5276C91BB00AA3E32 /* ReminderFrequency.swift */,
@@ -330,6 +331,8 @@
 				0465B61827719E990062228C /* QuestionCell.swift */,
 				0465B61927719E990062228C /* QuestionCell.xib */,
 				29048F2E27797D190086DCC5 /* BasePopupVC.swift */,
+				1C491B91F3532D760A3649CB /* QuestionFlow.swift */,
+				046BD749276C46BD0011A883 /* QuestionFlow.xib */,
 			);
 			path = PopUps;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				29B8249F276CA5AA00BB002D /* Extension.swift */,
 				29B824A4276CBAD600BB002D /* NavigationManager.swift */,
 				299604CE277B1734003A326E /* Constant.swift */,
+				1C49103482D37F76A9CDB070 /* QuestionFlows.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -970,9 +974,10 @@
 				0465B628277216480062228C /* Reminder.swift in Sources */,
 				29B824A0276CA5AA00BB002D /* Extension.swift in Sources */,
 				046BD75B276C6D5C0011A883 /* TextView.swift in Sources */,
-				046BD75D276C6D8E0011A883 /* QuestionFlow.swift in Sources */,
 				046BD756276C6C860011A883 /* Permissions.swift in Sources */,
 				1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */,
+				1C491222D118D576114E5619 /* QuestionFlows.swift in Sources */,
+				1C49134A427E4EC80D5907E8 /* QuestionFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1006,7 @@
 				294A9A8A2786EBE1003416BA /* PersistentStorage.swift in Sources */,
 				294A9A8E2786EBE8003416BA /* Cozie.xcdatamodeld in Sources */,
 				E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */,
+				E43B70ED282CA1EF0030873B /* QuestionFlows.swift in Sources */,
 				E4838283247BA33C002C3708 /* InterfaceController.swift in Sources */,
 				1C49164879AE8D85F345B747 /* SharedFunctions.swift in Sources */,
 				E43CAA9724CE805F00461DD1 /* ComplicationController.swift in Sources */,

@@ -19,15 +19,6 @@ struct QuestionResponse: Codable {
     var InfectionRisk: [Question]
 }
 
-// structure which is used to store the questions prompted to the user
-struct Question: Codable {
-    let title: String
-    let options: Array<String>
-    let icons: Array<String>
-    var nextQuestion: Array<Int>
-    let identifier: String
-}
-
 // temp dictionary to store the answers
 struct Answer: Codable {
     let startTimestamp: String
@@ -48,7 +39,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     // code related to the watch connectivity with the phone
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
-
+    
     let session = WCSession.default
     let userDefaults = UserDefaults.standard
     let healthStore = HealthStore()
@@ -61,7 +52,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
     @IBOutlet var tableView: WKInterfaceTable!
-    
+
     // initialize variables
     var questions = [Question]()
     var answers = [Answer]()  // it stores the answer after user as completed Cozie
@@ -81,6 +72,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+
+        defineQuestionFlows()
 
         // save on first startup the UUID in user defaults so it does not change
         uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
@@ -117,7 +110,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             participantID = id
             userDefaults.set(id, forKey: "participantID")
         }
-        if let question = message["questions"] as? [Bool] {
+        if let question = message["questions"] as? Int {
             userDefaults.set(question, forKey: "questions")
             defineQuestions()
         }
@@ -125,7 +118,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        if let question = message["questions"] as? [Bool] {
+        if let question = message["questions"] as? Int {
             userDefaults.set(question, forKey: "questions")
             defineQuestions()
         }
@@ -271,37 +264,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
     private func defineQuestions() {
         self.questions.removeAll()
-        let questions = userDefaults.object(forKey: "questions") as? [Bool] ?? [false,false,false,false,false,false,false,false]
-        var questionsFlow = [QuestionFlow]()
-        var question = [Int]()
-        for (index,value) in questions.enumerated() {
-            if value == true {
-                question.append(index)
-            }
-        }
-        question.forEach {
-            switch $0 {
-            case 0:
-                questionsFlow.append(.Thermal)
-            case 1:
-                questionsFlow.append(.IDRP)
-            case 2:
-                questionsFlow.append(.PDP)
-            case 3:
-                questionsFlow.append(.MF)
-            case 4:
-                questionsFlow.append(.ThermalMini)
-            case 5:
-                questionsFlow.append(.IDRPMini)
-            case 6:
-                questionsFlow.append(.PDPMini)
-            case 7:
-                questionsFlow.append(.MFMini)
-            default:
-                break
-            }
-        }
-        self.addQuestions(ofType: questionsFlow)
+        
+        print(userDefaults.object(forKey: "questions") as? Int ?? 0)
+        print(questionFlows)
+        
+        self.questions = questionFlows[userDefaults.object(forKey: "questions") as? Int ?? 0].questions
+
+        self.questions += [Question(title: "Thank you.", identifier: "end", options: ["Submit survey"],
+                icons: ["submit"], nextQuestion: [999])]
+        loadTableData(question: &questions[0], backPressed: false)
     }
 
     private func SendDataDatabase(answer: Answer) {
@@ -390,115 +361,4 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         loadTableData(question: &questions[currentQuestion], backPressed: false)
     }
 
-}
-
-extension InterfaceController {
-    enum QuestionFlow {
-        case Thermal
-        case IDRP
-        case PDP
-        case MF
-        case ThermalMini
-        case IDRPMini
-        case PDPMini
-        case MFMini
-    }
-    
-    private func addQuestions(ofType flows: [QuestionFlow]) {
-        flows.forEach { flow in
-            switch flow {
-            case .Thermal: self.thermalQuestion()
-            case .IDRP: self.IDRPQuestion()
-            case .PDP: self.PDPQuestion()
-            case .MF: self.MFQuestion()
-            case .ThermalMini: self.thermalMiniQuestion()
-            case .IDRPMini: self.IDRPMiniQuestion()
-            case .PDPMini: self.PDPMiniQuestion()
-            case .MFMini: self.MFMiniQuestion()
-            }
-        }
-        self.lastQuestion()
-    }
-    
-    private func thermalQuestion() {
-        self.read(type: .Thermal)
-    }
-    
-    private func IDRPQuestion() {
-        self.read(type: .IDRP)
-    }
-    
-    private func PDPQuestion() {
-        self.read(type: .PDP)
-    }
-    
-    private func MFQuestion() {
-        self.read(type: .MF)
-    }
-    
-    private func thermalMiniQuestion() {
-        self.read(type: .ThermalMini)
-    }
-    
-    private func IDRPMiniQuestion() {
-        self.read(type: .IDRPMini)
-    }
-    
-    private func PDPMiniQuestion() {
-        self.read(type: .PDPMini)
-    }
-    
-    private func MFMiniQuestion() {
-        self.read(type: .MFMini)
-    }
-    
-    private func lastQuestion() {
-        // Last question MUST have nextQuestion set to 999, the first question is question 0
-        self.questions += [Question(title: "Thank you.", options: ["Submit survey"],
-                                   icons: ["submit"], nextQuestion: [999], identifier: "end")]
-        loadTableData(question: &questions[0], backPressed: false)
-    }
-}
-
-extension InterfaceController {
-    private func read(type: QuestionFlow) {
-        if let data = self.readLocalFile(forName: "question_flows") {
-            do {
-                var data = try JSONDecoder().decode(QuestionResponse.self, from: data)
-                switch type {
-                case .Thermal: self.add(questions: &data.Thermal)
-                case .IDRP: break
-                case .PDP: self.add(questions: &data.Privacy)
-                case .MF: self.add(questions: &data.Movement)
-                case .ThermalMini: break
-                case .IDRPMini: self.add(questions: &data.InfectionRisk)
-                case .PDPMini: break
-                case .MFMini: break
-                }
-            } catch (let error) {
-                print(error)
-            }
-        }
-    }
-    
-    private func add(questions: inout [Question]) {
-        let index = self.questions.count
-        for (i, question) in questions.enumerated() {
-            questions[i].nextQuestion = question.nextQuestion.map{$0}.map{$0+index}
-        }
-        self.questions += questions
-    }
-    
-    private func readLocalFile(forName name: String) -> Data? {
-        do {
-            if let bundlePath = Bundle.main.path(forResource: name,
-                                                 ofType: "json"),
-                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-                return jsonData
-            }
-        } catch {
-            print(error)
-        }
-        return nil
-    }
 }

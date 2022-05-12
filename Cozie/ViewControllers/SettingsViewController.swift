@@ -60,8 +60,9 @@ class SettingsViewController: UIViewController {
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
         session?.activate()
+
         if self.session?.isReachable == true {
-            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
+            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0], replyHandler: nil) { error in
                 print(error.localizedDescription)
                 self.showAlert(title: "Sync failed", message: error.localizedDescription)
             }
