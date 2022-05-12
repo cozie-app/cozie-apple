@@ -79,6 +79,7 @@
 		E4838285247BA33C002C3708 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838284247BA33C002C3708 /* ExtensionDelegate.swift */; };
 		E4838287247BA33C002C3708 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4838286247BA33C002C3708 /* NotificationController.swift */; };
 		E4838289247BA33C002C3708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4838288247BA33C002C3708 /* Assets.xcassets */; };
+		E4AA1D19282D160D00274436 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299604CE277B1734003A326E /* Constant.swift */; };
 		E4BCBEAB247E0AE100A5BE43 /* RowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCBEAA247E0AE100A5BE43 /* RowController.swift */; };
 		E4C5D9D4249CA4B500228A15 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5D9D3249CA4B500228A15 /* NotificationService.swift */; };
 		E4C5D9D8249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E4C5D9D1249CA4B500228A15 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1012,6 +1013,7 @@
 				E474676F24DBA49200D1F7AC /* HealthStore.swift in Sources */,
 				294A9A8F2786EBEC003416BA /* CoreDataManager.swift in Sources */,
 				1C491B3550D9FA5FCBF53FAB /* SharedFunctions.swift in Sources */,
+				E4AA1D19282D160D00274436 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,9 +42,6 @@ class HealthStore {
     //returns an array of noise levels
     func noiseExposure(completion: @escaping (_ audioExposure: [String: Int]?) -> Void) {
 
-        // We want data points from our current device
-        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
-
         var tmpNoise: [String: Int] = [:]
 
         let query: HKSampleQuery = HKSampleQuery(sampleType: noise, predicate: nil, limit: 30,

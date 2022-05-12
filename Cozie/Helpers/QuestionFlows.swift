@@ -23,7 +23,8 @@ var questionFlows = [Flow]()
 func defineQuestionFlows() {
 
     questionFlows = [
-        Flow(title:"Thermal", questions: [Question(
+        Flow(title: "Thermal", questions: [
+            Question(
                 title: "How would you prefer to be?",
                 identifier: "tc-preference",
                 options: [
@@ -198,523 +199,522 @@ func defineQuestionFlows() {
                     ]
             )
         ]),
-        Flow(title:"Movement", questions: [
+        Flow(title: "Movement", questions: [
             Question(
-                title: "In the past 60min, I used",
-                identifier: "last-60min",
-                options: [
-                "Lift",
-                "Stairs",
-                "Both",
-                "Neither"
-            ],
-                icons: [
-                "elevator",
-                "stairs",
-                "both",
-                "neither"
-            ],
-                nextQuestion: [
-                1,
-                2,
-                9,
-                5
-            ]
+                    title: "In the past 60min, I used",
+                    identifier: "last-60min",
+                    options: [
+                        "Lift",
+                        "Stairs",
+                        "Both",
+                        "Neither"
+                    ],
+                    icons: [
+                        "elevator",
+                        "stairs",
+                        "both",
+                        "neither"
+                    ],
+                    nextQuestion: [
+                        1,
+                        2,
+                        9,
+                        5
+                    ]
             ),
             Question(
-                title: "Took lift, why?",
-                identifier: "lift-why",
-                options: [
-                "Convenient",
-                "Less effort",
-                "No stairs"
-            ],
-                icons: [
-                "convenience",
-                "less-effort",
-                "nostairs"
-            ],
-                nextQuestion: [
-                3,
-                5,
-                5
-            ]
+                    title: "Took lift, why?",
+                    identifier: "lift-why",
+                    options: [
+                        "Convenient",
+                        "Less effort",
+                        "No stairs"
+                    ],
+                    icons: [
+                        "convenience",
+                        "less-effort",
+                        "nostairs"
+                    ],
+                    nextQuestion: [
+                        3,
+                        5,
+                        5
+                    ]
             ),
             Question(
-                title: "Took stairs, why?",
-                identifier: "stairs-why",
-                options: [
-                "Convenient",
-                "No lift",
-                "Save energy",
-                "Healthy"
-            ],
-                icons: [
-                "convenience",
-                "no-elevator",
-                "save-energy",
-                "fitness"
-            ],
-                nextQuestion: [
-                4,
-                5,
-                5,
-                5
-            ]
+                    title: "Took stairs, why?",
+                    identifier: "stairs-why",
+                    options: [
+                        "Convenient",
+                        "No lift",
+                        "Save energy",
+                        "Healthy"
+                    ],
+                    icons: [
+                        "convenience",
+                        "no-elevator",
+                        "save-energy",
+                        "fitness"
+                    ],
+                    nextQuestion: [
+                        4,
+                        5,
+                        5,
+                        5
+                    ]
             ),
             Question(
-                title: "Lift convenient because?",
-                identifier: "lift-con",
-                options: [
-                "Easiest",
-                "Fastest",
-                "Both"
-            ],
-                icons: [
-                "easier",
-                "faster",
-                "both"
-            ],
-                nextQuestion: [
-                5,
-                5,
-                5
-            ]
+                    title: "Lift convenient because?",
+                    identifier: "lift-con",
+                    options: [
+                        "Easiest",
+                        "Fastest",
+                        "Both"
+                    ],
+                    icons: [
+                        "easier",
+                        "faster",
+                        "both"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5,
+                        5
+                    ]
             ),
             Question(
-                title: "Stairs convenient because",
-                identifier: "stairs-con",
-                options: [
-                "Easiest",
-                "Fastest",
-                "Both"
-            ],
-                icons: [
-                "easier",
-                "faster",
-                "both"
-            ],
-                nextQuestion: [
-                5,
-                5,
-                5
-            ]
+                    title: "Stairs convenient because",
+                    identifier: "stairs-con",
+                    options: [
+                        "Easiest",
+                        "Fastest",
+                        "Both"
+                    ],
+                    icons: [
+                        "easier",
+                        "faster",
+                        "both"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5,
+                        5
+                    ]
             ),
             Question(
-                title: "Are you working right now?",
-                identifier: "working",
-                options: [
-                "Yes",
-                "No"
-            ],
-                icons: [
-                "yes",
-                "no"
-            ],
-                nextQuestion: [
-                6,
-                8
-            ]
+                    title: "Are you working right now?",
+                    identifier: "working",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        6,
+                        8
+                    ]
             ),
             Question(
-                title: "What kind of workstation?",
-                identifier: "workstation",
-                options: [
-                "Adjustable",
-                "Standing",
-                "Sitting"
-            ],
-                icons: [
-                "adjustable",
-                "standing",
-                "sitting"
-            ],
-                nextQuestion: [
-                7,
-                8,
-                8
-            ]
+                    title: "What kind of workstation?",
+                    identifier: "workstation",
+                    options: [
+                        "Adjustable",
+                        "Standing",
+                        "Sitting"
+                    ],
+                    icons: [
+                        "adjustable",
+                        "standing",
+                        "sitting"
+                    ],
+                    nextQuestion: [
+                        7,
+                        8,
+                        8
+                    ]
             ),
             Question(
-                title: "Adjusted height today?",
-                identifier: "adj-height",
-                options: [
-                "Up & down",
-                "Down",
-                "Up",
-                "Never"
-            ],
-                icons: [
-                "adjustable",
-                "down",
-                "up",
-                "never"
-            ],
-                nextQuestion: [
-                8,
-                8,
-                8,
-                8
-            ]
+                    title: "Adjusted height today?",
+                    identifier: "adj-height",
+                    options: [
+                        "Up & down",
+                        "Down",
+                        "Up",
+                        "Never"
+                    ],
+                    icons: [
+                        "adjustable",
+                        "down",
+                        "up",
+                        "never"
+                    ],
+                    nextQuestion: [
+                        8,
+                        8,
+                        8,
+                        8
+                    ]
             ),
             Question(
-                title: "Are you",
-                identifier: "current",
-                options: [
-                "Standing",
-                "Sitting"
-            ],
-                icons: [
-                "standing",
-                "sitting"
-            ],
-                nextQuestion: [
-                12,
-                12
-            ]
+                    title: "Are you",
+                    identifier: "current",
+                    options: [
+                        "Standing",
+                        "Sitting"
+                    ],
+                    icons: [
+                        "standing",
+                        "sitting"
+                    ],
+                    nextQuestion: [
+                        12,
+                        12
+                    ]
             ), Question(
-                title: "Took lift, why?",
-                identifier: "lift-why",
-                options: [
-                    "Convenient",
-                    "Less effort",
-                    "No stairs"
-                ],
-                icons: [
-                    "convenience",
-                    "less-effort",
-                    "nostairs"
-                ],
-                nextQuestion: [
-                    11,
-                    10,
-                    10
-                ]
-            ),Question(
-                title: "Took stairs, why?",
-                identifier: "stairs-why",
-                options: [
-                    "Convenient",
-                    "No lift",
-                    "Save energy",
-                    "Healthy"
-                ],
-                icons: [
-                    "convenience",
-                    "no-elevator",
-                    "save-energy",
-                    "fitness"
-                ],
-                nextQuestion: [
-                    4,
-                    5,
-                    5,
-                    5
-                ]
-            ),Question(
-                title: "Lift convenient because?",
-                identifier: "lift-con",
-                options: [
-                    "Easiest",
-                    "Fastest",
-                    "Both"
-                ],
-                icons: [
-                    "easier",
-                    "faster",
-                    "both"
-                ],
-                nextQuestion: [
-                    10,
-                    10,
-                    10
-                ]
+                    title: "Took lift, why?",
+                    identifier: "lift-why",
+                    options: [
+                        "Convenient",
+                        "Less effort",
+                        "No stairs"
+                    ],
+                    icons: [
+                        "convenience",
+                        "less-effort",
+                        "nostairs"
+                    ],
+                    nextQuestion: [
+                        11,
+                        10,
+                        10
+                    ]
+            ), Question(
+                    title: "Took stairs, why?",
+                    identifier: "stairs-why",
+                    options: [
+                        "Convenient",
+                        "No lift",
+                        "Save energy",
+                        "Healthy"
+                    ],
+                    icons: [
+                        "convenience",
+                        "no-elevator",
+                        "save-energy",
+                        "fitness"
+                    ],
+                    nextQuestion: [
+                        4,
+                        5,
+                        5,
+                        5
+                    ]
+            ), Question(
+                    title: "Lift convenient because?",
+                    identifier: "lift-con",
+                    options: [
+                        "Easiest",
+                        "Fastest",
+                        "Both"
+                    ],
+                    icons: [
+                        "easier",
+                        "faster",
+                        "both"
+                    ],
+                    nextQuestion: [
+                        10,
+                        10,
+                        10
+                    ]
             )
         ]
         ),
-        Flow(title:"Privacy", questions: [
+        Flow(title: "Privacy", questions: [
             Question(
-                title: "Alone or in a group?",
-                identifier: "alone-group",
-                options: [
-                "Alone",
-                "Online",
-                "Group"
-            ],
-                icons: [
-                "alone-privacy",
-                "online-privacy",
-                "group-privacy"
-            ],
-                nextQuestion: [
-                4,
-                1,
-                10
-            ]
+                    title: "Alone or in a group?",
+                    identifier: "alone-group",
+                    options: [
+                        "Alone",
+                        "Online",
+                        "Group"
+                    ],
+                    icons: [
+                        "alone-privacy",
+                        "online-privacy",
+                        "group-privacy"
+                    ],
+                    nextQuestion: [
+                        4,
+                        1,
+                        10
+                    ]
             ),
             Question(
-                title: "Category of activity?",
-                identifier: "activity",
-                options: [
-                "Socialize",
-                "Collaborate",
-                "Learn"
-            ],
-                icons: [
-                "socialize-privacy",
-                "collaborate-privacy",
-                "learn-privacy"
-            ],
-                nextQuestion: [
-                3,
-                3,
-                3
-            ]
+                    title: "Category of activity?",
+                    identifier: "activity",
+                    options: [
+                        "Socialize",
+                        "Collaborate",
+                        "Learn"
+                    ],
+                    icons: [
+                        "socialize-privacy",
+                        "collaborate-privacy",
+                        "learn-privacy"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3,
+                        3
+                    ]
             ),
             Question(
-                title: "Possibly distracting others?",
-                identifier: "distracting",
-                options: [
-                "Yes",
-                "No"
-            ],
-                icons: [
-                "yes",
-                "no"
-            ],
-                nextQuestion: [
-                3,
-                3
-            ]
+                    title: "Possibly distracting others?",
+                    identifier: "distracting",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3
+                    ]
             ),
             Question(
-                title: "Distractions nearby?",
-                identifier: "distractions",
-                options: [
-                "None",
-                "A little",
-                "A lot"
-            ],
-                icons: [
-                "none",
-                "little",
-                "lot"
-            ],
-                nextQuestion: [
-                5,
-                6,
-                6
-            ]
+                    title: "Distractions nearby?",
+                    identifier: "distractions",
+                    options: [
+                        "None",
+                        "A little",
+                        "A lot"
+                    ],
+                    icons: [
+                        "none",
+                        "little",
+                        "lot"
+                    ],
+                    nextQuestion: [
+                        5,
+                        6,
+                        6
+                    ]
             ),
             Question(
-                title: "Category of activity?",
-                identifier: "activity",
-                options: [
-                "Focus",
-                "Leisure"
-            ],
-                icons: [
-                "focus-privacy",
-                "leisure-privacy"
-            ],
-                nextQuestion: [
-                3,
-                3
-            ]
+                    title: "Category of activity?",
+                    identifier: "activity",
+                    options: [
+                        "Focus",
+                        "Leisure"
+                    ],
+                    icons: [
+                        "focus-privacy",
+                        "leisure-privacy"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3
+                    ]
             ),
             Question(
-                title: "Feeling like you need more privacy?",
-                identifier: "more-privacy",
-                options: [
-                "Yes",
-                "No"
-            ],
-                icons: [
-                "yes",
-                "no"
-            ],
-                nextQuestion: [
-                7,
-                11
-            ]
+                    title: "Feeling like you need more privacy?",
+                    identifier: "more-privacy",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        7,
+                        11
+                    ]
             ),
             Question(
-                title: "What kind of distraction",
-                identifier: "kind-distraction",
-                options: [
-                "Visual",
-                "Audio",
-                "Others"
-            ],
-                icons: [
-                "visual-privacy",
-                "noise-privacy",
-                "others"
-            ],
-                nextQuestion: [
-                5,
-                5,
-                8
-            ]
+                    title: "What kind of distraction",
+                    identifier: "kind-distraction",
+                    options: [
+                        "Visual",
+                        "Audio",
+                        "Others"
+                    ],
+                    icons: [
+                        "visual-privacy",
+                        "noise-privacy",
+                        "others"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5,
+                        8
+                    ]
             ),
             Question(
-                title: "Why is more privacy needed?",
-                identifier: "why-more-privacy",
-                options: [
-                "See me",
-                "Hear me",
-                "Both"
-            ],
-                icons: [
-                "visual-privacy",
-                "noise-privacy",
-                "both"
-            ],
-                nextQuestion: [
-                9,
-                11,
-                9
-            ]
+                    title: "Why is more privacy needed?",
+                    identifier: "why-more-privacy",
+                    options: [
+                        "See me",
+                        "Hear me",
+                        "Both"
+                    ],
+                    icons: [
+                        "visual-privacy",
+                        "noise-privacy",
+                        "both"
+                    ],
+                    nextQuestion: [
+                        9,
+                        11,
+                        9
+                    ]
             ),
             Question(
-                title: "What is it?",
-                identifier: "what-privacy",
-                options: [
-                "Thermal",
-                "Scent",
-                "Glare"
-            ],
-                icons: [
-                "thermal-privacy",
-                "scent-privacy",
-                "glare-privacy"
-            ],
-                nextQuestion: [
-                5,
-                5,
-                5
-            ]
+                    title: "What is it?",
+                    identifier: "what-privacy",
+                    options: [
+                        "Thermal",
+                        "Scent",
+                        "Glare"
+                    ],
+                    icons: [
+                        "thermal-privacy",
+                        "scent-privacy",
+                        "glare-privacy"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5,
+                        5
+                    ]
             ),
             Question(
-                title: "What do people see?",
-                identifier: "people-see",
-                options: [
-                "Appearance",
-                "Work",
-                "Behaviour"
-            ],
-                icons: [
-                "appearance",
-                "work",
-                "activity"
-            ],
-                nextQuestion: [
-                11,
-                11,
-                11
-            ]
+                    title: "What do people see?",
+                    identifier: "people-see",
+                    options: [
+                        "Appearance",
+                        "Work",
+                        "Behaviour"
+                    ],
+                    icons: [
+                        "appearance",
+                        "work",
+                        "activity"
+                    ],
+                    nextQuestion: [
+                        11,
+                        11,
+                        11
+                    ]
             ),
             Question(
-                title: "Category of activity?",
-                identifier: "activity",
-                options: [
-                "Socialize",
-                "Collaborate",
-                "Learn"
-            ],
-                icons: [
-                "socialize-privacy",
-                "collaborate-privacy",
-                "learn-privacy"
-            ],
-                nextQuestion: [
-                2,
-                2,
-                2
-            ]
+                    title: "Category of activity?",
+                    identifier: "activity",
+                    options: [
+                        "Socialize",
+                        "Collaborate",
+                        "Learn"
+                    ],
+                    icons: [
+                        "socialize-privacy",
+                        "collaborate-privacy",
+                        "learn-privacy"
+                    ],
+                    nextQuestion: [
+                        2,
+                        2,
+                        2
+                    ]
             ),
         ]),
-        Flow(title:"Infection Risk", questions: [
+        Flow(title: "Infection Risk", questions: [
             Question(
-                title: "Do your surroundings increase infection risk?",
-                identifier: "surroundings-infection",
-                options: [
-                "Not at all",
-                "A Little",
-                "A lot"
-            ],
-                icons: [
-                "shield",
-                "1virus",
-                "3virus"
-            ],
-                nextQuestion: [
-                1,
-                2,
-                2
-            ]
+                    title: "Do your surroundings increase infection risk?",
+                    identifier: "surroundings-infection",
+                    options: [
+                        "Not at all",
+                        "A Little",
+                        "A lot"
+                    ],
+                    icons: [
+                        "shield",
+                        "1virus",
+                        "3virus"
+                    ],
+                    nextQuestion: [
+                        1,
+                        2,
+                        2
+                    ]
             ),
             Question(
-                title: "Currently, how many people are within 5m?",
-                identifier: "within-5m",
-                options: [
-                "0 pax",
-                "1-4 pax",
-                "5+ pax"
-            ],
-                icons: [
-                "0pax",
-                "0-4pax",
-                "5pax"
-            ],
-                nextQuestion: [
-                4,
-                4,
-                4
-            ]
+                    title: "Currently, how many people are within 5m?",
+                    identifier: "within-5m",
+                    options: [
+                        "0 pax",
+                        "1-4 pax",
+                        "5+ pax"
+                    ],
+                    icons: [
+                        "0pax",
+                        "0-4pax",
+                        "5pax"
+                    ],
+                    nextQuestion: [
+                        4,
+                        4,
+                        4
+                    ]
             ),
             Question(
-                title: "What causes more risk?",
-                identifier: "cause-risk",
-                options: [
-                "Ventilation",
-                "People",
-                "Surface"
-            ],
-                icons: [
-                "ventilation",
-                "people",
-                "surface"
-            ],
-                nextQuestion: [
-                1,
-                3,
-                1
-            ]
+                    title: "What causes more risk?",
+                    identifier: "cause-risk",
+                    options: [
+                        "Ventilation",
+                        "People",
+                        "Surface"
+                    ],
+                    icons: [
+                        "ventilation",
+                        "people",
+                        "surface"
+                    ],
+                    nextQuestion: [
+                        1,
+                        3,
+                        1
+                    ]
             ),
             Question(
-                title: "Specifically, what concerns you?",
-                identifier: "concerns",
-                options: [
-                "Density",
-                "Proximity",
-                "Both"
-            ],
-                icons: [
-                "density",
-                "proximity",
-                "both"
-            ],
-                nextQuestion: [
-                1,
-                1,
-                1
-            ]
+                    title: "Specifically, what concerns you?",
+                    identifier: "concerns",
+                    options: [
+                        "Density",
+                        "Proximity",
+                        "Both"
+                    ],
+                    icons: [
+                        "density",
+                        "proximity",
+                        "both"
+                    ],
+                    nextQuestion: [
+                        1,
+                        1,
+                        1
+                    ]
             ),
 
         ])
     ]
-
 
 
 }

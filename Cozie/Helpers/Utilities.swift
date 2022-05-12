@@ -318,6 +318,7 @@ struct FormatAPI: Codable {
     let participantID: String
     let responses: [String:String]
     let deviceUUID: String
+    var oneSignalUserID: String = ""
 }
 
 
