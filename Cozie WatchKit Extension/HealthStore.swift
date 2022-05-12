@@ -39,24 +39,7 @@ class HealthStore {
 
     }
 
-//    //returns the weight entry in Kilos or nil if no data
-//    func noiseExposure(completion: @escaping (_ audioExposure: Double?, _ date: Date?) -> Void) {
-//
-//        let query = HKSampleQuery(sampleType: noise, predicate: nil, limit: 1,
-//                sortDescriptors: [sortByDate]) { (query, results, error) in
-//            if let result = results?.first as? HKQuantitySample {
-//                let noiseExposure = result.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
-//                completion(noiseExposure, result.endDate)
-//                return
-//            }
-//
-//            //no data
-//            completion(nil, nil)
-//        }
-//        healthStore.execute(query)
-//    }
-
-    //returns the weight entry in Kilos or nil if no data
+    //returns an array of noise levels
     func noiseExposure(completion: @escaping (_ audioExposure: [String: Int]?) -> Void) {
 
         // We want data points from our current device
@@ -67,9 +50,6 @@ class HealthStore {
         let query: HKSampleQuery = HKSampleQuery(sampleType: noise, predicate: nil, limit: 30,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
             if let results = results as? [HKQuantitySample] {
-//                let noiseExposure = result.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
-//                completion(noiseExposure, result.endDate)
-//                return
 
                 for sample in results {
 
