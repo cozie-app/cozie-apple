@@ -59,6 +59,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var tmpResponses: [String: String] = [:]  // it temporally stores user's answers
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
     var bodyMass: Double = 0.0
+    var audioExposure: Double = 0.0
     var startTime = ""  // placeholder for the start time of the survey
     var participantID = "ExternalTester" // placeholder for the user ID
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
@@ -143,11 +144,23 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         healthStore.authorizeHealthKit { (success, error) in
             if success {
                 //get weight
+                self.healthStore.noiseExposure(completion: { (noise, noiseDate) in
+                    if noise != nil {
+                        self.audioExposure = noise!
+                    }
+                })
+
+                print("audio \(self.audioExposure)")
+
+                //get weight
                 self.healthStore.bodyMassKg(completion: { (mass, bodyMassDate) in
                     if mass != nil {
                         self.bodyMass = mass!
                     }
                 })
+
+                print(self.bodyMass)
+
                 //get basal energy
                 self.healthStore.basalEnergy(completion: { (energy, date) in
                     if energy != nil {
@@ -155,12 +168,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 //                        self.bodyMass = energy!
                     }
                 })
+
                 //get HR
                 self.healthStore.queryHeartRate(completion: { (heartRate) in
                     if heartRate != nil {
                         self.tmpHearthRate = heartRate!
                     }
                 })
+
+                print(self.tmpHearthRate)
             }
         }
     }

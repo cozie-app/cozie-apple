@@ -16,6 +16,7 @@ class HealthStore {
     private let bodyMassType = HKSampleType.quantityType(forIdentifier: .bodyMass)!
     private let heartRateType = HKObjectType.quantityType(forIdentifier: .heartRate)!
     private let basalEnergyType = HKObjectType.quantityType(forIdentifier: .basalEnergyBurned)!
+    private let noise = HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!
     let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
 
     func authorizeHealthKit(completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
@@ -29,12 +30,30 @@ class HealthStore {
             heartRateType,
             bodyMassType,
             basalEnergyType,
+            noise
         ]
         // Requests permission to save and read the specified data types.
         healthStore.requestAuthorization(toShare: [], read: healthKitTypes) { (success, error) in
             completion(success, error)
         }
 
+    }
+
+    //returns the weight entry in Kilos or nil if no data
+    func noiseExposure(completion: @escaping (_ audioExposure: Double?, _ date: Date?) -> Void) {
+
+        let query = HKSampleQuery(sampleType: noise, predicate: nil, limit: 1,
+                sortDescriptors: [sortByDate]) { (query, results, error) in
+            if let result = results?.first as? HKQuantitySample {
+                let noiseExposure = result.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
+                completion(noiseExposure, result.endDate)
+                return
+            }
+
+            //no data
+            completion(nil, nil)
+        }
+        healthStore.execute(query)
     }
 
     //returns the weight entry in Kilos or nil if no data
@@ -72,6 +91,7 @@ class HealthStore {
         healthStore.execute(query)
     }
 
+    // query heart rate
     func queryHeartRate(completion: @escaping (_ hr: [String: Int]?) -> Void) {
 
         // We want data points from our current device

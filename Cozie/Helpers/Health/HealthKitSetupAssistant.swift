@@ -26,7 +26,7 @@ class HealthKitSetupAssistant {
               let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
               let leanBodyMass = HKObjectType.quantityType(forIdentifier: .leanBodyMass),
               let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate),
-              let restingHertRate = HKObjectType.quantityType(forIdentifier: .restingHeartRate),
+              let restingHeartRate = HKObjectType.quantityType(forIdentifier: .restingHeartRate),
               let bodyTemperature = HKObjectType.quantityType(forIdentifier: .bodyTemperature),
               let respiratoryRate = HKObjectType.quantityType(forIdentifier: .respiratoryRate),
               let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount),
@@ -53,7 +53,7 @@ class HealthKitSetupAssistant {
         
         let healthKitTypesToWrite: Set<HKSampleType> = []
         
-        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHertRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature, dietaryWater]
+        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHeartRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature, dietaryWater]
         
         if #available(iOS 14.0, *) {
             guard let walkingSpeed = HKObjectType.quantityType(forIdentifier: .walkingSpeed),
