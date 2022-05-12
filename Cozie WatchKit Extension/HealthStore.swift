@@ -39,19 +39,51 @@ class HealthStore {
 
     }
 
-    //returns the weight entry in Kilos or nil if no data
-    func noiseExposure(completion: @escaping (_ audioExposure: Double?, _ date: Date?) -> Void) {
+//    //returns the weight entry in Kilos or nil if no data
+//    func noiseExposure(completion: @escaping (_ audioExposure: Double?, _ date: Date?) -> Void) {
+//
+//        let query = HKSampleQuery(sampleType: noise, predicate: nil, limit: 1,
+//                sortDescriptors: [sortByDate]) { (query, results, error) in
+//            if let result = results?.first as? HKQuantitySample {
+//                let noiseExposure = result.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
+//                completion(noiseExposure, result.endDate)
+//                return
+//            }
+//
+//            //no data
+//            completion(nil, nil)
+//        }
+//        healthStore.execute(query)
+//    }
 
-        let query = HKSampleQuery(sampleType: noise, predicate: nil, limit: 1,
+    //returns the weight entry in Kilos or nil if no data
+    func noiseExposure(completion: @escaping (_ audioExposure: [String: Int]?) -> Void) {
+
+        // We want data points from our current device
+        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+
+        var tmpNoise: [String: Int] = [:]
+
+        let query: HKSampleQuery = HKSampleQuery(sampleType: noise, predicate: nil, limit: 30,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
-            if let result = results?.first as? HKQuantitySample {
-                let noiseExposure = result.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
-                completion(noiseExposure, result.endDate)
+            if let results = results as? [HKQuantitySample] {
+//                let noiseExposure = result.quantity.doubleValue(for: HKUnit.decibelAWeightedSoundPressureLevel())
+//                completion(noiseExposure, result.endDate)
+//                return
+
+                for sample in results {
+
+                    // date when the HR was sampled
+                    let sampledDate = FormatDateISOString(date: sample.startDate)
+                    tmpNoise[sampledDate] = Int(sample.quantity.doubleValue(for: HKUnit(from: "count/min")))
+                }
+
+                completion(tmpNoise)
                 return
             }
 
             //no data
-            completion(nil, nil)
+            completion(nil)
         }
         healthStore.execute(query)
     }

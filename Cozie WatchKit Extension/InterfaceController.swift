@@ -59,7 +59,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var tmpResponses: [String: String] = [:]  // it temporally stores user's answers
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
     var bodyMass: Double = 0.0
-    var audioExposure: Double = 0.0
+//    var audioExposure: Double = 0.0
+    var audioExposure: [String: Int] = [:]
     var startTime = ""  // placeholder for the start time of the survey
     var participantID = "ExternalTester" // placeholder for the user ID
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
@@ -143,8 +144,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // improvement some of the following query do not need to be performed everytime willActivate is triggered
         healthStore.authorizeHealthKit { (success, error) in
             if success {
-                //get weight
-                self.healthStore.noiseExposure(completion: { (noise, noiseDate) in
+//                //get noise
+//                self.healthStore.noiseExposure(completion: { (noise, noiseDate) in
+//                    if noise != nil {
+//                        self.audioExposure = noise!
+//                    }
+//                })
+                //get noise array
+                self.healthStore.noiseExposure(completion: { (noise) in
                     if noise != nil {
                         self.audioExposure = noise!
                     }
