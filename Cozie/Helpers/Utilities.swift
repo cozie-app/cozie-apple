@@ -66,7 +66,7 @@ class Utilities {
         } catch {
             print(error)
         }
-        self.saveJSON(jsonString: jsonString)
+        saveJSON(jsonString: jsonString)
     }
     
     static func saveJSON(jsonString: String) {
@@ -93,7 +93,7 @@ class Utilities {
         alert.view.addSubview(loadingIndicator)
         sender.present(alert, animated: true, completion: nil)
         
-        self.getData(isForDownload: true) { (isSuccess, data) in
+        getData(isForDownload: true) { (isSuccess, data) in
             sender.dismiss(animated: false, completion: nil)
             if isSuccess {
                 if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -111,7 +111,7 @@ class Utilities {
         
         let param = ["user_id":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "","weeks":"100"]
 
-        let headers = ["x-api-key":"5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd",   // Singpore API key
+        let headers = ["x-api-key":"5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd",   // Singapore API key
                        "Accept":"application/json",
                        "Content-Type":"application/json"]
         

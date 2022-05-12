@@ -12,13 +12,6 @@ import CoreLocation
 import HealthKit
 import WatchConnectivity
 
-struct QuestionResponse: Codable {
-    var Thermal: [Question]
-    var Privacy: [Question]
-    var Movement: [Question]
-    var InfectionRisk: [Question]
-}
-
 // temp dictionary to store the answers
 struct Answer: Codable {
     let startTimestamp: String

@@ -61,7 +61,7 @@ final class CoreDataManager {
     
     func deleteSurvey(VoteLog: Int) {
         let context = PersistentStorage.shared.newBackgroundContext()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.cdSurveyDetails)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cdSurveyDetails)
         fetchRequest.predicate = NSPredicate(format: "voteLog==%@", VoteLog as CVarArg)
         fetchRequest.fetchLimit = 1
         context.perform {
@@ -71,7 +71,7 @@ final class CoreDataManager {
     }
     
     private func deleteAllSurvey() {
-        self.deleteEntity(entityName: self.cdSurveyDetails)
+        deleteEntity(entityName: cdSurveyDetails)
     }
     
     // MARK: - Model SurveyDetails CRUD
@@ -97,7 +97,7 @@ final class CoreDataManager {
     
     // MARK: - Whole CoreData CRUD
     func deleteAllLocalStorage() {
-        self.deleteAllSurvey()
+        deleteAllSurvey()
     }
 }
 
@@ -105,17 +105,17 @@ final class CoreDataManager {
 extension CDSurveyDetails {
     func convertToSurvey() -> SurveyDetails {
         var questionAnswers: [QuestionAnswer] = []
-        let set = self.toQuestionAnswer
+        let set = toQuestionAnswer
         let cdQuestionAnswerArray = set?.allObjects as? [CDQuestionAnswer]
         cdQuestionAnswerArray?.forEach({ questionAnswer in
             questionAnswers.append(questionAnswer.convertToQuestionAnswer())
         })
-        return SurveyDetails(voteLog: Int(self.voteLog), locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()), startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()), endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()), participantID: self.participantID ?? "", deviceUUID: self.deviceUUID ?? "", latitude: self.latitude, longitude: self.longitude, bodyMass: self.bodyMass, responses: questionAnswers, heartRate: Int(self.heartRate), isSync: self.isSync)
+        return SurveyDetails(voteLog: Int(voteLog), locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()), startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()), endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()), participantID: self.participantID ?? "", deviceUUID: deviceUUID ?? "", latitude: latitude, longitude: longitude, bodyMass: bodyMass, responses: questionAnswers, heartRate: Int(heartRate), isSync: isSync)
     }
 }
 
 extension CDQuestionAnswer {
     func convertToQuestionAnswer() -> QuestionAnswer {
-        return QuestionAnswer(voteLog: Int(self.voteLog), question: self.question, answer: self.answer)
+        return QuestionAnswer(voteLog: Int(voteLog), question: question, answer: answer)
     }
 }

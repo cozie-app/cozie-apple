@@ -34,7 +34,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     }
     
     func scheduleReminderNotification() {
-        self.clearNotifications()
+        clearNotifications()
         if (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.NotificationEnable.rawValue) as? Bool ?? true) {
             return
         }
@@ -43,7 +43,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             let allowedDays = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,false,false]
             var fromTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime
             var toTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime
-            var intervalTimeInMins: Int {
+            var intervalTimeInMin: Int {
                 get {
                     let tempInterTime = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq
                     let hours = Int(tempInterTime.getHour()) ?? 0
@@ -77,7 +77,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
                 }
                 
                 times.append(fromTime)
-                fromTime = Calendar.current.date(byAdding: .minute, value: intervalTimeInMins, to: fromTime) ?? Date()
+                fromTime = Calendar.current.date(byAdding: .minute, value: intervalTimeInMin, to: fromTime) ?? Date()
             }
             
             for weekDay in DateFormatter().shortWeekdaySymbols {

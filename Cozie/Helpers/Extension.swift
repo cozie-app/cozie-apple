@@ -36,8 +36,8 @@ extension Date {
     }
     
     func getTimeInt() -> Int {
-        let hour = self.getHour()
-        let mins = self.getMinutes()
+        let hour = getHour()
+        let mins = getMinutes()
         return Int("\(hour)\(mins)") ?? 0
     }
 }
@@ -58,9 +58,9 @@ extension String {
 extension UIView {
     @IBInspectable var cornerRadius: Double {
         get {
-            return Double(self.layer.cornerRadius)
+            return Double(layer.cornerRadius)
         }set {
-            self.layer.cornerRadius = CGFloat(newValue)
+            layer.cornerRadius = CGFloat(newValue)
         }
     }
 }
@@ -68,16 +68,16 @@ extension UIView {
 extension UIButton {
     @IBInspectable var buttonCornerRadius: Double {
         get {
-            return Double(self.layer.cornerRadius)
+            return Double(layer.cornerRadius)
         }set {
-            self.layer.cornerRadius = CGFloat(newValue)
+            layer.cornerRadius = CGFloat(newValue)
         }
     }
 }
 
 extension UIViewController {
     func getControllerFromStack(_ vc: AnyClass) -> UIViewController? {
-        guard let controllers = self.navigationController?.viewControllers else { return nil }
+        guard let controllers = navigationController?.viewControllers else { return nil }
         for controller in controllers {
             if controller.isKind(of: vc) {
                 return controller
@@ -90,7 +90,7 @@ extension UIViewController {
 extension UITableView {
     func setupPadding() {
         if #available(iOS 15.0, *) {
-            self.sectionHeaderTopPadding = 0
+            sectionHeaderTopPadding = 0
         }
     }
 }
@@ -99,11 +99,11 @@ extension UILabel {
     func calculateMaxLines(forText: String = "") -> Int {
         let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
         let charSize = font.lineHeight
-        var text = (self.text ?? "") as NSString
+        var text = (text ?? "") as NSString
         if forText != "" {
             text = forText as NSString
         }
-        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self.font as Any], context: nil)
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font as Any], context: nil)
         let linesRoundedUp = Int(ceil(textSize.height/charSize))
         return linesRoundedUp
     }

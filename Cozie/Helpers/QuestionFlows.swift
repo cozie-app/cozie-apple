@@ -183,7 +183,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Have you changed location, activity or clothing over the last 10-min?",
-                    identifier: "changed-loaction",
+                    identifier: "changed-location",
                     options: [
                         "Yes",
                         "No"

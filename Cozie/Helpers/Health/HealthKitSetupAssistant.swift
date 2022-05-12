@@ -10,7 +10,7 @@ import HealthKit
 
 class HealthKitSetupAssistant {
     
-    private enum HealthkitSetupError: Error {
+    private enum HealthKitSetupError: Error {
         case notAvailableOnDevice
         case dataTypeNotAvailable
     }
@@ -18,7 +18,7 @@ class HealthKitSetupAssistant {
     class func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Swift.Void) {
         
         guard HKHealthStore.isHealthDataAvailable() else {
-            completion(false, HealthkitSetupError.notAvailableOnDevice)
+            completion(false, HealthKitSetupError.notAvailableOnDevice)
             return
         }
         
@@ -47,7 +47,7 @@ class HealthKitSetupAssistant {
               let bloodPressureDiastolic = HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic),
               let basalBodyTemperature = HKObjectType.quantityType(forIdentifier: .basalBodyTemperature),
               let dietaryWater = HKObjectType.quantityType(forIdentifier: .dietaryWater) else {
-                  completion(false, HealthkitSetupError.dataTypeNotAvailable)
+                  completion(false, HealthKitSetupError.dataTypeNotAvailable)
             return
         }
         
