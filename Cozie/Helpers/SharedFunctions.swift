@@ -27,7 +27,7 @@ public func getDocumentsDirectory() -> URL {
 // send data via a POST request, the function it is synchronous
 public func PostRequest(message: Data) -> Int {
     // create the url with URL
-    let url = URL(string: "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-app-write-influx")! // Singapore Lambda API
+    let url = URL(string: AWSWriteURL)! // Singapore Lambda API
 
     // create the session object
     let session = URLSession.shared
@@ -38,7 +38,7 @@ public func PostRequest(message: Data) -> Int {
 
     request.httpBody = message
 
-    request.setValue("5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd", forHTTPHeaderField: "x-api-key")
+    request.setValue(AWSWriteAPIKey, forHTTPHeaderField: "x-api-key")
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
 
@@ -66,16 +66,6 @@ public func PostRequest(message: Data) -> Int {
             let statusCode = nsHTTPResponse.statusCode
             responseStatusCode = statusCode
         }
-
-//        do {
-//            //create json object from data
-//            if (try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) != nil {
-//                // print(json)
-//                // handle json...
-//            }
-//        } catch let error {
-//            print("error SF: \(error.localizedDescription)")
-//        }
     })
 
     // run the async POST request
