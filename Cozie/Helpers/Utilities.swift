@@ -160,6 +160,11 @@ class Utilities {
     }
     
     static func sendHealthData(data: [String:Double], type: healthType, samples: [HKQuantitySample]) {
+
+        if (data == [:]) {
+            return
+        }
+
         do {
             var postMessage = Data()
             switch type {
