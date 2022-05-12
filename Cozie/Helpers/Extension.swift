@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension Date {
-    func get24FormateTimeString() -> String {
+    func get24FormatTimeString() -> String {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         return timeFormatter.string(from: self)

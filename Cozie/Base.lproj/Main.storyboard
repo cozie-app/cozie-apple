@@ -335,61 +335,19 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svg-po-yao">
-                                        <rect key="frame" x="20" y="241.33333333333334" width="335" height="111.66666666666666"/>
+                                        <rect key="frame" x="20" y="241.33333333333334" width="335" height="50.666666666666657"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Flows:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHJ-PX-dR0">
-                                                <rect key="frame" x="102.66666666666669" y="5" width="130" height="20.333333333333332"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Flow:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHJ-PX-dR0">
+                                                <rect key="frame" x="107" y="5" width="121" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="6oI-0X-yre">
-                                                <rect key="frame" x="116.33333333333334" y="25.333333333333307" width="102.33333333333334" height="81.333333333333314"/>
+                                                <rect key="frame" x="150" y="25.333333333333314" width="35.333333333333343" height="20.333333333333329"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thermal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76P-dB-55m">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62.666666666666664" height="20.333333333333332"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IDRP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvF-EQ-Lan">
-                                                        <rect key="frame" x="0.0" y="20.333333333333371" width="37.333333333333336" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zci-hZ-VbX">
-                                                        <rect key="frame" x="0.0" y="20.333333333333371" width="55.666666666666664" height="20.333333333333329"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-9i-Mte">
-                                                        <rect key="frame" x="0.0" y="40.666666666666686" width="80.333333333333329" height="20.333333333333329"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thermal MINI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFo-6c-ypK">
-                                                        <rect key="frame" x="0.0" y="61" width="102" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Infection Risk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-jH-AxJ">
-                                                        <rect key="frame" x="0.0" y="61.000000000000007" width="102.33333333333333" height="20.333333333333336"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PDP MINI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMN-nc-z6z">
-                                                        <rect key="frame" x="0.0" y="81.333333333333371" width="72" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M&amp;F MINI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4s-DW-YnF">
-                                                        <rect key="frame" x="0.0" y="81.333333333333371" width="74.666666666666671" height="0.0"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76P-dB-55m">
+                                                        <rect key="frame" x="0.0" y="0.0" width="35.333333333333336" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -408,7 +366,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYf-8M-xoc">
-                                        <rect key="frame" x="20" y="368" width="335" height="50.666666666666686"/>
+                                        <rect key="frame" x="20" y="307" width="335" height="50.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder Frequency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDE-5p-xGV">
                                                 <rect key="frame" x="80.333333333333329" y="5" width="174.33333333333337" height="20.333333333333332"/>
@@ -433,7 +391,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNJ-If-G78">
-                                        <rect key="frame" x="20" y="433.66666666666663" width="335" height="50.666666666666686"/>
+                                        <rect key="frame" x="20" y="372.66666666666663" width="335" height="50.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participation Days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4j-Lh-8U3">
                                                 <rect key="frame" x="90.666666666666671" y="5" width="153.66666666666663" height="20.333333333333332"/>
@@ -458,7 +416,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iA3-GI-7d9">
-                                        <rect key="frame" x="20" y="499.33333333333331" width="335" height="63.666666666666686"/>
+                                        <rect key="frame" x="20" y="438.33333333333331" width="335" height="63.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Participation Hours:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLU-NI-MwI">
                                                 <rect key="frame" x="64.000000000000014" y="5" width="207.33333333333337" height="20.333333333333332"/>
@@ -483,7 +441,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-yJ-TPm">
-                                        <rect key="frame" x="20" y="578" width="335" height="60"/>
+                                        <rect key="frame" x="20" y="517" width="335" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Survey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dh-EP-dkQ">
                                                 <rect key="frame" x="105.33333333333331" y="7.9999999999999982" width="124.66666666666669" height="20.333333333333329"/>
@@ -554,26 +512,19 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="98Z-xN-YM7"/>
                     <connections>
                         <outlet property="appIconImg" destination="TrD-47-CWA" id="fLd-rS-wUI"/>
-                        <outlet property="labelIDRP" destination="zvF-EQ-Lan" id="aci-rX-BbK"/>
-                        <outlet property="labelIDRPMINI" destination="Gww-jH-AxJ" id="W1Q-5X-uZQ"/>
-                        <outlet property="labelMF" destination="C4L-9i-Mte" id="7Xx-pa-KZl"/>
-                        <outlet property="labelMFMINI" destination="c4s-DW-YnF" id="p2n-Qt-Y32"/>
+                        <outlet property="labelExperimentID" destination="fec-YZ-f5j" id="7Wk-HT-vD1"/>
+                        <outlet property="labelFlow" destination="76P-dB-55m" id="Udp-3u-0fy"/>
                         <outlet property="labelNotificationFreq" destination="shm-QS-1dA" id="BCY-H7-4aX"/>
-                        <outlet property="labelPDP" destination="Zci-hZ-VbX" id="CCO-2x-4WN"/>
-                        <outlet property="labelPDPMINI" destination="YMN-nc-z6z" id="JmY-Fd-1S3"/>
                         <outlet property="labelParticipantID" destination="eHc-Hp-xWw" id="taQ-j7-wxf"/>
                         <outlet property="labelParticipationDays" destination="5pu-1l-TdO" id="TwP-P5-52F"/>
                         <outlet property="labelParticipationHours" destination="fAe-bz-HIE" id="TLD-Ki-7lF"/>
-                        <outlet property="labelThermal" destination="76P-dB-55m" id="Udp-3u-0fy"/>
-                        <outlet property="labelThermalMINI" destination="zFo-6c-ypK" id="iqk-bI-WIi"/>
-                        <outlet property="lableExperimentId" destination="fec-YZ-f5j" id="7Wk-HT-vD1"/>
                         <outlet property="reminder" destination="75Z-2U-y7r" id="lGZ-Ud-JQ7"/>
                         <outlet property="totalQuestionnairesLabel" destination="gkV-KX-zkk" id="sho-la-tcy"/>
                         <outlet property="viewID" destination="FOg-Ah-Npu" id="Gy9-ci-5WT"/>
                         <outlet property="viewNotificationFreq" destination="wYf-8M-xoc" id="wXA-6E-jTh"/>
                         <outlet property="viewParticipationDays" destination="jNJ-If-G78" id="eSE-fR-XCH"/>
                         <outlet property="viewParticipationHours" destination="iA3-GI-7d9" id="b6D-pT-b1s"/>
-                        <outlet property="viewQuestionnairs" destination="svg-po-yao" id="Jp5-oV-c7B"/>
+                        <outlet property="viewQuestionnaires" destination="svg-po-yao" id="Jp5-oV-c7B"/>
                         <outlet property="viewSurvey" destination="Pf2-yJ-TPm" id="Cqo-ZH-X7c"/>
                     </connections>
                 </viewController>

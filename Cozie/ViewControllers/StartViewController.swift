@@ -11,14 +11,6 @@ import AVKit
 
 class StartViewController: UIViewController {
 
-    // to show the video
-    var videoPlayer: AVPlayer?
-    var videoPlayerLayer: AVPlayerLayer?
-
-    // two buttons in the start page
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

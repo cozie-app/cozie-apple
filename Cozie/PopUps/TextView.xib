@@ -94,7 +94,7 @@
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <integer key="value" value="60"/>
+                                <integer key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -116,7 +116,7 @@
                 <outlet property="msgLabel" destination="8fG-3k-EbV" id="XIn-vZ-LaB"/>
                 <outlet property="setBtn" destination="Y5Q-eY-YSX" id="rrk-lu-w13"/>
             </connections>
-            <point key="canvasLocation" x="-720" y="48"/>
+            <point key="canvasLocation" x="-71" y="50"/>
         </viewController>
     </objects>
     <resources>
