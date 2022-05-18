@@ -17,7 +17,7 @@
               ]
           },
           {
-              "title": "Would you like the environment to be:",
+              "title": "Would you like the ENVIRONMENT to be:",
               "identifier": "nern-preference-thermal",
               "options": [
                   "Warmer",
@@ -36,7 +36,7 @@
               ]
           },
           {
-              "title": "Would you like the air movement to be:",
+              "title": "Would you like the AIR MOVEMENT to be:",
               "identifier": "nern-preference-air",
               "options": [
                   "More",
