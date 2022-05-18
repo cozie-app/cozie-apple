@@ -28,8 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
         
         // Code needed for OneSignal to work properly
+        // old app id: 4d2b287e-603c-47db-a2b8-80b2a5d93473
         OneSignal.initWithLaunchOptions(launchOptions,
-          appId: "4d2b287e-603c-47db-a2b8-80b2a5d93473",
+          appId: "e4a6b1fc-57d9-4527-9051-516c56bcd0d9",
           handleNotificationAction: nil,
           settings: onesignalInitSettings)
 
