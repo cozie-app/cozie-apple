@@ -1,76 +1,35 @@
 {
     "Thermal":[
           {
-              "title": "Do you accept the overall THERMAL environment now?",
-              "identifier": "nern-thermal",
+              "title": "How do zou rate your general personal comfort at the moment (1-10)",
+              "identifier": "resh-comfort",
               "options": [
-                  "Unacceptable",
-                  "Acceptable"
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10"
               ],
               "icons": [
+                  "circle",
+                  "circle",
+                  "circle",
+                  "circle",
+                  "circle",
+                  "circle",
+                  "circle",
+                  "circle",
                   "circle",
                   "circle"
               ],
               "nextQuestion": [
                   1,
                   1
-              ]
-          },
-          {
-              "title": "Would you like the ENVIRONMENT to be:",
-              "identifier": "nern-preference-thermal",
-              "options": [
-                  "Warmer",
-                  "No change",
-                  "Cooler"
-              ],
-              "icons": [
-                  "circle",
-                  "circle",
-                  "circle"
-              ],
-              "nextQuestion": [
-                  2,
-                  2,
-                  2
-              ]
-          },
-          {
-              "title": "Would you like the AIR MOVEMENT to be:",
-              "identifier": "nern-preference-air",
-              "options": [
-                  "More",
-                  "No change",
-                  "Less"
-              ],
-              "icons": [
-                  "circle",
-                  "circle",
-                  "circle"
-              ],
-              "nextQuestion": [
-                  3,
-                  3,
-                  3
-              ]
-          },
-          {
-              "title": "How much does the NOISE bother or annoy you?",
-              "identifier": "nern-preference-noise",
-              "options": [
-                  "Not at all",
-                  "Slightly",
-                  "Very"
-              ],
-              "icons": [
-                  "circle",
-                  "circle",
-                  "circle"
-              ],
-              "nextQuestion": [
-                  4,
-                  4,
-                  4
               ]
           }
       ],
@@ -91,10 +50,16 @@
               "neither"
           ],
           "nextQuestion": [
-              1,
               2,
-              9,
-              5
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
           ]
       },
       {
