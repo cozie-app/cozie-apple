@@ -26,7 +26,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>app.cozie.ios.nern</string>
+	<string>app.cozie.ios.resh</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
