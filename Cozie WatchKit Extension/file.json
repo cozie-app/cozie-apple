@@ -1,7 +1,7 @@
 {
     "Thermal":[
           {
-              "title": "How do zou rate your general personal comfort at the moment (1-10)",
+              "title": "How do you rate your general personal comfort at the moment (1-10):",
               "identifier": "resh-comfort",
               "options": [
                   "1",
@@ -28,6 +28,14 @@
                   "circle"
               ],
               "nextQuestion": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
                   1,
                   1
               ]
