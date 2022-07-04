@@ -1,7 +1,7 @@
 {
     "Thermal":[
           {
-              "title": "Do you accept the overall thermal environment now?",
+              "title": "Do you accept the overall THERMAL environment now?",
               "identifier": "nern-thermal",
               "options": [
                   "Unacceptable",
@@ -52,6 +52,25 @@
                   3,
                   3,
                   3
+              ]
+          },
+          {
+              "title": "How much does the NOISE bother or annoy you?",
+              "identifier": "nern-preference-noise",
+              "options": [
+                  "Not at all",
+                  "Slightly",
+                  "Very"
+              ],
+              "icons": [
+                  "circle",
+                  "circle",
+                  "circle"
+              ],
+              "nextQuestion": [
+                  4,
+                  4,
+                  4
               ]
           }
       ],
