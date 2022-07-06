@@ -56,8 +56,10 @@
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "8"
       notificationPayloadFile = "Cozie WatchKit Extension/PushNotificationPayload.apns">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/Cozie">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E483826D247BA33B002C3708"
@@ -65,7 +67,7 @@
             BlueprintName = "Cozie WatchKit App"
             ReferencedContainer = "container:Cozie.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,8 +77,10 @@
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "8"
       notificationPayloadFile = "Cozie WatchKit Extension/PushNotificationPayload.apns">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/Cozie">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E483826D247BA33B002C3708"
@@ -84,7 +88,16 @@
             BlueprintName = "Cozie WatchKit App"
             ReferencedContainer = "container:Cozie.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E483826D247BA33B002C3708"
+            BuildableName = "Cozie WatchKit App.app"
+            BlueprintName = "Cozie WatchKit App"
+            ReferencedContainer = "container:Cozie.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
