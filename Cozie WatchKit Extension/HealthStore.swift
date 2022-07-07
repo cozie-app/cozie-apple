@@ -111,7 +111,7 @@ class HealthStore {
         // It provides us with both the ability to receive a snapshot of data, and then on subsequent calls, a snapshot of what has changed.
 //        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
         let query: HKSampleQuery = HKSampleQuery(sampleType: heartRateType, predicate: nil, limit: 30,
-                sortDescriptors: [sortByDate]) { query, results, error in
+                sortDescriptors: [sortByDate]) { (query, results, error) in
 
             if let results = results as? [HKQuantitySample] {
 
