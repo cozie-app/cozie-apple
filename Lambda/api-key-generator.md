@@ -26,4 +26,4 @@ aws apigateway create-usage-plan-key \
     --usage-plan-id <ID of the usage plan you got from the Usage Plan generation> 
     --key-type "API_KEY" \
     --key-id <key ID you got from the API key generation>
-``
+```
