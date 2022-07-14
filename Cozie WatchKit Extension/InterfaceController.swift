@@ -14,18 +14,19 @@ import WatchConnectivity
 
 // temp dictionary to store the answers
 struct Answer: Codable {
-    let startTimestamp: String
-    let endTimestamp: String
-    let heartRate: [String: Int]
-    let noiseWatch: [String: Int]
-    let participantID: String
-    let deviceUUID: String
-    let locationTimestamp: String
+    let timestamp_start: String
+    let timestamp_end: String
+    let heart_rate: [String: Int]
+    let sound_pressure: [String: Int]
+    let id_participant: String
+    let id_experiment: String
+    let id_device: String
+    let timestamp_location: String
     let latitude: Double
     let longitude: Double
     let responses: [String: String]
-    let voteLog: Int
-    let bodyMass: Double
+    let vote_count: Int
+    let body_mass: Double
 }
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationManagerDelegate {
@@ -33,7 +34,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     // code related to the watch connectivity with the phone
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
-    
+
     let session = WCSession.default
     let userDefaults = UserDefaults.standard
     let healthStore = HealthStore()
@@ -57,6 +58,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var audioExposure: [String: Int] = [:]
     var startTime = ""  // placeholder for the start time of the survey
     var participantID = "ExternalTester" // placeholder for the user ID
+    var experimentID = "AppleStore" // placeholder for the user ID
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
     var lat: Double = 0.0
     var long: Double = 0.0
@@ -75,6 +77,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
         // get participantID from the defaults if available
         participantID = userDefaults.string(forKey: "participantID") ?? participantID
+        experimentID = userDefaults.string(forKey: "experimentID") ?? experimentID
 
         // start connection session with the phone
         session.delegate = self
@@ -91,8 +94,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.delegate = self
     }
-    
-    func sendMessageToPhone(message: [String:Any]) {
+
+    func sendMessageToPhone(message: [String: Any]) {
         session.sendMessage(message) { message in
             print("sent[\(message.values)]")
         } errorHandler: { err in
@@ -101,10 +104,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     // this function fires when a message from the phone is received
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
         if let id = message["participantID"] as? String {
             participantID = id
             userDefaults.set(id, forKey: "participantID")
+        }
+        if let id = message["experimentID"] as? String {
+            experimentID = id
+            userDefaults.set(id, forKey: "experimentID")
         }
         if let question = message["questions"] as? Int {
             userDefaults.set(question, forKey: "questions")
@@ -112,19 +119,23 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         }
         WKInterfaceDevice.current().play(.notification)
     }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        if let question = message["questions"] as? Int {
-            userDefaults.set(question, forKey: "questions")
-            defineQuestions()
-        }
-        if let id = message["participantID"] as? String {
-            participantID = id
-            userDefaults.set(id, forKey: "participantID")
-        }
-        // vibrate the watch to notify the user that it worked
-        WKInterfaceDevice.current().play(.notification)
-    }
+
+//    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+//        if let question = message["questions"] as? Int {
+//            userDefaults.set(question, forKey: "questions")
+//            defineQuestions()
+//        }
+//        if let id = message["experimentID"] as? String {
+//            experimentID = id
+//            userDefaults.set(id, forKey: "experimentID")
+//        }
+//        if let id = message["participantID"] as? String {
+//            participantID = id
+//            userDefaults.set(id, forKey: "participantID")
+//        }
+//        // vibrate the watch to notify the user that it worked
+//        WKInterfaceDevice.current().play(.notification)
+//    }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -209,10 +220,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         // set the title of the question
         questionTitle.setText(question.title)
-        
+
         // scroll back the view to the top of the page
         scroll(to: questionTitle, at: .top, animated: true)
-        
+
         // set the number of rows in the table
         tableView.setNumberOfRows(question.options.count, withRowType: "RowController")
 
@@ -250,7 +261,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // check if user completed the survey
         if (currentQuestion == 999) {
             currentQuestion = 0  // reset question flow to start
-            
+
             let userDefaults = UserDefaults.standard
             voteLog = userDefaults.integer(forKey: "voteLog")
             voteLog += 1
@@ -264,12 +275,36 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             tmpResponses.forEach { (question, answer) in
                 qa.append(QuestionAnswer(voteLog: voteLog, question: question, answer: answer))
             }
-            CoreDataManager.shared.createSurvey(surveys: [SurveyDetails(voteLog: voteLog, locationTimestamp: locationTimestamp, startTimestamp: startTime, endTimestamp: endTime, participantID: participantID, deviceUUID: uuid, latitude: lat, longitude: long, bodyMass: bodyMass, responses: qa, heartRate: 1, isSync: false)])
-            SendDataDatabase(answer: Answer(startTimestamp: startTime, endTimestamp: endTime, heartRate: tmpHearthRate, noiseWatch: audioExposure,
-                    participantID: participantID, deviceUUID: uuid,
-                    locationTimestamp: locationTimestamp, latitude: lat, longitude: long, responses: tmpResponses,
-                    voteLog: voteLog, bodyMass: bodyMass))
-            self.sendMessageToPhone(message: ["isSurveyAdded":true])
+            CoreDataManager.shared.createSurvey(surveys: [
+                SurveyDetails(
+                        voteLog: voteLog,
+                        locationTimestamp: locationTimestamp,
+                        startTimestamp: startTime,
+                        endTimestamp: endTime,
+                        participantID: participantID,
+                        experimentID: experimentID,
+                        deviceUUID: uuid,
+                        latitude: lat,
+                        longitude: long,
+                        body_mass: bodyMass,
+                        responses: qa,
+                        heartRate: 1,
+                        isSync: false)])
+            SendDataDatabase(answer: Answer(
+                timestamp_start: startTime,
+                timestamp_end: endTime,
+                heart_rate: tmpHearthRate,
+                sound_pressure: audioExposure,
+                id_participant: participantID,
+                id_experiment: experimentID,
+                id_device: uuid,
+                timestamp_location: locationTimestamp,
+                latitude: lat,
+                longitude: long,
+                responses: tmpResponses,
+                vote_count: voteLog,
+                body_mass: bodyMass))
+            self.sendMessageToPhone(message: ["isSurveyAdded": true])
             // clear temporary arrays
             tmpResponses.removeAll()
             tmpHearthRate.removeAll()
@@ -281,7 +316,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
     private func defineQuestions() {
         self.questions.removeAll()
-        
+
         print(userDefaults.object(forKey: "questions") as? Int ?? 0)
 
         self.questions = questionFlows[userDefaults.object(forKey: "questions") as? Int ?? 0].questions

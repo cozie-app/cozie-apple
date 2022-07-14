@@ -27,10 +27,11 @@ final class CoreDataManager {
                 cdSurvey.startTimestamp = survey.startTimestamp
                 cdSurvey.endTimestamp = survey.endTimestamp
                 cdSurvey.participantID = survey.participantID
+                cdSurvey.experimentID = survey.experimentID
                 cdSurvey.deviceUUID = survey.deviceUUID
                 cdSurvey.latitude = survey.latitude
                 cdSurvey.longitude = survey.longitude
-                cdSurvey.bodyMass = survey.bodyMass
+                cdSurvey.body_mass = survey.body_mass
                 cdSurvey.heartRate = Int64(survey.heartRate)
                 cdSurvey.isSync = survey.isSync
                 
@@ -110,7 +111,20 @@ extension CDSurveyDetails {
         cdQuestionAnswerArray?.forEach({ questionAnswer in
             questionAnswers.append(questionAnswer.convertToQuestionAnswer())
         })
-        return SurveyDetails(voteLog: Int(voteLog), locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()), startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()), endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()), participantID: self.participantID ?? "", deviceUUID: deviceUUID ?? "", latitude: latitude, longitude: longitude, bodyMass: bodyMass, responses: questionAnswers, heartRate: Int(heartRate), isSync: isSync)
+        return SurveyDetails(
+            voteLog: Int(voteLog),
+            locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()),
+            startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()),
+            endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()),
+            participantID: self.participantID ?? "",
+            experimentID: self.experimentID ?? "",
+            deviceUUID: deviceUUID ?? "",
+            latitude: latitude,
+            longitude: longitude,
+            body_mass: body_mass,
+            responses: questionAnswers,
+            heartRate: Int(heartRate),
+            isSync: isSync)
     }
 }
 

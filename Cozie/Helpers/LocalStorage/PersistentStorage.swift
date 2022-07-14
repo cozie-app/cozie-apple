@@ -92,10 +92,11 @@ struct SurveyDetails: Codable {
     let startTimestamp: String
     let endTimestamp: String
     let participantID: String
+    let experimentID: String
     let deviceUUID: String
     let latitude: Double
     let longitude: Double
-    let bodyMass: Double
+    let body_mass: Double
     let responses: [QuestionAnswer]?
     let heartRate: Int
     let isSync:Bool

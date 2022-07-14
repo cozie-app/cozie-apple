@@ -62,7 +62,9 @@ class SettingsViewController: UIViewController {
         session?.activate()
 
         if self.session?.isReachable == true {
-            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0], replyHandler: nil) { error in
+            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                                       "experimentID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
+                                       "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0], replyHandler: nil) { error in
                 print(error.localizedDescription)
                 self.showAlert(title: "Sync failed", message: error.localizedDescription)
             }

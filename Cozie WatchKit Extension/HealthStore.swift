@@ -104,7 +104,7 @@ class HealthStore {
     func queryHeartRate(completion: @escaping (_ hr: [String: Int]?) -> Void) {
 
         // We want data points from our current device
-        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+//        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
 
         var tmpHearthRate: [String: Int] = [:]
 

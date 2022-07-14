@@ -21,10 +21,11 @@ extension CDSurveyDetails {
     @NSManaged public var startTimestamp: Date?
     @NSManaged public var endTimestamp: Date?
     @NSManaged public var participantID: String?
+    @NSManaged public var experimentID: String?
     @NSManaged public var deviceUUID: String?
     @NSManaged public var latitude: Int64
     @NSManaged public var longitude: Int64
-    @NSManaged public var bodyMass: Int64
+    @NSManaged public var body_mass: Int64
     @NSManaged public var heartRate: Int64
     @NSManaged public var isSync: Bool
     @NSManaged public var toQuestionAnswer: NSSet?
