@@ -69,7 +69,7 @@ def lambda_handler(event, context):
                 print("key_ts: ", key_ts, "timestamp_ts: ", timestamp_ts, "timestamp_test", int(time.time()))
                 json_body.append({
                     'time': timestamp_ts,  # XXX
-                    'measurement': measurement,
+                    'measurement': payload['id_experiment'],
                     'tags': {
                         'id_participant': payload['id_participant'],
                         'id_device': payload['id_device']
@@ -91,7 +91,7 @@ def lambda_handler(event, context):
     print("timestamp_end: ", payload['timestamp_end'])
     json_body.append({
         'time': timestamp,
-        'measurement': measurement,
+        'measurement': payload['id_experiment'],
         'tags': {
             'id_participant': payload['id_participant'],
             'id_device': payload['id_device']
