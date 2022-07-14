@@ -53,7 +53,7 @@ class WeeklySurvey: BasePopupVC {
                 }
             }
             do {
-                let postMessage = try JSONEncoder().encode(FormatAPI(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: tmpResponses, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
+                let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(), timestamp_start: GetDateTimeISOString(), timestamp_end: GetDateTimeISOString(), id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: tmpResponses, id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
                 PostRequest(message: postMessage)
             } catch let error {
                 print("error WS: \(error.localizedDescription)")

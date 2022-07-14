@@ -227,11 +227,11 @@ extension ProfileDataStore {
         switch type {
         case HKObjectType.quantityType(forIdentifier: .bodyMass)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .bodyMass)) { (bodyMass, samples) in
-                Utilities.sendHealthData(data: bodyMass, type: .ts_bodyMass, samples: samples)
+                Utilities.sendHealthData(data: bodyMass, type: .ts_body_mass, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .bodyMassIndex)) { (bodyMassIndex, samples) in
-                Utilities.sendHealthData(data: bodyMassIndex, type: .ts_bodyMassIndex, samples: samples)
+                Utilities.sendHealthData(data: bodyMassIndex, type: .ts_body_mass_index, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .leanBodyMass)!:
             getData(type: HKSampleType.quantityType(forIdentifier: .leanBodyMass)) { leanBodyMass in
@@ -242,11 +242,11 @@ extension ProfileDataStore {
             }
         case HKObjectType.quantityType(forIdentifier: .heartRate)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { (heartRate, samples) in
-                Utilities.sendHealthData(data: heartRate, type: .ts_heartRate, samples: samples)
+                Utilities.sendHealthData(data: heartRate, type: .ts_heart_rate, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .restingHeartRate)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .restingHeartRate)) { (restingHeartRate, samples) in
-                Utilities.sendHealthData(data: restingHeartRate, type: .ts_restingHeartRate, samples: samples)
+                Utilities.sendHealthData(data: restingHeartRate, type: .ts_resting_heart_rate, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .bodyTemperature)!:
             getData(type: HKSampleType.quantityType(forIdentifier: .bodyTemperature)) { bodyTemperature in
@@ -264,7 +264,7 @@ extension ProfileDataStore {
             }
         case HKObjectType.quantityType(forIdentifier: .stepCount)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .stepCount)) { (stepCount, samples) in
-                Utilities.sendHealthData(data: stepCount, type: .ts_stepCount, samples: samples)
+                Utilities.sendHealthData(data: stepCount, type: .ts_step_count, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .distanceCycling)!:
             getData(type: HKSampleType.quantityType(forIdentifier: .distanceCycling)) { distanceCycling in
@@ -289,11 +289,11 @@ extension ProfileDataStore {
             }
         case HKObjectType.quantityType(forIdentifier: .appleStandTime)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .appleStandTime)) { (appleStandTime, samples) in
-                Utilities.sendHealthData(data: appleStandTime, type: .ts_appleStandTime, samples: samples)
+                Utilities.sendHealthData(data: appleStandTime, type: .ts_stand_time, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure)) { (noise, samples) in
-                Utilities.sendHealthData(data: noise, type: .ts_hearingEnvironmentalExposure, samples: samples)
+                Utilities.sendHealthData(data: noise, type: .ts_hearing_environmental_exposure, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!:
             getData(type: HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure)) { headphoneAudioExposure in
@@ -311,7 +311,7 @@ extension ProfileDataStore {
             }
         case HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning)) { (distanceWalkingRunning, samples) in
-                Utilities.sendHealthData(data: distanceWalkingRunning, type: .ts_distanceWalkingRunning, samples: samples)
+                Utilities.sendHealthData(data: distanceWalkingRunning, type: .ts_distance_walking_running, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .vo2Max)!:
             getData(type: HKSampleType.quantityType(forIdentifier: .vo2Max)) { vo2Max in
@@ -343,15 +343,15 @@ extension ProfileDataStore {
             }
         case HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .oxygenSaturation)) { (bloodOxygen, samples) in
-                Utilities.sendHealthData(data: bloodOxygen, type: .ts_oxygenSaturation, samples: samples)
+                Utilities.sendHealthData(data: bloodOxygen, type: .ts_oxygen_saturation, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .bloodPressureSystolic)) { (bloodPressureSystolic, samples) in
-                Utilities.sendHealthData(data: bloodPressureSystolic, type: .ts_bloodPressureSystolic, samples: samples)
+                Utilities.sendHealthData(data: bloodPressureSystolic, type: .ts_blood_pressure_systolic, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .bloodPressureDiastolic)) { (bloodPressureDiastolic, samples) in
-                Utilities.sendHealthData(data: bloodPressureDiastolic, type: .ts_bloodPressureDiastolic, samples: samples)
+                Utilities.sendHealthData(data: bloodPressureDiastolic, type: .ts_blood_pressure_diastolic, samples: samples)
             }
         case HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!:
             getData(type: HKSampleType.quantityType(forIdentifier: .basalBodyTemperature)) { basalBodyTemperature in

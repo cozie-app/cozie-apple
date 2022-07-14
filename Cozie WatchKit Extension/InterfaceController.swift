@@ -19,6 +19,7 @@ struct Answer: Codable {
     let heart_rate: [String: Int]
     let sound_pressure: [String: Int]
     let id_participant: String
+    let id_experiment: String
     let id_device: String
     let timestamp_location: String
     let latitude: Double
@@ -57,6 +58,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var audioExposure: [String: Int] = [:]
     var startTime = ""  // placeholder for the start time of the survey
     var participantID = "ExternalTester" // placeholder for the user ID
+    var experimentID = "AppleStore" // placeholder for the user ID
     var questionsDisplayed = [0] // this holds in memory which questions was previously shown
     var lat: Double = 0.0
     var long: Double = 0.0
@@ -75,6 +77,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         uuid = userDefaults.string(forKey: "uuid") ?? "undefined"
         // get participantID from the defaults if available
         participantID = userDefaults.string(forKey: "participantID") ?? participantID
+        experimentID = userDefaults.string(forKey: "experimentID") ?? experimentID
 
         // start connection session with the phone
         session.delegate = self
@@ -106,6 +109,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             participantID = id
             userDefaults.set(id, forKey: "participantID")
         }
+        if let id = message["experimentID"] as? String {
+            experimentID = id
+            userDefaults.set(id, forKey: "experimentID")
+        }
         if let question = message["questions"] as? Int {
             userDefaults.set(question, forKey: "questions")
             defineQuestions()
@@ -113,18 +120,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         WKInterfaceDevice.current().play(.notification)
     }
 
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        if let question = message["questions"] as? Int {
-            userDefaults.set(question, forKey: "questions")
-            defineQuestions()
-        }
-        if let id = message["participantID"] as? String {
-            participantID = id
-            userDefaults.set(id, forKey: "participantID")
-        }
-        // vibrate the watch to notify the user that it worked
-        WKInterfaceDevice.current().play(.notification)
-    }
+//    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+//        if let question = message["questions"] as? Int {
+//            userDefaults.set(question, forKey: "questions")
+//            defineQuestions()
+//        }
+//        if let id = message["experimentID"] as? String {
+//            experimentID = id
+//            userDefaults.set(id, forKey: "experimentID")
+//        }
+//        if let id = message["participantID"] as? String {
+//            participantID = id
+//            userDefaults.set(id, forKey: "participantID")
+//        }
+//        // vibrate the watch to notify the user that it worked
+//        WKInterfaceDevice.current().play(.notification)
+//    }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -271,10 +282,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                         startTimestamp: startTime,
                         endTimestamp: endTime,
                         participantID: participantID,
+                        experimentID: experimentID,
                         deviceUUID: uuid,
                         latitude: lat,
                         longitude: long,
-                        bodyMass: bodyMass,
+                        body_mass: bodyMass,
                         responses: qa,
                         heartRate: 1,
                         isSync: false)])
@@ -284,6 +296,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 heart_rate: tmpHearthRate,
                 sound_pressure: audioExposure,
                 id_participant: participantID,
+                id_experiment: experimentID,
                 id_device: uuid,
                 timestamp_location: locationTimestamp,
                 latitude: lat,

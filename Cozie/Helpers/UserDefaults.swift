@@ -65,15 +65,15 @@ extension UserDefaults {
     func setValue(for key: String, value: Any) {
         setValue(value, forKey: key)
         do {
-            let postMessage = try JSONEncoder().encode(FormatAPI(locationTimestamp: GetDateTimeISOString(),
-                                                                 startTimestamp: GetDateTimeISOString(),
-                                                                 endTimestamp: GetDateTimeISOString(),
-                                                                 participantID: getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "",
-                                                                 responses: ["settings_participation_Days": "\(getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])",
-                                                                             "settings_notification_frequency": "\(getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
-                                                                             "settings_from_time": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
-                                                                 deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "",
-                                                                 oneSignalUserID: OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId as? String ?? "ID not yet retrieved"))
+            let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(),
+                    timestamp_start: GetDateTimeISOString(),
+                    timestamp_end: GetDateTimeISOString(),
+                    id_participant: getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                    responses: ["settings_participation_days": "\(getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])",
+                                "settings_notification_frequency": "\(getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
+                                "settings_from_time": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
+                    id_device: UIDevice.current.identifierForVendor?.uuidString ?? "",
+                    id_one_signal: OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId as? String ?? "ID not yet retrieved"))
             PostRequest(message: postMessage)
         } catch let error {
             print("error UD: \(error.localizedDescription)")
