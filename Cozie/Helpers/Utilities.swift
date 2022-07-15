@@ -121,8 +121,6 @@ class Utilities {
         let req = Alamofire.request(AWSReadURL, method: .get, parameters: param, headers: headers).responseJSON { (response) in
             if let responseCode = response.response?.statusCode {
                 if responseCode == 200 {
-                    print("response")
-                    print(response.result.value)
                     if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? NSDictionary {
                         if isForDownload {
 //                            self.saveJSON(jsonString: data)
