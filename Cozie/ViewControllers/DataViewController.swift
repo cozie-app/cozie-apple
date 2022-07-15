@@ -24,32 +24,32 @@ class DataViewController: UIViewController, ChartViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.labelData.layer.masksToBounds = true
+        labelData.layer.masksToBounds = true
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClickDataDownloadView(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onClickDataDownloadView(_:)))
         dataDownloadView.addGestureRecognizer(tap)
 
         let barChartView1 = barChart()
-        self.chart1 = barChartView1
+        chart1 = barChartView1
         graphView1.addSubview(barChartView1)
 
         barChartView1.translatesAutoresizingMaskIntoConstraints = false
-        barChartView1.leadingAnchor.constraint(equalTo: self.graphView1.layoutMarginsGuide.leadingAnchor).isActive = true
-        barChartView1.trailingAnchor.constraint(equalTo: self.graphView1.layoutMarginsGuide.trailingAnchor).isActive = true
-        barChartView1.topAnchor.constraint(equalTo: self.graphView1.layoutMarginsGuide.topAnchor).isActive = true
-        barChartView1.bottomAnchor.constraint(equalTo: self.graphView1.layoutMarginsGuide.bottomAnchor).isActive = true
+        barChartView1.leadingAnchor.constraint(equalTo: graphView1.layoutMarginsGuide.leadingAnchor).isActive = true
+        barChartView1.trailingAnchor.constraint(equalTo: graphView1.layoutMarginsGuide.trailingAnchor).isActive = true
+        barChartView1.topAnchor.constraint(equalTo: graphView1.layoutMarginsGuide.topAnchor).isActive = true
+        barChartView1.bottomAnchor.constraint(equalTo: graphView1.layoutMarginsGuide.bottomAnchor).isActive = true
 
         let barChartView2 = barChart()
-        self.chart2 = barChartView2
+        chart2 = barChartView2
         graphView2.addSubview(barChartView2)
 
         barChartView2.translatesAutoresizingMaskIntoConstraints = false
-        barChartView2.leadingAnchor.constraint(equalTo: self.graphView2.layoutMarginsGuide.leadingAnchor).isActive = true
-        barChartView2.trailingAnchor.constraint(equalTo: self.graphView2.layoutMarginsGuide.trailingAnchor).isActive = true
-        barChartView2.topAnchor.constraint(equalTo: self.graphView2.layoutMarginsGuide.topAnchor).isActive = true
-        barChartView2.bottomAnchor.constraint(equalTo: self.graphView2.layoutMarginsGuide.bottomAnchor).isActive = true
+        barChartView2.leadingAnchor.constraint(equalTo: graphView2.layoutMarginsGuide.leadingAnchor).isActive = true
+        barChartView2.trailingAnchor.constraint(equalTo: graphView2.layoutMarginsGuide.trailingAnchor).isActive = true
+        barChartView2.topAnchor.constraint(equalTo: graphView2.layoutMarginsGuide.topAnchor).isActive = true
+        barChartView2.bottomAnchor.constraint(equalTo: graphView2.layoutMarginsGuide.bottomAnchor).isActive = true
 
-        self.setupUI()
+        setupUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +77,7 @@ class DataViewController: UIViewController, ChartViewDelegate {
         }
 
         var yValues1: [BarChartDataEntry] = []
-        for (index, value) in self.responseValues.enumerated() {
+        for (index, value) in responseValues.enumerated() {
             yValues1.append(BarChartDataEntry(x: Double(index), y: value))
         }
 
@@ -86,18 +86,18 @@ class DataViewController: UIViewController, ChartViewDelegate {
             BarChartDataEntry(x: 1, y: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue) as? Double ?? 0.0)
         ]
 
-        self.setChartValue(values: yValues1, barChartView: self.chart1!)
-        self.chart1?.xAxis.labelCount = self.dateValues.count
-        self.chart1?.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.dateValues)
-        self.setChartValue(values: yValues2, barChartView: self.chart2!)
-        self.chart2?.xAxis.labelCount = self.validResValues.count
-        self.chart2?.xAxis.valueFormatter = IndexAxisValueFormatter(values: self.validResValues)
-        if self.dateValues.count > 0 {
-            self.chart1?.scaleYEnabled = false
-            self.chart1?.isUserInteractionEnabled = true
-            self.chart1?.setVisibleXRangeMaximum(4)
-            self.chart1?.setVisibleXRangeMinimum(4)
-            self.chart1?.moveViewToX(Double(self.dateValues.count))
+        setChartValue(values: yValues1, barChartView: chart1!)
+        chart1?.xAxis.labelCount = dateValues.count
+        chart1?.xAxis.valueFormatter = IndexAxisValueFormatter(values: dateValues)
+        setChartValue(values: yValues2, barChartView: chart2!)
+        chart2?.xAxis.labelCount = validResValues.count
+        chart2?.xAxis.valueFormatter = IndexAxisValueFormatter(values: validResValues)
+        if dateValues.count > 0 {
+            chart1?.scaleYEnabled = false
+            chart1?.isUserInteractionEnabled = true
+            chart1?.setVisibleXRangeMaximum(4)
+            chart1?.setVisibleXRangeMinimum(4)
+            chart1?.moveViewToX(Double(dateValues.count))
         }
     }
 
@@ -144,7 +144,7 @@ class DataViewController: UIViewController, ChartViewDelegate {
             Utilities.downloadData(self)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -164,6 +164,6 @@ extension DataViewController {
             }
         }
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.dayData.rawValue, value: dateData)
-        self.setupUI()
+        setupUI()
     }
 }
