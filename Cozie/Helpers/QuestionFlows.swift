@@ -26,7 +26,7 @@ func defineQuestionFlows() {
         Flow(title: "Thermal", questions: [
             Question(
                 title: "How would you prefer to be?",
-                identifier: "tc-preference",
+                identifier: "tc_preference",
                 options: [
                     "Cooler",
                     "No Change",
@@ -45,7 +45,7 @@ func defineQuestionFlows() {
         ),
             Question(
                     title: "Light preference",
-                    identifier: "light-preference",
+                    identifier: "light_preference",
                     options: [
                         "Dimmer",
                         "No Change",
@@ -64,7 +64,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Sound preference",
-                    identifier: "sound-preference",
+                    identifier: "sound_preference",
                     options: [
                         "Quieter",
                         "No Change",
@@ -83,7 +83,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Are you?",
-                    identifier: "are-you",
+                    identifier: "are_you",
                     options: [
                         "Outdoor",
                         "Indoor"
@@ -99,7 +99,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Where are you?",
-                    identifier: "location-place",
+                    identifier: "location_place",
                     options: [
                         "Home",
                         "Office",
@@ -121,7 +121,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Are you near a sensor?",
-                    identifier: "near-sensor?",
+                    identifier: "near_sensor?",
                     options: [
                         "Home",
                         "Work",
@@ -184,7 +184,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Have you changed location, activity or clothing over the last 10-min?",
-                    identifier: "changed-location",
+                    identifier: "changed_location",
                     options: [
                         "Yes",
                         "No"
@@ -202,7 +202,7 @@ func defineQuestionFlows() {
         Flow(title: "Movement", questions: [
             Question(
                     title: "In the past 60min, I used",
-                    identifier: "last-60min",
+                    identifier: "last_60min",
                     options: [
                         "Lift",
                         "Stairs",
@@ -224,7 +224,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Took lift, why?",
-                    identifier: "lift-why",
+                    identifier: "lift_why",
                     options: [
                         "Convenient",
                         "Less effort",
@@ -243,7 +243,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Took stairs, why?",
-                    identifier: "stairs-why",
+                    identifier: "stairs_why",
                     options: [
                         "Convenient",
                         "No lift",
@@ -265,7 +265,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Lift convenient because?",
-                    identifier: "lift-con",
+                    identifier: "lift_con",
                     options: [
                         "Easiest",
                         "Fastest",
@@ -284,7 +284,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Stairs convenient because",
-                    identifier: "stairs-con",
+                    identifier: "stairs_con",
                     options: [
                         "Easiest",
                         "Fastest",
@@ -338,7 +338,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Adjusted height today?",
-                    identifier: "adj-height",
+                    identifier: "adj_height",
                     options: [
                         "Up & down",
                         "Down",
@@ -375,7 +375,7 @@ func defineQuestionFlows() {
                     ]
             ), Question(
                     title: "Took lift, why?",
-                    identifier: "lift-why",
+                    identifier: "lift_why",
                     options: [
                         "Convenient",
                         "Less effort",
@@ -393,7 +393,7 @@ func defineQuestionFlows() {
                     ]
             ), Question(
                     title: "Took stairs, why?",
-                    identifier: "stairs-why",
+                    identifier: "stairs_why",
                     options: [
                         "Convenient",
                         "No lift",
@@ -414,7 +414,7 @@ func defineQuestionFlows() {
                     ]
             ), Question(
                     title: "Lift convenient because?",
-                    identifier: "lift-con",
+                    identifier: "lift_con",
                     options: [
                         "Easiest",
                         "Fastest",
@@ -436,7 +436,7 @@ func defineQuestionFlows() {
         Flow(title: "Privacy", questions: [
             Question(
                     title: "Alone or in a group?",
-                    identifier: "alone-group",
+                    identifier: "alone_group",
                     options: [
                         "Alone",
                         "Online",
@@ -525,7 +525,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Feeling like you need more privacy?",
-                    identifier: "more-privacy",
+                    identifier: "more_privacy",
                     options: [
                         "Yes",
                         "No"
@@ -541,7 +541,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "What kind of distraction",
-                    identifier: "kind-distraction",
+                    identifier: "kind_distraction",
                     options: [
                         "Visual",
                         "Audio",
@@ -560,7 +560,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Why is more privacy needed?",
-                    identifier: "why-more-privacy",
+                    identifier: "why_more_privacy",
                     options: [
                         "See me",
                         "Hear me",
@@ -579,7 +579,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "What is it?",
-                    identifier: "what-privacy",
+                    identifier: "what_privacy",
                     options: [
                         "Thermal",
                         "Scent",
@@ -598,7 +598,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "What do people see?",
-                    identifier: "people-see",
+                    identifier: "people_see",
                     options: [
                         "Appearance",
                         "Work",
@@ -638,7 +638,7 @@ func defineQuestionFlows() {
         Flow(title: "Infection Risk", questions: [
             Question(
                     title: "Do your surroundings increase infection risk?",
-                    identifier: "surroundings-infection",
+                    identifier: "surroundings_infection",
                     options: [
                         "Not at all",
                         "A Little",
@@ -657,7 +657,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Currently, how many people are within 5m?",
-                    identifier: "within-5m",
+                    identifier: "within_5m",
                     options: [
                         "0 pax",
                         "1-4 pax",
@@ -676,7 +676,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "What causes more risk?",
-                    identifier: "cause-risk",
+                    identifier: "cause_risk",
                     options: [
                         "Ventilation",
                         "People",

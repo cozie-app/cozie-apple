@@ -41,8 +41,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     let heartRateQuantity = HKUnit(from: "count/min")
     var locationManager: CLLocationManager = CLLocationManager()
 
-    // improvement get  other physiological parameters, activity, energy burned last hour, steps
-
     @IBOutlet weak var stopButton: WKInterfaceButton!
     @IBOutlet weak var backButton: WKInterfaceButton!
     @IBOutlet var questionTitle: WKInterfaceLabel!
@@ -54,7 +52,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     var tmpResponses: [String: String] = [:]  // it temporally stores user's answers
     var tmpHearthRate: [String: Int] = [:]  // it temporally stores user's answers
     var bodyMass: Double = 0.0
-//    var audioExposure: Double = 0.0
+    var basalEnergy: Double = 0.0
     var audioExposure: [String: Int] = [:]
     var startTime = ""  // placeholder for the start time of the survey
     var participantID = "ExternalTester" // placeholder for the user ID
@@ -104,22 +102,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     // this function fires when a message from the phone is received
-//    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-//        if let id = message["participantID"] as? String {
-//            participantID = id
-//            userDefaults.set(id, forKey: "participantID")
-//        }
-//        if let experiment = message["experimentID"] as? String {
-//            experimentID = experiment
-//            userDefaults.set(experiment, forKey: "experimentID")
-//        }
-//        if let question = message["questions"] as? Int {
-//            userDefaults.set(question, forKey: "questions")
-//            defineQuestions()
-//        }
-//        WKInterfaceDevice.current().play(.notification)
-//    }
-
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         if let question = message["questions"] as? Int {
             userDefaults.set(question, forKey: "questions")
@@ -149,20 +131,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         // improvement some of the following query do not need to be performed everytime willActivate is triggered
         healthStore.authorizeHealthKit { (success, error) in
             if success {
-//                //get noise
-//                self.healthStore.noiseExposure(completion: { (noise, noiseDate) in
-//                    if noise != nil {
-//                        self.audioExposure = noise!
-//                    }
-//                })
                 //get noise array
                 self.healthStore.noiseExposure(completion: { (noise) in
                     if noise != nil {
                         self.audioExposure = noise!
                     }
                 })
-
-                print("audio \(self.audioExposure)")
 
                 //get weight
                 self.healthStore.bodyMassKg(completion: { (mass, bodyMassDate) in
@@ -171,13 +145,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                     }
                 })
 
-                print(self.bodyMass)
-
                 //get basal energy
                 self.healthStore.basalEnergy(completion: { (energy, date) in
                     if energy != nil {
-//                        print("basal energy: \(energy)   date: \(date)")
-//                        self.bodyMass = energy!
+                        print("basal energy: \(energy)   date: \(date)")
+                        self.basalEnergy = energy!
                     }
                 })
 
@@ -187,8 +159,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                         self.tmpHearthRate = heartRate!
                     }
                 })
-
-                print(self.tmpHearthRate)
             }
         }
     }
@@ -267,14 +237,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             voteLog += 1
             userDefaults.set(voteLog, forKey: "voteLog")
 
-            // pushController(withName: "ThankYouController", context: questions[currentQuestion].options[rowIndex])
-
             let endTime = GetDateTimeISOString()
 
             var qa: [QuestionAnswer] = []
             tmpResponses.forEach { (question, answer) in
                 qa.append(QuestionAnswer(voteLog: voteLog, question: question, answer: answer))
             }
+
+            // I am not sure why this function has been added, maybe to share the survey responses with the phone
             CoreDataManager.shared.createSurvey(surveys: [
                 SurveyDetails(
                         voteLog: voteLog,
@@ -290,6 +260,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                         responses: qa,
                         heartRate: 1,
                         isSync: false)])
+
             SendDataDatabase(answer: Answer(
                 timestamp_start: startTime,
                 timestamp_end: endTime,
@@ -304,6 +275,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 responses: tmpResponses,
                 vote_count: voteLog,
                 body_mass: bodyMass))
+
             self.sendMessageToPhone(message: ["isSurveyAdded": true])
             // clear temporary arrays
             tmpResponses.removeAll()
@@ -321,8 +293,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
 
         self.questions = questionFlows[userDefaults.object(forKey: "questions") as? Int ?? 0].questions
 
-        self.questions += [Question(title: "Thank you.", identifier: "end", options: ["Submit survey"],
-                icons: ["submit"], nextQuestion: [999])]
+        self.questions += [Question(
+                title: "Thank you.",
+                identifier: "end",
+                options: ["Submit survey"],
+                icons: ["submit"],
+                nextQuestion: [999])]
         loadTableData(question: &questions[0], backPressed: false)
     }
 
