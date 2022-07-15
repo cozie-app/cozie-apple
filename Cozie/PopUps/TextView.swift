@@ -59,7 +59,7 @@ class TextView: BasePopupVC {
         case 3:
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue, value: Double(self.idTextField.text!))
         default:
-            var a = 2
+            print("")
         }
         NavigationManager.dismiss(self)}
 }

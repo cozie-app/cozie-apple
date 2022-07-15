@@ -148,7 +148,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                 //get basal energy
                 self.healthStore.basalEnergy(completion: { (energy, date) in
                     if energy != nil {
-                        print("basal energy: \(energy)   date: \(date)")
                         self.basalEnergy = energy!
                     }
                 })

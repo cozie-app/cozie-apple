@@ -57,7 +57,7 @@ public func PostRequest(message: Data) -> Int {
             return
         }
 
-        guard let data = data else {
+        guard data != nil else {
             return
         }
 
