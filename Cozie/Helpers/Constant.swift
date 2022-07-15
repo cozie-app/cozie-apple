@@ -22,7 +22,7 @@ let imgDownload = "downloadData"
 let folderName = "Cozie"
 
 let AWSWriteURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-write-influx"
-let AWSReadURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-app-read-influx"
+let AWSReadURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-read-influx"
 let AWSWriteAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
 let AWSReadAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
 
