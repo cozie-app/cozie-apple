@@ -10,12 +10,14 @@ import CoreData
 import CoreVideo
 
 final class CoreDataManager {
-    
-    private init(){}
+
+    private init() {
+    }
+
     static let shared = CoreDataManager()
-    
+
     private let cdSurveyDetails = "CDSurveyDetails"
-    
+
     // MARK: - Model SurveyDetails CRUD
     func createSurvey(surveys: [SurveyDetails]) {
         let context = PersistentStorage.shared.newBackgroundContext()
@@ -34,32 +36,32 @@ final class CoreDataManager {
                 cdSurvey.body_mass = survey.body_mass
                 cdSurvey.heartRate = Int64(survey.heartRate)
                 cdSurvey.isSync = survey.isSync
-                
+
                 var cdQuestionAnswerArray: [Any] = []
                 survey.responses?.forEach({ questionAnswer in
                     let cdQuestionAnswer = CDQuestionAnswer(context: context)
                     cdQuestionAnswer.voteLog = Int64(questionAnswer.voteLog ?? -1)
                     cdQuestionAnswer.question = questionAnswer.question
                     cdQuestionAnswer.answer = questionAnswer.answer
-                    
+
                     cdQuestionAnswerArray.append(cdQuestionAnswer)
                 })
                 cdSurvey.toQuestionAnswer = NSSet(array: cdQuestionAnswerArray)
-                
+
             }
             context.saveContext()
         }
     }
-    
+
     func readAllSurvey() -> [SurveyDetails]? {
         let result = PersistentStorage.shared.fetchManagedObject(managedObject: CDSurveyDetails.self)
-        var survey : [SurveyDetails] = []
+        var survey: [SurveyDetails] = []
         result?.forEach({ (cdSurvey) in
             survey.append(cdSurvey.convertToSurvey())
         })
         return survey
     }
-    
+
     func deleteSurvey(VoteLog: Int) {
         let context = PersistentStorage.shared.newBackgroundContext()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cdSurveyDetails)
@@ -70,11 +72,11 @@ final class CoreDataManager {
             context.saveContext()
         }
     }
-    
+
     private func deleteAllSurvey() {
         deleteEntity(entityName: cdSurveyDetails)
     }
-    
+
     // MARK: - Model SurveyDetails CRUD
 //    func createQuestionAnswer(questionAnswers: [QuestionAnswer]) {
 //        let context = PersistentStorage.shared.newBackgroundContext()
@@ -85,7 +87,7 @@ final class CoreDataManager {
 //            context.saveContext()
 //        }
 //    }
-    
+
     // MARK: - Delete Entity
     private func deleteEntity(entityName: String) {
         let context = PersistentStorage.shared.newBackgroundContext()
@@ -95,7 +97,7 @@ final class CoreDataManager {
             context.saveContext()
         }
     }
-    
+
     // MARK: - Whole CoreData CRUD
     func deleteAllLocalStorage() {
         deleteAllSurvey()
@@ -112,19 +114,19 @@ extension CDSurveyDetails {
             questionAnswers.append(questionAnswer.convertToQuestionAnswer())
         })
         return SurveyDetails(
-            voteLog: Int(voteLog),
-            locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()),
-            startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()),
-            endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()),
-            participantID: self.participantID ?? "",
-            experimentID: self.experimentID ?? "",
-            deviceUUID: deviceUUID ?? "",
-            latitude: latitude,
-            longitude: longitude,
-            body_mass: body_mass,
-            responses: questionAnswers,
-            heartRate: Int(heartRate),
-            isSync: isSync)
+                voteLog: Int(voteLog),
+                locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()),
+                startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()),
+                endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()),
+                participantID: self.participantID ?? "",
+                experimentID: self.experimentID ?? "",
+                deviceUUID: deviceUUID ?? "",
+                latitude: latitude,
+                longitude: longitude,
+                body_mass: body_mass,
+                responses: questionAnswers,
+                heartRate: Int(heartRate),
+                isSync: isSync)
     }
 }
 

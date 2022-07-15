@@ -9,11 +9,13 @@
 import UIKit
 
 class SettingsCell: UITableViewCell {
-    
+
     // define settings cell properties
     var sectionType: SectionType? {
         didSet {
-            guard let sectionType = sectionType else { return }
+            guard let sectionType = sectionType else {
+                return
+            }
             textLabel?.text = sectionType.description
             switchControl.isHidden = !sectionType.constrainsSwitch
             switchControl.isOn = !sectionType.isSwitchEnable
@@ -36,7 +38,7 @@ class SettingsCell: UITableViewCell {
 
         return switchControl
     }()
-    
+
     // define initial state of imageView
     let imageViewProperty: UIImageView = {
         let imageView = UIImageView()
@@ -62,9 +64,11 @@ class SettingsCell: UITableViewCell {
         imageViewProperty.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         imageViewProperty.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     }
-    
+
     private func setupImage(name: String) {
-        let widthConstraints = imageViewProperty.constraints.filter{$0.firstAttribute == .width}
+        let widthConstraints = imageViewProperty.constraints.filter {
+            $0.firstAttribute == .width
+        }
         widthConstraints.forEach { constrain in
             constrain.isActive = false
         }
@@ -74,18 +78,18 @@ class SettingsCell: UITableViewCell {
             imageViewProperty.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     // triggers an action when the switch button is pressed
-    @objc func handleSwitchAction(sender: UISwitch){
+    @objc func handleSwitchAction(sender: UISwitch) {
         if sender.isOn {
             print("Turned On")
         } else {
             print("Turned Off")
         }
     }
-    
+
 }

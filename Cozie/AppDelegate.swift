@@ -19,24 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         //Remove this method to stop OneSignal Debugging
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
 
         //START OneSignal initialization code
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
-        
+
         // Code needed for OneSignal to work properly
         OneSignal.initWithLaunchOptions(launchOptions,
-          appId: OneSignalAppID,
-          handleNotificationAction: nil,
-          settings: onesignalInitSettings)
+                appId: OneSignalAppID,
+                handleNotificationAction: nil,
+                settings: onesignalInitSettings)
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
 
         // The promptForPushNotifications function code will show the iOS push notification prompt.
         OneSignal.promptForPushNotifications(userResponse: { accepted in
-          print("User accepted notifications: \(accepted)")
+            print("User accepted notifications: \(accepted)")
         })
         //END OneSignal initialization code
         IQKeyboardManager.shared.enable = true
@@ -66,11 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-    
+
     func setUpBackgroundDeliveryForDataTypes() {
         let types = ProfileDataStore.dataTypesToRead()
         for type in types {
-            guard let sampleType = type as? HKSampleType else { print("ERROR: \(type) is not an HKSampleType"); continue }
+            guard let sampleType = type as? HKSampleType else {
+                print("ERROR: \(type) is not an HKSampleType"); continue
+            }
             let query = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
                 debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
                 DispatchQueue.global(qos: .background).async {

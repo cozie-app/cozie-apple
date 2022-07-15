@@ -25,24 +25,24 @@ func defineQuestionFlows() {
     questionFlows = [
         Flow(title: "Thermal", questions: [
             Question(
-                title: "How would you prefer to be?",
-                identifier: "tc_preference",
-                options: [
-                    "Cooler",
-                    "No Change",
-                    "Warmer"
-                ],
-                icons: [
-                    "tp-cooler",
-                    "comfortable",
-                    "tp-warmer"
-                ],
-                nextQuestion: [
-                    1,
-                    1,
-                    1
-                ]
-        ),
+                    title: "How would you prefer to be?",
+                    identifier: "tc_preference",
+                    options: [
+                        "Cooler",
+                        "No Change",
+                        "Warmer"
+                    ],
+                    icons: [
+                        "tp-cooler",
+                        "comfortable",
+                        "tp-warmer"
+                    ],
+                    nextQuestion: [
+                        1,
+                        1,
+                        1
+                    ]
+            ),
             Question(
                     title: "Light preference",
                     identifier: "light_preference",

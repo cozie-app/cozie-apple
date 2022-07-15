@@ -9,16 +9,16 @@
 import UIKit
 
 class HomePageViewController: UIViewController {
-    
+
     @IBOutlet weak var totalQuestionnairesLabel: UILabel!
     @IBOutlet weak var viewID: UIView!
     @IBOutlet weak var viewNotificationFreq: UIView!
     @IBOutlet weak var viewParticipationDays: UIView!
     @IBOutlet weak var viewParticipationHours: UIView!
     @IBOutlet weak var viewQuestionnaires: UIView!
-    
+
     @IBOutlet weak var labelFlow: UILabel!
-    
+
     @IBOutlet weak var labelExperimentID: UILabel!
     @IBOutlet weak var labelParticipantID: UILabel!
     @IBOutlet weak var labelNotificationFreq: UILabel!
@@ -27,14 +27,14 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var viewSurvey: UIView!
     @IBOutlet weak var appIconImg: UIImageView!
     @IBOutlet weak var reminder: UIImageView!
-    
-    var selectedQuestionFlow:Int = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0
-    var labelArray:[UILabel] = []
-    var daysFlag:[Bool] = []
-    var days:String = ""
-    var fromTime:String = ""
-    var ToTime:String = ""
-    
+
+    var selectedQuestionFlow: Int = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0
+    var labelArray: [UILabel] = []
+    var daysFlag: [Bool] = []
+    var days: String = ""
+    var fromTime: String = ""
+    var ToTime: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,13 +78,13 @@ class HomePageViewController: UIViewController {
         viewQuestionnaires.layer.shadowOpacity = 0.6
         viewQuestionnaires.layer.shadowOffset = .zero
         viewQuestionnaires.layer.shadowRadius = 5
-        
+
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         self.reminder.addGestureRecognizer(imageTap)
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClickSurveyView(_:)))
         self.viewSurvey.addGestureRecognizer(tap)
-        
+
         HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -95,46 +95,46 @@ class HomePageViewController: UIViewController {
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Utilities.getData { (isSuccess, data) in
             if isSuccess {
-                self.reloadPage(forData: data)                
+                self.reloadPage(forData: data)
             }
         }
         self.fillUpData()
     }
-    
+
     @objc private func imageTapped(_: UITapGestureRecognizer) {
         if let viewController = self.tabBarController {
             NavigationManager.openReminder(viewController)
         }
     }
-    
-    @objc private func onClickSurveyView(_: UITapGestureRecognizer){
+
+    @objc private func onClickSurveyView(_: UITapGestureRecognizer) {
         if let viewController = self.tabBarController {
             NavigationManager.openWeeklySurvey(viewController)
         }
     }
-    
-    private func fillUpData(){
-        
+
+    private func fillUpData() {
+
         let experimentID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String
         let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String
 
         self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
         self.labelExperimentID.text = experimentID
         self.labelParticipantID.text = participantID
-        
+
         self.labelNotificationFreq.text = "Every " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getHour() + " hours " + (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq).getMinutes() + " minutes"
-        
+
         self.labelFlow.text = questionFlows[UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0].title
-        
-        self.daysFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true,true,true,true,true,false,false]
+
+        self.daysFlag = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [true, true, true, true, true, false, false]
         self.days = ""
-        
-        for i in 0...6{
+
+        for i in 0...6 {
             switch i {
             case 0:   days += daysFlag[i] ? "Mon, " : ""
             case 1:   days += daysFlag[i] ? "Tue, " : ""
@@ -147,9 +147,9 @@ class HomePageViewController: UIViewController {
                 break
             }
         }
-        
+
         self.labelParticipationDays.text = String(days.dropLast(2))
-        
+
         self.fromTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormatTimeString() + "hrs"
         self.ToTime = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormatTimeString() + "hrs"
         self.labelParticipationHours.text = self.fromTime + " - " + self.ToTime
@@ -158,7 +158,9 @@ class HomePageViewController: UIViewController {
 
 extension HomePageViewController {
     func reloadPage(forData: [Response]) {
-        let actualResponse = forData.filter { $0.voteLog != nil }
+        let actualResponse = forData.filter {
+            $0.voteLog != nil
+        }
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
         self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
     }

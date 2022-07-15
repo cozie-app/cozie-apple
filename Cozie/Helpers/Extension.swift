@@ -15,26 +15,26 @@ extension Date {
         timeFormatter.dateFormat = "HH:mm"
         return timeFormatter.string(from: self)
     }
-    
+
     func getDayString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let stringDate = dateFormatter.string(from: self)
         return stringDate
     }
-    
+
     func getHour() -> String {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "H"
         return "\(Calendar.current.component(.hour, from: self))"
     }
-    
+
     func getMinutes() -> String {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "mm"
         return "\(Calendar.current.component(.minute, from: self))"
     }
-    
+
     func getTimeInt() -> Int {
         let hour = getHour()
         let mins = getMinutes()
@@ -47,7 +47,9 @@ extension String {
         if self != "" {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy"
-            guard let date = dateFormatter.date(from: self) else { return Date() }
+            guard let date = dateFormatter.date(from: self) else {
+                return Date()
+            }
             return date
         } else {
             return Date()
@@ -59,7 +61,8 @@ extension UIView {
     @IBInspectable var cornerRadius: Double {
         get {
             return Double(layer.cornerRadius)
-        }set {
+        }
+        set {
             layer.cornerRadius = CGFloat(newValue)
         }
     }
@@ -69,7 +72,8 @@ extension UIButton {
     @IBInspectable var buttonCornerRadius: Double {
         get {
             return Double(layer.cornerRadius)
-        }set {
+        }
+        set {
             layer.cornerRadius = CGFloat(newValue)
         }
     }
@@ -77,7 +81,9 @@ extension UIButton {
 
 extension UIViewController {
     func getControllerFromStack(_ vc: AnyClass) -> UIViewController? {
-        guard let controllers = navigationController?.viewControllers else { return nil }
+        guard let controllers = navigationController?.viewControllers else {
+            return nil
+        }
         for controller in controllers {
             if controller.isKind(of: vc) {
                 return controller
@@ -104,7 +110,7 @@ extension UILabel {
             text = forText as NSString
         }
         let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font as Any], context: nil)
-        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        let linesRoundedUp = Int(ceil(textSize.height / charSize))
         return linesRoundedUp
     }
 }

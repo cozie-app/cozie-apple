@@ -262,19 +262,19 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
                         isSync: false)])
 
             SendDataDatabase(answer: Answer(
-                timestamp_start: startTime,
-                timestamp_end: endTime,
-                heart_rate: tmpHearthRate,
-                sound_pressure: audioExposure,
-                id_participant: participantID,
-                id_experiment: experimentID,
-                id_device: uuid,
-                timestamp_location: locationTimestamp,
-                latitude: lat,
-                longitude: long,
-                responses: tmpResponses,
-                vote_count: voteLog,
-                body_mass: bodyMass))
+                    timestamp_start: startTime,
+                    timestamp_end: endTime,
+                    heart_rate: tmpHearthRate,
+                    sound_pressure: audioExposure,
+                    id_participant: participantID,
+                    id_experiment: experimentID,
+                    id_device: uuid,
+                    timestamp_location: locationTimestamp,
+                    latitude: lat,
+                    longitude: long,
+                    responses: tmpResponses,
+                    vote_count: voteLog,
+                    body_mass: bodyMass))
 
             self.sendMessageToPhone(message: ["isSurveyAdded": true])
             // clear temporary arrays
