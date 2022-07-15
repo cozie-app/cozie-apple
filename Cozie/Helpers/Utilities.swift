@@ -109,7 +109,10 @@ class Utilities {
 
     static func getData(isForDownload: Bool = false, completion: @escaping (Bool, [Response]) -> Void) {
 
-        let param = ["user_id": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "weeks": "100"]
+        let param = [
+            "id_participant": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "ExternalTester",
+            "id_experiment": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "AppleStore",
+            "weeks": "100"]
 
         let headers = ["x-api-key": AWSReadAPIKey, // Singapore API key
                        "Accept": "application/json",
@@ -118,6 +121,8 @@ class Utilities {
         let req = Alamofire.request(AWSReadURL, method: .get, parameters: param, headers: headers).responseJSON { (response) in
             if let responseCode = response.response?.statusCode {
                 if responseCode == 200 {
+                    print("response")
+                    print(response.result.value)
                     if let values = response.result.value as? NSArray, let dictionary = values.lastObject as? NSDictionary, let data = dictionary["data"] as? NSDictionary {
                         if isForDownload {
 //                            self.saveJSON(jsonString: data)
@@ -262,16 +267,16 @@ struct Response: Codable {
     let timestamp: String?
     let latitude: Double?
     let longitude: Double?
-    let user_id: String
-    let voteLog: Int?
+    let id_participant: String
+    let vote_count: Int?
 
     func encode(to encoder: Encoder) throws {
         var val = encoder.container(keyedBy: CodingKeys.self)
         try val.encode(timestamp, forKey: .timestamp)
         try val.encode(latitude, forKey: .latitude)
         try val.encode(longitude, forKey: .longitude)
-        try val.encode(user_id, forKey: .user_id)
-        try val.encode(voteLog, forKey: .voteLog)
+        try val.encode(id_participant, forKey: .id_participant)
+        try val.encode(vote_count, forKey: .vote_count)
     }
 }
 

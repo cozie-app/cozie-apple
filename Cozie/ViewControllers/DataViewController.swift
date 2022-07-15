@@ -151,7 +151,7 @@ class DataViewController: UIViewController, ChartViewDelegate {
 extension DataViewController {
     func reloadPage(forData: [Response]) {
         let actualResponse = forData.filter {
-            $0.voteLog != nil
+            $0.vote_count != nil
         }
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
         var dateData = [String: Int]()

@@ -159,7 +159,7 @@ class HomePageViewController: UIViewController {
 extension HomePageViewController {
     func reloadPage(forData: [Response]) {
         let actualResponse = forData.filter {
-            $0.voteLog != nil
+            $0.vote_count != nil
         }
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
         self.totalQuestionnairesLabel.text = "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue) as? Int ?? 0)"
