@@ -22,6 +22,7 @@ db = "cozie-apple"
 def lambda_handler(event, context):
 
     measurement = event["queryStringParameters"]["id_experiment"]
+    print(f"{measurement=}")
 
     # Check if there are any parameters, if not 400 error
     if len(event["queryStringParameters"]) == 0:
@@ -53,7 +54,7 @@ def lambda_handler(event, context):
     # Limit start time of data to be retrieved
     # This hack is needed because some fault data was inserted on 29.03.2022. All queries including data from data they return empty. The exact reason is unkown.
     influx_time_horizon = datetime.datetime.strptime(
-        "30.03.2022, 00:00", "%d.%m.%Y, %H:%M"
+        "30.06.2022, 00:00", "%d.%m.%Y, %H:%M"
     )
     if time_start < influx_time_horizon:
         time_start = influx_time_horizon
@@ -62,104 +63,41 @@ def lambda_handler(event, context):
 
     # section of the code run if query comes from the cozie apple app
     if "id_participant" in event["queryStringParameters"]:
+
         # Influx client
         client = InfluxDBClient(
             host, port, user, password, db, ssl=True, verify_ssl=True
         )
 
         # todo query only the columns which do not have timeseries data
-        query_influx = """SELECT 
-                          \"id_participant\", 
-                          \"id_device\",
-                          \"vote_count\", 
-                          \"end\", 
-                          \"clo\", 
-                          \"location-place\", 
-                          \"location-in-out\", 
-                          \"tc-preference\", 
-                          \"met\", 
-                          \"any-change\", 
-                          \"last-60min\", 
-                          \"alone-group\", 
-                          \"surroundings-infection\",
-                          \"surroundings-infection\", 
-                          \"within-5m\", 
-                          \"cause-risk\", 
-                          \"concerns\",
-                          \"tc-preference\", 
-                          \"light-preference\", 
-                          \"sound-preference\", 
-                          \"are-you\", 
-                          \"location-place \", 
-                          \"near-sensor?\", 
-                          \"mood\", 
-                          \"clo\", 
-                          \"changed-loaction\",
-                          \"alone-group\", 
-                          \"activity\", 
-                          \"distracting\", 
-                          \"distractions\", 
-                          \"activity\", 
-                          \"more-privacy\", 
-                          \"kind-distraction\", 
-                          \"why-more-privacy\", 
-                          \"what-privacy\", 
-                          \"people-see\", 
-                          \"activity\", 
-                          \"surroundings-infection\", 
-                          \"within-5m\", 
-                          \"cause-risk\", 
-                          \"concerns\",
-                          \"last-60min\", 
-                          \"lift-why\", 
-                          \"stairs-why\", 
-                          \"lift-con\", 
-                          \"stairs-con\", 
-                          \"working\", 
-                          \"workstation\", 
-                          \"adj-height\", 
-                          \"current\", 
-                          \"lift-why\", 
-                          \"stairs-why\", 
-                          \"lift-con\",
-                          \"latitude\", 
-                          \"longitude\",
-                          \"How much fatigue have you been experiencing throught the week?\", 
-                          \"How much fatigue are you currently experiencing?\", 
-                          \"On which days did you work from home this week?\", 
-                          \"Please indicate your satisfaction levels with the overall indoor air quality in your office.\", 
-                          \"Are you experiencing any of the following symptoms? (Select all that apply)\" 
-                          FROM {}.autogen.{} WHERE time > '{}' AND id_participant='{}'""".format(
+        query_influx = """SELECT "id_participant", "id_device", "vote_count", "time", "latitude", "longitude" FROM "{}"."autogen"."{}" WHERE time > '{}' AND id_participant='{}'""".format(
             db, measurement, from_time_str, event["queryStringParameters"]["id_participant"]
         )
 
-        print(query_influx)
+        print("query influx: ", query_influx)
         result = client.query(query_influx)
-        print("----------------------")
-        print("result")
-        print(result)
-        print("----------------------")
+        print("result: ", result)
         last_sync_timestamp = datetime.datetime.now().timestamp()
 
     try:
         # In order to keep the example on the website working and the app version from the freelancers working there is some adjustment needed to the datetime-index
         # Ideally, the website and app are adapted in order to remove the following lines. (Using the DataFrameClient instead of the InfluxDBClient might resolve this issue)
-        df = pd.DataFrame.from_dict(result["cozieApple"])
+        df = pd.DataFrame.from_dict(result[measurement])
+        print(df.head())
         df["time"] = pd.to_datetime(df["time"])
         df["time"] = df["time"].dt.tz_localize(None)
         df.index = df["time"]
         df = df.drop(["time"], axis=1)
 
         # In order to keep the Cozie app from freezinig for more than 30 seconds the last_sync_timesetamp needs to be returned
-        query_influx2 = """SELECT "heartRate" FROM "{}"."autogen"."{}" WHERE time > '{}' AND id_participant='{}' ORDER BY "time" DESC LIMIT 1 """.format(
+        query_influx2 = """SELECT "heart_rate" FROM "{}"."autogen"."{}" WHERE time > '{}' AND id_participant='{}' ORDER BY "time" DESC LIMIT 1 """.format(
             db, measurement, from_time_str, event["queryStringParameters"]["id_participant"]
         )
         result2 = client.query(query_influx2)
         print("----------------------")
-        print("result2")
-        print(result2)
+        print("result2: ", result2)
         print("----------------------")
-        for item in result2["cozieApple"]:
+        for item in result2[measurement]:
             last_sync_timestamp = datetime.datetime.strptime(
                 item["time"], "%Y-%m-%dT%H:%M:%S.%fZ"
             ).timestamp()
