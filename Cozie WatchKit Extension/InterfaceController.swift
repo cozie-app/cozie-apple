@@ -104,30 +104,30 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
     }
 
     // this function fires when a message from the phone is received
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        if let id = message["participantID"] as? String {
-            participantID = id
-            userDefaults.set(id, forKey: "participantID")
-        }
-        if let experiment = message["experimentID"] as? String {
-            experimentID = experiment
-            userDefaults.set(experiment, forKey: "experimentID")
-        }
-        if let question = message["questions"] as? Int {
-            userDefaults.set(question, forKey: "questions")
-            defineQuestions()
-        }
-        WKInterfaceDevice.current().play(.notification)
-    }
+//    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+//        if let id = message["participantID"] as? String {
+//            participantID = id
+//            userDefaults.set(id, forKey: "participantID")
+//        }
+//        if let experiment = message["experimentID"] as? String {
+//            experimentID = experiment
+//            userDefaults.set(experiment, forKey: "experimentID")
+//        }
+//        if let question = message["questions"] as? Int {
+//            userDefaults.set(question, forKey: "questions")
+//            defineQuestions()
+//        }
+//        WKInterfaceDevice.current().play(.notification)
+//    }
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         if let question = message["questions"] as? Int {
             userDefaults.set(question, forKey: "questions")
             defineQuestions()
         }
-        if let id = message["experimentID"] as? String {
-            experimentID = id
-            userDefaults.set(id, forKey: "experimentID")
+        if let experiment = message["experimentID"] as? String {
+            experimentID = experiment
+            userDefaults.set(experiment, forKey: "experimentID")
         }
         if let id = message["participantID"] as? String {
             participantID = id
