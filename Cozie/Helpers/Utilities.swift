@@ -153,7 +153,7 @@ class Utilities {
     static func sendHealthData(data: [String: String]) {
         do {
             let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(), timestamp_start: GetDateTimeISOString(), timestamp_end: GetDateTimeISOString(), id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: data, id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
-            PostRequest(message: postMessage)
+            _ = PostRequest(message: postMessage)
         } catch let error {
             print(error.localizedDescription)
         }

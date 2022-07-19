@@ -217,7 +217,6 @@ extension ProfileDataStore {
     }
 
     static func queryForUpdates(type: HKObjectType) {
-        // TODO: stop query after receive data 4 times a day
         // if let query = backgroundQuery {
         //     healthStore.stop(query)
         // }
@@ -233,13 +232,13 @@ extension ProfileDataStore {
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .bodyMassIndex)) { (bodyMassIndex, samples) in
                 Utilities.sendHealthData(data: bodyMassIndex, type: .ts_body_mass_index, samples: samples)
             }
-        case HKObjectType.quantityType(forIdentifier: .leanBodyMass)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .leanBodyMass)) { leanBodyMass in
-                if let leanBodyMass = leanBodyMass {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentLeanBodyMass.rawValue, value: leanBodyMass)
-                    Utilities.sendHealthData(data: ["ts_leanBodyMass": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentLeanBodyMass.rawValue) as? Double ?? 0)"])
-                }
-            }
+//        case HKObjectType.quantityType(forIdentifier: .leanBodyMass)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .leanBodyMass)) { leanBodyMass in
+//                if let leanBodyMass = leanBodyMass {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentLeanBodyMass.rawValue, value: leanBodyMass)
+//                    Utilities.sendHealthData(data: ["ts_leanBodyMass": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentLeanBodyMass.rawValue) as? Double ?? 0)"])
+//                }
+//            }
         case HKObjectType.quantityType(forIdentifier: .heartRate)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRate)) { (heartRate, samples) in
                 Utilities.sendHealthData(data: heartRate, type: .ts_heart_rate, samples: samples)
@@ -248,45 +247,45 @@ extension ProfileDataStore {
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .restingHeartRate)) { (restingHeartRate, samples) in
                 Utilities.sendHealthData(data: restingHeartRate, type: .ts_resting_heart_rate, samples: samples)
             }
-        case HKObjectType.quantityType(forIdentifier: .bodyTemperature)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .bodyTemperature)) { bodyTemperature in
-                if let bodyTemperature = bodyTemperature {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBodyTemperature.rawValue, value: bodyTemperature)
-                    Utilities.sendHealthData(data: ["ts_bodyTemperature": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBodyTemperature.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .respiratoryRate)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .respiratoryRate)) { respiratoryRate in
-                if let respiratoryRate = respiratoryRate {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentRespiratoryRate.rawValue, value: respiratoryRate)
-                    Utilities.sendHealthData(data: ["ts_respiratoryRate": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentRespiratoryRate.rawValue) as? Double ?? 0)"])
-                }
-            }
+//        case HKObjectType.quantityType(forIdentifier: .bodyTemperature)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .bodyTemperature)) { bodyTemperature in
+//                if let bodyTemperature = bodyTemperature {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBodyTemperature.rawValue, value: bodyTemperature)
+//                    Utilities.sendHealthData(data: ["ts_bodyTemperature": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBodyTemperature.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .respiratoryRate)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .respiratoryRate)) { respiratoryRate in
+//                if let respiratoryRate = respiratoryRate {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentRespiratoryRate.rawValue, value: respiratoryRate)
+//                    Utilities.sendHealthData(data: ["ts_respiratoryRate": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentRespiratoryRate.rawValue) as? Double ?? 0)"])
+//                }
+//            }
         case HKObjectType.quantityType(forIdentifier: .stepCount)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .stepCount)) { (stepCount, samples) in
                 Utilities.sendHealthData(data: stepCount, type: .ts_step_count, samples: samples)
             }
-        case HKObjectType.quantityType(forIdentifier: .distanceCycling)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .distanceCycling)) { distanceCycling in
-                if let distanceCycling = distanceCycling {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentDistanceCycling.rawValue, value: distanceCycling)
-                    Utilities.sendHealthData(data: ["ts_cyclingDistance": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentDistanceCycling.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .uvExposure)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .uvExposure)) { uvExposure in
-                if let uvExposure = uvExposure {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentUVExposure.rawValue, value: uvExposure)
-                    Utilities.sendHealthData(data: ["ts_UVexposure": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentUVExposure.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .flightsClimbed)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .flightsClimbed)) { flightsClimbed in
-                if let flightsClimbed = flightsClimbed {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentFlightsClimbed.rawValue, value: flightsClimbed)
-                    Utilities.sendHealthData(data: ["ts_flightsclimbed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentFlightsClimbed.rawValue) as? Double ?? 0)"])
-                }
-            }
+//        case HKObjectType.quantityType(forIdentifier: .distanceCycling)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .distanceCycling)) { distanceCycling in
+//                if let distanceCycling = distanceCycling {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentDistanceCycling.rawValue, value: distanceCycling)
+//                    Utilities.sendHealthData(data: ["ts_cyclingDistance": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentDistanceCycling.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .uvExposure)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .uvExposure)) { uvExposure in
+//                if let uvExposure = uvExposure {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentUVExposure.rawValue, value: uvExposure)
+//                    Utilities.sendHealthData(data: ["ts_UVexposure": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentUVExposure.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .flightsClimbed)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .flightsClimbed)) { flightsClimbed in
+//                if let flightsClimbed = flightsClimbed {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentFlightsClimbed.rawValue, value: flightsClimbed)
+//                    Utilities.sendHealthData(data: ["ts_flightsclimbed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentFlightsClimbed.rawValue) as? Double ?? 0)"])
+//                }
+//            }
         case HKObjectType.quantityType(forIdentifier: .appleStandTime)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .appleStandTime)) { (appleStandTime, samples) in
                 Utilities.sendHealthData(data: appleStandTime, type: .ts_stand_time, samples: samples)
@@ -295,52 +294,52 @@ extension ProfileDataStore {
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure)) { (noise, samples) in
                 Utilities.sendHealthData(data: noise, type: .ts_hearing_environmental_exposure, samples: samples)
             }
-        case HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure)) { headphoneAudioExposure in
-                if let headphoneAudioExposure = headphoneAudioExposure {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeadphoneAudioExposure.rawValue, value: headphoneAudioExposure)
-                    Utilities.sendHealthData(data: ["ts_hearingHeadhponeExposure": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeadphoneAudioExposure.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .distanceSwimming)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .distanceSwimming)) { distanceSwimming in
-                if let distanceSwimming = distanceSwimming {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentDistanceSwimming.rawValue, value: distanceSwimming)
-                    Utilities.sendHealthData(data: ["ts_swimmingDistance": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentDistanceSwimming.rawValue) as? Double ?? 0)"])
-                }
-            }
+//        case HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure)) { headphoneAudioExposure in
+//                if let headphoneAudioExposure = headphoneAudioExposure {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeadphoneAudioExposure.rawValue, value: headphoneAudioExposure)
+//                    Utilities.sendHealthData(data: ["ts_hearingHeadhponeExposure": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeadphoneAudioExposure.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .distanceSwimming)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .distanceSwimming)) { distanceSwimming in
+//                if let distanceSwimming = distanceSwimming {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentDistanceSwimming.rawValue, value: distanceSwimming)
+//                    Utilities.sendHealthData(data: ["ts_swimmingDistance": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentDistanceSwimming.rawValue) as? Double ?? 0)"])
+//                }
+//            }
         case HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning)) { (distanceWalkingRunning, samples) in
                 Utilities.sendHealthData(data: distanceWalkingRunning, type: .ts_distance_walking_running, samples: samples)
             }
-        case HKObjectType.quantityType(forIdentifier: .vo2Max)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .vo2Max)) { vo2Max in
-                if let vo2Max = vo2Max {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentVo2Max.rawValue, value: vo2Max)
-                    Utilities.sendHealthData(data: ["ts_vo2max": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentVo2Max.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .peakExpiratoryFlowRate)) { peakExpiratoryFlowRate in
-                if let peakExpiratoryFlowRate = peakExpiratoryFlowRate {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentPeakExpiratoryFlowRate.rawValue, value: peakExpiratoryFlowRate)
-                    Utilities.sendHealthData(data: ["ts_peakExpiratoryFlowRate": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentPeakExpiratoryFlowRate.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .heartRateVariabilitySDNN)) { heartRateVariabilitySDNN in
-                if let heartRateVariabilitySDNN = heartRateVariabilitySDNN {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeartRateVariabilitySDNN.rawValue, value: heartRateVariabilitySDNN)
-                    Utilities.sendHealthData(data: ["ts_heartRateVariabilitySDNN": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRateVariabilitySDNN.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .walkingHeartRateAverage)) { walkingHeartRateAverage in
-                if let walkingHeartRateAverage = walkingHeartRateAverage {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingHeartRateAverage.rawValue, value: walkingHeartRateAverage)
-                    Utilities.sendHealthData(data: ["ts_walkingHeartRateAverage": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingHeartRateAverage.rawValue) as? Double ?? 0)"])
-                }
-            }
+//        case HKObjectType.quantityType(forIdentifier: .vo2Max)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .vo2Max)) { vo2Max in
+//                if let vo2Max = vo2Max {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentVo2Max.rawValue, value: vo2Max)
+//                    Utilities.sendHealthData(data: ["ts_vo2max": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentVo2Max.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .peakExpiratoryFlowRate)) { peakExpiratoryFlowRate in
+//                if let peakExpiratoryFlowRate = peakExpiratoryFlowRate {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentPeakExpiratoryFlowRate.rawValue, value: peakExpiratoryFlowRate)
+//                    Utilities.sendHealthData(data: ["ts_peakExpiratoryFlowRate": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentPeakExpiratoryFlowRate.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .heartRateVariabilitySDNN)) { heartRateVariabilitySDNN in
+//                if let heartRateVariabilitySDNN = heartRateVariabilitySDNN {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeartRateVariabilitySDNN.rawValue, value: heartRateVariabilitySDNN)
+//                    Utilities.sendHealthData(data: ["ts_heartRateVariabilitySDNN": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRateVariabilitySDNN.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .walkingHeartRateAverage)) { walkingHeartRateAverage in
+//                if let walkingHeartRateAverage = walkingHeartRateAverage {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingHeartRateAverage.rawValue, value: walkingHeartRateAverage)
+//                    Utilities.sendHealthData(data: ["ts_walkingHeartRateAverage": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingHeartRateAverage.rawValue) as? Double ?? 0)"])
+//                }
+//            }
         case HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!:
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .oxygenSaturation)) { (bloodOxygen, samples) in
                 Utilities.sendHealthData(data: bloodOxygen, type: .ts_oxygen_saturation, samples: samples)
@@ -353,121 +352,121 @@ extension ProfileDataStore {
             getDataObject(type: HKSampleType.quantityType(forIdentifier: .bloodPressureDiastolic)) { (bloodPressureDiastolic, samples) in
                 Utilities.sendHealthData(data: bloodPressureDiastolic, type: .ts_blood_pressure_diastolic, samples: samples)
             }
-        case HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .basalBodyTemperature)) { basalBodyTemperature in
-                if let basalBodyTemperature = basalBodyTemperature {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBasalBodyTemperature.rawValue, value: basalBodyTemperature)
-                    Utilities.sendHealthData(data: ["ts_basalBodyTemperature": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBasalBodyTemperature.rawValue) as? Double ?? 0)"])
-                }
-            }
-        case HKObjectType.quantityType(forIdentifier: .dietaryWater)!:
-            getData(type: HKSampleType.quantityType(forIdentifier: .dietaryWater)) { dietaryWater in
-                if let dietaryWater = dietaryWater {
-                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentDietaryWater.rawValue, value: dietaryWater)
-                    Utilities.sendHealthData(data: ["ts_dietaryWater": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentDietaryWater.rawValue) as? Double ?? 0)"])
-                }
-            }
+//        case HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .basalBodyTemperature)) { basalBodyTemperature in
+//                if let basalBodyTemperature = basalBodyTemperature {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentBasalBodyTemperature.rawValue, value: basalBodyTemperature)
+//                    Utilities.sendHealthData(data: ["ts_basalBodyTemperature": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentBasalBodyTemperature.rawValue) as? Double ?? 0)"])
+//                }
+//            }
+//        case HKObjectType.quantityType(forIdentifier: .dietaryWater)!:
+//            getData(type: HKSampleType.quantityType(forIdentifier: .dietaryWater)) { dietaryWater in
+//                if let dietaryWater = dietaryWater {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentDietaryWater.rawValue, value: dietaryWater)
+//                    Utilities.sendHealthData(data: ["ts_dietaryWater": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentDietaryWater.rawValue) as? Double ?? 0)"])
+//                }
+//            }
         case is HKWorkoutType:
             debugPrint("HKWorkoutType")
         default: debugPrint("Unhandled HKObjectType: \(type)")
         }
 
-        if #available(iOS 14.0, *) {
-            switch type {
-            case HKObjectType.quantityType(forIdentifier: .walkingSpeed)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .walkingSpeed)) { walkingSpeed in
-                    if let walkingSpeed = walkingSpeed {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingSpeed.rawValue, value: walkingSpeed)
-                        Utilities.sendHealthData(data: ["ts_walkingSpeed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingSpeed.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            case HKObjectType.quantityType(forIdentifier: .walkingStepLength)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .walkingStepLength)) { walkingStepLength in
-                    if let walkingStepLength = walkingStepLength {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingStepLength.rawValue, value: walkingStepLength)
-                        Utilities.sendHealthData(data: ["ts_walkingStepLength": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingStepLength.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            case HKObjectType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)) { sixMinuteWalkTestDistance in
-                    if let sixMinuteWalkTestDistance = sixMinuteWalkTestDistance {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentSixMinuteWalkTestDistance.rawValue, value: sixMinuteWalkTestDistance)
-                        Utilities.sendHealthData(data: ["ts_sixMinuteWalkTestDistance": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentSixMinuteWalkTestDistance.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            case HKObjectType.quantityType(forIdentifier: .walkingAsymmetryPercentage)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .walkingAsymmetryPercentage)) { walkingAsymmetryPercentage in
-                    if let walkingAsymmetryPercentage = walkingAsymmetryPercentage {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingAsymmetryPercentage.rawValue, value: walkingAsymmetryPercentage)
-                        Utilities.sendHealthData(data: ["ts_walkingAsymmetryPercentage": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingAsymmetryPercentage.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            case HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)) { walkingDoubleSupportPercentage in
-                    if let walkingDoubleSupportPercentage = walkingDoubleSupportPercentage {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingDoubleSupportPercentage.rawValue, value: walkingDoubleSupportPercentage)
-                        Utilities.sendHealthData(data: ["ts_walkingDoubleSupportPercentage": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingDoubleSupportPercentage.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            case HKObjectType.quantityType(forIdentifier: .stairAscentSpeed)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .stairAscentSpeed)) { stairAscentSpeed in
-                    if let stairAscentSpeed = stairAscentSpeed {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentStairAscentSpeed.rawValue, value: stairAscentSpeed)
-                        Utilities.sendHealthData(data: ["ts_stairAscentSpeed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentStairAscentSpeed.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            case HKObjectType.quantityType(forIdentifier: .stairDescentSpeed)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .stairDescentSpeed)) { stairDescentSpeed in
-                    if let stairDescentSpeed = stairDescentSpeed {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentStairDescentSpeed.rawValue, value: stairDescentSpeed)
-                        Utilities.sendHealthData(data: ["ts_stairDescentSpeed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentStairDescentSpeed.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            default: debugPrint("Unhandled HKObjectType: \(type)")
-            }
-        }
-
-        if #available(iOS 15.0, *) {
-            switch type {
-            case HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness)!:
-                getData(type: HKSampleType.quantityType(forIdentifier: .appleWalkingSteadiness)) { appleWalkingSteadiness in
-                    if let appleWalkingSteadiness = appleWalkingSteadiness {
-                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentAppleWalkingSteadiness.rawValue, value: appleWalkingSteadiness)
-                        Utilities.sendHealthData(data: ["ts_appleWalkingSteadiness": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentAppleWalkingSteadiness.rawValue) as? Double ?? 0)"])
-                    }
-                }
-            default: debugPrint("Unhandled HKObjectType: \(type)")
-            }
-        }
+//        if #available(iOS 14.0, *) {
+//            switch type {
+//            case HKObjectType.quantityType(forIdentifier: .walkingSpeed)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .walkingSpeed)) { walkingSpeed in
+//                    if let walkingSpeed = walkingSpeed {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingSpeed.rawValue, value: walkingSpeed)
+//                        Utilities.sendHealthData(data: ["ts_walkingSpeed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingSpeed.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            case HKObjectType.quantityType(forIdentifier: .walkingStepLength)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .walkingStepLength)) { walkingStepLength in
+//                    if let walkingStepLength = walkingStepLength {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingStepLength.rawValue, value: walkingStepLength)
+//                        Utilities.sendHealthData(data: ["ts_walkingStepLength": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingStepLength.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            case HKObjectType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .sixMinuteWalkTestDistance)) { sixMinuteWalkTestDistance in
+//                    if let sixMinuteWalkTestDistance = sixMinuteWalkTestDistance {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentSixMinuteWalkTestDistance.rawValue, value: sixMinuteWalkTestDistance)
+//                        Utilities.sendHealthData(data: ["ts_sixMinuteWalkTestDistance": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentSixMinuteWalkTestDistance.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            case HKObjectType.quantityType(forIdentifier: .walkingAsymmetryPercentage)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .walkingAsymmetryPercentage)) { walkingAsymmetryPercentage in
+//                    if let walkingAsymmetryPercentage = walkingAsymmetryPercentage {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingAsymmetryPercentage.rawValue, value: walkingAsymmetryPercentage)
+//                        Utilities.sendHealthData(data: ["ts_walkingAsymmetryPercentage": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingAsymmetryPercentage.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            case HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .walkingDoubleSupportPercentage)) { walkingDoubleSupportPercentage in
+//                    if let walkingDoubleSupportPercentage = walkingDoubleSupportPercentage {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentWalkingDoubleSupportPercentage.rawValue, value: walkingDoubleSupportPercentage)
+//                        Utilities.sendHealthData(data: ["ts_walkingDoubleSupportPercentage": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentWalkingDoubleSupportPercentage.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            case HKObjectType.quantityType(forIdentifier: .stairAscentSpeed)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .stairAscentSpeed)) { stairAscentSpeed in
+//                    if let stairAscentSpeed = stairAscentSpeed {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentStairAscentSpeed.rawValue, value: stairAscentSpeed)
+//                        Utilities.sendHealthData(data: ["ts_stairAscentSpeed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentStairAscentSpeed.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            case HKObjectType.quantityType(forIdentifier: .stairDescentSpeed)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .stairDescentSpeed)) { stairDescentSpeed in
+//                    if let stairDescentSpeed = stairDescentSpeed {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentStairDescentSpeed.rawValue, value: stairDescentSpeed)
+//                        Utilities.sendHealthData(data: ["ts_stairDescentSpeed": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentStairDescentSpeed.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            default: debugPrint("Unhandled HKObjectType: \(type)")
+//            }
+//        }
+//
+//        if #available(iOS 15.0, *) {
+//            switch type {
+//            case HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness)!:
+//                getData(type: HKSampleType.quantityType(forIdentifier: .appleWalkingSteadiness)) { appleWalkingSteadiness in
+//                    if let appleWalkingSteadiness = appleWalkingSteadiness {
+//                        UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentAppleWalkingSteadiness.rawValue, value: appleWalkingSteadiness)
+//                        Utilities.sendHealthData(data: ["ts_appleWalkingSteadiness": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentAppleWalkingSteadiness.rawValue) as? Double ?? 0)"])
+//                    }
+//                }
+//            default: debugPrint("Unhandled HKObjectType: \(type)")
+//            }
+//        }
     }
 
     static func dataTypesToRead() -> Set<HKObjectType> {
-        var set = Set(arrayLiteral:
+        let set = Set(arrayLiteral:
         HKObjectType.quantityType(forIdentifier: .bodyMass)!,
-                HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
-//                      HKObjectType.quantityType(forIdentifier: .leanBodyMass)!,
-                HKObjectType.quantityType(forIdentifier: .heartRate)!,
-                HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
-//                      HKObjectType.quantityType(forIdentifier: .bodyTemperature)!,
-//                      HKObjectType.quantityType(forIdentifier: .respiratoryRate)!,
-                HKObjectType.quantityType(forIdentifier: .stepCount)!,
-//                      HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
-//                      HKObjectType.quantityType(forIdentifier: .uvExposure)!,
-//                      HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
-                HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
-                HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
-//                      HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
-//                      HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
-                HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-//                      HKObjectType.quantityType(forIdentifier: .vo2Max)!,
-//                      HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!,
-//                      HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
-//                      HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!,
-                HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
-                HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
-                HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!
-//                      HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!,
-//                      HKObjectType.quantityType(forIdentifier: .dietaryWater)!
+        HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
+//      HKObjectType.quantityType(forIdentifier: .leanBodyMass)!,
+        HKObjectType.quantityType(forIdentifier: .heartRate)!,
+        HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
+//      HKObjectType.quantityType(forIdentifier: .bodyTemperature)!,
+//      HKObjectType.quantityType(forIdentifier: .respiratoryRate)!,
+        HKObjectType.quantityType(forIdentifier: .stepCount)!,
+//      HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
+//      HKObjectType.quantityType(forIdentifier: .uvExposure)!,
+//      HKObjectType.quantityType(forIdentifier: .flightsClimbed)!,
+        HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
+        HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
+//      HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
+//      HKObjectType.quantityType(forIdentifier: .distanceSwimming)!,
+        HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+//      HKObjectType.quantityType(forIdentifier: .vo2Max)!,
+//      HKObjectType.quantityType(forIdentifier: .peakExpiratoryFlowRate)!,
+//      HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
+//      HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!,
+        HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
+        HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
+        HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!
+//      HKObjectType.quantityType(forIdentifier: .basalBodyTemperature)!,
+//      HKObjectType.quantityType(forIdentifier: .dietaryWater)!
         )
 
 //        if #available(iOS 14.0, *) {

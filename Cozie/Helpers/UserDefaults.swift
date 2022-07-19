@@ -32,34 +32,34 @@ extension UserDefaults {
         case recentBloodOxygen
         case recentBodyMass
         case recentBodyMassIndex
-        case recentLeanBodyMass
+//        case recentLeanBodyMass
         case recentRestingHeartRate
-        case recentBodyTemperature
-        case recentRespiratoryRate
+//        case recentBodyTemperature
+//        case recentRespiratoryRate
         case recentStepCount
-        case recentDistanceCycling
-        case recentUVExposure
-        case recentFlightsClimbed
+//        case recentDistanceCycling
+//        case recentUVExposure
+//        case recentFlightsClimbed
         case recentAppleStandTime
-        case recentHeadphoneAudioExposure
-        case recentDistanceSwimming
+//        case recentHeadphoneAudioExposure
+//        case recentDistanceSwimming
         case recentDistanceWalkingRunning
-        case recentVo2Max
-        case recentPeakExpiratoryFlowRate
-        case recentHeartRateVariabilitySDNN
-        case recentWalkingHeartRateAverage
+//        case recentVo2Max
+//        case recentPeakExpiratoryFlowRate
+//        case recentHeartRateVariabilitySDNN
+//        case recentWalkingHeartRateAverage
         case recentBloodPressureSystolic
         case recentBloodPressureDiastolic
-        case recentBasalBodyTemperature
-        case recentDietaryWater
-        case recentWalkingSpeed
-        case recentWalkingStepLength
-        case recentSixMinuteWalkTestDistance
-        case recentWalkingAsymmetryPercentage
-        case recentWalkingDoubleSupportPercentage
-        case recentStairAscentSpeed
-        case recentStairDescentSpeed
-        case recentAppleWalkingSteadiness
+//        case recentBasalBodyTemperature
+//        case recentDietaryWater
+//        case recentWalkingSpeed
+//        case recentWalkingStepLength
+//        case recentSixMinuteWalkTestDistance
+//        case recentWalkingAsymmetryPercentage
+//        case recentWalkingDoubleSupportPercentage
+//        case recentStairAscentSpeed
+//        case recentStairDescentSpeed
+//        case recentAppleWalkingSteadiness
     }
 
     func setValue(for key: String, value: Any) {
@@ -73,8 +73,8 @@ extension UserDefaults {
                                 "settings_notification_frequency": "\(getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
                                 "settings_from_time": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
                     id_device: UIDevice.current.identifierForVendor?.uuidString ?? "",
-                    id_one_signal: OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId as? String ?? "ID not yet retrieved"))
-            PostRequest(message: postMessage)
+                                                                 id_one_signal: OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId ?? "ID not yet retrieved"))
+            _ = PostRequest(message: postMessage)
         } catch let error {
             print("error UD: \(error.localizedDescription)")
         }
