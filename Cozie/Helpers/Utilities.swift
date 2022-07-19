@@ -12,22 +12,22 @@ import Alamofire
 import HealthKit
 
 struct HealthData: Codable {
-    var locationTimestamp: String = GetDateTimeISOString()
-    var startTimestamp: String = GetDateTimeISOString()
-    var endTimestamp: String = GetDateTimeISOString()
-    var participantID: String = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? ""
-    var ts_heartRate: [String: Double]? = nil
-    var ts_bloodPressureSystolic: [String: Double]? = nil
-    var ts_bloodPressureDiastolic: [String: Double]? = nil
-    var ts_hearingEnvironmentalExposure: [String: Double]? = nil
-    var deviceUUID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
-    var ts_bodyMass: [String: Double]? = nil
-    var ts_BMI: [String: Double]? = nil
-    var ts_oxygenSaturation: [String: Double]? = nil
-    var ts_stepCount: [String: Double]? = nil
-    var ts_standTime: [String: Double]? = nil
-    var ts_walkingDistance: [String: Double]? = nil
-    var ts_restingHeartRate: [String: Double]? = nil
+    let locationTimestamp: String
+    let startTimestamp: String
+    let endTimestamp: String
+    let participantID: String
+    let ts_heartRate: [String: Double]?
+    let ts_bloodPressureSystolic: [String: Double]?
+    let ts_bloodPressureDiastolic: [String: Double]?
+    let ts_hearingEnvironmentalExposure: [String: Double]?
+    let deviceUUID: String
+    let ts_bodyMass: [String: Double]?
+    let ts_BMI: [String: Double]?
+    let ts_oxygenSaturation: [String: Double]?
+    let ts_stepCount: [String: Double]?
+    let ts_standTime: [String: Double]?
+    let ts_walkingDistance: [String: Double]?
+    let ts_restingHeartRate: [String: Double]?
 }
 
 class Utilities {
@@ -109,10 +109,7 @@ class Utilities {
 
     static func getData(isForDownload: Bool = false, completion: @escaping (Bool, [Response]) -> Void) {
 
-        let param = [
-            "id_participant": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "ExternalTester",
-            "id_experiment": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "AppleStore",
-            "weeks": "100"]
+        let param = ["user_id": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "weeks": "100"]
 
         let headers = ["x-api-key": AWSReadAPIKey, // Singapore API key
                        "Accept": "application/json",
@@ -172,21 +169,21 @@ class Utilities {
             var postMessage = Data()
             switch type {
             case .ts_body_mass:
-                postMessage = try JSONEncoder().encode(HealthData(ts_bodyMass: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: data, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
             case .ts_body_mass_index:
-                postMessage = try JSONEncoder().encode(HealthData(ts_BMI: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: data, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
 //            case .ts_leanBodyMass:
 //                break
             case .ts_heart_rate:
-                postMessage = try JSONEncoder().encode(HealthData(ts_heartRate: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: data, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
             case .ts_resting_heart_rate:
-                postMessage = try JSONEncoder().encode(HealthData(ts_restingHeartRate: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: data))
 //            case .ts_bodyTemperature:
 //                break
 //            case .ts_respiratoryRate:
 //                break
             case .ts_step_count:
-                postMessage = try JSONEncoder().encode(HealthData(ts_stepCount: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: data, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
 //            case .ts_distanceCycling:
 //                break
 //            case .ts_uvExposure:
@@ -194,15 +191,15 @@ class Utilities {
 //            case .ts_flightsClimbed:
 //                break
             case .ts_stand_time:
-                postMessage = try JSONEncoder().encode(HealthData(ts_standTime: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: data, ts_walkingDistance: nil, ts_restingHeartRate: nil))
             case .ts_hearing_environmental_exposure:
-                postMessage = try JSONEncoder().encode(HealthData(ts_hearingEnvironmentalExposure: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: data, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
 //            case .ts_headphoneAudioExposure:
 //                break
 //            case .ts_distanceSwimming:
 //                break
             case .ts_distance_walking_running:
-                postMessage = try JSONEncoder().encode(HealthData(ts_walkingDistance: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: data, ts_restingHeartRate: nil))
 //            case .ts_vo2Max:
 //                break
 //            case .ts_peakExpiratoryFlowRate:
@@ -212,11 +209,11 @@ class Utilities {
 //            case .ts_walkingHeartRateAverage:
 //                break
             case .ts_oxygen_saturation:
-                postMessage = try JSONEncoder().encode(HealthData(ts_oxygenSaturation: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: data, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
             case .ts_blood_pressure_systolic:
-                postMessage = try JSONEncoder().encode(HealthData(ts_bloodPressureSystolic: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: data, ts_bloodPressureDiastolic: nil, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
             case .ts_blood_pressure_diastolic:
-                postMessage = try JSONEncoder().encode(HealthData(ts_bloodPressureDiastolic: data))
+                postMessage = try JSONEncoder().encode(HealthData(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", ts_heartRate: nil, ts_bloodPressureSystolic: nil, ts_bloodPressureDiastolic: data, ts_hearingEnvironmentalExposure: nil, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? "", ts_bodyMass: nil, ts_BMI: nil, ts_oxygenSaturation: nil, ts_stepCount: nil, ts_standTime: nil, ts_walkingDistance: nil, ts_restingHeartRate: nil))
 //            case .ts_basalBodyTemperature:
 //                break
 //            case .ts_dietaryWater:
