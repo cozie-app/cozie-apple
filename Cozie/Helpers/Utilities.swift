@@ -109,7 +109,10 @@ class Utilities {
 
     static func getData(isForDownload: Bool = false, completion: @escaping (Bool, [Response]) -> Void) {
 
-        let param = ["user_id": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "weeks": "100"]
+        let param = [
+            "id_participant": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "ExternalTester",
+            "id_experiment": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "AppleStore",
+            "weeks": "100"]
 
         let headers = ["x-api-key": AWSReadAPIKey, // Singapore API key
                        "Accept": "application/json",
