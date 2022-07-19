@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("ERROR: \(type) is not an HKSampleType"); continue
             }
             let query = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
-                debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
+//                debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
                 DispatchQueue.global(qos: .background).async {
                     ProfileDataStore.queryForUpdates(type: type)
                 }
@@ -88,7 +88,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let query = ProfileDataStore.backgroundQuery?.last {
                 healthStore.execute(query)
                 healthStore.enableBackgroundDelivery(for: type, frequency: .immediate) { (success, error) in
-                    debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
+//                    debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
+                    print("")
                 }
             } else {
                 ProfileDataStore.queryForUpdates(type: type)

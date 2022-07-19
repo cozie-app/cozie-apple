@@ -150,7 +150,7 @@ class Utilities {
                 }
             }
         }
-        debugPrint(req)
+//        debugPrint(req)
     }
 
     static func sendHealthData(data: [String: String]) {
