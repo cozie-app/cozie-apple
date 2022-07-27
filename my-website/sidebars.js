@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    "Project Overview": ["introduction", "installation", "downloadData"],
+    "Project Overview": ["introduction", "installation", "Setup", "downloadData"],
     "Customize Cozie": [
       "gettingStarted",
       "cloneCozie",

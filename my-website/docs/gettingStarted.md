@@ -6,7 +6,7 @@ sidebar_label: Getting Started
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-This guide will explain you how to edit the source code of Cozie.
+This guide will explain you how to edit the source code of Cozie Apple.
 
 What do you need?
 
