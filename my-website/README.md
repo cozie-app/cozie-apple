@@ -4,8 +4,11 @@ This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern 
 
 ### Installation
 
+Change directory to my-website
+
 ```
-$ yarn
+$ cd my-website
+$ yarn install
 ```
 
 ### Local Development

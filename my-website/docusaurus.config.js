@@ -1,5 +1,5 @@
 module.exports = {
-  title: "Cozie An iOS application for IEQ and physiological data collection",
+  title: "Cozie - An iOS application for IEQ and physiological data collection",
   tagline: "Allows building occupants to provide feedback in real time",
   url: "https://cozie-apple.app",
   baseUrl: "/",
@@ -17,10 +17,10 @@ module.exports = {
         {
           to: "docs/",
           activeBasePath: "docs",
-          label: "Docs",
+          label: "Documentation",
           position: "left",
         },
-        { to: "blog", label: "Blog", position: "left" },
+        { to: "blog", label: "Updates", position: "left" },
         {
           href: "https://github.com/cozie-app/cozie-apple",
           label: "GitHub",
@@ -37,10 +37,10 @@ module.exports = {
       style: "light",
       links: [
         {
-          title: "Docs",
+          title: "Documentation",
           items: [
             {
-              label: "Introduction",
+              label: "Introduction", 
               to: "docs/",
             },
           ],
@@ -66,7 +66,7 @@ module.exports = {
           title: "More",
           items: [
             {
-              label: "Blog",
+              label: "Updates",
               to: "blog",
             },
             {
@@ -100,8 +100,8 @@ module.exports = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        gtag: {
-          trackingID: 'G-WC21KB6YKB',
+        googleAnalytics: {
+          trackingID: 'UA-151445384-5',
           anonymizeIP: true,
         },
       },

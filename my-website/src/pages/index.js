@@ -135,35 +135,30 @@ function Home() {
               <img
                 alt="cozie main question"
                 className={styles.mainImage}
-                src={"img/main face.png"}
+                src={useBaseUrl('img/main face.png')}  width="500"
               />
             </div>
             <div className={clsx("col", styles.profileHeroContainer)}>
               <h1 className="hero__title">{siteConfig.title}</h1>
               <p className="hero__subtitle">{siteConfig.tagline}</p>
+              
               <Link
                 className={clsx(
                   "button button--outline button--active button--secondary button--lg margin--sm"
                 )}
                 to={useBaseUrl("blog/")}
               >
-                Coming soon!
+              Latest version
+              
               </Link>
               <a
                 className={clsx(
                   "button button--outline button--active button--secondary button--lg margin--sm"
                 )}
-                href={"mailto:cozie.app@gmail.com"}
+                href={"mailto:researcher@budslab.org"}
               >
                 Contact us
-              </a>
-              <a
-                className={clsx(
-                  "button button--outline button--active button--secondary button--lg margin--sm"
-                )}
-                href={"mailto:cozie.app@gmail.com"}
-              >
-                Become a tester
+           
               </a>
             </div>
           </div>
