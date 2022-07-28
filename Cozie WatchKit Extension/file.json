@@ -748,80 +748,55 @@
           ],
           "nextQuestion": [
               3,
-              4,
+              3,
               3
-          ]
-      },
-      {
-          "title": "What clothes are you wearing?",
-          "identifier": "thermal-clo",
-          "options": [
-              "Very light",
-              "Light",
-              "Medium",
-              "Heavy"
-          ],
-          "icons": [
-              "clothes-very-light",
-              "clothes-light",
-              "clothes-medium",
-              "clothes-heavy"
-          ],
-          "nextQuestion": [
-              4,
-              4,
-              4,
-              4
           ]
       },
       {
           "title": "Where are you?",
           "identifier": "location",
           "options":[
-              "Indoor",
+              "Indoor - office",
+              "Indoor - other",
               "Outdoor",
               "Transportation"
           ],
           "icons": [
               "indoor",
+              "others",
               "outdoor",
               "transportation"
           ],
           "nextQuestion": [
-              5,
-              8,
-              6
+              4,
+              6,
+              6,
+              5
           ]
       },
       {
-          "title": "Where are you indoors?",
-          "identifier": "location-indoor",
+          "title": "What kind of office?",
+          "identifier": "location-office",
           "options": [
-              "Office",
-              "Home",
-              "Food and beverage",
-              "Shopping",
-              "Entertainment",
-              "Sports",
-              "Others"
+              "Individual",
+              "Small shared",
+              "Large open plan",
+              "Cubicles",
+              "Conference room"
           ],
           "icons": [
-              "office",
-              "home",
-              "food-and-beverage",
-              "shopping",
-              "entertainment",
-              "sports",
-              "others"
+              "personal",
+              "shared",
+              "open-space",
+              "cubicles",
+              "conference-room"
           ],
           "nextQuestion": [
-              7,
-              8,
-              8,
-              8,
-              8,
-              8,
-              8
+              6,
+              6,
+              6,
+              6,
+              6
           ]
       },
       {
@@ -842,36 +817,11 @@
               "others"
           ],
           "nextQuestion": [
-              8,
-              8,
-              8,
-              8,
-              8
-          ]
-      },
-      {
-          "title": "What kind of office?",
-          "identifier": "location-office",
-          "options": [
-              "Personal",
-              "Shared",
-              "Open space",
-              "Cubicles",
-              "Conference room"
-          ],
-          "icons": [
-              "personal",
-              "shared",
-              "open-space",
-              "cubicles",
-              "conference-room"
-          ],
-          "nextQuestion": [
-              8,
-              8,
-              8,
-              8,
-              8
+              6,
+              6,
+              6,
+              6,
+              6
           ]
       },
       {
@@ -888,9 +838,9 @@
               "group"
           ],
           "nextQuestion": [
-              9,
-              10,
-              10
+              7,
+              8,
+              8
           ]
       },
       {
@@ -905,8 +855,8 @@
               "leisure"
           ],
           "nextQuestion": [
-              11,
-              11
+              9,
+              9
           ]
       },
       {
@@ -923,40 +873,9 @@
               "learn"
           ],
           "nextQuestion": [
-              11,
-              11,
-              11
-          ]
-      },
-      {
-          "title": "What best describes your mood?",
-          "identifier": "mood",
-          "options": [
-              "Productive",
-              "Stressed",
-              "Sad",
-              "Distracted",
-              "Bored",
-              "Happy",
-              "Angry"
-          ],
-          "icons": [
-              "productive",
-              "stressed",
-              "sad",
-              "distracted",
-              "bored",
-              "happy",
-              "angry"
-          ],
-          "nextQuestion": [
-              12,
-              12,
-              12,
-              12,
-              12,
-              12,
-              12
+              9,
+              9,
+              9
           ]
       }
   ]
