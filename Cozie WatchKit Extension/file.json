@@ -757,18 +757,24 @@
           "identifier": "location",
           "options":[
               "Indoor - office",
+              "Indoor - school",
+              "Indoor - home",
               "Indoor - other",
               "Outdoor",
               "Transportation"
           ],
           "icons": [
               "indoor",
+              "classroom",
+              "home",
               "others",
               "outdoor",
               "transportation"
           ],
           "nextQuestion": [
               4,
+              6,
+              6,
               6,
               6,
               5
