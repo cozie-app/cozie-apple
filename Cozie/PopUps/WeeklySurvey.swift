@@ -13,24 +13,28 @@ class WeeklySurvey: BasePopupVC {
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
     var questions = ["This app is easy to use.",
-                     "How often do zou wear your watch in a week?",
-                     "The notifications on the Apple Watch were annoying.",
-                     "The notifications on the iPhone were annoying.",
+                     "How often do you wear your watch in a week?",
+                     "The notifications on the watch were annoying.",
+                     "The notifications on the phones were annoying.",
                      "I answered the the question on the watch honestly.",
-                     "The Cozie app feels fast and responseive.",
-                     "Overall, how satisfied are zou with the Cozie app?",
-                     "How would zou rate the overall qualitz of the app?",
-                     "How likelz are zou to recommend this app to a friend or colleague?"]
+                     "The Cozie app feels fast and responsive.",
+                     "The notifications helped to change my mind",
+                     "I changed my location after seeing the notifications",
+                     "Overall, how satisfied are you with the Cozie app?",
+                     "How would you rate the overall quality of the app?",
+                     "How likely are you to recommend this app to a friend or colleague?"]
     var options:[[String]] = [["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
                               ["<10 hours", "10-20 hours", "20-30 hours", "30-40 hours", "40-50 hours", ">50 hours"],
                               ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
                               ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
                               ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
                               ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
+                              ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
+                              ["Always", "Very frequently", "Occasionally", "Rarely", "Very rarely", "Never"],
                               ["Not at all satisfied", "Not so satisfied", "Somewhat satisfied", "Very satisfied", "Extremly satisfied"],
                               ["Bad", "Poor", "Fair", "Good", "Excellent"],
                               ["Extremely unlikely", "Unlikely", "Neutral", "Likely", "Extremely likely"]]
-    var multipleAnswer = [false,false,false,false,false,false,false,false,false]
+    var multipleAnswer = [false,false,false,false,false,false,false,false,false,false, false]
     var answers: [Int:[Int]] = [:]
     var buttons: [Int:[UIButton]] = [:]
     var otherAnswer = ""
