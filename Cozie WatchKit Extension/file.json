@@ -690,7 +690,7 @@
   ],
   "Privacy":[
       {
-          "title": "Noise distractions nearby?",
+          "title": "Noise distractions nearby? (without headphones)",
           "identifier": "noise-nearby",
           "options": [
               "None",
@@ -703,7 +703,7 @@
               "a-lot"
           ],
           "nextQuestion": [
-              2,
+              3,
               1,
               1
           ]
@@ -716,6 +716,7 @@
               "Traffic",
               "Weather",
               "Appliances",
+              "Construction",
               "Others"
           ],
           "icons": [
@@ -723,6 +724,7 @@
               "traffic",
               "weather",
               "appliances",
+              "construction",
               "others"
           ],
           "nextQuestion": [
@@ -730,7 +732,27 @@
               2,
               2,
               2,
+              2,
               2
+          ]
+      },
+      {
+          "title": "Wearting earphones?",
+          "identifier": "earphones",
+          "options": [
+              "No",
+              "Normal earphone",
+              "Noise cancel"
+          ],
+          "icons": [
+              "no_2",
+              "yes_2",
+              "yes_2"
+          ],
+          "nextQuestion": [
+              3,
+              3,
+              3
           ]
       },
       {
@@ -747,9 +769,9 @@
               "prefer-warmer"
           ],
           "nextQuestion": [
-              3,
-              3,
-              3
+              4,
+              4,
+              4
           ]
       },
       {
@@ -772,12 +794,12 @@
               "transportation"
           ],
           "nextQuestion": [
-              4,
-              6,
-              6,
-              6,
-              6,
-              5
+              5,
+              7,
+              7,
+              7,
+              7,
+              6
           ]
       },
       {
@@ -798,11 +820,11 @@
               "conference-room"
           ],
           "nextQuestion": [
-              6,
-              6,
-              6,
-              6,
-              6
+              7,
+              7,
+              7,
+              7,
+              7
           ]
       },
       {
@@ -823,11 +845,11 @@
               "others"
           ],
           "nextQuestion": [
-              6,
-              6,
-              6,
-              6,
-              6
+              7,
+              7,
+              7,
+              7,
+              7
           ]
       },
       {
@@ -844,9 +866,9 @@
               "group"
           ],
           "nextQuestion": [
-              7,
               8,
-              8
+              9,
+              9
           ]
       },
       {
@@ -854,15 +876,18 @@
           "identifier": "activity-category",
           "options":[
               "Focus",
-              "Leisure"
+              "Leisure",
+              "Other"
           ],
           "icons": [
               "focus",
-              "leisure"
+              "leisure",
+              "others"
           ],
           "nextQuestion": [
-              9,
-              9
+              10,
+              10,
+              10
           ]
       },
       {
@@ -879,9 +904,9 @@
               "learn"
           ],
           "nextQuestion": [
-              9,
-              9,
-              9
+              10,
+              10,
+              10
           ]
       }
   ]
