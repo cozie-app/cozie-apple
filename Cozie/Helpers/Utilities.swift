@@ -155,7 +155,14 @@ class Utilities {
 
     static func sendHealthData(data: [String: String]) {
         do {
-            let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(), timestamp_start: GetDateTimeISOString(), timestamp_end: GetDateTimeISOString(), id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: data, id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
+            let postMessage = try JSONEncoder().encode(FormatAPI(
+                timestamp_location: GetDateTimeISOString(),
+                timestamp_start: GetDateTimeISOString(),
+                timestamp_end: GetDateTimeISOString(),
+                id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                id_experiment: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
+                responses: data,
+                id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
             _ = PostRequest(message: postMessage)
         } catch let error {
             print(error.localizedDescription)
@@ -319,9 +326,10 @@ struct FormatAPI: Codable {
     let timestamp_start: String
     let timestamp_end: String
     let id_participant: String
+    let id_experiment: String
     let responses: [String: String]
     let id_device: String
-    var id_one_signal: String = ""
+    var id_one_signal: String?
 }
 
 

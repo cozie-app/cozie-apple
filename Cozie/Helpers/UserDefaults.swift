@@ -69,6 +69,7 @@ extension UserDefaults {
                     timestamp_start: GetDateTimeISOString(),
                     timestamp_end: GetDateTimeISOString(),
                     id_participant: getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                    id_experiment: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
                     responses: ["settings_participation_days": "\(getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])",
                                 "settings_notification_frequency": "\(getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
                                 "settings_from_time": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
