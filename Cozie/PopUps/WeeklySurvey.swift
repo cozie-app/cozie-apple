@@ -18,8 +18,8 @@ class WeeklySurvey: BasePopupVC {
                      "The notifications on the phone were annoying.",
                      "I answered the the question on the watch honestly.",
                      "The Cozie app feels fast and responsive.",
-                     "The notifications helped to change my mind",
-                     "I changed my location after seeing the notifications",
+                     "The notifications helped to change my mind.",
+                     "I changed my location after seeing the notifications.",
                      "Overall, how satisfied are you with the Cozie app?",
                      "How would you rate the overall quality of the app?",
                      "How likely are you to recommend this app to a friend or colleague?"]
