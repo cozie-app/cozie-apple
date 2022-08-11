@@ -15,7 +15,7 @@ class WeeklySurvey: BasePopupVC {
     var questions = ["This app is easy to use.",
                      "How often do you wear your watch in a week?",
                      "The notifications on the watch were annoying.",
-                     "The notifications on the phones were annoying.",
+                     "The notifications on the phone were annoying.",
                      "I answered the the question on the watch honestly.",
                      "The Cozie app feels fast and responsive.",
                      "The notifications helped to change my mind",

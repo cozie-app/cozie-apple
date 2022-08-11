@@ -690,7 +690,7 @@
   ],
   "Privacy":[
       {
-          "title": "Noise distractions nearby? (without headphones)",
+          "title": "Noise distractions nearby? (without earphones)",
           "identifier": "noise-nearby",
           "options": [
               "None",
@@ -737,17 +737,17 @@
           ]
       },
       {
-          "title": "Wearting earphones?",
+          "title": "Wearing earphones?",
           "identifier": "earphones",
           "options": [
-              "No",
-              "Normal earphone",
+              "No earphones",
+              "Normal",
               "Noise cancel"
           ],
           "icons": [
-              "no_2",
-              "yes_2",
-              "yes_2"
+              "no3",
+              "yes3",
+              "yes3"
           ],
           "nextQuestion": [
               3,
