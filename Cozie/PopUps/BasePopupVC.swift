@@ -9,6 +9,9 @@
 import UIKit
 
 class BasePopupVC: UIViewController {
+    deinit {
+        debugPrint("deinit -> \(String(describing: self))")
+    }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
         NavigationManager.dismiss(self)

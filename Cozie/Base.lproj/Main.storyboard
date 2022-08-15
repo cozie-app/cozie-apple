@@ -43,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUA-Jp-CQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3092" y="-151.47783251231527"/>
+            <point key="canvasLocation" x="3001" y="-533"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Inc-PM-jFM">
@@ -53,9 +53,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <tabBarAppearance key="scrollEdgeAppearance">
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </tabBarAppearance>
+                        <tabBarAppearance key="standardAppearance"/>
                     </tabBar>
                     <connections>
                         <segue destination="md6-gd-GcL" kind="relationship" relationship="viewControllers" id="xZ6-eu-a4c"/>
@@ -88,7 +86,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CJ-KT-QgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2149.5999999999999" y="-151.47783251231527"/>
+            <point key="canvasLocation" x="2110" y="-533"/>
         </scene>
         <!--My Data-->
         <scene sceneID="RNv-LR-ByF">
@@ -220,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAr-HI-NSX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2111" y="607"/>
+            <point key="canvasLocation" x="2110" y="292"/>
         </scene>
         <!--Home-->
         <scene sceneID="F1z-QM-vZG">
