@@ -55,14 +55,16 @@ class BackgroundUpdateController {
     var startTimeStamp: Double = 0
     
     func setStartTemeRangeIfNeeded() {
+        UserDefaults.standard.setValue(ExecutionStatus.end.rawValue, forKey: updateStatusKey)
         if UserDefaults.standard.value(forKey: processingRecordsKey) == nil {
             UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: self.processingRecordsKey)
         }
     }
     
-//    func test() {
-//        UserDefaults.standard.setValue(Date().timeIntervalSince1970 - minimumTimeInterval, forKey: self.processingRecordsKey)
-//    }
+    //    func test() {
+    //        UserDefaults.standard.setValue(Date().timeIntervalSince1970 - minimumTimeInterval*2, forKey: processingRecordsKey)
+    //        lastProcessingEvent = UserDefaults.standard.value(forKey: processingRecordsKey) as? Double
+    //    }
     
     func registerBackgroundRefresh() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: refreshID, using: nil) { task in
@@ -119,7 +121,7 @@ class BackgroundUpdateController {
             // we should send data once per 30 min
             if interval < minimumTimeInterval
                 || status == ExecutionStatus.inprogress.rawValue {
-        
+                
                 // end processing task
                 task.setTaskCompleted(success: true)
                 
@@ -209,14 +211,14 @@ class BackgroundUpdateController {
                     UserDefaults.standard.setValue(lastEventDate, forKey: self.processingRecordsKey)
                 }
                 task.setTaskCompleted(success: true)
+                
+                // shceedule next processing
+                if task is BGProcessingTask {
+                    self?.scheduleBgProcessing()
+                } else {
+                    self?.scheduleBgTaskRefresh()
+                }
             }
-        }
-        
-        // shceedule next processing
-        if task is BGProcessingTask {
-            scheduleBgProcessing()
-        } else {
-            scheduleBgTaskRefresh()
         }
     }
 }
@@ -229,7 +231,7 @@ extension  BackgroundUpdateController {
         let endDate = Date()
         
         lastProcessingEvent = UserDefaults.standard.value(forKey: processingRecordsKey) as? Double
-       
+        
         if lastProcessingEvent == nil {
             debugPrint("fatal error")
             fatalError()
@@ -238,47 +240,23 @@ extension  BackgroundUpdateController {
         let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
         let startDate = Date.init(timeIntervalSince1970: lastProcessingEvent ?? 0)
         
-        /// environmentalAudioExposure used discrete samples that can be averaged over a time interval using a temporally weighted integration function.
-        /// split the predicate into simple predicates in the range of 5 minutes as in the requirements
-        var predicates: [NSPredicate] = []
-        let minInterval: Double = 5*60
-        let dataPoints = Int(floor((endDate.timeIntervalSince1970 - startDate.timeIntervalSince1970)/minInterval))
-        for point in 1...dataPoints {
-            var start_d = startDate.timeIntervalSince1970
-            if point > 1 {
-                start_d = startDate.timeIntervalSince1970 + (Double(point-1) * minInterval)
-            }
-            let end_d = startDate.timeIntervalSince1970 + (Double(point) * minInterval)
-            let predicate = HKQuery.predicateForSamples(withStart: Date(timeIntervalSince1970: start_d), end:  Date(timeIntervalSince1970: end_d), options: [])
-            predicates.append(predicate)
-        }
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end:  endDate, options: .strictEndDate)
         var noiseData: [String: Double] = [:]
         
-        let groupe = DispatchGroup()
-        for predicate in predicates {
-            groupe.enter()
-            let query: HKSampleQuery = HKSampleQuery(sampleType: noise, predicate: predicate, limit: HKObjectQueryNoLimit,
-                                                     sortDescriptors: [sortByDate]) { (query, results, error) in
+        let query: HKSampleQuery = HKSampleQuery(sampleType: noise, predicate: predicate, limit: HKObjectQueryNoLimit,
+                                                 sortDescriptors: [sortByDate]) { (query, results, error) in
+            
+            if let results = results as? [HKQuantitySample], results.count > 0 {
                 
-#if DEBUG
-                noiseData[FormatDateISOString(date: Date())] = 65
-#else
-                if let results = results as? [HKQuantitySample] {
-                    
-                    for sample in results {
-                        let sampledDate = FormatDateISOString(date: sample.startDate)
-                        noiseData[sampledDate] = sample.quantity.doubleValue(for: HKUnit(from: "dBASPL"))
-                    }
+                for sample in results {
+                    let sampledDate = FormatDateISOString(date: sample.startDate)
+                    noiseData[sampledDate] = sample.quantity.doubleValue(for: HKUnit(from: "dBASPL"))
                 }
-#endif
-                groupe.leave()
             }
-            healthStore.execute(query)
-        }
-        
-        groupe.notify(queue: .global()) {
             completion(noiseData)
         }
+        
+        healthStore.execute(query)
     }
     
     func heartRate(completion: @escaping (_ heartRateInfo: [String: Double]?) -> Void) {
@@ -293,15 +271,10 @@ extension  BackgroundUpdateController {
         let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
         
         let startDate = Date.init(timeIntervalSince1970: lastProcessingEvent ?? 0)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-#if DEBUG
-        var heatrRate: [String: Double] = [FormatDateISOString(date: Date()): 85,
-                                           FormatDateISOString(date: Date()): 75,
-                                           FormatDateISOString(date: Date()): 65]
-#else
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictEndDate)
+
         var heatrRate: [String: Double] = [:]
-#endif
-        
+
         let query: HKSampleQuery = HKSampleQuery(sampleType: heartRate, predicate: predicate, limit: HKObjectQueryNoLimit,
                                                  sortDescriptors: [sortByDate]) { (query, results, error) in
             if let results = results as? [HKQuantitySample] {
