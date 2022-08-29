@@ -741,8 +741,8 @@
           "identifier": "earphones",
           "options": [
               "No earphones",
-              "Normal",
-              "Noise cancel"
+              "Earphones",
+              "Noise cancelling"
           ],
           "icons": [
               "no3",
@@ -778,10 +778,10 @@
           "title": "Where are you?",
           "identifier": "location",
           "options":[
-              "Indoor - office",
-              "Indoor - school",
-              "Indoor - home",
-              "Indoor - other",
+              "Indoor - Office",
+              "Indoor - School",
+              "Indoor - Home",
+              "Indoor - Other",
               "Outdoor",
               "Transportation"
           ],
@@ -789,7 +789,7 @@
               "indoor",
               "classroom",
               "home",
-              "others",
+              "other",
               "outdoor",
               "transportation"
           ],
@@ -835,14 +835,14 @@
               "Train",
               "Car",
               "Taxi",
-              "Others"
+              "Other"
           ],
           "icons": [
               "bus",
               "train",
               "car",
               "taxi",
-              "others"
+              "other"
           ],
           "nextQuestion": [
               7,
@@ -858,7 +858,7 @@
           "options": [
               "Alone",
               "Online",
-              "Group"
+              "Online group"
           ],
           "icons": [
               "alone",
@@ -882,7 +882,7 @@
           "icons": [
               "focus",
               "leisure",
-              "others"
+              "other"
           ],
           "nextQuestion": [
               10,
@@ -896,14 +896,17 @@
           "options": [
               "Socialize",
               "Collaborate",
-              "Learn"
+              "Learn",
+              "Other"
           ],
           "icons": [
               "socialize",
               "collaborate",
-              "learn"
+              "learn",
+              "other"
           ],
           "nextQuestion": [
+              10,
               10,
               10,
               10
