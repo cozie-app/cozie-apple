@@ -15,7 +15,7 @@ class DataViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var graphView1: UIView!
     @IBOutlet weak var graphView2: UIView!
     @IBOutlet weak var dataDownloadView: UIView!
-
+    
     private var dateValues = [String]()
     private let validResValues = ["Valid Responses", "Goal"]
     private var responseValues = [Double]()
@@ -54,15 +54,14 @@ class DataViewController: UIViewController, ChartViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Utilities.getData { (isSuccess, data) in
+        Utilities.getData { [weak self] (isSuccess, data) in
             if isSuccess {
-                self.reloadPage(forData: data)
+                self?.reloadPage(forData: data)
             }
         }
     }
 
     private func setupUI() {
-
         dateValues.removeAll()
         responseValues.removeAll()
         let data = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.dayData.rawValue) as? [String: Int]
@@ -150,9 +149,11 @@ class DataViewController: UIViewController, ChartViewDelegate {
 
 extension DataViewController {
     func reloadPage(forData: [Response]) {
+        
         let actualResponse = forData.filter {
             $0.vote_count != nil
         }
+        
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.totalValidResponse.rawValue, value: actualResponse.count)
         var dateData = [String: Int]()
         actualResponse.forEach { response in

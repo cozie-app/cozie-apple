@@ -91,7 +91,7 @@ class HomePageViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
-                appDelegate?.setUpBackgroundDeliveryForDataTypes()
+                appDelegate?.deliveryHealthKitInfo()
             }
         }
     }

@@ -13,68 +13,82 @@ import HealthKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     let healthStore = HKHealthStore()
-
+    let backgroundProcessing = BackgroundUpdateController(service: HealthRepository())
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        //Remove this method to stop OneSignal Debugging
+        
+        // Remove this method to stop OneSignal Debugging
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
-
-        //START OneSignal initialization code
+        
+        // START OneSignal initialization code
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
-
+        
         // Code needed for OneSignal to work properly
         OneSignal.initWithLaunchOptions(launchOptions,
-                appId: OneSignalAppID,
-                handleNotificationAction: nil,
-                settings: onesignalInitSettings)
-
+                                        appId: OneSignalAppID,
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
-
+        
         // The promptForPushNotifications function code will show the iOS push notification prompt.
         OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
+            debugPrint("User accepted notifications: \(accepted)")
         })
-        //END OneSignal initialization code
+        // END OneSignal initialization code
         IQKeyboardManager.shared.enable = true
         LocalNotificationManager.shared.registerForPushNotifications()
-        HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
-            if let error = error {
-                print("error app delegate: \(error.localizedDescription)")
-            }
-            DispatchQueue.main.async {
-                self.setUpBackgroundDeliveryForDataTypes()
-            }
+        
+        // Delivery HealthKit info on application launch
+        authorizeAndDeliveryHealthKitInfo()
+        
+        // Register Background Processing for delivery HealthKit info
+        backgroundProcessing.setStartTemeRangeIfNeeded()
+        
+        backgroundProcessing.registerBackgroundRefresh()
+        backgroundProcessing.registerBackgroundProcessing { [weak self] in
+            self?.authorizeAndDeliveryHealthKitInfo()
         }
+        
         return true
     }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession:
-            UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+//        backgroundProcessing.test()
+        backgroundProcessing.scheduleBgProcessing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            self?.backgroundProcessing.scheduleBgTaskRefresh()
+        }
     }
+}
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+// MARK: - Health Kit Delivery
+
+extension AppDelegate {
+    
+    private func authorizeAndDeliveryHealthKitInfo() {
+        HealthKitSetupAssistant.authorizeHealthKit { (_, error) in
+            if let error = error {
+                debugPrint("error app delegate: \(error.localizedDescription)")
+            }
+            DispatchQueue.main.async {
+                self.deliveryHealthKitInfo()
+            }
+        }
     }
-
-    func setUpBackgroundDeliveryForDataTypes() {
+    
+    func deliveryHealthKitInfo() {
         let types = ProfileDataStore.dataTypesToRead()
         for type in types {
             guard let sampleType = type as? HKSampleType else {
-                print("ERROR: \(type) is not an HKSampleType"); continue
+                debugPrint("ERROR: \(type) is not an HKSampleType"); continue
             }
             let query = HKObserverQuery(sampleType: sampleType, predicate: nil) { (query, completionHandler, error) in
-//                debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
+                debugPrint("observer query update handler called for type \(type), error: \(String(describing: error))")
                 DispatchQueue.global(qos: .background).async {
                     ProfileDataStore.queryForUpdates(type: type)
                 }
@@ -88,8 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let query = ProfileDataStore.backgroundQuery?.last {
                 healthStore.execute(query)
                 healthStore.enableBackgroundDelivery(for: type, frequency: .immediate) { (success, error) in
-//                    debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
-                    print("")
+                    debugPrint("enableBackgroundDeliveryForType handler called for \(type) - success: \(success), error: \(String(describing: error))")
                 }
             } else {
                 ProfileDataStore.queryForUpdates(type: type)

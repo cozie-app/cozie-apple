@@ -10,6 +10,10 @@ import UIKit
 
 class SettingsCell: UITableViewCell {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     // define settings cell properties
     var sectionType: SectionType? {
         didSet {
@@ -91,5 +95,4 @@ class SettingsCell: UITableViewCell {
             print("Turned Off")
         }
     }
-
 }

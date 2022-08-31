@@ -46,7 +46,7 @@ public func PostRequest(message: Data) -> Int {
     // semaphore to wait for the function to complete
     let sem = DispatchSemaphore.init(value: 0)
 
-    //create dataTask using the session object to send data to the server
+    // create dataTask using the session object to send data to the server
     let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
 
         defer {

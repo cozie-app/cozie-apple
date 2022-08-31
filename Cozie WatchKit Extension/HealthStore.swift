@@ -36,7 +36,6 @@ class HealthStore {
         healthStore.requestAuthorization(toShare: [], read: healthKitTypes) { (success, error) in
             completion(success, error)
         }
-
     }
 
     //returns an array of noise levels
@@ -65,7 +64,7 @@ class HealthStore {
         healthStore.execute(query)
     }
 
-    //returns the weight entry in Kilos or nil if no data
+    // returns the weight entry in Kilos or nil if no data
     func bodyMassKg(completion: @escaping (_ bodyMass: Double?, _ date: Date?) -> Void) {
 
         let query = HKSampleQuery(sampleType: bodyMassType, predicate: nil, limit: 1,
@@ -82,14 +81,13 @@ class HealthStore {
         healthStore.execute(query)
     }
 
-    //returns the weight entry in Kilos or nil if no data
+    // returns the weight entry in Kilos or nil if no data
     func basalEnergy(completion: @escaping (_ basalEnergy: Double?, _ date: Date?) -> Void) {
 
         let query = HKSampleQuery(sampleType: basalEnergyType, predicate: nil, limit: 1,
                 sortDescriptors: [sortByDate]) { (query, results, error) in
             if let result = results?.first as? HKQuantitySample {
                 let energy = result.quantity.doubleValue(for: HKUnit.init(from: .kilocalorie))
-//                let energy = result.quantity.doubleValue(for: HKUnit.(from: HKUnit.kilocalorie()))
                 completion(energy, result.endDate)
                 return
             }

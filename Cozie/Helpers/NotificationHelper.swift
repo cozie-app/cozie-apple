@@ -15,8 +15,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     static let shared = LocalNotificationManager()
 
-    private override init() {
-    }
+    private override init() {}
 
     func registerForPushNotifications() {
 
@@ -134,7 +133,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
             let request = UNNotificationRequest(identifier: "\(weekDay)\(hr)\(mi)\(weekDayStr)\(Date().timeIntervalSinceNow)", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { err in
-                print(err?.localizedDescription)
+                print(err?.localizedDescription ?? "")
             }
         }
     }
