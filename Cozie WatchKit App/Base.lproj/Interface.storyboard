@@ -36,7 +36,7 @@
                                         <action selector="backButtonAction" destination="AgC-eL-Hgc" id="2zm-wb-PXu"/>
                                     </connections>
                                 </button>
-                                <button width="0.5" alignment="left" title="Abort" id="RiF-rV-AnG">
+                                <button width="0.5" alignment="left" title="Cancel" id="RiF-rV-AnG">
                                     <connections>
                                         <action selector="stopButtonAction" destination="AgC-eL-Hgc" id="nLG-yL-d4k"/>
                                     </connections>
