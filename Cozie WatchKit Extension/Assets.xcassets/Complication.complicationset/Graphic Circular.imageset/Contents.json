@@ -1,13 +1,13 @@
 {
   "images" : [
     {
-      "filename" : "84-2-1.png",
+      "filename" : "84.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : "<=145"
     },
     {
-      "filename" : "84-1-1.png",
+      "filename" : "84-2.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">161"
@@ -19,7 +19,7 @@
       "screen-width" : ">145"
     },
     {
-      "filename" : "94-1.png",
+      "filename" : "94.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">183"

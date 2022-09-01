@@ -1,25 +1,25 @@
 {
   "images" : [
     {
-      "filename" : "New_1.png",
+      "filename" : "72_circular_transparent.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : "<=145"
     },
     {
-      "filename" : "New_2.png",
+      "filename" : "72_circular_transparent-1.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">161"
     },
     {
-      "filename" : "New_3.png",
+      "filename" : "72_circular_transparent-2.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">145"
     },
     {
-      "filename" : "New_4.png",
+      "filename" : "72_circular_transparent-3.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">183"
