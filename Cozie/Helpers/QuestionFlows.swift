@@ -192,13 +192,13 @@ func defineQuestionFlows() {
                   identifier: "alone-group",
                   options: [
                       "Alone",
-                      "Online",
+                      "Group",
                       "Online group"
                   ],
                   icons: [
                       "alone",
-                      "online",
-                      "group"
+                      "group",
+                      "online"
                   ],
                   nextQuestion: [
                       8,
