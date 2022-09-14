@@ -114,7 +114,7 @@ func defineQuestionFlows() {
                   identifier: "location",
                   options:[
                       "Indoor - Office",
-                      "Indoor - School",
+                      "Indoor - Class",
                       "Indoor - Home",
                       "Indoor - Other",
                       "Outdoor",
