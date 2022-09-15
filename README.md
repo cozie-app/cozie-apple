@@ -28,6 +28,8 @@ I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) s
 4. Add Watch to iPhone simulaor `Window>Devices and Simulators>Create a new simulator`
 5. Select Cozie as Target and press play button in XCode.
 6. Select CozieWatchkitApp and press play button.
+7. Prior completing a survey sync the watch and the phone.
+8. If something is not working uninstall the app from both simulators and install it again.
 
 For more information please visit the [official documentation website](https://cozie-apple.app/docs/)
 
