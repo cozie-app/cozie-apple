@@ -23,13 +23,11 @@ I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) s
 
 ```git clone https://github.com/Cozie-IEQ/cozie-apple.git```
 
-2. Install the CocoaPods with the following command `pod install`. You need to have CocoaPods installed on your Mac. You can install CocoaPods using the following command `sudo gem install cocoapods`. If you are using a new Mac with M1 chip you will need to use the following command to install CocoaPods `sudo arch -x86_64 gem install ffi` followed by `arch -x86_64 pod install`.
+2. Install Pods with the following command `pod install`.
 3. Open the `Cozie.xcworkspace` file with XCode.
 4. Add Watch to iPhone simulaor `Window>Devices and Simulators>Create a new simulator`
 5. Select Cozie as Target and press play button in XCode.
 6. Select CozieWatchkitApp and press play button.
-7. Prior completing a survey sync the watch and the phone.
-8. If something is not working uninstall the app from both simulators and install it again.
 
 For more information please visit the [official documentation website](https://cozie-apple.app/docs/)
 
