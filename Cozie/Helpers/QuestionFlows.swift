@@ -43,161 +43,161 @@ func defineQuestionFlows() {
                         1
                     ]
             ),
-            Question(
-                    title: "Light preference",
-                    identifier: "light_preference",
-                    options: [
-                        "Dimmer",
-                        "No Change",
-                        "Brighter"
-                    ],
-                    icons: [
-                        "dimmer",
-                        "comfortable",
-                        "brighter"
-                    ],
-                    nextQuestion: [
-                        2,
-                        2,
-                        2
-                    ]
-            ),
-            Question(
-                    title: "Sound preference",
-                    identifier: "sound_preference",
-                    options: [
-                        "Quieter",
-                        "No Change",
-                        "Louder"
-                    ],
-                    icons: [
-                        "quieter",
-                        "comfortable",
-                        "louder"
-                    ],
-                    nextQuestion: [
-                        3,
-                        3,
-                        3
-                    ]
-            ),
-            Question(
-                    title: "Are you?",
-                    identifier: "are_you",
-                    options: [
-                        "Outdoor",
-                        "Indoor"
-                    ],
-                    icons: [
-                        "outdoor",
-                        "indoor"
-                    ],
-                    nextQuestion: [
-                        4,
-                        4
-                    ]
-            ),
-            Question(
-                    title: "Where are you?",
-                    identifier: "location_place",
-                    options: [
-                        "Home",
-                        "Office",
-                        "Vehicle",
-                        "Other"
-                    ],
-                    icons: [
-                        "loc-home",
-                        "loc-office",
-                        "loc-vehicle",
-                        "loc-other"
-                    ],
-                    nextQuestion: [
-                        5,
-                        5,
-                        5,
-                        5
-                    ]
-            ),
-            Question(
-                    title: "Are you near a sensor?",
-                    identifier: "near_sensor?",
-                    options: [
-                        "Home",
-                        "Work",
-                        "Portable",
-                        "No"
-                    ],
-                    icons: [
-                        "loc-home",
-                        "loc-office",
-                        "backpack",
-                        "no2"
-                    ],
-                    nextQuestion: [
-                        6,
-                        6,
-                        6,
-                        6
-                    ]
-            ),
-            Question(
-                    title: "What mood are you in?",
-                    identifier: "mood",
-                    options: [
-                        "Bad",
-                        "Good",
-                        "Neither"
-                    ],
-                    icons: [
-                        "mood-bad",
-                        "mood-good",
-                        "mood-neutral"
-                    ],
-                    nextQuestion: [
-                        7,
-                        7,
-                        7
-                    ]
-            ),
-            Question(
-                    title: "What clothes are you wearing?",
-                    identifier: "clo",
-                    options: [
-                        "Very light",
-                        "Light",
-                        "Medium",
-                        "Heavy"
-                    ],
-                    icons: [
-                        "clo-very-light",
-                        "clo-light",
-                        "clo-medium",
-                        "clo-heavy"
-                    ],
-                    nextQuestion: [
-                        8,
-                        8,
-                        8,
-                        8
-                    ]
-            ),
-            Question(
-                    title: "Have you changed location, activity or clothing over the last 10-min?",
-                    identifier: "changed_location",
-                    options: [
-                        "Yes",
-                        "No"
-                    ],
-                    icons: [
-                        "yes",
-                        "no"
-                    ],
-                    nextQuestion: [
-                        9,
-                        9
-                    ]
-            )
+//            Question(
+//                    title: "Light preference",
+//                    identifier: "light_preference",
+//                    options: [
+//                        "Dimmer",
+//                        "No Change",
+//                        "Brighter"
+//                    ],
+//                    icons: [
+//                        "dimmer",
+//                        "comfortable",
+//                        "brighter"
+//                    ],
+//                    nextQuestion: [
+//                        2,
+//                        2,
+//                        2
+//                    ]
+//            ),
+//            Question(
+//                    title: "Sound preference",
+//                    identifier: "sound_preference",
+//                    options: [
+//                        "Quieter",
+//                        "No Change",
+//                        "Louder"
+//                    ],
+//                    icons: [
+//                        "quieter",
+//                        "comfortable",
+//                        "louder"
+//                    ],
+//                    nextQuestion: [
+//                        3,
+//                        3,
+//                        3
+//                    ]
+//            ),
+//            Question(
+//                    title: "Are you?",
+//                    identifier: "are_you",
+//                    options: [
+//                        "Outdoor",
+//                        "Indoor"
+//                    ],
+//                    icons: [
+//                        "outdoor",
+//                        "indoor"
+//                    ],
+//                    nextQuestion: [
+//                        4,
+//                        4
+//                    ]
+//            ),
+//            Question(
+//                    title: "Where are you?",
+//                    identifier: "location_place",
+//                    options: [
+//                        "Home",
+//                        "Office",
+//                        "Vehicle",
+//                        "Other"
+//                    ],
+//                    icons: [
+//                        "loc-home",
+//                        "loc-office",
+//                        "loc-vehicle",
+//                        "loc-other"
+//                    ],
+//                    nextQuestion: [
+//                        5,
+//                        5,
+//                        5,
+//                        5
+//                    ]
+//            ),
+//            Question(
+//                    title: "Are you near a sensor?",
+//                    identifier: "near_sensor?",
+//                    options: [
+//                        "Home",
+//                        "Work",
+//                        "Portable",
+//                        "No"
+//                    ],
+//                    icons: [
+//                        "loc-home",
+//                        "loc-office",
+//                        "backpack",
+//                        "no2"
+//                    ],
+//                    nextQuestion: [
+//                        6,
+//                        6,
+//                        6,
+//                        6
+//                    ]
+//            ),
+//            Question(
+//                    title: "What mood are you in?",
+//                    identifier: "mood",
+//                    options: [
+//                        "Bad",
+//                        "Good",
+//                        "Neither"
+//                    ],
+//                    icons: [
+//                        "mood-bad",
+//                        "mood-good",
+//                        "mood-neutral"
+//                    ],
+//                    nextQuestion: [
+//                        7,
+//                        7,
+//                        7
+//                    ]
+//            ),
+//            Question(
+//                    title: "What clothes are you wearing?",
+//                    identifier: "clo",
+//                    options: [
+//                        "Very light",
+//                        "Light",
+//                        "Medium",
+//                        "Heavy"
+//                    ],
+//                    icons: [
+//                        "clo-very-light",
+//                        "clo-light",
+//                        "clo-medium",
+//                        "clo-heavy"
+//                    ],
+//                    nextQuestion: [
+//                        8,
+//                        8,
+//                        8,
+//                        8
+//                    ]
+//            ),
+//            Question(
+//                    title: "Have you changed location, activity or clothing over the last 10-min?",
+//                    identifier: "changed_location",
+//                    options: [
+//                        "Yes",
+//                        "No"
+//                    ],
+//                    icons: [
+//                        "yes",
+//                        "no"
+//                    ],
+//                    nextQuestion: [
+//                        9,
+//                        9
+//                    ]
+//            )
         ]),
         Flow(title: "Movement", questions: [
             Question(
