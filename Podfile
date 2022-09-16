@@ -6,7 +6,7 @@ target 'Cozie' do
   use_frameworks!
   pod 'OneSignal', '>= 3.0.0', '< 4.0'
 
-  pod 'Charts'
+  pod 'Charts', '=4.1.0'
   pod 'IQKeyboardManagerSwift'
   pod 'Alamofire', '~> 4.5'
   # Pods for Cozie

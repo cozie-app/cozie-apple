@@ -65,11 +65,9 @@ extension UserDefaults {
     func setValue(for key: String, value: Any) {
         setValue(value, forKey: key)
         do {
-            // Get OneSignal Player id
             let deviceState = OneSignal.getDeviceState()
             let player_id = deviceState?.userId
-            
-            // Create message with settings to be submitted to database
+
             let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(),
                     timestamp_start: GetDateTimeISOString(),
                     timestamp_end: GetDateTimeISOString(),
@@ -77,8 +75,7 @@ extension UserDefaults {
                     id_experiment: getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
                     responses: ["settings_participation_days": "\(getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])",
                                 "settings_notification_frequency": "\(getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
-                                "settings_participation_time_start": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)",
-                                "settings_participation_time_end": "\(getValue(for: UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime)"],
+                                "settings_from_time": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
                     id_device: UIDevice.current.identifierForVendor?.uuidString ?? "",
                     id_one_signal: player_id ?? "ID not yet retrieved"))
             _ = PostRequest(message: postMessage)

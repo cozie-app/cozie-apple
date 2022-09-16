@@ -1,8 +1,9 @@
 PODS:
   - Alamofire (4.9.1)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - IQKeyboardManagerSwift (6.5.9)
   - OneSignal (3.11.2):
     - OneSignal/OneSignalCore (= 3.11.2)
@@ -14,10 +15,11 @@ PODS:
     - OneSignal/OneSignalOutcomes
   - OneSignal/OneSignalOutcomes (3.11.2):
     - OneSignal/OneSignalCore
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
-  - Charts
+  - Charts (= 4.1.0)
   - IQKeyboardManagerSwift
   - OneSignal (< 4.0, >= 3.0.0)
 
@@ -27,13 +29,15 @@ SPEC REPOS:
     - Charts
     - IQKeyboardManagerSwift
     - OneSignal
+    - SwiftAlgorithms
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   OneSignal: 8861a1407c321ca1ae59d3adca6286eb7caf9d6e
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 15af826a3917ebed390bd3fcb1bc568196401640
+PODFILE CHECKSUM: c62e3ce4ec7e91a289b89de4d65649013864cec0
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
