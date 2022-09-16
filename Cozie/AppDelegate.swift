@@ -25,15 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         
         // START OneSignal initialization code
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
-        
-        // Code needed for OneSignal to work properly
-        OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: OneSignalAppID,
-                                        handleNotificationAction: nil,
-                                        settings: onesignalInitSettings)
-        
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        OneSignal.initWithLaunchOptions(launchOptions)
+        OneSignal.setAppId(OneSignalAppID)
         
         // The promptForPushNotifications function code will show the iOS push notification prompt.
         OneSignal.promptForPushNotifications(userResponse: { accepted in

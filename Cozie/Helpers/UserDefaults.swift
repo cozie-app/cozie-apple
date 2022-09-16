@@ -65,6 +65,9 @@ extension UserDefaults {
     func setValue(for key: String, value: Any) {
         setValue(value, forKey: key)
         do {
+            let deviceState = OneSignal.getDeviceState()
+            let player_id = deviceState?.userId
+
             let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(),
                     timestamp_start: GetDateTimeISOString(),
                     timestamp_end: GetDateTimeISOString(),
@@ -74,7 +77,7 @@ extension UserDefaults {
                                 "settings_notification_frequency": "\(getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
                                 "settings_from_time": "\(getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
                     id_device: UIDevice.current.identifierForVendor?.uuidString ?? "",
-                                                                 id_one_signal: OneSignal.getPermissionSubscriptionState().subscriptionStatus.userId ?? "ID not yet retrieved"))
+                    id_one_signal: player_id ?? "ID not yet retrieved"))
             _ = PostRequest(message: postMessage)
         } catch let error {
             print("error UD: \(error.localizedDescription)")
