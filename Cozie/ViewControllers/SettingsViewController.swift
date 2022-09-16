@@ -177,7 +177,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .sendParticipantIDWatch: sendParticipantID()
+            case .sendParticipantIDWatch:
+                sendParticipantID()
+                PostRequestSettings()
             }
         case .Communications:
             guard let buttonClicked = CommunicationOptions(rawValue: indexPath.row) else {
