@@ -39,7 +39,7 @@ func defineQuestionFlows() {
                     ],
                     nextQuestion: [
                         2,
-                        99,
+                        11,
                         1
                     ]
             ),
@@ -56,13 +56,13 @@ func defineQuestionFlows() {
                         "bus",
                         "car",
                         "outdoor-2",
-                        "Other"
+                        "other"
                     ],
                     nextQuestion: [
-                        99,
-                        99,
-                        99,
-                        99
+                        11,
+                        11,
+                        11,
+                        11
                     ]
             ),
             Question(
@@ -82,9 +82,9 @@ func defineQuestionFlows() {
                     ],
                     nextQuestion: [
                         3,
-                        3,
-                        3,
-                        3
+                        11,
+                        11,
+                        11
                     ]
             ),
             Question(
@@ -101,7 +101,7 @@ func defineQuestionFlows() {
                         "personal",
                         "shared",
                         "open-space",
-                        "cubilces",
+                        "cubicles",
                         "conference-room"
                     ],
                     nextQuestion: [
@@ -127,7 +127,7 @@ func defineQuestionFlows() {
                     nextQuestion: [
                         5,
                         5,
-                        99
+                        11
                     ]
             ),
             Question(
@@ -142,7 +142,7 @@ func defineQuestionFlows() {
                         "no-red"
                     ],
                     nextQuestion: [
-                        99,
+                        11,
                         6
                     ]
             ),
@@ -221,6 +221,7 @@ func defineQuestionFlows() {
                     nextQuestion: [
                         10,
                         10,
+                        10,
                         10
                     ]
             ),
@@ -233,14 +234,14 @@ func defineQuestionFlows() {
                         "None"
                     ],
                     icons: [
-                        "cooler",
+                        "tp-cooler",
                         "space-heater",
                         "none"
                     ],
                     nextQuestion: [
-                        99,
-                        99,
-                        99
+                        11,
+                        11,
+                        11
                     ]
             )
         ]),
@@ -258,7 +259,7 @@ func defineQuestionFlows() {
                     ],
                     nextQuestion: [
                         1,
-                        99,
+                        6,
                     ]
             ),
             Question(
@@ -277,7 +278,7 @@ func defineQuestionFlows() {
                     nextQuestion: [
                         2,
                         2,
-                        99
+                        6
                     ]
             ),
             Question(
@@ -292,7 +293,7 @@ func defineQuestionFlows() {
                         "no-red",
                     ],
                     nextQuestion: [
-                        99,
+                        6,
                         3,
                     ]
             ),
@@ -307,7 +308,7 @@ func defineQuestionFlows() {
                     icons: [
                         "tp-cooler",
                         "comfortable",
-                        "tp-warm"
+                        "tp-warmer"
                     ],
                     nextQuestion: [
                         4,
@@ -346,14 +347,14 @@ func defineQuestionFlows() {
                         "None"
                     ],
                     icons: [
-                        "cooler",
+                        "tp-cooler",
                         "space-heater",
                         "none"
                     ],
                     nextQuestion: [
-                        99,
-                        99,
-                        99
+                        6,
+                        6,
+                        6
                     ]
             )
         ]),
@@ -373,7 +374,7 @@ func defineQuestionFlows() {
                     ],
                     nextQuestion: [
                         2,
-                        99,
+                        11,
                         1
                     ]
             ),
@@ -393,10 +394,10 @@ func defineQuestionFlows() {
                         "other"
                     ],
                     nextQuestion: [
-                        99,
-                        99,
-                        99,
-                        99
+                        11,
+                        11,
+                        11,
+                        11
                     ]
             ),
             Question(
@@ -404,21 +405,21 @@ func defineQuestionFlows() {
                     identifier: "location-indoors",
                     options: [
                         "Office",
-                        "class",
+                        "Class",
                         "Home",
                         "Other"
                     ],
                     icons: [
                         "office",
-                        "class",
+                        "classroom",
                         "home",
                         "other"
                     ],
                     nextQuestion: [
                         3,
-                        99,
-                        99,
-                        99
+                        11,
+                        11,
+                        11
                     ]
             ),
             Question(
@@ -435,7 +436,7 @@ func defineQuestionFlows() {
                         "personal",
                         "shared",
                         "open-space",
-                        "cubilces",
+                        "cubicles",
                         "conference-room"
                     ],
                     nextQuestion: [
@@ -462,7 +463,7 @@ func defineQuestionFlows() {
                     nextQuestion: [
                         5,
                         5,
-                        99
+                        11
                     ]
             ),
             Question(
@@ -509,9 +510,9 @@ func defineQuestionFlows() {
                         "None"
                     ],
                     icons: [
-                        "cooler",
+                        "tp-cooler",
                         "space-heater",
-                        "None"
+                        "none"
                     ],
                     nextQuestion: [
                         8,
@@ -547,8 +548,8 @@ func defineQuestionFlows() {
                         "comfortable"
                     ],
                     nextQuestion: [
-                        99,
-                        99
+                        11,
+                        11
                     ]
             ),
             Question(
@@ -567,10 +568,10 @@ func defineQuestionFlows() {
                         "question-mark"
                     ],
                     nextQuestion: [
-                        99,
-                        99,
-                        99,
-                        99
+                        11,
+                        11,
+                        11,
+                        11
                     ]
             )
         ]),
