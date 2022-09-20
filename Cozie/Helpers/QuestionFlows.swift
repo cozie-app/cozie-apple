@@ -88,7 +88,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "What kind of office",
+                    title: "What kind of office?",
                     identifier: "office-type",
                     options: [
                         "Individual",
@@ -112,7 +112,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Are you near a sensor",
+                    title: "Are you near a sensor?",
                     identifier: "sensor",
                     options: [
                         "Office - Private",
@@ -147,7 +147,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "How would you prefer to be",
+                    title: "How would you prefer to be?",
                     identifier: "preference-thermal",
                     options: [
                         "Cooler",
@@ -185,7 +185,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Sound preference",
+                    title: "Sound preference?",
                     identifier: "preference-sound",
                     options: [
                         "Quieter",
@@ -204,7 +204,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "What clothes are you wearing",
+                    title: "What clothes are you wearing?",
                     identifier: "clothes",
                     options: [
                         "Light",
@@ -247,7 +247,7 @@ func defineQuestionFlows() {
         ]),
         Flow(title: "Perceived Comfort (short, WSU)", questions: [
             Question(
-                    title: "Where are you",
+                    title: "Where are you?",
                     identifier: "location",
                     options: [
                         "In office",
@@ -263,7 +263,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Are you near a sensor",
+                    title: "Are you near a sensor?",
                     identifier: "sensor",
                     options: [
                         "Office - Private",
@@ -282,7 +282,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Have you changed location, activity, or clothing in the last 5-mitutes",
+                    title: "Have you changed location, activity, or clothing in the last 5-mitutes?",
                     identifier: "changes",
                     options: [
                         "Yes",
@@ -298,7 +298,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "How would you prefer to be",
+                    title: "How would you prefer to be?",
                     identifier: "preference-thermal",
                     options: [
                         "Cooler",
@@ -379,7 +379,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "What kind of transport",
+                    title: "What kind of transport?",
                     identifier: "transport",
                     options: [
                         "Public transport",
@@ -402,7 +402,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Where indoors?",
-                    identifier: "location-indoors",
+                    identifier: "location-indoor",
                     options: [
                         "Office",
                         "Class",
@@ -423,7 +423,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "What kinf of office",
+                    title: "What kind of office?",
                     identifier: "office-type",
                     options: [
                         "Individual",
@@ -467,7 +467,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Can you perceive air movement",
+                    title: "Can you perceive air movement?",
                     identifier: "air-movement",
                     options: [
                         "Yes",
@@ -502,7 +502,7 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Are you using thermal equipment",
+                    title: "Are you using thermal equipment?",
                     identifier: "equipment",
                     options: [
                         "Fan",
@@ -522,7 +522,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "The air is ...",
-                    identifier: "air quality",
+                    identifier: "air-quality",
                     options: [
                         "Stuffy",
                         "Fresh"
@@ -554,7 +554,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "The bad air comes from...",
-                    identifier: "alertness",
+                    identifier: "air-pollution-source",
                     options: [
                         "Spoilt food",
                         "Outside",
