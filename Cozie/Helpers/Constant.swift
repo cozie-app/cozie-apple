@@ -11,7 +11,7 @@ import UIKit
 let defaultFromTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
 let defaultToTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
 let defaultNotificationFrq = Calendar.current.date(bySettingHour: 1, minute: 0, second: 0, of: Date()) ?? Date()
-let defaultExperimentID = "AppleStore"
+let defaultExperimentID = "vev"
 let defaultParticipantID = "ExternalTester"
 
 let primaryColour = UIColor(named: "primaryColour")
