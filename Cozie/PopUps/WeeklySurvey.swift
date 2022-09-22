@@ -12,8 +12,16 @@ class WeeklySurvey: BasePopupVC {
 
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    var questions = ["On which days did you work from home this week?", "Are you experiencing any of the following symptoms? (Select all that apply)", "How much fatigue are you currently experiencing?", "Please indicate your satisfaction levels with the overall indoor air quality in your office.", "How much fatigue have you been experiencing throught the week?"]
-    var options: [[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "None"], ["None", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"], ["Not at all", "Slightly", "Moderately", "Very", "Extremely"], ["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"], ["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
+    var questions = ["On which days did you work from home this week?",
+                     "Are you experiencing any of the following symptoms? (Select all that apply)",
+                     "How much fatigue are you currently experiencing?",
+                     "Please indicate your satisfaction levels with the overall indoor air quality in your office.",
+                     "How much fatigue have you been experiencing throughout the week?"]
+    var options: [[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "None"],
+                               ["None", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"],
+                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"],
+                               ["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"],
+                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
     var multipleAnswer = [true, true, false, false, false]
     var answers: [Int: [Int]] = [:]
     var buttons: [Int: [UIButton]] = [:]
