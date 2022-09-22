@@ -52,7 +52,7 @@ func defineQuestionFlows() {
                     "Weather",
                     "Appliances",
                     "Construction",
-                    "Others"
+                    "Other"
                 ],
                 icons: [
                     "talking",
@@ -60,7 +60,7 @@ func defineQuestionFlows() {
                     "weather",
                     "appliances",
                     "construction",
-                    "others-1"
+                    "other"
                 ],
                 nextQuestion: [
                     2,
