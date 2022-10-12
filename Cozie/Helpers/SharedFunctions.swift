@@ -5,6 +5,20 @@
 
 import Foundation
 
+struct FormatAPI: Codable {
+    let timestamp_location: String
+    let timestamp_start: String
+    let timestamp_end: String
+    let id_participant: String
+    let id_experiment: String
+    let responses: [String: String]
+    let id_device: String
+    var id_one_signal: String = ""
+}
+
+let placeholderParticipantID = "ExternalTester" // placeholder for the user ID
+let placeholdRrexperimentID = "AppleStore" // placeholder for the user ID
+
 // convert current time in ISO string
 public func GetDateTimeISOString() -> String {
     let date = Date()
