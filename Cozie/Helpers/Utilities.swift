@@ -326,17 +326,6 @@ enum healthType {
     //    case ts_appleWalkingSteadiness
 }
 
-struct FormatAPI: Codable {
-    let timestamp_location: String
-    let timestamp_start: String
-    let timestamp_end: String
-    let id_participant: String
-    let id_experiment: String
-    let responses: [String: String]
-    let id_device: String
-    var id_one_signal: String = ""
-}
-
 public func PostRequestSettings() {
     do {
         let deviceState = OneSignal.getDeviceState()
@@ -356,7 +345,6 @@ public func PostRequestSettings() {
     } catch let error {
         print("error UD: \(error.localizedDescription)")
     }
-//    synchronize()
 }
 
 

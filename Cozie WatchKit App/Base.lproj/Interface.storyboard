@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="19529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="20037" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="20006"/>
     </dependencies>
     <scenes>
         <!--Thermal-->
@@ -59,12 +59,11 @@
             <objects>
                 <notificationController id="YCC-NB-fut">
                     <items>
-                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="z0v-In-AHG"/>
                     </items>
                     <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
                     <connections>
-                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
-                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <outlet property="notificationAlertLabel" destination="z0v-In-AHG" id="i0i-Er-FcS"/>
                         <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
                     </connections>
                 </notificationController>
@@ -72,18 +71,28 @@
             <point key="canvasLocation" x="220" y="643"/>
         </scene>
         <!--Notification Controller-->
-        <scene sceneID="ZPc-GJ-vnh">
-            <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Cozie_WatchKit_App" customModuleProvider="target"/>
-            </objects>
-            <point key="canvasLocation" x="530" y="643"/>
-        </scene>
-        <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Cozie_WatchKit_App" customModuleProvider="target"/>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Cozie_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="CNQ-oF-Za7">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="Isv-Rl-SUv">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                        </label>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="WvL-m8-TLS">
+                            <fontDescription key="font" type="boldSystem" pointSize="16"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="notificationBody" destination="WvL-m8-TLS" id="Sne-Co-Wkn"/>
+                        <outlet property="notificationSubtitle" destination="Isv-Rl-SUv" id="oOn-bz-3T0"/>
+                        <outlet property="notificationTitle" destination="CNQ-oF-Za7" id="UUb-9A-CbR"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="530" y="345"/>
+            <point key="canvasLocation" x="546" y="643"/>
         </scene>
         <!--feedback-->
         <scene sceneID="uZq-Ot-77t">
