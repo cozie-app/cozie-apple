@@ -23,7 +23,165 @@ var questionFlows = [Flow]()
 func defineQuestionFlows() {
 
     questionFlows = [
-        Flow(title: "Thermal", questions: [
+        Flow(title: "Interaction", questions: [
+            Question(
+                    title: "Are you working in-person or remotely?",
+                    identifier: "i_location_work",
+                    options: [
+                        "In person",
+                        "Remote"
+                    ],
+                    icons: [
+                        "xxx",
+                        "xxx"
+                    ],
+                    nextQuestion: [
+                        1,
+                        1
+                    ]
+            ),
+            Question(
+                    title: "Have you interacted with 1+ people in the last half hour?",
+                    identifier: "i_interaction_people",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        2,
+                        6
+                    ]
+            ),
+            Question(
+                    title: "Was the interaction in-person or virtual?",
+                    identifier: "i_interaction_kind",
+                    options: [
+                        "In-person",
+                        "Virtual"
+                    ],
+                    icons: [
+                        "xxx",
+                        "xxx"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3
+                    ]
+            ),
+            Question(
+                    title: "With a coworker?",
+                    identifier: "i_coworker",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        4,
+                        4
+                    ]
+            ),
+            Question(
+                    title: "Planned (P) or spontaneous (S)?",
+                    identifier: "i_planned",
+                    options: [
+                        "(P) Planned",
+                        "(S) Spontaneous"
+                    ],
+                    icons: [
+                        "xxx",
+                        "xxx"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5
+                    ]
+            ),
+            Question(
+                    title: "Will this interaction impact any choices or actions in the next week?",
+                    identifier: "i_impact",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        6,
+                        6
+                    ]
+            ),
+            Question(
+                    title: "Where are you located?",
+                    identifier: "i_location_space",
+                    options: [
+                        "Desk",
+                        "Meeting Room",
+                        "Hallway",
+                        "Break Room",
+                        "Canteen",
+                        "Home",
+                        "Other"
+                    ],
+                    icons: [
+                        "xxx",
+                        "xxx",
+                        "xxx",
+                        "xxx",
+                        "xxx",
+                        "xxx",
+                        "xxx"
+                    ],
+                    nextQuestion: [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7
+                    ]
+            ),
+            Question(
+                    title: "How are you feeling?",
+                    identifier: "i_feeling",
+                    options: [
+                        "Happy",
+                        "Sad",
+                        "Relaxed",
+                        "Excited",
+                        "Angry",
+                        "Neutral"
+                    ],
+                    icons: [
+                        "happy",
+                        "sad",
+                        "relaxed",
+                        "xxx",
+                        "xxx",
+                        "xxx",
+                        "xxx"
+                    ],
+                    nextQuestion: [
+                        8,
+                        8,
+                        8,
+                        8,
+                        8,
+                        8,
+                    ]
+            )
+        ]),
+	  Flow(title: "Thermal", questions: [
             Question(
                     title: "How would you prefer to be?",
                     identifier: "tc_preference",
