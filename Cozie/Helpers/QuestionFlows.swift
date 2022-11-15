@@ -32,8 +32,8 @@ func defineQuestionFlows() {
                         "Remote"
                     ],
                     icons: [
-                        "xxx",
-                        "xxx"
+                        "placeholder",
+                        "placeholder"
                     ],
                     nextQuestion: [
                         1,
@@ -64,8 +64,8 @@ func defineQuestionFlows() {
                         "Virtual"
                     ],
                     icons: [
-                        "xxx",
-                        "xxx"
+                        "placeholder",
+                        "placeholder"
                     ],
                     nextQuestion: [
                         3,
@@ -96,8 +96,8 @@ func defineQuestionFlows() {
                         "(S) Spontaneous"
                     ],
                     icons: [
-                        "xxx",
-                        "xxx"
+                        "placeholder",
+                        "placeholder"
                     ],
                     nextQuestion: [
                         5,
@@ -133,13 +133,13 @@ func defineQuestionFlows() {
                         "Other"
                     ],
                     icons: [
-                        "xxx",
-                        "xxx",
-                        "xxx",
-                        "xxx",
-                        "xxx",
-                        "xxx",
-                        "xxx"
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder"
                     ],
                     nextQuestion: [
                         7,
@@ -163,13 +163,13 @@ func defineQuestionFlows() {
                         "Neutral"
                     ],
                     icons: [
-                        "happy",
-                        "sad",
-                        "relaxed",
-                        "xxx",
-                        "xxx",
-                        "xxx",
-                        "xxx"
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder",
+                        "placeholder"
                     ],
                     nextQuestion: [
                         8,
