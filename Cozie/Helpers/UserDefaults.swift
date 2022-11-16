@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import OneSignal
 
 extension UserDefaults {
 
@@ -19,7 +20,7 @@ extension UserDefaults {
         case FromTime
         case ToTime
         case NotificationEnable
-        case questions
+        case selectedQuestionFlow
         case permissions
         case participantID
         case experimentID
@@ -31,45 +32,38 @@ extension UserDefaults {
         case recentBloodOxygen
         case recentBodyMass
         case recentBodyMassIndex
-        case recentLeanBodyMass
+//        case recentLeanBodyMass
         case recentRestingHeartRate
-        case recentBodyTemperature
-        case recentRespiratoryRate
+//        case recentBodyTemperature
+//        case recentRespiratoryRate
         case recentStepCount
-        case recentDistanceCycling
-        case recentUVExposure
-        case recentFlightsClimbed
+//        case recentDistanceCycling
+//        case recentUVExposure
+//        case recentFlightsClimbed
         case recentAppleStandTime
-        case recentHeadphoneAudioExposure
-        case recentDistanceSwimming
+//        case recentHeadphoneAudioExposure
+//        case recentDistanceSwimming
         case recentDistanceWalkingRunning
-        case recentVo2Max
-        case recentPeakExpiratoryFlowRate
-        case recentHeartRateVariabilitySDNN
-        case recentWalkingHeartRateAverage
+//        case recentVo2Max
+//        case recentPeakExpiratoryFlowRate
+//        case recentHeartRateVariabilitySDNN
+//        case recentWalkingHeartRateAverage
         case recentBloodPressureSystolic
         case recentBloodPressureDiastolic
-        case recentBasalBodyTemperature
-        case recentDietaryWater
-        case recentWalkingSpeed
-        case recentWalkingStepLength
-        case recentSixMinuteWalkTestDistance
-        case recentWalkingAsymmetryPercentage
-        case recentWalkingDoubleSupportPercentage
-        case recentStairAscentSpeed
-        case recentStairDescentSpeed
-        case recentAppleWalkingSteadiness
+//        case recentBasalBodyTemperature
+//        case recentDietaryWater
+//        case recentWalkingSpeed
+//        case recentWalkingStepLength
+//        case recentSixMinuteWalkTestDistance
+//        case recentWalkingAsymmetryPercentage
+//        case recentWalkingDoubleSupportPercentage
+//        case recentStairAscentSpeed
+//        case recentStairDescentSpeed
+//        case recentAppleWalkingSteadiness
     }
 
     func setValue(for key: String, value: Any) {
         setValue(value, forKey: key)
-        do {
-            let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: self.getValue(for: UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: ["settings_participation_Days": "\(self.getValue(for: UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])", "settings_notification_frequency": "\(self.getValue(for: UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ", "settings_from_time": "\(self.getValue(for: UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"], deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
-            PostRequest(message: postMessage)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        synchronize()
     }
 
     func getValue(for key: String) -> Any {

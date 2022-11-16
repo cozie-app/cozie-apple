@@ -7,7 +7,7 @@
         <relationship name="toSurvey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSurveyDetails" inverseName="toQuestionAnswer" inverseEntity="CDSurveyDetails"/>
     </entity>
     <entity name="CDSurveyDetails" representedClassName="CDSurveyDetails" syncable="YES" codeGenerationType="class">
-        <attribute name="bodyMass" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="body_mass" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="deviceUUID" optional="YES" attributeType="String"/>
         <attribute name="endTimestamp" optional="YES" attributeType="String"/>
         <attribute name="heartRate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -16,6 +16,7 @@
         <attribute name="locationTimestamp" optional="YES" attributeType="String"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="participantID" optional="YES" attributeType="String"/>
+        <attribute name="experimentID" optional="YES" attributeType="String"/>
         <attribute name="startTimestamp" optional="YES" attributeType="String"/>
         <attribute name="voteLog" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="toQuestionAnswer" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDQuestionAnswer" inverseName="toSurvey" inverseEntity="CDQuestionAnswer"/>

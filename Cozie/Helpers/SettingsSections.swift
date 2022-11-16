@@ -4,6 +4,7 @@
 //
 
 import Foundation
+
 // this file contains the enum used to generate the Settings page programmatically
 
 protocol SectionType: CustomStringConvertible {
@@ -23,7 +24,7 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
     case About
 
     var description: String {
-        switch self{
+        switch self {
         case .UserSettings: return "User Settings"
         case .GeneralSettings: return "General Settings"
         case .Communications: return "Communications"
@@ -35,7 +36,7 @@ enum SettingsSections: Int, CaseIterable, CustomStringConvertible {
 
 // define the options in the UserSettings menu
 enum UserSettingOptions: Int, CaseIterable, SectionType {
-    
+
     case participantID
     case experimentID
 
@@ -77,7 +78,7 @@ enum GeneralSettingOptions: Int, CaseIterable, SectionType {
         return false
     }
     var description: String {
-        switch self{
+        switch self {
         case .sendParticipantIDWatch: return "Sync settings with watch"
         }
     }
@@ -105,7 +106,7 @@ enum CommunicationOptions: Int, CaseIterable, SectionType {
         }
     }
     var description: String {
-        switch self{
+        switch self {
         case .reminders: return "Reminders"
         }
     }
@@ -144,7 +145,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
         return false
     }
     var description: String {
-        switch self{
+        switch self {
         case .questionFlow: return "Question Flows"
         case .ReminderFrequency: return "Reminder Frequency"
         case .participationDays: return "Participation Days"
@@ -179,7 +180,7 @@ enum AboutOptions: Int, CaseIterable, SectionType {
         return false
     }
     var description: String {
-        switch self{
+        switch self {
         case .cozie: return "COZIE"
         case .budsLab: return "BUDS Lab"
         }

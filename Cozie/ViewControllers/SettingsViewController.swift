@@ -12,14 +12,10 @@ import WatchConnectivity
 private let reuseIdentifier = "SettingsCell"
 
 class SettingsViewController: UIViewController {
-    
+
     @IBOutlet weak var settingsTableView: UITableView!
 
     var session: WCSession?
-
-    // MARK: - Properties
-
-    var userInfoHeader: UserInfoHeader!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +33,6 @@ class SettingsViewController: UIViewController {
 
         self.settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
         self.settingsTableView.setupPadding()
-        
-        let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 100)
-        userInfoHeader = UserInfoHeader(frame: frame)
-        self.settingsTableView.tableHeaderView = userInfoHeader
-        self.settingsTableView.tableFooterView = UIView()
     }
 
     private func configureUI() {
@@ -69,8 +60,14 @@ class SettingsViewController: UIViewController {
     // send the Firebase participant uid to the watch so the value will be appended to the POST request
     private func sendParticipantID() {
         session?.activate()
+
         if self.session?.isReachable == true {
-            self.session?.sendMessage(["participantID":UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.questions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false,false]], replyHandler: nil) { error in
+            self.session?.sendMessage([
+                "participantID": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                "experimentID": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
+                "questions": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.selectedQuestionFlow.rawValue) as? Int ?? 0
+            ], replyHandler: nil) {
+                error in
                 print(error.localizedDescription)
                 self.showAlert(title: "Sync failed", message: error.localizedDescription)
             }
@@ -121,7 +118,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return view
 
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -180,7 +177,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             switch buttonClicked {
-            case .sendParticipantIDWatch: sendParticipantID()
+            case .sendParticipantIDWatch:
+                sendParticipantID()
+                PostRequestSettings()
             }
         case .Communications:
             guard let buttonClicked = CommunicationOptions(rawValue: indexPath.row) else {
@@ -241,7 +240,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    private func showAlert(title:String, message:String) {
+    private func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
@@ -257,23 +256,23 @@ extension UITabBarController: TimePickerDelegate {
 }
 
 extension SettingsViewController {
-    
+
     // TODO: change demo data to actual data
-    func createCSV(from array:[Dictionary<String, AnyObject>]?) {
-        
-        var employeeArray:[Dictionary<String, AnyObject>] =  Array()
+    func createCSV(from array: [Dictionary<String, AnyObject>]?) {
+
+        var employeeArray: [Dictionary<String, AnyObject>] = Array()
         for i in 1...10 {
             var dic = Dictionary<String, AnyObject>()
             dic.updateValue(i as AnyObject, forKey: "EmpID")
             dic.updateValue("NameForEmployee id = \(i)" as AnyObject, forKey: "EmpName")
             employeeArray.append(dic)
         }
-                
+
         var csvString = "\("Employee ID"), \("Employee Name")\n\n"
         for dic in employeeArray {
             csvString = csvString.appending("\(String(describing: dic["EmpID"]!)) , \(String(describing: dic["EmpName"]!))\n")
         }
-        
+
         do {
             let path = try FileManager.default.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false).appendingPathComponent(folderName)
             let fileURL = path.appendingPathComponent("data.csv")
@@ -301,7 +300,7 @@ extension SettingsViewController: WCSessionDelegate {
     func sessionReachabilityDidChange(_ session: WCSession) {
     }
 
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
         if let msg = message["isSurveyAdded"] as? Bool, msg == true {
             // TODO: reload graph
             print("reload graph")

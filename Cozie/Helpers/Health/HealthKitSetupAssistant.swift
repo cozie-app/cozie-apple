@@ -9,24 +9,24 @@
 import HealthKit
 
 class HealthKitSetupAssistant {
-    
-    private enum HealthkitSetupError: Error {
+
+    private enum HealthKitSetupError: Error {
         case notAvailableOnDevice
         case dataTypeNotAvailable
     }
-    
+
     class func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Swift.Void) {
-        
+
         guard HKHealthStore.isHealthDataAvailable() else {
-            completion(false, HealthkitSetupError.notAvailableOnDevice)
+            completion(false, HealthKitSetupError.notAvailableOnDevice)
             return
         }
-        
+
         guard let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
               let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
               let leanBodyMass = HKObjectType.quantityType(forIdentifier: .leanBodyMass),
               let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate),
-              let restingHertRate = HKObjectType.quantityType(forIdentifier: .restingHeartRate),
+              let restingHeartRate = HKObjectType.quantityType(forIdentifier: .restingHeartRate),
               let bodyTemperature = HKObjectType.quantityType(forIdentifier: .bodyTemperature),
               let respiratoryRate = HKObjectType.quantityType(forIdentifier: .respiratoryRate),
               let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount),
@@ -47,14 +47,14 @@ class HealthKitSetupAssistant {
               let bloodPressureDiastolic = HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic),
               let basalBodyTemperature = HKObjectType.quantityType(forIdentifier: .basalBodyTemperature),
               let dietaryWater = HKObjectType.quantityType(forIdentifier: .dietaryWater) else {
-                  completion(false, HealthkitSetupError.dataTypeNotAvailable)
+            completion(false, HealthKitSetupError.dataTypeNotAvailable)
             return
         }
-        
+
         let healthKitTypesToWrite: Set<HKSampleType> = []
-        
-        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHertRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature, dietaryWater]
-        
+
+        var healthKitTypesToRead: Set<HKObjectType> = [bodyMass, bodyMassIndex, leanBodyMass, heartRate, restingHeartRate, bodyTemperature, respiratoryRate, stepCount, distanceCycling, uvExposure, flightClimbed, time, noise, headphoneAudio, distanceSwimming, distanceRunning, vo2Max, peakExpiratoryRate, heartRateVariability, walkingHeartRate, bloodOxygen, bloodPressureSystolic, bloodPressureDiastolic, basalBodyTemperature, dietaryWater]
+
         if #available(iOS 14.0, *) {
             guard let walkingSpeed = HKObjectType.quantityType(forIdentifier: .walkingSpeed),
                   let walkingStepLength = HKObjectType.quantityType(forIdentifier: .walkingStepLength),
@@ -63,8 +63,8 @@ class HealthKitSetupAssistant {
                   let walkingDoubleSupportPercentage = HKObjectType.quantityType(forIdentifier: .walkingDoubleSupportPercentage),
                   let stairAscentSpeed = HKObjectType.quantityType(forIdentifier: .stairAscentSpeed),
                   let stairDescentSpeed = HKObjectType.quantityType(forIdentifier: .stairDescentSpeed) else {
-                      return
-                  }
+                return
+            }
             healthKitTypesToRead.insert(walkingSpeed)
             healthKitTypesToRead.insert(walkingStepLength)
             healthKitTypesToRead.insert(sixMinuteWalkTestDistance)
@@ -73,16 +73,16 @@ class HealthKitSetupAssistant {
             healthKitTypesToRead.insert(stairAscentSpeed)
             healthKitTypesToRead.insert(stairDescentSpeed)
         }
-        
+
         if #available(iOS 15.0, *) {
             guard let appleWalkingSteadiness = HKObjectType.quantityType(forIdentifier: .appleWalkingSteadiness) else {
                 return
             }
             healthKitTypesToRead.insert(appleWalkingSteadiness)
         }
-        
+
         HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite,
-                                             read: healthKitTypesToRead) { (success, error) in
+                read: healthKitTypesToRead) { (success, error) in
             completion(success, error)
         }
     }

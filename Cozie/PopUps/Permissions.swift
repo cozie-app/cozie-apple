@@ -9,7 +9,11 @@
 import UIKit
 
 class Permissions: BasePopupVC {
-
+    
+    enum PermissionsType: Int {
+        case noiseDataSwitch, motionDataSwitch, heartDataSwitch, locationDataSwitch, dataSwitch, wifiDataSwitch, bluetoothDataSwitch
+    }
+    
     @IBOutlet weak var noiseDataSwitch: UISwitch!
     @IBOutlet weak var motionDataSwitch: UISwitch!
     @IBOutlet weak var heartDataSwitch: UISwitch!
@@ -23,21 +27,19 @@ class Permissions: BasePopupVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setButton.layer.cornerRadius = 5
-        
         self.permissions = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.permissions.rawValue) as? [Bool] ?? [false,false,false,false,false,false,false]
-        
         self.fillUpData()
-
     }
     
     private func fillUpData(){
         
-        for i in 0...6{
-            switch i {
-            case 0: noiseDataSwitch.setOn(self.permissions[0], animated: true)
-            case 1: heartDataSwitch.setOn(self.permissions[1], animated: true)
+        for type in PermissionsType.noiseDataSwitch.rawValue...PermissionsType.bluetoothDataSwitch.rawValue {
+            switch type {
+            case PermissionsType.noiseDataSwitch.rawValue:
+                noiseDataSwitch.setOn(self.permissions[PermissionsType.noiseDataSwitch.rawValue], animated: true)
+            case PermissionsType.heartDataSwitch.rawValue:
+                heartDataSwitch.setOn(self.permissions[PermissionsType.heartDataSwitch.rawValue], animated: true)
             case 2: motionDataSwitch.setOn(self.permissions[2], animated: true)
             case 3: locationDataSwitch.setOn(self.permissions[3], animated: true)
             case 4: bluetoothDataSwitch.setOn(self.permissions[4], animated: true)
@@ -65,9 +67,7 @@ class Permissions: BasePopupVC {
         }
     }
     
-    
     @IBAction func onClickSet(_ sender: UIButton) {
-        
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.permissions.rawValue, value: self.permissions)
         NavigationManager.dismiss(self)
     }

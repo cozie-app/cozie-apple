@@ -10,12 +10,14 @@ import CoreData
 import CoreVideo
 
 final class CoreDataManager {
-    
-    private init(){}
+
+    private init() {
+    }
+
     static let shared = CoreDataManager()
-    
+
     private let cdSurveyDetails = "CDSurveyDetails"
-    
+
     // MARK: - Model SurveyDetails CRUD
     func createSurvey(surveys: [SurveyDetails]) {
         let context = PersistentStorage.shared.newBackgroundContext()
@@ -27,41 +29,42 @@ final class CoreDataManager {
                 cdSurvey.startTimestamp = survey.startTimestamp
                 cdSurvey.endTimestamp = survey.endTimestamp
                 cdSurvey.participantID = survey.participantID
+                cdSurvey.experimentID = survey.experimentID
                 cdSurvey.deviceUUID = survey.deviceUUID
                 cdSurvey.latitude = survey.latitude
                 cdSurvey.longitude = survey.longitude
-                cdSurvey.bodyMass = survey.bodyMass
+                cdSurvey.body_mass = survey.body_mass
                 cdSurvey.heartRate = Int64(survey.heartRate)
                 cdSurvey.isSync = survey.isSync
-                
+
                 var cdQuestionAnswerArray: [Any] = []
                 survey.responses?.forEach({ questionAnswer in
                     let cdQuestionAnswer = CDQuestionAnswer(context: context)
                     cdQuestionAnswer.voteLog = Int64(questionAnswer.voteLog ?? -1)
                     cdQuestionAnswer.question = questionAnswer.question
                     cdQuestionAnswer.answer = questionAnswer.answer
-                    
+
                     cdQuestionAnswerArray.append(cdQuestionAnswer)
                 })
                 cdSurvey.toQuestionAnswer = NSSet(array: cdQuestionAnswerArray)
-                
+
             }
             context.saveContext()
         }
     }
-    
+
     func readAllSurvey() -> [SurveyDetails]? {
         let result = PersistentStorage.shared.fetchManagedObject(managedObject: CDSurveyDetails.self)
-        var survey : [SurveyDetails] = []
+        var survey: [SurveyDetails] = []
         result?.forEach({ (cdSurvey) in
             survey.append(cdSurvey.convertToSurvey())
         })
         return survey
     }
-    
+
     func deleteSurvey(VoteLog: Int) {
         let context = PersistentStorage.shared.newBackgroundContext()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.cdSurveyDetails)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cdSurveyDetails)
         fetchRequest.predicate = NSPredicate(format: "voteLog==%@", VoteLog as CVarArg)
         fetchRequest.fetchLimit = 1
         context.perform {
@@ -69,11 +72,11 @@ final class CoreDataManager {
             context.saveContext()
         }
     }
-    
+
     private func deleteAllSurvey() {
-        self.deleteEntity(entityName: self.cdSurveyDetails)
+        deleteEntity(entityName: cdSurveyDetails)
     }
-    
+
     // MARK: - Model SurveyDetails CRUD
 //    func createQuestionAnswer(questionAnswers: [QuestionAnswer]) {
 //        let context = PersistentStorage.shared.newBackgroundContext()
@@ -84,7 +87,7 @@ final class CoreDataManager {
 //            context.saveContext()
 //        }
 //    }
-    
+
     // MARK: - Delete Entity
     private func deleteEntity(entityName: String) {
         let context = PersistentStorage.shared.newBackgroundContext()
@@ -94,10 +97,10 @@ final class CoreDataManager {
             context.saveContext()
         }
     }
-    
+
     // MARK: - Whole CoreData CRUD
     func deleteAllLocalStorage() {
-        self.deleteAllSurvey()
+        deleteAllSurvey()
     }
 }
 
@@ -105,17 +108,30 @@ final class CoreDataManager {
 extension CDSurveyDetails {
     func convertToSurvey() -> SurveyDetails {
         var questionAnswers: [QuestionAnswer] = []
-        let set = self.toQuestionAnswer
+        let set = toQuestionAnswer
         let cdQuestionAnswerArray = set?.allObjects as? [CDQuestionAnswer]
         cdQuestionAnswerArray?.forEach({ questionAnswer in
             questionAnswers.append(questionAnswer.convertToQuestionAnswer())
         })
-        return SurveyDetails(voteLog: Int(self.voteLog), locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()), startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()), endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()), participantID: self.participantID ?? "", deviceUUID: self.deviceUUID ?? "", latitude: self.latitude, longitude: self.longitude, bodyMass: self.bodyMass, responses: questionAnswers, heartRate: Int(self.heartRate), isSync: self.isSync)
+        return SurveyDetails(
+                voteLog: Int(voteLog),
+                locationTimestamp: self.locationTimestamp ?? FormatDateISOString(date: Date()),
+                startTimestamp: self.startTimestamp ?? FormatDateISOString(date: Date()),
+                endTimestamp: self.endTimestamp ?? FormatDateISOString(date: Date()),
+                participantID: self.participantID ?? "",
+                experimentID: self.experimentID ?? "",
+                deviceUUID: deviceUUID ?? "",
+                latitude: latitude,
+                longitude: longitude,
+                body_mass: body_mass,
+                responses: questionAnswers,
+                heartRate: Int(heartRate),
+                isSync: isSync)
     }
 }
 
 extension CDQuestionAnswer {
     func convertToQuestionAnswer() -> QuestionAnswer {
-        return QuestionAnswer(voteLog: Int(self.voteLog), question: self.question, answer: self.answer)
+        return QuestionAnswer(voteLog: Int(voteLog), question: question, answer: answer)
     }
 }

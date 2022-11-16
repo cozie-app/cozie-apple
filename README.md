@@ -19,19 +19,17 @@ Cozie allows building occupants to provide feedback in real time
 
 I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) so you can see all the steps required to clone Cozie on your computer.
 
-1. Clone the `cozie-app` repository on your computer. 
+1. Clone the `cozie-app` repository on your computer, then `cd` into the repo. 
 
 ```git clone https://github.com/Cozie-IEQ/cozie-apple.git```
 
-2. Clone the latest stable release of ResearchKit. 
-
-```git clone -b stable https://github.com/ResearchKit/ResearchKit.git```
-
+2. Install the CocoaPods with the following command `pod install`. You need to have CocoaPods installed on your Mac. You can install CocoaPods using the following command `sudo gem install cocoapods`. If you are using a new Mac with M1 chip you will need to use the following command to install CocoaPods `sudo arch -x86_64 gem install ffi` followed by `arch -x86_64 pod install`.
 3. Open the `Cozie.xcworkspace` file with XCode.
-
-4. [Add the ResearchKit framework](https://github.com/ResearchKit/ResearchKit/blob/master/README.md#1-add-the-researchkit-framework-to-your-project) to your project
-
+4. Add Watch to iPhone simulaor `Window>Devices and Simulators>Create a new simulator`
 5. Select Cozie as Target and press play button in XCode.
+6. Select CozieWatchkitApp and press play button.
+7. Prior completing a survey sync the watch and the phone.
+8. If something is not working uninstall the app from both simulators and install it again.
 
 For more information please visit the [official documentation website](https://cozie-apple.app/docs/)
 

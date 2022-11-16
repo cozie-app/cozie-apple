@@ -43,8 +43,8 @@ class DailyParticipation: BasePopupVC {
     }
     
     private func setupFilledData() {
-        self.fromLabel.text = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormateTimeString() + "hrs"
-        self.toLabel.text = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormateTimeString() + "hrs"
+        self.fromLabel.text = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime).get24FormatTimeString() + "hrs"
+        self.toLabel.text = (UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ToTime.rawValue) as? Date ?? defaultToTime).get24FormatTimeString() + "hrs"
     }
     
     @objc private func onClickFromView() {

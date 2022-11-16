@@ -9,9 +9,11 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var TaskImage: UIImageView!
     @IBOutlet weak var TaskLabel: UILabel!
     @IBOutlet weak var TaskCompletedIndicator: UIImageView!
     
+    override class func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }

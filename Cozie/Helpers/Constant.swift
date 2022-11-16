@@ -20,3 +20,10 @@ let imgGithub = "githubLogo"
 let imgBudsLab = "budsLabIcon"
 let imgDownload = "downloadData"
 let folderName = "Cozie"
+
+let AWSWriteURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-write-influx"
+let AWSReadURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-read-influx"
+let AWSWriteAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
+let AWSReadAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
+
+let OneSignalAppID = "17d346bf-bfe5-4422-be96-2a8e4ae4cc3d"

@@ -51,15 +51,15 @@ class TextView: BasePopupVC {
             Utilities.getData { (isSuccess, data) in
                 DispatchQueue.main.async {
                     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
-                    appDelegate?.setUpBackgroundDeliveryForDataTypes()
+                    appDelegate?.deliveryHealthKitInfo()
                 }
             }
         case 2:
             UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: self.idTextField.text!)
         case 3:
-            UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue, value: Double(self.idTextField.text!))
+            UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.studyGoal.rawValue, value: Double(self.idTextField.text ?? "") ?? 0.0)
         default:
-            var a = 2
+            print("")
         }
         NavigationManager.dismiss(self)}
 }

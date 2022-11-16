@@ -12,8 +12,16 @@ class WeeklySurvey: BasePopupVC {
 
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    var questions = ["On which days did you work from home this week?", "Are you experiencing any of the following symptoms? (Select all that apply)", "How much fatigue are you currently experiencing?", "Please indicate your satisfaction levels with the overall indoor air quality in your office.", "How much fatigue have you been experiencing throught the week?"]
-    var options: [[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "None"], ["None", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"], ["Not at all", "Slightly", "Moderately", "Very", "Extremely"], ["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"], ["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
+    var questions = ["On which days did you work from home this week?",
+                     "Are you experiencing any of the following symptoms? (Select all that apply)",
+                     "How much fatigue are you currently experiencing?",
+                     "Please indicate your satisfaction levels with the overall indoor air quality in your office.",
+                     "How much fatigue have you been experiencing throughout the week?"]
+    var options: [[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "None"],
+                               ["None", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"],
+                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"],
+                               ["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"],
+                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
     var multipleAnswer = [true, true, false, false, false]
     var answers: [Int: [Int]] = [:]
     var buttons: [Int: [UIButton]] = [:]
@@ -53,10 +61,11 @@ class WeeklySurvey: BasePopupVC {
                 }
             }
             do {
-                let postMessage = try JSONEncoder().encode(APIFormate(locationTimestamp: GetDateTimeISOString(), startTimestamp: GetDateTimeISOString(), endTimestamp: GetDateTimeISOString(), participantID: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "", responses: tmpResponses, deviceUUID: UIDevice.current.identifierForVendor?.uuidString ?? ""))
-                PostRequest(message: postMessage)
+                let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(), timestamp_start: GetDateTimeISOString(), timestamp_end: GetDateTimeISOString(), id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                                                                     id_experiment:  UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "", responses: tmpResponses, id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
+                _ = PostRequest(message: postMessage)
             } catch let error {
-                print(error.localizedDescription)
+                print("error WS: \(error.localizedDescription)")
             }
             NavigationManager.dismiss(self)
         }

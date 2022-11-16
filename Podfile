@@ -4,9 +4,9 @@
 target 'Cozie' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'OneSignal', '>= 2.11.2', '< 3.0'
+  pod 'OneSignal', '>= 3.0.0', '< 4.0'
 
-  pod 'Charts'
+  pod 'Charts', '=4.1.0'
   pod 'IQKeyboardManagerSwift'
   pod 'Alamofire', '~> 4.5'
   # Pods for Cozie
@@ -41,7 +41,7 @@ end
 target 'OneSignalNotificationServiceExtension' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'OneSignal', '>= 2.11.2', '< 3.0'
+  pod 'OneSignal', '>= 3.0.0', '< 4.0'
 
   # Pods for OneSignalNotificationServiceExtension
 
