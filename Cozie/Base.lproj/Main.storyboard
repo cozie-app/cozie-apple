@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="twX-qU-vF7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="twX-qU-vF7">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,13 +13,13 @@
         <!--Settings View Controller-->
         <scene sceneID="WtC-KL-8ka">
             <objects>
-                <viewController id="AdB-sb-bBQ" customClass="SettingsViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AdB-sb-bBQ" customClass="SettingsViewController" customModule="Cozie_Xesh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Mq-a5-idT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="721"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="l9T-vD-hE8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="638"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="AdB-sb-bBQ" id="1em-fN-k6m"/>
@@ -72,7 +72,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" selectedImage="gear" id="QL1-u7-Opw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="flK-YO-etK">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -91,13 +91,13 @@
         <!--My Data-->
         <scene sceneID="RNv-LR-ByF">
             <objects>
-                <viewController id="iBM-id-FCK" customClass="DataViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iBM-id-FCK" customClass="DataViewController" customModule="Cozie_Xesh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dtB-rY-Sgu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" My Data:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n86-3j-znN">
-                                <rect key="frame" x="-12" y="64" width="130" height="40"/>
+                                <rect key="frame" x="-12" y="67" width="130" height="40"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="7fz-YV-UkD"/>
@@ -113,33 +113,33 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Responses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAD-N0-8nl">
-                                <rect key="frame" x="131.33333333333334" y="114" width="112.66666666666666" height="18"/>
+                                <rect key="frame" x="131.33333333333334" y="117" width="112.66666666666666" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMH-JK-fw6">
-                                <rect key="frame" x="0.0" y="142" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="145" width="375" height="180"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="80V-rD-ELZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUN-Jz-zC8">
-                                <rect key="frame" x="0.0" y="370" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="373" width="375" height="180"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="8YL-a9-KwZ"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currenty, how many people within 5m?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cg3-od-stU">
-                                <rect key="frame" x="55" y="342" width="265" height="18"/>
+                                <rect key="frame" x="55" y="345" width="265" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJh-A5-6gg">
-                                <rect key="frame" x="20" y="570" width="335" height="65"/>
+                                <rect key="frame" x="20" y="573" width="335" height="65"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0Dw-Do-RMd">
                                         <rect key="frame" x="20" y="0.0" width="315" height="65"/>
@@ -223,13 +223,13 @@
         <!--Home-->
         <scene sceneID="F1z-QM-vZG">
             <objects>
-                <viewController id="md6-gd-GcL" customClass="HomePageViewController" customModule="Cozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="md6-gd-GcL" customClass="HomePageViewController" customModule="Cozie_Xesh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eLP-z1-M5d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fc5-eM-Ln8" userLabel="ContentView">
-                                <rect key="frame" x="0.0" y="46.666666666666686" width="375" height="720"/>
+                                <rect key="frame" x="0.0" y="49.666666666666686" width="375" height="720"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yL-CI-jiz">
                                         <rect key="frame" x="20" y="0.0" width="335" height="50"/>
@@ -441,8 +441,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-yJ-TPm">
                                         <rect key="frame" x="20" y="517" width="335" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Survey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dh-EP-dkQ">
-                                                <rect key="frame" x="105.33333333333331" y="7.9999999999999982" width="124.66666666666669" height="20.333333333333329"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End-of-Day Survey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dh-EP-dkQ">
+                                                <rect key="frame" x="87.333333333333329" y="7.9999999999999982" width="160.33333333333337" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
@@ -533,9 +533,9 @@
     </scenes>
     <resources>
         <image name="checklist" width="128" height="128"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="house" catalog="system" width="128" height="106"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
         <image name="square.and.arrow.down.fill" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

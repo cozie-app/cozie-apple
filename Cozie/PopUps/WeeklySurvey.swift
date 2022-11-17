@@ -12,17 +12,68 @@ class WeeklySurvey: BasePopupVC {
 
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    var questions = ["On which days did you work from home this week?",
-                     "Are you experiencing any of the following symptoms? (Select all that apply)",
-                     "How much fatigue are you currently experiencing?",
-                     "Please indicate your satisfaction levels with the overall indoor air quality in your office.",
-                     "How much fatigue have you been experiencing throughout the week?"]
-    var options: [[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "None"],
-                               ["None", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"],
-                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"],
-                               ["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"],
-                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
-    var multipleAnswer = [true, true, false, false, false]
+    
+    
+    
+    
+    
+    var questions = ["Please select a range for the number of total interactions you have had today.",
+                     "How many of those interactions were in person?",
+                     "Please rate the perceived value of your in/person interactions.",
+                     "Please rate the perceived value of your virtual interactions.",
+                     "Approximately, what percentage of your total interactions were about 'current work tasks'?",
+                     "Approximately, what percentage of your total interactions were about 'future work tasks'?",
+                     "Approximately, what percentage of your total interactions were about 'past work tasks'?",
+                     "Approximately, what percentage of your total interactions were about 'work dynamics'?",
+                     "Approximately, what percentage of your total interactions were about 'personal life'?",
+                     "Approximately, what percentage of your total interactions were about 'politics'?",
+                     "Approximately, what percentage of your total interactions were about 'technology'?",
+                     "Approximately, what percentage of your total interactions were about 'sustainability'?",
+                     "Approximately, what percentage of your total interactions were about 'energy consumption'?",
+                     "Approximately, what percentage of your total interactions were about 'other'?",
+                     "Approximately, what percentage of your interactions have an impact on your choices and actions for the coming week?",
+                     "Approximately, what percentage of your interactions resulted in more positive emotions after the interaction?"]
+    
+    
+    
+    
+    var options: [[String]] = [["0", "1-3", "4-6", "7-10", "11+"],
+                               ["0", "1-3", "4-6", "7-10", "11+"],
+                               ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+                               ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"],
+                               ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]]
+  
+    
+    
+    
+    var multipleAnswer = [false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false]
+    
     var answers: [Int: [Int]] = [:]
     var buttons: [Int: [UIButton]] = [:]
     var otherAnswer = ""
