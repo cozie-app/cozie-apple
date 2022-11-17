@@ -15,16 +15,17 @@ def check_type(key, value):
                   'ts_heartRate',
                   'ts_oxygenSaturation',
                   'ts_restingHeartRate',
+                  'sound_pressure',
                   'ts_standTime',
                   'ts_stepCount',
-                  'sound_pressure',
                   'vote_count']
                   
     # Fields with float values
     float_fields = ['latitude',
                     'longitude',
                     'ts_hearingEnvironmentalExposure',
-                    'ts_walkingDistance']
+                    'ts_walkingDistance',
+                    'ts_bodyMass']
                       
     if key in int_fields:
         return int(value)
