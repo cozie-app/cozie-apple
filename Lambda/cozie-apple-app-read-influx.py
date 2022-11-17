@@ -10,6 +10,7 @@ import datetime
 import pandas as pd
 from influxdb import InfluxDBClient
 import os
+from valid_votes import keep_valid_votes
 
 # Influx authentication
 user = os.environ["DB_USER"]
@@ -21,6 +22,7 @@ db = "cozie-apple"
 
 def lambda_handler(event, context):
 
+    print("Test - asdf - Test")
     measurement = event["queryStringParameters"]["id_experiment"]
     print(f"{measurement=}")
 
@@ -63,7 +65,7 @@ def lambda_handler(event, context):
 
     # section of the code run if query comes from the cozie apple app
     if "id_participant" in event["queryStringParameters"]:
-
+        
         # Influx client
         client = InfluxDBClient(
             host, port, user, password, db, ssl=True, verify_ssl=True
@@ -88,7 +90,11 @@ def lambda_handler(event, context):
         df["time"] = df["time"].dt.tz_localize(None)
         df.index = df["time"]
         df = df.drop(["time"], axis=1)
-
+        
+        # Remove invalid votes for orenth
+        if "orenth" in measurement:
+            df = keep_valid_votes(df)
+        
         # In order to keep the Cozie app from freezinig for more than 30 seconds the last_sync_timesetamp needs to be returned
         query_influx2 = """SELECT "heart_rate" FROM "{}"."autogen"."{}" WHERE time > '{}' AND id_participant='{}' ORDER BY "time" DESC LIMIT 1 """.format(
             db, measurement, from_time_str, event["queryStringParameters"]["id_participant"]
@@ -98,9 +104,10 @@ def lambda_handler(event, context):
         print("result2: ", result2)
         print("----------------------")
         for item in result2[measurement]:
-            last_sync_timestamp = datetime.datetime.strptime(
-                item["time"], "%Y-%m-%dT%H:%M:%S.%fZ"
-            ).timestamp()
+            if '.' in item["time"]:
+                last_sync_timestamp = datetime.datetime.strptime(item["time"], "%Y-%m-%dT%H:%M:%S.%fZ").timestamp()
+            else:
+                last_sync_timestamp = datetime.datetime.strptime(item["time"], "%Y-%m-%dT%H:%M:%SZ").timestamp() # deal with timestamps that don't have decimals
 
     # no data for that query were available
     except KeyError:
