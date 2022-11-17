@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4838243247BA33A002C3708"
-               BuildableName = "Cozie Xesh.app"
-               BlueprintName = "Cozie Xesh"
+               BuildableName = "Cozie Thesh.app"
+               BlueprintName = "Cozie Thesh"
                ReferencedContainer = "container:Cozie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
