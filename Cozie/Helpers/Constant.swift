@@ -11,8 +11,8 @@ import UIKit
 let defaultFromTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
 let defaultToTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
 let defaultNotificationFrq = Calendar.current.date(bySettingHour: 1, minute: 0, second: 0, of: Date()) ?? Date()
-let defaultExperimentID = "AppleStore"
-let defaultParticipantID = "ExternalTester"
+let defaultExperimentID = "leth"
+let defaultParticipantID = "leth"
 
 let primaryColour = UIColor(named: "primaryColour")
 
@@ -26,4 +26,4 @@ let AWSReadURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/de
 let AWSWriteAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
 let AWSReadAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
 
-let OneSignalAppID = "17d346bf-bfe5-4422-be96-2a8e4ae4cc3d"
+let OneSignalAppID = "c809b8dd-44f5-462a-9657-613d00747e0a"
