@@ -21,6 +21,9 @@ let imgBudsLab = "budsLabIcon"
 let imgDownload = "downloadData"
 let folderName = "Cozie"
 
+let cozieVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+let buildNumber = Bundle.main.infoDictionary!["CFBundleVersion"]!
+
 let AWSWriteURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-write-influx"
 let AWSReadURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-read-influx"
 let AWSWriteAPIKey = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
