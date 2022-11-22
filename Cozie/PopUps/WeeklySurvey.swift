@@ -12,29 +12,64 @@ class WeeklySurvey: BasePopupVC {
 
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    var questions = ["This app is easy to use.",
-                         "How often do you wear your watch in a week?",
-                         "The notifications on the watch were annoying.",
-                         "The notifications on the phone were annoying.",
-                         "I answered the the question on the watch honestly.",
-                         "The Cozie app feels fast and responsive.",
-                         "The notifications helped to change my mind.",
-                         "I changed my location after seeing the notifications.",
-                         "Overall, how satisfied are you with the Cozie app?",
-                         "How would you rate the overall quality of the app?",
-                         "How likely are you to recommend this app to a friend or colleague?"]
-        var options:[[String]] = [["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
-                                  ["<10 hours", "10-20 hours", "20-30 hours", "30-40 hours", "40-50 hours", ">50 hours"],
-                                  ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
-                                  ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
-                                  ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
-                                  ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
-                                  ["Strongly disagree", "Disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Agree", "Strong Agree"],
-                                  ["Always", "Very frequently", "Occasionally", "Rarely", "Very rarely", "Never"],
-                                  ["Not at all satisfied", "Not so satisfied", "Somewhat satisfied", "Very satisfied", "Extremly satisfied"],
-                                  ["Bad", "Poor", "Fair", "Good", "Excellent"],
-                                  ["Extremely unlikely", "Unlikely", "Neutral", "Likely", "Extremely likely"]]
-        var multipleAnswer = [false,false,false,false,false,false,false,false,false,false,false]
+    
+    
+    
+    
+
+    
+    var questions = ["The noise and/or temperature intervention messages were helpful to me in understanding how to improve my indoor environmental satisfaction.",
+                     "Over the past week, I changed my location after receiving the noise intervention messages. ",
+                     "Over the past week, I put on my earphones to mitigate noise distractions after receiving the noise intervention messages.",
+                     "Over the past week, I changed my location, adjusted the thermostat, fan etc. to feel thermally comfortable after receiving the temperature intervention messages.",
+                     "This app is easy to use.",
+                     "How often do you wear your watch in a week?",
+                     "The intervention messages were annoying.",
+                     "The Cozie app feels fast and responsive.",
+                     "Overall, how satisfied are you with the Cozie app?",
+                     "How would you rate the overall quality of the app?",
+                     "How likely are you to recommend this app to a friend or colleague?"]
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    var options:[[String]] = [["Strongly agree", "Agree", "Neutral", "Disagree", "Strongly disgree", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree"],
+                              ["<10 hours", "10-20 hours", "20-30 hours", "30-40 hours", "40-50 hours", ">50 hours"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree", "I did not receive any intervention messages"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree"],
+                              ["Extremly satisfied", "Very satisfied", "Somewhat satisfied", "Not so satisfied", "Not at all satisfied"],
+                              ["Excellent", "Good", "Fair", "Poor", "Bad"],
+                              ["Extremely likely", "Likely", "Neutral", "Unlikely", "Extremely unlikely"]]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    var multipleAnswer =  [false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false]
+    
     var answers: [Int: [Int]] = [:]
     var buttons: [Int: [UIButton]] = [:]
     var otherAnswer = ""
