@@ -349,7 +349,10 @@ public func PostRequestSettings() {
                 id_experiment: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
                 responses: ["settings_participation_days": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ParticipationDays.rawValue) as? [Bool] ?? [false])",
                             "settings_notification_frequency": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.ReminderFrequency.rawValue) as? Date ?? defaultNotificationFrq) ",
-                            "settings_from_time": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)"],
+                            "settings_from_time": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.FromTime.rawValue) as? Date ?? defaultFromTime)",
+                            "build_number": buildNumber,
+                            "bundle_name": bundleName,
+                            "bundle_version": bundleVersion],
                 id_device: UIDevice.current.identifierForVendor?.uuidString ?? "",
                 id_one_signal: player_id ?? "ID not yet retrieved"))
         _ = PostRequest(message: postMessage)
