@@ -38,7 +38,7 @@ class WeeklySurvey: BasePopupVC {
     
     
     
-    var options:[[String]] = [["Strongly agree", "Agree", "Neutral", "Disagree", "Strongly disgree", "I did not receive any intervention messages"],
+    var options:[[String]] = [["Strongly agree", "Agree", "Neutral", "Disagree", "Strongly disgree", "No intervention messages received"],
                               ["Always", "Often", "Sometimes", "Seldom", "Never", "No intervention messages received"],
                               ["Always", "Often", "Sometimes", "Seldom", "Never", "No intervention messages received"],
                               ["Always", "Often", "Sometimes", "Seldom", "Never", "No intervention messages received"],
@@ -108,8 +108,13 @@ class WeeklySurvey: BasePopupVC {
                 }
             }
             do {
-                let postMessage = try JSONEncoder().encode(FormatAPI(timestamp_location: GetDateTimeISOString(), timestamp_start: GetDateTimeISOString(), timestamp_end: GetDateTimeISOString(), id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "",
-                                                                     id_experiment:  UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "", responses: tmpResponses, id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
+                let postMessage = try JSONEncoder().encode(FormatAPI(
+                    timestamp_location: GetDateTimeISOString(),
+                    timestamp_start: GetDateTimeISOString(),
+                    timestamp_end: GetDateTimeISOString(),
+                    id_participant: UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "",
+                    id_experiment:  UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "",
+                    responses: tmpResponses, id_device: UIDevice.current.identifierForVendor?.uuidString ?? ""))
                 _ = PostRequest(message: postMessage)
             } catch let error {
                 print("error WS: \(error.localizedDescription)")
