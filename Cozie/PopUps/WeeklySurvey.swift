@@ -12,17 +12,64 @@ class WeeklySurvey: BasePopupVC {
 
     @IBOutlet weak var tableQuestions: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    var questions = ["On which days did you work from home this week?",
-                     "Are you experiencing any of the following symptoms? (Select all that apply)",
-                     "How much fatigue are you currently experiencing?",
-                     "Please indicate your satisfaction levels with the overall indoor air quality in your office.",
-                     "How much fatigue have you been experiencing throughout the week?"]
-    var options: [[String]] = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "None"],
-                               ["None", "Hoarse/dry throat", "Irritation of the eyes", "Dry eyes", "Dry skin", "Flushed facial skin", "Others, please indicate"],
-                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"],
-                               ["Extremely dissatisfied", "Moderately dissatisfied", "Slightly dissatisfied", "Neither satisfied or dissatisfied", "Slightly satisfied", "Moderately satisfied", "Extremely satisfied"],
-                               ["Not at all", "Slightly", "Moderately", "Very", "Extremely"]]
-    var multipleAnswer = [true, true, false, false, false]
+    
+    
+    
+    
+
+    
+    var questions = ["The noise and/or temperature intervention messages were helpful to me in understanding how to improve my indoor environmental satisfaction.",
+                     "Over the past week, I changed my location after receiving the noise intervention messages. ",
+                     "Over the past week, I put on my earphones to mitigate noise distractions after receiving the noise intervention messages.",
+                     "Over the past week, I changed my location, adjusted the thermostat, fan etc. to feel thermally comfortable after receiving the temperature intervention messages.",
+                     "This app is easy to use.",
+                     "How often do you wear your watch in a week?",
+                     "The intervention messages were annoying.",
+                     "The Cozie app feels fast and responsive.",
+                     "Overall, how satisfied are you with the Cozie app?",
+                     "How would you rate the overall quality of the app?",
+                     "How likely are you to recommend this app to a friend or colleague?"]
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    var options:[[String]] = [["Strongly agree", "Agree", "Neutral", "Disagree", "Strongly disgree", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree"],
+                              ["<10 hours", "10-20 hours", "20-30 hours", "30-40 hours", "40-50 hours", ">50 hours"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree", "I did not receive any intervention messages"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree"],
+                              ["Extremly satisfied", "Very satisfied", "Somewhat satisfied", "Not so satisfied", "Not at all satisfied"],
+                              ["Excellent", "Good", "Fair", "Poor", "Bad"],
+                              ["Extremely likely", "Likely", "Neutral", "Unlikely", "Extremely unlikely"]]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    var multipleAnswer =  [false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false]
+    
     var answers: [Int: [Int]] = [:]
     var buttons: [Int: [UIButton]] = [:]
     var otherAnswer = ""
