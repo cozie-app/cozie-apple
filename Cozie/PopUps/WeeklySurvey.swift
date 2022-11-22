@@ -39,12 +39,12 @@ class WeeklySurvey: BasePopupVC {
     
     
     var options:[[String]] = [["Strongly agree", "Agree", "Neutral", "Disagree", "Strongly disgree", "I did not receive any intervention messages"],
-                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
-                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
-                              ["Always", "Often", "Sometimes", "Seldom", "Never", "I did not receive any intervention messages"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "No intervention messages received"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "No intervention messages received"],
+                              ["Always", "Often", "Sometimes", "Seldom", "Never", "No intervention messages received"],
                               ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree"],
                               ["<10 hours", "10-20 hours", "20-30 hours", "30-40 hours", "40-50 hours", ">50 hours"],
-                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree", "I did not receive any intervention messages"],
+                              ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree", "No intervention messages received"],
                               ["Strongly agree", "Agree", "Neutral", "Disgree", "Strongly disagree"],
                               ["Extremly satisfied", "Very satisfied", "Somewhat satisfied", "Not so satisfied", "Not at all satisfied"],
                               ["Excellent", "Good", "Fair", "Poor", "Bad"],
