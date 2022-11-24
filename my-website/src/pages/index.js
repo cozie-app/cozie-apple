@@ -155,7 +155,7 @@ function Home() {
                 className={clsx(
                   "button button--outline button--active button--secondary button--lg margin--sm"
                 )}
-                href={"mailto:researcher@budslab.org"}
+                href={"mailto:cozie.app@gmail.com"}
               >
                 Contact us
            
