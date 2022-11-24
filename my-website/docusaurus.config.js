@@ -73,6 +73,10 @@ module.exports = {
               label: "GitHub",
               href: "https://github.com/FedericoTartarini",
             },
+            {
+              label: "Privacy Policy",
+              to: "docs/privacyPolicy",
+            },
           ],
         },
       ],
