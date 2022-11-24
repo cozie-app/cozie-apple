@@ -77,6 +77,10 @@ module.exports = {
               label: "Privacy Policy",
               to: "docs/privacyPolicy",
             },
+            {
+              label: "Support",
+              to: "docs/support",
+            },
           ],
         },
       ],
