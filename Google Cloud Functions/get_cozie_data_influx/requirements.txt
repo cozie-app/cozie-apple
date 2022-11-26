@@ -1,4 +1,0 @@
-Flask==1.0.2
-pandas
-influxdb
-functions_framework
