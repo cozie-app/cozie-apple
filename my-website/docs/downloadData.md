@@ -9,14 +9,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 ## Download the data collected using the Cozie Apple Watch survey
 
 You can download the data you have collected using the Cozie Apple Watch survey using the following Python code.
-Please note that you will have to specify your `USER_ID` and `API_KEY`.
+Please note that you will have to specify your `ID_PARTICIPANT`, `ID_EXPERIMENT` and `API_KEY`.
 Therefore, it is very important that you have successfully completed Step 5 in [Instructions for testers](installation.md).
 You can get these information by emailing us at cozie.app@gmail.com
 
 All the data you have queried are saved inside the Pandas dataframe called `df`.
-
-Keep also in mind that some records (rows of the dataframe) only contain heart rate data.
-Consequently if you are interested in analysing only the responses that a participant (USER_ID) provided using the apple watch, please first filter out all the records which contain 'NaN' in the VoteLog column using the following command `df = df.dropna(subset=['voteLog'])`
 
 ```
 import requests
