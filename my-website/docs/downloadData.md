@@ -22,24 +22,58 @@ Consequently if you are interested in analysing only the responses that a partic
 import requests
 import json
 import pandas as pd
+import matplotlib.pyplot as plt
 
+# Settings
 YOUR_TIMEZONE = 'Asia/Singapore'
-USER_ID = 'XXXXXXX'
-WEEKS = "10"         # Number of weeks from which the data is retrived, starting from now
-API_KEY = 'YYYYYY'
+ID_PARTICIPANT = 'ExternalUser'
+ID_EXPERIMENT = 'AppleStore'
+WEEKS = "2"  # Number of weeks from which the data is retrived, starting from now
+API_KEY = '' # reach out to cozie.app@gmail.com for an API_KEY
 
-payload = {'user_id': USER_ID, 'weeks': WEEKS}
-
-# the api-key below is limited to 200 queries per day. Please contact us to get an API key
+# Query data
+payload = {'id_participant': ID_PARTICIPANT,'id_experiment': ID_EXPERIMENT, 'weeks': WEEKS}
 headers = {"Accept": "application/json", 'x-api-key': API_KEY}
-
-response = requests.get( 'https://0iecjae656.execute-api.us-east-1.amazonaws.com/default/CozieApple_Read_Influx', params=payload, headers=headers)
+response = requests.get('https://m7cy76lxmi.execute-api.ap-southeast-1.amazonaws.com/default/cozie-apple-researcher-read-influx', params=payload, headers=headers)
 data = json.loads(response.content)
-df = pd.DataFrame.from_dict(data[1]["data"]).T
+
+# Convert response in Pandas Dataframe
+df = pd.DataFrame.from_dict(data).T
 df.index = pd.to_datetime(df.index, unit='ms')
 df.index = df.index.tz_localize('UTC').tz_convert(YOUR_TIMEZONE)
+pd.options.display.max_columns = None
 
-print(df.head())
+# Display dataframe
+df.head()
+```
+
+### Watch survey data
+If you want to focus on the analysis of the watch-based survey data use the code below to filter the dataframe retrieved above.
+
+```
+# Get only question flow responses
+df_questions = df[~df["vote_count"].isna()]
+df_questions.style
+```
+
+### Physiological data
+Use the code below to plot noise and heart rate data contained in the dataframe retrieved above. 
+
+```
+# Plot time-series data
+fig, ax = plt.subplots(1,2, figsize =(15, 7))
+
+# Heart rate
+df["heart_rate"].plot(ax=ax[0], style='.')
+ax[0].set_title("Heart Rate", fontsize=18)
+ax[0].set_ylabel("Heart Rate [bpm]", fontsize=14)
+ax[0].set_xlabel("Time", fontsize=14)
+
+# Sound pressure
+df["sound_pressure"].plot(ax=ax[1], style='.')
+ax[1].set_title("Sound Pressure", fontsize=18)
+ax[1].set_ylabel("Sound Pressure [dB?]", fontsize=14)
+ax[1].set_xlabel("Time", fontsize=14)
 ```
 
 ## Features
