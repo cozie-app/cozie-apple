@@ -46,7 +46,7 @@ extension UserDefaults {
         case recentDistanceWalkingRunning
 //        case recentVo2Max
 //        case recentPeakExpiratoryFlowRate
-//        case recentHeartRateVariabilitySDNN
+        case recentHeartRateVariabilitySDNN
 //        case recentWalkingHeartRateAverage
         case recentBloodPressureSystolic
         case recentBloodPressureDiastolic
