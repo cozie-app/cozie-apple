@@ -90,7 +90,6 @@ ax[1].set_xlabel("Time", fontsize=14)
 | `ts_stepCount` | Integer | Number of steps walked, provided by Apple Health Kit |
 | `ts_standTime` | Integer | Stand time in ?, provided by Apple Health Kit |
 | `ts_restingHeartRate` | Integer | Resting heart rate in bpm, provided by Apple Health Kit |
-| `ts_restingHeartRate` | Float |  Noise level in dB(A), provided by Apple Health Kit, submitted submitted when iPhone Cozie app is opened |
 | `sound_pressure` | Integer | Noise level in dB(A), provided by Apple Health Kit, submitted as background task. Sampled every 30 min  |
 | `ts_hearingEnvironmentalExposure` | Integer | Noise level in dB(A), provided by Apple Health Kit, submitted when iPhone Cozie app is opened. Sampled every 30min  |
 | `timestamp_start` | String | Timestamp (UTC) of when micro survey was started |
