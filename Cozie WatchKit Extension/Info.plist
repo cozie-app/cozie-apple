@@ -51,6 +51,8 @@
 	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
