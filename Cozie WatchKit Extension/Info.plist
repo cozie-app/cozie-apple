@@ -48,19 +48,17 @@
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
+	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
+	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>

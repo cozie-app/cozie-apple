@@ -32,28 +32,20 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>We are not using not storing this data.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
+	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>We are logging the heart rate data.</string>
+	<string>Cozie accesses the health records to add your data to the watch survey responses.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used it to determine form where you completed the survey.</string>
+	<string>Cozie uses the location data to add your location to the watch survey responses.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
-	<key>NSMotionUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<string>Cozie uses the mircrophone to derive a noise metric. Cozie only logs the noise metric.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
