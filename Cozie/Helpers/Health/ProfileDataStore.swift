@@ -329,13 +329,10 @@ extension ProfileDataStore {
 //        case HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!:
 //            getData(type: HKSampleType.quantityType(forIdentifier: .heartRateVariabilitySDNN)) { heartRateVariabilitySDNN in
 //                if let heartRateVariabilitySDNN = heartRateVariabilitySDNN {
+//                    UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.recentHeartRateVariabilitySDNN.rawValue, value: heartRateVariabilitySDNN)
 //                    Utilities.sendHealthData(data: ["ts_heartRateVariabilitySDNN": "\(UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.recentHeartRateVariabilitySDNN.rawValue) as? Double ?? 0)"])
 //                }
 //            }
-        case HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!:
-            getDataObject(type: HKSampleType.quantityType(forIdentifier: .heartRateVariabilitySDNN)) { (HRV, samples) in
-                Utilities.sendHealthData(data: HRV, type: .ts_HRV, samples: samples)
-                    }
 //        case HKObjectType.quantityType(forIdentifier: .walkingHeartRateAverage)!:
 //            getData(type: HKSampleType.quantityType(forIdentifier: .walkingHeartRateAverage)) { walkingHeartRateAverage in
 //                if let walkingHeartRateAverage = walkingHeartRateAverage {

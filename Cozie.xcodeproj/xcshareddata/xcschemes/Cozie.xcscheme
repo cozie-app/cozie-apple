@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4838243247BA33A002C3708"
-               BuildableName = "Cozie - Dev.app"
-               BlueprintName = "Cozie - Dev"
+               BuildableName = "Cozie.app"
+               BlueprintName = "Cozie"
                ReferencedContainer = "container:Cozie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4838243247BA33A002C3708"
-            BuildableName = "Cozie - Dev.app"
-            BlueprintName = "Cozie - Dev"
+            BuildableName = "Cozie.app"
+            BlueprintName = "Cozie"
             ReferencedContainer = "container:Cozie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4838243247BA33A002C3708"
-            BuildableName = "Cozie - Dev.app"
-            BlueprintName = "Cozie - Dev"
+            BuildableName = "Cozie.app"
+            BlueprintName = "Cozie"
             ReferencedContainer = "container:Cozie.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -84,8 +84,8 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "E4838243247BA33A002C3708"
-                     BuildableName = "Cozie - Dev.app"
-                     BlueprintName = "Cozie - Dev"
+                     BuildableName = "Cozie.app"
+                     BlueprintName = "Cozie"
                      ReferencedContainer = "container:Cozie.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
