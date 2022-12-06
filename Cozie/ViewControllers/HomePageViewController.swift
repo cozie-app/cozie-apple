@@ -47,7 +47,7 @@ class HomePageViewController: UIViewController {
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue, value: experimentID)
         UserDefaults.shared.setValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue, value: participantID)
 
-        appIconImg.image = UIImage(named: "AppIcon")
+        appIconImg.image = UIImage(named: "AppIcon_circular_framed")
 
         viewID.layer.cornerRadius = 5
         viewID.layer.shadowColor = UIColor.lightGray.cgColor
