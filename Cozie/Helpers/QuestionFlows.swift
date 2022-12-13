@@ -23,7 +23,7 @@ var questionFlows = [Flow]()
 func defineQuestionFlows() {
 
     questionFlows = [
-        Flow(title: "Thermal (short(", questions: [
+        Flow(title: "Thermal (short)", questions: [
             Question(
                     title: "How would you prefer to be?",
                     identifier: "tc_preference",
