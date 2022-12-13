@@ -23,7 +23,7 @@ var questionFlows = [Flow]()
 func defineQuestionFlows() {
 
     questionFlows = [
-        Flow(title: "Thermal", questions: [
+        Flow(title: "Thermal (short(", questions: [
             Question(
                     title: "How would you prefer to be?",
                     identifier: "tc_preference",
@@ -43,162 +43,447 @@ func defineQuestionFlows() {
                         1
                     ]
             ),
-//            Question(
-//                    title: "Light preference",
-//                    identifier: "light_preference",
-//                    options: [
-//                        "Dimmer",
-//                        "No Change",
-//                        "Brighter"
-//                    ],
-//                    icons: [
-//                        "dimmer",
-//                        "comfortable",
-//                        "brighter"
-//                    ],
-//                    nextQuestion: [
-//                        2,
-//                        2,
-//                        2
-//                    ]
-//            ),
-//            Question(
-//                    title: "Sound preference",
-//                    identifier: "sound_preference",
-//                    options: [
-//                        "Quieter",
-//                        "No Change",
-//                        "Louder"
-//                    ],
-//                    icons: [
-//                        "quieter",
-//                        "comfortable",
-//                        "louder"
-//                    ],
-//                    nextQuestion: [
-//                        3,
-//                        3,
-//                        3
-//                    ]
-//            ),
-//            Question(
-//                    title: "Are you?",
-//                    identifier: "are_you",
-//                    options: [
-//                        "Outdoor",
-//                        "Indoor"
-//                    ],
-//                    icons: [
-//                        "outdoor",
-//                        "indoor"
-//                    ],
-//                    nextQuestion: [
-//                        4,
-//                        4
-//                    ]
-//            ),
-//            Question(
-//                    title: "Where are you?",
-//                    identifier: "location_place",
-//                    options: [
-//                        "Home",
-//                        "Office",
-//                        "Vehicle",
-//                        "Other"
-//                    ],
-//                    icons: [
-//                        "loc-home",
-//                        "loc-office",
-//                        "loc-vehicle",
-//                        "loc-other"
-//                    ],
-//                    nextQuestion: [
-//                        5,
-//                        5,
-//                        5,
-//                        5
-//                    ]
-//            ),
-//            Question(
-//                    title: "Are you near a sensor?",
-//                    identifier: "near_sensor?",
-//                    options: [
-//                        "Home",
-//                        "Work",
-//                        "Portable",
-//                        "No"
-//                    ],
-//                    icons: [
-//                        "loc-home",
-//                        "loc-office",
-//                        "backpack",
-//                        "no2"
-//                    ],
-//                    nextQuestion: [
-//                        6,
-//                        6,
-//                        6,
-//                        6
-//                    ]
-//            ),
-//            Question(
-//                    title: "What mood are you in?",
-//                    identifier: "mood",
-//                    options: [
-//                        "Bad",
-//                        "Good",
-//                        "Neither"
-//                    ],
-//                    icons: [
-//                        "mood-bad",
-//                        "mood-good",
-//                        "mood-neutral"
-//                    ],
-//                    nextQuestion: [
-//                        7,
-//                        7,
-//                        7
-//                    ]
-//            ),
-//            Question(
-//                    title: "What clothes are you wearing?",
-//                    identifier: "clo",
-//                    options: [
-//                        "Very light",
-//                        "Light",
-//                        "Medium",
-//                        "Heavy"
-//                    ],
-//                    icons: [
-//                        "clo-very-light",
-//                        "clo-light",
-//                        "clo-medium",
-//                        "clo-heavy"
-//                    ],
-//                    nextQuestion: [
-//                        8,
-//                        8,
-//                        8,
-//                        8
-//                    ]
-//            ),
-//            Question(
-//                    title: "Have you changed location, activity or clothing over the last 10-min?",
-//                    identifier: "changed_location",
-//                    options: [
-//                        "Yes",
-//                        "No"
-//                    ],
-//                    icons: [
-//                        "yes",
-//                        "no"
-//                    ],
-//                    nextQuestion: [
-//                        9,
-//                        9
-//                    ]
-//            )
+            Question(
+                    title: "Are you?",
+                    identifier: "are_you",
+                    options: [
+                        "Outdoor",
+                        "Indoor"
+                    ],
+                    icons: [
+                        "outdoor",
+                        "indoor"
+                    ],
+                    nextQuestion: [
+                        2,
+                        2
+                    ]
+            ),
+            Question(
+                    title: "What clothes are you wearing?",
+                    identifier: "clo",
+                    options: [
+                        "Very light",
+                        "Light",
+                        "Medium",
+                        "Heavy"
+                    ],
+                    icons: [
+                        "clo-very-light",
+                        "clo-light",
+                        "clo-medium",
+                        "clo-heavy"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3,
+                        3,
+                        3
+                    ]
+            )
         ]),
+    
+        Flow(title: "Thermal (long)", questions: [
+            Question(
+                    title: "How would you prefer to be?",
+                    identifier: "tc_preference",
+                    options: [
+                        "Cooler",
+                        "No Change",
+                        "Warmer"
+                    ],
+                    icons: [
+                        "tp-cooler",
+                        "comfortable",
+                        "tp-warmer"
+                    ],
+                    nextQuestion: [
+                        1,
+                        1,
+                        1
+                    ]
+            ),
+            Question(
+                    title: "Light preference",
+                    identifier: "light_preference",
+                    options: [
+                        "Dimmer",
+                        "No Change",
+                        "Brighter"
+                    ],
+                    icons: [
+                        "dimmer",
+                        "comfortable",
+                        "brighter"
+                    ],
+                    nextQuestion: [
+                        2,
+                        2,
+                        2
+                    ]
+            ),
+            Question(
+                    title: "Sound preference",
+                    identifier: "sound_preference",
+                    options: [
+                        "Quieter",
+                        "No Change",
+                        "Louder"
+                    ],
+                    icons: [
+                        "quieter",
+                        "comfortable",
+                        "louder"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3,
+                        3
+                    ]
+            ),
+            Question(
+                    title: "Are you?",
+                    identifier: "are_you",
+                    options: [
+                        "Outdoor",
+                        "Indoor"
+                    ],
+                    icons: [
+                        "outdoor",
+                        "indoor"
+                    ],
+                    nextQuestion: [
+                        4,
+                        4
+                    ]
+            ),
+            Question(
+                    title: "Where are you?",
+                    identifier: "location_place",
+                    options: [
+                        "Home",
+                        "Office",
+                        "Vehicle",
+                        "Other"
+                    ],
+                    icons: [
+                        "loc-home",
+                        "loc-office",
+                        "loc-vehicle",
+                        "loc-other"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5,
+                        5,
+                        5
+                    ]
+            ),
+            Question(
+                    title: "Are you near a sensor?",
+                    identifier: "near_sensor?",
+                    options: [
+                        "Home",
+                        "Work",
+                        "Portable",
+                        "No"
+                    ],
+                    icons: [
+                        "loc-home",
+                        "loc-office",
+                        "backpack",
+                        "no2"
+                    ],
+                    nextQuestion: [
+                        6,
+                        6,
+                        6,
+                        6
+                    ]
+            ),
+            Question(
+                    title: "What mood are you in?",
+                    identifier: "mood",
+                    options: [
+                        "Bad",
+                        "Good",
+                        "Neither"
+                    ],
+                    icons: [
+                        "mood-bad",
+                        "mood-good",
+                        "mood-neutral"
+                    ],
+                    nextQuestion: [
+                        7,
+                        7,
+                        7
+                    ]
+            ),
+            Question(
+                    title: "What clothes are you wearing?",
+                    identifier: "clo",
+                    options: [
+                        "Very light",
+                        "Light",
+                        "Medium",
+                        "Heavy"
+                    ],
+                    icons: [
+                        "clo-very-light",
+                        "clo-light",
+                        "clo-medium",
+                        "clo-heavy"
+                    ],
+                    nextQuestion: [
+                        8,
+                        8,
+                        8,
+                        8
+                    ]
+            ),
+            Question(
+                    title: "Have you changed location, activity or clothing over the last 10-min?",
+                    identifier: "changed_location",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes",
+                        "no"
+                    ],
+                    nextQuestion: [
+                        9,
+                        9
+                    ]
+            )
+        ]),
+        Flow(title: "Noise and privacy", questions:[
+                    Question(
+                        title: "Noise distractions nearby? (without earphones)",
+                        identifier: "noise-nearby",
+                        options: [
+                            "None",
+                            "A Little",
+                            "A lot"
+                        ],
+                        icons: [
+                            "none-1",
+                            "a-little",
+                            "a-lot"
+                        ],
+                        nextQuestion: [
+                            3,
+                            1,
+                            1
+                        ]
+                    ),
+                    Question(
+                        title: "What kind of noise?",
+                        identifier: "noise-kind",
+                        options: [
+                            "Talking",
+                            "Traffic",
+                            "Weather",
+                            "Appliances",
+                            "Construction",
+                            "Other"
+                        ],
+                        icons: [
+                            "talking",
+                            "traffic",
+                            "weather",
+                            "appliances",
+                            "construction",
+                            "other"
+                        ],
+                        nextQuestion: [
+                            2,
+                            2,
+                            2,
+                            2,
+                            2,
+                            2
+                        ]
+                    ),
+                    Question(
+                          title: "Wearing earphones?",
+                          identifier: "earphones",
+                          options: [
+                              "No earphones",
+                              "Earphones",
+                              "Noise cancelling"
+                          ],
+                          icons: [
+                              "no3",
+                              "yes3",
+                              "yes3"
+                          ],
+                          nextQuestion: [
+                              3,
+                              3,
+                              3
+                          ]
+                    ),
+                    Question(
+                          title: "Thermally, what do you prefer now?",
+                          identifier: "thermal-preference",
+                          options: [
+                              "Cooler",
+                              "No change",
+                              "Warmer"
+                          ],
+                          icons: [
+                              "prefer-cooler",
+                              "no-change",
+                              "prefer-warmer"
+                          ],
+                          nextQuestion: [
+                              4,
+                              4,
+                              4
+                          ]
+                    ),
+                    Question(
+                          title: "Where are you?",
+                          identifier: "location",
+                          options:[
+                              "Indoor - Office",
+                              "Indoor - Class",
+                              "Indoor - Home",
+                              "Indoor - Other",
+                              "Outdoor",
+                              "Transportation"
+                          ],
+                          icons: [
+                              "indoor-1",
+                              "classroom",
+                              "home",
+                              "other",
+                              "outdoor-1",
+                              "transportation"
+                          ],
+                          nextQuestion: [
+                              5,
+                              7,
+                              7,
+                              7,
+                              7,
+                              6
+                          ]
+                    ),
+                    Question(
+                          title: "What kind of office?",
+                          identifier: "location-office",
+                          options: [
+                              "Individual",
+                              "Small shared",
+                              "Large open plan",
+                              "Cubicles",
+                              "Conference room"
+                          ],
+                          icons: [
+                              "personal",
+                              "shared",
+                              "open-space",
+                              "cubicles",
+                              "conference-room"
+                          ],
+                          nextQuestion: [
+                              7,
+                              7,
+                              7,
+                              7,
+                              7
+                          ]
+                    ),
+                    Question(
+                          title: "What kind of transport?",
+                          identifier: "location-transport",
+                          options:[
+                              "Bus",
+                              "Train",
+                              "Car",
+                              "Taxi",
+                              "Other"
+                          ],
+                          icons: [
+                              "bus",
+                              "train",
+                              "car",
+                              "taxi",
+                              "other"
+                          ],
+                          nextQuestion: [
+                              7,
+                              7,
+                              7,
+                              7,
+                              7
+                          ]
+                    ),
+                    Question(
+                          title: "Alone or in a group?",
+                          identifier: "alone-group",
+                          options: [
+                              "Alone",
+                              "Group",
+                              "Online group"
+                          ],
+                          icons: [
+                              "alone",
+                              "group",
+                              "online"
+                          ],
+                          nextQuestion: [
+                              8,
+                              9,
+                              9
+                          ]
+                    ),
+                    Question(
+                          title: "Category of activity?",
+                          identifier: "activity-category",
+                          options:[
+                              "Focus",
+                              "Leisure",
+                              "Other"
+                          ],
+                          icons: [
+                              "focus",
+                              "leisure",
+                              "other"
+                          ],
+                          nextQuestion: [
+                              10,
+                              10,
+                              10
+                          ]
+                    ),
+                    Question(
+                          title: "Category of activity?",
+                          identifier: "activity-category",
+                          options: [
+                              "Socialize",
+                              "Collaborate",
+                              "Learn",
+                              "Other"
+                          ],
+                          icons: [
+                              "socialize",
+                              "collaborate",
+                              "learn",
+                              "other"
+                          ],
+                          nextQuestion: [
+                              10,
+                              10,
+                              10,
+                              10
+                          ]
+                    )
+                ]),
         Flow(title: "Movement", questions: [
             Question(
                     title: "In the past 60min, I used",
