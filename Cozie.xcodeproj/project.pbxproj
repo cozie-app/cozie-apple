@@ -23,7 +23,6 @@
 		1C491022D63C0CA5B15EB214 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163FDF42B00199E54702 /* SharedFunctions.swift */; };
 		1C491222D118D576114E5619 /* QuestionFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49103482D37F76A9CDB070 /* QuestionFlows.swift */; };
 		1C49134A427E4EC80D5907E8 /* QuestionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491B91F3532D760A3649CB /* QuestionFlow.swift */; };
-		1C4913AD630B92A241DE121E /* CNAME in Resources */ = {isa = PBXBuildFile; fileRef = 1C491A478BD7051B28E220BD /* CNAME */; };
 		1C49194B488FD313FD6C1023 /* SettingsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */; };
 		1C491B3550D9FA5FCBF53FAB /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163FDF42B00199E54702 /* SharedFunctions.swift */; };
 		1C491E437C9F2A5E6D4CF49D /* ViewControllersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */; };
@@ -179,7 +178,6 @@
 		1C49103482D37F76A9CDB070 /* QuestionFlows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFlows.swift; sourceTree = "<group>"; };
 		1C49163F4A062ABDF63C426B /* ViewControllersNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersNames.swift; sourceTree = "<group>"; };
 		1C49163FDF42B00199E54702 /* SharedFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
-		1C491A478BD7051B28E220BD /* CNAME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CNAME; path = "my-website/static/CNAME"; sourceTree = "<group>"; };
 		1C491B91F3532D760A3649CB /* QuestionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFlow.swift; sourceTree = "<group>"; };
 		1C491CD6EC59C0666AA0A479 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
 		20B3F0100A1BF6639B8DA26B /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -451,7 +449,6 @@
 				E4838245247BA33A002C3708 /* Products */,
 				E48382AD247BA713002C3708 /* Frameworks */,
 				2F9E67614CD4ACF113607CBD /* Pods */,
-				1C491A478BD7051B28E220BD /* CNAME */,
 			);
 			sourceTree = "<group>";
 		};
@@ -756,7 +753,6 @@
 				0465B629277216480062228C /* Reminder.xib in Resources */,
 				E483824F247BA33A002C3708 /* Main.storyboard in Resources */,
 				29CCF1B8276C91BB00AA3E32 /* NotificationFrequency.xib in Resources */,
-				1C4913AD630B92A241DE121E /* CNAME in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1229,7 +1225,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit ExtensionDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1257,7 +1253,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit Extension/Cozie WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = "Cozie WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1287,7 +1283,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1322,7 +1318,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie WatchKit App/Cozie WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				IBSC_MODULE = Cozie_WatchKit_Extension;
 				INFOPLIST_FILE = "Cozie WatchKit App/Info.plist";
@@ -1355,7 +1351,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = Cozie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1380,7 +1376,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/CozieRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -1509,7 +1505,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1534,7 +1530,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
