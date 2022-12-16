@@ -179,28 +179,28 @@ func defineQuestionFlows() {
                         5
                     ]
             ),
-            Question(
-                    title: "Are you near a sensor?",
-                    identifier: "near_sensor?",
-                    options: [
-                        "Home",
-                        "Work",
-                        "Portable",
-                        "No"
-                    ],
-                    icons: [
-                        "loc-home",
-                        "loc-office",
-                        "backpack",
-                        "no2"
-                    ],
-                    nextQuestion: [
-                        6,
-                        6,
-                        6,
-                        6
-                    ]
-            ),
+//            Question(
+//                    title: "Are you near a sensor?",
+//                    identifier: "near_sensor?",
+//                    options: [
+//                        "Home",
+//                        "Work",
+//                        "Portable",
+//                        "No"
+//                    ],
+//                    icons: [
+//                        "loc-home",
+//                        "loc-office",
+//                        "backpack",
+//                        "no2"
+//                    ],
+//                    nextQuestion: [
+//                        6,
+//                        6,
+//                        6,
+//                        6
+//                    ]
+//            ),
             Question(
                     title: "What mood are you in?",
                     identifier: "mood",
