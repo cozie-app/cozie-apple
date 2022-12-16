@@ -228,13 +228,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             switch buttonClicked {
             case .cozie:
-                let url = URL(string: "https://www.cozie-apple.app")!
+                let url = URL(string: "https://www.github.com/cozie-app/cozie-apple")!
                 let alert = Utilities.alert(url: url, title: "Cozie")
                 present(alert, animated: true, completion: nil)
-            case .budsLab:
-                let url = URL(string: "https://www.budslab.org")!
-                let alert = Utilities.alert(url: url, title: "BUDS Lab")
-                present(alert, animated: true, completion: nil)
+//            case .budsLab:
+//                let url = URL(string: "https://www.budslab.org")!
+//                let alert = Utilities.alert(url: url, title: "BUDS Lab")
+//                present(alert, animated: true, completion: nil)
             }
         }
 

@@ -76,11 +76,11 @@ class SettingsCell: UITableViewCell {
         widthConstraints.forEach { constrain in
             constrain.isActive = false
         }
-        if name == imgBudsLab {
-            imageViewProperty.widthAnchor.constraint(equalToConstant: 95).isActive = true
-        } else {
-            imageViewProperty.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        }
+//        if name == imgBudsLab {
+//            imageViewProperty.widthAnchor.constraint(equalToConstant: 95).isActive = true
+//        } else {
+        imageViewProperty.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//        }
     }
 
     required init?(coder aDecoder: NSCoder) {

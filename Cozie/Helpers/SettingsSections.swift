@@ -160,7 +160,7 @@ enum ExperimentSettingOptions: Int, CaseIterable, SectionType {
 enum AboutOptions: Int, CaseIterable, SectionType {
 
     case cozie
-    case budsLab
+//    case budsLab
 
     var imageView: Bool {
         return true
@@ -169,8 +169,8 @@ enum AboutOptions: Int, CaseIterable, SectionType {
         switch self {
         case .cozie:
             return imgGithub
-        case .budsLab:
-            return imgBudsLab
+//        case .budsLab:
+//            return imgBudsLab
         }
     }
     var constrainsSwitch: Bool {
@@ -181,8 +181,8 @@ enum AboutOptions: Int, CaseIterable, SectionType {
     }
     var description: String {
         switch self {
-        case .cozie: return "COZIE"
-        case .budsLab: return "BUDS Lab"
+        case .cozie: return "Cozie on GitHub"
+//        case .budsLab: return "BUDS Lab"
         }
     }
 }
