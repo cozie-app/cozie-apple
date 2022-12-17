@@ -40,6 +40,7 @@ We would love you for the contribution to our project, check the ``LICENSE`` fil
 ## Authors
 
 * [Federico Tartarini](https://github.com/FedericoTartarini) - Main developer
+* [Mario Frei](https://www.linkedin.com/in/mario-frei/) - Developer
 * [Clayton Miller](https://www.linkedin.com/in/claytonmiller/) - Supervisor
 * [Stefano Schiavon](https://www.linkedin.com/in/stefanoschiavon/) - Supervisor
 
