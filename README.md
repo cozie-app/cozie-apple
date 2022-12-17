@@ -7,7 +7,6 @@ Cozie allows building occupants to provide feedback in real time
 
 - [x] **Free and Easy to Use** - Building occupants can complete a right-here-right now survey directly from their Apple watch. Without the need of having to open an app on their Phone or a survey link.
 - [x] **Open source** - Cozie is an Open Source project and together with [Cozie for Fitbit](https://cozie.app), allows researchers to focus on the data collection. We have taken care of all the programming for you!
-- [x] **Powered by Apple ResearchKit** - Cozie iOS app uses [Apple's Research Kit](https://www.researchandcare.org/researchkit/). A software framework for Apple apps that let researchers gather robust and meaningful data.
 
 ## Documentation and tutorials
 
@@ -35,7 +34,7 @@ For more information please visit the [official documentation website](https://c
 
 ## Contribute
 
-We would love you for the contribution to our project, check the ``LICENSE`` file for more info.
+We would love you for the contribution to our project, check the [`LICENSE`](https://github.com/cozie-app/cozie-apple/blob/master/LICENSE) file for more info.
 
 ## Authors
 
@@ -43,5 +42,3 @@ We would love you for the contribution to our project, check the ``LICENSE`` fil
 * [Mario Frei](https://www.linkedin.com/in/mario-frei/) - Developer
 * [Clayton Miller](https://www.linkedin.com/in/claytonmiller/) - Supervisor
 * [Stefano Schiavon](https://www.linkedin.com/in/stefanoschiavon/) - Supervisor
-
-See ``LICENSE`` file for more information.
