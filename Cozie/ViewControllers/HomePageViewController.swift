@@ -113,9 +113,12 @@ class HomePageViewController: UIViewController {
     }
 
     @objc private func onClickSurveyView(_: UITapGestureRecognizer) {
-        if let viewController = self.tabBarController {
-            NavigationManager.openWeeklySurvey(viewController)
+        if let url_external_survey = URL(string: "https://www.budslab.org") {
+            UIApplication.shared.open(url_external_survey)
         }
+        //if let viewController = self.tabBarController {
+            //NavigationManager.openWeeklySurvey(viewController)
+        //}
     }
 
     private func fillUpData() {
