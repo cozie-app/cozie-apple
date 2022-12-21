@@ -25,159 +25,113 @@ func defineQuestionFlows() {
     questionFlows = [
         Flow(title: "Interaction", questions: [
             Question(
-                    title: "Are you working in-person or remotely?",
-                    identifier: "i_location_work",
+                    title: "Have your had a spontaneous interaction in the last half hour?",
+                    identifier: "ws_interaction",
                     options: [
-                        "In person",
-                        "Remote"
+                        "Yes",
+                        "No"
                     ],
                     icons: [
-                        "placeholder",
-                        "placeholder"
+                        "yes3",
+                        "no3"
                     ],
                     nextQuestion: [
                         1,
-                        1
+                        2
                     ]
             ),
             Question(
-                    title: "Have you interacted with 1+ people in the last half hour?",
-                    identifier: "i_interaction_people",
+                    title: "With whom?",
+                    identifier: "i_whom",
                     options: [
-                        "Yes",
-                        "No"
+                        "Coworker",
+                        "Supervisor",
+                        "Friend",
+                        "Family",
+                        "Other"
                     ],
                     icons: [
-                        "yes",
-                        "no"
-                    ],
-                    nextQuestion: [
-                        2,
-                        6
-                    ]
-            ),
-            Question(
-                    title: "Was the interaction in-person or virtual?",
-                    identifier: "i_interaction_kind",
-                    options: [
-                        "In-person",
-                        "Virtual"
-                    ],
-                    icons: [
-                        "placeholder",
-                        "placeholder"
+                        "coworker_and_work_in_person",
+                        "supervisor",
+                        "friend_and_wanted_socialization",
+                        "family",
+                        "other"
                     ],
                     nextQuestion: [
                         3,
-                        3
+                        3,
+                        2,
+                        2,
+                        2
                     ]
             ),
             Question(
-                    title: "With a coworker?",
-                    identifier: "i_coworker",
+                    title: "Where are you currently located?",
+                    identifier: "i_location_1",
                     options: [
-                        "Yes",
-                        "No"
+                        "Work - in person",
+                        "Work - remote",
+                        "Home",
+                        "Transportation",
+                        "Other"
                     ],
                     icons: [
-                        "yes",
-                        "no"
+                        "coworker_and_work_in_person",
+                        "work_remote",
+                        "home",
+                        "transportation",
+                        "other"
                     ],
                     nextQuestion: [
+                        4,
+                        4,
+                        4,
                         4,
                         4
                     ]
             ),
             Question(
-                    title: "Planned (P) or spontaneous (S)?",
-                    identifier: "i_planned",
+                    title: "Please categorize this interaction:",
+                    identifier: "i_category",
                     options: [
-                        "(P) Planned",
-                        "(S) Spontaneous"
+                        "Collaboration",
+                        "Distraction",
+                        "Wanted Socialization"
                     ],
                     icons: [
-                        "placeholder",
-                        "placeholder"
+                        "collaborate",
+                        "distracted",
+                        "friend_and_wanted_socialization",
                     ],
                     nextQuestion: [
-                        5,
-                        5
+                        4,
+                        4,
+                        4
                     ]
             ),
             Question(
-                    title: "Will this interaction impact any choices or actions in the next week?",
-                    identifier: "i_impact",
-                    options: [
-                        "Yes",
-                        "No"
-                    ],
-                    icons: [
-                        "yes",
-                        "no"
-                    ],
-                    nextQuestion: [
-                        6,
-                        6
-                    ]
-            ),
-            Question(
-                    title: "Where are you located?",
-                    identifier: "i_location_space",
+                    title: "Where are you currently located?",
+                    identifier: "i_location_2",
                     options: [
                         "Desk",
                         "Meeting Room",
                         "Hallway",
-                        "Break Room",
-                        "Canteen",
-                        "Home",
+                        "Break room/Canteen",
                         "Other"
                     ],
                     icons: [
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder"
+                        "desk",
+                        "meeting_room",
+                        "hallway",
+                        "break_room_canteen",
+                        "other"
                     ],
                     nextQuestion: [
-                        7,
-                        7,
-                        7,
-                        7,
-                        7,
-                        7,
-                        7
-                    ]
-            ),
-            Question(
-                    title: "How are you feeling?",
-                    identifier: "i_feeling",
-                    options: [
-                        "Happy",
-                        "Sad",
-                        "Relaxed",
-                        "Excited",
-                        "Angry",
-                        "Neutral"
-                    ],
-                    icons: [
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder",
-                        "placeholder"
-                    ],
-                    nextQuestion: [
-                        8,
-                        8,
-                        8,
-                        8,
-                        8,
-                        8,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5
                     ]
             )
         ]),
