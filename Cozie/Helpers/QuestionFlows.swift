@@ -84,10 +84,10 @@ func defineQuestionFlows() {
                     ],
                     nextQuestion: [
                         4,
-                        4,
-                        4,
-                        4,
-                        4
+                        5,
+                        5,
+                        5,
+                        5
                     ]
             ),
             Question(
