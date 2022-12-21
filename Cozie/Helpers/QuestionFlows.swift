@@ -25,7 +25,7 @@ func defineQuestionFlows() {
     questionFlows = [
         Flow(title: "Interaction", questions: [
             Question(
-                    title: "Have your had a spontaneous interaction in the last half hour?",
+                    title: "Have you had a spontaneous interaction in the last half hour?",
                     identifier: "ws_interaction",
                     options: [
                         "Yes",
