@@ -42,7 +42,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "With whom?",
-                    identifier: "i_whom",
+                    identifier: "ws_whom",
                     options: [
                         "Coworker",
                         "Supervisor",
@@ -67,7 +67,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Where are you currently located?",
-                    identifier: "i_location_1",
+                    identifier: "ws_location_1",
                     options: [
                         "Work - in person",
                         "Work - remote",
@@ -92,7 +92,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Please categorize this interaction:",
-                    identifier: "i_category",
+                    identifier: "ws_category",
                     options: [
                         "Collaboration",
                         "Distraction",
@@ -111,7 +111,7 @@ func defineQuestionFlows() {
             ),
             Question(
                     title: "Where are you currently located?",
-                    identifier: "i_location_2",
+                    identifier: "ws_location_2",
                     options: [
                         "Desk",
                         "Meeting Room",
