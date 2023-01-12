@@ -113,9 +113,20 @@ class HomePageViewController: UIViewController {
     }
 
     @objc private func onClickSurveyView(_: UITapGestureRecognizer) {
-        if let url_external_survey = URL(string: "https://www.budslab.org") {
+        
+        // Create custom url
+        let participantID = UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? defaultParticipantID
+        var url_phone_survey = "https://nus.syd1.qualtrics.com/jfe/form/SV_268ajolx3P9ZPAG?id_participant="
+        url_phone_survey.append(participantID)
+        
+        if let url_external_survey = URL(string: url_phone_survey) {
             UIApplication.shared.open(url_external_survey)
         }
+        
+        //if let url_external_survey = URL(string: "https://www.budslab.org") {
+        //    UIApplication.shared.open(url_external_survey)
+        //}
+        
         //if let viewController = self.tabBarController {
             //NavigationManager.openWeeklySurvey(viewController)
         //}
