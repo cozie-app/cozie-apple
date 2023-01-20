@@ -14,7 +14,7 @@ class DataViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var labelData: UILabel!
     @IBOutlet weak var graphView1: UIView!
     @IBOutlet weak var graphView2: UIView!
-    @IBOutlet weak var dataDownloadView: UIView!
+    //@IBOutlet weak var dataDownloadView: UIView!
     
     private var dateValues = [String]()
     private let validResValues = ["Valid Responses", "Goal"]
@@ -26,8 +26,8 @@ class DataViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         labelData.layer.masksToBounds = true
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(onClickDataDownloadView(_:)))
-        dataDownloadView.addGestureRecognizer(tap)
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(onClickDataDownloadView(_:)))
+        //dataDownloadView.addGestureRecognizer(tap)
 
         let barChartView1 = barChart()
         chart1 = barChartView1
@@ -137,14 +137,14 @@ class DataViewController: UIViewController, ChartViewDelegate {
         barChartView.legend.horizontalAlignment = .center
     }
 
-    @objc func onClickDataDownloadView(_: UITapGestureRecognizer) {
-        let alert = UIAlertController(title: "Download Data", message: "Are you sure you want to download your data? This might take a few moments", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Download", style: .default, handler: { _ in
-            Utilities.downloadData(self)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
+//    @objc func onClickDataDownloadView(_: UITapGestureRecognizer) {
+//        let alert = UIAlertController(title: "Download Data", message: "Are you sure you want to download your data? This might take a few moments", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Download", style: .default, handler: { _ in
+//            Utilities.downloadData(self)
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        present(alert, animated: true, completion: nil)
+//    }
 }
 
 extension DataViewController {
