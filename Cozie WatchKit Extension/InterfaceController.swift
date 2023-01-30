@@ -217,7 +217,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
             
             if let rowController = tableView.rowController(at: index) as? RowController {
                 rowController.rowLabel.setText(rowModel)
-                rowController.rowImage.setImageNamed(question.icons[index])
+                //rowController.rowImage.setImageNamed(question.icons[index])
             }
         }
         
