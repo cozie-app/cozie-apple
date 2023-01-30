@@ -11,13 +11,15 @@ import UIKit
 let defaultFromTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
 let defaultToTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
 let defaultNotificationFrq = Calendar.current.date(bySettingHour: 1, minute: 0, second: 0, of: Date()) ?? Date()
-let defaultExperimentID = "AppleStore"
+//let defaultExperimentID = "AppleStore"
+let defaultExperimentID = "alda"
 
 // Generate randomized default participant id
 let suffix_letters = "ABCDEFGHKLMNPQRSTUVWXYZ23456789" //IJO01 are intentionally missing
 let suffix_length = 8
 let suffix = String((0..<suffix_length).map{ _ in suffix_letters.randomElement()! })
-let defaultParticipantID = "Participant_" + suffix
+//let defaultParticipantID = "Participant_" + suffix
+let defaultParticipantID = "alda"
 
 let primaryColour = UIColor(named: "primaryColour")
 
