@@ -23,6 +23,84 @@ var questionFlows = [Flow]()
 func defineQuestionFlows() {
 
     questionFlows = [
+        Flow(title: "Alda / Ampa (CoT)", questions: [
+            Question(
+                    title: "Do you accept the overall THERMAL environment now?",
+                    identifier: "ws_thermal",
+                    options: [
+                        "Unacceptable",
+                        "Acceptable"
+                    ],
+                    icons: [
+                        "circle",
+                        "circle"
+                    ],
+                    nextQuestion: [
+                        1,
+                        1
+                    ]
+            ),
+            Question(
+                    title: "Would you like the ENVIRONMENT to be:",
+                    identifier: "ws_thermal_preference",
+                    options: [
+                        "Warmer",
+                        "No change",
+                        "Cooler"
+                    ],
+                    icons: [
+                        "circle",
+                        "circle",
+                        "circle"
+                    ],
+                    nextQuestion: [
+                        2,
+                        2,
+                        2
+                    ]
+            ),
+            Question(
+                    title: "Would you like the AIR MOVEMENT to be:",
+                    identifier: "ws_preference_air",
+                    options: [
+                        "More",
+                        "No change",
+                        "Less"
+                    ],
+                    icons: [
+                        "circle",
+                        "circle",
+                        "circle"
+                    ],
+                    nextQuestion: [
+                        3,
+                        3,
+                        3,
+                        3
+                    ]
+            ),
+            Question(
+                    title: "How much does the NOISE bother or annoy you?",
+                    identifier: "ws_preference_noise",
+                    options: [
+                        "Not at all",
+                        "Slightly",
+                        "Very"
+                    ],
+                    icons: [
+                        "circle",
+                        "circle",
+                        "circle"
+                    ],
+                    nextQuestion: [
+                        4,
+                        4,
+                        4,
+                        3
+                    ]
+            )
+        ]),
+        
         Flow(title: "Thermal (short)", questions: [
             Question(
                     title: "How would you prefer to be?",
