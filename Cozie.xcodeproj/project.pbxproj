@@ -231,7 +231,7 @@
 		E47351E1247D0F5D0079D11A /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
 		E47351E2247D0F5D0079D11A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		E474676E24DBA49200D1F7AC /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
-		E4838244247BA33A002C3708 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4838244247BA33A002C3708 /* Cozie - Ampa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cozie - Ampa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4838247247BA33A002C3708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E483824E247BA33A002C3708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4838250247BA33B002C3708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -455,7 +455,7 @@
 		E4838245247BA33A002C3708 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4838244247BA33A002C3708 /* Cozie.app */,
+				E4838244247BA33A002C3708 /* Cozie - Ampa.app */,
 				E483825A247BA33B002C3708 /* CozieTests.xctest */,
 				E4838265247BA33B002C3708 /* CozieUITests.xctest */,
 				E483826E247BA33B002C3708 /* Cozie WatchKit App.app */,
@@ -562,9 +562,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4838243247BA33A002C3708 /* Cozie */ = {
+		E4838243247BA33A002C3708 /* Cozie - Ampa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie" */;
+			buildConfigurationList = E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie - Ampa" */;
 			buildPhases = (
 				EA9B2C11522202656E5FDA44 /* [CP] Check Pods Manifest.lock */,
 				E4838240247BA33A002C3708 /* Sources */,
@@ -580,9 +580,9 @@
 				E4C5D9D7249CA4B500228A15 /* PBXTargetDependency */,
 				ACB45E092836097200C16C25 /* PBXTargetDependency */,
 			);
-			name = Cozie;
+			name = "Cozie - Ampa";
 			productName = Cozie;
-			productReference = E4838244247BA33A002C3708 /* Cozie.app */;
+			productReference = E4838244247BA33A002C3708 /* Cozie - Ampa.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E4838259247BA33B002C3708 /* CozieTests */ = {
@@ -725,7 +725,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E4838243247BA33A002C3708 /* Cozie */,
+				E4838243247BA33A002C3708 /* Cozie - Ampa */,
 				E4838259247BA33B002C3708 /* CozieTests */,
 				E4838264247BA33B002C3708 /* CozieUITests */,
 				E483826D247BA33B002C3708 /* Cozie WatchKit App */,
@@ -1061,12 +1061,12 @@
 		};
 		E483825C247BA33B002C3708 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E4838243247BA33A002C3708 /* Cozie */;
+			target = E4838243247BA33A002C3708 /* Cozie - Ampa */;
 			targetProxy = E483825B247BA33B002C3708 /* PBXContainerItemProxy */;
 		};
 		E4838267247BA33B002C3708 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E4838243247BA33A002C3708 /* Cozie */;
+			target = E4838243247BA33A002C3708 /* Cozie - Ampa */;
 			targetProxy = E4838266247BA33B002C3708 /* PBXContainerItemProxy */;
 		};
 		E4838280247BA33C002C3708 /* PBXTargetDependency */ = {
@@ -1234,7 +1234,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -1262,7 +1262,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -1295,7 +1295,7 @@
 				);
 				MARKETING_VERSION = 2.0.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -1330,7 +1330,7 @@
 				);
 				MARKETING_VERSION = 2.0.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -1359,7 +1359,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1385,7 +1385,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1514,7 +1514,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1539,7 +1539,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.ampa.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1578,7 +1578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie" */ = {
+		E4838296247BA33C002C3708 /* Build configuration list for PBXNativeTarget "Cozie - Ampa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4838297247BA33C002C3708 /* Debug */,
