@@ -142,22 +142,6 @@ func defineQuestionFlows() {
                     ]
             ),
             Question(
-                    title: "Are you?",
-                    identifier: "are_you",
-                    options: [
-                        "Outdoor",
-                        "Indoor"
-                    ],
-                    icons: [
-                        "outdoor",
-                        "indoor"
-                    ],
-                    nextQuestion: [
-                        4,
-                        4
-                    ]
-            ),
-            Question(
                     title: "Where are you?",
                     identifier: "location_place",
                     options: [
@@ -173,34 +157,12 @@ func defineQuestionFlows() {
                         "loc-other"
                     ],
                     nextQuestion: [
-                        5,
-                        5,
-                        5,
-                        5
+                        4,
+                        4,
+                        4,
+                        4
                     ]
             ),
-//            Question(
-//                    title: "Are you near a sensor?",
-//                    identifier: "near_sensor?",
-//                    options: [
-//                        "Home",
-//                        "Work",
-//                        "Portable",
-//                        "No"
-//                    ],
-//                    icons: [
-//                        "loc-home",
-//                        "loc-office",
-//                        "backpack",
-//                        "no2"
-//                    ],
-//                    nextQuestion: [
-//                        6,
-//                        6,
-//                        6,
-//                        6
-//                    ]
-//            ),
             Question(
                     title: "What mood are you in?",
                     identifier: "mood",
@@ -215,9 +177,9 @@ func defineQuestionFlows() {
                         "mood-neutral"
                     ],
                     nextQuestion: [
-                        7,
-                        7,
-                        7
+                        5,
+                        5,
+                        5
                     ]
             ),
             Question(
@@ -236,10 +198,10 @@ func defineQuestionFlows() {
                         "clo-heavy"
                     ],
                     nextQuestion: [
-                        8,
-                        8,
-                        8,
-                        8
+                        6,
+                        6,
+                        6,
+                        6
                     ]
             ),
             Question(
@@ -254,8 +216,8 @@ func defineQuestionFlows() {
                         "no"
                     ],
                     nextQuestion: [
-                        9,
-                        9
+                        7,
+                        7
                     ]
             )
         ]),
