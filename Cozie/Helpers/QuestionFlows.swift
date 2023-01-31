@@ -24,8 +24,8 @@ func defineQuestionFlows() {
 
     questionFlows = [
         Flow(title: "Interaction", questions: [
-            Question(
-                    title: "Have you had a spontaneous interaction in the last half hour?",
+            Question( //0
+                    title: "Have you had a spontaneous interaction in since the last survey",
                     identifier: "ws_interaction",
                     options: [
                         "Yes",
@@ -40,32 +40,32 @@ func defineQuestionFlows() {
                         2
                     ]
             ),
-            Question(
+            Question( //1
                     title: "With whom?",
                     identifier: "ws_whom",
                     options: [
-                        "Coworker",
                         "Supervisor",
+                        "Coworker",
+                        "Household Member",
                         "Friend",
-                        "Family",
                         "Other"
                     ],
                     icons: [
-                        "coworker_and_work_in_person",
                         "supervisor",
-                        "friend_and_wanted_socialization",
+                        "coworker_and_work_in_person",
                         "family",
+                        "friend_and_wanted_socialization",
                         "other"
                     ],
                     nextQuestion: [
                         3,
                         3,
-                        2,
-                        2,
-                        2
+                        3,
+                        3,
+                        3
                     ]
             ),
-            Question(
+            Question( //2
                     title: "Where are you currently located?",
                     identifier: "ws_location_1",
                     options: [
@@ -83,14 +83,14 @@ func defineQuestionFlows() {
                         "other"
                     ],
                     nextQuestion: [
-                        4,
-                        5,
-                        5,
-                        5,
-                        5
+                        9,
+                        10,
+                        10,
+                        10,
+                        10
                     ]
             ),
-            Question(
+            Question( //3
                     title: "Please categorize this interaction:",
                     identifier: "ws_category",
                     options: [
@@ -105,18 +105,94 @@ func defineQuestionFlows() {
                     ],
                     nextQuestion: [
                         4,
-                        4,
-                        4
+                        5,
+                        5
                     ]
             ),
-            Question(
-                    title: "Where are you currently located?",
+            Question( //4
+                    title: "Please select a description for the interaction:",
+                    identifier: "ws_description",
+                    options: [
+                        "New ideas",
+                        "Problem-solving",
+                        "Task-related",
+                        "Advice",
+                        "Other"
+                    ],
+                    icons: [
+                        "new_ideas",
+                        "problem_solving",
+                        "task_related",
+                        "advice",
+                        "other"
+                    ],
+                    nextQuestion: [
+                        5,
+                        5,
+                        5,
+                        5,
+                        5
+                    ]
+            ),
+            Question( //5
+                    title: "Was the interaction valuable?",
+                    identifier: "ws_value",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes3",
+                        "no3",
+                    ],
+                    nextQuestion: [
+                        6,
+                        6
+                    ]
+            ),
+            Question( //6
+                    title: "Did you initiate the interaction?",
+                    identifier: "ws_initiation",
+                    options: [
+                        "Yes",
+                        "No"
+                    ],
+                    icons: [
+                        "yes3",
+                        "no3",
+                    ],
+                    nextQuestion: [
+                        7,
+                        7
+                    ]
+            ),
+            Question( //7
+                    title: "Did this interaction impact your focus?",
+                    identifier: "ws_focus",
+                    options: [
+                        "Yes",
+                        "Partially",
+                        "No"
+                    ],
+                    icons: [
+                        "yes3",
+                        "partially",
+                        "no3",
+                    ],
+                    nextQuestion: [
+                        8,
+                        8,
+                        8
+                    ]
+            ),
+            Question( //8
+                    title: "Where were you located at the time of the interaction?",
                     identifier: "ws_location_2",
                     options: [
                         "Desk",
                         "Meeting Room",
                         "Hallway",
-                        "Break room/Canteen",
+                        "Canteen",
                         "Other"
                     ],
                     icons: [
@@ -127,11 +203,36 @@ func defineQuestionFlows() {
                         "other"
                     ],
                     nextQuestion: [
-                        5,
-                        5,
-                        5,
-                        5,
-                        5
+                        10,
+                        10,
+                        10,
+                        10,
+                        10
+                    ]
+            ),
+            Question( //9
+                    title: "Where are you currently located?",
+                    identifier: "ws_location_3",
+                    options: [
+                        "Desk",
+                        "Meeting Room",
+                        "Hallway",
+                        "Canteen",
+                        "Other"
+                    ],
+                    icons: [
+                        "desk",
+                        "meeting_room",
+                        "hallway",
+                        "break_room_canteen",
+                        "other"
+                    ],
+                    nextQuestion: [
+                        10,
+                        10,
+                        10,
+                        10,
+                        10
                     ]
             )
         ]),
