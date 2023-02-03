@@ -309,7 +309,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate, CLLocationM
         
         self.questions += [Question(
             //title: "Thank you.",
-            title: "If you had another interaction in the last 30 minutes, please fill out the watch survey for the other interactions.",
+            title: "If you had another interaction in the in this time period, please fill out the watch survey for the other interactions.",
             identifier: "end",
             options: ["Submit survey"],
             icons: ["submit"],
