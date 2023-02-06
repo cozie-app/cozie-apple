@@ -28,20 +28,26 @@ func defineQuestionFlows() {
                     title: "Do you accept the overall THERMAL environment now?",
                     identifier: "ws_thermal",
                     options: [
-                        "Unacceptable",
-                        "Acceptable"
+                        "Acceptable",
+                        "Just acceptable",
+                        "Just unacceptable",
+                        "Unacceptable"
                     ],
                     icons: [
+                        "circle",
+                        "circle",
                         "circle",
                         "circle"
                     ],
                     nextQuestion: [
                         1,
+                        1,
+                        1,
                         1
                     ]
             ),
             Question(
-                    title: "Would you like the ENVIRONMENT to be:",
+                    title: "Would you like the TEMPERATURE to be:",
                     identifier: "ws_thermal_preference",
                     options: [
                         "Warmer",
@@ -75,7 +81,6 @@ func defineQuestionFlows() {
                     nextQuestion: [
                         3,
                         3,
-                        3,
                         3
                     ]
             ),
@@ -85,9 +90,11 @@ func defineQuestionFlows() {
                     options: [
                         "Not at all",
                         "Slightly",
+                        "Modertely",
                         "Very"
                     ],
                     icons: [
+                        "circle",
                         "circle",
                         "circle",
                         "circle"
@@ -96,7 +103,7 @@ func defineQuestionFlows() {
                         4,
                         4,
                         4,
-                        3
+                        4
                     ]
             )
         ]),
