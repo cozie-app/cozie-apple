@@ -216,7 +216,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 if let viewController = self.tabBarController {
                     NavigationManager.openDailyParticipation(viewController)
                 }
-            case .downloadData: Utilities.downloadData(self)
+            //case .downloadData: Utilities.downloadData(self)
             case .studyGoal:
                 if let viewController = self.tabBarController {
                     NavigationManager.openTextView(viewController, isParticipantID: 3)

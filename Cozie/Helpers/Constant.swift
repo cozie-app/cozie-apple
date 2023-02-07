@@ -23,7 +23,7 @@ let primaryColour = UIColor(named: "primaryColour")
 
 let imgGithub = "githubLogo"
 //let imgBudsLab = "budsLabIcon"
-let imgDownload = "downloadData"
+//let imgDownload = "downloadData"
 let folderName = "Cozie"
 
 let AWSWriteURL = "https://wifmmwu7qe.execute-api.ap-southeast-1.amazonaws.com/development/cozie-apple-app-write-influx"
