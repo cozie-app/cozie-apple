@@ -193,6 +193,7 @@ func defineQuestionFlows() {
                         "Meeting Room",
                         "Hallway",
                         "Canteen",
+                        "Work - remote",
                         "Other"
                     ],
                     icons: [
@@ -200,9 +201,11 @@ func defineQuestionFlows() {
                         "meeting_room",
                         "hallway",
                         "break_room_canteen",
+                        "work_remote",
                         "other"
                     ],
                     nextQuestion: [
+                        10,
                         10,
                         10,
                         10,
