@@ -29,7 +29,7 @@ func defineQuestionFlows() {
                 identifier: "noise-nearby",
                 options: [
                     "None",
-                    "A Little",
+                    "A little",
                     "A lot"
                 ],
                 icons: [
@@ -930,7 +930,7 @@ func defineQuestionFlows() {
                 identifier: "surroundings_infection",
                 options: [
                     "Not at all",
-                    "A Little",
+                    "A little",
                     "A lot"
                 ],
                 icons: [
