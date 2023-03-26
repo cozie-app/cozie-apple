@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
-import Alamofire
 import HealthKit
 import OneSignal
+import Alamofire
 
 struct HealthData: Codable {
     let locationTimestamp: String
@@ -120,7 +120,7 @@ class Utilities {
         let param = [
             "id_participant": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.participantID.rawValue) as? String ?? "ExternalTester",
             "id_experiment": UserDefaults.shared.getValue(for: UserDefaults.UserDefaultKeys.experimentID.rawValue) as? String ?? "AppleStore",
-            "weeks": "10"]
+            "weeks": "50"]
 
         let headers = ["x-api-key": AWSReadAPIKey, // Singapore API key
                        "Accept": "application/json",
