@@ -1,0 +1,83 @@
+{
+    "survey_name": "Thermal (short)",
+    "survey_id": "thermal_short",
+    "survey": [{
+            "question": "How would you prefer to be?",
+            "question_id": "q_thermal",
+            "response_options": [{
+                    "text": "Cooler",
+                    "icon": "cloud.circle",
+                    "use_sf_symbols": true,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": "q_location"
+                },
+                {
+                    "text": "No Change",
+                    "icon": "comfortable",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": "q_location"
+                },
+                {
+                    "text": "Warmer",
+                    "icon": "tp_warmer",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": "q_location"
+                }
+            ]
+        },
+        {
+            "question": "Where are you?",
+            "question_id": "q_location",
+            "response_options": [{
+                    "text": "Outdoor",
+                    "icon": "outdoor",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": "q_clothing"
+                },
+                {
+                    "text": "Indoor",
+                    "icon": "indoor",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": "q_clothing"
+                }
+            ]
+        },
+        {
+            "question": "What clothes are you wearing?",
+            "question_id": "q_clothing",
+            "response_options": [{
+                    "text": "Very light",
+                    "icon": "clo-very-light",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": ""
+                },
+                {
+                    "text": "Light",
+                    "icon": "clo-light",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": ""
+                },
+                {
+                    "text": "Medium",
+                    "icon": "clo-medium",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": ""
+                },
+                {
+                    "text": "heavy",
+                    "icon": "clo-heavy",
+                    "use_sf_symbols": false,
+                    "sf_symbols_color": "#F55D25",
+                    "next_question_id": ""
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "conference-room.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

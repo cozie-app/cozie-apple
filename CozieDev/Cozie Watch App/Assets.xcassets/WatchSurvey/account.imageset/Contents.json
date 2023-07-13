@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "filename" : "baseline_account_circle_black_18dp-1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "baseline_account_circle_black_18dp.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
