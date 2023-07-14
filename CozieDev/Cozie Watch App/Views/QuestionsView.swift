@@ -56,41 +56,44 @@ struct QuestionsView: View {
                             }
                         }
                         .frame(minHeight: 45)
-                        .padding(.vertical, 3)
+                        .padding(.vertical, 1)
                         .onTapGesture {
                             viewModel.selectOptions(option: option)
                             scrollToTopAnimation(reader: reader, animation: true)
                         }
                     }
-                    VStack {
-                        HStack {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                                
-                                Text("Back")
+                    
+                    if !viewModel.isFirstQuestion {
+                        VStack {
+                            HStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
                                     
-                            }
-                            .onTapGesture {
-                                viewModel.backAction()
-                                scrollToTopAnimation(reader: reader, animation: true)
-                            }
-                            Spacer()
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                                
-                                Text("Reset")
+                                    Text("Back")
                                     
-                            }
-                            .onTapGesture {
-                                viewModel.restart()
-                                scrollToTopAnimation(reader: reader, animation: true)
+                                }
+                                .onTapGesture {
+                                    viewModel.backAction()
+                                    scrollToTopAnimation(reader: reader, animation: true)
+                                }
+                                Spacer()
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                    
+                                    Text("Reset")
+                                    
+                                }
+                                .onTapGesture {
+                                    viewModel.restart()
+                                    scrollToTopAnimation(reader: reader, animation: true)
+                                }
                             }
                         }
+                        .frame(height: 45)
+                        .padding(.vertical, 3)
                     }
-                    .frame(height: 45)
-                    .padding(.vertical, 3)
                     
                 }
             }

@@ -11,7 +11,7 @@ import WatchConnectivity
 class WatchSurveyViewModel: NSObject, ObservableObject {
     
     enum CozieAppState: Int {
-        case notsynced, synced, /*timeout,*/ finished
+        case notsynced, synced, /*timeout,*/ sendData, finished
     }
     
     // MARK: Private
@@ -25,10 +25,20 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     private var watchSurvey: WatchSurvey? = nil
     private var startTime = Date()
     
+    let categoryId = "cozie_push_action_category"
+    
+    
+    // MARK: Public
+    var isFirstQuestion: Bool {
+        return self.selectedOptions.count == 0
+    }
+    
     // MARK: Published
     @Published var questionsList: [ResponseOption]  = []
     @Published var questionsTitle: String = ""
     @Published var state: CozieAppState = .notsynced
+    @Published var sendSurveyProgress: Bool = false
+    var upadateLocationInProgress = false
     
     // MARK: Private func
     private func loadWatchSurvey(data: Data) {
@@ -57,6 +67,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             //            } else {
             state = .synced
             startTime = Date()
+            syncSurvey()
             // Uncomment to test
             //                let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
             //                if let url = defaultURLJSON {
@@ -81,12 +92,56 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     private func sendSurvey() {
+        
+        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), logsComplition: { /*[weak self]  in*/
+            ///
+        }, completion: { [weak self] success, error in
+            if success {
+//                if self?.session.isReachable ?? false {
+//                    self?.sendLogsData(completion: {
+//                        DispatchQueue.main.async {
+//                            self?.sendSurveyProgress = false
+//                            self?.state = .finished
+//                        }
+//                    })
+//                } else {
+                    DispatchQueue.main.async {
+                        self?.sendSurveyProgress = false
+                        self?.state = .finished
+                    }
+//                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.sendSurveyProgress = false
+                    self?.state = .finished
+                }
+                if !success {
+//                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+                }
+            }
+        })
+        
         storage.saveLastSurveySend()
         storage.updateSurveyCount()
-        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate)) { [weak self] in
-            self?.sendLogsData()
-        }
         locationManager.completion = nil
+    }
+    
+    func syncSurvey() {
+        let list = storage.allNotSyncedSurveyList()
+        if !list.isEmpty {
+            let groupe = DispatchGroup()
+            for data in list {
+                groupe.enter()
+                watchSurveyInteractor.pushSurveyHistoryData(watchSurvey: data) { success in
+                    data.synced = success
+                    groupe.leave()
+                }
+            }
+            groupe.notify(queue: DispatchQueue.main) { [weak self] in
+                let notSynced = list.filter({ $0.synced == false})
+                self?.storage.updateNotSyncedSurvey(list: notSynced)
+            }
+        }
     }
     
     // MARK: Public func
@@ -114,27 +169,19 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             questionsList = nextSuvey.responseOptions
             currentSurvey = nextSuvey
         } else {
-            state = .finished
+            state = .sendData
         }
     }
     
     func sendWatchSurvey() {
-        if let manager = locationManager.locationManager,
-           manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            manager.requestLocation()
-            locationManager.completion = { [weak self] in
-                guard let self = self else { return }
-                self.sendSurvey()
-            }
-        } else {
-            sendSurvey()
-        }
+        sendSurveyProgress = true
+        sendSurvey()
     }
     
     func backAction() {
         if !selectedOptions.isEmpty {
             
-            if let previousSelected = selectedOptions.last , let prevSuvey = watchSurvey?.survey.first(where: { $0.responseOptions.contains(where: { $0.id == previousSelected.optin.id })}) {
+            if let previousSelected = selectedOptions.last , let prevSuvey = watchSurvey?.survey.first(where: { $0.questionID == previousSelected.sID }) {
                 questionsTitle = prevSuvey.question
                 questionsList = prevSuvey.responseOptions
                 currentSurvey = prevSuvey
@@ -147,23 +194,39 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     
     func resetAction() {
         backAction()
-//        if !selectedOptions.isEmpty {
-//            selectedOptions.removeAll()
-//            if let watchSurveyObj = watchSurvey, let question = watchSurveyObj.survey.first(where: { $0.questionID == (watchSurveyObj.firstQuestionID ?? "failed") }) {
-//                questionsTitle = question.question
-//                questionsList = question.responseOptions
-//                currentSurvey = question
-//            }
-//        }
     }
     
     func restart() {
         selectedOptions.removeAll()
         prepareWatchSurvey()
     }
+    
+    func updateLocation() {
+        upadateLocationInProgress = true
+        if let manager = locationManager.locationManager,
+           manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
+            manager.requestLocation()
+            locationManager.completion = { [weak self] in
+                self?.upadateLocationInProgress = false
+            }
+        }
+    }
+    
+    // log test
+//    private func testLog(trigger: String, details: String, state: String = "error") {
+//
+//        let str =
+//        """
+//        {
+//        "trigger": "\(trigger)",
+//        "si_watch_survey_state": "\(state)",
+//        "si_watch_survey_details": "\(details)"
+//        }
+//        """
+//        storage.seveLogs(logs: str)
+//    }
 }
 
-// TODO: Refactor
 extension WatchSurveyViewModel: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         debugPrint("activationState:\n \(activationState)")
@@ -180,6 +243,7 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             // reset survey count
             if storage.userID() != userID {
                 storage.resetSurveyCount()
+                storage.clearLogs()
             }
             storage.saveUserID(userID: userID)
         }
@@ -188,8 +252,13 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             // reset survey count
             if storage.expirimentID() != expID {
                 storage.resetSurveyCount()
+                storage.clearLogs()
             }
             storage.saveExpirimentID(expID: expID)
+        }
+        
+        if let userOneSignalID = message[CommunicationKeys.userOneSignalIDKey.rawValue] as? String {
+            storage.saveUserOneSignalID(userID: userOneSignalID)
         }
         
         if let password = message[CommunicationKeys.passwordIDKey.rawValue] as? String {
@@ -212,18 +281,25 @@ extension WatchSurveyViewModel: WCSessionDelegate {
         }
     }
     
-    func sendLogsData() {
+    func sendLogsData(completion: (()->())? = nil) {
         let logs = storage.sevedLogs()
         if !logs.isEmpty {
             
             let param = [CommunicationKeys.wsLogs.rawValue: logs]
-            session.sendMessage(param, replyHandler: { responce in
+            session.sendMessage(param, replyHandler: { [weak self] responce in
                 debugPrint(responce)
+                
                 if let result = responce[CommunicationKeys.resived.rawValue] as? Bool, result {
-                    self.storage.clearLogs()
+                    self?.storage.clearLogs()
+                } else {
+//                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "(WatchConnectivity)HealthKit data not sent. Success response from iPhone not received.")
                 }
-            }, errorHandler: { error in
+                completion?()
+            }, errorHandler: {/*[weak self]*/ error in
+                // Connectin with iPhone not available (app should be in forreground state)
                 debugPrint(error)
+//                self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "(WatchConnectivity)Connectin with iPhone not available. Error details: \(error.localizedDescription)")
+                completion?()
             })
         }
     }

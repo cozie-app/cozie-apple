@@ -64,6 +64,7 @@ class BackendViewModel: NSObject, ObservableObject {
     let comManager = WatchConnectivityManagerPhone.shared
     let setitngsInteractor = SettingsInteractor()
     let watchSurveyInteractor = WatchSurveyInteractor()
+    let healthKitInteractor = HealthKitInteractor()
 
     @Published var loading: Bool = false
     
@@ -77,6 +78,8 @@ class BackendViewModel: NSObject, ObservableObject {
             data.subtitle = dataFor(state: BackendState(rawValue: index) ?? .clear)
         }
         list = tempData
+        
+        sendHKInfo()
     }
     
     // MARK: - State Property Reaction
@@ -157,6 +160,9 @@ class BackendViewModel: NSObject, ObservableObject {
                     completion?(success)
                 }
             }
+            
+            // send health data
+            healthKitInteractor.sendData(trigger: CommunicationKeys.syncBackendTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
         }
     }
     
@@ -175,7 +181,7 @@ class BackendViewModel: NSObject, ObservableObject {
                         
                         if let survey = surveysList.first?.toModel(), let backend = self.backendInteractor.currentBackendSettings, let user = self.userIntaractor.currentUser, let settings = self.setitngsInteractor.currentSettings  {
                             let json = try JSONEncoder().encode(survey)
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", timeInterval: Int(settings.wss_time_out))
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_sigmnal_id ?? "", timeInterval: Int(settings.wss_time_out))
                         }
                         
                     } catch let error {
@@ -185,4 +191,10 @@ class BackendViewModel: NSObject, ObservableObject {
             }
         }
     }
+    
+    // MARK: TEST
+    func sendHKInfo() {
+        healthKitInteractor.getAllRequestedData(completion: nil)
+    }
+    
 }

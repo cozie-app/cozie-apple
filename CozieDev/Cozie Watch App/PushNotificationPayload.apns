@@ -1,0 +1,10 @@
+{
+    "aps": {
+        "alert": {
+            "body": "Test message",
+            "title": "Optional title",
+            "subtitle": "Optional subtitle"
+        },
+        "category": "cozie_notification_category",
+    }
+}

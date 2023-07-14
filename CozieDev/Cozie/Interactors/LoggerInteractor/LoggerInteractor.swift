@@ -8,8 +8,12 @@
 import Foundation
 
 final class LoggerInteractor {
+    static let shared = LoggerInteractor()
     
     let userIntaractor = UserInteractor()
+    
+    let semapfore = DispatchSemaphore(value: 1)
+    let writeQueue = DispatchQueue.global(qos: .userInitiated)
     
     // MARK: Private
     private enum Constants: String {
@@ -44,24 +48,29 @@ final class LoggerInteractor {
     func logInfo(action: String, info: String) {
         if let currentUser = userIntaractor.currentUser {
             let filename = getDocumentsDirectory().appendingPathComponent(buildFileName(additionalName: userFileName(user: currentUser)))
-            
-            do {
-                var logHistory = ""
-                if FileManager.default.fileExists(atPath: filename.relativePath) {
-                    logHistory = try String(contentsOfFile: filename.relativePath)
+            writeQueue.async { [weak self] in
+                self?.semapfore.wait()
+                do {
+                    var logHistory = ""
+                    if FileManager.default.fileExists(atPath: filename.relativePath) {
+                        logHistory = try String(contentsOfFile: filename.relativePath)
+                    }
+                    if !logHistory.isEmpty {
+                        logHistory.removeLast()
+                        logHistory.append(",\n")
+                    } else {
+                        logHistory.append("[")
+                    }
+                    
+                    logHistory.append(info)
+                    logHistory.append("]")
+                    try logHistory.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+                    self?.semapfore.signal()
+                } catch let error {
+                    debugPrint(error)
+                    self?.semapfore.signal()
+//                    self?.logInfo(action: "", info: "Writing error: \(error.localizedDescription)")
                 }
-                if !logHistory.isEmpty {
-                    logHistory.removeLast()
-                    logHistory.append(",\n")
-                } else {
-                    logHistory.append("[")
-                }
-                
-                logHistory.append(info)
-                logHistory.append("]")
-                try logHistory.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
-            } catch let error {
-                debugPrint(error)
             }
         }
     }

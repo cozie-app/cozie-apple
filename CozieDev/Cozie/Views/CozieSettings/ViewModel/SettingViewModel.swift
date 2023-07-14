@@ -104,6 +104,7 @@ class SettingViewModel: ObservableObject {
     let backendInteractor = BackendInteractor()
     let comManager = WatchConnectivityManagerPhone.shared
     let watchSurveyInteractor = WatchSurveyInteractor()
+    let healthKitInteractor = HealthKitInteractor()
     
     init(reminderManager: ReminderManager) {
         self.reminderManager = reminderManager
@@ -133,6 +134,8 @@ class SettingViewModel: ObservableObject {
             }
             // sync with watch
             syncWatchData()
+            // send health data
+            healthKitInteractor.sendData(trigger: CommunicationKeys.syncSettingsTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
         }
     }
     
@@ -146,6 +149,8 @@ class SettingViewModel: ObservableObject {
     
     func configureSettins() {
         if let settings = settingsIntaractor.currentSettings {
+            subscriptions.removeAll()
+            
             updateSurveyList()
             
             goal = "\(settings.wss_goal)"
@@ -158,6 +163,8 @@ class SettingViewModel: ObservableObject {
             questionViewModel.selectedId = questionViewModel.selectedIDForTitle(settings.wss_title ?? "")
             
             if let daysValues = settings.wss_participation_days {
+                // reset all selected
+                dayList.forEach({ $0.isSelected = false })
                 daysValues.components(separatedBy: ",").forEach { dayPrefix in
                     dayList.first(where: { $0.titleShort() == dayPrefix })?.isSelected = true
                 }
@@ -184,6 +191,8 @@ class SettingViewModel: ObservableObject {
             .store(in: &subscriptions)
             
             if let daysValues = settings.pss_reminder_days {
+                // reset all selected
+                phoneParticipationDays.forEach({ $0.isSelected = false })
                 daysValues.components(separatedBy: ",").forEach { dayPrefix in
                     phoneParticipationDays.first(where: { $0.titleShort() == dayPrefix })?.isSelected = true
                 }
@@ -406,6 +415,14 @@ class SettingViewModel: ObservableObject {
             }
         }
     }
+    // MARK: Rminders
+    
+    func prepareRemindersIfNeeded() {
+        if let settings = settingsIntaractor.currentSettings {
+            configureWatchReminders(enabled: settings.wss_reminder_enabeled)
+            configurePhoneReminders(enabled: settings.pss_reminder_enabled)
+        }
+    }
     
     func updatePhonePartisipants(list: [DayModel]) {
         let selected = list.filter{ $0.isSelected }
@@ -439,7 +456,7 @@ class SettingViewModel: ObservableObject {
                         
                         if let survey = surveysList.first?.toModel(), let backend = self.backendInteractor.currentBackendSettings, let user = self.userIntaractor.currentUser, let settings = self.settingsIntaractor.currentSettings  {
                             let json = try JSONEncoder().encode(survey)
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", timeInterval: Int(settings.wss_time_out)) {
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: self.storage.playerID(), timeInterval: Int(settings.wss_time_out)) {
                                 DispatchQueue.main.async { [weak self] in
                                     self?.updateStateForParticipentID(enabled: true)
                                     self?.updateStateForExperimentID(enabled: true)
@@ -456,6 +473,12 @@ class SettingViewModel: ObservableObject {
         }
     }
     
+    func resetSyncInfo() {
+        updateStateForParticipentID(enabled: false)
+        updateStateForExperimentID(enabled: false)
+        updateStateForSurveySynced(enabled: false)
+    }
+    
     // MARK: Watch survey list
     func updateSurveyList() {
         if self.questionViewModel.list.first(where: { $0.link == (backendInteractor.currentBackendSettings?.watch_survey_link ?? "link" ) }) == nil {
@@ -464,11 +487,13 @@ class SettingViewModel: ObservableObject {
                 request.predicate = NSPredicate(format: "external == %d", true)
                 let surveysList = try self.persistenceController.container.viewContext.fetch(request)
                 if let model = surveysList.first {
-//                    if let settings = self.settingsIntaractor.currentSettings {
-//                        settings.wss_title = model.surveyName ?? ""
-//                        try? self.persistenceController.container.viewContext.save()
-//                    }
-                    self.questionViewModel.updateWithBackendSurvey(title: model.surveyName ?? "", link: self.backendInteractor.currentBackendSettings?.watch_survey_link ?? "")
+
+                    let link = self.backendInteractor.currentBackendSettings?.watch_survey_link ?? ""
+                    if self.questionViewModel.selectedId == 0, storage.selectedWSLink() != link {
+                        storage.saveWSLink(link: link)
+                    }
+                    
+                    self.questionViewModel.updateWithBackendSurvey(title: model.surveyName ?? "", link: link)
                 }
             } catch let error {
                 debugPrint(error.localizedDescription)

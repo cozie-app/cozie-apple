@@ -13,7 +13,8 @@ class WatchConnectivityManagerPhone: NSObject {
     static let shared = WatchConnectivityManagerPhone()
     
     let session: WCSession = WCSession.default
-    let loggerInteractor = LoggerInteractor()
+    let loggerInteractor = LoggerInteractor.shared
+    let healthKitInteractor = HealthKitInteractor()
     var activateCompletion: (()->())?
     
     override init() {
@@ -74,13 +75,14 @@ class WatchConnectivityManagerPhone: NSObject {
         activateIfNeededAndSendMessage()
     }
     
-    func sendAll(data: Data, writeApiURL: String, writeApiKey: String, userID: String, expID: String, password: String, timeInterval: Int, completion: (()->())? = nil) {
+    func sendAll(data: Data, writeApiURL: String, writeApiKey: String, userID: String, expID: String, password: String, userOneSignalID: String, timeInterval: Int, completion: (()->())? = nil) {
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data,
                           CommunicationKeys.writeApiURL.rawValue: writeApiURL,
                           CommunicationKeys.writeApiKey.rawValue: writeApiKey,
                           CommunicationKeys.userIDKey.rawValue: userID,
                           CommunicationKeys.expIDKey.rawValue: expID,
+                          CommunicationKeys.userOneSignalIDKey.rawValue: CozieStorage.shared.playerID(),
                           CommunicationKeys.passwordIDKey.rawValue: password,
                           CommunicationKeys.timeInterval.rawValue: timeInterval]
             
@@ -126,10 +128,33 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        replyHandler([CommunicationKeys.resived.rawValue: true])
         
         if let logs = message[CommunicationKeys.wsLogs.rawValue] as? String {
             loggerInteractor.logInfo(action: "", info: logs)
+            replyHandler([CommunicationKeys.resived.rawValue: true])
+            
+//            testLog(details: "ConnectivityManager received logs from watch!", state: "info")
+            // send health data
+            healthKitInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
+            
         }
     }
+    
+    func sessionReachabilityDidChange(_ session: WCSession) {
+//        testLog(details: session.isReachable ? "ConnectivityManager Session Reachabil!" : "ConnectivityManager Session not Reachabil!", state: "info")
+    }
+    
+    // log test
+//    private func testLog(details: String, state: String = "error") {
+//
+//        let str =
+//        """
+//        {
+//        "trigger": "SessionReachability",
+//        "si_connectivity_manager_state": "\(state)",
+//        "si_connectivity_manager_details": "\(details)",
+//        }
+//        """
+//        LoggerInteractor.shared.logInfo(action: "", info: str)
+//    }
 }

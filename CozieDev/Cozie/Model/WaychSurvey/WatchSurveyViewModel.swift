@@ -10,7 +10,8 @@ import Foundation
 class WatchSurveyViewModel: ObservableObject {
     let syncInteractor = SyncInteractor()
     let backendInteractor = BackendInteractor()
-    let loggerInteractor = LoggerInteractor()
+    let loggerInteractor = LoggerInteractor.shared
+    let healthKitInteractor = HealthKitInteractor()
     
     @Published var loading: Bool = false
     @Published var dataSynced: Bool = false
@@ -18,7 +19,7 @@ class WatchSurveyViewModel: ObservableObject {
     var fileDataURL: URL? = nil
     var errorString: String = ""
 
-    func updateData(completion: @escaping () -> Void) {
+    func updateData(sendHealthData: Bool = false, completion: @escaping () -> Void) {
         if !loading {
             loading = true
             syncInteractor.syncData(completion: { [weak self] error in
@@ -27,6 +28,9 @@ class WatchSurveyViewModel: ObservableObject {
                     self?.dataSynced = error == nil
                 }
             })
+            if sendHealthData {
+                healthKitInteractor.sendData(trigger: CommunicationKeys.syncDataTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
+            }
         }
     }
     

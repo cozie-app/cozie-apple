@@ -15,6 +15,8 @@ struct CozieBackendView: View {
     @State var isSelected: Bool = false
     @State var showError = false
     
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -66,6 +68,9 @@ struct CozieBackendView: View {
             }
             .alert(viewModel.errorString, isPresented: $showError) {
                 Button("OK", role: .cancel) { }
+            }
+            .onReceive(updateTrigger) { _ in
+                viewModel.prepareData()
             }
         }
     }

@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 enum CozieTabs {
     case data, settings, backend
 }
 
 class HomeCoordinator: ObservableObject {
+    static let updateNorification = Notification.Name("CozieUpdateView")
+    
     @Published var tab = CozieTabs.data
     @Published var session: Session
     
@@ -34,11 +37,43 @@ class HomeCoordinator: ObservableObject {
                                   session: session)
     }
     
+    func prepareSoucer(info: InitModel) {
+        backendInteractor.prepereBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSigmnalId: info.appOneSignalAppID, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
+        if let backend = backendInteractor.currentBackendSettings {
+            userIntaractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
+            settingsInteractor.prepereSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabeled: info.wssReminderEnabeled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
+            
+            backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
+            
+            settingsViewModel.configureSettins()
+            settingsViewModel.prepareRemindersIfNeeded()
+            
+            // update selected survey
+            if let selectedSurvey = QuestionViewModel.defaultQuestions.first(where: { $0.title == info.wssTitle }) {
+                CozieStorage.shared.saveWSLink(link: selectedSurvey.link)
+            } else {
+                if !info.apiWatchSurveyURL.isEmpty {
+                    settingsViewModel.questionViewModel.updateWithBackendSurvey(title: info.wssTitle, link: info.apiWatchSurveyURL)
+                    CozieStorage.shared.saveWSLink(link: info.apiWatchSurveyURL)
+                }
+            }
+            
+            CozieStorage.shared.savePIDSynced(false)
+            CozieStorage.shared.saveExpIDSynced(false)
+            CozieStorage.shared.saveSurveySynced(false)
+            
+            // trigger screens update
+            NotificationCenter.default.post(name: HomeCoordinator.updateNorification, object: nil)
+        }
+    }
+    
     func prepareSoucer() {
         backendInteractor.prepereBackendData()
         if let backend = backendInteractor.currentBackendSettings {
             userIntaractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
             settingsInteractor.prepereSettingsData()
+            backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
         }
     }
+    
 }

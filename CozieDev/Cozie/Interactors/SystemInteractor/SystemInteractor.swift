@@ -20,7 +20,7 @@ class LogsSystemInteractor {
     
     func logsData() -> Logs {
         guard let user = userIntaractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
-        let tag = Tags(idOnesignal: "35E2A783-35DA-4C5F-B54E-5DAC30B6E860", idParticipant: user.participantID ?? "", idPassword: user.passwordID ?? "")
+        let tag = Tags(idOnesignal: CozieStorage.shared.playerID(), idParticipant: user.participantID ?? "", idPassword: user.passwordID ?? "")
         let fielsds = Fields(wssGoal: Int(settings.wss_goal),
                              wssTitle: settings.wss_title ?? "",
                              wssTimeOut: Int(settings.wss_time_out),
@@ -58,7 +58,7 @@ class LogsSystemInteractor {
                              appOneSignalAppID: backend.one_sigmnal_id ?? "",
                              apiPhoneSurveyURL: backend.phone_survey_link ?? "",
                              apiWatchSurveyURL: backend.watch_survey_link ?? "",
-                             transmitTrigger: "")
+                             transmitTrigger: "app_change_settings")
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"

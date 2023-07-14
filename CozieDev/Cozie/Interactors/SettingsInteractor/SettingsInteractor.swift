@@ -16,7 +16,7 @@ class SettingsInteractor: SettingInteractorProtocol {
     let persistenceController = PersistenceController.shared
     
     let backendInteractor = BackendInteractor()
-    let loggerInteractor = LoggerInteractor()
+    let loggerInteractor = LoggerInteractor.shared
 
     let baseRepo = BaseRepository()
     
@@ -43,6 +43,47 @@ class SettingsInteractor: SettingInteractorProtocol {
             settings.pss_reminder_enabled = false
             settings.pss_reminder_days = ""
             settings.pss_reminder_time = ""
+            
+            try? persistenceController.container.viewContext.save()
+        }
+    }
+    
+    func prepereSettingsData(wssTitle: String = "Weather (short)",
+                             wssGoal: Int = 100,
+                             wssTimeout: Int = 60*5,
+                             wssReminderEnabeled: Bool = false,
+                             wssReminderInterval: Int = 0,
+                             wssParticipationDays: String = "",
+                             wssParticipationTimeStart: String = "00:00",
+                             wssParticipationTimeEnd: String = "23:00",
+                             pssReminderEnabled: Bool = false,
+                             pssReminderDays: String = "",
+                             pssReminderTime: String = "") {
+        if let settingList = try? persistenceController.container.viewContext.fetch(SettingsData.fetchRequest()), let model = settingList.first {
+            model.wss_title = wssTitle
+            model.wss_goal = Int16(wssGoal)
+            model.wss_time_out = Int16(wssTimeout)
+            model.wss_reminder_enabeled = wssReminderEnabeled
+            model.wss_reminder_interval = Int16(wssReminderInterval)
+            model.wss_participation_days = wssParticipationDays
+            model.wss_participation_time_start = wssParticipationTimeStart
+            model.wss_participation_time_end = wssParticipationTimeEnd
+            model.pss_reminder_enabled = pssReminderEnabled
+            model.pss_reminder_days = pssReminderDays
+            model.pss_reminder_time = pssReminderTime
+        } else {
+            let settings = SettingsData(context: persistenceController.container.viewContext)
+            settings.wss_title = wssTitle
+            settings.wss_goal = Int16(wssGoal)
+            settings.wss_time_out = Int16(wssTimeout)
+            settings.wss_reminder_enabeled = wssReminderEnabeled
+            settings.wss_reminder_interval = Int16(wssReminderInterval)
+            settings.wss_participation_days = wssParticipationDays
+            settings.wss_participation_time_start = wssParticipationTimeStart
+            settings.wss_participation_time_end = wssParticipationTimeEnd
+            settings.pss_reminder_enabled = pssReminderEnabled
+            settings.pss_reminder_days = pssReminderDays
+            settings.pss_reminder_time = pssReminderTime
             
             try? persistenceController.container.viewContext.save()
         }

@@ -18,18 +18,10 @@ struct ThankYouView: View {
                 .multilineTextAlignment(.center)
                 .font(.caption2)
             Image(systemName: "digitalcrown.press.fill")
-                .font(.system(size: 25))
-            Button {
-                viewModel.backAction()
-            } label: {
-                Text("Back")
-            }
+                .font(.system(size: 35))
         }
         .onReceive(NotificationCenter.default.publisher(for: WKExtension.applicationWillEnterForegroundNotification)) { _ in
             viewModel.restart()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: WKExtension.applicationDidEnterBackgroundNotification)) { _ in
-            viewModel.sendWatchSurvey()
         }
     }
 }

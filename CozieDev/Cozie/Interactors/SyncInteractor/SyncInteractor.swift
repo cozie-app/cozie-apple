@@ -42,6 +42,8 @@ class SyncInteractor {
                     let model = try JSONDecoder().decode(WatchSurveyModel.self, from: data)
                     
                     self?.persistenceController.container.performBackgroundTask { context in
+                        context.automaticallyMergesChangesFromParent = true
+                        
                         if let userList =  try? context.fetch(User.fetchRequest()),
                             let user = userList.first {
                             if let syncInfoList = try? context.fetch(SyncInfo.fetchRequest()),

@@ -59,6 +59,7 @@ struct CozieSettingView: View {
     
     // MARK: States
     @State var showError = false
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
     
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
@@ -83,6 +84,11 @@ struct CozieSettingView: View {
                 Button("OK", role: .cancel) { }
             }
             .onAppear{
+                viewModel.getUserInfo()
+                viewModel.configureSettins()
+            }
+            .onReceive(updateTrigger) { _ in
+                viewModel.resetSyncInfo()
                 viewModel.getUserInfo()
                 viewModel.configureSettins()
             }

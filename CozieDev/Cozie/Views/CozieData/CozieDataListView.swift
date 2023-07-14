@@ -23,6 +23,8 @@ struct CozieDataListView: View {
     @State var showError = false
     @State var presentingModal = false
     
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -41,7 +43,7 @@ struct CozieDataListView: View {
                                                              state: watchSurveyViewModel.dataSynced ? .remote : .local))
                     }, header: {
                         CozieAnimatedSyncHeader(title: "Watch Survey", action: {
-                            watchSurveyViewModel.updateData {
+                            watchSurveyViewModel.updateData(sendHealthData: true) {
                                 debugPrint("finish update data!")
                             }
                         }, animated: $watchSurveyViewModel.loading)
@@ -119,6 +121,9 @@ struct CozieDataListView: View {
         }
         .alert(watchSurveyViewModel.errorString, isPresented: $showError) {
             Button("OK", role: .cancel) { }
+        }
+        .onReceive(updateTrigger) { _ in
+            watchSurveyViewModel.updateData(completion: {})
         }
     }
 }

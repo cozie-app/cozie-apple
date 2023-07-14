@@ -30,5 +30,21 @@ class UserInteractor {
         }
     }
     
+    // 
+    public func prepareUser(participantID: String, experimentID: String, password: String = "1G8yOhPvMZ6m") {
+        if let userList = try? persistenceController.container.viewContext.fetch(User.fetchRequest()), let user = userList.first {
+            user.participantID = participantID
+            user.experimentID = experimentID
+            user.passwordID = password
+            try? persistenceController.container.viewContext.save()
+        } else {
+            let user = User(context: persistenceController.container.viewContext)
+            user.participantID = participantID
+            user.experimentID = experimentID
+            user.passwordID = password
+            try? persistenceController.container.viewContext.save()
+        }
+    }
+    
 }
  

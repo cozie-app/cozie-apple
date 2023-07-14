@@ -28,8 +28,8 @@ struct HomeCoordinatorView: View {
             
             SettingCoordinatorView(coordinator: coordinator.loadSessionCoodinator())
                 .tabItem {
-                HomeTabView(title: "Settings", imageName: "gearshape.fill")
-            }.tag(CozieTabs.settings)
+                    HomeTabView(title: "Settings", imageName: "gearshape.fill")
+                }.tag(CozieTabs.settings)
             
             CozieBackendView().tabItem {
                 HomeTabView(title: "Backend", imageName: "cloud")
@@ -40,7 +40,6 @@ struct HomeCoordinatorView: View {
         .accentColor(.appOrange)
         .onAppear{
             coordinator.prepareSoucer()
-            //healthKitInteractor.healthKitInit()
             let _ = coordinator.session.reminderManager.askForPermission { result in
                 switch result {
                 case let .success(isGranted):

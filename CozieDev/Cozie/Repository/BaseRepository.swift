@@ -8,11 +8,19 @@
 import Foundation
 import CoreData
 
-class BaseRepository: ObservableObject {
-    enum ServiceError: Error {
-        case badResponce
-    }
+enum ServiceError: Error, LocalizedError {
+    case responseStatusError(Int, String)
     
+    public var errorDescription: String? {
+        switch self {
+        case let .responseStatusError(status, message):
+            return "Error with status \(status) message: \(message)"
+        }
+    }
+}
+
+class BaseRepository: ObservableObject {
+   
     // MARK: Base GET
     func get(url: String, parameters: [String: String], key: String, completion: @escaping (Result<Data, Error>) -> Void) {
         guard var componentsQuery = URLComponents(string: url) else { return }
@@ -40,7 +48,11 @@ class BaseRepository: ObservableObject {
                     completion(.success(responseData))
                 } else {
                     debugPrint("error - Sync data!")
-                    completion(.failure(ServiceError.badResponce))
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty responce!")))
+                    }
                 }
             }.resume()
         }
@@ -77,7 +89,11 @@ class BaseRepository: ObservableObject {
                     }
                 } else {
                     debugPrint("error - GET JSON file!")
-                    completion(.failure(ServiceError.badResponce))
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty responce!")))
+                    }
                 }
             }.resume()
         }
@@ -98,15 +114,19 @@ class BaseRepository: ObservableObject {
             ]
             
             urlRequest.httpBody = body
-            
-            URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            let session = URLSession(configuration: URLSessionConfiguration.default)
+            session.dataTask(with: urlRequest) { data, response, error in
                 if let httpResponse = response as? HTTPURLResponse,
                    httpResponse.statusCode == 200,
                    let responseData = data {
                     completion(.success(responseData))
                 } else {
                     debugPrint("error - POST data!")
-                    completion(.failure(ServiceError.badResponce))
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty responce!")))
+                    }
                 }
             }.resume()
         }

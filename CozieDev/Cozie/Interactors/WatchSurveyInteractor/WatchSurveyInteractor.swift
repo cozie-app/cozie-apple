@@ -12,6 +12,7 @@ class WatchSurveyInteractor {
     let persistenceController = PersistenceController.shared
     let baseRepo = BaseRepository()
     let storage = CozieStorage.shared
+    let surveyManager = SurveyManager()
     
     // MARK: - Load WatchSurvey JSON
     func loadSelectedWatchSurveyJSON(completion: ((_ success: Bool) -> ())?) {
@@ -26,64 +27,65 @@ class WatchSurveyInteractor {
                 
                 switch result {
                 case .success(let surveyListData):
-                    do {
-                        let surveyModel = try JSONDecoder().decode(WatchSurvey.self, from: surveyListData)
-                        // set first question ID
-                        surveyModel.firstQuestionID = surveyModel.survey.first?.questionID
-                        try self.persistenceController.container.viewContext.performAndWait {
-                            // remove previouse saved survey with same id
-                            let request = WatchSurveyData.fetchRequest()
-                            let surveysList = try self.persistenceController.container.viewContext.fetch(request)
-                            
-                            surveysList.forEach { modle in
-                                // reset previouse selected
-                                if modle.selected {
-                                    modle.selected = false
-                                }
-                                // remove all internal
-                                if !modle.external {
-                                    self.persistenceController.container.viewContext.delete(modle)
-                                }
-                            }
-                        }
-                        
-                        // Save new survey to core data
-                        let watchSurvey = WatchSurveyData(context: self.persistenceController.container.viewContext)
-                        watchSurvey.surveyID = surveyModel.surveyID
-                        watchSurvey.surveyName = surveyModel.surveyName
-                        watchSurvey.firstQuestionID = surveyModel.firstQuestionID
-                        watchSurvey.selected = true
-                        
-                        surveyModel.survey.enumerated()
-                            .forEach{ (index, survay) in
-                                let surveyData = SurveyData(context: self.persistenceController.container.viewContext)
-                                surveyData.watchSurvey = watchSurvey
-                                surveyData.question = survay.question
-                                surveyData.questionID = survay.questionID
-                                surveyData.index = Int16(index)
-                                survay.responseOptions.enumerated().forEach { (index, respObj) in
-                                    let responseOptionData = ResponseOptionData(context: self.persistenceController.container.viewContext)
-                                    responseOptionData.survay = surveyData
-                                    responseOptionData.index = Int16(index)
-                                    responseOptionData.text = respObj.text
-                                    responseOptionData.nextQuestionID = respObj.nextQuestionID
-                                    responseOptionData.icon = respObj.icon
-                                    responseOptionData.useSfSymbols = respObj.useSfSymbols
-                                    responseOptionData.sfSymbolsColor = respObj.sfSymbolsColor
-                                }
-                            }
-                        
-                        try self.persistenceController.container.viewContext.save()
-                        completion?(true)
-                    } catch let error {
-                        debugPrint(error.localizedDescription)
-                        completion?(false)
-                    }
+                    self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: true, completion: completion)
                 case .failure(let error):
                     completion?(false)
                     debugPrint(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    // MARK: Notification responce
+    func sendResponce(action: String,
+                      userInteractor: UserInteractor = UserInteractor(),
+                      backendInteractor: BackendInteractor = BackendInteractor(),
+                      loggerInteractor: LoggerInteractor = LoggerInteractor.shared,
+                      completion:((_ success: Bool)->())?) {
+        guard let user = userInteractor.currentUser, let backend = backendInteractor.currentBackendSettings else {
+            completion?(false)
+            return
+        }
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateString = dateFormatter.string(from: date)
+        
+        let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.playerID(),
+                    WatchSurveyKeys.idParticipant.rawValue: user.participantID ?? "",
+                    WatchSurveyKeys.idPassword.rawValue: user.passwordID ?? ""]
+        
+        let filds = [WatchSurveyKeys.actionButtonKey.rawValue: action,
+                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
+        
+        let responce: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
+                                        WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
+                                        WatchSurveyKeys.tags.rawValue: tags,
+                                        WatchSurveyKeys.fields.rawValue: filds]
+
+        do {
+            let json = try JSONSerialization.data(withJSONObject: responce, options: .prettyPrinted)
+            
+            BaseRepository().post(url: backend.api_write_url ?? "", body: json, key: backend.api_write_key ?? "") { result in
+                switch result {
+                case .success(let data):
+                    debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
+                    completion?(true)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                    completion?(false)
+                }
+            }
+            
+            // log data
+            let jsonToLog = try JSONSerialization.data(withJSONObject: responce, options: .withoutEscapingSlashes)
+            debugPrint(jsonToLog)
+            loggerInteractor.logInfo(action: "", info: String(data: jsonToLog, encoding: .utf8) ?? "")
+            
+        } catch let error {
+            completion?(false)
+            debugPrint(error.localizedDescription)
         }
     }
 }
