@@ -104,7 +104,7 @@ class SettingViewModel: ObservableObject {
     let backendInteractor = BackendInteractor()
     let comManager = WatchConnectivityManagerPhone.shared
     let watchSurveyInteractor = WatchSurveyInteractor()
-    let healthKitInteractor = HealthKitInteractor()
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     
     init(reminderManager: ReminderManager) {
         self.reminderManager = reminderManager
@@ -132,8 +132,10 @@ class SettingViewModel: ObservableObject {
                     completion?(success)
                 }
             }
+            
             // sync with watch
             syncWatchData()
+            
             // send health data
             healthKitInteractor.sendData(trigger: CommunicationKeys.syncSettingsTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
         }
@@ -442,7 +444,7 @@ class SettingViewModel: ObservableObject {
     }
     
     // MARK: Sync watch survey
-    func syncWatchData() {
+    func syncWatchData(completion: (()->())? = nil) {
         watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] success in
             guard let self = self else {
                 return
@@ -461,6 +463,8 @@ class SettingViewModel: ObservableObject {
                                     self?.updateStateForParticipentID(enabled: true)
                                     self?.updateStateForExperimentID(enabled: true)
                                     self?.updateStateForSurveySynced(enabled: true)
+                                    
+                                    completion?()
                                 }
                             }
                         }

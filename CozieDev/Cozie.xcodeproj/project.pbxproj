@@ -98,6 +98,16 @@
 		CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */; };
 		CA57234829F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */; };
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
+		CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
+		CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
+		CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */; };
+		CA8BE5642A53F6C400D0627D /* BackendDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */; };
+		CA8BE5652A53F6D500D0627D /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
+		CA8BE5662A53F7EA00D0627D /* HealthKitInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE84D29E8679B00590527 /* HealthKitInteractor.swift */; };
+		CA8BE5682A53FF0E00D0627D /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */; };
+		CA8BE5692A53FF0E00D0627D /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */; };
+		CA8BE56A2A54002000D0627D /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
+		CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
 		CAB58A5529F960D000E26D20 /* CozieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5429F960D000E26D20 /* CozieStorage.swift */; };
 		CAB58A5829F9706900E26D20 /* WatchSurveyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */; };
 		CAB58A5B29F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */; };
@@ -282,6 +292,10 @@
 		CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA6102B629F6C7320055A140 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
+		CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendDataProtocol.swift; sourceTree = "<group>"; };
+		CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
+		CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorageProtocol.swift; sourceTree = "<group>"; };
 		CAB58A5429F960D000E26D20 /* CozieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorage.swift; sourceTree = "<group>"; };
 		CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyInteractor.swift; sourceTree = "<group>"; };
 		CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchSurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -508,6 +522,7 @@
 				9212144529D18FE8002BAEB4 /* Reminder */,
 				9244815C29C0CF63004E6779 /* AppLinks.swift */,
 				CAB58A5429F960D000E26D20 /* CozieStorage.swift */,
+				CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */,
 				9212144129CDFBB7002BAEB4 /* AppColor.swift */,
 				9212144A29D1EEBE002BAEB4 /* Session.swift */,
 				CA2EE92F29EFE36E00590527 /* CommunicationKeys.swift */,
@@ -692,6 +707,7 @@
 			isa = PBXGroup;
 			children = (
 				CA0A1B1429DB23F5007A3A19 /* UserInteractor.swift */,
+				CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */,
 			);
 			path = UserInteractor;
 			sourceTree = "<group>";
@@ -716,6 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				CA1548F929E5B244005FDD6B /* BackendInteractor.swift */,
+				CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */,
 			);
 			path = BackendInteractor;
 			sourceTree = "<group>";
@@ -731,6 +748,7 @@
 		CA1548FE29E6F7E1005FDD6B /* LoggerInteractor */ = {
 			isa = PBXGroup;
 			children = (
+				CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */,
 				CA1548FF29E6F7FE005FDD6B /* LoggerInteractor.swift */,
 			);
 			path = LoggerInteractor;
@@ -1048,7 +1066,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 921289C1299649EC0060C729;
 			productRefGroup = 921289CB299649EC0060C729 /* Products */;
@@ -1266,6 +1283,7 @@
 				9267485D29D71868004329B9 /* BackendViewModel.swift in Sources */,
 				9212144429CE0730002BAEB4 /* TextFieldPopUp.swift in Sources */,
 				CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */,
+				CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */,
 				CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */,
 				CA2EE92E29EFE18900590527 /* WatchConnectivityManager.swift in Sources */,
 				CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */,
@@ -1306,18 +1324,21 @@
 				92D0B80F29D9BD63008557FC /* SettingCoordinator.swift in Sources */,
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
 				CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */,
+				CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */,
 				9212144729D18FF5002BAEB4 /* ReminderManager.swift in Sources */,
 				CA1548FA29E5B244005FDD6B /* BackendInteractor.swift in Sources */,
 				CAC6F92F2A0CFCB7006D625D /* ConfigurationView.swift in Sources */,
 				9221074A29992205001EC552 /* CozieDataCoordinator.swift in Sources */,
 				CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */,
 				927E20EC29D5ED6E008F476F /* QuestionViewModel.swift in Sources */,
+				CA8BE5682A53FF0E00D0627D /* LoggerProtocol.swift in Sources */,
 				CAD1E5CA29FBEF17000F9FE7 /* HealthDataModel.swift in Sources */,
 				CA2EE85529ED6E1600590527 /* WaychSurveyData.swift in Sources */,
 				92D0B81229D9BFA9008557FC /* SettingCoordinatorView.swift in Sources */,
 				92210746299906F1001EC552 /* HomeCoordinator.swift in Sources */,
 				9267EFEC299A6FCA0025A3CE /* DataTitleImageRow.swift in Sources */,
 				CA011F152A1744A7006BFA7C /* CozieLocationManager.swift in Sources */,
+				CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */,
 				CA0A1B1D29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift in Sources */,
 				9251771B29C364870089C92C /* TimerPickerViewModel.swift in Sources */,
 				CAC6F9312A0CFFCB006D625D /* InitModel.swift in Sources */,
@@ -1358,17 +1379,23 @@
 				CA2EE93E29F1157400590527 /* QuestionsView.swift in Sources */,
 				CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */,
 				CAC6F92B2A091742006D625D /* SendSurveyView.swift in Sources */,
+				CA8BE5662A53F7EA00D0627D /* HealthKitInteractor.swift in Sources */,
 				CA2EE90229EDA92E00590527 /* ContentView.swift in Sources */,
+				CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */,
 				CA2EE94529F1531700590527 /* LocationManager.swift in Sources */,
 				CA2EE93129EFE38100590527 /* CommunicationKeys.swift in Sources */,
 				CA2EE94229F1391300590527 /* TimeOutViewModel.swift in Sources */,
 				CA2EE94829F180FD00590527 /* WatchSurveyInteractor.swift in Sources */,
 				CA2EE90029EDA92E00590527 /* CozieWatchApp.swift in Sources */,
+				CA8BE5692A53FF0E00D0627D /* LoggerProtocol.swift in Sources */,
 				CA2EE90D29EEB89600590527 /* WatchSurveyViewModel.swift in Sources */,
 				CA2EE94029F12F5100590527 /* TimeOutView.swift in Sources */,
 				CA2EE94329F151CC00590527 /* BaseRepository.swift in Sources */,
+				CA8BE5642A53F6C400D0627D /* BackendDataProtocol.swift in Sources */,
+				CA8BE56A2A54002000D0627D /* HealthDataModel.swift in Sources */,
 				CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */,
 				CA2EE93C29F1152C00590527 /* ThankYouView.swift in Sources */,
+				CA8BE5652A53F6D500D0627D /* CozieStorageProtocol.swift in Sources */,
 				CA2EE94A29F1862400590527 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1457,13 +1484,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1511,13 +1539,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1529,10 +1558,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -1545,14 +1577,16 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Cozie_dev_appstore;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1570,10 +1604,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -1586,14 +1623,16 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Cozie_dev_appstore;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1689,15 +1728,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=watchos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cozie-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cozie Dev";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = Cozie_Watch_App.ComplicationController;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We are logging the heart rate data.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We are logging the heart rate data.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Used it to determine form where you completed the survey.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used it to determine where you completed the watch survey.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1707,15 +1750,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.dev.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = AppStore_watch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1727,15 +1772,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=watchos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cozie-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cozie Dev";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = Cozie_Watch_App.ComplicationController;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We are logging the heart rate data.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We are logging the heart rate data.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Used it to determine form where you completed the survey.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used it to determine where you completed the watch survey.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1745,15 +1795,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.dev.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = AppStore_watch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1762,22 +1814,26 @@
 			baseConfigurationReference = 3FAA11F93F17560C643D3510 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.dev.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Appstore_OneSignal;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1790,22 +1846,27 @@
 			baseConfigurationReference = 3C8A1E07A73983C9EB107B45 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.dev.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Appstore_OneSignal;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

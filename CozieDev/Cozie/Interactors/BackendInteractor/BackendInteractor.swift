@@ -103,8 +103,10 @@ class BackendInteractor {
     
     // MARK: Setup/Updaete OneSign
     func updateOneSign(launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil,
-                       surveyInteractor: WatchSurveyInteractor = WatchSurveyInteractor(),
-                       healthKitInteractor: HealthKitInteractor = HealthKitInteractor()) {
+                       surveyInteractor: WatchSurveyInteractor = WatchSurveyInteractor()) {
+        
+        let healthKitInteractor: HealthKitInteractor = HealthKitInteractor(storage: storage, userData: UserInteractor(), backendData: self, loger: LoggerInteractor.shared)
+        
         if let _ = currentBackendSettings {
             // Remove this method to stop OneSignal Debugging
             OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
@@ -164,5 +166,14 @@ extension AppDelegate: OSSubscriptionObserver {
             CozieStorage.shared.savePlayerID(playerId)
             debugPrint("Player id: \(playerId)")
         }
+    }
+}
+
+extension BackendInteractor: BackendDataProtocol {
+    var apiWriteInfo: WApiInfo? {
+        guard let settings = self.currentBackendSettings else {
+            return nil
+        }
+        return (settings.api_write_url ?? "", settings.api_write_key ?? "")
     }
 }

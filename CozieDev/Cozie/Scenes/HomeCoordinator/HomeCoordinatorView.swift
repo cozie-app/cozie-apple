@@ -12,7 +12,7 @@ struct HomeCoordinatorView: View {
     // MARK: Stored Properties
     
     @ObservedObject var coordinator: HomeCoordinator
-    let healthKitInteractor = HealthKitInteractor()
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     
     init(coordinator: HomeCoordinator) {
         self.coordinator = coordinator

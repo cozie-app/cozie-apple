@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: NSObject, UIApplicationDelegate {
     let locationManager = LocationManager()
     let backgroundProcessing = BackgroundUpdateManager()
-    let healthKitInteractor = HealthKitInteractor()
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     static private(set) var instance: AppDelegate! = nil

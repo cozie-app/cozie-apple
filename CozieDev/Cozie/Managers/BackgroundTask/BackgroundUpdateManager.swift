@@ -4,8 +4,6 @@ import BackgroundTasks
 import HealthKit
 import UIKit
 
-// MARK: - SoundData
-
 struct BGUpdateData: Codable {
     let soundPressure: [String: Double]?
     let heartRate: [String: Double]?
@@ -39,7 +37,7 @@ class BackgroundUpdateManager {
     private let noise = HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!
     private let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate)!
     
-    private let healthKitInteractor = HealthKitInteractor()
+    private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     private let storage = CozieStorage.shared
     
     var lastProcessingEvent: Double? = nil
@@ -103,7 +101,7 @@ class BackgroundUpdateManager {
             // we should send data once per 30 min
             if interval < BackgroundUpdateManager.minimumTimeInterval
                 || status == ExecutionStatus.inprogress.rawValue {
-                //testLog(details: "Minimum time interval not reached")
+                // testLog(details: "Minimum time interval not reached")
                 // end processing task
                 task.setTaskCompleted(success: true)
                 
@@ -157,20 +155,16 @@ class BackgroundUpdateManager {
     }
     
     // log test
-//    private func testLog(details: String, state: String = "error") {
-//        
-//        let str =
-//        """
-//        {
-//        "trigger": "background_task",
-//        "si_background_task_state": "\(state)",
-//        "si_background_task_details": "\(details)",
-//        }
-//        """
-//        LoggerInteractor.shared.logInfo(action: "", info: str)
-//    }
-}
-
-// MARK: - Get an array of noise levels
-extension BackgroundUpdateManager {
+    //    private func testLog(details: String, state: String = "error") {
+    //
+    //        let str =
+    //        """
+    //        {
+    //        "trigger": "background_task",
+    //        "si_background_task_state": "\(state)",
+    //        "si_background_task_details": "\(details)",
+    //        }
+    //        """
+    //        LoggerInteractor.shared.logInfo(action: "", info: str)
+    //    }
 }

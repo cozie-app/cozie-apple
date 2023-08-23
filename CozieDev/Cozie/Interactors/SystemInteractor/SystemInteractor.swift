@@ -180,21 +180,3 @@ class Fields: Codable {
         self.transmitTrigger = transmitTrigger
     }
 }
-
-// MARK: - Tags
-class Tags: Codable {
-    var idOnesignal, idParticipant, idPassword: String
-
-    enum CodingKeys: String, CodingKey {
-        case idOnesignal = "id_onesignal"
-        case idParticipant = "id_participant"
-        case idPassword = "id_password"
-    }
-
-    init(idOnesignal: String, idParticipant: String, idPassword: String) {
-        self.idOnesignal = idOnesignal
-        self.idParticipant = idParticipant
-        self.idPassword = idPassword
-    }
-}
-

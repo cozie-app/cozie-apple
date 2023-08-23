@@ -64,7 +64,7 @@ class BackendViewModel: NSObject, ObservableObject {
     let comManager = WatchConnectivityManagerPhone.shared
     let setitngsInteractor = SettingsInteractor()
     let watchSurveyInteractor = WatchSurveyInteractor()
-    let healthKitInteractor = HealthKitInteractor()
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
 
     @Published var loading: Bool = false
     
@@ -192,7 +192,7 @@ class BackendViewModel: NSObject, ObservableObject {
         }
     }
     
-    // MARK: TEST
+    // MARK: send HKInfo
     func sendHKInfo() {
         healthKitInteractor.getAllRequestedData(completion: nil)
     }

@@ -40,12 +40,14 @@ struct CozieWatchApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     let cozieUserNotificationCenterDelegate = CozieUserNotificationCenterDelegate()
+    let healthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, loger: StorageManager.shared)
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .onAppear {
                     addNotifCategory()
+                    prepareHealthInteractor()
                 }
         }
  
@@ -71,6 +73,17 @@ struct CozieWatchApp: App {
                                                       options: [])
                 UNUserNotificationCenter.current().setNotificationCategories([category])
             }
+        }
+    }
+    
+    private func prepareHealthInteractor() {
+        if StorageManager.shared.healthLastSyncedTimeInterval() == 0.0 {
+            
+            let interval = Date().timeIntervalSince1970
+            StorageManager.shared.healthUpdateLastSyncedTimeInterval(interval)
+            StorageManager.shared.updatefirstLaunchTimeInterval(interval)
+            
+            healthKitInteractor.requestHealthAuth()
         }
     }
 }

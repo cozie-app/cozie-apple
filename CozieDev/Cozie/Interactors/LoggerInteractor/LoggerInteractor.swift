@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class LoggerInteractor {
+final class LoggerInteractor: LoggerProtocol {
     static let shared = LoggerInteractor()
     
     let userIntaractor = UserInteractor()

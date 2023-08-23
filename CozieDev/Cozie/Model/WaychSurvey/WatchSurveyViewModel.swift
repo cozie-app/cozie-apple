@@ -11,7 +11,7 @@ class WatchSurveyViewModel: ObservableObject {
     let syncInteractor = SyncInteractor()
     let backendInteractor = BackendInteractor()
     let loggerInteractor = LoggerInteractor.shared
-    let healthKitInteractor = HealthKitInteractor()
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     
     @Published var loading: Bool = false
     @Published var dataSynced: Bool = false

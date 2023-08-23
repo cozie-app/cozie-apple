@@ -14,8 +14,9 @@ class WatchConnectivityManagerPhone: NSObject {
     
     let session: WCSession = WCSession.default
     let loggerInteractor = LoggerInteractor.shared
-    let healthKitInteractor = HealthKitInteractor()
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     var activateCompletion: (()->())?
+    var transferingFileCompletion: (()->())?
     
     override init() {
         super.init()
@@ -76,6 +77,7 @@ class WatchConnectivityManagerPhone: NSObject {
     }
     
     func sendAll(data: Data, writeApiURL: String, writeApiKey: String, userID: String, expID: String, password: String, userOneSignalID: String, timeInterval: Int, completion: (()->())? = nil) {
+        
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data,
                           CommunicationKeys.writeApiURL.rawValue: writeApiURL,
@@ -88,7 +90,21 @@ class WatchConnectivityManagerPhone: NSObject {
             
             self?.session.sendMessage(params, replyHandler: { responce in
                 debugPrint(responce)
-                completion?()
+                if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
+                    completion?()
+                    return
+                }
+                
+                if let transferStatus = responce[CommunicationKeys.transverFileStatusKey.rawValue] as? Int {
+                    switch transferStatus {
+                    case FileTransferStatus.started.rawValue:
+                        self?.transferingFileCompletion = completion
+                    case FileTransferStatus.error.rawValue:
+                        completion?()
+                    default:
+                        completion?()
+                    }
+                }
             }, errorHandler: { error in
                 debugPrint(error)
             })
@@ -113,9 +129,11 @@ class WatchConnectivityManagerPhone: NSObject {
 
 extension WatchConnectivityManagerPhone: WCSessionDelegate {
     func sessionDidBecomeInactive(_ session: WCSession) {
+        debugPrint("Session Did Become Inactive")
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
+        debugPrint("Session Did Deactivate")
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -133,28 +151,60 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
             loggerInteractor.logInfo(action: "", info: logs)
             replyHandler([CommunicationKeys.resived.rawValue: true])
             
-//            testLog(details: "ConnectivityManager received logs from watch!", state: "info")
-            // send health data
-            healthKitInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
-            
+            // testLog(details: "ConnectivityManager received logs from watch!", state: "info")
         }
     }
     
     func sessionReachabilityDidChange(_ session: WCSession) {
-//        testLog(details: session.isReachable ? "ConnectivityManager Session Reachabil!" : "ConnectivityManager Session not Reachabil!", state: "info")
+        // testLog(details: session.isReachable ? "ConnectivityManager Session Reachabil!" : "ConnectivityManager Session not Reachabil!", state: "info")
+    }
+    
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+        do {
+            let wlogs = try String(contentsOf: file.fileURL, encoding: .utf8)
+            loggerInteractor.logInfo(action: "", info: wlogs)
+            session.sendMessage([CommunicationKeys.transverFileStatusKey.rawValue : FileTransferStatus.finished.rawValue], replyHandler: { [weak self] responce in
+                if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
+                    self?.transferCompletion()
+                }
+            })
+        } catch let error {
+            debugPrint("error reading file: \(error)")
+            session.sendMessage([CommunicationKeys.transverFileStatusKey.rawValue : FileTransferStatus.error.rawValue], replyHandler: { [weak self] responce in
+                if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
+                    self?.transferCompletion()
+                }
+            })
+        }
+    }
+    
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
+        if let error = error {
+            debugPrint(error)
+            return
+        }
+        
+        debugPrint(fileTransfer.progress)
+    }
+    
+    private func transferCompletion() {
+        if transferingFileCompletion != nil {
+            transferingFileCompletion?()
+        }
+        transferingFileCompletion = nil
     }
     
     // log test
-//    private func testLog(details: String, state: String = "error") {
-//
-//        let str =
-//        """
-//        {
-//        "trigger": "SessionReachability",
-//        "si_connectivity_manager_state": "\(state)",
-//        "si_connectivity_manager_details": "\(details)",
-//        }
-//        """
-//        LoggerInteractor.shared.logInfo(action: "", info: str)
-//    }
+    //    private func testLog(details: String, state: String = "error") {
+    //
+    //        let str =
+    //        """
+    //        {
+    //        "trigger": "SessionReachability",
+    //        "si_connectivity_manager_state": "\(state)",
+    //        "si_connectivity_manager_details": "\(details)",
+    //        }
+    //        """
+    //        LoggerInteractor.shared.logInfo(action: "", info: str)
+    //    }
 }

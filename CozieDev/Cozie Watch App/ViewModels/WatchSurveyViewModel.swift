@@ -26,7 +26,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     private var startTime = Date()
     
     let categoryId = "cozie_push_action_category"
-    
+    let logFileName = "logs.txt"
     
     // MARK: Public
     var isFirstQuestion: Bool {
@@ -97,19 +97,10 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             ///
         }, completion: { [weak self] success, error in
             if success {
-//                if self?.session.isReachable ?? false {
-//                    self?.sendLogsData(completion: {
-//                        DispatchQueue.main.async {
-//                            self?.sendSurveyProgress = false
-//                            self?.state = .finished
-//                        }
-//                    })
-//                } else {
-                    DispatchQueue.main.async {
-                        self?.sendSurveyProgress = false
-                        self?.state = .finished
-                    }
-//                }
+                DispatchQueue.main.async {
+                    self?.sendSurveyProgress = false
+                    self?.state = .finished
+                }
             } else {
                 DispatchQueue.main.async {
                     self?.sendSurveyProgress = false
@@ -233,6 +224,16 @@ extension WatchSurveyViewModel: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        
+        // transver file status
+        if let transverFileStatus = message[CommunicationKeys.transverFileStatusKey.rawValue] as? Int {
+            if transverFileStatus == FileTransferStatus.finished.rawValue {
+                storage.clearLogs()
+            }
+            replyHandler([CommunicationKeys.resived.rawValue: true])
+            return
+        }
+        
         replyHandler([CommunicationKeys.resived.rawValue: true])
         
         if let json = message[CommunicationKeys.jsonKey.rawValue] as? Data {
@@ -274,33 +275,20 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             storage.saveTimeInterval(interval: timeInterval)
         }
         
-        sendLogsData()
+        transferLoggFile()
         
         DispatchQueue.main.async { [weak self] in
             self?.prepareWatchSurvey()
         }
     }
     
-    func sendLogsData(completion: (()->())? = nil) {
-        let logs = storage.sevedLogs()
-        if !logs.isEmpty {
-            
-            let param = [CommunicationKeys.wsLogs.rawValue: logs]
-            session.sendMessage(param, replyHandler: { [weak self] responce in
-                debugPrint(responce)
-                
-                if let result = responce[CommunicationKeys.resived.rawValue] as? Bool, result {
-                    self?.storage.clearLogs()
-                } else {
-//                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "(WatchConnectivity)HealthKit data not sent. Success response from iPhone not received.")
-                }
-                completion?()
-            }, errorHandler: {/*[weak self]*/ error in
-                // Connectin with iPhone not available (app should be in forreground state)
-                debugPrint(error)
-//                self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "(WatchConnectivity)Connectin with iPhone not available. Error details: \(error.localizedDescription)")
-                completion?()
-            })
+    func transferLoggFile() {
+        let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        
+        guard let filePathURL = filePath, FileManager.default.fileExists(atPath: filePathURL.appendingPathComponent(StorageManager.logFileName).relativePath) else {
+            return
         }
+        //debugPrint(try? String(contentsOf: filePathURL, encoding: .utf8))
+        session.transferFile(filePathURL.appendingPathComponent(StorageManager.logFileName), metadata: nil)
     }
 }

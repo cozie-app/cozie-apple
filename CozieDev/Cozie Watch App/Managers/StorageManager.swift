@@ -7,8 +7,9 @@
 
 import Foundation
 
-class StorageManager {
+class StorageManager: CozieStorageProtocol {
     typealias ApiInfo = (url: String, key: String)
+    static let logFileName = "wlogs.txt"
     
     enum Keys: String {
         case jsonKey = "CozieWatchSyrveyJSON"
@@ -20,14 +21,25 @@ class StorageManager {
         case paswordIDKey = "CoziePaswordIDKey"
         case timeInterval = "CozieTimeIntervalKey"
         case lastSurveyTimeInterval = "CozieLastSurveyTimeIntervalKey"
-        case sevedLogs = "CozieSevedLogsKey"
         case sevedSurveyCount = "CozieSevedSurveyCount"
         case notSyncedSurvey = "CozieNotSyncedSurvey"
+        
+        // Storage postfix
+        case storagePostfixTime = "_wstorage_time"
+        case storagePostfixTempTime = "_wstorage_temp_time"
+        
+        case firstLaunchTimeInterval = "firstLaunchTimeIntervalWatch"
+        
+        case healthPrefixSyncedDateKey = "CozieStorageWatchHealthSyncedDateKey"
+        case healthLastSyncKey = "CozieStorageWatchLastSyncTimestamp"
     }
     
     let storage = UserDefaults.standard
     
     static let shared = StorageManager()
+    
+    let semapfore = DispatchSemaphore(value: 1)
+    let writeQueue = DispatchQueue.global(qos: .userInitiated)
     
     // MARK: Watch Survey JSON
     func saveWatchSurveyJSON(data: Data) {
@@ -102,27 +114,52 @@ class StorageManager {
     }
     
     // MARK: Save survey logs
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
     func seveLogs(logs: String, surveyCount: Int? = nil) {
-        var logsHistory = sevedLogs()
-        if logsHistory.isEmpty {
-            UserDefaults.standard.set(logs, forKey: Keys.sevedLogs.rawValue)
-        } else {
-            if let surveyCount = surveyCount, (logsHistory.range(of: "ws_survey_count\":\(surveyCount)") != nil) {
-                return
+        let filename = getDocumentsDirectory().appendingPathComponent(StorageManager.logFileName)
+        writeQueue.async { [weak self] in
+            self?.semapfore.wait()
+            do {
+                var logsHistory = ""
+                if FileManager.default.fileExists(atPath: filename.relativePath) {
+                    logsHistory = try String(contentsOfFile: filename.relativePath)
+                }
+                if !logsHistory.isEmpty {
+                    if let surveyCount = surveyCount, (logsHistory.range(of: "ws_survey_count\":\(surveyCount)") != nil) {
+                        self?.semapfore.signal()
+                        return
+                    }
+                    logsHistory.append(",")
+                    logsHistory.append(logs)
+                } else {
+                    logsHistory.append(logs)
+                }
+                
+                try logsHistory.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+                self?.semapfore.signal()
+                
+            } catch let error {
+                debugPrint(error)
+                self?.semapfore.signal()
             }
-            logsHistory.append(",")
-            logsHistory.append(logs)
-            UserDefaults.standard.set(logsHistory, forKey: Keys.sevedLogs.rawValue)
         }
     }
     
-    // MARK: Logs
-    func sevedLogs() -> String {
-        return (UserDefaults.standard.value(forKey: Keys.sevedLogs.rawValue) as? String) ?? ""
-    }
-    
+    // MARK: Clear Logs
     func clearLogs() {
-        UserDefaults.standard.set("", forKey: Keys.sevedLogs.rawValue)
+        let filename = getDocumentsDirectory().appendingPathComponent(StorageManager.logFileName)
+        if FileManager.default.fileExists(atPath: filename.relativePath) {
+            do {
+                try FileManager.default.removeItem(atPath: filename.relativePath)
+            } catch let error {
+                debugPrint(error)
+            }
+        }
     }
     
     // MARK: Not Synced Survey
@@ -187,5 +224,70 @@ class StorageManager {
         } else {
             return false
         }
+    }
+    
+    // MARK: Health kit
+    func healthLastSyncedTimeInterval() -> Double {
+        return UserDefaults.standard.value(forKey: Keys.healthLastSyncKey.rawValue) as? Double ?? 0.0
+    }
+    
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double) {
+        UserDefaults.standard.set(interval, forKey: Keys.healthLastSyncKey.rawValue)
+    }
+    
+    // MARK: first lanch time interval
+    func  firstLaunchTimeInterval() -> Double {
+        return UserDefaults.standard.value(forKey: Keys.firstLaunchTimeInterval.rawValue) as? Double ?? 0.0
+    }
+    
+    func updatefirstLaunchTimeInterval(_ interval: Double) {
+        UserDefaults.standard.set(interval, forKey: Keys.firstLaunchTimeInterval.rawValue)
+    }
+    
+    // MARK: HealthKit data storage
+    func healthLastSyncedTimeInterval(key: String) -> Double {
+        let keyWithStorageID = key + Keys.storagePostfixTime.rawValue
+        return UserDefaults.standard.value(forKey: keyWithStorageID) as? Double ?? firstLaunchTimeInterval()
+    }
+    
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String) {
+        let keyWithStorageID = key + Keys.storagePostfixTime.rawValue
+        UserDefaults.standard.set(interval, forKey: keyWithStorageID)
+    }
+    
+    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String) {
+        let keyWithStorageID = key + Keys.storagePostfixTempTime.rawValue
+        UserDefaults.standard.set(interval, forKey: keyWithStorageID)
+    }
+    
+    func healthUpdateFromTempLastSyncedTimeInterval(key: String) {
+        let keyWithStorageID = key + Keys.storagePostfixTime.rawValue
+        let tempKeyWithStorageID = key + Keys.storagePostfixTempTime.rawValue
+        
+        if let interval = UserDefaults.standard.value(forKey: tempKeyWithStorageID) as? Double, interval > 0 {
+            UserDefaults.standard.set(interval, forKey: keyWithStorageID)
+        }
+    }
+    
+    func playerID() -> String {
+        return self.userOneSignalID()
+    }
+}
+
+extension StorageManager: LoggerProtocol {
+    func logInfo(action: String, info: String) {
+        seveLogs(logs: info)
+    }
+}
+
+extension StorageManager: UserDataProtocol {
+    var userInfo: CUserInfo? {
+        return (userID(), paswordID(), expirimentID())
+    }
+}
+
+extension StorageManager: BackendDataProtocol {
+    var apiWriteInfo: WApiInfo? {
+        return (watchSurveyAPI().url, watchSurveyAPI().key)
     }
 }

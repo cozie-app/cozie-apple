@@ -6,7 +6,8 @@
 //
 
 import Foundation
-class CozieStorage {
+
+class CozieStorage: CozieStorageProtocol {
     
     enum CozieStorageKeys: String {
         case appConfigured = "CozieStorageAppConfiguredKey"

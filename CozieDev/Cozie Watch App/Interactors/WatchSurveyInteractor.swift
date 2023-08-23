@@ -26,6 +26,7 @@ class SurveyHistory: Codable {
 }
 
 class WatchSurveyInteractor {
+    let healthInteractor: HealthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, loger: StorageManager.shared, dataPrefix: "ws")
 
     func sendSurveyData(watchSurvey: WatchSurvey?,
                         selectedOptions:[SelectedSurveyInfo],
@@ -81,7 +82,10 @@ class WatchSurveyInteractor {
                 switch result {
                 case .success(let data):
                     debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
-                    completion?(true, nil)
+                    //completion?(true, nil)
+                    self?.healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0) { succces in
+                        completion?(true, nil)
+                    }
                 case .failure(let error):
                     self?.saveNotSyncedSurvey(jsonData: json, userInfo: storage.userID() + storage.expirimentID())
                     debugPrint(error.localizedDescription)

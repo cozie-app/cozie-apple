@@ -27,6 +27,12 @@ public enum CommunicationKeys: String {
     case syncBackgroundTaskTrigger = "background_task"
     case syncWatchSurveyTrigger = "watch_survey"
     case pushNotificationForegroundTrigger = "push_notification_foreground"
+    
+    case transverFileStatusKey = "transver_file_status"
+}
+
+public enum FileTransferStatus: Int {
+    case started, error, finished
 }
 
 public enum WatchSurveyKeys: String {

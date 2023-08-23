@@ -45,6 +45,15 @@ class UserInteractor {
             try? persistenceController.container.viewContext.save()
         }
     }
-    
+}
+
+extension UserInteractor: UserDataProtocol {
+    var userInfo: CUserInfo? {
+        guard let user = self.currentUser else {
+            return nil
+        }
+        
+        return (user.participantID ?? "", user.passwordID ?? "", user.experimentID ?? "")
+    }
 }
  

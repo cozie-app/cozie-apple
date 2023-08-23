@@ -71,7 +71,6 @@ class SurveyManager {
                             }
                         }
                     
-                    
                     try context.save()
                     completion?(true)
                 })

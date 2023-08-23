@@ -81,7 +81,7 @@ class LocationManager: NSObject {
     var currentLocation: CLLocation? = nil
     
     let locationManagerInteractor = LocationManagerInteractor()
-    private let healthKitInteractor = HealthKitInteractor()
+    private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     
     var completion: (()->())?
     
