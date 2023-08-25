@@ -21,7 +21,7 @@ struct WatchSurveyModel {
     func formattedDate() -> String {
         let dateFormattor = DateFormatter()
         dateFormattor.timeZone = TimeZone(identifier: "UTC")
-        dateFormattor.dateFormat = "MM.dd.yyyy - HH:mm"
+        dateFormattor.dateFormat = "dd.MM.yyyy - HH:mm"
         if let date = dateFormattor.date(from: lastSync) {
             dateFormattor.timeZone = .current
             return dateFormattor.string(from: date)
