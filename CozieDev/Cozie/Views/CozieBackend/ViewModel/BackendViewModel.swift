@@ -104,7 +104,7 @@ class BackendViewModel: NSObject, ObservableObject {
         case .writeKey:
             backend.api_write_key = value
         case .oneSignalAppId:
-            backend.one_sigmnal_id = value
+            backend.one_signal_id = value
         case .participantPassword:
             backend.participant_password = value
             userIntaractor.currentUser?.passwordID = value
@@ -131,7 +131,7 @@ class BackendViewModel: NSObject, ObservableObject {
         case .writeKey:
             return backend.api_write_key ?? ""
         case .oneSignalAppId:
-            return backend.one_sigmnal_id ?? ""
+            return backend.one_signal_id ?? ""
         case .participantPassword:
             return backend.participant_password ?? ""
         case .watchsurveyLink:
@@ -181,7 +181,7 @@ class BackendViewModel: NSObject, ObservableObject {
                         
                         if let survey = surveysList.first?.toModel(), let backend = self.backendInteractor.currentBackendSettings, let user = self.userIntaractor.currentUser, let settings = self.setitngsInteractor.currentSettings  {
                             let json = try JSONEncoder().encode(survey)
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_sigmnal_id ?? "", timeInterval: Int(settings.wss_time_out))
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_signal_id ?? "", timeInterval: Int(settings.wss_time_out))
                         }
                         
                     } catch let error {

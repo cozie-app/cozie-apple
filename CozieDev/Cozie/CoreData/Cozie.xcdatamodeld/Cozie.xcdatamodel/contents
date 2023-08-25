@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BackendInfo" representedClassName=".BackendInfo" syncable="YES">
         <attribute name="api_read_key" optional="YES" attributeType="String"/>
         <attribute name="api_read_url" optional="YES" attributeType="String"/>
         <attribute name="api_write_key" optional="YES" attributeType="String"/>
         <attribute name="api_write_url" optional="YES" attributeType="String"/>
-        <attribute name="one_sigmnal_id" optional="YES" attributeType="String"/>
+        <attribute name="one_signal_id" optional="YES" attributeType="String"/>
         <attribute name="participant_password" optional="YES" attributeType="String"/>
         <attribute name="phone_survey_link" optional="YES" attributeType="String"/>
         <attribute name="watch_survey_link" optional="YES" attributeType="String"/>

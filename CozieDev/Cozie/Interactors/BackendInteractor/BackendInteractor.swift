@@ -32,7 +32,7 @@ class BackendInteractor {
             backend.api_read_key = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
             backend.api_write_url = "https://43cb5nnwe3mejojyftbuaow4640nsrnd.lambda-url.ap-southeast-1.on.aws"
             backend.api_write_key = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
-            backend.one_sigmnal_id = "be00093b-ed75-4c2e-81af-d6b382587283"
+            backend.one_signal_id = "be00093b-ed75-4c2e-81af-d6b382587283"
             backend.participant_password = "1G8yOhPvMZ6m"
             backend.watch_survey_link = "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_weather_short.txt"
             backend.phone_survey_link = "https://docs.google.com/forms/d/e/1FAIpQLSchX6cIqgx7tupV_47o5sYVs5IvEBqhwTMGuRLCjGxqbh_gTA/viewform?usp=pp_url&entry.247006640=dev&entry.932499052=dev01"
@@ -58,7 +58,7 @@ class BackendInteractor {
             model.api_read_key = apiReadKey
             model.api_write_url = apiWriteUrl
             model.api_write_key = apiWriteKey
-            model.one_sigmnal_id = oneSigmnalId
+            model.one_signal_id = oneSigmnalId
             model.participant_password = participantPassword
             model.watch_survey_link = watchSurveyLink
             model.phone_survey_link = phoneSurveyLink
@@ -71,7 +71,7 @@ class BackendInteractor {
             backend.api_read_key = apiReadKey
             backend.api_write_url = apiWriteUrl
             backend.api_write_key = apiWriteKey
-            backend.one_sigmnal_id = oneSigmnalId
+            backend.one_signal_id = oneSigmnalId
             backend.participant_password = participantPassword
             backend.watch_survey_link = watchSurveyLink
             backend.phone_survey_link = phoneSurveyLink

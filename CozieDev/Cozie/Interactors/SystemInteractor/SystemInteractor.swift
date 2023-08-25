@@ -55,7 +55,7 @@ class LogsSystemInteractor {
                              appBundleName: "Coze - Dev",
                              appBundleBuildVersion: Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "",
                              appBundleBuildNumber: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "",
-                             appOneSignalAppID: backend.one_sigmnal_id ?? "",
+                             appOneSignalAppID: backend.one_signal_id ?? "",
                              apiPhoneSurveyURL: backend.phone_survey_link ?? "",
                              apiWatchSurveyURL: backend.watch_survey_link ?? "",
                              transmitTrigger: "app_change_settings")

@@ -22,7 +22,7 @@ extension BackendInfo {
     @NSManaged public var api_read_key: String?
     @NSManaged public var api_write_url: String?
     @NSManaged public var api_write_key: String?
-    @NSManaged public var one_sigmnal_id: String?
+    @NSManaged public var one_signal_id: String?
     @NSManaged public var participant_password: String?
     @NSManaged public var watch_survey_link: String?
     @NSManaged public var phone_survey_link: String?
