@@ -149,7 +149,7 @@ class SettingViewModel: ObservableObject {
         }
     }
     
-    func configureSettins() {
+    func configureSettings() {
         if let settings = settingsIntaractor.currentSettings {
             subscriptions.removeAll()
             

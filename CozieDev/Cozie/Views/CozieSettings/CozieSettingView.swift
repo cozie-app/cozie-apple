@@ -85,12 +85,12 @@ struct CozieSettingView: View {
             }
             .onAppear{
                 viewModel.getUserInfo()
-                viewModel.configureSettins()
+                viewModel.configureSettings()
             }
             .onReceive(updateTrigger) { _ in
                 viewModel.resetSyncInfo()
                 viewModel.getUserInfo()
-                viewModel.configureSettins()
+                viewModel.configureSettings()
             }
             
             switch viewModel.showingState {

@@ -45,7 +45,7 @@ class HomeCoordinator: ObservableObject {
             
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
             
-            settingsViewModel.configureSettins()
+            settingsViewModel.configureSettings()
             settingsViewModel.prepareRemindersIfNeeded()
             
             // update selected survey
