@@ -8,12 +8,12 @@
 import SwiftUI
 
 fileprivate extension Int {
-    func toWatchType() -> WatchSurwayType {
+    func toWatchType() -> WatchSurveyType {
         switch self {
         case 0:
-            return .watchSurway
+            return .watchSurvey
         case 1:
-            return .watchSurwayResponceGoal
+            return .watchSurveyResponceGoal
         case 2:
             return .enableReminders
         case 3:
@@ -25,18 +25,18 @@ fileprivate extension Int {
         case 6:
             return .participationTimeEnd
         default:
-            return .watchSurway
+            return .watchSurvey
         }
     }
 }
-enum WatchSurwayType: CaseIterable {
-    case watchSurway, watchSurwayResponceGoal, enableReminders, reminderInterval, participationDays, participationTimeStart, participationTimeEnd
+enum WatchSurveyType: CaseIterable {
+    case watchSurvey, watchSurveyResponceGoal, enableReminders, reminderInterval, participationDays, participationTimeStart, participationTimeEnd
     
     func toString() -> String {
         switch self {
-        case .watchSurway:
+        case .watchSurvey:
             return "Watch Survey"
-        case .watchSurwayResponceGoal:
+        case .watchSurveyResponceGoal:
             return "Watch Survey Response Goal"
         case .enableReminders:
             return "Enable Reminders"
@@ -94,7 +94,7 @@ struct CozieSettingView: View {
             }
             
             switch viewModel.showingState {
-            case .watchSurway:
+            case .watchSurvey:
                 WatchSurveyList(title: "Question Flows",
                                 viewModel: viewModel.questionViewModel) {
                     viewModel.clearState()
@@ -238,7 +238,7 @@ struct CozieSettingView: View {
     
     func watchSurveySection() -> some View {
         return Section(content: {
-            ForEach( 0 ..< WatchSurwayType.allCases.count ) { index in
+            ForEach( 0 ..< WatchSurveyType.allCases.count ) { index in
                 createWatchSurveyCell(type: index.toWatchType())
             }
         },
@@ -264,16 +264,16 @@ struct CozieSettingView: View {
         })
     }
     
-    // MARK: - Watch Surway Count
-    func createWatchSurveyCell(type: WatchSurwayType) -> some View {
+    // MARK: - Watch Survey Count
+    func createWatchSurveyCell(type: WatchSurveyType) -> some View {
         switch type{
-        case .watchSurway:
+        case .watchSurvey:
             return AnyView(SettingWatchCell(title: type.toString(),
                                             subtitle: viewModel.watchSurveyTitle(),
                                             isActive: viewModel.surveySynced).onTapGesture {
-                viewModel.showingState = .watchSurway
+                viewModel.showingState = .watchSurvey
             })
-        case .watchSurwayResponceGoal:
+        case .watchSurveyResponceGoal:
             return AnyView(TitleSubtitleCell(title: type.toString(),
                                              subtitle: viewModel.goal).onTapGesture {
                 viewModel.showingState = .watchGoal

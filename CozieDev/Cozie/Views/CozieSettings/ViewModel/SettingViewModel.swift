@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 enum SettingState {
-    case clear, watchSurway, watchGoal, watchReminderInterval, watchParticipation, watchParticipationTimeStart, watchParticipationTimeEnd, participantId, experimentId,
+    case clear, watchSurvey, watchGoal, watchReminderInterval, watchParticipation, watchParticipationTimeStart, watchParticipationTimeEnd, participantId, experimentId,
          phoneReminderInterval, phoneParticipation
 }
 
