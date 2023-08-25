@@ -95,7 +95,7 @@ class WatchConnectivityManagerPhone: NSObject {
                     return
                 }
                 
-                if let transferStatus = responce[CommunicationKeys.transverFileStatusKey.rawValue] as? Int {
+                if let transferStatus = responce[CommunicationKeys.transferFileStatusKey.rawValue] as? Int {
                     switch transferStatus {
                     case FileTransferStatus.started.rawValue:
                         self?.transferingFileCompletion = completion
@@ -163,14 +163,14 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
         do {
             let wlogs = try String(contentsOf: file.fileURL, encoding: .utf8)
             loggerInteractor.logInfo(action: "", info: wlogs)
-            session.sendMessage([CommunicationKeys.transverFileStatusKey.rawValue : FileTransferStatus.finished.rawValue], replyHandler: { [weak self] responce in
+            session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.finished.rawValue], replyHandler: { [weak self] responce in
                 if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
                     self?.transferCompletion()
                 }
             })
         } catch let error {
             debugPrint("error reading file: \(error)")
-            session.sendMessage([CommunicationKeys.transverFileStatusKey.rawValue : FileTransferStatus.error.rawValue], replyHandler: { [weak self] responce in
+            session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.error.rawValue], replyHandler: { [weak self] responce in
                 if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
                     self?.transferCompletion()
                 }

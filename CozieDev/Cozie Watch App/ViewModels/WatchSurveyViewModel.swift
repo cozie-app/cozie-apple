@@ -225,9 +225,9 @@ extension WatchSurveyViewModel: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         
-        // transver file status
-        if let transverFileStatus = message[CommunicationKeys.transverFileStatusKey.rawValue] as? Int {
-            if transverFileStatus == FileTransferStatus.finished.rawValue {
+        // transfer file status
+        if let transferFileStatus = message[CommunicationKeys.transferFileStatusKey.rawValue] as? Int {
+            if transferFileStatus == FileTransferStatus.finished.rawValue {
                 storage.clearLogs()
             }
             replyHandler([CommunicationKeys.resived.rawValue: true])
