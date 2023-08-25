@@ -39,7 +39,7 @@ struct HomeCoordinatorView: View {
         }
         .accentColor(.appOrange)
         .onAppear{
-            coordinator.prepareSoucer()
+            coordinator.prepareSource()
             let _ = coordinator.session.reminderManager.askForPermission { result in
                 switch result {
                 case let .success(isGranted):

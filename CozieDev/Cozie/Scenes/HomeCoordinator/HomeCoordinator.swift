@@ -37,7 +37,7 @@ class HomeCoordinator: ObservableObject {
                                   session: session)
     }
     
-    func prepareSoucer(info: InitModel) {
+    func prepareSource(info: InitModel) {
         backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSigmnalId: info.appOneSignalAppID, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
         if let backend = backendInteractor.currentBackendSettings {
             userIntaractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
@@ -67,7 +67,7 @@ class HomeCoordinator: ObservableObject {
         }
     }
     
-    func prepareSoucer() {
+    func prepareSource() {
         backendInteractor.prepareBackendData()
         if let backend = backendInteractor.currentBackendSettings {
             userIntaractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
