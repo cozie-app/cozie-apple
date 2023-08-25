@@ -286,7 +286,7 @@ struct CozieSettingView: View {
                 viewModel.showingState = .watchReminderInterval
             })
         case .participationDays:
-            return AnyView(TitleSubtitleCell(title: type.toString(), subtitle: viewModel.partisipans).onTapGesture {
+            return AnyView(TitleSubtitleCell(title: type.toString(), subtitle: viewModel.participationDays).onTapGesture {
                 viewModel.showingState = .watchParticipation
             })
         case .participationTimeStart:

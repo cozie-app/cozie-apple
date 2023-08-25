@@ -68,7 +68,7 @@ class SettingViewModel: ObservableObject {
     @Published var experimentID: String = "App Store"
     
     // Watch Survey
-    @Published var partisipans: String = ""
+    @Published var participationDays: String = ""
     @Published var goal: String = "100"
     @Published var reminderInterval: TimeModel = TimeModel()
     @Published var timeStart: TimeModel = TimeModel()
@@ -170,7 +170,7 @@ class SettingViewModel: ObservableObject {
                 daysValues.components(separatedBy: ",").forEach { dayPrefix in
                     dayList.first(where: { $0.titleShort() == dayPrefix })?.isSelected = true
                 }
-                partisipans =  daysValues
+                participationDays =  daysValues
             }
             let time = TimeModel(minute: Int(settings.wss_reminder_interval))
             reminderInterval = time
@@ -326,7 +326,7 @@ class SettingViewModel: ObservableObject {
             content = content + day.titleShort() + ","
         }
         dayList = list
-        partisipans = String(content.dropLast())
+        participationDays = String(content.dropLast())
         
         if let settings = settingsIntaractor.currentSettings {
             settings.wss_participation_days = String(content.dropLast())
