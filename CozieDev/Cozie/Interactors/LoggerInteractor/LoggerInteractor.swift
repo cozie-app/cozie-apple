@@ -39,7 +39,11 @@ final class LoggerInteractor: LoggerProtocol {
         var name = ""
         if let participantID = user.participantID,
             let experimentID = user.experimentID {
-            name = participantID + "_" + experimentID + "_"
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+            let dateString = dateFormatter.string(from: date)
+            name = experimentID + "_" + participantID + "_" + dateString + "_"
         }
         return name
     }
