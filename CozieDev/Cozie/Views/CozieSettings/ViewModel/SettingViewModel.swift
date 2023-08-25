@@ -417,7 +417,7 @@ class SettingViewModel: ObservableObject {
             }
         }
     }
-    // MARK: Rminders
+    // MARK: Reminders
     
     func prepareRemindersIfNeeded() {
         if let settings = settingsIntaractor.currentSettings {
