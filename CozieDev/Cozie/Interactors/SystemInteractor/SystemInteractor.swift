@@ -21,7 +21,7 @@ class LogsSystemInteractor {
     func logsData() -> Logs {
         guard let user = userIntaractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
         let tag = Tags(idOnesignal: CozieStorage.shared.playerID(), idParticipant: user.participantID ?? "", idPassword: user.passwordID ?? "")
-        let fielsds = Fields(wssGoal: Int(settings.wss_goal),
+        let fields = Fields(wssGoal: Int(settings.wss_goal),
                              wssTitle: settings.wss_title ?? "",
                              wssTimeOut: Int(settings.wss_time_out),
                              wssReminderEnabeled: settings.wss_reminder_enabeled,
@@ -63,7 +63,7 @@ class LogsSystemInteractor {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let dateString = dateFormatter.string(from: date)
-        let logs = Logs(time: dateString, measurement: user.experimentID ?? "", tags: tag, fields: fielsds)
+        let logs = Logs(time: dateString, measurement: user.experimentID ?? "", tags: tag, fields: fields)
         
         return logs
     }
