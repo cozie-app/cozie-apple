@@ -32,7 +32,7 @@ struct Defaults {
     static let WSStimeOutTime: Int16 = 55
     static let WSSreminderEnabled = true
     static let WSSreminderInterval: Int16 = 60
-    static let WSSparticipationDays: String = "Mo,Tu"
+    static let WSSparticipationDays: String = "Mo,Tu,We,Th,Fr"
     static let WSSparticiaptionTimeStart = "09:00"
     static let WSSparticipationTimeEnd = "18:00"
     static let PSSreminderEnabled = false
