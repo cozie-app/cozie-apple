@@ -17,13 +17,13 @@ fileprivate extension Int {
         case 2:
             return .enableReminders
         case 3:
-            return .reminderInterval
-        case 4:
             return .participationDays
-        case 5:
+        case 4:
             return .participationTimeStart
-        case 6:
+        case 5:
             return .participationTimeEnd
+        case 6:
+            return .reminderInterval
         default:
             return .watchSurvey
         }
