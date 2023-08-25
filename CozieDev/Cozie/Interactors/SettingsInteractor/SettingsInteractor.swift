@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol SettingInteractorProtocol {
-    func prepereSettingsData()
+    func prepareSettingsData()
 }
 
 class SettingsInteractor: SettingInteractorProtocol {
@@ -27,7 +27,7 @@ class SettingsInteractor: SettingInteractorProtocol {
         return settings
     }
     
-    func prepereSettingsData() {
+    func prepareSettingsData() {
         if let settingList = try? persistenceController.container.viewContext.fetch(SettingsData.fetchRequest()), let _ = settingList.first {
            debugPrint(settingList)
         } else {
@@ -48,7 +48,7 @@ class SettingsInteractor: SettingInteractorProtocol {
         }
     }
     
-    func prepereSettingsData(wssTitle: String = Defaults.WSStitle,
+    func prepareSettingsData(wssTitle: String = Defaults.WSStitle,
                              wssGoal: Int16 = Defaults.WSSgoal,
                              wssTimeout: Int16 = Defaults.WSStimeOutTime,
                              wssReminderEnabeled: Bool = Defaults.WSSreminderEnabled,

@@ -23,7 +23,7 @@ class BackendInteractor {
         return settings
     }
     
-    func prepereBackendData() {
+    func prepareBackendData() {
         if let settingList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()), let _ = settingList.first {
             debugPrint(settingList)
         } else {
@@ -44,7 +44,7 @@ class BackendInteractor {
         }
     }
     
-    func prepereBackendData(apiReadUrl: String,
+    func prepareBackendData(apiReadUrl: String,
                             apiReadKey: String,
                             apiWriteUrl: String,
                             apiWriteKey: String,

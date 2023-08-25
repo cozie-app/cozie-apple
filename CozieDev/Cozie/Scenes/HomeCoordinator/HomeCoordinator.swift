@@ -38,10 +38,10 @@ class HomeCoordinator: ObservableObject {
     }
     
     func prepareSoucer(info: InitModel) {
-        backendInteractor.prepereBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSigmnalId: info.appOneSignalAppID, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
+        backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSigmnalId: info.appOneSignalAppID, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
         if let backend = backendInteractor.currentBackendSettings {
             userIntaractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
-            settingsInteractor.prepereSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabeled: info.wssReminderEnabeled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
+            settingsInteractor.prepareSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabeled: info.wssReminderEnabeled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
             
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
             
@@ -68,10 +68,10 @@ class HomeCoordinator: ObservableObject {
     }
     
     func prepareSoucer() {
-        backendInteractor.prepereBackendData()
+        backendInteractor.prepareBackendData()
         if let backend = backendInteractor.currentBackendSettings {
             userIntaractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
-            settingsInteractor.prepereSettingsData()
+            settingsInteractor.prepareSettingsData()
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
         }
     }
