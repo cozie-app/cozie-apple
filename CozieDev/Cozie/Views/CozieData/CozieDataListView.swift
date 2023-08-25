@@ -32,13 +32,13 @@ struct CozieDataListView: View {
                     .frame(height: 1)
                 List {
                     Section(content: {
-                        WatchSurvayRow(info: WatchSurvayInfo(title: "Valid Survey Count",
+                        WatchSurveyRow(info: WatchSurveyInfo(title: "Valid Survey Count",
                                                              subtitle: (syncInfo.first?.validCount ?? "0") + "/\(settings.first?.wss_goal ?? 0)",
                                                              state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                        WatchSurvayRow(info: WatchSurvayInfo(title: "Invalid Survey Count",
+                        WatchSurveyRow(info: WatchSurveyInfo(title: "Invalid Survey Count",
                                                              subtitle: syncInfo.first?.invalidCount ?? "0",
                                                              state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                        WatchSurvayRow(info: WatchSurvayInfo(title: "Last Watch Survey",
+                        WatchSurveyRow(info: WatchSurveyInfo(title: "Last Watch Survey",
                                                              subtitle: syncInfo.first?.date ?? "0",
                                                              state: watchSurveyViewModel.dataSynced ? .remote : .local))
                     }, header: {

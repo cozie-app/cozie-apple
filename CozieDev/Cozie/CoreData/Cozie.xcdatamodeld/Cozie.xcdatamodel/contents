@@ -20,7 +20,7 @@
         <attribute name="sfSymbolsColor" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="useSfSymbols" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="survay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SurveyData" inverseName="responseOption" inverseEntity="SurveyData"/>
+        <relationship name="survey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SurveyData" inverseName="responseOption" inverseEntity="SurveyData"/>
     </entity>
     <entity name="SettingsData" representedClassName=".SettingsData" syncable="YES">
         <attribute name="ps_url" optional="YES" attributeType="String"/>
@@ -40,7 +40,7 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="question" optional="YES" attributeType="String"/>
         <attribute name="questionID" attributeType="String" defaultValueString=""/>
-        <relationship name="responseOption" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ResponseOptionData" inverseName="survay" inverseEntity="ResponseOptionData"/>
+        <relationship name="responseOption" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ResponseOptionData" inverseName="survey" inverseEntity="ResponseOptionData"/>
         <relationship name="watchSurvey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WatchSurveyData" inverseName="survey" inverseEntity="WatchSurveyData"/>
     </entity>
     <entity name="SyncInfo" representedClassName=".SyncInfo" syncable="YES">

@@ -1,5 +1,5 @@
 //
-//  WatchSurvayRepository.swift
+//  WatchSurveyRepository.swift
 //  Cozie
 //
 //  Created by Denis on 23.03.2023.

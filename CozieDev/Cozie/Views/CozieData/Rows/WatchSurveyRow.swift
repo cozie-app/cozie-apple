@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WatchSurvayInfo {
+struct WatchSurveyInfo {
     
     enum State {
         case local, remote
@@ -17,16 +17,16 @@ struct WatchSurvayInfo {
     let subtitle: String
     let state: State
     
-    static func generateRandomData() -> WatchSurvayInfo {
-        let info = WatchSurvayInfo(title: "Valid Survey Count",
+    static func generateRandomData() -> WatchSurveyInfo {
+        let info = WatchSurveyInfo(title: "Valid Survey Count",
                                    subtitle: "45 / 100",
                                    state: .remote)
         return info
     }
 }
 
-struct WatchSurvayRow: View {
-    let info: WatchSurvayInfo
+struct WatchSurveyRow: View {
+    let info: WatchSurveyInfo
     
     var body: some View {
         VStack() {
@@ -48,12 +48,12 @@ struct WatchSurvayRow: View {
     }
 }
 
-extension WatchSurvayRow {
+extension WatchSurveyRow {
 
 }
 
-struct WatchSurvayRow_Previews: PreviewProvider {
+struct WatchSurveyRow_Previews: PreviewProvider {
     static var previews: some View {
-        WatchSurvayRow(info: WatchSurvayInfo.generateRandomData())
+        WatchSurveyRow(info: WatchSurveyInfo.generateRandomData())
     }
 }

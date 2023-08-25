@@ -53,15 +53,15 @@ class SurveyManager {
                     }
                     
                     surveyModel.survey.enumerated()
-                        .forEach{ (index, survay) in
+                        .forEach{ (index, survey) in
                             let surveyData = SurveyData(context: context)
                             surveyData.watchSurvey = watchSurvey
-                            surveyData.question = survay.question
-                            surveyData.questionID = survay.questionID
+                            surveyData.question = survey.question
+                            surveyData.questionID = survey.questionID
                             surveyData.index = Int16(index)
-                            survay.responseOptions.enumerated().forEach { (index, respObj) in
+                            survey.responseOptions.enumerated().forEach { (index, respObj) in
                                 let responseOptionData = ResponseOptionData(context: context)
-                                responseOptionData.survay = surveyData
+                                responseOptionData.survey = surveyData
                                 responseOptionData.index = Int16(index)
                                 responseOptionData.text = respObj.text
                                 responseOptionData.nextQuestionID = respObj.nextQuestionID

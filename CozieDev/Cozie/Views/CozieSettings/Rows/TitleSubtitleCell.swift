@@ -23,6 +23,6 @@ struct TitleSubtitleCell: View {
 struct TitleSubtitleCell_Previews: PreviewProvider {
 //    @State static var subtitle: String = "100"
     static var previews: some View {
-        TitleSubtitleCell(title: "Watch survay", subtitle: "100")
+        TitleSubtitleCell(title: "Watch survey", subtitle: "100")
     }
 }

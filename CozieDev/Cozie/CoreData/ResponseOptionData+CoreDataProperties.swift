@@ -22,7 +22,7 @@ extension ResponseOptionData {
     @NSManaged public var text: String?
     @NSManaged public var useSfSymbols: Bool
     @NSManaged public var index: Int16
-    @NSManaged public var survay: SurveyData?
+    @NSManaged public var survey: SurveyData?
 
 }
 

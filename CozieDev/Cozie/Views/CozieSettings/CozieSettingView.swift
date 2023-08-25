@@ -72,8 +72,8 @@ struct CozieSettingView: View {
                     .frame(height: 1)
                 List {
                     experimentSection()
-                    watchSurvaySection()
-                    phoneSurvaySection()
+                    watchSurveySection()
+                    phoneSurveySection()
                 }
                 .padding([.leading, .trailing], -5)
                 .listStyle(.insetGrouped)
@@ -236,10 +236,10 @@ struct CozieSettingView: View {
         })
     }
     
-    func watchSurvaySection() -> some View {
+    func watchSurveySection() -> some View {
         return Section(content: {
             ForEach( 0 ..< WatchSurwayType.allCases.count ) { index in
-                createWatchSurvayCell(type: index.toWatchType())
+                createWatchSurveyCell(type: index.toWatchType())
             }
         },
                        header: {
@@ -247,7 +247,7 @@ struct CozieSettingView: View {
         })
     }
     
-    func phoneSurvaySection() -> some View {
+    func phoneSurveySection() -> some View {
         return Section(content: {
             ToggleCell(title: "Enable Reminder", isOn: $viewModel.phoneReminderState)
             TitleSubtitleCell(title: "Reminder Time",
@@ -265,7 +265,7 @@ struct CozieSettingView: View {
     }
     
     // MARK: - Watch Surway Count
-    func createWatchSurvayCell(type: WatchSurwayType) -> some View {
+    func createWatchSurveyCell(type: WatchSurwayType) -> some View {
         switch type{
         case .watchSurway:
             return AnyView(SettingWatchCell(title: type.toString(),

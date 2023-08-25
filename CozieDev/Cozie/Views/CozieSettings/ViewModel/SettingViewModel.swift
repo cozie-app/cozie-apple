@@ -1,5 +1,5 @@
 //
-//  SettingWatchSurvayViewModel.swift
+//  SettingWatchSurveyViewModel.swift
 //  Cozie
 //
 //  Created by Denis on 16.03.2023.
@@ -388,7 +388,7 @@ class SettingViewModel: ObservableObject {
         showingState = .clear
     }
     
-    // MARK: Phone Survay Func
+    // MARK: Phone Survey Func
     func updatePhoneReminderState(isEnabled: Bool) {
         if let settings = settingsIntaractor.currentSettings {
             settings.pss_reminder_enabled = isEnabled
