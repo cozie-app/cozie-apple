@@ -1,5 +1,5 @@
 //
-//  TimerPikerViewModel.swift
+//  TimePickerViewModel.swift
 //  Cozie
 //
 //  Created by Denis on 16.03.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TimerPickerViewModel: ObservableObject {
+class TimePickerViewModel: ObservableObject {
     @Published var selectedHour: Int = 10
     @Published var selectedMinures: Int = 10
     @Published var selectedSeconds: Int = 10

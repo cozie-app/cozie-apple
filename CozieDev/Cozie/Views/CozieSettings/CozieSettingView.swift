@@ -114,7 +114,7 @@ struct CozieSettingView: View {
                     viewModel.clearState()
                 }
             case .watchReminderInterval:
-                TimerPicker(title: "Reminder Frequency",
+                TimePicker(title: "Reminder Frequency",
                             subtitle: "Notify me every...",
                             selectedHour: viewModel.reminderInterval.hour,
                             selectedMinutes: viewModel.reminderInterval.minute,
@@ -135,12 +135,12 @@ struct CozieSettingView: View {
                     viewModel.updatePartisipants(list: list)
                 }
             case .watchParticipationTimeStart:
-                TimerPicker(title:"Daily Participation Time Start",
-                            subtitle: "Notify me only after this time",
-                            selectedHour: viewModel.timeStart.hour,
-                            selectedMinutes: viewModel.timeStart.minute,
-                            stepInterval: 5,
-                            closeAction: {
+                TimePicker(title:"Daily Participation Time Start",
+                           subtitle: "Notify me only after this time",
+                           selectedHour: viewModel.timeStart.hour,
+                           selectedMinutes: viewModel.timeStart.minute,
+                           stepInterval: 5,
+                           closeAction: {
                     viewModel.clearState()
                 }, setAction: { hour, minutes in
                     viewModel.timeStart.hour = hour
@@ -150,12 +150,12 @@ struct CozieSettingView: View {
                 }
                 )
             case .watchParticipationTimeEnd:
-                TimerPicker(title:"Daily Participation Time End",
-                            subtitle: "Notify me only before this time",
-                            selectedHour: viewModel.timeEnd.hour,
-                            selectedMinutes: viewModel.timeEnd.minute,
-                            stepInterval: 5,
-                            closeAction: {
+                TimePicker(title:"Daily Participation Time End",
+                           subtitle: "Notify me only before this time",
+                           selectedHour: viewModel.timeEnd.hour,
+                           selectedMinutes: viewModel.timeEnd.minute,
+                           stepInterval: 5,
+                           closeAction: {
                     viewModel.clearState()
                 }, setAction: { hour, minutes in
                     viewModel.timeEnd.hour = hour
@@ -187,12 +187,12 @@ struct CozieSettingView: View {
                     viewModel.clearState()
                 }
             case .phoneReminderInterval:
-                TimerPicker(title: "Phone Survey Reminder Time",
-                            subtitle: "Notify me at...",
-                            selectedHour: viewModel.phoneReminderInterval.hour,
-                            selectedMinutes: viewModel.phoneReminderInterval.minute,
-                            stepInterval: 5,
-                            closeAction: {
+                TimePicker(title: "Phone Survey Reminder Time",
+                           subtitle: "Notify me at...",
+                           selectedHour: viewModel.phoneReminderInterval.hour,
+                           selectedMinutes: viewModel.phoneReminderInterval.minute,
+                           stepInterval: 5,
+                           closeAction: {
                     viewModel.clearState()
                 }, setAction: { hour, minutes in
                     viewModel.phoneReminderInterval.hour = hour

@@ -1,5 +1,5 @@
 //
-//  TimerPiker.swift
+//  TimePicker.swift
 //  Cozie
 //
 //  Created by Denis on 16.03.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimerPicker: View {
+struct TimePicker: View {
     
     let title: String
     let subtitle: String
@@ -15,7 +15,7 @@ struct TimerPicker: View {
     @State var selectedHour: Int = 0
     @State var selectedMinutes: Int = 0
     @State var stepInterval: Int = 1
-    @StateObject var viewModel = TimerPickerViewModel()
+    @StateObject var viewModel = TimePickerViewModel()
 
 
     var closeAction: ()->()
@@ -62,9 +62,9 @@ struct TimerPicker: View {
     }
 }
 
-struct TimerPicker_Previews: PreviewProvider {
+struct TimePicker_Previews: PreviewProvider {
     static var previews: some View {
-        TimerPicker(title: "Reminder Frequency",
+        TimePicker(title: "Reminder Frequency",
                     subtitle: "Notify me every...") {
             print("closeAction")
         } setAction: { hour, minutes in
