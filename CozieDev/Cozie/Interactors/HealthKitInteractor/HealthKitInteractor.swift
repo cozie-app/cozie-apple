@@ -27,8 +27,8 @@ class HealthKitInteractor {
         // Wrist Temperature
         case wristTemperatureKey = "_wrist_temperature"
         
-        // Sleep Analisis Keys:
-        case sleepAnalisisKey = "_sleep_analisis"
+        // Sleep Analysis Keys:
+        case sleepAnalysisKey = "_sleep_analysis"
         case sleepInBed = "_sleep_in_bed"
         case sleepAwake = "_sleep_awake"
         case sleepDeep = "_sleep_deep"
@@ -152,7 +152,7 @@ class HealthKitInteractor {
         let predicate = HKQuery.predicateForSamples(withStart: Date(timeIntervalSince1970: TimeInterval(lastSync)),
                                                     end: Date(),
                                                     options: .strictEndDate)
-        if typeKey == HeathDataKeys.sleepAnalisisKey.rawValue {
+        if typeKey == HeathDataKeys.sleepAnalysisKey.rawValue {
             print(TimeInterval(lastSync))
         }
         
@@ -163,8 +163,8 @@ class HealthKitInteractor {
                                         predicate: predicate,
                                         limit: HKObjectQueryNoLimit,
                                         sortDescriptors: [sortDescriptor]) { [weak self] (query, samples, error) in
-            // Sleep Analisis
-            if typeKey == HeathDataKeys.sleepAnalisisKey.rawValue {
+            // Sleep Analysis
+            if typeKey == HeathDataKeys.sleepAnalysisKey.rawValue {
                 guard let sleepSamples = samples as? [HKCategorySample], let self = self else {
                     completion([], [], error)
                     return
@@ -173,7 +173,7 @@ class HealthKitInteractor {
                 var lastSyncInterval = 0.0
                 var sleepData: [SleepData] = []
                 for sleepSample in sleepSamples {
-                    let sleepKey = self.keyForSleepAnalisis(value: sleepSample.value)
+                    let sleepKey = self.keyForSleepAnalysis(value: sleepSample.value)
                     if !sleepKey.isEmpty {
                         let lastInterval = sleepSample.endDate.timeIntervalSince1970
                         if lastSyncInterval < lastInterval {
@@ -318,7 +318,7 @@ class HealthKitInteractor {
         case HKObjectType.quantityType(forIdentifier: .bodyTemperature):
             return HeathDataKeys.wristTemperatureKey.rawValue
         case HKObjectType.categoryType(forIdentifier: .sleepAnalysis):
-            return HeathDataKeys.sleepAnalisisKey.rawValue
+            return HeathDataKeys.sleepAnalysisKey.rawValue
         case HKObjectType.quantityType(forIdentifier: .appleSleepingWristTemperature):
             return HeathDataKeys.wristTemperatureKey.rawValue
         default:
@@ -326,7 +326,7 @@ class HealthKitInteractor {
         }
     }
     
-    private func keyForSleepAnalisis(value: Int) -> String {
+    private func keyForSleepAnalysis(value: Int) -> String {
         switch value {
         case HKCategoryValueSleepAnalysis.inBed.rawValue:
             return HeathDataKeys.sleepInBed.rawValue
