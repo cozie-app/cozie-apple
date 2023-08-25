@@ -533,7 +533,7 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		9251771629C3644C0089C92C /* Piker */ = {
+		9251771629C3644C0089C92C /* Picker */ = {
 			isa = PBXGroup;
 			children = (
 				927E20E829D5ED45008F476F /* WatchSurveyList */,
@@ -541,7 +541,7 @@
 				92F7D16729C4E49400B31433 /* DaysListView */,
 				9251771929C364700089C92C /* TimePicker */,
 			);
-			path = Piker;
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		9251771929C364700089C92C /* TimePicker */ = {
@@ -612,7 +612,7 @@
 			children = (
 				92D0B81029D9BF94008557FC /* Coordinator */,
 				9251772029C376C00089C92C /* ViewModel */,
-				9251771629C3644C0089C92C /* Piker */,
+				9251771629C3644C0089C92C /* Picker */,
 				9267EFF4299A95900025A3CE /* Rows */,
 				9267EFEF299A91470025A3CE /* CozieSettingView.swift */,
 			);
