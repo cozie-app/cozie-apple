@@ -67,10 +67,10 @@ class DayModel: Identifiable, ObservableObject {
 
 class DaysViewModel: ObservableObject {
     @Published var list: [DayModel] = [DayModel(id: 1, title: .monday, isSelected: false),
-                                       DayModel(id: 2, title: .tuesday, isSelected: false),
-                                       DayModel(id: 3, title: .wednesday, isSelected: false),
-                                       DayModel(id: 4, title: .thursday, isSelected: false),
-                                       DayModel(id: 5, title: .friday, isSelected: false),
-                                       DayModel(id: 6, title: .saturday, isSelected: false),
-                                       DayModel(id: 7, title: .sunday, isSelected: false)]
+                                       DayModel(id: 2, title: .tuesday, isSelected:  false),
+                                       DayModel(id: 3, title: .wednesday, isSelected:  false),
+                                       DayModel(id: 4, title: .thursday, isSelected:  false),
+                                       DayModel(id: 5, title: .friday, isSelected:  false),
+                                       DayModel(id: 6, title: .saturday, isSelected:  false),
+                                       DayModel(id: 7, title: .sunday, isSelected:  false)]
 }

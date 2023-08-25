@@ -10,10 +10,10 @@ import Foundation
 // MARK: - InitModel
 class InitModel: Codable {
     var idParticipant, idExperiment, wssTitle: String
-    var wssGoal, wssTimeOut: Int
+    var wssGoal, wssTimeOut: Int16
     var wssReminderEnabeled: Bool
     var wssParticipationTimeStart, wssParticipationTimeEnd, wssParticipationDays: String
-    var wssReminderInterval: Int
+    var wssReminderInterval: Int16
     var pssReminderEnabled: Bool
     var pssReminderDays, pssReminderTime: String
     var apiReadURL: String
@@ -47,7 +47,7 @@ class InitModel: Codable {
         case apiPhoneSurveyURL = "api_phone_survey_url"
     }
     
-    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int, wssTimeOut: Int, wssReminderEnabeled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String) {
+    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabeled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String) {
         self.idParticipant = idParticipant
         self.idExperiment = idExperiment
         self.wssTitle = wssTitle

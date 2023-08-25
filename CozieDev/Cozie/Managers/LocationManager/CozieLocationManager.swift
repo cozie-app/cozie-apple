@@ -76,7 +76,7 @@ class LocationManagerInteractor {
 }
 
 class LocationManager: NSObject {
-    let mimimumDistance: Double = 50
+    let mimimumDistance: Double = Defaults.locationChangeDistanceThreshold
     var locationManager: CLLocationManager? = nil
     var currentLocation: CLLocation? = nil
     

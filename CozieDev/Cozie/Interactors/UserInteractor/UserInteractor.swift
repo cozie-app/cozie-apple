@@ -23,9 +23,9 @@ class UserInteractor {
            debugPrint(userList)
         } else {
             let user = User(context: persistenceController.container.viewContext)
-            user.participantID = "dev01"
-            user.experimentID = "dev"
-            user.passwordID = password
+            user.participantID = Defaults.generateParticipantID()
+            user.experimentID = Defaults.experimentID
+            user.passwordID = Defaults.generatePasswordID()
             try? persistenceController.container.viewContext.save()
         }
     }

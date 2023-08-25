@@ -28,17 +28,17 @@ class BackendInteractor {
             debugPrint(settingList)
         } else {
             let backend = BackendInfo(context: persistenceController.container.viewContext)
-            backend.api_read_url = "https://at6x6b7v54hmoki6dlyew72csq0ihxrn.lambda-url.ap-southeast-1.on.aws"
-            backend.api_read_key = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
-            backend.api_write_url = "https://43cb5nnwe3mejojyftbuaow4640nsrnd.lambda-url.ap-southeast-1.on.aws"
-            backend.api_write_key = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
-            backend.one_signal_id = "be00093b-ed75-4c2e-81af-d6b382587283"
-            backend.participant_password = "1G8yOhPvMZ6m"
-            backend.watch_survey_link = "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_weather_short.txt"
-            backend.phone_survey_link = "https://docs.google.com/forms/d/e/1FAIpQLSchX6cIqgx7tupV_47o5sYVs5IvEBqhwTMGuRLCjGxqbh_gTA/viewform?usp=pp_url&entry.247006640=dev&entry.932499052=dev01"
+            backend.api_read_url = Defaults.APIreadURL
+            backend.api_read_key = Defaults.APIreadKey
+            backend.api_write_url = Defaults.APIwriteURL
+            backend.api_write_key = Defaults.APIwriteKey
+            backend.one_signal_id = Defaults.OneSignalAppID
+            backend.participant_password = Defaults.generatePasswordID()
+            backend.watch_survey_link = Defaults.watchSurveyLink
+            backend.phone_survey_link = Defaults.phoneSurveyLink
             
             // save default link
-            storage.saveWSLink(link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_weather_short.txt")
+            storage.saveWSLink(link: Defaults.phoneSurveyLink)
             
             try? persistenceController.container.viewContext.save()
         }
