@@ -13,7 +13,7 @@ fileprivate extension Int {
         case 0:
             return .watchSurvey
         case 1:
-            return .watchSurveyResponceGoal
+            return .watchSurveyResponseGoal
         case 2:
             return .enableReminders
         case 3:
@@ -30,13 +30,13 @@ fileprivate extension Int {
     }
 }
 enum WatchSurveyType: CaseIterable {
-    case watchSurvey, watchSurveyResponceGoal, enableReminders, reminderInterval, participationDays, participationTimeStart, participationTimeEnd
+    case watchSurvey, watchSurveyResponseGoal, enableReminders, reminderInterval, participationDays, participationTimeStart, participationTimeEnd
     
     func toString() -> String {
         switch self {
         case .watchSurvey:
             return "Watch Survey"
-        case .watchSurveyResponceGoal:
+        case .watchSurveyResponseGoal:
             return "Watch Survey Response Goal"
         case .enableReminders:
             return "Enable Reminders"
@@ -273,7 +273,7 @@ struct CozieSettingView: View {
                                             isActive: viewModel.surveySynced).onTapGesture {
                 viewModel.showingState = .watchSurvey
             })
-        case .watchSurveyResponceGoal:
+        case .watchSurveyResponseGoal:
             return AnyView(TitleSubtitleCell(title: type.toString(),
                                              subtitle: viewModel.goal).onTapGesture {
                 viewModel.showingState = .watchGoal

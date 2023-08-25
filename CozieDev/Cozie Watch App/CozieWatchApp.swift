@@ -13,8 +13,8 @@ class NotificationViewModel {
     
     let watchSurveyInteractor = WatchSurveyInteractor()
     
-    func sendResponce(_ info: String, completion: ((_ success: Bool)->())?) {
-        watchSurveyInteractor.sendResponce(action: info) { success in
+    func sendResponse(_ info: String, completion: ((_ success: Bool)->())?) {
+        watchSurveyInteractor.sendResponse(action: info) { success in
             completion?(success)
         }
     }
@@ -28,7 +28,7 @@ class CozieUserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDel
             return
         }
         
-        notificationViewModel.sendResponce(response.actionIdentifier) { success in
+        notificationViewModel.sendResponse(response.actionIdentifier) { success in
             completionHandler()
         }
     }

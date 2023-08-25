@@ -12,7 +12,7 @@ class LocationManagerInteractor {
     let baseRepo = BaseRepository()
     let storage = CozieStorage.shared
     
-    // MARK: Notification responce
+    // MARK: Notification response
     func sendLocation(location: CLLocation,
                       userInteractor: UserInteractor = UserInteractor(),
                       backendInteractor: BackendInteractor = BackendInteractor(),
@@ -44,13 +44,13 @@ class LocationManagerInteractor {
                                      LocationChangedKey.tsLocationSourceDevice.rawValue: "iPhone",
                                      WatchSurveyKeys.transmitTrigger.rawValue: LocationChangedKey.locationChange.rawValue]
         
-        let responce: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
+        let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
                                         WatchSurveyKeys.tags.rawValue: tags,
                                         WatchSurveyKeys.fields.rawValue: filds]
         
         do {
-            let json = try JSONSerialization.data(withJSONObject: responce, options: .prettyPrinted)
+            let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
             
             BaseRepository().post(url: backend.api_write_url ?? "", body: json, key: backend.api_write_key ?? "") { result in
                 switch result {
@@ -64,7 +64,7 @@ class LocationManagerInteractor {
             }
             
             // log data
-            let jsonToLog = try JSONSerialization.data(withJSONObject: responce, options: .withoutEscapingSlashes)
+            let jsonToLog = try JSONSerialization.data(withJSONObject: response, options: .withoutEscapingSlashes)
             debugPrint(jsonToLog)
             loggerInteractor.logInfo(action: "", info: String(data: jsonToLog, encoding: .utf8) ?? "")
             

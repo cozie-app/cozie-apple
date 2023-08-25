@@ -36,8 +36,8 @@ class WatchConnectivityManagerPhone: NSObject {
                           CommunicationKeys.expIDKey.rawValue: expID,
                           CommunicationKeys.passwordIDKey.rawValue: password]
             
-            self?.session.sendMessage(params, replyHandler: { responce in
-                debugPrint(responce)
+            self?.session.sendMessage(params, replyHandler: { response in
+                debugPrint(response)
             }, errorHandler: { error in
                 debugPrint(error)
             })
@@ -52,8 +52,8 @@ class WatchConnectivityManagerPhone: NSObject {
             let params = [CommunicationKeys.writeApiURL.rawValue: writeApiURL,
                           CommunicationKeys.writeApiKey.rawValue: writeApiKey]
             
-            self?.session.sendMessage(params, replyHandler: { responce in
-                debugPrint(responce)
+            self?.session.sendMessage(params, replyHandler: { response in
+                debugPrint(response)
             }, errorHandler: { error in
                 debugPrint(error)
             })
@@ -66,8 +66,8 @@ class WatchConnectivityManagerPhone: NSObject {
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data]
             
-            self?.session.sendMessage(params, replyHandler: { responce in
-                debugPrint(responce)
+            self?.session.sendMessage(params, replyHandler: { response in
+                debugPrint(response)
             }, errorHandler: { error in
                 debugPrint(error)
             })
@@ -88,14 +88,14 @@ class WatchConnectivityManagerPhone: NSObject {
                           CommunicationKeys.passwordIDKey.rawValue: password,
                           CommunicationKeys.timeInterval.rawValue: timeInterval]
             
-            self?.session.sendMessage(params, replyHandler: { responce in
-                debugPrint(responce)
-                if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
+            self?.session.sendMessage(params, replyHandler: { response in
+                debugPrint(response)
+                if let success = response[CommunicationKeys.resived.rawValue] as? Bool, success {
                     completion?()
                     return
                 }
                 
-                if let transferStatus = responce[CommunicationKeys.transferFileStatusKey.rawValue] as? Int {
+                if let transferStatus = response[CommunicationKeys.transferFileStatusKey.rawValue] as? Int {
                     switch transferStatus {
                     case FileTransferStatus.started.rawValue:
                         self?.transferingFileCompletion = completion
@@ -163,15 +163,15 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
         do {
             let wlogs = try String(contentsOf: file.fileURL, encoding: .utf8)
             loggerInteractor.logInfo(action: "", info: wlogs)
-            session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.finished.rawValue], replyHandler: { [weak self] responce in
-                if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
+            session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.finished.rawValue], replyHandler: { [weak self] response in
+                if let success = response[CommunicationKeys.resived.rawValue] as? Bool, success {
                     self?.transferCompletion()
                 }
             })
         } catch let error {
             debugPrint("error reading file: \(error)")
-            session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.error.rawValue], replyHandler: { [weak self] responce in
-                if let success = responce[CommunicationKeys.resived.rawValue] as? Bool, success {
+            session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.error.rawValue], replyHandler: { [weak self] response in
+                if let success = response[CommunicationKeys.resived.rawValue] as? Bool, success {
                     self?.transferCompletion()
                 }
             })

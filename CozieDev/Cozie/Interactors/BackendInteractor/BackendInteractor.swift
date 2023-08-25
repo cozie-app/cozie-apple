@@ -114,7 +114,7 @@ class BackendInteractor {
             let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
                 // This block gets called when the user reacts to a notification received
                 if let actionID = result.action.actionId {
-                    surveyInteractor.sendResponce(action: actionID) { success in
+                    surveyInteractor.sendResponse(action: actionID) { success in
                         if success {
                             debugPrint("iOS notification action sent")
                         }

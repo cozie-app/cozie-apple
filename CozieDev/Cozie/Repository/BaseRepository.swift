@@ -51,7 +51,7 @@ class BaseRepository: ObservableObject {
                     if let error = error {
                         completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
                     } else {
-                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty responce!")))
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
                     }
                 }
             }.resume()
@@ -92,7 +92,7 @@ class BaseRepository: ObservableObject {
                     if let error = error {
                         completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
                     } else {
-                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty responce!")))
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
                     }
                 }
             }.resume()
@@ -125,7 +125,7 @@ class BaseRepository: ObservableObject {
                     if let error = error {
                         completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
                     } else {
-                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty responce!")))
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
                     }
                 }
             }.resume()

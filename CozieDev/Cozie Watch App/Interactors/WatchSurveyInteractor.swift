@@ -134,8 +134,8 @@ class WatchSurveyInteractor {
         storage.seveNotSyncedSurvey(history: history)
     }
     
-    // MARK: Notification responce
-    func sendResponce(action: String, storage: StorageManager = StorageManager.shared, completion:((_ success: Bool)->())?) {
+    // MARK: Notification response
+    func sendResponse(action: String, storage: StorageManager = StorageManager.shared, completion:((_ success: Bool)->())?) {
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.userOneSignalID(),
                     WatchSurveyKeys.idParticipant.rawValue: storage.userID(),
@@ -144,14 +144,14 @@ class WatchSurveyInteractor {
         let filds = [WatchSurveyKeys.actionButtonKey.rawValue: action,
                      WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
         
-        let responce: [String : Any] = [WatchSurveyKeys.postTime.rawValue: formattedDate(),
+        let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: formattedDate(),
                                         WatchSurveyKeys.measurement.rawValue: storage.expirimentID(),
                                         WatchSurveyKeys.tags.rawValue: tags,
                                         WatchSurveyKeys.fields.rawValue: filds]
         
         let api = storage.watchSurveyAPI()
         do {
-            let json = try JSONSerialization.data(withJSONObject: responce, options: .prettyPrinted)
+            let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
             
             BaseRepository().post(url: api.url, body: json, key: api.key) { result in
                 switch result {
@@ -172,7 +172,7 @@ class WatchSurveyInteractor {
         // save logs
         DispatchQueue.global().async { /*[weak self] in*/
             do {
-                let jsonToLog = try JSONSerialization.data(withJSONObject: responce, options: .withoutEscapingSlashes)
+                let jsonToLog = try JSONSerialization.data(withJSONObject: response, options: .withoutEscapingSlashes)
                 debugPrint(jsonToLog)
                 storage.seveLogs(logs: String(data: jsonToLog, encoding: .utf8) ?? "")
             } catch let error {

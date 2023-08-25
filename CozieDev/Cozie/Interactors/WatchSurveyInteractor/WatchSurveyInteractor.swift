@@ -36,8 +36,8 @@ class WatchSurveyInteractor {
         }
     }
     
-    // MARK: Notification responce
-    func sendResponce(action: String,
+    // MARK: Notification response
+    func sendResponse(action: String,
                       userInteractor: UserInteractor = UserInteractor(),
                       backendInteractor: BackendInteractor = BackendInteractor(),
                       loggerInteractor: LoggerInteractor = LoggerInteractor.shared,
@@ -59,13 +59,13 @@ class WatchSurveyInteractor {
         let filds = [WatchSurveyKeys.actionButtonKey.rawValue: action,
                      WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
         
-        let responce: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
+        let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
                                         WatchSurveyKeys.tags.rawValue: tags,
                                         WatchSurveyKeys.fields.rawValue: filds]
 
         do {
-            let json = try JSONSerialization.data(withJSONObject: responce, options: .prettyPrinted)
+            let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
             
             BaseRepository().post(url: backend.api_write_url ?? "", body: json, key: backend.api_write_key ?? "") { result in
                 switch result {
@@ -79,7 +79,7 @@ class WatchSurveyInteractor {
             }
             
             // log data
-            let jsonToLog = try JSONSerialization.data(withJSONObject: responce, options: .withoutEscapingSlashes)
+            let jsonToLog = try JSONSerialization.data(withJSONObject: response, options: .withoutEscapingSlashes)
             debugPrint(jsonToLog)
             loggerInteractor.logInfo(action: "", info: String(data: jsonToLog, encoding: .utf8) ?? "")
             
