@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "sound_waves.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "laptop_meeting_online.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

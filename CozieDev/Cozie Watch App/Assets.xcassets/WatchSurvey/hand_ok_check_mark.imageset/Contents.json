@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "hand_ok_check_mark.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

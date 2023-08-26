@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "emoticon_neutral.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

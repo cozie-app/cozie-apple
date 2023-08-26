@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "test_transparency.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

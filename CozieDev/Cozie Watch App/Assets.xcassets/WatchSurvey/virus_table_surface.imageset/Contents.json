@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "virus_table_surface.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

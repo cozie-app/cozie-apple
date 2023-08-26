@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "hand_speech_bubble.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

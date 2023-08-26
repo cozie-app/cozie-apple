@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "vehicle_train.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

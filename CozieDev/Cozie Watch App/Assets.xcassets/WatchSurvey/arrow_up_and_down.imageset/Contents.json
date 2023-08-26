@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "arrow_up_and_down.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

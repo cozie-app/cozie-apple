@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "building_house_lighting.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "building_house_fan.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

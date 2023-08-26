@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "space_classroom.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
