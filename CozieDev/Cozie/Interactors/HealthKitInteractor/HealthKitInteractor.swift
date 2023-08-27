@@ -218,7 +218,7 @@ class HealthKitInteractor {
         healthStore.execute(sampleQuery)
     }
     
-    private let healthDateFormattor: DateFormatter = {
+    private let healthDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return dateFormatter
@@ -255,17 +255,17 @@ class HealthKitInteractor {
                             return
                         }
                         
-                        let currentDataString = self.healthDateFormattor.string(from: sample.startDate)
+                        let currentDataString = self.healthDateFormatter.string(from: sample.startDate)
                         
                         if let lastModel = healthModels.last {
                             // prevent value duplicates
                             if lastModel.time != currentDataString {
-                                healthModels.append(HealthModel(time: self.healthDateFormattor.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0)))
+                                healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0)))
                                 //
                                 // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                             }
                         } else {
-                            healthModels.append(HealthModel(time: self.healthDateFormattor.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0)))
+                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0)))
                             
                             // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                         }
@@ -279,7 +279,7 @@ class HealthKitInteractor {
                 
             } else if sleepData.count > 0 {
                 sleepData.forEach { (sleepKey, startDate, value) in
-                    healthModels.append(HealthModel(time: self.healthDateFormattor.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
+                    healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
                 }
                 completion(healthModels, samples)
             } else if let error = error {
