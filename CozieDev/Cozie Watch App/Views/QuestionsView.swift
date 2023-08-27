@@ -12,7 +12,7 @@ struct QuestionsView: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.questionsTitle)
+            Text(.init(viewModel.questionsTitle))  // render markdown using .init()
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 8)
             ScrollViewReader { reader in
@@ -58,7 +58,7 @@ struct QuestionsView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
                                 HStack {
-                                    Text(option.text)
+                                    Text(.init(option.text))  // render markdown using .init()
                                         .foregroundColor(Color.white)
                                         .padding(.leading, 8)
                                     Spacer()
