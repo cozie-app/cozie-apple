@@ -55,20 +55,22 @@ class ResponseOption: Codable, Identifiable {
     var id: String {
         return text + icon
     }
-    var text, icon: String
+    var text, icon, iconBackgroundColor: String
     var useSfSymbols: Bool
     var sfSymbolsColor, nextQuestionID: String
 
     enum CodingKeys: String, CodingKey {
         case text, icon
+        case iconBackgroundColor = "icon_background_color"
         case useSfSymbols = "use_sf_symbols"
         case sfSymbolsColor = "sf_symbols_color"
         case nextQuestionID = "next_question_id"
     }
 
-    init(text: String, icon: String, useSfSymbols: Bool, sfSymbolsColor: String, nextQuestionID: String) {
+    init(text: String, icon: String, iconBackgroundColor:String, useSfSymbols: Bool, sfSymbolsColor: String, nextQuestionID: String) {
         self.text = text
         self.icon = icon
+        self.iconBackgroundColor = iconBackgroundColor
         self.useSfSymbols = useSfSymbols
         self.sfSymbolsColor = sfSymbolsColor
         self.nextQuestionID = nextQuestionID

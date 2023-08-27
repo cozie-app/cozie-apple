@@ -19,27 +19,35 @@ struct QuestionsView: View {
                 ScrollView {
                     ForEach(viewModel.questionsList, id: \.id) { option in
                         HStack {
-                            if option.useSfSymbols {
-                                if UIImage(systemName: option.icon) == nil {
-                                    Image(systemName: "photo.circle")
-                                        .resizable()
-                                        .frame(width: 35,height: 35)
+                            ZStack {
+                                Image(systemName: "circle.fill")
+                                    .resizable()
+                                    .frame(width: 35,height: 35)
+                                    .foregroundColor(Color(hex: option.iconBackgroundColor))
+                                if option.useSfSymbols {
+                                    if UIImage(systemName: option.icon) == nil {
+                                        Image(systemName: "photo.circle")
+                                            .resizable()
+                                            .frame(width: 35,height: 35)
+                                            .foregroundColor(.black)
+                                    } else {
+                                        Image(systemName: option.icon)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width:25, height: 25)
+                                            .foregroundColor(Color(hex: option.sfSymbolsColor))
+                                    }
                                 } else {
-                                    Image(systemName: option.icon)
-                                        .resizable()
-                                        .frame(width: 35,height: 35)
-                                        .foregroundColor(Color(hex: option.sfSymbolsColor))
-                                }
-                            } else {
-                                if UIImage(named: option.icon) == nil {
-                                    Image(systemName: "photo.circle")
-                                        .resizable()
-                                        .frame(width: 35,height: 35)
-                                        .foregroundColor(.white)
-                                } else {
-                                    Image(option.icon)
-                                        .resizable()
-                                        .frame(width: 35,height: 35)
+                                    if UIImage(named: option.icon) == nil {
+                                        Image(systemName: "photo.circle")
+                                            .resizable()
+                                            .frame(width: 35,height: 35)
+                                            .foregroundColor(.black)
+                                    } else {
+                                        Image(option.icon)
+                                            .resizable()
+                                            .frame(width: 35,height: 35)
+                                    }
                                 }
                             }
                             ZStack {

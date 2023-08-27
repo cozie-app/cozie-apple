@@ -66,6 +66,7 @@ class SurveyManager {
                                 responseOptionData.text = respObj.text
                                 responseOptionData.nextQuestionID = respObj.nextQuestionID
                                 responseOptionData.icon = respObj.icon
+                                responseOptionData.iconBackgroundColor = respObj.iconBackgroundColor
                                 responseOptionData.useSfSymbols = respObj.useSfSymbols
                                 responseOptionData.sfSymbolsColor = respObj.sfSymbolsColor
                             }
