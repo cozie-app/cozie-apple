@@ -230,11 +230,11 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             if transferFileStatus == FileTransferStatus.finished.rawValue {
                 storage.clearLogs()
             }
-            replyHandler([CommunicationKeys.resived.rawValue: true])
+            replyHandler([CommunicationKeys.received.rawValue: true])
             return
         }
         
-        replyHandler([CommunicationKeys.resived.rawValue: true])
+        replyHandler([CommunicationKeys.received.rawValue: true])
         
         if let json = message[CommunicationKeys.jsonKey.rawValue] as? Data {
             storage.saveWatchSurveyJSON(data: json)

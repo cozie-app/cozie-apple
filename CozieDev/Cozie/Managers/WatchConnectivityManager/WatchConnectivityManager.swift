@@ -90,7 +90,7 @@ class WatchConnectivityManagerPhone: NSObject {
             
             self?.session.sendMessage(params, replyHandler: { response in
                 debugPrint(response)
-                if let success = response[CommunicationKeys.resived.rawValue] as? Bool, success {
+                if let success = response[CommunicationKeys.received.rawValue] as? Bool, success {
                     completion?()
                     return
                 }
@@ -149,7 +149,7 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
         
         if let logs = message[CommunicationKeys.wsLogs.rawValue] as? String {
             loggerInteractor.logInfo(action: "", info: logs)
-            replyHandler([CommunicationKeys.resived.rawValue: true])
+            replyHandler([CommunicationKeys.received.rawValue: true])
             
             // testLog(details: "ConnectivityManager received logs from watch!", state: "info")
         }
@@ -164,14 +164,14 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
             let wlogs = try String(contentsOf: file.fileURL, encoding: .utf8)
             loggerInteractor.logInfo(action: "", info: wlogs)
             session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.finished.rawValue], replyHandler: { [weak self] response in
-                if let success = response[CommunicationKeys.resived.rawValue] as? Bool, success {
+                if let success = response[CommunicationKeys.received.rawValue] as? Bool, success {
                     self?.transferCompletion()
                 }
             })
         } catch let error {
             debugPrint("error reading file: \(error)")
             session.sendMessage([CommunicationKeys.transferFileStatusKey.rawValue : FileTransferStatus.error.rawValue], replyHandler: { [weak self] response in
-                if let success = response[CommunicationKeys.resived.rawValue] as? Bool, success {
+                if let success = response[CommunicationKeys.received.rawValue] as? Bool, success {
                     self?.transferCompletion()
                 }
             })

@@ -17,7 +17,7 @@ public enum CommunicationKeys: String {
     case timeInterval = "CosieCOMtimeInterval"
     case userOneSignalIDKey = "CosieCOMOneSignalIDKey"
     
-    case resived = "received"
+    case received = "received"
     case wsLogs = "ws_logs"
     case oneSignalAppID = "be00093b-ed75-4c2e-81af-d6b382587283"
     case appTrigger = "application_appear"
