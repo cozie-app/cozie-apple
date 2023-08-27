@@ -20,10 +20,13 @@ struct QuestionsView: View {
                     ForEach(viewModel.questionsList, id: \.id) { option in
                         HStack {
                             ZStack {
-                                Image(systemName: "circle.fill")
-                                    .resizable()
-                                    .frame(width: 35,height: 35)
-                                    .foregroundColor(Color(hex: option.iconBackgroundColor))
+                                if option.icon != "" {
+                                    // Only show background if icon name string is not empty
+                                    Image(systemName: "circle.fill")
+                                        .resizable()
+                                        .frame(width: 35,height: 35)
+                                        .foregroundColor(Color(hex: option.iconBackgroundColor))
+                                }
                                 if option.useSfSymbols {
                                     if UIImage(systemName: option.icon) == nil {
                                         Image(systemName: "photo.circle")
@@ -39,10 +42,11 @@ struct QuestionsView: View {
                                     }
                                 } else {
                                     if UIImage(named: option.icon) == nil {
-                                        Image(systemName: "photo.circle")
-                                            .resizable()
-                                            .frame(width: 35,height: 35)
-                                            .foregroundColor(.black)
+                                        // Show default icon
+                                        //Image(systemName: "photo.circle")
+                                        //    .resizable()
+                                        //    .frame(width: 35,height: 35)
+                                        //    .foregroundColor(.black)
                                     } else {
                                         Image(option.icon)
                                             .resizable()
