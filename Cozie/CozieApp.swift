@@ -89,7 +89,7 @@ struct CozieApp: App {
     }
     
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "coziedev" else {
+        guard url.scheme == "cozie" else {
             return
         }
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {

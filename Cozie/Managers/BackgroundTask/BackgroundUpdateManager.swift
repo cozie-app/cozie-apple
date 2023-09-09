@@ -25,10 +25,10 @@ class BackgroundUpdateManager {
     enum ExecutionStatus: Int {
         case inprogress = 1, end  = 0
     }
-    private let updateStatusKey = "cozydev.app.processing.status"
+    private let updateStatusKey = "cozie.app.processing.status"
     
-    private let processingID = "app.coziedev.dataprocesssing"
-    private let refreshID = "app.coziedev.datarefresh"
+    private let processingID = "app.cozie.dataprocesssing"
+    private let refreshID = "app.cozie.datarefresh"
     
     static let minimumTimeInterval: Double = 25 * 60
     
