@@ -1,43 +1,25 @@
 PODS:
-  - Alamofire (4.9.1)
-  - Charts (4.1.0):
-    - Charts/Core (= 4.1.0)
-  - Charts/Core (4.1.0):
-    - SwiftAlgorithms (~> 1.0)
-  - IQKeyboardManagerSwift (6.5.9)
-  - OneSignal (3.11.2):
-    - OneSignal/OneSignalCore (= 3.11.2)
-    - OneSignal/OneSignalExtension (= 3.11.2)
-    - OneSignal/OneSignalOutcomes (= 3.11.2)
-  - OneSignal/OneSignalCore (3.11.2)
-  - OneSignal/OneSignalExtension (3.11.2):
-    - OneSignal/OneSignalCore
-    - OneSignal/OneSignalOutcomes
-  - OneSignal/OneSignalOutcomes (3.11.2):
-    - OneSignal/OneSignalCore
-  - SwiftAlgorithms (1.0.0)
+  - OneSignalXCFramework (3.12.5):
+    - OneSignalXCFramework/OneSignalCore (= 3.12.5)
+    - OneSignalXCFramework/OneSignalExtension (= 3.12.5)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.12.5)
+  - OneSignalXCFramework/OneSignalCore (3.12.5)
+  - OneSignalXCFramework/OneSignalExtension (3.12.5):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalOutcomes (3.12.5):
+    - OneSignalXCFramework/OneSignalCore
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
-  - Charts (= 4.1.0)
-  - IQKeyboardManagerSwift
-  - OneSignal (< 4.0, >= 3.0.0)
+  - OneSignalXCFramework (< 4.0, >= 3.0.0)
 
 SPEC REPOS:
   trunk:
-    - Alamofire
-    - Charts
-    - IQKeyboardManagerSwift
-    - OneSignal
-    - SwiftAlgorithms
+    - OneSignalXCFramework
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Charts: 354f86803d11d9c35de280587fef50d1af063978
-  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
-  OneSignal: 8861a1407c321ca1ae59d3adca6286eb7caf9d6e
-  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  OneSignalXCFramework: 4afdd14f6fa769eadf141209037e3eac5890beb9
 
-PODFILE CHECKSUM: c62e3ce4ec7e91a289b89de4d65649013864cec0
+PODFILE CHECKSUM: 726b799c71bff334a58b5eaa6af6f50687809abe
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.1

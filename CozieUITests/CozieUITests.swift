@@ -2,13 +2,12 @@
 //  CozieUITests.swift
 //  CozieUITests
 //
-//  Created by Federico Tartarini on 25/5/20.
-//  Copyright © 2020 Federico Tartarini. All rights reserved.
+//  Created by Denis on 10.02.2023.
 //
 
 import XCTest
 
-class CozieUITests: XCTestCase {
+final class CozieUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,14 +27,13 @@ class CozieUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
     func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+            measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
         }

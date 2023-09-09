@@ -1,72 +1,134 @@
 //
-//  BaseRepository.swift
+//  WatchSurveyRepository.swift
 //  Cozie
 //
-//  Created by Alexandr Chmal on 09.08.2022.
-//  Copyright © 2022 Federico Tartarini. All rights reserved.
+//  Created by Denis on 23.03.2023.
 //
 
 import Foundation
+import CoreData
 
-
-open class BaseRepository {
-    enum Method: String {
-        case GET, POST, PUT, DELETE
-    }
+enum ServiceError: Error, LocalizedError {
+    case responseStatusError(Int, String)
     
-    enum CommonError: Error {
-        case custorm(message: String)
+    public var errorDescription: String? {
+        switch self {
+        case let .responseStatusError(status, message):
+            return "Error with status \(status) message: \(message)"
+        }
+    }
+}
+
+class BaseRepository: ObservableObject {
+   
+    // MARK: Base GET
+    func get(url: String, parameters: [String: String], key: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard var componentsQuery = URLComponents(string: url) else { return }
         
-        func message() -> String {
-            switch self {
-            case .custorm(let message):
-                return message
-            }
+        var itemsList = [URLQueryItem]()
+        for (key, value) in parameters {
+            itemsList.append(URLQueryItem(name: key, value: value))
+        }
+        componentsQuery.queryItems = itemsList
+        
+        if let url = componentsQuery.url {
+            
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "GET"
+            
+            urlRequest.allHTTPHeaderFields = [
+                "Accept": "application/json",
+                "x-api-key": key
+            ]
+            
+            URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode == 200,
+                   let responseData = data {
+                    completion(.success(responseData))
+                } else {
+                    debugPrint("error - Sync data!")
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
+                    }
+                }
+            }.resume()
         }
     }
     
-    func post(url: URL, parameters: [String: Any]? = nil, body: Data? = nil, headers:[String: Any]? = nil, completion:((_ result: Result<Any, Error>)-> ())? = nil) {
-        let session = URLSession.shared
-
-        var request = baseRequest(method: .POST, url: url)
+    // MARK: Base GET JSON file
+    func getFileContent(url: String, parameters: [String: String]?, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard var componentsQuery = URLComponents(string: url) else { return }
         
-        if let body = body {
-            request.httpBody = body
-#warning("Add paramter/object encoding if needed")
-        } else if let parameters = parameters, !parameters.isEmpty {}
+        if let param = parameters {
+            var itemsList = [URLQueryItem]()
+            for (key, value) in param {
+                itemsList.append(URLQueryItem(name: key, value: value))
+            }
+            componentsQuery.queryItems = itemsList
+        }
         
-        request.setValue(AWSWriteAPIKey, forHTTPHeaderField: "x-api-key")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-
-        // create dataTask using the session object to send data to the server
-        session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-
-            guard error == nil else {
-                completion?(.failure(error!))
-                return
-            }
-
-            guard data != nil else {
-                completion?(.failure(CommonError.custorm(message: "Invalid response.")))
-                return
-            }
-
-            if let response = response,
-                let nsHTTPResponse = response as? HTTPURLResponse,
-               nsHTTPResponse.statusCode == 200 {
-                completion?(.success(()))
-            }
-        }).resume()
+        if let url = componentsQuery.url {
+            
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "GET"
+            
+            urlRequest.allHTTPHeaderFields = [
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            ]
+            
+            URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode == 200,
+                   let responseData = data {
+                    DispatchQueue.main.async {
+                        completion(.success(responseData))
+                    }
+                } else {
+                    debugPrint("error - GET JSON file!")
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
+                    }
+                }
+            }.resume()
+        }
     }
     
-    func baseRequest(method: Method, url: URL) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
+    // MARK: Base Post
+    func post(url: String, body: Data, key: String, completion: @escaping (Result<Data, Error>) -> Void) {
         
-        request.setValue(AWSWriteAPIKey, forHTTPHeaderField: "x-api-key")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        return request
+        if let url = URL(string: url) {
+            
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "POST"
+            
+            urlRequest.allHTTPHeaderFields = [
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "x-api-key": key
+            ]
+            
+            urlRequest.httpBody = body
+            let session = URLSession(configuration: URLSessionConfiguration.default)
+            session.dataTask(with: urlRequest) { data, response, error in
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode == 200,
+                   let responseData = data {
+                    completion(.success(responseData))
+                } else {
+                    debugPrint("error - POST data!")
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
+                    }
+                }
+            }.resume()
+        }
     }
 }

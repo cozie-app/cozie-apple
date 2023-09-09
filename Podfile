@@ -1,14 +1,10 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '11.0'
 
 target 'Cozie' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'OneSignal', '>= 3.0.0', '< 4.0'
-
-  pod 'Charts', '=4.1.0'
-  pod 'IQKeyboardManagerSwift'
-  pod 'Alamofire', '~> 4.5'
+  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
   # Pods for Cozie
 
   target 'CozieTests' do
@@ -22,27 +18,18 @@ target 'Cozie' do
 
 end
 
-target 'Cozie WatchKit App' do
+target 'Cozie Watch App' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Cozie WatchKit App
-
-end
-
-target 'Cozie WatchKit Extension' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Cozie WatchKit Extension
+  # Pods for Cozie Watch App
 
 end
 
 target 'OneSignalNotificationServiceExtension' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'OneSignal', '>= 3.0.0', '< 4.0'
 
   # Pods for OneSignalNotificationServiceExtension
-
+  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
 end

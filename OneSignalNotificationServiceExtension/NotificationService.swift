@@ -2,12 +2,10 @@
 //  NotificationService.swift
 //  OneSignalNotificationServiceExtension
 //
-//  Created by Federico Tartarini on 19/6/20.
-//  Copyright © 2020 Federico Tartarini. All rights reserved.
+//  Created by Alexandr Chmal on 03.05.23.
 //
 
 import UserNotifications
-
 import OneSignal
 
 class NotificationService: UNNotificationServiceExtension {
@@ -17,13 +15,24 @@ class NotificationService: UNNotificationServiceExtension {
     var bestAttemptContent: UNMutableNotificationContent?
     
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-        self.receivedRequest = request;
+        self.receivedRequest = request
         self.contentHandler = contentHandler
-        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+        self.bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
         if let bestAttemptContent = bestAttemptContent {
+            //If your SDK version is < 3.5.0 uncomment and use this code:
+            /*
             OneSignal.didReceiveNotificationExtensionRequest(self.receivedRequest, with: self.bestAttemptContent)
             contentHandler(bestAttemptContent)
+            */
+            
+            /* DEBUGGING: Uncomment the 2 lines below to check this extension is excuting
+                          Note, this extension only runs when mutable-content is set
+                          Setting an attachment or action buttons automatically adds this */
+            //OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
+            //bestAttemptContent.body = "[Modified] " + bestAttemptContent.body
+            
+            OneSignal.didReceiveNotificationExtensionRequest(self.receivedRequest, with: bestAttemptContent, withContentHandler: self.contentHandler)
         }
     }
     
@@ -35,5 +44,4 @@ class NotificationService: UNNotificationServiceExtension {
             contentHandler(bestAttemptContent)
         }
     }
-    
 }

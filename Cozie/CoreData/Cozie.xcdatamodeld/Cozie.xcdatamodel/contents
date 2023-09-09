@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BackendInfo" representedClassName=".BackendInfo" syncable="YES">
+        <attribute name="api_read_key" optional="YES" attributeType="String"/>
+        <attribute name="api_read_url" optional="YES" attributeType="String"/>
+        <attribute name="api_write_key" optional="YES" attributeType="String"/>
+        <attribute name="api_write_url" optional="YES" attributeType="String"/>
+        <attribute name="one_signal_id" optional="YES" attributeType="String"/>
+        <attribute name="participant_password" optional="YES" attributeType="String"/>
+        <attribute name="phone_survey_link" optional="YES" attributeType="String"/>
+        <attribute name="watch_survey_link" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="ResponseOptionData" representedClassName=".ResponseOptionData" syncable="YES">
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="iconBackgroundColor" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nextQuestionID" attributeType="String" defaultValueString=""/>
+        <attribute name="sfSymbolsColor" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="useSfSymbols" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="survey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SurveyData" inverseName="responseOption" inverseEntity="SurveyData"/>
+    </entity>
+    <entity name="SettingsData" representedClassName=".SettingsData" syncable="YES">
+        <attribute name="ps_url" optional="YES" attributeType="String"/>
+        <attribute name="pss_reminder_days" optional="YES" attributeType="String"/>
+        <attribute name="pss_reminder_enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="pss_reminder_time" optional="YES" attributeType="String"/>
+        <attribute name="wss_goal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wss_participation_days" optional="YES" attributeType="String"/>
+        <attribute name="wss_participation_time_end" optional="YES" attributeType="String"/>
+        <attribute name="wss_participation_time_start" optional="YES" attributeType="String"/>
+        <attribute name="wss_reminder_enabeled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="wss_reminder_interval" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wss_time_out" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wss_title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SurveyData" representedClassName=".SurveyData" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="question" optional="YES" attributeType="String"/>
+        <attribute name="questionID" attributeType="String" defaultValueString=""/>
+        <relationship name="responseOption" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ResponseOptionData" inverseName="survey" inverseEntity="ResponseOptionData"/>
+        <relationship name="watchSurvey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WatchSurveyData" inverseName="survey" inverseEntity="WatchSurveyData"/>
+    </entity>
+    <entity name="SyncInfo" representedClassName=".SyncInfo" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="invalidCount" optional="YES" attributeType="String"/>
+        <attribute name="validCount" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="syncInfo" inverseEntity="User"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="experimentID" optional="YES" attributeType="String"/>
+        <attribute name="participantID" optional="YES" attributeType="String"/>
+        <attribute name="passwordID" optional="YES" attributeType="String"/>
+        <relationship name="syncInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SyncInfo" inverseName="user" inverseEntity="SyncInfo"/>
+    </entity>
+    <entity name="WatchSurveyData" representedClassName=".WatchSurveyData" syncable="YES">
+        <attribute name="external" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="firstQuestionID" optional="YES" attributeType="String"/>
+        <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="surveyID" optional="YES" attributeType="String"/>
+        <attribute name="surveyName" optional="YES" attributeType="String"/>
+        <relationship name="survey" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SurveyData" inverseName="watchSurvey" inverseEntity="SurveyData"/>
+    </entity>
+</model>
