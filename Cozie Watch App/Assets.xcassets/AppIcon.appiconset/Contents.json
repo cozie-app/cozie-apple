@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "1024.png",
+      "filename" : "1024_master.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"
