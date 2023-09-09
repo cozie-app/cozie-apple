@@ -11,12 +11,9 @@ Cozie allows building occupants to provide feedback in real time
 ## Documentation and tutorials
 
 - [Documentation](https://www.cozie-apple.app/docs/)
-- [Overview](https://www.youtube.com/watch?v=5e4FwVydYRE&t=109s)
 - [Official website](https://www.cozie-apple.app/)
 
 ## Installation
-
-I have created a [video tutorial](https://www.youtube.com/watch?v=gSNPvoGc8Zw) so you can see all the steps required to clone Cozie on your computer.
 
 1. Clone the `cozie-app` repository on your computer, then `cd` into the repo. 
 
