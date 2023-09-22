@@ -92,7 +92,6 @@
 		CA2EE94A29F1862400590527 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE94929F1862400590527 /* StorageManager.swift */; };
 		CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */; };
 		CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4E2A0256A300D096AD /* NotificationView.swift */; };
-		CA4EBE582A02677300D096AD /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE572A02677300D096AD /* NotificationService.swift */; };
 		CA4EBE5C2A02677300D096AD /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA4EBE552A02677300D096AD /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */; };
 		CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */; };
@@ -178,14 +177,14 @@
 		};
 		CA4EBE602A02677300D096AD /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
 				CA4EBE5C2A02677300D096AD /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -287,8 +286,6 @@
 		CA4EBE4E2A0256A300D096AD /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CA4EBE502A025BD100D096AD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		CA4EBE552A02677300D096AD /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA4EBE572A02677300D096AD /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		CA4EBE592A02677300D096AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -302,7 +299,6 @@
 		CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyInteractor.swift; sourceTree = "<group>"; };
 		CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchSurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CAB58A5A29F971BD00E26D20 /* WatchSurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchSurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CAC6F9292A02AF59006D625D /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		CAC6F92A2A091742006D625D /* SendSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSurveyView.swift; sourceTree = "<group>"; };
 		CAC6F92D2A0A2923006D625D /* Cozie Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie Watch App.entitlements"; sourceTree = "<group>"; };
 		CAC6F92E2A0CFCB7006D625D /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
@@ -401,7 +397,6 @@
 				921289E2299649ED0060C729 /* CozieTests */,
 				921289EC299649ED0060C729 /* CozieUITests */,
 				CA2EE8FE29EDA92E00590527 /* Cozie Watch App */,
-				CA4EBE562A02677300D096AD /* OneSignalNotificationServiceExtension */,
 				921289CB299649EC0060C729 /* Products */,
 				CA2EE92129EECD9B00590527 /* Frameworks */,
 				428AB4AF32555B272CBCC37A /* Pods */,
@@ -895,16 +890,6 @@
 				CA2EE94729F180FD00590527 /* WatchSurveyInteractor.swift */,
 			);
 			path = Interactors;
-			sourceTree = "<group>";
-		};
-		CA4EBE562A02677300D096AD /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXGroup;
-			children = (
-				CAC6F9292A02AF59006D625D /* OneSignalNotificationServiceExtension.entitlements */,
-				CA4EBE572A02677300D096AD /* NotificationService.swift */,
-				CA4EBE592A02677300D096AD /* Info.plist */,
-			);
-			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		CAB58A5629F9704F00E26D20 /* WatchSurveyInteractor */ = {
@@ -1408,7 +1393,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA4EBE582A02677300D096AD /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
