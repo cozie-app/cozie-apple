@@ -3,7 +3,7 @@ import WatchKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     private let complicationID = "Cozie_complication"
-    private let displayName = "Cozie Dev"
+    private let displayName = "Cozie"
     
     // MARK: - Timeline Configuration
     func getSupportedTimeTravelDirections(for complication: CLKComplication,

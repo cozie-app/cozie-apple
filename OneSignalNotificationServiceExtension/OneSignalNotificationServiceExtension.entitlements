@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.cozie.dev.Cozie.onesignal</string>
+		<string>group.com.cozie.ios.onesignal</string>
 	</array>
 </dict>
 </plist>

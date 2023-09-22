@@ -4,8 +4,8 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>app.coziedev.dataprocesssing</string>
-		<string>app.coziedev.datarefresh</string>
+		<string>app.cozie.dataprocesssing</string>
+		<string>app.cozie.datarefresh</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -14,7 +14,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>coziedev</string>
+				<string>cozie</string>
 			</array>
 		</dict>
 	</array>

@@ -14,7 +14,7 @@ struct QuestionType {
 }
 
 class QuestionViewModel: ObservableObject {
-    static let defaultQuestions = [QuestionType(id: 0, title: "Weather (short)", link:                             "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_weather_short.txt"),
+    static let defaultQuestions = [QuestionType(id: 0, title: "Demo", link:                             "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_demo.txt"),
                                    QuestionType(id: 1, title: "Thermal (short)", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_thermal_short.txt"),
                                    QuestionType(id: 2, title: "Thermal (long)", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_thermal_long.txt"),
                                    QuestionType(id: 3, title: "Noise and privacy", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_noise_and_privacy.txt"),
