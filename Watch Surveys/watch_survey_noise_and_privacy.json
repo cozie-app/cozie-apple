@@ -1,0 +1,383 @@
+{
+  "survey_name": "Noise and privacy",
+  "survey_id": "noise_and_privacy",
+  "survey": [{
+      "question": "Noise distractions nearby? (without earphones)",
+      "question_id": "q_noise_nearby",
+      "response_options": [{
+          "text": "None",
+          "icon": "text_none",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_thermal_preference"
+        },
+        {
+          "text": "A little",
+          "icon": "text_a_little",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_noise_kind"
+        },
+        {
+          "text": "A lot",
+          "icon": "text_a_lot",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_noise_kind"
+        }
+      ]
+    },
+    {
+      "question": "What kind of noise?",
+      "question_id": "q_noise_kind",
+      "response_options": [{
+          "text": "Talking",
+          "icon": "person_2_dialog_4_2",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_earphones"
+        },
+        {
+          "text": "Traffic",
+          "icon": "vehicle_cars_two",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_earphones"
+        },
+        {
+          "text": "Weather",
+          "icon": "cloud_rain_lighting",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_earphones"
+        },
+        {
+          "text": "Appliances",
+          "icon": "air_conditioning_unit",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_earphones"
+        },
+        {
+          "text": "Construction",
+          "icon": "vehicle_excavator",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_earphones"
+        },
+        {
+          "text": "Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_earphones"
+        }
+      ]
+    },
+    {
+      "question": "Wearing earphones?",
+      "question_id": "q_earphones",
+      "response_options": [{
+          "text": "No earphones",
+          "icon": "text_no",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_thermal_preference"
+        },
+        {
+          "text": "Earphones",
+          "icon": "text_yes",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_thermal_preference"
+        },
+        {
+          "text": "Noise cancelling",
+          "icon": "text_yes",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_thermal_preference"
+        }
+      ]
+    },
+    {
+      "question": "Thermally, what do you prefer now?",
+      "question_id": "q_thermal_preference",
+      "response_options": [{
+          "text": "Cooler",
+          "icon": "snowflake",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_location"
+        },
+        {
+          "text": "No change",
+          "icon": "emoticon_happy",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_location"
+        },
+        {
+          "text": "Warmer",
+          "icon": "flame",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_location"
+        }
+      ]
+    },
+    {
+      "question": "Where are you?",
+      "question_id": "q_location",
+      "response_options": [{
+          "text": "Indoor - Office",
+          "icon": "person_laptop",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_location_office"
+        },
+        {
+          "text": "Indoor - Class",
+          "icon": "space_classroom",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Indoor - Home",
+          "icon": "building_house",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Indoor - Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Outdoor",
+          "icon": "person_walking",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Transportation",
+          "icon": "vehicle_taxi_and_bus",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_location_transport"
+        }
+      ]
+    },
+    {
+      "question": "What kind of office?",
+      "question_id": "q_location_office",
+      "response_options": [{
+          "text": "Individual",
+          "icon": "person",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Small shared",
+          "icon": "person_group_3_1",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Large open plan",
+          "icon": "person_group_2_office_work",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Cubicles",
+          "icon": "space_cubicles",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Conference room",
+          "icon": "person_meeting_4",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        }
+      ]
+    },
+    {
+      "question": "What kind of transport?",
+      "question_id": "q_location_transport",
+      "response_options": [{
+          "text": "Bus",
+          "icon": "vehicle_bus",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Train",
+          "icon": "vehicle_train",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Car",
+          "icon": "vehicle_car",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Taxi",
+          "icon": "vehicle_taxi",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        },
+        {
+          "text": "Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_alone_group"
+        }
+      ]
+    },
+    {
+      "question": "Alone or in a group?",
+      "question_id": "q_alone_group",
+      "response_options": [{
+          "text": "Alone",
+          "icon": "person_1",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_activity_category_1"
+        },
+        {
+          "text": "Group",
+          "icon": "person_meeting_3",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_activity_category_2"
+        },
+        {
+          "text": "Online group",
+          "icon": "laptop_meeting_online",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_activity_category_2"
+        }
+      ]
+    },
+    {
+      "question": "Category of activity?",
+      "question_id": "q_activity_category_1",
+      "response_options": [{
+          "text": "Focus",
+          "icon": "person_laptop",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Leisure",
+          "icon": "person_head_relax",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    },
+    {
+      "question": "Category of activity?",
+      "question_id": "q_activity_category_2",
+      "response_options": [{
+          "text": "Socialize",
+          "icon": "person_2_dialog_4",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Collaborate",
+          "icon": "handshake",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Learn",
+          "icon": "person_head_thinking",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    }
+  ]
+}

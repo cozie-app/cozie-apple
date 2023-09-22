@@ -1,0 +1,367 @@
+{
+  "survey_name": "Interaction",
+  "survey_id": "interaction",
+  "survey": [{
+			"question": "Have you had a spontaneous interaction since your last survey?",
+			"question_id": "q_interaction",
+			"response_options": [{
+					"text": "Yes",
+					"icon": "text_yes",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_whom"
+				},
+				{
+					"text": "No",
+					"icon": "text_no",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_1"
+				}
+			]
+		},
+		{
+			"question": "With Whom",
+			"question_id": "q_whom",
+			"response_options": [{
+					"text": "Supervisor",
+					"icon": "person_2_dialog_4",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_category"
+				},
+				{
+					"text": "Coworker",
+					"icon": "person_group_2_office_work",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_category"
+				},
+				{
+					"text": "Household Member",
+					"icon": "building_house_person_3_within",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Friend",
+					"icon": "person_meeting_3",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				}
+			]
+		},
+		{
+			"question": "Where are you currently located?",
+			"question_id": "q_location_1",
+			"response_options": [
+				{
+					"text": "Work - in person",
+					"icon": "person_group_2_office_work",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_3"
+				},
+				{
+					"text": "Work - remote",
+					"icon": "laptop_meeting_online",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Home",
+					"icon": "building_house",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Transportation",
+					"icon": "vehicle_taxi_and_bus",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				}
+			]
+		},
+		{
+			"question": "Please categorize this interaction",
+			"question_id": "q_category",
+			"response_options": [
+				{
+					"text": "Collaboration",
+					"icon": "handshake",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_description"
+				},
+				{
+					"text": "Distraction",
+					"icon": "person_noise_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Wanted Socialization",
+					"icon": "person_meeting_3",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				}
+			]
+		},
+		{
+			"question": "Please select a description for the interaction:",
+			"question_id": "q_description",
+			"response_options": [
+				{
+					"text": "New ideas",
+					"icon": "person_head_thinking",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Problem-solving",
+					"icon": "puzzle",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Task-related",
+					"icon": "clipboard",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Advice",
+					"icon": "hand_speech_bubble",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_value"
+				}
+			]
+		},
+		{
+			"question": "Was the interaction valuable?",
+			"question_id": "q_value",
+			"response_options": [
+				{
+					"text": "Yes",
+					"icon": "text_yes",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_initiation"
+				},
+				{
+					"text": "No",
+					"icon": "text_no",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_initiation"
+				}
+			]
+		},
+		{
+			"question": "Did you initiate the interaction?",
+			"question_id": "q_initiation",
+			"response_options": [
+				{
+					"text": "Yes",
+					"icon": "text_yes",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_focus"
+				},
+				{
+					"text": "No",
+					"icon": "text_no",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_focus"
+				}
+			]
+		},
+		{
+			"question": "Did this interaction impact your focus?",
+			"question_id": "q_focus",
+			"response_options": [
+				{
+					"text": "Yes",
+					"icon": "text_yes",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_2"
+				},
+				{
+					"text": "Partially",
+					"icon": "text_partially",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_2"
+				},
+				{
+					"text": "No",
+					"icon": "text_no",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_2"
+				}
+			]
+		},
+		{
+			"question": "Where were you located at the time of the interaction?",
+			"question_id": "q_location_2",
+			"response_options": [
+				{
+					"text": "Desk",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Meeting room",
+					"icon": "person_meeting_4",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Hallway",
+					"icon": "person_walking",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Canteen",
+					"icon": "food_and_beverage",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Work - remote",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				}
+			]
+		},
+		{
+			"question": "Where are you currently located?",
+			"question_id": "q_location_3",
+			"response_options": [
+				{
+					"text": "Desk",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Meeting room",
+					"icon": "person_meeting_4",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Hallway",
+					"icon": "person_walking",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Canteen",
+					"icon": "food_and_beverage",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				}
+			]
+		}
+  ]
+}

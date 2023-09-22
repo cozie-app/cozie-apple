@@ -1,0 +1,755 @@
+{
+	"survey_name": "Arda survey - English",
+	"survey_id": "arda_survey_en",
+	"survey": [{
+			"question": "Are you...?",
+			"question_id": "q_location",
+			"response_options": [{
+					"text": "Indoors",
+					"icon": "space_indoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_indoors"
+				},
+				{
+					"text": "Outdoors",
+					"icon": "space_outdoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_outdoors"
+				}
+			]
+		},
+		{
+			"question": "What are you doing?",
+			"question_id": "q_activity_indoors",
+			"response_options": [{
+					"text": "Working",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_working"
+				},
+				{
+					"text": "Studying",
+					"icon": "person_studying",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_studying"
+				},
+				{
+					"text": "Having a meal",
+					"icon": "cutlery",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_meal"
+				},
+				{
+					"text": "Leisure",
+					"icon": "person_head_relax",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_leisure"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_other"
+				}
+			]
+		},
+		{
+			"question": "What are you doing?",
+			"question_id": "q_activity_outdoors",
+			"response_options": [{
+					"text": "Walking somewhere",
+					"icon": "person_walking_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_outdoors"
+				},
+				{
+					"text": "Taking transportation",
+					"icon": "vehicle_taxi_and_bus",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_outdoors"
+				},
+				{
+					"text": "Sitting outside",
+					"icon": "person_bus_stop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_outdoors"
+				},
+				{
+					"text": "Spending time outdoors",
+					"icon": "space_outdoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_outdoors"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_outdoors"
+				}
+			]
+		},
+		{
+			"question": "Where?",
+			"question_id": "q_location_working",
+			"response_options": [{
+					"text": "Private workspace",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_working"
+				},
+				{
+					"text": "Shared workspace",
+					"icon": "person_group_2_office_work",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_working"
+				},
+				{
+					"text": "Home",
+					"icon": "building_house",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_working"
+				},
+				{
+					"text": "Library",
+					"icon": "space_library",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_working"
+				},
+				{
+					"text": "Café",
+					"icon": "cup_hot",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_working"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_working"
+				}
+			]
+		},
+		{
+			"question": "Where?",
+			"question_id": "q_location_studying",
+			"response_options": [{
+					"text": "Home",
+					"icon": "building_house",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_studying"
+				},
+				{
+					"text": "Library",
+					"icon": "space_library",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_studying"
+				},
+				{
+					"text": "Classroom",
+					"icon": "space_classroom_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_studying"
+				},
+				{
+					"text": "Café",
+					"icon": "cup_hot",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_studying"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_studying"
+				}
+			]
+		},
+		{
+			"question": "Where?",
+			"question_id": "q_location_meal",
+			"response_options": [{
+					"text": "Home",
+					"icon": "building_house",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_meal"
+				},
+				{
+					"text": "On campus",
+					"icon": "building_university",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_meal"
+				},
+				{
+					"text": "Off campus",
+					"icon": "city_seoul",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_meal"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_meal"
+				}
+			]
+		},
+		{
+			"question": "Where?",
+			"question_id": "q_location_leisure",
+			"response_options": [{
+					"text": "Home",
+					"icon": "building_house",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_leisure"
+				},
+				{
+					"text": "On campus",
+					"icon": "building_university",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_leisure"
+				},
+				{
+					"text": "Off campus",
+					"icon": "city_seoul",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_leisure"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_activity_change_leisure"
+				}
+			]
+		},
+		{
+			"question": "Did you change your activity in the last hour?",
+			"question_id": "q_activity_change_working",
+			"response_options": [{
+					"text": "Yes, studying",
+					"icon": "person_studying",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, having a meal",
+					"icon": "cutlery",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, leisure",
+					"icon": "person_head_relax",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, outdoors",
+					"icon": "space_outdoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "No",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				}
+			]
+		},
+		{
+			"question": "Did you change your activity in the last hour?",
+			"question_id": "q_activity_change_studying",
+			"response_options": [{
+					"text": "Yes, working",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, having a meal",
+					"icon": "cutlery",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, leisure",
+					"icon": "person_head_relax",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, outdoors",
+					"icon": "space_outdoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "No",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				}
+			]
+		},
+		{
+			"question": "Did you change your activity in the last hour?",
+			"question_id": "q_activity_change_meal",
+			"response_options": [{
+					"text": "Yes, working",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, studying",
+					"icon": "person_studying",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, leisure",
+					"icon": "person_head_relax",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, outdoors",
+					"icon": "space_outdoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "No",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				}
+			]
+		},
+		{
+			"question": "Did you change your activity in the last hour?",
+			"question_id": "q_activity_change_leisure",
+			"response_options": [{
+					"text": "Yes, working",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, studying",
+					"icon": "person_studying",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, having a meal",
+					"icon": "cutlery",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, outdoors",
+					"icon": "space_outdoor",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "No",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				}
+			]
+		},
+		{
+			"question": "Did you change your activity in the last hour?",
+			"question_id": "q_activity_change_outdoors",
+			"response_options": [{
+					"text": "Yes, working",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, studying",
+					"icon": "person_studying",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, having a meal",
+					"icon": "cutlery",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Yes, leisure",
+					"icon": "person_head_relax",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "No",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				}
+			]
+
+		},
+		{
+			"question": "Did you change location in the last hour and for how long?",
+			"question_id": "q_location_change",
+			"response_options": [{
+					"text": "No, I did not change location",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_adaptive_comfort"
+				},
+				{
+					"text": "Yes, less than 15 min",
+					"icon": "text_smaller_than_15",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_adaptive_comfort"
+				},
+				{
+					"text": "Yes, less than 30 min",
+					"icon": "text_smaller_than_30",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_adaptive_comfort"
+				},
+				{
+					"text": "Yes, less than 45 min",
+					"icon": "text_smaller_than_45",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_adaptive_comfort"
+				},
+				{
+					"text": "Yes, more than 45 min",
+					"icon": "text_greater_than_45",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_adaptive_comfort"
+				}
+			]
+		},
+		{
+			"question": "Did you take any adaptive comfort measures in the last hour?",
+			"question_id": "q_adaptive_comfort",
+			"response_options": [{
+					"text": "Yes, clothing",
+					"icon": "clothes_shirt_pants_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "Yes, location",
+					"icon": "map_location",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "Yes, thermostat",
+					"icon": "thermometer",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "Yes, fan",
+					"icon": "fan",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "Yes, other",
+					"icon": "text_other",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "No",
+					"icon": "text_x_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				}
+			]
+		},
+		{
+			"question": "What clothes are you wearing?",
+			"question_id": "q_clothing",
+			"response_options": [{
+					"text": "Very light",
+					"icon": "clothes_shirt_shorts",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_thermal"
+				},
+				{
+					"text": "Light",
+					"icon": "clothes_shirt_pants",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_thermal"
+				},
+				{
+					"text": "Medium",
+					"icon": "clothes_shirt_pants_2",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_thermal"
+				},
+				{
+					"text": "Heavy",
+					"icon": "clothes_pullover",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_thermal"
+				},
+				{
+					"text": "Very heavy",
+					"icon": "clothes_jacket",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_thermal"
+				}
+			]
+		},
+		{
+			"question": "How would you prefer it to be?",
+			"question_id": "q_thermal",
+			"response_options": [{
+					"text": "Colder",
+					"icon": "snowflake",
+					"icon_background_color": "#2891D9",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				},
+				{
+					"text": "No Change",
+					"icon": "emoticon_happy_3",
+					"icon_background_color": "#35C035",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				},
+				{
+					"text": "Warmer",
+					"icon": "flame",
+					"icon_background_color": "#EC1517",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				}
+			]
+		},
+		{
+			"question": "What mood are you in?",
+			"question_id": "q_mood",
+			"response_options": [{
+					"text": "Positive",
+					"icon": "emoticon_happy_4",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "end"
+				},
+				{
+					"text": "Neutral",
+					"icon": "emoticon_neutral",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "end"
+				},
+				{
+					"text": "Negative",
+					"icon": "emoticon_sad",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "end"
+				}
+			]
+		}
+	]
+}

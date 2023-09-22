@@ -1,0 +1,391 @@
+{
+  "survey_name": "Movement",
+  "survey_id": "movement",
+  "survey": [
+    {
+      "question": "In the last 60min, I used",
+      "question_id": "q_last_60min",
+      "response_options": [{
+          "text": "Lift",
+          "icon": "elevator",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_lift_why_1"
+        },
+        {
+          "text": "Stairs",
+          "icon": "stairs",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_why_1"
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_lift_why_2"
+        },
+        {
+          "text": "Neither",
+          "icon": "text_neither",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    },
+    {
+      "question": "Took lift, why?",
+      "question_id": "q_lift_why_1",
+      "response_options": [{
+          "text": "Convenient",
+          "icon": "hand_ok_check_mark",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_lift_convenient"
+        },
+        {
+          "text": "Less effort",
+          "icon": "person_arrow_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "No stairs",
+          "icon": "stairs_none",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    },
+    {
+      "question": "Took stairs, why?",
+      "question_id": "q_stairs_why_1",
+      "response_options": [{
+          "text": "Convenient",
+          "icon": "hand_ok_check_mark",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_convenient"
+        },
+        {
+          "text": "No lift",
+          "icon": "elevator_none",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Save energy",
+          "icon": "building_house_lighting",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Healthy",
+          "icon": "person_waving",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    },
+    {
+      "question": "Lift convenient because?",
+      "question_id": "q_lift_convenient",
+      "response_options": [{
+          "text": "Easiest",
+          "icon": "hand_finger_snap",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Fastest",
+          "icon": "stop_watch",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    },
+    {
+      "question": "Stairs convenient because",
+      "question_id": "q_stairs_convenient",
+      "response_options": [{
+          "text": "Easiest",
+          "icon": "hand_finger_snap",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Fastest",
+          "icon": "stop_watch",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    },
+    {
+      "question": "Are you working right now?",
+      "question_id": "q_working",
+      "response_options": [{
+          "text": "Yes",
+          "icon": "text_yes",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_workstation"
+        },
+        {
+          "text": "No",
+          "icon": "text_no",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        }
+      ]
+    },
+    {
+      "question": "What kind of workstation?",
+      "question_id": "q_workstation",
+      "response_options": [{
+          "text": "Adjustable",
+          "icon": "arrow_up_and_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_adjust_height"
+        },
+        {
+          "text": "Standing",
+          "icon": "person_standing",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        },
+        {
+          "text": "Sitting",
+          "icon": "person_sitting",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        }
+      ]
+    },
+    {
+      "question": "Adjusted height today?",
+      "question_id": "q_adjust_height",
+      "response_options": [{
+          "text": "Up & down",
+          "icon": "arrow_up_and_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        },
+        {
+          "text": "Down",
+          "icon": "arrow_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        },
+        {
+          "text": "Up",
+          "icon": "arrow_up",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        },
+        {
+          "text": "Never",
+          "icon": "x",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_current"
+        }
+      ]
+    },
+    {
+      "question": "Are you",
+      "question_id": "q_current",
+      "response_options": [{
+          "text": "Standing",
+          "icon": "person_standing",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Sitting",
+          "icon": "person_sitting",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    },
+    {
+      "question": "Took lift, why?",
+      "question_id": "q_lift_why_2",
+      "response_options": [{
+          "text": "Convenient",
+          "icon": "hand_ok_check_mark",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_lift_convenient_2"
+        },
+        {
+          "text": "Less effort",
+          "icon": "person_arrow_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_why_2"
+        },
+        {
+          "text": "No stairs",
+          "icon": "stairs_none",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_why_2"
+        }
+      ]
+    },
+    {
+      "question": "Took stairs, why?",
+      "question_id": "q_stairs_why_2",
+      "response_options": [{
+          "text": "Convenient",
+          "icon": "hand_ok_check_mark",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_convenient_2"
+        },
+        {
+          "text": "Save energy",
+          "icon": "building_house_lighting",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Healthy",
+          "icon": "person_waving",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    },
+    {
+      "question": "Lift convenient because?",
+      "question_id": "q_lift_convenient_2",
+      "response_options": [{
+          "text": "Easiest",
+          "icon": "hand_finger_snap",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_why_2"
+        },
+        {
+          "text": "Fastest",
+          "icon": "stop_watch",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_why_2"
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_stairs_why_2"
+        }
+      ]
+    },
+    {
+      "question": "Stairs convenient because",
+      "question_id": "q_stairs_convenient_2",
+      "response_options": [{
+          "text": "Easiest",
+          "icon": "hand_finger_snap",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Fastest",
+          "icon": "stop_watch",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_working"
+        }
+      ]
+    }
+  ]
+}
