@@ -1,0 +1,300 @@
+{
+  "survey_name": "Privacy",
+  "survey_id": "privacy",
+  "survey": [{
+      "question": "Alone or in a group?",
+      "question_id": "q_alone_group",
+      "response_options": [{
+          "text": "Alone",
+          "icon": "person_1",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_activity_1"
+        },
+        {
+          "text": "Online",
+          "icon": "laptop_meeting_online",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_activity_2"
+        },
+        {
+          "text": "Group",
+          "icon": "person_meeting_3",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distracting"
+        }
+      ]
+    },
+    {
+      "question": "Category of activity",
+      "question_id": "q_activity_2",
+      "response_options": [{
+          "text": "Socialize",
+          "icon": "person_2_dialog_4",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        },
+        {
+          "text": "Collaborate",
+          "icon": "handshake",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        },
+        {
+          "text": "Learn",
+          "icon": "person_head_thinking",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        }
+      ]
+    },
+    {
+      "question": "Possibly distracting others?",
+      "question_id": "q_distracting",
+      "response_options": [{
+          "text": "Yes",
+          "icon": "thumbs_up",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        },
+        {
+          "text": "No",
+          "icon": "thumbs_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        }
+      ]
+    },
+    {
+      "question": "Distractions nearby?",
+      "question_id": "q_distractions",
+      "response_options": [{
+          "text": "None",
+          "icon": "text_none",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_more_privacy"
+        },
+        {
+          "text": "A little",
+          "icon": "text_a_little",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distraction_kind"
+        },
+        {
+          "text": "A lot",
+          "icon": "text_a_lot",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distraction_kind"
+        }
+      ]
+    },
+    {
+      "question": "Category of activity?",
+      "question_id": "q_activity_1",
+      "response_options": [{
+          "text": "Focus",
+          "icon": "person_laptop",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        },
+        {
+          "text": "Leisure",
+          "icon": "person_head_relax",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distractions"
+        }
+      ]
+    },
+    {
+      "question": "Feeling like you need more privacy?",
+      "question_id": "q_more_privacy",
+      "response_options": [{
+          "text": "Yes",
+          "icon": "thumbs_up",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_why_more_privacy"
+        },
+        {
+          "text": "No",
+          "icon": "thumbs_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    },
+    {
+      "question": "What kind of distraction?",
+      "question_id": "q_distraction_kind",
+      "response_options": [{
+          "text": "Visual",
+          "icon": "human_eye",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_more_privacy"
+        },
+        {
+          "text": "Audio",
+          "icon": "human_ear",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_more_privacy"
+        },
+        {
+          "text": "Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_what_privacy"
+        }
+      ]
+    },
+    {
+      "question": "Why is more privacy needed?",
+      "question_id": "q_why_more_privacy",
+      "response_options": [{
+          "text": "See me",
+          "icon": "human_eye",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_people_see"
+        },
+        {
+          "text": "Hear me",
+          "icon": "human_ear",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_people_see"
+        }
+      ]
+    },
+    {
+      "question": "What is it?",
+      "question_id": "q_what_privacy",
+      "response_options": [{
+          "text": "Thermal",
+          "icon": "thermometer",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_more_privacy"
+        },
+        {
+          "text": "Scent",
+          "icon": "human_nose",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_more_privacy"
+        },
+        {
+          "text": "Glare",
+          "icon": "sun",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_more_privacy"
+        }
+      ]
+    },
+    {
+      "question": "What do people see?",
+      "question_id": "q_people_see",
+      "response_options": [{
+          "text": "Appearance",
+          "icon": "person_arrows_inward",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Work",
+          "icon": "person_desk_working",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Behavior",
+          "icon": "person_dancing",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    },
+    {
+      "question": "Category of activity?",
+      "question_id": "q_activity_3",
+      "response_options": [{
+          "text": "Socialize",
+          "icon": "person_2_dialog_4",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distracting"
+        },
+        {
+          "text": "Collaborate",
+          "icon": "handshake",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distracting"
+        },
+        {
+          "text": "Learn",
+          "icon": "person_head_thinking",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_distracting"
+        }
+      ]
+    }
+  ]
+}

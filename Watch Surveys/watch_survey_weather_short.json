@@ -1,0 +1,49 @@
+{
+	"survey_name": "Weather (short)",
+	"survey_id": "weather_short",
+	"survey": [{
+			"question": "How is the weather",
+			"question_id": "q_weather",
+			"response_options": [{
+					"text": "Sunny (plus some additional text to test linebreaks)",
+					"icon": "sun.max.fill",
+					"use_sf_symbols": true,
+					"sf_symbols_color": "#FFFF00",
+					"next_question_id": ""
+				},
+				{
+					"text": "Cloudy",
+					"icon": "cloud.sun.fill",
+					"use_sf_symbols": true,
+					"sf_symbols_color": "#cacaca",
+					"next_question_id": ""
+				},
+				{
+					"text": "Rainy",
+					"icon": "cloud.sun.rain.fill",
+					"use_sf_symbols": true,
+					"sf_symbols_color": "#6279C0",
+					"next_question_id": "q_stormy"
+				}
+			]
+		},
+		{
+			"question": "Is it stormy?",
+			"question_id": "q_stormy",
+			"response_options": [{
+					"text": "Yes",
+					"icon": "cloud.sun.bolt.fill",
+					"use_sf_symbols": true,
+					"sf_symbols_color": "#FFFFFF",
+					"next_question_id": ""
+				},{
+					"text": "No",
+					"icon": "cloud.sun.bolt.fill",
+					"use_sf_symbols": true,
+					"sf_symbols_color": "#cacaca",
+					"next_question_id": ""
+				}
+			]
+		}
+	]
+}

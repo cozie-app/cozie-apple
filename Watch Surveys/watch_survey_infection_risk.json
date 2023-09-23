@@ -1,0 +1,121 @@
+{
+  "survey_name": "Infection risk",
+  "survey_id": "infection_risk",
+  "survey": [{
+      "question": "Do your surroundings increase infection risk?",
+      "question_id": "q_surroundings_infection",
+      "response_options": [{
+          "text": "Not at all",
+          "icon": "shield_check_mark",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_within_5m"
+        },
+        {
+          "text": "A little",
+          "icon": "virus_1",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_risk_cause"
+        },
+        {
+          "text": "A lot",
+          "icon": "virus_3",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_risk_cause"
+        }
+      ]
+    },
+    {
+      "question": "Currently, how many people are within 5m?",
+      "question_id": "q_within_5m",
+      "response_options": [{
+          "text": "0 pax",
+          "icon": "person_0",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "1-4 pax",
+          "icon": "person_1-4",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "5+ pax",
+          "icon": "person_5_plus",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    },
+    {
+      "question": "What causes more risk?",
+      "question_id": "q_risk_cause",
+      "response_options": [{
+          "text": "Ventilation",
+          "icon": "building_house_fan",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_within_5m"
+        },
+        {
+          "text": "People",
+          "icon": "person_2_interaction",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_concerns"
+        },
+        {
+          "text": "Surface",
+          "icon": "virus_table_surface",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_within_5m"
+        }
+      ]
+    },
+    {
+      "question": "Specifically, what concerns you?",
+      "question_id": "q_concerns",
+      "response_options": [{
+          "text": "Density",
+          "icon": "person_group_3_2",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_within_5m"
+        },
+        {
+          "text": "Proximity",
+          "icon": "person_2_distance",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_within_5m"
+        },
+        {
+          "text": "Both",
+          "icon": "text_both",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_within_5m"
+        }
+      ]
+    }
+  ]
+}
