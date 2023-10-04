@@ -1,5 +1,5 @@
 # Cozie Apple
-> Cozie an iOS app app for human comfort data collection 
+> Cozie an iOS app for human comfort data collection 
 
 Cozie allows building occupants to provide feedback in real time
 
