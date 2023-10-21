@@ -1,0 +1,216 @@
+{
+	"survey_name": "Thermal (long)",
+	"survey_id": "thermal_long",
+	"survey": [{
+			"question": "How would you prefer to be?",
+			"question_id": "q_preference_thermal",
+			"response_options": [{
+					"text": "Cooler",
+					"icon": "snowflake",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_preference_light"
+				},
+				{
+					"text": "No Change",
+					"icon": "emoticon_happy",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_preference_light"
+				},
+				{
+					"text": "Warmer",
+					"icon": "flame",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_preference_light"
+				}
+			]
+		},
+		{
+			"question": "Light preference",
+			"question_id": "q_preference_light",
+			"response_options": [{
+					"text": "Dimmer",
+					"icon": "light_dim",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_preference_sound"
+				},
+				{
+					"text": "No Change",
+					"icon": "emoticon_happy",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_preference_sound"
+				},
+				{
+					"text": "Brighter",
+					"icon": "light_bright",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_preference_sound"
+				}
+			]
+		},
+		{
+			"question": "Sound preference",
+			"question_id": "q_preference_sound",
+			"response_options": [{
+					"text": "Quieter",
+					"icon": "speaker_mute",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_place"
+				},
+				{
+					"text": "No Change",
+					"icon": "emoticon_happy",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_place"
+				},
+				{
+					"text": "Louder",
+					"icon": "sound_waves",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_place"
+				}
+			]
+		},
+		{
+			"question": "Where are you?",
+			"question_id": "q_location_place",
+			"response_options": [{
+					"text": "Home",
+					"icon": "building_house",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				},
+				{
+					"text": "Office",
+					"icon": "building_office",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				},
+				{
+					"text": "Vehicle",
+					"icon": "vehicle_car_bus",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				},
+				{
+					"text": "Other",
+					"icon": "map_location",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_mood"
+				}
+			]
+		},
+		{
+			"question": "What mood are you in?",
+			"question_id": "q_mood",
+			"response_options": [{
+					"text": "Bad",
+					"icon": "emoticon_sad",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "Good",
+					"icon": "emoticon_happy",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				},
+				{
+					"text": "Neutral",
+					"icon": "emoticon_neutral",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_clothing"
+				}
+			]
+		},
+		{
+			"question": "What clothes are you wearing?",
+			"question_id": "q_clothing",
+			"response_options": [{
+					"text": "Very light",
+					"icon": "clothes_shirt_sleeveless",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Light",
+					"icon": "clothes_shirt_shorts",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Medium",
+					"icon": "clothes_shirt_pants",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				},
+				{
+					"text": "Heavy",
+					"icon": "clothes_pullover",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_location_change"
+				}
+      ]
+		},
+		{
+			"question": "Have you changed location, activity or clothing over the last 10-min?",
+			"question_id": "q_location_change",
+			"response_options": [{
+					"text": "Yes",
+					"icon": "text_yes",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				},
+				{
+					"text": "No",
+					"icon": "text_no",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+				}
+			]
+		}
+	]
+}
