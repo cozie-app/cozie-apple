@@ -14,13 +14,13 @@ struct QuestionType {
 }
 
 class QuestionViewModel: ObservableObject {
-    static let defaultQuestions = [QuestionType(id: 0, title: "Demo", link:                             "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_demo.txt"),
-                                   QuestionType(id: 1, title: "Thermal (short)", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_thermal_short.txt"),
-                                   QuestionType(id: 2, title: "Thermal (long)", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_thermal_long.txt"),
-                                   QuestionType(id: 3, title: "Noise and privacy", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_noise_and_privacy.txt"),
-                                   QuestionType(id: 4, title: "Movement", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_movement.txt"),
-                                   QuestionType(id: 5, title: "Privacy", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_privacy.txt"),
-                                   QuestionType(id: 6, title: "Infection Risk", link: "https://raw.githubusercontent.com/mariofrei/cozie-test/main/watch_surveys/watch_survey_infection_risk.txt")]
+    static let defaultQuestions = [QuestionType(id: 0, title: "Thermal (short)",   link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_thermal_short.json"),
+                                   QuestionType(id: 1, title: "Thermal (long)",    link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_thermal_long.json"),
+                                   QuestionType(id: 2, title: "Demo",              link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_demo.json"),
+                                   QuestionType(id: 3, title: "Noise and privacy", link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_noise_and_privacy.json"),
+                                   QuestionType(id: 4, title: "Movement",          link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_movement.json"),
+                                   QuestionType(id: 5, title: "Privacy",           link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_privacy.json"),
+                                   QuestionType(id: 6, title: "Infection Risk",    link: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_infection_risk.json")]
     
     @Published var selectedId: Int = 0
     @Published var list: [QuestionType] = QuestionViewModel.defaultQuestions
