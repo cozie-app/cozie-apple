@@ -1721,7 +1721,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cozie-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Cozie Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = Cozie;
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = Cozie_Watch_App.ComplicationController;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We are logging the heart rate data.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We are logging the heart rate data.";
@@ -1764,7 +1764,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cozie-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Cozie Dev";
+				INFOPLIST_KEY_CFBundleDisplayName = Cozie;
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = Cozie_Watch_App.ComplicationController;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We are logging the heart rate data.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We are logging the heart rate data.";
