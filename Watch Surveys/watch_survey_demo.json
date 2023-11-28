@@ -1,0 +1,55 @@
+{
+  "survey_name": "Demo",
+  "survey_id": "Demo",
+  "survey": [{
+      "question": "This is the first question:",
+      "question_id": "q_first_question",
+      "response_options": [{
+					"text": "The following formatting can be done:\n *Italics*, **Bold**, ~Strikethrough~, `Code 123`, \n\nLinebreak",
+					"icon": "snowflake",
+					"icon_background_color": "#0000FF",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_second_question"
+        },
+        {
+					"text": "2. response option, that will be broken up on multiple lines",
+					"icon": "",
+					"icon_background_color": "#FF0000",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": "q_second_question"
+        },
+        {
+					"text": "3. Response option with SF Symbol as icon",
+					"icon": "applewatch",
+					"icon_background_color": "#FFFFFF",
+					"use_sf_symbols": true,
+					"sf_symbols_color": "#00FF00",
+					"next_question_id": "q_second_question"
+        }
+      ]
+    },
+    {
+      "question": "Where are you?",
+      "question_id": "q_second_question",
+      "response_options": [{
+					"text": "Outdoor",
+					"icon": "person_walking",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+        },
+        {
+					"text": "Indoor",
+					"icon": "person_laptop",
+					"icon_background_color": "#F1A62E",
+					"use_sf_symbols": false,
+					"sf_symbols_color": "#000000",
+					"next_question_id": ""
+        }
+      ]
+    },
+  ]
+}
