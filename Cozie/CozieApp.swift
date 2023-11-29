@@ -36,7 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         backgroundProcessing.registerBackgroundRefresh()
         backgroundProcessing.registerBackgroundProcessing {
             self.healthKitInteractor.sendData { success in
-                debugPrint(success ? "Health data sended" : "Health data failed")
+                debugPrint(success ? "Health data sent" : "Health data failed")
             }
         }
         
@@ -74,7 +74,7 @@ struct CozieApp: App {
                     if newPhase == .active {
                         // Delivery HealthKit info on application launch
                         appDelegate.healthKitInteractor.sendData(trigger: CommunicationKeys.appTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { success in
-                            debugPrint(success ? "Health data sended" : "Health data failed")
+                            debugPrint(success ? "Health data sent" : "Health data failed")
                         }
                     } else if newPhase == .inactive {
                         debugPrint("Inactive")
