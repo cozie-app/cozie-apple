@@ -19,7 +19,7 @@ public enum CommunicationKeys: String {
     
     case received = "received"
     case wsLogs = "ws_logs"
-    case oneSignalAppID = "be00093b-ed75-4c2e-81af-d6b382587283"
+    case oneSignalAppID = "17d346bf-bfe5-4422-be96-2a8e4ae4cc3d"
     case appTrigger = "application_appear"
     case syncSettingsTrigger = "sync_button_settings_tab"
     case syncBackendTrigger = "sync_button_backend_tab"

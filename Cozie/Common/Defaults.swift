@@ -43,10 +43,12 @@ struct Defaults {
     static let APIwriteKey: String = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
     static let APIreadURL: String = "https://at6x6b7v54hmoki6dlyew72csq0ihxrn.lambda-url.ap-southeast-1.on.aws"
     static let APIreadKey: String = "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"
+    
+    // To Do: The value below needs to replace the value in Communication Keys
     static let OneSignalAppID: String = "17d346bf-bfe5-4422-be96-2a8e4ae4cc3d"
     static let watchSurveyLink: String = "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Watch%20Surveys/watch_survey_thermal_short.json"
     
-    // The values below need to replace the values stored in AppLinks.swift
+    // To Do: The values below need to replace the values stored in AppLinks.swift
     static let phoneSurveyLink: String = "https://forms.gle/BGGJ8es2fz4uvmFc7"
     static let cozieWebsiteURL: String = "https://www.cozie-apple.app"
     static let cozieGithubURL: String = "https://github.com/cozie-app/cozie-apple"
