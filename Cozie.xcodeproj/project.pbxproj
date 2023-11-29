@@ -92,7 +92,6 @@
 		CA2EE94A29F1862400590527 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE94929F1862400590527 /* StorageManager.swift */; };
 		CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */; };
 		CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4E2A0256A300D096AD /* NotificationView.swift */; };
-		CA4EBE5C2A02677300D096AD /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA4EBE552A02677300D096AD /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */; };
 		CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */; };
 		CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */; };
@@ -144,13 +143,6 @@
 			remoteGlobalIDString = CA2EE8FC29EDA92E00590527;
 			remoteInfo = "Cozie Watch App";
 		};
-		CA4EBE5A2A02677300D096AD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 921289C2299649EC0060C729 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA4EBE542A02677300D096AD;
-			remoteInfo = OneSignalNotificationServiceExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -174,17 +166,6 @@
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA4EBE602A02677300D096AD /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				CA4EBE5C2A02677300D096AD /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -929,14 +910,12 @@
 				921289C7299649EC0060C729 /* Frameworks */,
 				921289C8299649EC0060C729 /* Resources */,
 				CA2EE92529EECD9B00590527 /* Embed Watch Content */,
-				CA4EBE602A02677300D096AD /* Embed Foundation Extensions */,
 				6DFFAB22A7F5729B7AF416C1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				CA2EE92429EECD9B00590527 /* PBXTargetDependency */,
-				CA4EBE5B2A02677300D096AD /* PBXTargetDependency */,
 			);
 			name = Cozie;
 			productName = Cozie;
@@ -1414,11 +1393,6 @@
 			target = CA2EE8FC29EDA92E00590527 /* Cozie Watch App */;
 			targetProxy = CA2EE92329EECD9B00590527 /* PBXContainerItemProxy */;
 		};
-		CA4EBE5B2A02677300D096AD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CA4EBE542A02677300D096AD /* OneSignalNotificationServiceExtension */;
-			targetProxy = CA4EBE5A2A02677300D096AD /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1547,10 +1521,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -1573,6 +1549,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Cozie Master App Store";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1591,10 +1568,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cozie/Info.plist;
@@ -1617,6 +1596,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Cozie Master App Store";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1712,6 +1692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
@@ -1738,7 +1719,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = AppStore_watch;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "Cozie master WatchKit AppStore";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1757,10 +1738,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=watchos*]" = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cozie-Watch-App-Info.plist";
@@ -1781,6 +1764,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "Cozie master WatchKit AppStore";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1796,9 +1780,11 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
@@ -1813,6 +1799,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Cozie Master OneSignal App Store";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1826,9 +1813,11 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
@@ -1843,6 +1832,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Cozie Master OneSignal App Store";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
