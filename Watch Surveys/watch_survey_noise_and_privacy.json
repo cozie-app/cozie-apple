@@ -35,7 +35,7 @@
       "question_id": "q_noise_kind",
       "response_options": [{
           "text": "Talking",
-          "icon": "person_2_dialog_4_2",
+          "icon": "person_2_dialog_3",
           "icon_background_color": "#F1A62E",
           "use_sf_symbols": false,
           "sf_symbols_color": "#000000",
