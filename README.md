@@ -38,3 +38,4 @@ We would love you for the contribution to our project, check the [`LICENSE`](htt
 * [Mario Frei](https://www.linkedin.com/in/mario-frei/) - Developer
 * [Clayton Miller](https://www.linkedin.com/in/claytonmiller/) - Supervisor
 * [Stefano Schiavon](https://www.linkedin.com/in/stefanoschiavon/) - Supervisor
+* [Yun Xuan Chua](https://www.linkedin.com/in/chuayunxuan/) - Project Manager
