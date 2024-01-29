@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		410F9F24609171DBA9C76493 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1684B5F544F1C4F61CEB3474 /* Pods_Cozie.framework */; };
 		5A3B1674EE88726D3A70656B /* Pods_Cozie_Watch_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21102A014A9965ACB8F62D4A /* Pods_Cozie_Watch_App.framework */; };
+		6AA6E556E22A71C96B09ED9C /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		70CA7CEB1BBF753A37220B19 /* Pods_CozieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7A34F99C19A755D1793F9B /* Pods_CozieTests.framework */; };
 		92042D1729D5B357007A9250 /* Int+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92042D1629D5B357007A9250 /* Int+Helper.swift */; };
 		9212143F29CDD4BA002BAEB4 /* TitleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212143E29CDD4BA002BAEB4 /* TitleTitleCell.swift */; };
@@ -97,6 +98,8 @@
 		CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */; };
 		CA57234829F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */; };
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
+		CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F3DE22B51664100C42C7F /* NotificationService.swift */; };
 		CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */; };
@@ -118,7 +121,6 @@
 		CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */; };
 		CAD1E5CA29FBEF17000F9FE7 /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
 		CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */; };
-		FD10D0EB6D422D4DB141EEF6 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +145,13 @@
 			remoteGlobalIDString = CA2EE8FC29EDA92E00590527;
 			remoteInfo = "Cozie Watch App";
 		};
+		CA6F3DEF2B516A1200C42C7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 921289C2299649EC0060C729 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA6F3DE92B516A1100C42C7F;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -165,6 +174,17 @@
 				CA2EE92229EECD9B00590527 /* Cozie Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA6F3DF52B516A1300C42C7F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -266,12 +286,16 @@
 		CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		CA4EBE4E2A0256A300D096AD /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CA4EBE502A025BD100D096AD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		CA4EBE552A02677300D096AD /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA6102B629F6C7320055A140 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		CA6F3DE22B51664100C42C7F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		CA6F3DE32B51664100C42C7F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		CA6F3DE42B51664100C42C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
 		CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
@@ -327,11 +351,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA4EBE522A02677300D096AD /* Frameworks */ = {
+		CA6F3DE72B516A1100C42C7F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD10D0EB6D422D4DB141EEF6 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
+				6AA6E556E22A71C96B09ED9C /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +402,7 @@
 				921289E2299649ED0060C729 /* CozieTests */,
 				921289EC299649ED0060C729 /* CozieUITests */,
 				CA2EE8FE29EDA92E00590527 /* Cozie Watch App */,
+				CA6F3DEB2B516A1200C42C7F /* OneSignalNotificationServiceExtension */,
 				921289CB299649EC0060C729 /* Products */,
 				CA2EE92129EECD9B00590527 /* Frameworks */,
 				428AB4AF32555B272CBCC37A /* Pods */,
@@ -391,7 +416,7 @@
 				921289DF299649ED0060C729 /* CozieTests.xctest */,
 				921289E9299649ED0060C729 /* CozieUITests.xctest */,
 				CA2EE8FD29EDA92E00590527 /* Cozie Watch App.app */,
-				CA4EBE552A02677300D096AD /* OneSignalNotificationServiceExtension.appex */,
+				CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -873,6 +898,17 @@
 			path = Interactors;
 			sourceTree = "<group>";
 		};
+		CA6F3DEB2B516A1200C42C7F /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */,
+				CA6F3DE22B51664100C42C7F /* NotificationService.swift */,
+				CA6F3DE32B51664100C42C7F /* OneSignalNotificationServiceExtension.entitlements */,
+				CA6F3DE42B51664100C42C7F /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		CAB58A5629F9704F00E26D20 /* WatchSurveyInteractor */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,11 +947,13 @@
 				921289C8299649EC0060C729 /* Resources */,
 				CA2EE92529EECD9B00590527 /* Embed Watch Content */,
 				6DFFAB22A7F5729B7AF416C1 /* [CP] Embed Pods Frameworks */,
+				CA6F3DF52B516A1300C42C7F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				CA2EE92429EECD9B00590527 /* PBXTargetDependency */,
+				CA6F3DF02B516A1200C42C7F /* PBXTargetDependency */,
 			);
 			name = Cozie;
 			productName = Cozie;
@@ -980,14 +1018,14 @@
 			productReference = CA2EE8FD29EDA92E00590527 /* Cozie Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CA4EBE542A02677300D096AD /* OneSignalNotificationServiceExtension */ = {
+		CA6F3DE92B516A1100C42C7F /* OneSignalNotificationServiceExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA4EBE5D2A02677300D096AD /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildConfigurationList = CA6F3DF22B516A1300C42C7F /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
 			buildPhases = (
-				CD330F2DF7F71A79550B28F2 /* [CP] Check Pods Manifest.lock */,
-				CA4EBE512A02677300D096AD /* Sources */,
-				CA4EBE522A02677300D096AD /* Frameworks */,
-				CA4EBE532A02677300D096AD /* Resources */,
+				955221779BAD531FF518EA8C /* [CP] Check Pods Manifest.lock */,
+				CA6F3DE62B516A1100C42C7F /* Sources */,
+				CA6F3DE72B516A1100C42C7F /* Frameworks */,
+				CA6F3DE82B516A1100C42C7F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -995,7 +1033,7 @@
 			);
 			name = OneSignalNotificationServiceExtension;
 			productName = OneSignalNotificationServiceExtension;
-			productReference = CA4EBE552A02677300D096AD /* OneSignalNotificationServiceExtension.appex */;
+			productReference = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1005,7 +1043,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					921289C9299649EC0060C729 = {
@@ -1022,8 +1060,8 @@
 					CA2EE8FC29EDA92E00590527 = {
 						CreatedOnToolsVersion = 14.1;
 					};
-					CA4EBE542A02677300D096AD = {
-						CreatedOnToolsVersion = 14.1;
+					CA6F3DE92B516A1100C42C7F = {
+						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
@@ -1043,7 +1081,7 @@
 				921289DE299649ED0060C729 /* CozieTests */,
 				921289E8299649ED0060C729 /* CozieUITests */,
 				CA2EE8FC29EDA92E00590527 /* Cozie Watch App */,
-				CA4EBE542A02677300D096AD /* OneSignalNotificationServiceExtension */,
+				CA6F3DE92B516A1100C42C7F /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1082,7 +1120,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA4EBE532A02677300D096AD /* Resources */ = {
+		CA6F3DE82B516A1100C42C7F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1192,7 +1230,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CD330F2DF7F71A79550B28F2 /* [CP] Check Pods Manifest.lock */ = {
+		955221779BAD531FF518EA8C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1368,10 +1406,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA4EBE512A02677300D096AD /* Sources */ = {
+		CA6F3DE62B516A1100C42C7F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,6 +1431,11 @@
 			isa = PBXTargetDependency;
 			target = CA2EE8FC29EDA92E00590527 /* Cozie Watch App */;
 			targetProxy = CA2EE92329EECD9B00590527 /* PBXContainerItemProxy */;
+		};
+		CA6F3DF02B516A1200C42C7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA6F3DE92B516A1100C42C7F /* OneSignalNotificationServiceExtension */;
+			targetProxy = CA6F3DEF2B516A1200C42C7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1522,7 +1566,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1543,7 +1587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1566,7 +1610,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1587,7 +1631,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1633,7 +1677,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Denis.CozieTests;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.CozieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1671,7 +1715,7 @@
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Denis.CozieUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.CozieUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1690,7 +1734,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1709,7 +1753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1732,7 +1776,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1751,7 +1795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1764,15 +1808,17 @@
 			};
 			name = Release;
 		};
-		CA4EBE5E2A02677300D096AD /* Debug */ = {
+		CA6F3DF32B516A1300C42C7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FAA11F93F17560C643D3510 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
@@ -1783,26 +1829,30 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		CA4EBE5F2A02677300D096AD /* Release */ = {
+		CA6F3DF42B516A1300C42C7F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C8A1E07A73983C9EB107B45 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
@@ -1813,10 +1863,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1872,11 +1922,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CA4EBE5D2A02677300D096AD /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+		CA6F3DF22B516A1300C42C7F /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CA4EBE5E2A02677300D096AD /* Debug */,
-				CA4EBE5F2A02677300D096AD /* Release */,
+				CA6F3DF32B516A1300C42C7F /* Debug */,
+				CA6F3DF42B516A1300C42C7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

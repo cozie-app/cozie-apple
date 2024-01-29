@@ -91,6 +91,9 @@ class SettingsInteractor: SettingInteractorProtocol {
     
     func logSettingsData(name: String, expiriment: String, logs: Logs, completion: ((_ success: Bool)->())?) {
         if let backend = backendInteractor.currentBackendSettings {
+            if (backend.api_write_url?.isEmpty ?? true) || (backend.api_write_key?.isEmpty ?? true) {
+                completion?(false)
+            }
             do {
                 let bodyJson = try JSONEncoder().encode([logs])
                 
@@ -112,7 +115,10 @@ class SettingsInteractor: SettingInteractorProtocol {
                 }
             } catch let error {
                 debugPrint(error)
+                completion?(false)
             }
+        } else {
+            completion?(false)
         }
     }
 }

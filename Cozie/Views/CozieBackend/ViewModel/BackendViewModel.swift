@@ -22,7 +22,7 @@ class BackendData: ObservableObject {
 
 class BackendViewModel: NSObject, ObservableObject {
     enum BackendState: Int {
-        case readURL, readKey, writeURL, writeKey, oneSignalAppId, participantPassword, watchsurveyLink, phoneSurveyLink, clear
+        case readURL, readKey, writeURL, writeKey,/* oneSignalAppId,*/ participantPassword, watchsurveyLink, phoneSurveyLink, clear
     }
 
     // State Property
@@ -32,28 +32,28 @@ class BackendViewModel: NSObject, ObservableObject {
         }
     }
     
-    @Published var list: [BackendData] = [BackendData(id: 0,
+    @Published var list: [BackendData] = [BackendData(id: BackendState.readURL.rawValue,
                                                       title: "API Read URL",
                                                       subtitle: "https://at6x6b7v54hmoki6dlyew72csq0ihxrn.lambda-url.ap-southeast-1.on.aws"),
-                                          BackendData(id: 1,
+                                          BackendData(id: BackendState.readKey.rawValue,
                                                       title: "API Read Key",
                                                       subtitle: "5LkKVBO1Zp2pbYBbnkQsb8njmf8sGB5zhMrYQmPd"),
-                                          BackendData(id: 2,
+                                          BackendData(id: BackendState.writeURL.rawValue,
                                                       title: "API Write URL",
                                                       subtitle: ""),
-                                          BackendData(id: 3,
+                                          BackendData(id: BackendState.writeKey.rawValue,
                                                       title: "API Write Key",
                                                       subtitle: ""),
-                                          BackendData(id: 4,
-                                                      title: "OneSignal App ID",
-                                                      subtitle: ""),
-                                          BackendData(id: 5,
+//                                          BackendData(id: 4,
+//                                                      title: "OneSignal App ID",
+//                                                      subtitle: ""),
+                                          BackendData(id: BackendState.participantPassword.rawValue,
                                                       title: "Participant Password",
                                                       subtitle: ""),
-                                          BackendData(id: 6,
+                                          BackendData(id: BackendState.watchsurveyLink.rawValue,
                                                       title: "Watch Survey Link",
                                                       subtitle: ""),
-                                          BackendData(id: 7,
+                                          BackendData(id: BackendState.phoneSurveyLink.rawValue,
                                                       title: "Phone Survey Link",
                                                       subtitle: "")]
     
@@ -103,8 +103,8 @@ class BackendViewModel: NSObject, ObservableObject {
             backend.api_write_url = value
         case .writeKey:
             backend.api_write_key = value
-        case .oneSignalAppId:
-            backend.one_signal_id = value
+//        case .oneSignalAppId:
+//            backend.one_signal_id = value
         case .participantPassword:
             backend.participant_password = value
             userIntaractor.currentUser?.passwordID = value
@@ -130,8 +130,8 @@ class BackendViewModel: NSObject, ObservableObject {
             return backend.api_write_url ?? ""
         case .writeKey:
             return backend.api_write_key ?? ""
-        case .oneSignalAppId:
-            return backend.one_signal_id ?? ""
+//        case .oneSignalAppId:
+//            return backend.one_signal_id ?? ""
         case .participantPassword:
             return backend.participant_password ?? ""
         case .watchsurveyLink:
