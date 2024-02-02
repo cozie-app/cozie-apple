@@ -58,7 +58,7 @@ class BackendInteractor {
             model.api_read_key = apiReadKey
             model.api_write_url = apiWriteUrl
             model.api_write_key = apiWriteKey
-            model.one_signal_id = oneSigmnalId
+            model.one_signal_id = Defaults.OneSignalAppID //oneSigmnalId
             model.participant_password = participantPassword
             model.watch_survey_link = watchSurveyLink
             model.phone_survey_link = phoneSurveyLink
@@ -71,7 +71,7 @@ class BackendInteractor {
             backend.api_read_key = apiReadKey
             backend.api_write_url = apiWriteUrl
             backend.api_write_key = apiWriteKey
-            backend.one_signal_id = oneSigmnalId
+            backend.one_signal_id = Defaults.OneSignalAppID//oneSigmnalId
             backend.participant_password = participantPassword
             backend.watch_survey_link = watchSurveyLink
             backend.phone_survey_link = phoneSurveyLink

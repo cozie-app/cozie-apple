@@ -2,7 +2,7 @@
 //  NotificationService.swift
 //  OneSignalNotificationServiceExtension
 //
-//  Created by Alexandr Chmal on 03.05.23.
+//  Created by Alexandr Chmal on 12.01.24.
 //
 
 import UserNotifications
