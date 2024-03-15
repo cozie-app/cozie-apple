@@ -32,6 +32,11 @@ class StorageManager: CozieStorageProtocol {
         
         case healthPrefixSyncedDateKey = "CozieStorageWatchHealthSyncedDateKey"
         case healthLastSyncKey = "CozieStorageWatchLastSyncTimestamp"
+        
+        // offline
+        case storagePostfixTimeOffline = "_wstorage_offline_time"
+        case storagePostfixTempTimeOffline = "_wstorage_temp_offline_time"
+        case healthLastSyncOfflineKey = "CozieStorageWatchLastSyncTimestampOffline"
     }
     
     let storage = UserDefaults.standard
@@ -215,8 +220,8 @@ class StorageManager: CozieStorageProtocol {
     func dataSynced() -> Bool {
         let api = watchSurveyAPI()
         if watchatchSurveyJSON() != nil,
-            !api.key.isEmpty,
-            !api.url.isEmpty,
+//            !api.key.isEmpty,
+//            !api.url.isEmpty,
             !expirimentID().isEmpty,
             !userID().isEmpty,
             !paswordID().isEmpty {
@@ -224,15 +229,6 @@ class StorageManager: CozieStorageProtocol {
         } else {
             return false
         }
-    }
-    
-    // MARK: Health kit
-    func healthLastSyncedTimeInterval() -> Double {
-        return UserDefaults.standard.value(forKey: Keys.healthLastSyncKey.rawValue) as? Double ?? 0.0
-    }
-    
-    func healthUpdateLastSyncedTimeInterval(_ interval: Double) {
-        UserDefaults.standard.set(interval, forKey: Keys.healthLastSyncKey.rawValue)
     }
     
     // MARK: first lanch time interval
@@ -245,24 +241,33 @@ class StorageManager: CozieStorageProtocol {
     }
     
     // MARK: HealthKit data storage
-    func healthLastSyncedTimeInterval(key: String) -> Double {
-        let keyWithStorageID = key + Keys.storagePostfixTime.rawValue
+    
+    func healthLastSyncedTimeInterval(offline: Bool) -> Double {
+        return UserDefaults.standard.value(forKey: offline ? Keys.healthLastSyncOfflineKey.rawValue : Keys.healthLastSyncKey.rawValue) as? Double ?? 0.0
+    }
+    
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, offline: Bool) {
+        UserDefaults.standard.set(interval, forKey: offline ? Keys.healthLastSyncOfflineKey.rawValue : Keys.healthLastSyncKey.rawValue)
+    }
+    
+    func healthLastSyncedTimeInterval(key: String, offline: Bool) -> Double {
+        let keyWithStorageID = key + (offline ? Keys.storagePostfixTimeOffline.rawValue : Keys.storagePostfixTime.rawValue)
         return UserDefaults.standard.value(forKey: keyWithStorageID) as? Double ?? firstLaunchTimeInterval()
     }
     
-    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String) {
-        let keyWithStorageID = key + Keys.storagePostfixTime.rawValue
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool) {
+        let keyWithStorageID = key + (offline ? Keys.storagePostfixTimeOffline.rawValue : Keys.storagePostfixTime.rawValue)
         UserDefaults.standard.set(interval, forKey: keyWithStorageID)
     }
     
-    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String) {
-        let keyWithStorageID = key + Keys.storagePostfixTempTime.rawValue
+    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool) {
+        let keyWithStorageID = key + (offline ? Keys.storagePostfixTempTimeOffline.rawValue : Keys.storagePostfixTempTime.rawValue)
         UserDefaults.standard.set(interval, forKey: keyWithStorageID)
     }
     
-    func healthUpdateFromTempLastSyncedTimeInterval(key: String) {
-        let keyWithStorageID = key + Keys.storagePostfixTime.rawValue
-        let tempKeyWithStorageID = key + Keys.storagePostfixTempTime.rawValue
+    func healthUpdateFromTempLastSyncedTimeInterval(key: String, offline: Bool) {
+        let keyWithStorageID = key + (offline ? Keys.storagePostfixTimeOffline.rawValue : Keys.storagePostfixTime.rawValue)
+        let tempKeyWithStorageID = key + (offline ? Keys.storagePostfixTempTimeOffline.rawValue : Keys.storagePostfixTempTime.rawValue)
         
         if let interval = UserDefaults.standard.value(forKey: tempKeyWithStorageID) as? Double, interval > 0 {
             UserDefaults.standard.set(interval, forKey: keyWithStorageID)

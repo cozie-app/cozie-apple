@@ -47,14 +47,16 @@ class BackgroundUpdateManager {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: refreshID, using: nil) { task in
             self.hendleBgProcessing(task: task, work: nil)
         }
-        lastProcessingEvent = storage.healthLastSyncedTimeInterval()
+        healthKitInteractor.updateState()
+        lastProcessingEvent = storage.healthLastSyncedTimeInterval(offline: healthKitInteractor.offlineMode.isEnabled)
     }
     
     func registerBackgroundProcessing(work: (()->())? = nil ) {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: processingID, using: nil) { task in
             self.hendleBgProcessing(task: task, work: work)
         }
-        lastProcessingEvent = storage.healthLastSyncedTimeInterval()
+        healthKitInteractor.updateState()
+        lastProcessingEvent = storage.healthLastSyncedTimeInterval(offline: healthKitInteractor.offlineMode.isEnabled)
     }
     
     func scheduleBgTaskRefresh() {
@@ -88,7 +90,8 @@ class BackgroundUpdateManager {
         }
         
         // update lastProcessingEvent
-        lastProcessingEvent = storage.healthLastSyncedTimeInterval()
+        healthKitInteractor.updateState()
+        lastProcessingEvent = storage.healthLastSyncedTimeInterval(offline: healthKitInteractor.offlineMode.isEnabled)
         
         // preventing double data sending
         if let lastUpdate = lastProcessingEvent {
@@ -140,7 +143,7 @@ class BackgroundUpdateManager {
             let lastEventDate = Date().timeIntervalSince1970
             self.lastProcessingEvent = lastEventDate
             
-            self.storage.healthUpdateLastSyncedTimeInterval(lastEventDate)
+            self.storage.healthUpdateLastSyncedTimeInterval(lastEventDate, offline: healthKitInteractor.offlineMode.isEnabled)
             
             UserDefaults.standard.setValue(ExecutionStatus.end.rawValue, forKey: self.updateStatusKey)
             task.setTaskCompleted(success: true)

@@ -10,13 +10,13 @@ import Foundation
 protocol CozieStorageProtocol {
     func playerID() -> String
     
-    func healthLastSyncedTimeInterval() -> Double
+    func healthLastSyncedTimeInterval(offline: Bool) -> Double
     
-    func healthUpdateLastSyncedTimeInterval(_ interval: Double)
-    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String)
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, offline: Bool)
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool)
     
-    func healthLastSyncedTimeInterval(key: String) -> Double
+    func healthLastSyncedTimeInterval(key: String, offline: Bool) -> Double
     
-    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String)
-    func healthUpdateFromTempLastSyncedTimeInterval(key: String)
+    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool)
+    func healthUpdateFromTempLastSyncedTimeInterval(key: String, offline: Bool)
 }

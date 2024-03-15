@@ -77,10 +77,12 @@ struct CozieWatchApp: App {
     }
     
     private func prepareHealthInteractor() {
-        if StorageManager.shared.healthLastSyncedTimeInterval() == 0.0 {
+        
+        if StorageManager.shared.healthLastSyncedTimeInterval(offline: false) == 0.0 {
             
             let interval = Date().timeIntervalSince1970
-            StorageManager.shared.healthUpdateLastSyncedTimeInterval(interval)
+            StorageManager.shared.healthUpdateLastSyncedTimeInterval(interval, offline: false)
+            StorageManager.shared.healthUpdateLastSyncedTimeInterval(interval, offline: true)
             StorageManager.shared.updatefirstLaunchTimeInterval(interval)
             
             healthKitInteractor.requestHealthAuth()

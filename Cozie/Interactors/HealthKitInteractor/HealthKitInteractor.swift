@@ -11,6 +11,7 @@ import HealthKit
 class HealthKitInteractor {
     static let minInterval: Double = 60
     typealias SleepData = (sleepKey: String, startDate: Date, value: Double)
+    typealias WorkaoutData = (key: String, startDate: Date, value: Double)
     
     enum HeathDataKeys: String {
         case heartRateKey = "_heart_rate"
@@ -35,6 +36,14 @@ class HealthKitInteractor {
         case sleepCore = "_sleep_core"
         case sleepREM = "_sleep_REM"
         case sleepUnspecified = "_sleep_unspecified"
+        
+        //workaut
+        case workout = "_workout"
+        case workoutType = "_workout_type"
+        case workoutDuration = "_workout_duration"
+        case activeEnergyBurned = "_active_energy_burned"
+        case moveTime = "_move_time"
+        case exerciseTime = "_exercise_time"
     }
     
     private let healthStore = HKHealthStore()
@@ -42,6 +51,8 @@ class HealthKitInteractor {
     private let userData: UserDataProtocol
     private let backendData: BackendDataProtocol
     private let service: BaseRepository = BaseRepository()
+    let offlineMode = OfflineModeManager()
+    
     static var sendDataInProgress = false
     
     let logger: LoggerProtocol
@@ -49,26 +60,36 @@ class HealthKitInteractor {
     private let dataPrefix: String
     
     let allTypesiPhone = [HKObjectType.quantityType(forIdentifier: .heartRate)!,
-                     HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
-                     HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
-                     HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
-                     HKObjectType.quantityType(forIdentifier: .stepCount)!,
-                     HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
-                     HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!,
-                     HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                     HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
-                     HKObjectType.quantityType(forIdentifier: .appleStandTime)!]
+                          HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
+                          HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
+                          HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
+                          HKObjectType.quantityType(forIdentifier: .stepCount)!,
+                          HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
+                          HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!,
+                          HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                          HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
+                          HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
+                          //new
+                          .workoutType(),
+                          HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                          HKObjectType.quantityType(forIdentifier: .appleMoveTime)!,
+                          HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!]
     
     let allWatchTypes = [HKObjectType.quantityType(forIdentifier: .heartRate)!,
-                     HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
-                     HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
-                     HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
-                     HKObjectType.quantityType(forIdentifier: .stepCount)!,
-                     HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
-                     HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!,
-                     HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                     HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
-                     HKObjectType.quantityType(forIdentifier: .appleStandTime)!]
+                         HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
+                         HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
+                         HKObjectType.quantityType(forIdentifier: .headphoneAudioExposure)!,
+                         HKObjectType.quantityType(forIdentifier: .stepCount)!,
+                         HKObjectType.quantityType(forIdentifier: .oxygenSaturation)!,
+                         HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!,
+                         HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                         HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
+                         HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
+                         //new
+                         .workoutType(),
+                         HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                         HKObjectType.quantityType(forIdentifier: .appleMoveTime)!,
+                         HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!]
     
     let allTypes: Set<HKSampleType>
     
@@ -124,6 +145,7 @@ class HealthKitInteractor {
         return false
     }
     
+    // MARK: - Request Health Auth
     func requestHealthAuth(completion: ((_ succes: Bool)->())? = nil) {
         if HKHealthStore.isHealthDataAvailable() {
             healthStore.requestAuthorization(toShare: nil, read: allTypes) { success, error in
@@ -138,12 +160,12 @@ class HealthKitInteractor {
     }
     
     private func getLastDaySamples(for sampleType: HKSampleType,
-                                   completion: @escaping ([HKQuantitySample], [SleepData], Error?) -> Swift.Void) {
+                                   completion: @escaping ([HKQuantitySample], [SleepData], [WorkaoutData], Error?) -> Swift.Void) {
         var lastSync = Date().timeIntervalSince1970
         let typeKey = healthKeyFor(simple: sampleType)
         
         // save last sync time for each data
-        let lastSavedSync = storage.healthLastSyncedTimeInterval(key: typeKey)
+        let lastSavedSync = storage.healthLastSyncedTimeInterval(key: typeKey, offline: offlineMode.isEnabled)
         
         if lastSavedSync > 0 {
             lastSync = lastSavedSync
@@ -163,10 +185,15 @@ class HealthKitInteractor {
                                         predicate: predicate,
                                         limit: HKObjectQueryNoLimit,
                                         sortDescriptors: [sortDescriptor]) { [weak self] (query, samples, error) in
+            if samples?.isEmpty ?? true {
+                completion([], [], [], error)
+                return
+            }
+            
             // Sleep Analysis
             if typeKey == HeathDataKeys.sleepAnalysisKey.rawValue {
                 guard let sleepSamples = samples as? [HKCategorySample], let self = self else {
-                    completion([], [], error)
+                    completion([], [], [], error)
                     return
                 }
                 
@@ -186,16 +213,37 @@ class HealthKitInteractor {
                 }
                 
                 if lastSyncInterval > 0, !sleepData.isEmpty {
-                    self.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey)
+                    self.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey, offline: offlineMode.isEnabled)
                 }
                 
-                completion([], sleepData, nil)
+                completion([], sleepData, [], nil)
+            } else if let samplesWorkaout = samples as? [HKWorkout] {
+                var lastSyncInterval = 0.0
+                var workaoutData: [WorkaoutData] = []
+                for sampleWorkaout in samplesWorkaout {
+                    if !typeKey.isEmpty {
+                        let lastInterval = sampleWorkaout.endDate.timeIntervalSince1970
+                        if lastSyncInterval < lastInterval {
+                            lastSyncInterval = lastInterval
+                        }
+                        if lastInterval > lastSync {
+                            workaoutData.append((HeathDataKeys.workoutType.rawValue, sampleWorkaout.startDate, Double(sampleWorkaout.workoutActivityType.rawValue)))
+                            workaoutData.append((HeathDataKeys.workoutDuration.rawValue, sampleWorkaout.startDate, sampleWorkaout.duration))
+                        }
+                    }
+                }
+                
+                if lastSyncInterval > 0 {
+                    self?.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey, offline: self?.offlineMode.isEnabled ?? false)
+                }
+                
+                completion([], [], workaoutData, nil)
             } else {
                 guard let samples = samples as? [HKQuantitySample] else {
-                    completion([], [], error)
+                    completion([], [], [], error)
                     return
                 }
-
+                
                 var lastSyncInterval = 0.0
                 samples.forEach { obj in
                     let interval = obj.endDate.timeIntervalSince1970
@@ -206,40 +254,40 @@ class HealthKitInteractor {
                     }
                 }
                 if lastSyncInterval > 0 {
-                    self?.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey)
+                    self?.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey, offline: self?.offlineMode.isEnabled ?? false)
                 }
                 //self?.testLog(trigger: "(HealthKit)Samples for -> (\(typeKey))", details: "Last sync interval: (\(lastSyncInterval))", state: "info")
                 //
                 
-                completion(samples, [], nil)
+                completion(samples, [], [], nil)
             }
         }
         
         healthStore.execute(sampleQuery)
     }
-    
+    // MARK: - Helfer
     private let healthDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return dateFormatter
     }()
     
+    // MARK: - Get HealthKit Data
     private func getDataObject(type: HKSampleType?, trigger: String, completion: @escaping ([HealthModel], [HKQuantitySample]) -> Void) {
         guard let type = type, let user = userData.userInfo else {
             debugPrint("\(String(describing: type)) Sample Type is no longer available in HealthKit or User not exist")
             completion([], [])
             return
         }
-        
         let tag = Tags(idOnesignal: storage.playerID(), idParticipant: user.participantID, idPassword: user.passwordID)
         
-        getLastDaySamples(for: type) { [weak self] (samples, sleepData, error) in
+        getLastDaySamples(for: type) { [weak self] (samples, sleepData, workautData, error) in
             guard let self = self else { return }
             
             var healthModels: [HealthModel] = []
             
             if samples.count > 0 {
-                let lastSunccesTimestamp = self.storage.healthLastSyncedTimeInterval(key: self.healthKeyFor(simple: type))
+                let lastSunccesTimestamp = self.storage.healthLastSyncedTimeInterval(key: self.healthKeyFor(simple: type), offline: offlineMode.isEnabled)
                 
                 let group = DispatchGroup()
                 samples.forEach({
@@ -282,6 +330,17 @@ class HealthKitInteractor {
                     healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
                 }
                 completion(healthModels, samples)
+                
+            } else if workautData.count > 0 {
+                workautData.forEach { (workautKey, startDate, value) in
+                    if workautKey == HeathDataKeys.workoutType.rawValue {
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
+                    } else {
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value)))
+                    }
+                }
+                completion(healthModels, samples)
+                
             } else if let error = error {
                 completion([], samples)
                 debugPrint("error: \(error)")
@@ -321,6 +380,14 @@ class HealthKitInteractor {
             return HeathDataKeys.sleepAnalysisKey.rawValue
         case HKObjectType.quantityType(forIdentifier: .appleSleepingWristTemperature):
             return HeathDataKeys.wristTemperatureKey.rawValue
+        case .workoutType():
+            return HeathDataKeys.workout.rawValue
+        case HKObjectType.quantityType(forIdentifier: .activeEnergyBurned):
+            return HeathDataKeys.activeEnergyBurned.rawValue
+        case HKObjectType.quantityType(forIdentifier: .appleMoveTime):
+            return HeathDataKeys.moveTime.rawValue
+        case HKObjectType.quantityType(forIdentifier: .appleExerciseTime):
+            return HeathDataKeys.exerciseTime.rawValue
         default:
             return ""
         }
@@ -393,12 +460,65 @@ class HealthKitInteractor {
             data = sample.quantity.doubleValue(for: HKUnit(from: "ml"))
         case HKObjectType.quantityType(forIdentifier: .appleSleepingWristTemperature):
             data = sample.quantity.doubleValue(for: HKUnit.degreeCelsius())
+//        case .workoutType():
+//            return HeathDataKeys.workout.rawValue
+        case HKObjectType.quantityType(forIdentifier: .activeEnergyBurned):
+             data = sample.quantity.doubleValue(for: .kilocalorie())
+        case HKObjectType.quantityType(forIdentifier: .appleMoveTime):
+             data = sample.quantity.doubleValue(for: .minute())
+        case HKObjectType.quantityType(forIdentifier: .appleExerciseTime):
+             data = sample.quantity.doubleValue(for: .minute())
         default:
             break
         }
         completion(data)
     }
     
+    // MARK: - Update Sync And Log Date
+    private func updateSyncAndLogDate() {
+        let lastUpdateDate = Date()
+        self.storage.healthUpdateLastSyncedTimeInterval(lastUpdateDate.timeIntervalSince1970, offline: self.offlineMode.isEnabled)
+        
+        self.allTypes.forEach { obj in
+            self.storage.healthUpdateFromTempLastSyncedTimeInterval(key: self.healthKeyFor(simple: obj), offline: self.offlineMode.isEnabled)
+        }
+
+        updateLogDate(date: lastUpdateDate)
+    }
+    
+    private func updateLogDate(date: Date) {
+        // update offline date
+        self.storage.healthUpdateLastSyncedTimeInterval(date.timeIntervalSince1970, offline: true)
+        self.allTypes.forEach { obj in
+            self.storage.healthUpdateFromTempLastSyncedTimeInterval(key: self.healthKeyFor(simple: obj), offline: true)
+        }
+    }
+    // MARK: -
+    
+    private func filterLoggedData(models: [HealthModel]) -> [HealthModel] {
+        let logedTimeIntervel = self.storage.healthLastSyncedTimeInterval(offline: true)
+        let fillteredData = models.filter { model in
+            if let date = self.healthDateFormatter.date(from: model.time) {
+                return date.timeIntervalSince1970 > logedTimeIntervel
+            } else {
+                return false
+            }
+        }
+        
+        return fillteredData
+    }
+    
+    private func logModelsIfNeeded(encoder: JSONEncoder, models: [HealthModel]) {
+        let loggData = filterLoggedData(models: models)
+        if !loggData.isEmpty {
+            let json = try? encoder.encode(loggData)
+            if let json {
+                self.logger.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
+            }
+        }
+    }
+    
+    // MARK: - Get All Requested Data
     func getAllRequestedData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, completion: ((_ models: [HealthModel])->())?) {
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
@@ -408,8 +528,10 @@ class HealthKitInteractor {
             let group = DispatchGroup()
             for type in self.allTypes {
                 group.enter()
+                print("\(type) enter(type)")
                 self.getDataObject(type: type, trigger: trigger) { infos, simples in
                     list.append(contentsOf: infos)
+                    print("\(type) leav(type)")
                     group.leave()
                 }
             }
@@ -420,10 +542,13 @@ class HealthKitInteractor {
         }
     }
     
+    // MARK: - Send And Log Date
     func sendData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, timeout: Double? = nil, completion: ((_ succces: Bool)->())?) {
         
         // testLog(trigger: trigger, details: "WS:Sending HealthKit data started", state: "triggered")
         
+        // update offline status
+        updateState()
         // prevent data from being sent if a previous send has not completed
         if HealthKitInteractor.sendDataInProgress {
             completion?(false)
@@ -437,7 +562,7 @@ class HealthKitInteractor {
             sendTimeout = customTimeout
         }
         
-        if ((Date().timeIntervalSince1970 - storage.healthLastSyncedTimeInterval()) - sendTimeout) < 0 {
+        if ((Date().timeIntervalSince1970 - storage.healthLastSyncedTimeInterval(offline: offlineMode.isEnabled)) - sendTimeout) < 0 {
             HealthKitInteractor.sendDataInProgress = false
             completion?(false)
             // testLog(trigger: trigger, details: "WS:Minimum time interval not reached", state: "error")
@@ -462,29 +587,46 @@ class HealthKitInteractor {
                     do {
                         let bodyJson = try JSONEncoder().encode(models)
                         
-                        // log data
                         let encoder = JSONEncoder()
                         encoder.outputFormatting = .withoutEscapingSlashes
-                        let json = try? encoder.encode(models)
-                        if let json {
-                            self.logger.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
+                        
+                        // log data
+                        // filtering of logged data
+                        if !self.offlineMode.isEnabled && self.storage.healthLastSyncedTimeInterval(offline: true) < self.storage.healthLastSyncedTimeInterval(offline: false) {
+                            self.logModelsIfNeeded(encoder: encoder, models: models)
+                        } else {
+                            // filtering of logged data
+                            if self.storage.healthLastSyncedTimeInterval(offline: true) > self.storage.healthLastSyncedTimeInterval(offline: false) {
+                                self.logModelsIfNeeded(encoder: encoder, models: models)
+                            } else {
+                                let json = try? encoder.encode(models)
+                                if let json {
+                                    self.logger.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
+                                }
+                            }
+                            // prevent request in offline mode
+                            if self.offlineMode.isEnabled {
+                                let lastUpdateDate = Date()
+                                self.updateLogDate(date: lastUpdateDate)
+                                
+                                HealthKitInteractor.sendDataInProgress = false
+                                // self.testLog(trigger: trigger, details: "WS:(HealthKit)Service error: \(error.localizedDescription)", state: "error")
+                                completion?(false)
+                                return
+                            }
                         }
                         
                         self.service.post(url: writeInfo.wUrl, body: bodyJson, key: writeInfo.wKey) { result in
                             switch result {
                             case .success(_):
-                                let lastUpdateDate = Date()
-                                self.storage.healthUpdateLastSyncedTimeInterval(lastUpdateDate.timeIntervalSince1970)
-                                
-                                self.allTypes.forEach { obj in
-                                    self.storage.healthUpdateFromTempLastSyncedTimeInterval(key: self.healthKeyFor(simple: obj))
-                                }
+                                self.updateSyncAndLogDate()
                                 
                                 HealthKitInteractor.sendDataInProgress = false
                                 // self.testLog(trigger: trigger, details: "WS: (HealthKit)Data sent -> date:\(lastUpdateDate)", state: "success")
                                 completion?(true)
                                 
                             case .failure(let error):
+                                self.updateLogDate(date: Date())
                                 HealthKitInteractor.sendDataInProgress = false
                                 debugPrint(error.localizedDescription)
                                 // self.testLog(trigger: trigger, details: "WS:(HealthKit)Service error: \(error.localizedDescription)", state: "error")
@@ -512,21 +654,123 @@ class HealthKitInteractor {
         }
     }
     
+    func updateState() {
+        if let info = backendData.apiWriteInfo {
+            offlineMode.updateWith(apiInfo: info)
+        }
+    }
+    
     // log test
-//    private func testLog(trigger: String, details: String, state: String = "error") {
-//        if dataPrefix == "ts" {
-//            return
-//        }
-//
-//        let str =
-//        """
-//        {
-//        "trigger": "\(trigger)",
-//        "si_health_kit_state": "\(state)",
-//        "si_health_kit_details": "\(details)"
-//        }
-//        """
-//        logger.logInfo(action: "", info: str)
-//    }
+    //    private func testLog(trigger: String, details: String, state: String = "error") {
+    //        if dataPrefix == "ts" {
+    //            return
+    //        }
+    //
+    //        let str =
+    //        """
+    //        {
+    //        "trigger": "\(trigger)",
+    //        "si_health_kit_state": "\(state)",
+    //        "si_health_kit_details": "\(details)"
+    //        }
+    //        """
+    //        logger.logInfo(action: "", info: str)
+    //    }
+}
+
+extension HKWorkoutActivityType {
+
+    /*
+     Simple mapping of available workout types to a human readable name.
+     */
+    var name: String {
+        switch self {
+        case .americanFootball:             return "American Football"
+        case .archery:                      return "Archery"
+        case .australianFootball:           return "Australian Football"
+        case .badminton:                    return "Badminton"
+        case .baseball:                     return "Baseball"
+        case .basketball:                   return "Basketball"
+        case .bowling:                      return "Bowling"
+        case .boxing:                       return "Boxing"
+        case .climbing:                     return "Climbing"
+        case .crossTraining:                return "Cross Training"
+        case .curling:                      return "Curling"
+        case .cycling:                      return "Cycling"
+        case .dance:                        return "Dance"
+        case .danceInspiredTraining:        return "Dance Inspired Training"
+        case .elliptical:                   return "Elliptical"
+        case .equestrianSports:             return "Equestrian Sports"
+        case .fencing:                      return "Fencing"
+        case .fishing:                      return "Fishing"
+        case .functionalStrengthTraining:   return "Functional Strength Training"
+        case .golf:                         return "Golf"
+        case .gymnastics:                   return "Gymnastics"
+        case .handball:                     return "Handball"
+        case .hiking:                       return "Hiking"
+        case .hockey:                       return "Hockey"
+        case .hunting:                      return "Hunting"
+        case .lacrosse:                     return "Lacrosse"
+        case .martialArts:                  return "Martial Arts"
+        case .mindAndBody:                  return "Mind and Body"
+        case .mixedMetabolicCardioTraining: return "Mixed Metabolic Cardio Training"
+        case .paddleSports:                 return "Paddle Sports"
+        case .play:                         return "Play"
+        case .preparationAndRecovery:       return "Preparation and Recovery"
+        case .racquetball:                  return "Racquetball"
+        case .rowing:                       return "Rowing"
+        case .rugby:                        return "Rugby"
+        case .running:                      return "Running"
+        case .sailing:                      return "Sailing"
+        case .skatingSports:                return "Skating Sports"
+        case .snowSports:                   return "Snow Sports"
+        case .soccer:                       return "Soccer"
+        case .softball:                     return "Softball"
+        case .squash:                       return "Squash"
+        case .stairClimbing:                return "Stair Climbing"
+        case .surfingSports:                return "Surfing Sports"
+        case .swimming:                     return "Swimming"
+        case .tableTennis:                  return "Table Tennis"
+        case .tennis:                       return "Tennis"
+        case .trackAndField:                return "Track and Field"
+        case .traditionalStrengthTraining:  return "Traditional Strength Training"
+        case .volleyball:                   return "Volleyball"
+        case .walking:                      return "Walking"
+        case .waterFitness:                 return "Water Fitness"
+        case .waterPolo:                    return "Water Polo"
+        case .waterSports:                  return "Water Sports"
+        case .wrestling:                    return "Wrestling"
+        case .yoga:                         return "Yoga"
+
+        // iOS 10
+        case .barre:                        return "Barre"
+        case .coreTraining:                 return "Core Training"
+        case .crossCountrySkiing:           return "Cross Country Skiing"
+        case .downhillSkiing:               return "Downhill Skiing"
+        case .flexibility:                  return "Flexibility"
+        case .highIntensityIntervalTraining:    return "High Intensity Interval Training"
+        case .jumpRope:                     return "Jump Rope"
+        case .kickboxing:                   return "Kickboxing"
+        case .pilates:                      return "Pilates"
+        case .snowboarding:                 return "Snowboarding"
+        case .stairs:                       return "Stairs"
+        case .stepTraining:                 return "Step Training"
+        case .wheelchairWalkPace:           return "Wheelchair Walk Pace"
+        case .wheelchairRunPace:            return "Wheelchair Run Pace"
+
+        // iOS 11
+        case .taiChi:                       return "Tai Chi"
+        case .mixedCardio:                  return "Mixed Cardio"
+        case .handCycling:                  return "Hand Cycling"
+
+        // iOS 13
+        case .discSports:                   return "Disc Sports"
+        case .fitnessGaming:                return "Fitness Gaming"
+
+        // Catch-all
+        default:                            return "Other"
+        }
+    }
+
 }
 

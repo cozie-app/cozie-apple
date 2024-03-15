@@ -12,11 +12,13 @@ class HealthFilds: Encodable {
     var transmitTtrigger: String = ""
     var healthKey: String = ""
     var healthValue: Double = 0.0
+    var healthStringValue: String = ""
     
-    init(transmitTtrigger: String, healthKey: String, healthValue: Double) {
+    init(transmitTtrigger: String, healthKey: String, healthValue: Double, healthStringValue: String = "") {
         self.transmitTtrigger = transmitTtrigger
         self.healthKey = healthKey
         self.healthValue = healthValue
+        self.healthStringValue = healthStringValue
     }
     
     enum HealthFildsCodingKeys: CodingKey {
@@ -53,7 +55,11 @@ class HealthFilds: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: HealthFildsCodingKeys.self)
         try container.encode(transmitTtrigger, forKey: .transmitTtrigger)
-        try container.encode(healthValue, forKey: .info(key: healthKey))
+        if healthStringValue.isEmpty {
+            try container.encode(healthValue, forKey: .info(key: healthKey))
+        } else {
+            try container.encode(healthStringValue, forKey: .info(key: healthKey))
+        }
     }
 }
 

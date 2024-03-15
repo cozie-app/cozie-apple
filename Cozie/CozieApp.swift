@@ -22,10 +22,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         self.launchOptions = launchOptions
         
         // update sync date if not exist
-        if CozieStorage.shared.healthLastSyncedTimeInterval() == 0.0 {
+        if CozieStorage.shared.healthLastSyncedTimeInterval(offline: false) == 0.0 {
             
             let interval = Date().timeIntervalSince1970
-            CozieStorage.shared.healthUpdateLastSyncedTimeInterval(interval)
+            CozieStorage.shared.healthUpdateLastSyncedTimeInterval(interval, offline: false)
+            CozieStorage.shared.healthUpdateLastSyncedTimeInterval(interval, offline: true)
             CozieStorage.shared.updatefirstLaunchTimeInterval(interval)
             
             healthKitInteractor.requestHealthAuth()
