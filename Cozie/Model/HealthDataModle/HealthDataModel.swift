@@ -9,16 +9,30 @@ import Foundation
 
 // MARK: - HealthModel
 class HealthFilds: Encodable {
+    
+    private enum HealthModelKeys: String {
+        case startTime = "start_time"
+        case endTime = "end_time"
+    }
+    
     var transmitTtrigger: String = ""
     var healthKey: String = ""
     var healthValue: Double = 0.0
+    
+    // workaut
     var healthStringValue: String = ""
     
-    init(transmitTtrigger: String, healthKey: String, healthValue: Double, healthStringValue: String = "") {
+    // start/end time
+    var startTime: String = ""
+    var endTime: String = ""
+    
+    init(transmitTtrigger: String, healthKey: String, healthValue: Double, healthStringValue: String = "", startTime: String = "", endTime: String = "") {
         self.transmitTtrigger = transmitTtrigger
         self.healthKey = healthKey
         self.healthValue = healthValue
         self.healthStringValue = healthStringValue
+        self.startTime = startTime
+        self.endTime = endTime
     }
     
     enum HealthFildsCodingKeys: CodingKey {
@@ -59,6 +73,12 @@ class HealthFilds: Encodable {
             try container.encode(healthValue, forKey: .info(key: healthKey))
         } else {
             try container.encode(healthStringValue, forKey: .info(key: healthKey))
+        }
+        
+        // start_time -- end_time
+        if !startTime.isEmpty && !endTime.isEmpty {
+            try container.encode(startTime, forKey: .info(key: healthKey + "_" + HealthModelKeys.startTime.rawValue))
+            try container.encode(endTime, forKey: .info(key: healthKey + "_" + HealthModelKeys.endTime.rawValue))
         }
     }
 }

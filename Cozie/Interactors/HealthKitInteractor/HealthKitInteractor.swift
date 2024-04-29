@@ -308,13 +308,12 @@ class HealthKitInteractor {
                         if let lastModel = healthModels.last {
                             // prevent value duplicates
                             if lastModel.time != currentDataString {
-                                healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0)))
+                                healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
                                 //
                                 // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                             }
                         } else {
-                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0)))
-                            
+                            healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
                             // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                         }
                         group.leave()
@@ -347,6 +346,16 @@ class HealthKitInteractor {
             } else {
                 completion([], samples)
             }
+        }
+    }
+    
+    private func healthModel(type: HKSampleType, sample: HKQuantitySample, user: CUserInfo, tag: Tags, currentDataString: String, trigger: String, value: Double?) -> HealthModel {
+        
+        if type == HKObjectType.quantityType(forIdentifier: .stepCount) || type == HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) {
+            let endDataString = self.healthDateFormatter.string(from: sample.endDate)
+            return HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0, startTime: currentDataString, endTime: endDataString))
+        } else {
+            return HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0))
         }
     }
     
