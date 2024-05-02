@@ -20,6 +20,8 @@ class CozieStorage: CozieStorageProtocol {
         // Health Kit
         case healthPrefixSyncedDateKey = "CozieStorageHealthSyncedDateKey"
         case healthLastSyncKey = "CozieStorageLastSyncTimestamp"
+        // offline
+        case healthLastSyncOffleinKey = "CozieStorageLastSyncTimestampOffline"
         
         // Location
         case locationLatKey = "location_lat"
@@ -28,6 +30,10 @@ class CozieStorage: CozieStorageProtocol {
         // Storage postfix
         case storagePostfixTime = "_storage_time"
         case storagePostfixTempTime = "_storage_temp_time"
+        
+        // offline
+        case storagePostfixTimeOffline = "_offline_storage_time"
+        case storagePostfixTempTimeOffline = "_offline_storage_temp_time"
         
         case firstLaunchTimeInterval = "firstLaunchTimeInterval"
     }
@@ -73,16 +79,7 @@ class CozieStorage: CozieStorageProtocol {
     func saveSurveySynced(_ synced: Bool) {
         UserDefaults.standard.set(synced, forKey: CozieStorageKeys.surveySynced.rawValue)
     }
-    
-    // MARK: Health kit
-    func healthLastSyncedTimeInterval() -> Double {
-        return UserDefaults.standard.value(forKey: CozieStorageKeys.healthLastSyncKey.rawValue) as? Double ?? 0.0
-    }
-    
-    func healthUpdateLastSyncedTimeInterval(_ interval: Double) {
-        UserDefaults.standard.set(interval, forKey: CozieStorageKeys.healthLastSyncKey.rawValue)
-    }
-    
+
     // MARK: first lanch time interval
     func  firstLaunchTimeInterval() -> Double {
         return UserDefaults.standard.value(forKey: CozieStorageKeys.firstLaunchTimeInterval.rawValue) as? Double ?? 0.0
@@ -93,29 +90,63 @@ class CozieStorage: CozieStorageProtocol {
     }
     
     // MARK: HealthKit data storage
-    func healthLastSyncedTimeInterval(key: String) -> Double {
-        let keyWithStorageID = key + CozieStorageKeys.storagePostfixTime.rawValue
+    
+    func healthLastSyncedTimeInterval(offline: Bool) -> Double {
+        return UserDefaults.standard.value(forKey: offline ? CozieStorageKeys.healthLastSyncOffleinKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue) as? Double ?? 0.0
+    }
+    
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, offline: Bool) {
+        UserDefaults.standard.set(interval, forKey: offline ? CozieStorageKeys.healthLastSyncOffleinKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue)
+    }
+    
+    func healthLastSyncedTimeInterval(key: String, offline: Bool) -> Double {
+        let keyWithStorageID: String
+        if offline {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTimeOffline.rawValue
+        } else {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTime.rawValue
+        }
         return UserDefaults.standard.value(forKey: keyWithStorageID) as? Double ?? firstLaunchTimeInterval()
     }
     
-    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String) {
-        let keyWithStorageID = key + CozieStorageKeys.storagePostfixTime.rawValue
+    func healthUpdateLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool) {
+        let keyWithStorageID: String
+        if offline {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTimeOffline.rawValue
+        } else {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTime.rawValue
+        }
         UserDefaults.standard.set(interval, forKey: keyWithStorageID)
     }
     
-    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String) {
-        let keyWithStorageID = key + CozieStorageKeys.storagePostfixTempTime.rawValue
+    func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool) {
+        let keyWithStorageID: String
+        if offline {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTempTimeOffline.rawValue
+        } else {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTempTime.rawValue
+        }
+        
         UserDefaults.standard.set(interval, forKey: keyWithStorageID)
     }
     
-    func healthUpdateFromTempLastSyncedTimeInterval(key: String) {
-        let keyWithStorageID = key + CozieStorageKeys.storagePostfixTime.rawValue
-        let tempKeyWithStorageID = key + CozieStorageKeys.storagePostfixTempTime.rawValue
+    func healthUpdateFromTempLastSyncedTimeInterval(key: String, offline: Bool) {
+        let keyWithStorageID: String
+        let tempKeyWithStorageID: String
+        
+        if offline {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTimeOffline.rawValue
+            tempKeyWithStorageID = key + CozieStorageKeys.storagePostfixTempTimeOffline.rawValue
+        } else {
+            keyWithStorageID = key + CozieStorageKeys.storagePostfixTime.rawValue
+            tempKeyWithStorageID = key + CozieStorageKeys.storagePostfixTempTime.rawValue
+        }
         
         if let interval = UserDefaults.standard.value(forKey: tempKeyWithStorageID) as? Double, interval > 0 {
             UserDefaults.standard.set(interval, forKey: keyWithStorageID)
         }
     }
+    
     // location
     func updateLastLocation(lat: Double, lng: Double) {
         UserDefaults.standard.set(lat, forKey: CozieStorageKeys.locationLatKey.rawValue)

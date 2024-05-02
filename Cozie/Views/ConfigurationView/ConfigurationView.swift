@@ -15,7 +15,7 @@ struct ConfigurationView: View {
                 .foregroundColor(.appOrange)
                 .padding(.top, 50)
             
-            Text("Cosie")
+            Text("Cozie")
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding(.top, 20)

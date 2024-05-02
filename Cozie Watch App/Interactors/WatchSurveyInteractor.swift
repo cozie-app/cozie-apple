@@ -27,7 +27,8 @@ class SurveyHistory: Codable {
 
 class WatchSurveyInteractor {
     let healthInteractor: HealthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, loger: StorageManager.shared, dataPrefix: "ws")
-
+    let offlineMode = OfflineModeManager()
+    
     func sendSurveyData(watchSurvey: WatchSurvey?,
                         selectedOptions:[SelectedSurveyInfo],
                         location: CLLocation?,
@@ -72,24 +73,31 @@ class WatchSurveyInteractor {
         do {
             let json = try JSONSerialization.data(withJSONObject: survey, options: .prettyPrinted)
             let api = storage.watchSurveyAPI()
+            offlineMode.updateWith(apiInfo: (wUrl: api.url, wKey: api.key))
             
             let jsonToLog = try JSONSerialization.data(withJSONObject: survey, options: .withoutEscapingSlashes)
             debugPrint(jsonToLog)
             storage.seveLogs(logs: String(data: jsonToLog, encoding: .utf8) ?? "")
             logsComplition?()
             
-            BaseRepository().post(url: api.url, body: json, key: api.key) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
-                    //completion?(true, nil)
-                    self?.healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0) { succces in
-                        completion?(true, nil)
+            if  offlineMode.isEnabled {
+                healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0) { succces in
+                    completion?(true, nil)
+                }
+            } else {
+                BaseRepository().post(url: api.url, body: json, key: api.key) { [weak self] result in
+                    switch result {
+                    case .success(let data):
+                        debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
+                        //completion?(true, nil)
+                        self?.healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0) { succces in
+                            completion?(true, nil)
+                        }
+                    case .failure(let error):
+                        self?.saveNotSyncedSurvey(jsonData: json, userInfo: storage.userID() + storage.expirimentID())
+                        debugPrint(error.localizedDescription)
+                        completion?(false, error)
                     }
-                case .failure(let error):
-                    self?.saveNotSyncedSurvey(jsonData: json, userInfo: storage.userID() + storage.expirimentID())
-                    debugPrint(error.localizedDescription)
-                    completion?(false, error)
                 }
             }
             
@@ -116,15 +124,22 @@ class WatchSurveyInteractor {
     
     func pushSurveyHistoryData(watchSurvey: SurveyHistory, storage: StorageManager = StorageManager.shared, completion:((_ success: Bool)->())?) {
         let api = storage.watchSurveyAPI()
-        BaseRepository().post(url: api.url, body: watchSurvey.jsonData, key: api.key) { result in
-            switch result {
-            case .success(let data):
-                debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
-                completion?(true)
-            case .failure(let error):
-                debugPrint(error.localizedDescription)
-                completion?(false)
+    
+        offlineMode.updateWith(apiInfo: (wUrl: api.url, wKey: api.key))
+        
+        if !offlineMode.isEnabled {
+            BaseRepository().post(url: api.url, body: watchSurvey.jsonData, key: api.key) { result in
+                switch result {
+                case .success(let data):
+                    debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
+                    completion?(true)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                    completion?(false)
+                }
             }
+        } else {
+            completion?(false)
         }
     }
     
@@ -150,23 +165,27 @@ class WatchSurveyInteractor {
                                         WatchSurveyKeys.fields.rawValue: filds]
         
         let api = storage.watchSurveyAPI()
-        do {
-            let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
-            
-            BaseRepository().post(url: api.url, body: json, key: api.key) { result in
-                switch result {
-                case .success(let data):
-                    debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
-                    completion?(true)
-                case .failure(let error):
-                    debugPrint(error.localizedDescription)
-                    completion?(false)
+        offlineMode.updateWith(apiInfo: (wUrl: api.url, wKey: api.key))
+        
+        if !offlineMode.isEnabled {
+            do {
+                let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
+                
+                BaseRepository().post(url: api.url, body: json, key: api.key) { result in
+                    switch result {
+                    case .success(let data):
+                        debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
+                        completion?(true)
+                    case .failure(let error):
+                        debugPrint(error.localizedDescription)
+                        completion?(false)
+                    }
                 }
+                
+            } catch let error {
+                completion?(false)
+                debugPrint(error.localizedDescription)
             }
-            
-        } catch let error {
-            completion?(false)
-            debugPrint(error.localizedDescription)
         }
         
         // save logs

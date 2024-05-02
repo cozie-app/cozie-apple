@@ -92,6 +92,15 @@ class SettingsInteractor: SettingInteractorProtocol {
     func logSettingsData(name: String, expiriment: String, logs: Logs, completion: ((_ success: Bool)->())?) {
         if let backend = backendInteractor.currentBackendSettings {
             if (backend.api_write_url?.isEmpty ?? true) || (backend.api_write_key?.isEmpty ?? true) {
+                
+                // log data
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .withoutEscapingSlashes
+                let json = try? encoder.encode(logs)
+                if let json {
+                    self.loggerInteractor.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
+                }
+                
                 completion?(false)
             }
             do {

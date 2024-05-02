@@ -91,6 +91,8 @@
 		CA2EE94529F1531700590527 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE94429F1531700590527 /* LocationManager.swift */; };
 		CA2EE94829F180FD00590527 /* WatchSurveyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE94729F180FD00590527 /* WatchSurveyInteractor.swift */; };
 		CA2EE94A29F1862400590527 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE94929F1862400590527 /* StorageManager.swift */; };
+		CA4349162B8CCC1E00C0EEDA /* OfflineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4349152B8CCC1E00C0EEDA /* OfflineManager.swift */; };
+		CA4349172B8CD12F00C0EEDA /* OfflineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4349152B8CCC1E00C0EEDA /* OfflineManager.swift */; };
 		CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */; };
 		CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4E2A0256A300D096AD /* NotificationView.swift */; };
 		CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */; };
@@ -283,6 +285,7 @@
 		CA2EE94429F1531700590527 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CA2EE94729F180FD00590527 /* WatchSurveyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyInteractor.swift; sourceTree = "<group>"; };
 		CA2EE94929F1862400590527 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		CA4349152B8CCC1E00C0EEDA /* OfflineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineManager.swift; sourceTree = "<group>"; };
 		CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		CA4EBE4E2A0256A300D096AD /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CA4EBE502A025BD100D096AD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
@@ -871,6 +874,7 @@
 		CA2EE92C29EFE16F00590527 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				CA4349142B8CCBDD00C0EEDA /* OfflineManager */,
 				CAC89E2E2A4B021600EDA94E /* BackgroundTask */,
 				CA1A68042A1F8C6A0084B000 /* SurveyManager */,
 				CA011F122A174470006BFA7C /* LocationManager */,
@@ -896,6 +900,14 @@
 				CA2EE94729F180FD00590527 /* WatchSurveyInteractor.swift */,
 			);
 			path = Interactors;
+			sourceTree = "<group>";
+		};
+		CA4349142B8CCBDD00C0EEDA /* OfflineManager */ = {
+			isa = PBXGroup;
+			children = (
+				CA4349152B8CCC1E00C0EEDA /* OfflineManager.swift */,
+			);
+			path = OfflineManager;
 			sourceTree = "<group>";
 		};
 		CA6F3DEB2B516A1200C42C7F /* OneSignalNotificationServiceExtension */ = {
@@ -1294,6 +1306,7 @@
 				CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */,
 				92128A06299688640060C729 /* WatchSurveyRow.swift in Sources */,
 				ACAB713F2A98536000AC8C80 /* Defaults.swift in Sources */,
+				CA4349162B8CCC1E00C0EEDA /* OfflineManager.swift in Sources */,
 				92CFCA8A29C8877900ABC374 /* DaysViewModel.swift in Sources */,
 				CAB58A5529F960D000E26D20 /* CozieStorage.swift in Sources */,
 				92042D1729D5B357007A9250 /* Int+Helper.swift in Sources */,
@@ -1385,6 +1398,7 @@
 				CA2EE93E29F1157400590527 /* QuestionsView.swift in Sources */,
 				CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */,
 				CAC6F92B2A091742006D625D /* SendSurveyView.swift in Sources */,
+				CA4349172B8CD12F00C0EEDA /* OfflineManager.swift in Sources */,
 				CA8BE5662A53F7EA00D0627D /* HealthKitInteractor.swift in Sources */,
 				CA2EE90229EDA92E00590527 /* ContentView.swift in Sources */,
 				CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */,
@@ -1566,7 +1580,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1610,7 +1624,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1734,7 +1748,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1776,7 +1790,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;

@@ -8,14 +8,14 @@
 import Foundation
 
 public enum CommunicationKeys: String {
-    case jsonKey = "CosieCOMJsonKey"
-    case userIDKey = "CosieCOMUserIDKey"
-    case expIDKey = "CosieCOMExpKey"
-    case passwordIDKey = "CosieCOMPasswordIDKey"
-    case writeApiKey = "CosieCOMwriteApiKey"
-    case writeApiURL = "CosieCOMwriteApiURL"
-    case timeInterval = "CosieCOMtimeInterval"
-    case userOneSignalIDKey = "CosieCOMOneSignalIDKey"
+    case jsonKey = "CozieCOMJsonKey"
+    case userIDKey = "CozieCOMUserIDKey"
+    case expIDKey = "CozieCOMExpKey"
+    case passwordIDKey = "CozieCOMPasswordIDKey"
+    case writeApiKey = "CozieCOMwriteApiKey"
+    case writeApiURL = "CozieCOMwriteApiURL"
+    case timeInterval = "CozieCOMtimeInterval"
+    case userOneSignalIDKey = "CozieCOMOneSignalIDKey"
     
     case received = "received"
     case wsLogs = "ws_logs"

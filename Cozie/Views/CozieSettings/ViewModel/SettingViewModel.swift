@@ -127,7 +127,7 @@ class SettingViewModel: ObservableObject {
                     if success {
                         self.errorString = ""
                     } else {
-                        self.errorString = "Log settings data error."
+                        self.errorString = ""//"Log settings data error."
                     }
                     completion?(success)
                 }
