@@ -24,9 +24,9 @@ struct SendSurveyView: View {
                             .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
                         
                         HStack {
-                            Image(systemName: "checkmark.circle")
-                                .font(.system(size: 28))
-                                .foregroundColor(.green)
+                            Image("send_green")
+                                .resizable()
+                                .frame(width: 28,height: 28)
                             Text("Submit survey")
                         }
                     }
