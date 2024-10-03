@@ -111,26 +111,31 @@ class BackendInteractor {
             // Remove this method to stop OneSignal Debugging
             OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
             
-            let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-                // This block gets called when the user reacts to a notification received
-                if let actionID = result.action.actionId {
-                    surveyInteractor.sendResponse(action: actionID) { success in
-                        if success {
-                            debugPrint("iOS notification action sent")
-                        }
-                    }
-                }
-            }
+            // uncomment the behavior of OneSignal's own actions
+            /*
+             let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
+             // This block gets called when the user reacts to a notification received
+             if let actionID = result.action.actionId {
+             surveyInteractor.sendResponse(action: actionID) { success in
+             if success {
+             debugPrint("iOS notification action sent")
+             }
+             }
+             }
+             }
+             OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+             */
             
             OneSignal.setNotificationWillShowInForegroundHandler { /*[weak self]*/ notification, completion in
                 // send health data
                 healthKitInteractor.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
-                    completion(notification)
+                    DispatchQueue.main.async {
+                        completion(notification)
+                    }
                 }
-                //self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
+                // self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
             }
             
-            OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
             
             // OneSignal initialization
             OneSignal.initWithLaunchOptions(launchOptions)
@@ -146,20 +151,20 @@ class BackendInteractor {
     }
     
     // log test
-//    private func testLog(trigger: String, details: String, state: String = "error") {
-//        
-//        let str =
-//        """
-//        {
-//        "trigger": "\(trigger)",
-//        "si_onesignal_state": "\(state)",
-//        "si_onesignal_details": "\(details)",
-//        }
-//        """
-//        LoggerInteractor.shared.logInfo(action: "", info: str)
-//    }
+    //    private func testLog(trigger: String, details: String, state: String = "error") {
+    //
+    //        let str =
+    //        """
+    //        {
+    //        "trigger": "\(trigger)",
+    //        "si_onesignal_state": "\(state)",
+    //        "si_onesignal_details": "\(details)",
+    //        }
+    //        """
+    //        LoggerInteractor.shared.logInfo(action: "", info: str)
+    //    }
 }
- 
+
 extension AppDelegate: OSSubscriptionObserver {
     func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges) {
         if let playerId = stateChanges.to.userId {
@@ -177,3 +182,22 @@ extension BackendInteractor: BackendDataProtocol {
         return (settings.api_write_url ?? "", settings.api_write_key ?? "")
     }
 }
+
+
+// MARK: - TEST: - OneSIgnal curl Alex_Segment
+/*
+ curl --include \
+      --request POST \
+      --header "Content-Type: application/json; charset=utf-8" \
+      --header "Authorization: Basic NDRkODliNWUtZjdlMy00YmU1LWI2M2YtN2I1MTAzOTg5ZjU3"\
+      --data-binary "{
+          \"app_id\": \"17d346bf-bfe5-4422-be96-2a8e4ae4cc3d\",
+          \"contents\": {\"en\": \"Alexs test for content\"},
+          \"headings\": {\"en\": \"Alexs test for headings\"},
+          \"subtitle\": {\"en\": \"Alexs test for subtitle\"},
+          \"ios_category\": \"cozie_notification_action_category\",
+          \"included_segments\": [\"Alex_Segment\"]
+      }" \
+      https://api.onesignal.com/notifications
+*/
+ 

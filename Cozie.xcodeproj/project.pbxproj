@@ -99,6 +99,7 @@
 		CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */; };
 		CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */; };
 		CA57234829F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */; };
+		CA59D2702CAE8F84008A0771 /* String+Lacalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA59D26F2CAE8F84008A0771 /* String+Lacalization.swift */; };
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
 		CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F3DE22B51664100C42C7F /* NotificationService.swift */; };
@@ -293,6 +294,7 @@
 		CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CA59D26F2CAE8F84008A0771 /* String+Lacalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Lacalization.swift"; sourceTree = "<group>"; };
 		CA6102B629F6C7320055A140 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		CA6F3DE22B51664100C42C7F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CA6F3DE32B51664100C42C7F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 			children = (
 				92803DEF29D4279B008438EB /* Date+Helper.swift */,
 				92042D1629D5B357007A9250 /* Int+Helper.swift */,
+				CA59D26F2CAE8F84008A0771 /* String+Lacalization.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1345,6 +1348,7 @@
 				CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */,
 				CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */,
 				9212144729D18FF5002BAEB4 /* ReminderManager.swift in Sources */,
+				CA59D2702CAE8F84008A0771 /* String+Lacalization.swift in Sources */,
 				CA1548FA29E5B244005FDD6B /* BackendInteractor.swift in Sources */,
 				CAC6F92F2A0CFCB7006D625D /* ConfigurationView.swift in Sources */,
 				9221074A29992205001EC552 /* CozieDataCoordinator.swift in Sources */,

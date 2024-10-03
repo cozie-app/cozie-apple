@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+// MARK: AppDelegate: - Application initialization / BGTasks
 class AppDelegate: NSObject, UIApplicationDelegate {
     let locationManager = LocationManager()
     let backgroundProcessing = BackgroundUpdateManager()
@@ -45,8 +46,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // init conection with watch
         _ = WatchConnectivityManagerPhone.shared
+        
+        // custom notification action: register new notification category
+        regiterActionNotifCategory()
         return true
     }
+    
+    // MARK: BGTask - Start
     
     func startBGTasks() {
         // backgroundProcessing.test()
@@ -55,7 +61,47 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             self.backgroundProcessing.scheduleBgTaskRefresh()
         }
     }
+    
+    // MARK: Notification Helper - Regiter Notification Category
+    
+    private func regiterActionNotifCategory() {
+       UNUserNotificationCenter.current().delegate = self
+        
+        UNUserNotificationCenter.current().getNotificationCategories { list in
+            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory.rawValue }) == nil {
+                let actionHelpful = UNNotificationAction(identifier: "Helpful",
+                                                  title: "Helpful",
+                                                  options: [])
+                
+                let actionNotHelpful = UNNotificationAction(identifier: "Not helpful",
+                                                  title: "Not helpful",
+                                                  options: [])
+                
+                let category = UNNotificationCategory(identifier: NotificationKeys.actionBaceNotificationCategory.rawValue,
+                                                      actions: [actionHelpful, actionNotHelpful],
+                                                      intentIdentifiers: [],
+                                                      options: [])
+                UNUserNotificationCenter.current().setNotificationCategories([category])
+            }
+        }
+    }
+    
 }
+
+// MARK: NotificationDelegate: - Silent notification actions
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let surveyInteractor = WatchSurveyInteractor()
+        if response.actionIdentifier != UNNotificationDefaultActionIdentifier {
+            surveyInteractor.sendResponse(action: response.actionIdentifier) { success in
+                if success {
+                    debugPrint("iOS notification action sent")
+                }
+            }
+        }
+    }
+}
+
 
 @main
 struct CozieApp: App {

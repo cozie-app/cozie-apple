@@ -9,115 +9,129 @@ import SwiftUI
 
 struct QuestionsView: View {
     @EnvironmentObject var viewModel: WatchSurveyViewModel
+    let questionTopInset: CGFloat = 16
     
     var body: some View {
-        VStack {
-            Text(.init(viewModel.questionsTitle))  // render markdown using .init()
-                .multilineTextAlignment(.center)
-                .padding([.leading, .trailing], 8)
-            ScrollViewReader { reader in
-                ScrollView {
-                    ForEach(viewModel.questionsList, id: \.id) { option in
-                        HStack {
-                            ZStack {
-                                if option.icon != "" {
-                                    // Only show background if icon name string is not empty
-                                    Image(systemName: "circle.fill")
-                                        .resizable()
-                                        .frame(width: 35,height: 35)
-                                        .foregroundColor(Color(hex: option.iconBackgroundColor))
-                                }
-                                if option.useSfSymbols {
-                                    if UIImage(systemName: option.icon) == nil {
-                                        Image(systemName: "photo.circle")
-                                            .resizable()
-                                            .frame(width: 35,height: 35)
-                                            .foregroundColor(.black)
-                                    } else {
-                                        Image(systemName: option.icon)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width:25, height: 25)
-                                            .foregroundColor(Color(hex: option.sfSymbolsColor))
-                                    }
-                                } else {
-                                    if UIImage(named: option.icon) == nil {
-                                        // Show default icon
-                                        //Image(systemName: "photo.circle")
-                                        //    .resizable()
-                                        //    .frame(width: 35,height: 35)
-                                        //    .foregroundColor(.black)
-                                    } else {
-                                        Image(option.icon)
-                                            .resizable()
-                                            .frame(width: 35,height: 35)
-                                    }
-                                }
-                            }
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                                HStack {
-                                    Text(.init(option.text))  // render markdown using .init()
-                                        .foregroundColor(Color.white)
-                                        .padding(.leading, 8)
-                                    Spacer()
-                                }
-                                .padding(4)
-                                
-                            }
-                        }
-                        .frame(minHeight: 45)
-                        .padding(.vertical, 1)
-                        .onTapGesture {
-                            viewModel.selectOptions(option: option)
-                            scrollToTopAnimation(reader: reader, animation: true)
-                        }
-                    }
-                    
-                    if !viewModel.isFirstQuestion {
-                        VStack {
+        GeometryReader { geometry in
+            VStack {
+                //
+                Rectangle()
+                    .foregroundStyle(.clear) // 
+                    .frame(height: geometry.safeAreaInsets.top - questionTopInset)
+                    .ignoresSafeArea()
+                    .zIndex(1)
+                //
+                ScrollViewReader { reader in
+                    ScrollView {
+                        Text(.init(viewModel.questionsTitle))  // render markdown using .init()
+                            .multilineTextAlignment(.center)
+                            .padding([.leading, .trailing], 8)
+                        
+                        ForEach(viewModel.questionsList, id: \.id) { option in
                             HStack {
                                 ZStack {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                                    
-                                    Text("Back")
-                                    
+                                    if option.icon != "" {
+                                        // Only show background if icon name string is not empty
+                                        Image(systemName: "circle.fill")
+                                            .resizable()
+                                            .frame(width: 35,height: 35)
+                                            .foregroundColor(Color(hex: option.iconBackgroundColor))
+                                    }
+                                    if option.useSfSymbols {
+                                        if UIImage(systemName: option.icon) == nil {
+                                            Image(systemName: "photo.circle")
+                                                .resizable()
+                                                .frame(width: 35,height: 35)
+                                                .foregroundColor(.black)
+                                        } else {
+                                            Image(systemName: option.icon)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width:25, height: 25)
+                                                .foregroundColor(Color(hex: option.sfSymbolsColor))
+                                        }
+                                    } else {
+                                        if UIImage(named: option.icon) == nil {
+                                            // Show default icon
+                                            //Image(systemName: "photo.circle")
+                                            //    .resizable()
+                                            //    .frame(width: 35,height: 35)
+                                            //    .foregroundColor(.black)
+                                        } else {
+                                            Image(option.icon)
+                                                .resizable()
+                                                .frame(width: 35,height: 35)
+                                        }
+                                    }
                                 }
-                                .onTapGesture {
-                                    viewModel.backAction()
-                                    scrollToTopAnimation(reader: reader, animation: true)
-                                }
-                                Spacer()
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 8)
                                         .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                    HStack {
+                                        Text(.init(option.text))  // render markdown using .init()
+                                            .foregroundColor(Color.white)
+                                            .padding(.leading, 8)
+                                        Spacer()
+                                    }
+                                    .padding(4)
                                     
-                                    Text("Reset")
-                                    
-                                }
-                                .onTapGesture {
-                                    viewModel.restart()
-                                    scrollToTopAnimation(reader: reader, animation: true)
                                 }
                             }
+                            .frame(minHeight: 45)
+                            .padding(.vertical, 1)
+                            .onTapGesture {
+                                viewModel.selectOptions(option: option)
+                                scrollToTopAnimation(reader: reader, animation: true)
+                            }
                         }
-                        .frame(height: 45)
-                        .padding(.vertical, 3)
+                        
+                        if !viewModel.isFirstQuestion {
+                            VStack {
+                                HStack {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                        
+                                        Text("Back")
+                                        
+                                    }
+                                    .onTapGesture {
+                                        viewModel.backAction()
+                                        scrollToTopAnimation(reader: reader, animation: true)
+                                    }
+                                    Spacer()
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                        
+                                        Text("Reset")
+                                        
+                                    }
+                                    .onTapGesture {
+                                        viewModel.restart()
+                                        scrollToTopAnimation(reader: reader, animation: true)
+                                    }
+                                }
+                            }
+                            .frame(height: 45)
+                            .padding(.vertical, 3)
+                        }
+                        
                     }
                     
+                    
                 }
+                //.animation(.easeIn)
+                .foregroundColor(.white)
+                .onReceive(NotificationCenter.default.publisher(for: WKExtension.applicationWillEnterForegroundNotification)) { _ in
+                    viewModel.restart()
+                }
+                
             }
-            //.animation(.easeIn)
-            .foregroundColor(.white)
-            .onReceive(NotificationCenter.default.publisher(for: WKExtension.applicationWillEnterForegroundNotification)) { _ in
-                viewModel.restart()
+            .ignoresSafeArea(edges: .top)
+            .onAppear {
+                viewModel.prepare()
             }
-            
-        }
-        .onAppear {
-            viewModel.prepare()
         }
     }
     
@@ -133,7 +147,7 @@ struct QuestionsView: View {
 struct QuestionsView_Previews: PreviewProvider {
     static var previews: some View {
         QuestionsView()
-            .environmentObject(WatchSurveyViewModel())
+            .environmentObject(WatchSurveyViewModel()/*WatchSurveyViewModel.test*/)
     }
 }
 
@@ -153,7 +167,7 @@ extension Color {
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-
+        
         self.init(
             .sRGB,
             red: Double(r) / 255,

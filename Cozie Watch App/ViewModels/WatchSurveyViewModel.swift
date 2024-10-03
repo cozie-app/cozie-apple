@@ -9,6 +9,16 @@ import SwiftUI
 import WatchConnectivity
 
 class WatchSurveyViewModel: NSObject, ObservableObject {
+    // Uncomment for preview tests
+    /*static var test = {
+        let model = WatchSurveyViewModel()
+        model.questionsTitle = "Currently, the end of watch survey questions might not shown depending on the Apple Watch model and font size settings in watchOS. We would like to make the following changes"
+        model.questionsList = [ResponseOption(text: "Test 1", icon: "12", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 2", icon: "23", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 3", icon: "34", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 4", icon: "45", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: "")]
+        return model
+    }()*/
     
     enum CozieAppState: Int {
         case notsynced, synced, /*timeout,*/ sendData, finished

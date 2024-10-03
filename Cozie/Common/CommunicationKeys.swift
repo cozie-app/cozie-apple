@@ -7,6 +7,10 @@
 
 import Foundation
 
+public enum NotificationKeys: String {
+    case actionBaceNotificationCategory = "cozie_notification_action_category"
+}
+
 public enum CommunicationKeys: String {
     case jsonKey = "CozieCOMJsonKey"
     case userIDKey = "CozieCOMUserIDKey"

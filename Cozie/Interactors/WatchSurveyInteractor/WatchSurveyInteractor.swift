@@ -14,6 +14,8 @@ class WatchSurveyInteractor {
     let storage = CozieStorage.shared
     let surveyManager = SurveyManager()
     
+    deinit { debugPrint("\(WatchSurveyInteractor.self) - deinit") }
+    
     // MARK: - Load WatchSurvey JSON
     func loadSelectedWatchSurveyJSON(completion: ((_ success: Bool) -> ())?) {
         let selectedLink = storage.selectedWSLink()
