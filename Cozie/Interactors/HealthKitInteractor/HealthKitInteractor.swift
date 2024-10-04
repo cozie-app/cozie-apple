@@ -469,14 +469,14 @@ class HealthKitInteractor {
             data = sample.quantity.doubleValue(for: HKUnit(from: "ml"))
         case HKObjectType.quantityType(forIdentifier: .appleSleepingWristTemperature):
             data = sample.quantity.doubleValue(for: HKUnit.degreeCelsius())
-//        case .workoutType():
-//            return HeathDataKeys.workout.rawValue
+            //        case .workoutType():
+            //            return HeathDataKeys.workout.rawValue
         case HKObjectType.quantityType(forIdentifier: .activeEnergyBurned):
-             data = sample.quantity.doubleValue(for: .kilocalorie())
+            data = sample.quantity.doubleValue(for: .kilocalorie())
         case HKObjectType.quantityType(forIdentifier: .appleMoveTime):
-             data = sample.quantity.doubleValue(for: .minute())
+            data = sample.quantity.doubleValue(for: .minute())
         case HKObjectType.quantityType(forIdentifier: .appleExerciseTime):
-             data = sample.quantity.doubleValue(for: .minute())
+            data = sample.quantity.doubleValue(for: .minute())
         default:
             break
         }
@@ -491,7 +491,7 @@ class HealthKitInteractor {
         self.allTypes.forEach { obj in
             self.storage.healthUpdateFromTempLastSyncedTimeInterval(key: self.healthKeyFor(simple: obj), offline: self.offlineMode.isEnabled)
         }
-
+        
         updateLogDate(date: lastUpdateDate)
     }
     
@@ -552,7 +552,7 @@ class HealthKitInteractor {
     }
     
     // MARK: - Send And Log Date
-    func sendData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, timeout: Double? = nil, completion: ((_ succces: Bool)->())?) {
+    func sendData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, timeout: Double? = nil, healthCache: [HealthModel]? = nil, completion: ((_ succces: Bool)->())?) {
         
         // testLog(trigger: trigger, details: "WS:Sending HealthKit data started", state: "triggered")
         
@@ -580,86 +580,109 @@ class HealthKitInteractor {
         
         HealthKitInteractor.sendDataInProgress = true
         
+        if let cache = healthCache {
+            self.sendHealthKitData(models: cache, completion: completion)
+        } else {
+            self.requestHealthAuth { [weak self]  success in
+                
+                guard let self else { return }
+                
+                if !success, !HealthKitInteractor.sendDataInProgress {
+                    HealthKitInteractor.sendDataInProgress = false
+                    completion?(success)
+                    // self.testLog(trigger: trigger, details: "WS: (HealthKit) Permission not granted or sending data in progress", state: "error")
+                    return
+                }
+                
+                self.getAllRequestedData(trigger: trigger) { models in
+                    self.sendHealthKitData(models: models, completion: completion)
+                }
+            }
+        }
+    }
+    
+    func requestHealthData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, completion:((_ models: [HealthModel]?)->())?) {
         self.requestHealthAuth { [weak self]  success in
             
             guard let self else { return }
             
-            if !success, !HealthKitInteractor.sendDataInProgress {
-                HealthKitInteractor.sendDataInProgress = false
-                completion?(success)
-                // self.testLog(trigger: trigger, details: "WS: (HealthKit) Permission not granted or sending data in progress", state: "error")
-                return
+            if !success {
+                completion?(nil)
             }
             
             self.getAllRequestedData(trigger: trigger) { models in
-                if let writeInfo = self.backendData.apiWriteInfo, !models.isEmpty {
-                    do {
-                        let bodyJson = try JSONEncoder().encode(models)
-                        
-                        let encoder = JSONEncoder()
-                        encoder.outputFormatting = .withoutEscapingSlashes
-                        
-                        // log data
-                        // filtering of logged data
-                        if !self.offlineMode.isEnabled && self.storage.healthLastSyncedTimeInterval(offline: true) < self.storage.healthLastSyncedTimeInterval(offline: false) {
-                            self.logModelsIfNeeded(encoder: encoder, models: models)
-                        } else {
-                            // filtering of logged data
-                            if self.storage.healthLastSyncedTimeInterval(offline: true) > self.storage.healthLastSyncedTimeInterval(offline: false) {
-                                self.logModelsIfNeeded(encoder: encoder, models: models)
-                            } else {
-                                let json = try? encoder.encode(models)
-                                if let json {
-                                    self.logger.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
-                                }
-                            }
-                            // prevent request in offline mode
-                            if self.offlineMode.isEnabled {
-                                let lastUpdateDate = Date()
-                                self.updateLogDate(date: lastUpdateDate)
-                                
-                                HealthKitInteractor.sendDataInProgress = false
-                                // self.testLog(trigger: trigger, details: "WS:(HealthKit)Service error: \(error.localizedDescription)", state: "error")
-                                completion?(false)
-                                return
-                            }
+                completion?(models)
+            }
+        }
+    }
+    
+    func sendHealthKitData(models: [HealthModel], completion: ((_ succces: Bool)->())?) {
+        if let writeInfo = self.backendData.apiWriteInfo, !models.isEmpty {
+            do {
+                let bodyJson = try JSONEncoder().encode(models)
+                
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .withoutEscapingSlashes
+                
+                // log data
+                // filtering of logged data
+                if !self.offlineMode.isEnabled && self.storage.healthLastSyncedTimeInterval(offline: true) < self.storage.healthLastSyncedTimeInterval(offline: false) {
+                    self.logModelsIfNeeded(encoder: encoder, models: models)
+                } else {
+                    // filtering of logged data
+                    if self.storage.healthLastSyncedTimeInterval(offline: true) > self.storage.healthLastSyncedTimeInterval(offline: false) {
+                        self.logModelsIfNeeded(encoder: encoder, models: models)
+                    } else {
+                        let json = try? encoder.encode(models)
+                        if let json {
+                            self.logger.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
                         }
+                    }
+                    // prevent request in offline mode
+                    if self.offlineMode.isEnabled {
+                        let lastUpdateDate = Date()
+                        self.updateLogDate(date: lastUpdateDate)
                         
-                        self.service.post(url: writeInfo.wUrl, body: bodyJson, key: writeInfo.wKey) { result in
-                            switch result {
-                            case .success(_):
-                                self.updateSyncAndLogDate()
-                                
-                                HealthKitInteractor.sendDataInProgress = false
-                                // self.testLog(trigger: trigger, details: "WS: (HealthKit)Data sent -> date:\(lastUpdateDate)", state: "success")
-                                completion?(true)
-                                
-                            case .failure(let error):
-                                self.updateLogDate(date: Date())
-                                HealthKitInteractor.sendDataInProgress = false
-                                debugPrint(error.localizedDescription)
-                                // self.testLog(trigger: trigger, details: "WS:(HealthKit)Service error: \(error.localizedDescription)", state: "error")
-                                completion?(false)
-                            }
-                        }
-                    } catch let error {
+                        HealthKitInteractor.sendDataInProgress = false
+                        // self.testLog(trigger: trigger, details: "WS:(HealthKit)Service error: \(error.localizedDescription)", state: "error")
+                        completion?(false)
+                        return
+                    }
+                }
+                
+                self.service.post(url: writeInfo.wUrl, body: bodyJson, key: writeInfo.wKey) { result in
+                    switch result {
+                    case .success(_):
+                        self.updateSyncAndLogDate()
+                        
+                        HealthKitInteractor.sendDataInProgress = false
+                        // self.testLog(trigger: trigger, details: "WS: (HealthKit)Data sent -> date:\(lastUpdateDate)", state: "success")
+                        completion?(true)
+                        
+                    case .failure(let error):
+                        self.updateLogDate(date: Date())
                         HealthKitInteractor.sendDataInProgress = false
                         debugPrint(error.localizedDescription)
-                        // self.testLog(trigger: trigger, details: "WS: (HealthKit)Encoding error: \(error.localizedDescription)", state: "error")
+                        // self.testLog(trigger: trigger, details: "WS:(HealthKit)Service error: \(error.localizedDescription)", state: "error")
                         completion?(false)
                     }
-                } else {
-                    HealthKitInteractor.sendDataInProgress = false
-                    
-                    debugPrint("Backend not configured or empty data!")
-                    if models.isEmpty {
-                        // self.testLog(trigger: trigger, details: "WS: Empty HealthKit data!", state: "info")
-                    } else {
-                        // self.testLog(trigger: trigger, details: "WS: Backend not configured or empty HealthKit data!", state: "info")
-                    }
-                    completion?(false)
                 }
+            } catch let error {
+                HealthKitInteractor.sendDataInProgress = false
+                debugPrint(error.localizedDescription)
+                // self.testLog(trigger: trigger, details: "WS: (HealthKit)Encoding error: \(error.localizedDescription)", state: "error")
+                completion?(false)
             }
+        } else {
+            HealthKitInteractor.sendDataInProgress = false
+            
+            debugPrint("Backend not configured or empty data!")
+            if models.isEmpty {
+                // self.testLog(trigger: trigger, details: "WS: Empty HealthKit data!", state: "info")
+            } else {
+                // self.testLog(trigger: trigger, details: "WS: Backend not configured or empty HealthKit data!", state: "info")
+            }
+            completion?(false)
         }
     }
     
@@ -688,7 +711,7 @@ class HealthKitInteractor {
 }
 
 extension HKWorkoutActivityType {
-
+    
     /*
      Simple mapping of available workout types to a human readable name.
      */
@@ -750,8 +773,8 @@ extension HKWorkoutActivityType {
         case .waterSports:                  return "Water Sports"
         case .wrestling:                    return "Wrestling"
         case .yoga:                         return "Yoga"
-
-        // iOS 10
+            
+            // iOS 10
         case .barre:                        return "Barre"
         case .coreTraining:                 return "Core Training"
         case .crossCountrySkiing:           return "Cross Country Skiing"
@@ -766,20 +789,20 @@ extension HKWorkoutActivityType {
         case .stepTraining:                 return "Step Training"
         case .wheelchairWalkPace:           return "Wheelchair Walk Pace"
         case .wheelchairRunPace:            return "Wheelchair Run Pace"
-
-        // iOS 11
+            
+            // iOS 11
         case .taiChi:                       return "Tai Chi"
         case .mixedCardio:                  return "Mixed Cardio"
         case .handCycling:                  return "Hand Cycling"
-
-        // iOS 13
+            
+            // iOS 13
         case .discSports:                   return "Disc Sports"
         case .fitnessGaming:                return "Fitness Gaming"
-
-        // Catch-all
+            
+            // Catch-all
         default:                            return "Other"
         }
     }
-
+    
 }
 

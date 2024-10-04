@@ -29,11 +29,16 @@ class WatchSurveyInteractor {
     let healthInteractor: HealthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, loger: StorageManager.shared, dataPrefix: "ws")
     let offlineMode = OfflineModeManager()
     
+    func healthDataPreload(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, completion:((_ models: [HealthModel]?)->())?) {
+        healthInteractor.requestHealthData(trigger: trigger, completion: completion)
+    }
+    
     func sendSurveyData(watchSurvey: WatchSurvey?,
                         selectedOptions:[SelectedSurveyInfo],
                         location: CLLocation?,
                         time: SelectedSurveyTime,
                         storage: StorageManager = StorageManager.shared,
+                        healthCache: [HealthModel]? = nil,
                         logsComplition:(()->())? = nil, completion:((_ success: Bool, _ error: Error?)->())?) {
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -80,8 +85,8 @@ class WatchSurveyInteractor {
             storage.seveLogs(logs: String(data: jsonToLog, encoding: .utf8) ?? "")
             logsComplition?()
             
-            if  offlineMode.isEnabled {
-                healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0) { succces in
+            if offlineMode.isEnabled {
+                healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0, healthCache: healthCache) { succces in
                     completion?(true, nil)
                 }
             } else {
@@ -90,7 +95,7 @@ class WatchSurveyInteractor {
                     case .success(let data):
                         debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
                         //completion?(true, nil)
-                        self?.healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0) { succces in
+                        self?.healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0, healthCache: healthCache) { succces in
                             completion?(true, nil)
                         }
                     case .failure(let error):

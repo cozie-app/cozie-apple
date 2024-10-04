@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WatchConnectivity
+import Combine
 
 class WatchSurveyViewModel: NSObject, ObservableObject {
     // Uncomment for preview tests
@@ -22,6 +23,10 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     
     enum CozieAppState: Int {
         case notsynced, synced, /*timeout,*/ sendData, finished
+    }
+    
+    enum CozieCacheState: Int {
+        case started, inprogress, finished
     }
     
     // MARK: Private
@@ -48,7 +53,13 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     @Published var questionsTitle: String = ""
     @Published var state: CozieAppState = .notsynced
     @Published var sendSurveyProgress: Bool = false
+    
+    var cacheHealthState = CurrentValueSubject<CozieCacheState, Never>(.finished)
+    
     var upadateLocationInProgress = false
+    
+    private var healthCache: [HealthModel]?
+    private var bag = Set<AnyCancellable>()
     
     // MARK: Private func
     private func loadWatchSurvey(data: Data) {
@@ -78,6 +89,12 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             state = .synced
             startTime = Date()
             syncSurvey()
+            
+            cacheHealthState.send(.started)
+            watchSurveyInteractor.healthDataPreload(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue) { [weak self] models in
+                self?.healthCache = models
+                self?.cacheHealthState.send(.finished)
+            }
             // Uncomment to test
             //                let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
             //                if let url = defaultURLJSON {
@@ -102,25 +119,83 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     private func sendSurvey() {
-        
-        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), logsComplition: { /*[weak self]  in*/
-            ///
-        }, completion: { [weak self] success, error in
-            if success {
-                DispatchQueue.main.async {
-                    self?.sendSurveyProgress = false
-                    self?.state = .finished
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self?.sendSurveyProgress = false
-                    self?.state = .finished
-                }
-                if !success {
-//                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+        if cacheHealthState.value == .started {
+            cacheHealthState.last().sink { [weak self] value in
+                guard let self = self else { return }
+                
+                switch value {
+                case .finished:
+                    print("sucsess")
+                    self.watchSurveyInteractor.sendSurveyData(watchSurvey: self.watchSurvey, selectedOptions: self.selectedOptions, location: self.locationManager.currentLocation, time: (self.startTime, self.locationManager.lastUpdateDate), healthCache: self.healthCache, logsComplition: { /*[weak self]  in*/
+                        ///
+                    }, completion: { [weak self] success, error in
+                        
+                        self?.healthCache = nil
+                        self?.cacheHealthState.send(.finished)
+                        
+                        if success {
+                            DispatchQueue.main.async {
+                                self?.sendSurveyProgress = false
+                                self?.state = .finished
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self?.sendSurveyProgress = false
+                                self?.state = .finished
+                            }
+                            if !success {
+                                //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+                            }
+                        }
+                    })
+                default:
+                    print("error")
                 }
             }
-        })
+            .store(in: &bag)
+        } else if cacheHealthState.value == .finished, healthCache != nil {
+            self.watchSurveyInteractor.sendSurveyData(watchSurvey: self.watchSurvey, selectedOptions: self.selectedOptions, location: self.locationManager.currentLocation, time: (self.startTime, self.locationManager.lastUpdateDate), healthCache: self.healthCache, logsComplition: { /*[weak self]  in*/
+                ///
+            }, completion: { [weak self] success, error in
+                
+                self?.healthCache = nil
+                self?.cacheHealthState.send(.finished)
+                
+                if success {
+                    DispatchQueue.main.async {
+                        self?.sendSurveyProgress = false
+                        self?.state = .finished
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.sendSurveyProgress = false
+                        self?.state = .finished
+                    }
+                    if !success {
+                        //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+                    }
+                }
+            })
+        } else {
+            watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: nil, logsComplition: { /*[weak self]  in*/
+                ///
+            }, completion: { [weak self] success, error in
+                if success {
+                    DispatchQueue.main.async {
+                        self?.sendSurveyProgress = false
+                        self?.state = .finished
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.sendSurveyProgress = false
+                        self?.state = .finished
+                    }
+                    if !success {
+                        //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+                    }
+                }
+            })
+        }
         
         storage.saveLastSurveySend()
         storage.updateSurveyCount()
