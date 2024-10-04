@@ -63,29 +63,49 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     // MARK: Notification Helper - Regiter Notification Category
-    
     private func regiterActionNotifCategory() {
-       UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().setNotificationCategories([])
         
         UNUserNotificationCenter.current().getNotificationCategories { list in
-            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory.rawValue }) == nil {
-                let actionHelpful = UNNotificationAction(identifier: "Helpful",
-                                                  title: "Helpful",
-                                                  options: [])
-                
-                let actionNotHelpful = UNNotificationAction(identifier: "Not helpful",
-                                                  title: "Not helpful",
-                                                  options: [])
-                
-                let category = UNNotificationCategory(identifier: NotificationKeys.actionBaceNotificationCategory.rawValue,
-                                                      actions: [actionHelpful, actionNotHelpful],
-                                                      intentIdentifiers: [],
-                                                      options: [])
-                UNUserNotificationCenter.current().setNotificationCategories([category])
+            var categorys: Set<UNNotificationCategory> = []
+            // cozie_notification_action_category_1
+            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory1.rawValue }) == nil {
+                let listActionTitlesCategory = ["Helpful", "Not helpful"]
+                categorys.insert(self.registerCategory(NotificationKeys.actionBaceNotificationCategory1.rawValue, actionList: listActionTitlesCategory))
             }
+            // cozie_notification_action_category_2
+            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory2.rawValue }) == nil {
+                let listActionTitlesCategory = ["I will do it", "I'll do my best", "Not relevant"]
+                categorys.insert(self.registerCategory(NotificationKeys.actionBaceNotificationCategory2.rawValue, actionList: listActionTitlesCategory))
+            }
+            // cozie_notification_action_category_3
+            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory3.rawValue }) == nil {
+                let listActionTitlesCategory = ["I may do it", "No thanks", "Not relevant"]
+                categorys.insert(self.registerCategory(NotificationKeys.actionBaceNotificationCategory3.rawValue, actionList: listActionTitlesCategory))
+            }
+            
+            UNUserNotificationCenter.current().setNotificationCategories(categorys)
         }
     }
     
+    private func actionFromList(_ list: [String]) -> [UNNotificationAction] {
+        var actions: [UNNotificationAction] = []
+        for actionTitle in list {
+            actions.append(UNNotificationAction(identifier: actionTitle,
+                                                title: actionTitle,
+                                                options: []))
+        }
+        return actions
+    }
+    
+    private func registerCategory(_ id: String, actionList: [String]) -> UNNotificationCategory {
+        return UNNotificationCategory(identifier: id,
+                                              actions: actionFromList(actionList),
+                                              intentIdentifiers: [],
+                                              options: [])
+    }
+                                            
 }
 
 // MARK: NotificationDelegate: - Silent notification actions
