@@ -26,7 +26,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     enum CozieCacheState: Int {
-        case started, inprogress, finished
+        case nottrigered, inprogress, finished
     }
     
     // MARK: Private
@@ -54,6 +54,8 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     @Published var state: CozieAppState = .notsynced
     @Published var sendSurveyProgress: Bool = false
     
+    private(set) var questionID: String = ""
+    
     var cacheHealthState = CurrentValueSubject<CozieCacheState, Never>(.finished)
     
     var upadateLocationInProgress = false
@@ -67,6 +69,9 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             let wSurvey = try JSONDecoder().decode(WatchSurvey.self, from: data)
             watchSurvey = wSurvey
             if let question = wSurvey.survey.first(where: { $0.questionID == (wSurvey.firstQuestionID ?? "failed") }) {
+                // questionID has a side effect of questionsTitle !!!
+                questionID = question.questionID
+                
                 questionsList = question.responseOptions
                 questionsTitle = question.question
                 currentSurvey = question
@@ -90,11 +95,19 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             startTime = Date()
             syncSurvey()
             
-            cacheHealthState.send(.started)
+            cacheHealthState.send(.inprogress)
             watchSurveyInteractor.healthDataPreload(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue) { [weak self] models in
                 self?.healthCache = models
                 self?.cacheHealthState.send(.finished)
             }
+            
+            // Uncomment for test
+//            Task {
+//                try await Task.sleep(nanoseconds: 10_000_000_000)
+//                self.healthCache = []
+//                self.cacheHealthState.send(.finished)
+//            }
+            
             // Uncomment to test
             //                let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
             //                if let url = defaultURLJSON {
@@ -119,87 +132,61 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     private func sendSurvey() {
-        if cacheHealthState.value == .started {
-            cacheHealthState.last().sink { [weak self] value in
+        if cacheHealthState.value == .inprogress {
+            // clear bag
+            bag = Set<AnyCancellable>()
+            
+            // bind HealfData state
+            cacheHealthState.sink { [weak self] value in
                 guard let self = self else { return }
                 
                 switch value {
                 case .finished:
-                    print("sucsess")
-                    self.watchSurveyInteractor.sendSurveyData(watchSurvey: self.watchSurvey, selectedOptions: self.selectedOptions, location: self.locationManager.currentLocation, time: (self.startTime, self.locationManager.lastUpdateDate), healthCache: self.healthCache, logsComplition: { /*[weak self]  in*/
-                        ///
-                    }, completion: { [weak self] success, error in
-                        
-                        self?.healthCache = nil
-                        self?.cacheHealthState.send(.finished)
-                        
-                        if success {
-                            DispatchQueue.main.async {
-                                self?.sendSurveyProgress = false
-                                self?.state = .finished
-                            }
-                        } else {
-                            DispatchQueue.main.async {
-                                self?.sendSurveyProgress = false
-                                self?.state = .finished
-                            }
-                            if !success {
-                                //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
-                            }
-                        }
-                    })
+                    debugPrint("HealthData finished pre-cache")
+                    triggerSendSurvey()
                 default:
-                    print("error")
+                    debugPrint("HealthData error pre-cache")
                 }
             }
             .store(in: &bag)
         } else if cacheHealthState.value == .finished, healthCache != nil {
-            self.watchSurveyInteractor.sendSurveyData(watchSurvey: self.watchSurvey, selectedOptions: self.selectedOptions, location: self.locationManager.currentLocation, time: (self.startTime, self.locationManager.lastUpdateDate), healthCache: self.healthCache, logsComplition: { /*[weak self]  in*/
-                ///
-            }, completion: { [weak self] success, error in
-                
-                self?.healthCache = nil
-                self?.cacheHealthState.send(.finished)
-                
-                if success {
-                    DispatchQueue.main.async {
-                        self?.sendSurveyProgress = false
-                        self?.state = .finished
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.sendSurveyProgress = false
-                        self?.state = .finished
-                    }
-                    if !success {
-                        //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
-                    }
-                }
-            })
+            triggerSendSurvey()
         } else {
-            watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: nil, logsComplition: { /*[weak self]  in*/
-                ///
-            }, completion: { [weak self] success, error in
-                if success {
-                    DispatchQueue.main.async {
-                        self?.sendSurveyProgress = false
-                        self?.state = .finished
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.sendSurveyProgress = false
-                        self?.state = .finished
-                    }
-                    if !success {
-                        //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
-                    }
-                }
-            })
+            triggerSendSurvey()
         }
         
         storage.saveLastSurveySend()
         storage.updateSurveyCount()
         locationManager.completion = nil
+    }
+    
+    private func triggerSendSurvey() {
+        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: nil, logsComplition: { /*[weak self]  in*/
+            ///
+        }, completion: { [weak self] success, error in
+            self?.resetCachedHealthData()
+            
+            if success {
+                DispatchQueue.main.async {
+                    self?.sendSurveyProgress = false
+                    self?.state = .finished
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.sendSurveyProgress = false
+                    self?.state = .finished
+                }
+                if !success {
+                    //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+                }
+            }
+        })
+    }
+    
+    // MARK: reset pre-cache HealthData
+    private func resetCachedHealthData() {
+        healthCache = nil
+        cacheHealthState.send(.finished)
     }
     
     func syncSurvey() {
