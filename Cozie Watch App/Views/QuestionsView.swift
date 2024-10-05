@@ -10,6 +10,7 @@ import SwiftUI
 struct QuestionsView: View {
     @EnvironmentObject var viewModel: WatchSurveyViewModel
     let questionTopInset: CGFloat = 16
+    let questiosID = UUID()
     
     var body: some View {
         GeometryReader { geometry in
@@ -26,6 +27,7 @@ struct QuestionsView: View {
                         Text(.init(viewModel.questionsTitle))  // render markdown using .init()
                             .multilineTextAlignment(.center)
                             .padding([.leading, .trailing], 8)
+                            .id(questiosID)
                         
                         ForEach(viewModel.questionsList, id: \.id) { option in
                             HStack {
@@ -138,7 +140,7 @@ struct QuestionsView: View {
     func scrollToTopAnimation(reader: ScrollViewProxy?, animation: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             withAnimation {
-                reader?.scrollTo(viewModel.questionsList.first?.id ?? "", anchor: .top)
+                reader?.scrollTo(questiosID, anchor: .top)
             }
         }
     }

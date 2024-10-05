@@ -8,7 +8,9 @@
 import Foundation
 
 public enum NotificationKeys: String {
-    case actionBaceNotificationCategory = "cozie_notification_action_category"
+    case actionBaceNotificationCategory1 = "cozie_notification_action_category_1"
+    case actionBaceNotificationCategory2 = "cozie_notification_action_category_2"
+    case actionBaceNotificationCategory3 = "cozie_notification_action_category_3"
 }
 
 public enum CommunicationKeys: String {
