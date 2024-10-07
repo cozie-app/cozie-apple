@@ -166,9 +166,15 @@ class HealthKitInteractor {
         
         // save last sync time for each data
         let lastSavedSync = storage.healthLastSyncedTimeInterval(key: typeKey, offline: offlineMode.isEnabled)
+        let maxInterval: Double = storage.maxHealthCutoffInteval() * (60*60*24)
         
         if lastSavedSync > 0 {
-            lastSync = lastSavedSync
+            let interval = lastSync - lastSavedSync
+            if interval < maxInterval {
+                lastSync = lastSavedSync
+            } else {
+                lastSync = lastSync - maxInterval
+            }
         }
         
         let predicate = HKQuery.predicateForSamples(withStart: Date(timeIntervalSince1970: TimeInterval(lastSync)),

@@ -10,6 +10,7 @@ import Foundation
 protocol CozieStorageProtocol {
     func playerID() -> String
     
+    func maxHealthCutoffInteval() -> Double
     func healthLastSyncedTimeInterval(offline: Bool) -> Double
     
     func healthUpdateLastSyncedTimeInterval(_ interval: Double, offline: Bool)

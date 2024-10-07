@@ -35,6 +35,7 @@ public enum CommunicationKeys: String {
     case pushNotificationForegroundTrigger = "push_notification_foreground"
     
     case transferFileStatusKey = "transfer_file_status"
+    case healthCutoffTimeInterval = "health_cutoff_time_interval"
 }
 
 public enum FileTransferStatus: Int {

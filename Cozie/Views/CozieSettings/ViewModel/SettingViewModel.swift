@@ -458,7 +458,7 @@ class SettingViewModel: ObservableObject {
                         
                         if let survey = surveysList.first?.toModel(), let backend = self.backendInteractor.currentBackendSettings, let user = self.userIntaractor.currentUser, let settings = self.settingsIntaractor.currentSettings  {
                             let json = try JSONEncoder().encode(survey)
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: self.storage.playerID(), timeInterval: Int(settings.wss_time_out)) {
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: self.storage.playerID(), timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: CozieStorage.shared.maxHealthCutoffInteval()) {
                                 DispatchQueue.main.async { [weak self] in
                                     self?.updateStateForParticipentID(enabled: true)
                                     self?.updateStateForExperimentID(enabled: true)

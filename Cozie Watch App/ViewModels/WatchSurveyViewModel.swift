@@ -347,6 +347,10 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             storage.saveTimeInterval(interval: timeInterval)
         }
         
+        if let maxTimeInterval = message[CommunicationKeys.healthCutoffTimeInterval.rawValue] as? Double {
+            storage.saveHealthMaxCutoffTimeinterval(maxTimeInterval)
+        }
+        
         transferLoggFile()
         
         DispatchQueue.main.async { [weak self] in

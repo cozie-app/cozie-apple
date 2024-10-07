@@ -76,7 +76,15 @@ class WatchConnectivityManagerPhone: NSObject {
         activateIfNeededAndSendMessage()
     }
     
-    func sendAll(data: Data, writeApiURL: String, writeApiKey: String, userID: String, expID: String, password: String, userOneSignalID: String, timeInterval: Int, completion: (()->())? = nil) {
+    func sendAll(data: Data,
+                 writeApiURL: String,
+                 writeApiKey: String,
+                 userID: String,
+                 expID: String,
+                 password: String,
+                 userOneSignalID: String,
+                 timeInterval: Int,
+                 healthCutoffTimeInterval: Double, completion: (()->())? = nil) {
         
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data,
@@ -86,7 +94,8 @@ class WatchConnectivityManagerPhone: NSObject {
                           CommunicationKeys.expIDKey.rawValue: expID,
                           CommunicationKeys.userOneSignalIDKey.rawValue: CozieStorage.shared.playerID(),
                           CommunicationKeys.passwordIDKey.rawValue: password,
-                          CommunicationKeys.timeInterval.rawValue: timeInterval]
+                          CommunicationKeys.timeInterval.rawValue: timeInterval,
+                          CommunicationKeys.healthCutoffTimeInterval.rawValue: healthCutoffTimeInterval]
             
             self?.session.sendMessage(params, replyHandler: { response in
                 debugPrint(response)

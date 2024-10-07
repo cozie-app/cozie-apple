@@ -24,28 +24,15 @@ struct CozieBackendView: View {
                     Spacer()
                         .frame(height: 1)
                     List {
-                        Section(content: {
-                            ForEach($viewModel.list,
-                                    id: \.id) { $data in
-                                Button {
-                                    
-                                    viewModel.showingState = BackendViewModel.BackendState(rawValue: data.id) ?? .clear
-                                } label: {
-                                    BackendCell(title: data.title, subtitle: data.subtitle)
-                                }
+                        ForEach($viewModel.section) { sectionData in
+                            switch sectionData.id {
+                            case BackendViewModel.BackendSectionType.backend.rawValue:
+                                backendSection(title: "Backend", sectionData.list.wrappedValue, true)
+                            default:
+                                backendSection(title: "Data", sectionData.list.wrappedValue)
                             }
-                        },
-                                header: {
-                            CozieAnimatedSyncHeader(title: "Backend", action: {
-                                viewModel.loadWatchSurveyJSON { success in
-                                    showError = !success
-                                    if success {
-                                        settingsViewModel.updateSurveyList()
-                                        viewModel.syncWatchData()
-                                    }
-                                }
-                            }, animated: $viewModel.loading)
-                        })
+                        }
+                        
                     }
                     .padding([.leading, .trailing], -5)
                     .headerProminence(.increased)
@@ -55,7 +42,7 @@ struct CozieBackendView: View {
                 }
                 
                 if viewModel.showingState != .clear {
-                    didSelectCell(index: viewModel.showingState.rawValue)
+                    didSelectCell(itemID: viewModel.showingState.rawValue)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -76,16 +63,58 @@ struct CozieBackendView: View {
     }
     
     // MARK: Did Selected
-    func didSelectCell(index: Int) -> some View {
-        let title = viewModel.list[index].title
-        let text = viewModel.list[index].subtitle
-        return TextFieldPopUp(title: title, text: text) {
+    func didSelectCell(itemID: Int) -> some View {
+        let tt = viewModel.section
+            .flatMap{ $0.list }
+            .filter{ $0.id == itemID }.first
+        
+        guard let item = tt else {
+            return TextFieldPopUp(title: "", text: "") {
+                viewModel.showingState = .clear
+            } setAction: { text in
+                viewModel.showingState = .clear
+            }
+        }
+
+        return TextFieldPopUp(title: item.title, text: item.subtitle) {
             viewModel.showingState = .clear
         } setAction: { text in
-            viewModel.list[index].subtitle = text
-            viewModel.updateValue(state: BackendViewModel.BackendState(rawValue: index) ?? .clear, value: text)
+            item.subtitle = text
+            viewModel.updateValue(state: BackendViewModel.BackendState(rawValue: itemID) ?? .clear, value: text)
             viewModel.showingState = .clear
         }
+    }
+    
+    func backendSection(title: String, _ list: [BackendData], _ syncHeader: Bool = false) -> some View {
+        Section(content: {
+            ForEach(list,
+                    id: \.id) { data in
+                Button {
+                    
+                    viewModel.showingState = BackendViewModel.BackendState(rawValue: data.id) ?? .clear
+                } label: {
+                    BackendCell(title: data.title, subtitle: data.subtitle)
+                }
+            }
+        },
+                header: {
+            if syncHeader {
+                CozieAnimatedSyncHeader(title: title, action: {
+                    viewModel.loadWatchSurveyJSON { success in
+                        showError = !success
+                        if success {
+                            settingsViewModel.updateSurveyList()
+                            viewModel.syncWatchData()
+                        }
+                    }
+                }, animated: $viewModel.loading)
+            } else {
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .textCase(nil)
+            }
+        })
     }
 }
 
