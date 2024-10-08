@@ -8,13 +8,14 @@
 import Foundation
 import CoreData
 import UIKit
-import OneSignal
+import OneSignalFramework
 
 class BackendInteractor {
     let persistenceController = PersistenceController.shared
     let baseRepo = BaseRepository()
     let storage = CozieStorage.shared
     let surveyManager = SurveyManager()
+    let notifListner = CozieNotificationLifecycleListener()
     
     var currentBackendSettings: BackendInfo? {
         guard let settingsList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()),
@@ -109,43 +110,17 @@ class BackendInteractor {
         
         if let _ = currentBackendSettings {
             // Remove this method to stop OneSignal Debugging
-            OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
+            OneSignal.Debug.setLogLevel(.LL_VERBOSE)
             
-            // uncomment the behavior of OneSignal's own actions
-            /*
-             let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-             // This block gets called when the user reacts to a notification received
-             if let actionID = result.action.actionId {
-             surveyInteractor.sendResponse(action: actionID) { success in
-             if success {
-             debugPrint("iOS notification action sent")
-             }
-             }
-             }
-             }
-             OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
-             */
-            
-            OneSignal.setNotificationWillShowInForegroundHandler { /*[weak self]*/ notification, completion in
-                // send health data
-                healthKitInteractor.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
-                    DispatchQueue.main.async {
-                        completion(notification)
-                    }
-                }
-                // self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
-            }
-            
+            notifListner.healthKitInteractor = healthKitInteractor
+            OneSignal.Notifications.addForegroundLifecycleListener(notifListner)
             
             // OneSignal initialization
-            OneSignal.initWithLaunchOptions(launchOptions)
-            OneSignal.setAppId(CommunicationKeys.oneSignalAppID.rawValue)
-            OneSignal.promptForPushNotifications(userResponse: { accepted in
-                debugPrint("User accepted notifications: \(accepted)")
-            })
+            OneSignal.initialize(CommunicationKeys.oneSignalAppID.rawValue, withLaunchOptions: launchOptions)
+            OneSignal.User.pushSubscription.optIn()
             
             if let delegate = AppDelegate.instance {
-                OneSignal.add(delegate as OSSubscriptionObserver)
+                OneSignal.User.addObserver(delegate)
             }
         }
     }
@@ -165,9 +140,22 @@ class BackendInteractor {
     //    }
 }
 
-extension AppDelegate: OSSubscriptionObserver {
-    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges) {
-        if let playerId = stateChanges.to.userId {
+class CozieNotificationLifecycleListener : NSObject, OSNotificationLifecycleListener {
+    var healthKitInteractor: HealthKitInteractor? = nil
+    func onWillDisplay(event: OSNotificationWillDisplayEvent) {
+        event.preventDefault()
+        healthKitInteractor?.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
+            debugPrint("On WillDisplay Notification")
+        }
+        // self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
+    }
+}
+
+
+extension AppDelegate: OSUserStateObserver {
+    func onUserStateDidChange(state: OSUserChangedState) {
+        // prints out all properties
+        if let playerId = state.current.onesignalId {
             CozieStorage.shared.savePlayerID(playerId)
             debugPrint("Player id: \(playerId)")
         }

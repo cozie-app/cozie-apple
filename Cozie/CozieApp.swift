@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import OneSignalFramework
 
 // MARK: AppDelegate: - Application initialization / BGTasks
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -105,7 +106,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                                               intentIdentifiers: [],
                                               options: [])
     }
-                                            
+                                    
 }
 
 // MARK: NotificationDelegate: - Silent notification actions
