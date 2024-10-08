@@ -104,7 +104,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return UNNotificationCategory(identifier: id,
                                               actions: actionFromList(actionList),
                                               intentIdentifiers: [],
-                                              options: [])
+                                              options: .customDismissAction)
     }
                                     
 }
@@ -133,13 +133,20 @@ struct CozieApp: App {
     
     @StateObject var coordinator = HomeCoordinator(session: Session())
     let persistenceController = PersistenceController.shared
+    var defaults = UserDefaults(suiteName: "group.app.cozie.ios")
     
     var body: some Scene {
         WindowGroup {
             HomeCoordinatorView(coordinator: coordinator)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onChange(of: scenePhase) { newPhase in
+                    
                     if newPhase == .active {
+                        
+                        debugPrint(defaults?.value(forKey: "cozie_notification_infoKey") ?? "info ist empty")
+                        debugPrint(defaults?.value(forKey: "cozie_notification_info_deleted_Key") ?? "info ist empty")
+                        //defaults?.set(["test" : "info ist emptyTest"], forKey: "cozie_notification_info")
+                        
                         // Delivery HealthKit info on application launch
                         appDelegate.healthKitInteractor.sendData(trigger: CommunicationKeys.appTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { success in
                             debugPrint(success ? "Health data sent" : "Health data failed")

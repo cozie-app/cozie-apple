@@ -301,6 +301,7 @@
 		CA6F3DE42B51664100C42C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
+		CA87CFFD2CB534A600501497 /* OneSignalNotificationServiceExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionDebug.entitlements; sourceTree = "<group>"; };
 		CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
@@ -916,6 +917,7 @@
 		CA6F3DEB2B516A1200C42C7F /* OneSignalNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
+				CA87CFFD2CB534A600501497 /* OneSignalNotificationServiceExtensionDebug.entitlements */,
 				CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */,
 				CA6F3DE22B51664100C42C7F /* NotificationService.swift */,
 				CA6F3DE32B51664100C42C7F /* OneSignalNotificationServiceExtension.entitlements */,
@@ -1831,6 +1833,7 @@
 			baseConfigurationReference = 3FAA11F93F17560C643D3510 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
