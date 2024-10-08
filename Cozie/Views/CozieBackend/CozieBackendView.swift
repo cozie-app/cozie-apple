@@ -26,10 +26,12 @@ struct CozieBackendView: View {
                     List {
                         ForEach($viewModel.section) { sectionData in
                             switch sectionData.id {
-                            case BackendViewModel.BackendSectionType.backend.rawValue:
-                                backendSection(title: "Backend", sectionData.list.wrappedValue, true)
-                            default:
+                            case BackendViewModel.BackendSectionType.surveys.rawValue:
+                                backendSection(title: "Surveys", sectionData.list.wrappedValue, true)
+                            case BackendViewModel.BackendSectionType.data.rawValue:
                                 backendSection(title: "Data", sectionData.list.wrappedValue)
+                            default:
+                                backendSection(title: "Backend", sectionData.list.wrappedValue)
                             }
                         }
                         
@@ -47,7 +49,7 @@ struct CozieBackendView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
-                CozieToolbarContent(title: "Cozie - Backend")
+                CozieToolbarContent(title: "Cozie - Advanced")
             })
             .background(Color.appBackground)
             .onAppear{

@@ -40,8 +40,10 @@ final class BackendSection: Identifiable {
                                                             //                                                      subtitle: ""),
                                                             BackendData(id: BackendViewModel.BackendState.participantPassword.rawValue,
                                                                         title: "Participant Password",
-                                                                        subtitle: ""),
-                                                            BackendData(id: BackendViewModel.BackendState.watchsurveyLink.rawValue,
+                                                                        subtitle: "")])
+    
+    static var defaulSurveysSection = BackendSection(id: BackendViewModel.BackendSectionType.surveys.rawValue,
+                                                     list: [BackendData(id: BackendViewModel.BackendState.watchsurveyLink.rawValue,
                                                                         title: "Watch Survey Link",
                                                                         subtitle: ""),
                                                             BackendData(id: BackendViewModel.BackendState.phoneSurveyLink.rawValue,
@@ -68,7 +70,7 @@ class BackendViewModel: NSObject, ObservableObject {
     }
     
     enum BackendSectionType: Int {
-        case data, backend
+        case surveys, data, backend
     }
     
     // State Property
@@ -77,7 +79,8 @@ class BackendViewModel: NSObject, ObservableObject {
             updateState(state: showingState)
         }
     }
-    @Published var section: [BackendSection] = [BackendSection.defaulBackendSection,
+    @Published var section: [BackendSection] = [BackendSection.defaulSurveysSection,
+                                                BackendSection.defaulBackendSection,
                                                 BackendSection.defaulDataSection]
     
     private var backendState: BackendState = .clear
