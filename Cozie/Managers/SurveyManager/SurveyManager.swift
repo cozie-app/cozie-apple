@@ -9,7 +9,7 @@ import Foundation
 
 
 class SurveyManager {
-    func update(surveyListData: Data, persistenceController: PersistenceController, selected: Bool, completion: ((Bool)->())? ) {
+    func update(surveyListData: Data, persistenceController: PersistenceController, selected: Bool, completion: ((_ error: Error?)->())? ) {
         do {
             let surveyModel = try JSONDecoder().decode(WatchSurvey.self, from: surveyListData)
             // set first question ID
@@ -73,12 +73,16 @@ class SurveyManager {
                         }
                     
                     try context.save()
-                    completion?(true)
+                    DispatchQueue.main.async {
+                        completion?(nil)
+                    }
                 })
             }
         } catch let error {
             debugPrint(error.localizedDescription)
-            completion?(false)
+            DispatchQueue.main.async {
+                completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
+            }
         }
     }
 }

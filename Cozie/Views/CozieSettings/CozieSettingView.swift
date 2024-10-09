@@ -230,7 +230,7 @@ struct CozieSettingView: View {
                        header: {
             CozieAnimatedSyncHeader(title: "Experiment Settings", action: {
                 viewModel.sendInfo { success in
-                    //showError = !success
+                    showError = !success
                 }
             }, animated: $viewModel.loading)
         })

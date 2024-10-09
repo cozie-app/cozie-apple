@@ -82,12 +82,12 @@ class BackendInteractor {
     }
     
     // MARK: - Load WatchSurvey JSON
-    func loadExternalWatchSurveyJSON(completion: ((_ success: Bool) -> ())?) {
+    func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         if let backend = currentBackendSettings {
             baseRepo.getFileContent(url: backend.watch_survey_link ?? "", parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
-                    completion?(false)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
                     return
                 }
                 
@@ -95,7 +95,7 @@ class BackendInteractor {
                 case .success(let surveyListData):
                     self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: false, completion: completion)
                 case .failure(let error):
-                    completion?(false)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
                     debugPrint(error.localizedDescription)
                 }
             }

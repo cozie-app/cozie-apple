@@ -174,18 +174,19 @@ class BackendViewModel: NSObject, ObservableObject {
     func loadWatchSurveyJSON(completion: ((_ success: Bool)->())?) {
         if !loading {
             loading = true
-            backendInteractor.loadExternalWatchSurveyJSON { [weak self] success in
+            backendInteractor.loadExternalWatchSurveyJSON { [weak self] loadError in
                 guard let self = self else {
                     return
                 }
                 DispatchQueue.main.async {
                     self.loading = false
-                    if success {
+                    if loadError == nil {
                         self.errorString = ""
+                        completion?(true)
                     } else {
                         self.errorString = "Load watch survey JSON error."
+                        completion?(false)
                     }
-                    completion?(success)
                 }
             }
             
@@ -196,11 +197,11 @@ class BackendViewModel: NSObject, ObservableObject {
     
     // MARK: Sync watch survey
     func syncWatchData() {
-        watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] success in
+        watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] loadError in
             guard let self = self else {
                 return
             }
-            if success {
+            if loadError == nil {
                 DispatchQueue.main.async {
                     do {
                         let request = WatchSurveyData.fetchRequest()
@@ -216,6 +217,9 @@ class BackendViewModel: NSObject, ObservableObject {
                         debugPrint(error.localizedDescription)
                     }
                 }
+            } else {
+                // error
+                debugPrint(loadError?.localizedDescription ?? "error -> syncWatchData")
             }
         }
     }

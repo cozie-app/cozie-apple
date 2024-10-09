@@ -17,13 +17,13 @@ class WatchSurveyInteractor {
     deinit { debugPrint("\(WatchSurveyInteractor.self) - deinit") }
     
     // MARK: - Load WatchSurvey JSON
-    func loadSelectedWatchSurveyJSON(completion: ((_ success: Bool) -> ())?) {
+    func loadSelectedWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         let selectedLink = storage.selectedWSLink()
         if !selectedLink.isEmpty {
             baseRepo.getFileContent(url: selectedLink, parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
-                    completion?(false)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
                     return
                 }
                 
@@ -31,7 +31,7 @@ class WatchSurveyInteractor {
                 case .success(let surveyListData):
                     self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: true, completion: completion)
                 case .failure(let error):
-                    completion?(false)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
                     debugPrint(error.localizedDescription)
                 }
             }
