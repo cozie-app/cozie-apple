@@ -22,7 +22,7 @@ class WatchSurveyViewModel: ObservableObject {
     func updateData(sendHealthData: Bool = false, completion: @escaping () -> Void) {
         if !loading {
             loading = true
-            syncInteractor.syncData(completion: { [weak self] error in
+            syncInteractor.syncSummaryData(completion: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.loading = false
                     self?.dataSynced = error == nil

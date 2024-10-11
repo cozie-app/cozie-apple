@@ -11,11 +11,11 @@ import WatchConnectivity
 class WatchConnectivityManagerPhone: NSObject {
     
     enum WatchConnectivityManagerError: Error, LocalizedError {
-        case connectionError, surveyError
+        case connectionError, surveyJSONError
         public var errorDescription: String? {
                switch self {
-               case .connectionError: return "Cozie Watch App not reachable"
-               case .surveyError: return "Load watch survey JSON error."
+               case .connectionError: return "Syncing with watch failed: Cozie watch app not reachable."
+               case .surveyJSONError: return "Syncing with watch failed: JSON file download failed."
                }
            }
     }

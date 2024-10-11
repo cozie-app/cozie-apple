@@ -81,7 +81,7 @@ class SurveyManager {
         } catch let error {
             debugPrint(error.localizedDescription)
             DispatchQueue.main.async {
-                completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
+                completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
             }
         }
     }

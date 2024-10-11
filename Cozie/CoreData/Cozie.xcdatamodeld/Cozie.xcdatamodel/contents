@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BackendInfo" representedClassName=".BackendInfo" syncable="YES">
         <attribute name="api_read_key" optional="YES" attributeType="String"/>
         <attribute name="api_read_url" optional="YES" attributeType="String"/>
@@ -37,6 +37,12 @@
         <attribute name="wss_time_out" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wss_title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="SummaryInfoData" representedClassName="SummaryInfoData" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="label" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="summaryList" inverseEntity="User"/>
+    </entity>
     <entity name="SurveyData" representedClassName=".SurveyData" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="question" optional="YES" attributeType="String"/>
@@ -54,6 +60,7 @@
         <attribute name="experimentID" optional="YES" attributeType="String"/>
         <attribute name="participantID" optional="YES" attributeType="String"/>
         <attribute name="passwordID" optional="YES" attributeType="String"/>
+        <relationship name="summaryList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SummaryInfoData" inverseName="user" inverseEntity="SummaryInfoData"/>
         <relationship name="syncInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SyncInfo" inverseName="user" inverseEntity="SyncInfo"/>
     </entity>
     <entity name="WatchSurveyData" representedClassName=".WatchSurveyData" syncable="YES">

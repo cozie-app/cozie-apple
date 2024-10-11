@@ -58,8 +58,6 @@
 		CA011F152A1744A7006BFA7C /* CozieLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA011F142A1744A7006BFA7C /* CozieLocationManager.swift */; };
 		CA0A1B0E29DB20F2007A3A19 /* SyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B0D29DB20F2007A3A19 /* SyncInteractor.swift */; };
 		CA0A1B1529DB23F5007A3A19 /* UserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1429DB23F5007A3A19 /* UserInteractor.swift */; };
-		CA0A1B1829DC772F007A3A19 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1629DC772F007A3A19 /* User+CoreDataClass.swift */; };
-		CA0A1B1929DC772F007A3A19 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1729DC772F007A3A19 /* User+CoreDataProperties.swift */; };
 		CA0A1B1C29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */; };
 		CA0A1B1D29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */; };
 		CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1F29DDB0AA007A3A19 /* SettingsInteractor.swift */; };
@@ -95,6 +93,10 @@
 		CA4349172B8CD12F00C0EEDA /* OfflineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4349152B8CCC1E00C0EEDA /* OfflineManager.swift */; };
 		CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */; };
 		CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4E2A0256A300D096AD /* NotificationView.swift */; };
+		CA4F42442CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42422CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift */; };
+		CA4F42452CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42432CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift */; };
+		CA4F42482CB7D9000059013B /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42462CB7D9000059013B /* User+CoreDataClass.swift */; };
+		CA4F42492CB7D9000059013B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42472CB7D9000059013B /* User+CoreDataProperties.swift */; };
 		CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */; };
 		CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */; };
 		CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */; };
@@ -253,8 +255,6 @@
 		CA011F142A1744A7006BFA7C /* CozieLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieLocationManager.swift; sourceTree = "<group>"; };
 		CA0A1B0D29DB20F2007A3A19 /* SyncInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncInteractor.swift; sourceTree = "<group>"; };
 		CA0A1B1429DB23F5007A3A19 /* UserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInteractor.swift; sourceTree = "<group>"; };
-		CA0A1B1629DC772F007A3A19 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "Cozie/CoreData/User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		CA0A1B1729DC772F007A3A19 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "Cozie/CoreData/User+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SyncInfo+CoreDataClass.swift"; path = "Cozie/CoreData/SyncInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SyncInfo+CoreDataProperties.swift"; path = "Cozie/CoreData/SyncInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1F29DDB0AA007A3A19 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
@@ -290,6 +290,10 @@
 		CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		CA4EBE4E2A0256A300D096AD /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CA4EBE502A025BD100D096AD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CA4F42422CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummaryInfoData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CA4F42432CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummaryInfoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CA4F42462CB7D9000059013B /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CA4F42472CB7D9000059013B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -476,6 +480,10 @@
 		921289FC29964A0B0060C729 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CA4F42462CB7D9000059013B /* User+CoreDataClass.swift */,
+				CA4F42472CB7D9000059013B /* User+CoreDataProperties.swift */,
+				CA4F42422CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift */,
+				CA4F42432CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift */,
 				CAD1E5C529FA901D000F9FE7 /* SettingsData+CoreDataClass.swift */,
 				CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */,
 				CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */,
@@ -488,8 +496,6 @@
 				CA1548F529E5B1EF005FDD6B /* BackendInfo+CoreDataProperties.swift */,
 				CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */,
 				CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */,
-				CA0A1B1629DC772F007A3A19 /* User+CoreDataClass.swift */,
-				CA0A1B1729DC772F007A3A19 /* User+CoreDataProperties.swift */,
 				921289D6299649ED0060C729 /* Persistence.swift */,
 				921289D8299649ED0060C729 /* Cozie.xcdatamodeld */,
 			);
@@ -1301,7 +1307,6 @@
 				9267EFF0299A91470025A3CE /* CozieSettingView.swift in Sources */,
 				CA1A68062A1F8C840084B000 /* SurveyManager.swift in Sources */,
 				921289DA299649ED0060C729 /* Cozie.xcdatamodeld in Sources */,
-				CA0A1B1929DC772F007A3A19 /* User+CoreDataProperties.swift in Sources */,
 				9267485D29D71868004329B9 /* BackendViewModel.swift in Sources */,
 				9212144429CE0730002BAEB4 /* TextFieldPopUp.swift in Sources */,
 				CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */,
@@ -1310,6 +1315,8 @@
 				CA2EE92E29EFE18900590527 /* WatchConnectivityManager.swift in Sources */,
 				CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */,
 				92128A06299688640060C729 /* WatchSurveyRow.swift in Sources */,
+				CA4F42442CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift in Sources */,
+				CA4F42452CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift in Sources */,
 				ACAB713F2A98536000AC8C80 /* Defaults.swift in Sources */,
 				CA4349162B8CCC1E00C0EEDA /* OfflineManager.swift in Sources */,
 				92CFCA8A29C8877900ABC374 /* DaysViewModel.swift in Sources */,
@@ -1327,7 +1334,6 @@
 				92524F9629CCBA5100074A09 /* WatchSurveyViewModel.swift in Sources */,
 				CAB58A5829F9706900E26D20 /* WatchSurveyInteractor.swift in Sources */,
 				9244815F29C1CA1A004E6779 /* SettingWatchCell.swift in Sources */,
-				CA0A1B1829DC772F007A3A19 /* User+CoreDataClass.swift in Sources */,
 				CA0A1B1529DB23F5007A3A19 /* UserInteractor.swift in Sources */,
 				CA1548F629E5B1F0005FDD6B /* BackendInfo+CoreDataClass.swift in Sources */,
 				CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */,
@@ -1368,6 +1374,8 @@
 				9251771B29C364870089C92C /* TimePickerViewModel.swift in Sources */,
 				CAC6F9312A0CFFCB006D625D /* InitModel.swift in Sources */,
 				9267EFF3299A946C0025A3CE /* CozieBackendView.swift in Sources */,
+				CA4F42482CB7D9000059013B /* User+CoreDataClass.swift in Sources */,
+				CA4F42492CB7D9000059013B /* User+CoreDataProperties.swift in Sources */,
 				CA2EE93029EFE36E00590527 /* CommunicationKeys.swift in Sources */,
 				92803DF029D4279B008438EB /* Date+Helper.swift in Sources */,
 				92524F9429CCA9EA00074A09 /* WatchSurveyModel.swift in Sources */,

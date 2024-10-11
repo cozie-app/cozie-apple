@@ -71,4 +71,54 @@ class SyncInteractor {
             }
         }
     }
+    
+    public func syncSummaryData(completion: ( (_ error: Error?) -> Void )?) {
+        let param: [String: String]
+        if let userList = try? persistenceController.container.viewContext.fetch(User.fetchRequest()),
+            let user = userList.first {
+            param = ["id_participant": user.participantID ?? "",
+                     "id_experiment": user.experimentID ?? "",
+                     "id_password": user.passwordID ?? ""]
+        } else {
+            param = [:]
+        }
+        let apiInfo = getAPI()
+        baseRepo.get(url: apiInfo.url, parameters: param, key: apiInfo.key) { [weak self] result in
+            switch result {
+            case .success(let data):
+                do {
+                    
+                    let list = try JSONDecoder().decode([ListSummaryModel].self, from: data)
+                    
+                    self?.persistenceController.container.performBackgroundTask { context in
+                        context.automaticallyMergesChangesFromParent = true
+
+                        if let userList =  try? context.fetch(User.fetchRequest()),
+                            let user = userList.first, let savedSummaryList = try? context.fetch(SummaryInfoData.fetchRequest()) {
+                            
+                            for summary in list.enumerated() {
+                                let summaryInfo:SummaryInfoData
+                                if let first = savedSummaryList.first(where: { $0.index == Int16(summary.offset) }) {
+                                    summaryInfo = first
+                                } else {
+                                    summaryInfo = SummaryInfoData(context: context)
+                                }
+                                summaryInfo.label = summary.element.label
+                                summaryInfo.data = summary.element.data
+                                summaryInfo.index = Int16(summary.offset)
+                                summaryInfo.user = user
+                            }
+                            savedSummaryList.filter{ $0.index > list.count - 1 }.forEach{ context.delete($0) }
+                        }
+                        try? context.save()
+                        completion?(nil)
+                    }
+                } catch let error {
+                    completion?(error)
+                }
+            case .failure(let error):
+                completion?(error)
+            }
+        }
+    }
 }

@@ -23,7 +23,10 @@ class BaseRepository: ObservableObject {
    
     // MARK: Base GET
     func get(url: String, parameters: [String: String], key: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        guard var componentsQuery = URLComponents(string: url) else { return }
+        guard var componentsQuery = URLComponents(string: url) else {
+            completion(.failure(ServiceError.responseStatusError(0, "Fatal error")))
+            return
+        }
         
         var itemsList = [URLQueryItem]()
         for (key, value) in parameters {
@@ -42,6 +45,12 @@ class BaseRepository: ObservableObject {
             ]
             
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                // debug
+                if let dataToPrint = data {
+                    debugPrint(String(data: dataToPrint, encoding: .utf8))
+                }
+                //
+                
                 if let httpResponse = response as? HTTPURLResponse,
                    httpResponse.statusCode == 200,
                    let responseData = data {

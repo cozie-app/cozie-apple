@@ -7,16 +7,26 @@
 
 import Foundation
 
+struct ListSummaryModel: Decodable, Identifiable {
+    var label: String = ""
+    var data: String = ""
+    var id: String {
+        get {label + data}
+    }
+}
+
 struct WatchSurveyModel {
     var validCount: String = ""
     var invalidCount: String = ""
     var lastSync: String = ""
+    var list: ListSummaryModel?
     
     init(validCount: String, invalidCount: String, lastSync: String) {
         self.validCount = validCount
         self.invalidCount = invalidCount
         self.lastSync = lastSync
     }
+    
     //DD.MM.yyyy - HH:mm
     func formattedDate() -> String {
         let dateFormatter = DateFormatter()

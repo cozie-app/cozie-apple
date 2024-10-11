@@ -87,7 +87,7 @@ class BackendInteractor {
             baseRepo.getFileContent(url: backend.watch_survey_link ?? "", parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
-                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     return
                 }
                 
@@ -95,7 +95,7 @@ class BackendInteractor {
                 case .success(let surveyListData):
                     self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: false, completion: completion)
                 case .failure(let error):
-                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyError)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)
                 }
             }
