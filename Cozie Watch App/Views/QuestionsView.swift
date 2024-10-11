@@ -138,11 +138,13 @@ struct QuestionsView: View {
     }
     
     func scrollToTopAnimation(reader: ScrollViewProxy?, animation: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            withAnimation {
-                reader?.scrollTo(viewModel.questionID, anchor: .top)
-            }
-        }
+        reader?.scrollTo(viewModel.questionID, anchor: .top)
+        // remove scroll animation to question in watch app
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//            withAnimation {
+//                reader?.scrollTo(viewModel.questionID, anchor: .top)
+//            }
+//        }
     }
 }
 
