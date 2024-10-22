@@ -17,6 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     static private(set) var instance: AppDelegate! = nil
+    private(set) var categoryController: PushCategoryProtocol = PushCatgoryController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -49,7 +50,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ = WatchConnectivityManagerPhone.shared
         
         // custom notification action: register new notification category
-        regiterActionNotifCategory()
+        categoryController.regiterActionNotifCategory()
         return true
     }
     
@@ -62,67 +63,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             self.backgroundProcessing.scheduleBgTaskRefresh()
         }
     }
-    
-    // MARK: Notification Helper - Regiter Notification Category
-    private func regiterActionNotifCategory() {
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().setNotificationCategories([])
-        
-        UNUserNotificationCenter.current().getNotificationCategories { list in
-            var categorys: Set<UNNotificationCategory> = []
-            // cozie_notification_action_category_1
-            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory1.rawValue }) == nil {
-                let listActionTitlesCategory = ["Helpful", "Not helpful"]
-                categorys.insert(self.registerCategory(NotificationKeys.actionBaceNotificationCategory1.rawValue, actionList: listActionTitlesCategory))
-            }
-            // cozie_notification_action_category_2
-            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory2.rawValue }) == nil {
-                let listActionTitlesCategory = ["I will do it", "I'll do my best", "Not relevant"]
-                categorys.insert(self.registerCategory(NotificationKeys.actionBaceNotificationCategory2.rawValue, actionList: listActionTitlesCategory))
-            }
-            // cozie_notification_action_category_3
-            if list.first(where: { $0.identifier == NotificationKeys.actionBaceNotificationCategory3.rawValue }) == nil {
-                let listActionTitlesCategory = ["I may do it", "No thanks", "Not relevant"]
-                categorys.insert(self.registerCategory(NotificationKeys.actionBaceNotificationCategory3.rawValue, actionList: listActionTitlesCategory))
-            }
-            
-            UNUserNotificationCenter.current().setNotificationCategories(categorys)
-        }
-    }
-    
-    private func actionFromList(_ list: [String]) -> [UNNotificationAction] {
-        var actions: [UNNotificationAction] = []
-        for actionTitle in list {
-            actions.append(UNNotificationAction(identifier: actionTitle,
-                                                title: actionTitle,
-                                                options: []))
-        }
-        return actions
-    }
-    
-    private func registerCategory(_ id: String, actionList: [String]) -> UNNotificationCategory {
-        return UNNotificationCategory(identifier: id,
-                                              actions: actionFromList(actionList),
-                                              intentIdentifiers: [],
-                                              options: .customDismissAction)
-    }
-                                    
 }
-
-// MARK: NotificationDelegate: - Silent notification actions
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let surveyInteractor = WatchSurveyInteractor()
-        if response.actionIdentifier != UNNotificationDefaultActionIdentifier {
-            surveyInteractor.sendResponse(action: response.actionIdentifier) { success in
-                if success {
-                    debugPrint("iOS notification action sent")
-                }
-            }
-        }
-    }
-}
-
 
 @main
 struct CozieApp: App {

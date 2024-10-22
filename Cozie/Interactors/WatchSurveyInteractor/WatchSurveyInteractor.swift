@@ -8,11 +8,36 @@
 import Foundation
 import CoreData
 
+protocol SurveyManagerProtocol {
+    func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ error: Error?)->())? )
+    func asyncUpdate(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool) async throws
+}
+
+protocol SurveyStorageProtocol {
+    func selectedWSLink() -> String
+    func playerID() -> String
+}
+
 class WatchSurveyInteractor {
-    let persistenceController = PersistenceController.shared
-    let baseRepo = BaseRepository()
-    let storage = CozieStorage.shared
-    let surveyManager = SurveyManager()
+    let persistenceController: PersistenceController
+    let baseRepo: BaseRepository
+    let storage: SurveyStorageProtocol
+    let surveyManager: SurveyManagerProtocol
+    
+    init() {
+        self.persistenceController = PersistenceController.shared
+        self.baseRepo = BaseRepository()
+        self.storage = CozieStorage.shared
+        self.surveyManager = SurveyManager()
+    }
+    
+    init(surveyManager: SurveyManagerProtocol, storage: SurveyStorageProtocol) {
+        self.surveyManager = surveyManager
+        self.storage = storage
+        
+        self.persistenceController = PersistenceController.shared
+        self.baseRepo = BaseRepository()
+    }
     
     deinit { debugPrint("\(WatchSurveyInteractor.self) - deinit") }
     
@@ -29,7 +54,7 @@ class WatchSurveyInteractor {
                 
                 switch result {
                 case .success(let surveyListData):
-                    self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: true, completion: completion)
+                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: true, completion: completion)
                 case .failure(let error):
                     completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)

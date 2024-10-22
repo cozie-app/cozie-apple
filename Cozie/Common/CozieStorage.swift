@@ -182,3 +182,5 @@ class CozieStorage: CozieStorageProtocol {
         return CozieStorageKeys.healthPrefixSyncedDateKey.rawValue
     }
 }
+
+extension CozieStorage: SurveyStorageProtocol {}

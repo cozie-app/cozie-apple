@@ -37,7 +37,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     
     private var selectedOptions: [(sID: String, optin: ResponseOption)] = []
     private var currentSurvey: Survey?
-    private var watchSurvey: WatchSurvey? = nil
+    private var watchSurvey: WatchSurveyModelController? = nil
     private var startTime = Date()
     
     let categoryId = "cozie_push_action_category"
@@ -66,7 +66,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     // MARK: Private func
     private func loadWatchSurvey(data: Data) {
         do {
-            let wSurvey = try JSONDecoder().decode(WatchSurvey.self, from: data)
+            let wSurvey = try JSONDecoder().decode(WatchSurveyModelController.self, from: data)
             watchSurvey = wSurvey
             if let question = wSurvey.survey.first(where: { $0.questionID == (wSurvey.firstQuestionID ?? "failed") }) {
                 // questionID has a side effect of questionsTitle !!!

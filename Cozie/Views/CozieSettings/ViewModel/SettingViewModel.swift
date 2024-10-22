@@ -152,6 +152,16 @@ class SettingViewModel: ObservableObject {
         if let settings = settingsIntaractor.currentSettings {
             subscriptions.removeAll()
             
+            // Find selected id
+            // Side effect for updateSurveyList
+            let selectedLink = storage.selectedWSLink()
+            if  !selectedLink.isEmpty {
+                questionViewModel.selectedId = questionViewModel.selectedIDForLink(selectedLink)
+            } else {
+                questionViewModel.selectedId = questionViewModel.selectedIDForTitle(settings.wss_title ?? "")
+            }
+            //
+            
             updateSurveyList()
             
             goal = "\(settings.wss_goal)"
@@ -161,7 +171,6 @@ class SettingViewModel: ObservableObject {
                 self?.updateReminderState(isEnabled: value)
             }
             .store(in: &subscriptions)
-            questionViewModel.selectedId = questionViewModel.selectedIDForTitle(settings.wss_title ?? "")
             
             if let daysValues = settings.wss_participation_days {
                 // reset all selected
@@ -494,7 +503,7 @@ class SettingViewModel: ObservableObject {
     
     // MARK: Watch survey list
     func updateSurveyList() {
-        if self.questionViewModel.list.first(where: { $0.link == (backendInteractor.currentBackendSettings?.watch_survey_link ?? "link" ) }) == nil {
+//        if self.questionViewModel.list.first(where: { $0.link == (backendInteractor.currentBackendSettings?.watch_survey_link ?? "link" ) }) == nil {
             do {
                 let request = WatchSurveyData.fetchRequest()
                 request.predicate = NSPredicate(format: "external == %d", true)
@@ -511,6 +520,8 @@ class SettingViewModel: ObservableObject {
             } catch let error {
                 debugPrint(error.localizedDescription)
             }
-        }
+//        } else {
+//            
+//        }
     }
 }

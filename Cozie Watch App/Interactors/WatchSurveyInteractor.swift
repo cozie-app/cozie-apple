@@ -33,7 +33,7 @@ class WatchSurveyInteractor {
         healthInteractor.requestHealthData(trigger: trigger, completion: completion)
     }
     
-    func sendSurveyData(watchSurvey: WatchSurvey?,
+    func sendSurveyData(watchSurvey: WatchSurveyModelController?,
                         selectedOptions:[SelectedSurveyInfo],
                         location: CLLocation?,
                         time: SelectedSurveyTime,

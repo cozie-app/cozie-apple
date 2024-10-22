@@ -184,7 +184,7 @@ class BackendViewModel: NSObject, ObservableObject {
                         self.errorString = ""
                         completion?(true)
                     } else {
-                        self.errorString = "Load watch survey JSON error."
+                        self.errorString = WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError.localizedDescription
                         completion?(false)
                     }
                 }

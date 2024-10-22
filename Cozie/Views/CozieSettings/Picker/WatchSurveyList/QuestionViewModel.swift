@@ -37,6 +37,10 @@ class QuestionViewModel: ObservableObject {
         return list.first(where: { $0.title == title })?.id ?? 0
     }
     
+    func selectedIDForLink(_ link: String) -> Int {
+        return list.first(where: { $0.link == link })?.id ?? 0
+    }
+    
     func updateWithBackendSurvey(title: String, link: String) {
         var tmpList = list
         tmpList.removeAll { type in

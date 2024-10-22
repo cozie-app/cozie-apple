@@ -92,6 +92,7 @@ class HealthKitInteractor {
                          HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!]
     
     let allTypes: Set<HKSampleType>
+    let lock = NSLock()
     
     init(storage: CozieStorageProtocol, userData: UserDataProtocol, backendData: BackendDataProtocol, loger: LoggerProtocol, transmitTrigger: String = "background_task", dataPrefix: String = "ts") {
         self.storage = storage
@@ -285,6 +286,7 @@ class HealthKitInteractor {
             completion([], [])
             return
         }
+        
         let tag = Tags(idOnesignal: storage.playerID(), idParticipant: user.participantID, idPassword: user.passwordID)
         
         getLastDaySamples(for: type) { [weak self] (samples, sleepData, workautData, error) in
@@ -434,7 +436,7 @@ class HealthKitInteractor {
     private func convertToUnit(sample: HKQuantitySample, type: HKSampleType, completion: @escaping (Double?) -> Void) {
         
         var data: Double? = nil
-        
+        type.identifier
         switch type {
         case HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure),
             HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure):
@@ -545,7 +547,9 @@ class HealthKitInteractor {
                 group.enter()
                 print("\(type) enter(type)")
                 self.getDataObject(type: type, trigger: trigger) { infos, simples in
+                    self.lock.lock()
                     list.append(contentsOf: infos)
+                    self.lock.unlock()
                     print("\(type) leav(type)")
                     group.leave()
                 }

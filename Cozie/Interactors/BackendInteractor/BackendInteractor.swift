@@ -93,7 +93,7 @@ class BackendInteractor {
                 
                 switch result {
                 case .success(let surveyListData):
-                    self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: false, completion: completion)
+                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false, completion: completion)
                 case .failure(let error):
                     completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)

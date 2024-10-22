@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - WatchSurvey
-class WatchSurvey: Codable {
+class WatchSurveyModelController: Codable {
     var surveyName, surveyID: String
     var firstQuestionID: String? = nil
     var survey: [Survey]
