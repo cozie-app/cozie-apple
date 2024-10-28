@@ -1,12 +1,16 @@
 //
-//  PuchCatgoryController.swift
+//  PushCatgoryController.swift
 //  Cozie
 //
 //  Created by Alexandr Chmal on 22.10.24.
 //
 import UIKit
+protocol CatgoryDataProtocol: Codable {
+    var id: String { get }
+    var buttons: [String] { get }
+}
 
-struct CatgoryInfo: Decodable {
+struct CatgoryInfo: CatgoryDataProtocol {
     let id: String
     let buttons: [String]
 }

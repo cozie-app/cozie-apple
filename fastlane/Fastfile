@@ -1,0 +1,40 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+    desc "Run Unit Tests and distribute"
+    lane :tests do
+        run_tests(workspace: "Cozie.xcworkspace",
+                devices: ["iPhone 16"],
+                clean: true,
+                scheme: "Cozie")
+    end
+    lane :cozieci do
+	increment_build_number
+	#xcov(
+	#	workspace: "Cozie.xcworkspace",
+  	#	scheme: "Cozie",
+  	#	#output_directory: "xcov_output", 
+	#	minimum_coverage_percentage: 25.0
+	#)
+
+        build_app(scheme: "Cozie",
+           	workspace: "Cozie.xcworkspace",
+        	include_bitcode: true)
+        upload_to_testflight
+    end
+end

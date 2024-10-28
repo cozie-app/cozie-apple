@@ -14,10 +14,18 @@ final class PushCatgoryControllerTest {
     init() async throws {}
     deinit {}
     
-    @Test func test_parse_LocalSevedCategory() throws {
-        let contr = PushCatgoryController()
-        let list = try contr.categoryList(plistName: "CategoryList", bundel: Bundle(for: PushCatgoryController.self))
-        
-        #expect(list.count > 0)
+    @Suite("Parsing")
+    struct PushCatgoryControllerST {
+        @Test("Parsing Local Category", .tags(.parsing))
+        func parseLocalSevedCategory() throws {
+            let contr = PushCatgoryController()
+            let list = try contr.categoryList(plistName: "CategoryList", bundel: Bundle(for: PushCatgoryController.self))
+            
+            #expect(list.count > 0)
+        }
     }
+}
+
+private extension Tag {
+    @Tag static var parsing: Self
 }
