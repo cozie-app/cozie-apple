@@ -11,7 +11,7 @@ import Testing
 final class PersistenceControllerTest {
     let storage = PersistenceController(inMemory: true)
     let surveyManager: SurveyManagerProtocol = SurveyManager()
-    @Test("Test PersistenceController") func test_seve_survey() async throws {
+    @Test("Test Persistence Controller") func test_seve_survey() async throws {
         let request = WatchSurveyData.fetchRequest()
         let prelist  = try storage.container.viewContext.fetch(request)
         

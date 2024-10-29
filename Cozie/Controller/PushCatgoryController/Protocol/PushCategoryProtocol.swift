@@ -7,4 +7,5 @@
 
 protocol PushCategoryProtocol {
     func regiterActionNotifCategory()
+    func enablePushLogging(_ value: Bool)
 }

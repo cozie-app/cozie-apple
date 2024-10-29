@@ -14,13 +14,13 @@ final class WatchSurveyModelControllerTest {
     init() async throws {}
     deinit {}
     
-    @Test func test_parse_WatchSurveyModel() throws {
+    @Test func parseWatchSurveyModel() throws {
         let mod = try JSONDecoder().decode(WatchSurveyModelController.self, from: TestSurveyData.suveyStub)
         
         #expect(mod.surveyName == "Thermal (short)")
         #expect(mod.surveyID == "thermal_short")
         
-        let syrvey = try #require(mod.survey.first)
+        _ = try #require(mod.survey.first)
     }
 }
 

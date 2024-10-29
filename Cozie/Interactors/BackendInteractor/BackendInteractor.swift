@@ -171,6 +171,15 @@ extension BackendInteractor: BackendDataProtocol {
     }
 }
 
+extension BackendInteractor: ApiDataProtocol{
+    var url: String {
+        return currentBackendSettings?.api_write_url ?? ""
+    }
+    
+    var key: String {
+        return currentBackendSettings?.api_write_key ?? ""
+    }
+}
 
 // MARK: - TEST: - OneSIgnal curl Alex_Segment
 /*
@@ -184,6 +193,7 @@ extension BackendInteractor: BackendDataProtocol {
           \"headings\": {\"en\": \"Alexs test for headings\"},
           \"subtitle\": {\"en\": \"Alexs test for subtitle\"},
           \"ios_category\": \"cozie_notification_action_category\",
+          \"content_available\": true,
           \"included_segments\": [\"Alex_Segment\"]
       }" \
       https://api.onesignal.com/notifications

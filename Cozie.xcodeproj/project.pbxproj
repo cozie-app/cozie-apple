@@ -104,6 +104,10 @@
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
 		CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F3DE22B51664100C42C7F /* NotificationService.swift */; };
+		CA7E1D892CCFD6E9000C6461 /* PuschNotificationLoggerStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D882CCFD6E5000C6461 /* PuschNotificationLoggerStorageTest.swift */; };
+		CA7E1D8B2CCFD866000C6461 /* PuschNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PuschNotificationLoggerGroupStorage.swift */; };
+		CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
+		CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
 		CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */; };
 		CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */; };
 		CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
@@ -132,6 +136,11 @@
 		CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */; };
 		CAD1E5CA29FBEF17000F9FE7 /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
 		CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */; };
+		CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */; };
+		CAD1F0EF2CCFB87F001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
+		CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */; };
+		CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */; };
+		CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,6 +319,9 @@
 		CA6F3DE42B51664100C42C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
+		CA7E1D882CCFD6E5000C6461 /* PuschNotificationLoggerStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuschNotificationLoggerStorageTest.swift; sourceTree = "<group>"; };
+		CA7E1D8A2CCFD865000C6461 /* PuschNotificationLoggerGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuschNotificationLoggerGroupStorage.swift; sourceTree = "<group>"; };
+		CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCommon.swift; sourceTree = "<group>"; };
 		CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyModelControllerTest.swift; sourceTree = "<group>"; };
 		CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTest.swift; sourceTree = "<group>"; };
 		CA87CFFD2CB534A600501497 /* OneSignalNotificationServiceExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionDebug.entitlements; sourceTree = "<group>"; };
@@ -334,6 +346,10 @@
 		CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataModel.swift; sourceTree = "<group>"; };
 		CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundUpdateManager.swift; sourceTree = "<group>"; };
+		CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPushTests.swift; sourceTree = "<group>"; };
+		CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerController.swift; sourceTree = "<group>"; };
+		CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificaitonLoggerRepository.swift; sourceTree = "<group>"; };
+		CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerRepositoryTests.swift; sourceTree = "<group>"; };
 		D24C4273B7B8B756FE8443A6 /* Pods-Cozie Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie Watch App.release.xcconfig"; path = "Target Support Files/Pods-Cozie Watch App/Pods-Cozie Watch App.release.xcconfig"; sourceTree = "<group>"; };
 		E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F415053C9AB8896A79909F80 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
@@ -477,6 +493,7 @@
 		921289E2299649ED0060C729 /* CozieTests */ = {
 			isa = PBXGroup;
 			children = (
+				CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */,
 				CAB063052CC7A4A3004D94CA /* PushCatgoryController */,
 				CA8160462CC2588E00BCBE25 /* WatchSurvey */,
 			);
@@ -593,6 +610,7 @@
 		92524F8F29CC5FEA00074A09 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */,
 				92524F9029CC6A2C00074A09 /* BaseRepository.swift */,
 			);
 			path = Repository;
@@ -946,6 +964,14 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
+		CA7E1D872CCFD695000C6461 /* PuschNotificationLoggerGroupStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CA7E1D8A2CCFD865000C6461 /* PuschNotificationLoggerGroupStorage.swift */,
+			);
+			path = PuschNotificationLoggerGroupStorage;
+			sourceTree = "<group>";
+		};
 		CA8160452CC2587500BCBE25 /* WatchSurveyModelController */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,6 +1002,9 @@
 		CAB062FB2CC79A39004D94CA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */,
+				CA7E1D872CCFD695000C6461 /* PuschNotificationLoggerGroupStorage */,
+				CAD1F0ED2CCFB857001B5307 /* PushNotificationLoggerController */,
 				CAB062FA2CC79A1A004D94CA /* PushCatgoryController */,
 			);
 			path = Controller;
@@ -1021,6 +1050,24 @@
 				CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */,
 			);
 			path = BackgroundTask;
+			sourceTree = "<group>";
+		};
+		CAD1F0ED2CCFB857001B5307 /* PushNotificationLoggerController */ = {
+			isa = PBXGroup;
+			children = (
+				CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */,
+			);
+			path = PushNotificationLoggerController;
+			sourceTree = "<group>";
+		};
+		CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */ = {
+			isa = PBXGroup;
+			children = (
+				CA7E1D882CCFD6E5000C6461 /* PuschNotificationLoggerStorageTest.swift */,
+				CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */,
+				CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */,
+			);
+			path = PushNotificationLogging;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1381,9 +1428,11 @@
 				921289DA299649ED0060C729 /* Cozie.xcdatamodeld in Sources */,
 				9267485D29D71868004329B9 /* BackendViewModel.swift in Sources */,
 				9212144429CE0730002BAEB4 /* TextFieldPopUp.swift in Sources */,
+				CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */,
 				CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */,
 				CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */,
 				CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */,
+				CAD1F0EF2CCFB87F001B5307 /* PushNotificationLoggerController.swift in Sources */,
 				CA2EE92E29EFE18900590527 /* WatchConnectivityManager.swift in Sources */,
 				CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */,
 				92128A06299688640060C729 /* WatchSurveyRow.swift in Sources */,
@@ -1419,9 +1468,11 @@
 				CA2EE84E29E8679B00590527 /* HealthKitInteractor.swift in Sources */,
 				9251771D29C366180089C92C /* TimePickerView.swift in Sources */,
 				922107482999188F001EC552 /* HomeCoordinatorView.swift in Sources */,
+				CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */,
 				CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */,
 				CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */,
 				9212144229CDFBB7002BAEB4 /* AppColor.swift in Sources */,
+				CA7E1D8B2CCFD866000C6461 /* PuschNotificationLoggerGroupStorage.swift in Sources */,
 				921289D0299649EC0060C729 /* ContentView.swift in Sources */,
 				92D0B80F29D9BD63008557FC /* SettingCoordinator.swift in Sources */,
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
@@ -1462,9 +1513,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7E1D892CCFD6E9000C6461 /* PuschNotificationLoggerStorageTest.swift in Sources */,
 				CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */,
 				CAB063072CC7A4AD004D94CA /* PushCatgoryControllerTest.swift in Sources */,
 				CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */,
+				CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */,
+				CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1512,6 +1566,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */,
+				CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */,
 				CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

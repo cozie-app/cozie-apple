@@ -97,8 +97,10 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             
             cacheHealthState.send(.inprogress)
             watchSurveyInteractor.healthDataPreload(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue) { [weak self] models in
-                self?.healthCache = models
-                self?.cacheHealthState.send(.finished)
+                if self?.cacheHealthState.value == .inprogress {
+                    self?.healthCache = models
+                    self?.cacheHealthState.send(.finished)
+                }
             }
             
             // Uncomment for test
@@ -161,9 +163,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     private func triggerSendSurvey() {
-        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: nil, logsComplition: { /*[weak self]  in*/
-            ///
-        }, completion: { [weak self] success, error in
+        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: healthCache, logsComplition: { }, completion: { [weak self] success, error in
             self?.resetCachedHealthData()
             
             if success {

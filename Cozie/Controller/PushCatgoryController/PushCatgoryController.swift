@@ -27,8 +27,33 @@ enum CategoryError: LocalizedError {
 }
 
 class PushCatgoryController: NSObject {
+    let pushNotificationLogger: PushNotificationLoggerController
+    let groupStorage = PuschNotificationLoggerGroupStorage(storage: UserDefaults(suiteName: GroupCommonKeys.storageName.rawValue) ?? GroupStorageGuard())
+    
+    init(pushNotificationLogger: PushNotificationLoggerController) {
+        self.pushNotificationLogger = pushNotificationLogger
+    }
+    
     // MARK: Notification Helper - Regiter Notification Category
- 
+    
+    func enablePushLogging(_ value: Bool) {
+        if value {
+            Task{
+                await withTaskGroup(of: Void.self, body: { [weak self] group in
+                    if let self {
+                        group.addTask {
+                            for action in self.groupStorage.formattedActions() {
+                                try? await self.pushNotificationLogger.pushNotificationDidSelectAction(action)
+                            }
+                        }
+                    }
+                })
+                
+                groupStorage.storage.clearActions()
+            }
+        }
+    }
+    
     func categoryList(plistName: String, bundel: Bundle) throws -> [CatgoryInfo] {
         if let url = bundel.url(forResource: plistName, withExtension: "plist") {
             let data = try Data(contentsOf: url)
@@ -94,6 +119,47 @@ extension PushCatgoryController: UNUserNotificationCenterDelegate {
                     debugPrint("iOS notification action sent")
                 }
             }
+        } else if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            Task {
+                try? await self.pushNotificationLogger.pushNotificationDidSelectAction("dismiss")
+            }
         }
+    }
+}
+
+extension UserDefaults: GroupStorageProtocol {
+    func payloads() -> [[String : Any]] {
+        self.value(forKey: GroupCommonKeys.payloads.rawValue) as? [[String : Any]] ?? []
+    }
+    
+    func clearPayloads() {
+        self.set(nil, forKey: GroupCommonKeys.payloads.rawValue)
+    }
+    
+    func actions() -> [String] {
+        self.value(forKey: GroupCommonKeys.actions.rawValue) as? [String] ?? []
+    }
+    
+    func clearActions() {
+        self.set(nil, forKey: GroupCommonKeys.actions.rawValue)
+    }
+    
+}
+
+fileprivate struct GroupStorageGuard: GroupStorageProtocol {
+    let message = "Create storage error!"
+    func payloads() -> [[String : Any]] {
+        fatalError(message)
+    }
+    func clearPayloads() {
+        //
+    }
+    
+    func actions() -> [String] {
+        fatalError(message)
+    }
+    
+    func clearActions() {
+        //
     }
 }

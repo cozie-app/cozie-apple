@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     static private(set) var instance: AppDelegate! = nil
-    private(set) var categoryController: PushCategoryProtocol = PushCatgoryController()
+    private(set) var categoryController: PushCategoryProtocol = PushCatgoryController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificaitonLoggerRepository(apiRepository: BaseRepository(), api: BackendInteractor())))
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -51,6 +51,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // custom notification action: register new notification category
         categoryController.regiterActionNotifCategory()
+        categoryController.enablePushLogging(true)
         return true
     }
     

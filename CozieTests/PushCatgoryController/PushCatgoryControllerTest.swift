@@ -18,11 +18,20 @@ final class PushCatgoryControllerTest {
     struct PushCatgoryControllerST {
         @Test("Parsing Local Category", .tags(.parsing))
         func parseLocalSevedCategory() throws {
-            let contr = PushCatgoryController()
+            let contr = PushCatgoryController(pushNotificationLogger: PushNotificationLoggerController(repository: PuschNotificationRepositorySpy()))
+            
             let list = try contr.categoryList(plistName: "CategoryList", bundel: Bundle(for: PushCatgoryController.self))
             
             #expect(list.count > 0)
         }
+    }
+}
+
+fileprivate struct PuschNotificationRepositorySpy : PuschNotificationRepositoryProtocol {
+    func saveNotifInfo(info: [String : Any]) async throws {
+    }
+    
+    func saveAction(action: String) async throws {
     }
 }
 
