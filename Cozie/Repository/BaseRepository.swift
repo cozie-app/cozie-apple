@@ -129,6 +129,10 @@ extension BaseRepository: ApiRepositoryProtocol {
                 "x-api-key": key
             ]
             
+            // debug
+            debugPrint(String(data: body, encoding: .utf8))
+            //
+            
             urlRequest.httpBody = body
             let session = URLSession(configuration: URLSessionConfiguration.default)
             session.dataTask(with: urlRequest) { data, response, error in

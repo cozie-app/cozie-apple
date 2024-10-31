@@ -13,18 +13,18 @@ class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var receivedRequest: UNNotificationRequest!
     var bestAttemptContent: UNMutableNotificationContent?
-    let pushLogger = PushNotificationLoggerController(repository: UserDefaults(suiteName: GroupCommonKeys.storageName.rawValue) ?? UserDefaults.standard)
+    let pushLogger = PushNotificationLoggerController(repository: UserDefaults(suiteName: GroupCommon.storageName.rawValue) ?? UserDefaults.standard)
     
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.receivedRequest = request
         self.contentHandler = contentHandler
         self.bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-//        defaults?.set(request.content.userInfo, forKey: "cozie_notification_infoKey")
-//        defaults?.synchronize()
         
         Task {
-            try? await pushLogger.pushNotificationDidReciv(payload: request.content.userInfo as? [String: Any] ?? [:])
+            var tempInfo = request.content.userInfo
+            tempInfo[GroupCommon.timestamp.rawValue] = Date().timeIntervalSince1970
+            try? await pushLogger.pushNotificationDidReciv(payload: tempInfo as? [String: Any] ?? [:])
         }
         
         if let bestAttemptContent = bestAttemptContent {
@@ -45,16 +45,26 @@ class NotificationService: UNNotificationServiceExtension {
     }
 }
 
-extension UserDefaults: PuschNotificationRepositoryProtocol {
+extension UserDefaults: PushNotificationRepositoryProtocol {
     func saveNotifInfo(info: [String: Any]) async throws {
-        var storredInfo: [[String: Any]] = self.object(forKey: GroupCommonKeys.payloads.rawValue) as? [[String: Any]] ?? []
+        var storredInfo: [[String: Any]] = self.object(forKey: GroupCommon.payloads.rawValue) as? [[String: Any]] ?? []
+        
+        if storredInfo.count > GroupCommon.payloadsLimit {
+            storredInfo.removeFirst()
+        }
+        
         storredInfo.append(info)
-        self.set(storredInfo, forKey: GroupCommonKeys.payloads.rawValue)
+        self.set(storredInfo, forKey: GroupCommon.payloads.rawValue)
     }
     
     func saveAction(action: String) async throws {
-        var storredAction: [String] = self.object(forKey: GroupCommonKeys.actions.rawValue) as? [String] ?? []
+        var storredAction: [String] = self.object(forKey: GroupCommon.actions.rawValue) as? [String] ?? []
+        
+        if storredAction.count > GroupCommon.actionsLimit {
+            storredAction.removeFirst()
+        }
+        
         storredAction.append(action)
-        self.set(storredAction, forKey: GroupCommonKeys.actions.rawValue)
+        self.set(storredAction, forKey: GroupCommon.actions.rawValue)
     }
 }

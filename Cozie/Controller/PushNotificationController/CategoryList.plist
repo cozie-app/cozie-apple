@@ -6,10 +6,10 @@
 		<key>id</key>
 		<string>cozie_notification_action_category_1</string>
 		<key>buttons</key>
-        <array>
-            <string>Helpful</string>
-            <string>Not helpful</string>
-        </array>
+		<array>
+			<string>Helpful</string>
+			<string>Not helpful</string>
+		</array>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -17,29 +17,29 @@
 		<key>buttons</key>
 		<array>
 			<string>I will do it</string>
-			<string>I'll do my best</string>
-            <string>Not relevant</string>
+			<string>I&apos;ll do my best</string>
+			<string>Not relevant</string>
 		</array>
 	</dict>
 	<dict>
 		<key>id</key>
 		<string>cozie_notification_action_category_3</string>
 		<key>buttons</key>
-        <array>
-            <string>I may do it</string>
-            <string>No thanks</string>
-            <string>Not relevant</string>
-        </array>
+		<array>
+			<string>I may do it</string>
+			<string>No thanks</string>
+			<string>Not relevant</string>
+		</array>
 	</dict>
 	<dict>
 		<key>id</key>
 		<string>cozie_notification_action_category_4</string>
 		<key>buttons</key>
-        <array>
-            <string>Helpful</string>
-            <string>Not helpful</string>
-            <string>Not relevant</string>
-        </array>
+		<array>
+			<string>Helpful</string>
+			<string>Not helpful now</string>
+			<string>Not relevant</string>
+		</array>
 	</dict>
 </array>
 </plist>

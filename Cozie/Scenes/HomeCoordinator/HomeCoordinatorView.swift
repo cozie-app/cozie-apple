@@ -58,7 +58,6 @@ struct HomeCoordinatorView_Previews: PreviewProvider {
     }
 }
 
-
 struct HomeTabView: View {
     let title: String
     let imageName: String

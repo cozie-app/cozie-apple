@@ -436,7 +436,7 @@ class HealthKitInteractor {
     private func convertToUnit(sample: HKQuantitySample, type: HKSampleType, completion: @escaping (Double?) -> Void) {
         
         var data: Double? = nil
-        type.identifier
+        // TO DO: chage to -> type.identifier
         switch type {
         case HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure),
             HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure):

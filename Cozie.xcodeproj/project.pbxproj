@@ -59,12 +59,14 @@
 		CA0A1B1C29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */; };
 		CA0A1B1D29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */; };
 		CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1F29DDB0AA007A3A19 /* SettingsInteractor.swift */; };
+		CA0F69BA2CD2606D00C0B0F5 /* GroupStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0F69B92CD2606300C0B0F5 /* GroupStorageTests.swift */; };
 		CA1548F629E5B1F0005FDD6B /* BackendInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548F429E5B1EF005FDD6B /* BackendInfo+CoreDataClass.swift */; };
 		CA1548F729E5B1F0005FDD6B /* BackendInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548F529E5B1EF005FDD6B /* BackendInfo+CoreDataProperties.swift */; };
 		CA1548FA29E5B244005FDD6B /* BackendInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548F929E5B244005FDD6B /* BackendInteractor.swift */; };
 		CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548FC29E5D3BB005FDD6B /* SystemInteractor.swift */; };
 		CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548FF29E6F7FE005FDD6B /* LoggerInteractor.swift */; };
 		CA1865982CCBEC0F000B6702 /* Cozie.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = CA1865962CCBEC0F000B6702 /* Cozie.xctestplan */; };
+		CA18CCE62CD28A77000FC4B1 /* PushNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */; };
 		CA1A68062A1F8C840084B000 /* SurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1A68052A1F8C840084B000 /* SurveyManager.swift */; };
 		CA2EE84E29E8679B00590527 /* HealthKitInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE84D29E8679B00590527 /* HealthKitInteractor.swift */; };
 		CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE85229ED47B000590527 /* LogInfoView.swift */; };
@@ -104,8 +106,8 @@
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
 		CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F3DE22B51664100C42C7F /* NotificationService.swift */; };
-		CA7E1D892CCFD6E9000C6461 /* PuschNotificationLoggerStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D882CCFD6E5000C6461 /* PuschNotificationLoggerStorageTest.swift */; };
-		CA7E1D8B2CCFD866000C6461 /* PuschNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PuschNotificationLoggerGroupStorage.swift */; };
+		CA7E1D892CCFD6E9000C6461 /* PushNotificationLoggerStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */; };
+		CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */; };
 		CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
 		CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
 		CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */; };
@@ -120,10 +122,9 @@
 		CA8BE5692A53FF0E00D0627D /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */; };
 		CA8BE56A2A54002000D0627D /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
 		CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
-		CAB062FD2CC79A50004D94CA /* PushCatgoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FC2CC79A4E004D94CA /* PushCatgoryController.swift */; };
-		CAB063002CC79A84004D94CA /* PushCategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushCategoryProtocol.swift */; };
+		CAB063002CC79A84004D94CA /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
 		CAB063042CC79BCA004D94CA /* CategoryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAB063032CC79BCA004D94CA /* CategoryList.plist */; };
-		CAB063072CC7A4AD004D94CA /* PushCatgoryControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB063062CC7A4AA004D94CA /* PushCatgoryControllerTest.swift */; };
+		CAB063072CC7A4AD004D94CA /* PushNotificationControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB063062CC7A4AA004D94CA /* PushNotificationControllerTest.swift */; };
 		CAB063092CC7A515004D94CA /* CategoryListTets.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAB063082CC7A515004D94CA /* CategoryListTets.plist */; };
 		CAB58A5529F960D000E26D20 /* CozieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5429F960D000E26D20 /* CozieStorage.swift */; };
 		CAB58A5829F9706900E26D20 /* WatchSurveyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */; };
@@ -141,6 +142,9 @@
 		CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */; };
 		CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */; };
 		CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
+		CAE4FDB72CD28BF900B0B888 /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
+		CAE4FDB82CD28C6300B0B888 /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
+		CAE4FDB92CD28C7000B0B888 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,12 +275,14 @@
 		CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SyncInfo+CoreDataClass.swift"; path = "Cozie/CoreData/SyncInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SyncInfo+CoreDataProperties.swift"; path = "Cozie/CoreData/SyncInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1F29DDB0AA007A3A19 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		CA0F69B92CD2606300C0B0F5 /* GroupStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStorageTests.swift; sourceTree = "<group>"; };
 		CA1548F429E5B1EF005FDD6B /* BackendInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackendInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA1548F529E5B1EF005FDD6B /* BackendInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackendInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA1548F929E5B244005FDD6B /* BackendInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendInteractor.swift; sourceTree = "<group>"; };
 		CA1548FC29E5D3BB005FDD6B /* SystemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInteractor.swift; sourceTree = "<group>"; };
 		CA1548FF29E6F7FE005FDD6B /* LoggerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerInteractor.swift; sourceTree = "<group>"; };
 		CA1865962CCBEC0F000B6702 /* Cozie.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cozie.xctestplan; sourceTree = "<group>"; };
+		CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationController.swift; sourceTree = "<group>"; };
 		CA1A68052A1F8C840084B000 /* SurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyManager.swift; sourceTree = "<group>"; };
 		CA2EE84D29E8679B00590527 /* HealthKitInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitInteractor.swift; sourceTree = "<group>"; };
 		CA2EE84F29E867D500590527 /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
@@ -319,8 +325,8 @@
 		CA6F3DE42B51664100C42C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
-		CA7E1D882CCFD6E5000C6461 /* PuschNotificationLoggerStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuschNotificationLoggerStorageTest.swift; sourceTree = "<group>"; };
-		CA7E1D8A2CCFD865000C6461 /* PuschNotificationLoggerGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuschNotificationLoggerGroupStorage.swift; sourceTree = "<group>"; };
+		CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerStorageTests.swift; sourceTree = "<group>"; };
+		CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerGroupStorage.swift; sourceTree = "<group>"; };
 		CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCommon.swift; sourceTree = "<group>"; };
 		CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyModelControllerTest.swift; sourceTree = "<group>"; };
 		CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTest.swift; sourceTree = "<group>"; };
@@ -329,10 +335,9 @@
 		CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorageProtocol.swift; sourceTree = "<group>"; };
-		CAB062FC2CC79A4E004D94CA /* PushCatgoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCatgoryController.swift; sourceTree = "<group>"; };
-		CAB062FF2CC79A7E004D94CA /* PushCategoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCategoryProtocol.swift; sourceTree = "<group>"; };
+		CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationControllerProtocol.swift; sourceTree = "<group>"; };
 		CAB063032CC79BCA004D94CA /* CategoryList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CategoryList.plist; sourceTree = "<group>"; };
-		CAB063062CC7A4AA004D94CA /* PushCatgoryControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCatgoryControllerTest.swift; sourceTree = "<group>"; };
+		CAB063062CC7A4AA004D94CA /* PushNotificationControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationControllerTest.swift; sourceTree = "<group>"; };
 		CAB063082CC7A515004D94CA /* CategoryListTets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CategoryListTets.plist; sourceTree = "<group>"; };
 		CAB58A5429F960D000E26D20 /* CozieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorage.swift; sourceTree = "<group>"; };
 		CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyInteractor.swift; sourceTree = "<group>"; };
@@ -494,7 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */,
-				CAB063052CC7A4A3004D94CA /* PushCatgoryController */,
+				CAB063052CC7A4A3004D94CA /* PushNotificationController */,
 				CA8160462CC2588E00BCBE25 /* WatchSurvey */,
 			);
 			path = CozieTests;
@@ -964,12 +969,12 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
-		CA7E1D872CCFD695000C6461 /* PuschNotificationLoggerGroupStorage */ = {
+		CA7E1D872CCFD695000C6461 /* PushNotificationLoggerGroupStorage */ = {
 			isa = PBXGroup;
 			children = (
-				CA7E1D8A2CCFD865000C6461 /* PuschNotificationLoggerGroupStorage.swift */,
+				CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */,
 			);
-			path = PuschNotificationLoggerGroupStorage;
+			path = PushNotificationLoggerGroupStorage;
 			sourceTree = "<group>";
 		};
 		CA8160452CC2587500BCBE25 /* WatchSurveyModelController */ = {
@@ -989,42 +994,42 @@
 			path = WatchSurvey;
 			sourceTree = "<group>";
 		};
-		CAB062FA2CC79A1A004D94CA /* PushCatgoryController */ = {
+		CAB062FA2CC79A1A004D94CA /* PushNotificationController */ = {
 			isa = PBXGroup;
 			children = (
-				CAB062FE2CC79A72004D94CA /* Protocol */,
-				CAB062FC2CC79A4E004D94CA /* PushCatgoryController.swift */,
+				CAB062FE2CC79A72004D94CA /* Protocols */,
+				CA7E1D872CCFD695000C6461 /* PushNotificationLoggerGroupStorage */,
+				CAD1F0ED2CCFB857001B5307 /* PushNotificationLoggerController */,
+				CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */,
+				CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */,
 				CAB063032CC79BCA004D94CA /* CategoryList.plist */,
 			);
-			path = PushCatgoryController;
+			path = PushNotificationController;
 			sourceTree = "<group>";
 		};
 		CAB062FB2CC79A39004D94CA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */,
-				CA7E1D872CCFD695000C6461 /* PuschNotificationLoggerGroupStorage */,
-				CAD1F0ED2CCFB857001B5307 /* PushNotificationLoggerController */,
-				CAB062FA2CC79A1A004D94CA /* PushCatgoryController */,
+				CAB062FA2CC79A1A004D94CA /* PushNotificationController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		CAB062FE2CC79A72004D94CA /* Protocol */ = {
+		CAB062FE2CC79A72004D94CA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				CAB062FF2CC79A7E004D94CA /* PushCategoryProtocol.swift */,
+				CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */,
 			);
-			path = Protocol;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
-		CAB063052CC7A4A3004D94CA /* PushCatgoryController */ = {
+		CAB063052CC7A4A3004D94CA /* PushNotificationController */ = {
 			isa = PBXGroup;
 			children = (
-				CAB063062CC7A4AA004D94CA /* PushCatgoryControllerTest.swift */,
+				CAB063062CC7A4AA004D94CA /* PushNotificationControllerTest.swift */,
 				CAB063082CC7A515004D94CA /* CategoryListTets.plist */,
 			);
-			path = PushCatgoryController;
+			path = PushNotificationController;
 			sourceTree = "<group>";
 		};
 		CAB58A5629F9704F00E26D20 /* WatchSurveyInteractor */ = {
@@ -1063,7 +1068,8 @@
 		CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */ = {
 			isa = PBXGroup;
 			children = (
-				CA7E1D882CCFD6E5000C6461 /* PuschNotificationLoggerStorageTest.swift */,
+				CA0F69B92CD2606300C0B0F5 /* GroupStorageTests.swift */,
+				CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */,
 				CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */,
 				CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */,
 			);
@@ -1424,7 +1430,6 @@
 			files = (
 				9267EFF0299A91470025A3CE /* CozieSettingView.swift in Sources */,
 				CA1A68062A1F8C840084B000 /* SurveyManager.swift in Sources */,
-				CAB062FD2CC79A50004D94CA /* PushCatgoryController.swift in Sources */,
 				921289DA299649ED0060C729 /* Cozie.xcdatamodeld in Sources */,
 				9267485D29D71868004329B9 /* BackendViewModel.swift in Sources */,
 				9212144429CE0730002BAEB4 /* TextFieldPopUp.swift in Sources */,
@@ -1447,6 +1452,7 @@
 				9212143F29CDD4BA002BAEB4 /* TitleTitleCell.swift in Sources */,
 				921289D7299649ED0060C729 /* Persistence.swift in Sources */,
 				927E20EA29D5ED5B008F476F /* WatchSurveyList.swift in Sources */,
+				CA18CCE62CD28A77000FC4B1 /* PushNotificationController.swift in Sources */,
 				CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */,
 				CA0A1B1C29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift in Sources */,
 				92524F9129CC6A2C00074A09 /* BaseRepository.swift in Sources */,
@@ -1472,7 +1478,7 @@
 				CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */,
 				CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */,
 				9212144229CDFBB7002BAEB4 /* AppColor.swift in Sources */,
-				CA7E1D8B2CCFD866000C6461 /* PuschNotificationLoggerGroupStorage.swift in Sources */,
+				CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */,
 				921289D0299649EC0060C729 /* ContentView.swift in Sources */,
 				92D0B80F29D9BD63008557FC /* SettingCoordinator.swift in Sources */,
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
@@ -1492,7 +1498,7 @@
 				9267EFEC299A6FCA0025A3CE /* DataTitleImageRow.swift in Sources */,
 				CA011F152A1744A7006BFA7C /* CozieLocationManager.swift in Sources */,
 				CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */,
-				CAB063002CC79A84004D94CA /* PushCategoryProtocol.swift in Sources */,
+				CAB063002CC79A84004D94CA /* PushNotificationControllerProtocol.swift in Sources */,
 				CA0A1B1D29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift in Sources */,
 				9251771B29C364870089C92C /* TimePickerViewModel.swift in Sources */,
 				CAC6F9312A0CFFCB006D625D /* InitModel.swift in Sources */,
@@ -1513,12 +1519,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA7E1D892CCFD6E9000C6461 /* PuschNotificationLoggerStorageTest.swift in Sources */,
+				CA7E1D892CCFD6E9000C6461 /* PushNotificationLoggerStorageTests.swift in Sources */,
 				CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */,
-				CAB063072CC7A4AD004D94CA /* PushCatgoryControllerTest.swift in Sources */,
+				CAB063072CC7A4AD004D94CA /* PushNotificationControllerTest.swift in Sources */,
 				CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */,
 				CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */,
 				CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */,
+				CA0F69BA2CD2606D00C0B0F5 /* GroupStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1566,9 +1573,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE4FDB82CD28C6300B0B888 /* UserDataProtocol.swift in Sources */,
+				CAE4FDB72CD28BF900B0B888 /* PushNotificationControllerProtocol.swift in Sources */,
 				CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */,
 				CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */,
 				CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */,
+				CAE4FDB92CD28C7000B0B888 /* CozieStorageProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

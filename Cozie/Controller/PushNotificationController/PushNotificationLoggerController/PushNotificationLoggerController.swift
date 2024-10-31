@@ -7,16 +7,6 @@
 
 import Foundation
 
-protocol PuschNotificationRepositoryProtocol {
-    func saveNotifInfo(info: [String: Any]) async throws
-    func saveAction(action: String) async throws
-}
-
-protocol ApiDataProtocol {
-    var url: String { get }
-    var key: String { get }
-}
-
 enum LoggerError: Error, LocalizedError {
     case statusError(Int, String)
     
@@ -29,7 +19,7 @@ enum LoggerError: Error, LocalizedError {
 }
 
 struct PushNotificationLoggerController {
-    let repository: PuschNotificationRepositoryProtocol
+    let repository: PushNotificationRepositoryProtocol
     
     func pushNotificationDidReciv(payload: [String: Any]) async throws {
         if payload.isEmpty {

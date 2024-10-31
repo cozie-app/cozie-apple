@@ -49,7 +49,7 @@ struct PushNotificationLoggerTests {
     }
 }
 
-fileprivate final class RepositorySpy: PuschNotificationRepositoryProtocol {
+fileprivate final class RepositorySpy: PushNotificationRepositoryProtocol {
     var info: [String: Any] = [:]
     var actions: [String] = []
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PushNotificaitonLoggerRepository: PuschNotificationRepositoryProtocol {
+final class PushNotificaitonLoggerRepository: PushNotificationRepositoryProtocol {
     let apiRepository: ApiRepositoryProtocol
     let api: ApiDataProtocol
     
@@ -17,8 +17,9 @@ final class PushNotificaitonLoggerRepository: PuschNotificationRepositoryProtoco
     }
     
     func saveNotifInfo(info: [String : Any]) async throws {
+        let json = try JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
         try await withCheckedThrowingContinuation { continuation in
-            apiRepository.post(url: api.url, body: Data(), key: api.key) { result in
+            apiRepository.post(url: api.url, body: json, key: api.key) { result in
                 switch result {
                 case .success(_):
                     continuation.resume()

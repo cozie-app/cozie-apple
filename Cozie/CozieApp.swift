@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     static private(set) var instance: AppDelegate! = nil
-    private(set) var categoryController: PushCategoryProtocol = PushCatgoryController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificaitonLoggerRepository(apiRepository: BaseRepository(), api: BackendInteractor())))
+    private(set) var pushNotificationController: PushNotificationControllerProtocol = PushNotificationController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificaitonLoggerRepository(apiRepository: BaseRepository(), api: BackendInteractor())), userData: UserInteractor(), storage: CozieStorage.shared)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -50,8 +50,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ = WatchConnectivityManagerPhone.shared
         
         // custom notification action: register new notification category
-        categoryController.regiterActionNotifCategory()
-        categoryController.enablePushLogging(true)
+        pushNotificationController.registerActionNotifCategory()
         return true
     }
     
@@ -93,6 +92,7 @@ struct CozieApp: App {
                         appDelegate.healthKitInteractor.sendData(trigger: CommunicationKeys.appTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { success in
                             debugPrint(success ? "Health data sent" : "Health data failed")
                         }
+                        appDelegate.pushNotificationController.enablePushLogging(true)
                     } else if newPhase == .inactive {
                         debugPrint("Inactive")
                     } else if newPhase == .background {
