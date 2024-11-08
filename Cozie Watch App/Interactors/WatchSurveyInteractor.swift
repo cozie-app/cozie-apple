@@ -161,13 +161,13 @@ class WatchSurveyInteractor {
                     WatchSurveyKeys.idParticipant.rawValue: storage.userID(),
                     WatchSurveyKeys.idPassword.rawValue: storage.paswordID()]
         
-        let filds = [WatchSurveyKeys.actionButtonKey.rawValue: action,
+        let fields = [WatchSurveyKeys.actionButtonKey.rawValue: action,
                      WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
         
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: formattedDate(),
                                         WatchSurveyKeys.measurement.rawValue: storage.expirimentID(),
                                         WatchSurveyKeys.tags.rawValue: tags,
-                                        WatchSurveyKeys.fields.rawValue: filds]
+                                        WatchSurveyKeys.fields.rawValue: fields]
         
         let api = storage.watchSurveyAPI()
         offlineMode.updateWith(apiInfo: (wUrl: api.url, wKey: api.key))

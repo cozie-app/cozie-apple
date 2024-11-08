@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="23H222" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BackendInfo" representedClassName=".BackendInfo" syncable="YES">
         <attribute name="api_read_key" optional="YES" attributeType="String"/>
         <attribute name="api_read_url" optional="YES" attributeType="String"/>
@@ -32,7 +32,7 @@
         <attribute name="wss_participation_days" optional="YES" attributeType="String"/>
         <attribute name="wss_participation_time_end" optional="YES" attributeType="String"/>
         <attribute name="wss_participation_time_start" optional="YES" attributeType="String"/>
-        <attribute name="wss_reminder_enabeled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="wss_reminder_enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="wss_reminder_interval" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wss_time_out" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wss_title" optional="YES" attributeType="String"/>

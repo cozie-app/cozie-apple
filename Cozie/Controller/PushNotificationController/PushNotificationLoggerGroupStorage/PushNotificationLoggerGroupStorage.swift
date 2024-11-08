@@ -24,7 +24,7 @@ struct PushNotificationLoggerGroupStorage {
         case notificationTitle = "notification_title"
         case notificationSubtitle = "notification_subtitle"
         case notificationText = "notification_text"
-        case actionButtonShown = "action_button_shown"
+        case actionButtonShown = "action_buttons_shown"
         case transmitTrigger = "transmit_trigger"
     }
     
@@ -71,12 +71,12 @@ struct PushNotificationLoggerGroupStorage {
                     WatchSurveyKeys.idParticipant.rawValue: userData.userInfo?.participantID ?? "",
                     WatchSurveyKeys.idPassword.rawValue: userData.userInfo?.passwordID ?? ""]
         
-        let filds: [String: Any]
+        let fields: [String: Any]
         if let aps = info[NotificationKeys.aps.rawValue] as? [String: Any],
            let alert = aps[NotificationKeys.alert.rawValue] as? [String: Any] {
             let categoryInfo = categoryList.first(where: {$0.id == (aps[NotificationKeys.category.rawValue] as? String ?? "")})
             
-            filds = [NotificationKeys.notificationTitle.rawValue: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+            fields = [NotificationKeys.notificationTitle.rawValue: alert[NotificationKeys.alertTitle.rawValue] ?? "",
                      NotificationKeys.notificationSubtitle.rawValue: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
                      NotificationKeys.notificationText.rawValue: alert[NotificationKeys.alertBody.rawValue] ?? "",
                      NotificationKeys.actionButtonShown.rawValue: (categoryInfo?.buttons as? [String])?.reduce("", { partialResult, action in
@@ -84,13 +84,13 @@ struct PushNotificationLoggerGroupStorage {
             }) ?? "",
                      NotificationKeys.transmitTrigger.rawValue: trigger]
         } else {
-            filds = [:]
+            fields = [:]
         }
         
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: userData.userInfo?.experimentID ?? "",
                                         WatchSurveyKeys.tags.rawValue: tags,
-                                        WatchSurveyKeys.fields.rawValue: filds]
+                                        WatchSurveyKeys.fields.rawValue: fields]
         return response
     }
 }

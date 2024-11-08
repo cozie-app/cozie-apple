@@ -9,7 +9,7 @@ import UIKit
 
 let testTag = Tags(idOnesignal: "", idParticipant: "", idPassword: "")
 
-let testFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabeled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
+let testFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
 
 let testLog = Logs(time: "2023-01-01T07:02:51.578Z", measurement: "dev", tags: testTag, fields: testFields)
 
@@ -24,7 +24,7 @@ class LogsSystemInteractor {
         let fields = Fields(wssGoal: Int(settings.wss_goal),
                              wssTitle: settings.wss_title ?? "",
                              wssTimeOut: Int(settings.wss_time_out),
-                             wssReminderEnabeled: settings.wss_reminder_enabeled,
+                             wssReminderEnabled: settings.wss_reminder_enabled,
                              wssReminderInterval: Int(settings.wss_reminder_interval),
                              wssParticipationDays: settings.wss_participation_days ?? "",
                              wssParticipationTimeStart: settings.wss_participation_time_start ?? "",
@@ -93,7 +93,7 @@ class Fields: Codable {
     var siIphoneModel, siWatchModel, siIphoneDeviceID, siWatchDeviceID: String
     var siIphoneBatteryChargeState, siWatchBatteryChargeState: Int
     var siIphoneWifiSignalStrength, siWatchWifiSignalStrength, siIphoneCellularSignalStrength, siWatchCellularSignalStrength: String
-    var wssReminderEnabeled, pssReminderEnabled, siIphoneLocationServiceEnabled, siWatchLocationServiceEnabled, siIphoneLowBatteryModeEnabled, siWatchConnectedToPhone: Bool
+    var wssReminderEnabled, pssReminderEnabled, siIphoneLocationServiceEnabled, siWatchLocationServiceEnabled, siIphoneLowBatteryModeEnabled, siWatchConnectedToPhone: Bool
     var appBundleName, appBundleBuildVersion, appBundleBuildNumber, appOneSignalAppID: String
     var apiPhoneSurveyURL, apiWatchSurveyURL: String
     var transmitTrigger: String
@@ -102,7 +102,7 @@ class Fields: Codable {
         case wssGoal = "wss_goal"
         case wssTitle = "wss_title"
         case wssTimeOut = "wss_time_out"
-        case wssReminderEnabeled = "wss_reminder_enabeled"
+        case wssReminderEnabled = "wss_reminder_enabled"
         case wssReminderInterval = "wss_reminder_interval"
         case wssParticipationDays = "wss_participation_days"
         case wssParticipationTimeStart = "wss_participation_time_start"
@@ -139,11 +139,11 @@ class Fields: Codable {
         case transmitTrigger = "transmit_trigger"
     }
 
-    init(wssGoal: Int, wssTitle: String, wssTimeOut: Int, wssReminderEnabeled: Bool, wssReminderInterval: Int, wssParticipationDays: String, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, apiReadUrl: String, apiReadKey: String, apiWriteUrl: String, apiWriteKey: String, pssReminderEnabled: Bool, pssReminderTime: String, pssReminderDays: String, siIosVersion: String, siWatchosVersion: String, siIphoneModel: String, siWatchModel: String, siIphoneDeviceID: String, siWatchDeviceID: String, siIphoneBatteryChargeState: Int, siWatchBatteryChargeState: Int, siIphoneWifiSignalStrength: String, siWatchWifiSignalStrength: String, siIphoneCellularSignalStrength: String, siWatchCellularSignalStrength: String, siIphoneLocationServiceEnabled: Bool, siWatchLocationServiceEnabled: Bool, siIphoneLowBatteryModeEnabled: Bool, siWatchConnectedToPhone: Bool, appBundleName: String, appBundleBuildVersion: String, appBundleBuildNumber: String, appOneSignalAppID: String, apiPhoneSurveyURL: String, apiWatchSurveyURL: String, transmitTrigger: String) {
+    init(wssGoal: Int, wssTitle: String, wssTimeOut: Int, wssReminderEnabled: Bool, wssReminderInterval: Int, wssParticipationDays: String, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, apiReadUrl: String, apiReadKey: String, apiWriteUrl: String, apiWriteKey: String, pssReminderEnabled: Bool, pssReminderTime: String, pssReminderDays: String, siIosVersion: String, siWatchosVersion: String, siIphoneModel: String, siWatchModel: String, siIphoneDeviceID: String, siWatchDeviceID: String, siIphoneBatteryChargeState: Int, siWatchBatteryChargeState: Int, siIphoneWifiSignalStrength: String, siWatchWifiSignalStrength: String, siIphoneCellularSignalStrength: String, siWatchCellularSignalStrength: String, siIphoneLocationServiceEnabled: Bool, siWatchLocationServiceEnabled: Bool, siIphoneLowBatteryModeEnabled: Bool, siWatchConnectedToPhone: Bool, appBundleName: String, appBundleBuildVersion: String, appBundleBuildNumber: String, appOneSignalAppID: String, apiPhoneSurveyURL: String, apiWatchSurveyURL: String, transmitTrigger: String) {
         self.wssGoal = wssGoal
         self.wssTitle = wssTitle
         self.wssTimeOut = wssTimeOut
-        self.wssReminderEnabeled = wssReminderEnabeled
+        self.wssReminderEnabled = wssReminderEnabled
         self.wssReminderInterval = wssReminderInterval
         self.wssParticipationDays = wssParticipationDays
         self.wssParticipationTimeStart = wssParticipationTimeStart

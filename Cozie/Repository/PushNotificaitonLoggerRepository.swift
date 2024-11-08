@@ -10,6 +10,7 @@ import Foundation
 final class PushNotificaitonLoggerRepository: PushNotificationRepositoryProtocol {
     let apiRepository: ApiRepositoryProtocol
     let api: ApiDataProtocol
+    let loggerInteractor: LoggerInteractor = LoggerInteractor.shared
     
     init(apiRepository: ApiRepositoryProtocol, api: ApiDataProtocol) {
         self.apiRepository = apiRepository
@@ -18,10 +19,16 @@ final class PushNotificaitonLoggerRepository: PushNotificationRepositoryProtocol
     
     func saveNotifInfo(info: [String : Any]) async throws {
         let json = try JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
+        
         try await withCheckedThrowingContinuation { continuation in
-            apiRepository.post(url: api.url, body: json, key: api.key) { result in
+            apiRepository.post(url: api.url, body: json, key: api.key) { [weak self] result in
                 switch result {
                 case .success(_):
+                    // log data
+                    if let jsonToLog = try? JSONSerialization.data(withJSONObject: info, options: .withoutEscapingSlashes) {
+                        debugPrint(jsonToLog)
+                        self?.loggerInteractor.logInfo(action: "", info: String(data: jsonToLog, encoding: .utf8) ?? "")
+                    }
                     continuation.resume()
                 case .failure(let error):
                     continuation.resume(throwing: error)

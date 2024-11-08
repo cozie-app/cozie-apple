@@ -35,7 +35,7 @@ class SettingsInteractor: SettingInteractorProtocol {
             settings.wss_title = Defaults.WSStitle
             settings.wss_goal = Defaults.WSSgoal
             settings.wss_time_out = Defaults.WSStimeOutTime
-            settings.wss_reminder_enabeled = Defaults.WSSreminderEnabled
+            settings.wss_reminder_enabled = Defaults.WSSreminderEnabled
             settings.wss_reminder_interval = Defaults.WSSreminderInterval
             settings.wss_participation_days = Defaults.WSSparticipationDays
             settings.wss_participation_time_start = Defaults.WSSparticiaptionTimeStart
@@ -51,7 +51,7 @@ class SettingsInteractor: SettingInteractorProtocol {
     func prepareSettingsData(wssTitle: String = Defaults.WSStitle,
                              wssGoal: Int16 = Defaults.WSSgoal,
                              wssTimeout: Int16 = Defaults.WSStimeOutTime,
-                             wssReminderEnabeled: Bool = Defaults.WSSreminderEnabled,
+                             wssReminderEnabled: Bool = Defaults.WSSreminderEnabled,
                              wssReminderInterval: Int16 = Defaults.WSSreminderInterval,
                              wssParticipationDays: String = "",
                              wssParticipationTimeStart: String = Defaults.WSSparticiaptionTimeStart,
@@ -63,7 +63,7 @@ class SettingsInteractor: SettingInteractorProtocol {
             model.wss_title = wssTitle
             model.wss_goal = Int16(wssGoal)
             model.wss_time_out = Int16(wssTimeout)
-            model.wss_reminder_enabeled = wssReminderEnabeled
+            model.wss_reminder_enabled = wssReminderEnabled
             model.wss_reminder_interval = Int16(wssReminderInterval)
             model.wss_participation_days = wssParticipationDays
             model.wss_participation_time_start = wssParticipationTimeStart
@@ -76,7 +76,7 @@ class SettingsInteractor: SettingInteractorProtocol {
             settings.wss_title = wssTitle
             settings.wss_goal = Int16(wssGoal)
             settings.wss_time_out = Int16(wssTimeout)
-            settings.wss_reminder_enabeled = wssReminderEnabeled
+            settings.wss_reminder_enabled = wssReminderEnabled
             settings.wss_reminder_interval = Int16(wssReminderInterval)
             settings.wss_participation_days = wssParticipationDays
             settings.wss_participation_time_start = wssParticipationTimeStart

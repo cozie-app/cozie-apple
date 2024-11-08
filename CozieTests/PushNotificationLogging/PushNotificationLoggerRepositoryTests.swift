@@ -11,7 +11,7 @@ import Foundation
 
 struct PushNotificationLoggerRepositoryTests {
     
-    @Test("Send PushNotification info by API")
+    @Test("Send PushNotification info to API")
     func sendPuschNotificationInfoByAPI() async throws {
         let apiRepositorySpy = ApiRepositorySpy(triggerError: false)
         

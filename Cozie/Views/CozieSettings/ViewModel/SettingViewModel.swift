@@ -165,7 +165,7 @@ class SettingViewModel: ObservableObject {
             updateSurveyList()
             
             goal = "\(settings.wss_goal)"
-            isReminderEnabled = settings.wss_reminder_enabeled
+            isReminderEnabled = settings.wss_reminder_enabled
             $isReminderEnabled.eraseToAnyPublisher().dropFirst().sink { [weak self] value in
                 self?.updateInterval()
                 self?.updateReminderState(isEnabled: value)
@@ -307,12 +307,12 @@ class SettingViewModel: ObservableObject {
         let daysCount = max(dayList.filter({ $0.isSelected }).count, 1)
         let availableCoundPerDay = Int(54/daysCount)
         if startMinutes < endMinutes {
-            var distans = (endMinutes - startMinutes)/availableCoundPerDay
-            let ect = distans % 5
+            var distance = (endMinutes - startMinutes)/availableCoundPerDay
+            let ect = distance % 5
             if ect != 0 {
-                distans = distans + (5-ect)
+                distance = distance + (5-ect)
             }
-            reminderInterval = TimeModel(minute: max(distans, (reminderInterval.hour * 60) + reminderInterval.minute))
+            reminderInterval = TimeModel(minute: max(distance, (reminderInterval.hour * 60) + reminderInterval.minute))
         } else {
             reminderInterval = TimeModel()
         }
@@ -346,7 +346,7 @@ class SettingViewModel: ObservableObject {
     
     func updateReminderState(isEnabled: Bool) {
         if let settings = settingsIntaractor.currentSettings {
-            settings.wss_reminder_enabeled = isEnabled
+            settings.wss_reminder_enabled = isEnabled
             try? persistenceController.container.viewContext.save()
         }
         
@@ -429,7 +429,7 @@ class SettingViewModel: ObservableObject {
     
     func prepareRemindersIfNeeded() {
         if let settings = settingsIntaractor.currentSettings {
-            configureWatchReminders(enabled: settings.wss_reminder_enabeled)
+            configureWatchReminders(enabled: settings.wss_reminder_enabled)
             configurePhoneReminders(enabled: settings.pss_reminder_enabled)
         }
     }

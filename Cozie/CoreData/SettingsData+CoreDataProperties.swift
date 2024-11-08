@@ -26,7 +26,7 @@ extension SettingsData {
     @NSManaged public var wss_participation_days: String?
     @NSManaged public var wss_participation_time_end: String?
     @NSManaged public var wss_participation_time_start: String?
-    @NSManaged public var wss_reminder_enabeled: Bool
+    @NSManaged public var wss_reminder_enabled: Bool
     @NSManaged public var wss_reminder_interval: Int16
     @NSManaged public var wss_time_out: Int16
     @NSManaged public var wss_title: String?

@@ -11,7 +11,7 @@ import Foundation
 class InitModel: Codable {
     var idParticipant, idExperiment, wssTitle: String
     var wssGoal, wssTimeOut: Int16
-    var wssReminderEnabeled: Bool
+    var wssReminderEnabled: Bool
     var wssParticipationTimeStart, wssParticipationTimeEnd, wssParticipationDays: String
     var wssReminderInterval: Int16
     var pssReminderEnabled: Bool
@@ -29,7 +29,7 @@ class InitModel: Codable {
         case wssTitle = "wss_title"
         case wssGoal = "wss_goal"
         case wssTimeOut = "wss_time_out"
-        case wssReminderEnabeled = "wss_reminder_enabeled"
+        case wssReminderEnabled = "wss_reminder_enabled"
         case wssParticipationTimeStart = "wss_participation_time_start"
         case wssParticipationTimeEnd = "wss_participation_time_end"
         case wssParticipationDays = "wss_participation_days"
@@ -47,13 +47,13 @@ class InitModel: Codable {
         case apiPhoneSurveyURL = "api_phone_survey_url"
     }
     
-    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabeled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String) {
+    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String) {
         self.idParticipant = idParticipant
         self.idExperiment = idExperiment
         self.wssTitle = wssTitle
         self.wssGoal = wssGoal
         self.wssTimeOut = wssTimeOut
-        self.wssReminderEnabeled = wssReminderEnabeled
+        self.wssReminderEnabled = wssReminderEnabled
         self.wssParticipationTimeStart = wssParticipationTimeStart
         self.wssParticipationTimeEnd = wssParticipationTimeEnd
         self.wssParticipationDays = wssParticipationDays

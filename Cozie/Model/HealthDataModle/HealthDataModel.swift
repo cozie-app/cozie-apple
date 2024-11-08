@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - HealthModel
-class HealthFilds: Encodable {
+class HealthFields: Encodable {
     
     private enum HealthModelKeys: String {
         case startTime = "start_time"
@@ -35,13 +35,13 @@ class HealthFilds: Encodable {
         self.endTime = endTime
     }
     
-    enum HealthFildsCodingKeys: CodingKey {
+    enum HealthFieldsCodingKeys: CodingKey {
         var stringValue: String {
             return self.value
         }
         
         init?(stringValue: String) {
-            self = HealthFildsCodingKeys.info(key: stringValue)
+            self = HealthFieldsCodingKeys.info(key: stringValue)
         }
         
         var intValue: Int? {
@@ -49,7 +49,7 @@ class HealthFilds: Encodable {
         }
         
         init?(intValue: Int) {
-            self = HealthFildsCodingKeys.info(key: "")
+            self = HealthFieldsCodingKeys.info(key: "")
         }
         
         
@@ -67,7 +67,7 @@ class HealthFilds: Encodable {
     }
     
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: HealthFildsCodingKeys.self)
+        var container = encoder.container(keyedBy: HealthFieldsCodingKeys.self)
         try container.encode(transmitTtrigger, forKey: .transmitTtrigger)
         if healthStringValue.isEmpty {
             try container.encode(healthValue, forKey: .info(key: healthKey))
@@ -86,7 +86,7 @@ class HealthFilds: Encodable {
 class HealthModel: Encodable {
     var time, measurement: String
     var tags: Tags
-    var fields: HealthFilds
+    var fields: HealthFields
     
     enum CodingKeys: String, CodingKey {
         case time
@@ -98,7 +98,7 @@ class HealthModel: Encodable {
     init(time: String,
          measurement: String,
          tags: Tags,
-         fields: HealthFilds) {
+         fields: HealthFields) {
         
         self.time = time
         self.measurement = measurement

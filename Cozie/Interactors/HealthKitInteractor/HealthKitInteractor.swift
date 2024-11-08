@@ -334,16 +334,16 @@ class HealthKitInteractor {
                 
             } else if sleepData.count > 0 {
                 sleepData.forEach { (sleepKey, startDate, value) in
-                    healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
+                    healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
                 }
                 completion(healthModels, samples)
                 
             } else if workautData.count > 0 {
                 workautData.forEach { (workautKey, startDate, value) in
                     if workautKey == HeathDataKeys.workoutType.rawValue {
-                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
                     } else {
-                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value)))
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value)))
                     }
                 }
                 completion(healthModels, samples)
@@ -361,9 +361,9 @@ class HealthKitInteractor {
         
         if type == HKObjectType.quantityType(forIdentifier: .stepCount) || type == HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) {
             let endDataString = self.healthDateFormatter.string(from: sample.endDate)
-            return HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0, startTime: currentDataString, endTime: endDataString))
+            return HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0, startTime: currentDataString, endTime: endDataString))
         } else {
-            return HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFilds(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0))
+            return HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0))
         }
     }
     

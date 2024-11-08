@@ -57,7 +57,7 @@ public enum WatchSurveyKeys: String {
     case tags = "tags"
     case fields = "fields"
     case wssTitle = "wss_title"
-    case actionButtonKey = "action_button"
+    case actionButtonKey = "action_button_pressed"
     case transmitTriggerPushValue = "push_notification_action_button"
 }
 
