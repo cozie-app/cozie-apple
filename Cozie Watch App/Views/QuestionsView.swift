@@ -9,7 +9,10 @@ import SwiftUI
 
 struct QuestionsView: View {
     @EnvironmentObject var viewModel: WatchSurveyViewModel
+    @State private var sensoryFeedback: Int = 0
     let questionTopInset: CGFloat = 16
+    let buttonColor = Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.20)
+    let selectedButtonColor = Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.12)
     
     var body: some View {
         GeometryReader { geometry in
@@ -36,7 +39,7 @@ struct QuestionsView: View {
                                         // Only show background if icon name string is not empty
                                         Image(systemName: "circle.fill")
                                             .resizable()
-                                            .frame(width: 35,height: 35)
+                                            .frame(width: 35, height: 35)
                                             .foregroundColor(Color(hex: option.iconBackgroundColor))
                                     }
                                     if option.useSfSymbols {
@@ -67,16 +70,16 @@ struct QuestionsView: View {
                                     }
                                 }
                                 ZStack {
+                
                                     RoundedRectangle(cornerRadius: 8)
-                                        .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                        .foregroundColor(viewModel.isOptinSelected(option: option) ? selectedButtonColor : buttonColor)
                                     HStack {
                                         Text(.init(option.text))  // render markdown using .init()
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(viewModel.isOptinSelected(option: option) ? Color.gray: Color.white)
                                             .padding(.leading, 8)
                                         Spacer()
                                     }
                                     .padding(4)
-                                    
                                 }
                             }
                             .frame(minHeight: 45)
@@ -92,7 +95,7 @@ struct QuestionsView: View {
                                 HStack {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 8)
-                                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                            .foregroundColor(buttonColor)
                                         
                                         Text("Back")
                                         
@@ -104,7 +107,7 @@ struct QuestionsView: View {
                                     Spacer()
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 8)
-                                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                            .foregroundColor(buttonColor)
                                         
                                         Text("Reset")
                                         

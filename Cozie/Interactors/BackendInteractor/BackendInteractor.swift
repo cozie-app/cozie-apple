@@ -45,24 +45,42 @@ class BackendInteractor {
         }
     }
     
-    func prepareBackendData(apiReadUrl: String,
-                            apiReadKey: String,
-                            apiWriteUrl: String,
-                            apiWriteKey: String,
-                            oneSigmnalId: String,
-                            participantPassword: String,
-                            watchSurveyLink: String,
-                            phoneSurveyLink: String) {
+    func prepareBackendData(apiReadUrl: String?,
+                            apiReadKey: String?,
+                            apiWriteUrl: String?,
+                            apiWriteKey: String?,
+                            oneSigmnalId: String?,
+                            participantPassword: String?,
+                            watchSurveyLink: String?,
+                            phoneSurveyLink: String?) {
         if let settingList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()), let model = settingList.first {
             
-            model.api_read_url = apiReadUrl
-            model.api_read_key = apiReadKey
-            model.api_write_url = apiWriteUrl
-            model.api_write_key = apiWriteKey
+            if let apiReadUrl {
+                model.api_read_url = apiReadUrl
+            }
+            if let apiReadKey {
+                model.api_read_key = apiReadKey
+            }
+            if let apiWriteUrl {
+                model.api_write_url = apiWriteUrl
+            }
+            if let apiWriteKey {
+                model.api_write_key = apiWriteKey
+            }
+
             model.one_signal_id = Defaults.OneSignalAppID //oneSigmnalId
-            model.participant_password = participantPassword
-            model.watch_survey_link = watchSurveyLink
-            model.phone_survey_link = phoneSurveyLink
+            
+            if let participantPassword {
+                model.participant_password = participantPassword
+            }
+            
+            if let watchSurveyLink {
+                model.watch_survey_link = watchSurveyLink
+            }
+            
+            if let phoneSurveyLink {
+                model.phone_survey_link = phoneSurveyLink
+            }
             
             try? persistenceController.container.viewContext.save()
             debugPrint(settingList)

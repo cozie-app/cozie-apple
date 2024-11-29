@@ -8,7 +8,7 @@
 import Foundation
 import HealthKit
 
-class HealthKitInteractor {
+final class HealthKitInteractor {
     static let minInterval: Double = 60
     typealias SleepData = (sleepKey: String, startDate: Date, value: Double)
     typealias WorkaoutData = (key: String, startDate: Date, value: Double)
@@ -275,7 +275,7 @@ class HealthKitInteractor {
     // MARK: - Helfer
     private let healthDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         return dateFormatter
     }()
     

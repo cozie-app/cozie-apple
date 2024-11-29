@@ -8,6 +8,7 @@
 import Foundation
 
 class SurveyManager {
+    // TO DO: async/await
     func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ error: Error?)->())? ) {
         do {
             let surveyModel = try JSONDecoder().decode(WatchSurveyModelController.self, from: surveyListData)
@@ -27,7 +28,7 @@ class SurveyManager {
             }
         }
     }
-    
+    // TO DO: async/await
     func asyncUpdate(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool) async throws {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) -> Void in
             self.update(surveyListData: surveyListData, storage: storage, selected: selected) { err in

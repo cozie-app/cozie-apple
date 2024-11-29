@@ -52,9 +52,11 @@ class HomeCoordinator: ObservableObject {
             if let selectedSurvey = QuestionViewModel.defaultQuestions.first(where: { $0.title == info.wssTitle }) {
                 CozieStorage.shared.saveWSLink(link: selectedSurvey.link)
             } else {
-                if !info.apiWatchSurveyURL.isEmpty {
-                    settingsViewModel.questionViewModel.updateWithBackendSurvey(title: info.wssTitle, link: info.apiWatchSurveyURL)
-                    CozieStorage.shared.saveWSLink(link: info.apiWatchSurveyURL)
+                if let apiWatchSurveyURL = info.apiWatchSurveyURL, apiWatchSurveyURL.isEmpty {
+                    if let wssTitle = info.wssTitle, let apiWatchSurveyURL = info.apiWatchSurveyURL {
+                        settingsViewModel.questionViewModel.updateWithBackendSurvey(title: wssTitle, link: apiWatchSurveyURL)
+                    }
+                    CozieStorage.shared.saveWSLink(link: apiWatchSurveyURL)
                 }
             }
             

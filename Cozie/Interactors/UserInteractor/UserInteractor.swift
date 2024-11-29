@@ -9,8 +9,10 @@ import Foundation
 import CoreData
 
 class UserInteractor {
+    // TO DO: Dependency Inversion + Test coverage
     let persistenceController = PersistenceController.shared
-
+    
+    // TO DO: async/await
     var currentUser: User? {
         guard let userList = try? persistenceController.container.viewContext.fetch(User.fetchRequest()),
                 let user = userList.first else { return nil }
@@ -31,17 +33,23 @@ class UserInteractor {
     }
     
     // 
-    public func prepareUser(participantID: String, experimentID: String, password: String = "1G8yOhPvMZ6m") {
+    public func prepareUser(participantID: String?, experimentID: String?, password: String? = "1G8yOhPvMZ6m") {
         if let userList = try? persistenceController.container.viewContext.fetch(User.fetchRequest()), let user = userList.first {
-            user.participantID = participantID
-            user.experimentID = experimentID
-            user.passwordID = password
+            if let participantID {
+                user.participantID = participantID
+            }
+            if let experimentID {
+                user.experimentID = experimentID
+            }
+            if let password {
+                user.passwordID = password
+            }
             try? persistenceController.container.viewContext.save()
         } else {
             let user = User(context: persistenceController.container.viewContext)
-            user.participantID = participantID
-            user.experimentID = experimentID
-            user.passwordID = password
+            user.participantID = participantID ??  Defaults.generateParticipantID()
+            user.experimentID = experimentID ?? Defaults.experimentID
+            user.passwordID = password ?? Defaults.generatePasswordID()
             try? persistenceController.container.viewContext.save()
         }
     }

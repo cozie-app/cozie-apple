@@ -25,7 +25,7 @@ class SurveyHistory: Codable {
     }
 }
 
-class WatchSurveyInteractor {
+final class WatchSurveyInteractor {
     let healthInteractor: HealthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, loger: StorageManager.shared, dataPrefix: "ws")
     let offlineMode = OfflineModeManager()
     
@@ -42,8 +42,10 @@ class WatchSurveyInteractor {
                         logsComplition:(()->())? = nil, completion:((_ success: Bool, _ error: Error?)->())?) {
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
+        // dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let dateString = dateFormatter.string(from: date)
+        
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.userOneSignalID(),
                     WatchSurveyKeys.idParticipant.rawValue: storage.userID(),
@@ -211,7 +213,7 @@ class WatchSurveyInteractor {
     private func formattedDate() -> String {
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         return dateFormatter.string(from: date)
     }
     

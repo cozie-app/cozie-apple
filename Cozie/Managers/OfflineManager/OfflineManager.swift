@@ -8,8 +8,8 @@
 import Foundation
 import CoreData
 
-class OfflineModeManager {
-    var isEnabled: Bool = false
+final class OfflineModeManager {
+    private(set) var isEnabled: Bool = false
     
     func updateWith(apiInfo: WApiInfo) {
         if apiInfo.wKey.isEmpty || apiInfo.wUrl.isEmpty {

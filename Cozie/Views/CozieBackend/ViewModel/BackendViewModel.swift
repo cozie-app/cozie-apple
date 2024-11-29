@@ -99,9 +99,11 @@ class BackendViewModel: NSObject, ObservableObject {
     
     // MARK: Prepare Data
     func prepareData() {
-        section
+        let updatedList = section
+        updatedList
             .flatMap{ $0.list }
             .forEach { $0.subtitle = dataFor(state: BackendState(rawValue: $0.id) ?? .clear)}
+        section = updatedList
         sendHKInfo()
     }
     

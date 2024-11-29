@@ -76,7 +76,7 @@ class WatchSurveyInteractor {
         
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         let dateString = dateFormatter.string(from: date)
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.playerID(),
