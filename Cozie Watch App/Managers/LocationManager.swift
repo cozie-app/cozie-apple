@@ -8,7 +8,12 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject {
+protocol UpdateLocationProtocol {
+    func updateLocation(completion: (()->())?)
+    var currentLocation: CLLocation? { get }
+}
+
+final class LocationManager: NSObject {
     var locationManager: CLLocationManager? = nil
     var currentLocation: CLLocation? = nil
     var lastUpdateDate: Date?
@@ -19,6 +24,20 @@ class LocationManager: NSObject {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
+    }
+}
+
+extension LocationManager: UpdateLocationProtocol {
+    func updateLocation(completion: (()->())?) {
+        self.completion = completion
+        
+        if locationManager == nil {
+            self.requestAuth()
+        } else {
+            if locationManager!.authorizationStatus == .authorizedWhenInUse || locationManager!.authorizationStatus == .authorizedAlways {
+                locationManager?.requestLocation()
+            }
+        }
     }
 }
 

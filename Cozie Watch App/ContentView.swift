@@ -18,7 +18,7 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding([.leading, .trailing], 8)
                     .onAppear {
-                        viewModel.prepare()
+                        viewModel.prepareLocationAndConnectivityManager()
                     }
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .font(.system(size: 35))
