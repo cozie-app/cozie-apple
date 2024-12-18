@@ -91,6 +91,7 @@ class BackendViewModel: NSObject, ObservableObject {
     let setitngsInteractor = SettingsInteractor()
     let watchSurveyInteractor = WatchSurveyInteractor()
     let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    let storage = CozieStorage()
     
     @Published var loading: Bool = false
     
@@ -128,13 +129,16 @@ class BackendViewModel: NSObject, ObservableObject {
             backend.api_write_url = value
         case .writeKey:
             backend.api_write_key = value
-            //        case .oneSignalAppId:
-            //            backend.one_signal_id = value
+//        case .oneSignalAppId:
+//            backend.one_signal_id = value
         case .participantPassword:
             backend.participant_password = value
             userIntaractor.currentUser?.passwordID = value
         case .watchsurveyLink:
-            backend.watch_survey_link = value
+            if backend.watch_survey_link != value {
+                backend.watch_survey_link = value
+                storage.saveExternalWSLink(link: (value, ""))
+            }
         case .phoneSurveyLink:
             backend.phone_survey_link = value
         case .healthCutoffTime:
@@ -199,7 +203,7 @@ class BackendViewModel: NSObject, ObservableObject {
     
     // MARK: Sync watch survey
     func syncWatchData() {
-        watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] loadError in
+        watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] title, loadError in
             guard let self = self else {
                 return
             }

@@ -39,7 +39,7 @@ class BackendInteractor {
             backend.phone_survey_link = Defaults.phoneSurveyLink
             
             // save default link
-            storage.saveWSLink(link: Defaults.phoneSurveyLink)
+            storage.saveWSLink(link: (Defaults.watchSurveyLink, Defaults.WSStitle))
             
             try? persistenceController.container.viewContext.save()
         }
@@ -102,7 +102,8 @@ class BackendInteractor {
     // MARK: - Load WatchSurvey JSON
     func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         if let backend = currentBackendSettings {
-            baseRepo.getFileContent(url: backend.watch_survey_link ?? "", parameters: nil) { [weak self] result in
+            let surveyLink = backend.watch_survey_link ?? ""
+            baseRepo.getFileContent(url: surveyLink, parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
                     completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
@@ -111,7 +112,15 @@ class BackendInteractor {
                 
                 switch result {
                 case .success(let surveyListData):
-                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false, completion: completion)
+                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false) { title, error in
+                        if let surveyTitle = title {
+                            // update external ws link after sync
+                            self.storage.saveExternalWSLink(link: (surveyLink, surveyTitle))
+                            completion?(error)
+                        } else {
+                            completion?(error)
+                        }
+                    }
                 case .failure(let error):
                     completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)

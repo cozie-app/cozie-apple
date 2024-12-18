@@ -15,7 +15,7 @@ struct CozieBackendView: View {
     @State var isSelected: Bool = false
     @State var showError = false
     
-    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.didReceiveDeeplink)
     
     var body: some View {
         NavigationView {

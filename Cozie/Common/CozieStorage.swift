@@ -12,6 +12,9 @@ class CozieStorage: CozieStorageProtocol {
     enum CozieStorageKeys: String {
         case appConfigured = "CozieStorageAppConfiguredKey"
         case selectedURL = "CozieStorageSelectedURLKey"
+        case selectedURLTitle = "CozieStorageSelectedURLTitleKey"
+        case externalURL = "CozieStorageExternalURLKey"
+        case externalURLTitle = "CozieStorageExternalURLTitleKey"
         case pIDSynced = "CozieStoragePIDSyncedKey"
         case expIDSynced = "CozieStorageExpIDSyncedKey"
         case surveySynced = "CozieStorageSurveySyncedKey"
@@ -49,12 +52,26 @@ class CozieStorage: CozieStorageProtocol {
         UserDefaults.standard.set(id, forKey: CozieStorageKeys.playerID.rawValue)
     }
     
-    func selectedWSLink() -> String {
-        UserDefaults.standard.value(forKey: CozieStorageKeys.selectedURL.rawValue) as? String ?? ""
+    func selectedWSLink() -> SurveyInfo {
+        (UserDefaults.standard.value(forKey: CozieStorageKeys.selectedURL.rawValue) as? String ?? "",
+         UserDefaults.standard.value(forKey: CozieStorageKeys.selectedURLTitle.rawValue) as? String ?? "")
+    }
+
+    
+    func saveWSLink(link: SurveyInfo) {
+        UserDefaults.standard.set(link.link, forKey: CozieStorageKeys.selectedURL.rawValue)
+        UserDefaults.standard.set(link.title, forKey: CozieStorageKeys.selectedURLTitle.rawValue)
     }
     
-    func saveWSLink(link: String) {
-        UserDefaults.standard.set(link, forKey: CozieStorageKeys.selectedURL.rawValue)
+    func externalWSLink() -> SurveyInfo {
+        (UserDefaults.standard.value(forKey: CozieStorageKeys.externalURL.rawValue) as? String ?? "",
+         UserDefaults.standard.value(forKey: CozieStorageKeys.externalURLTitle.rawValue) as? String ?? "")
+    }
+
+    
+    func saveExternalWSLink(link: SurveyInfo) {
+        UserDefaults.standard.set(link.link, forKey: CozieStorageKeys.externalURL.rawValue)
+        UserDefaults.standard.set(link.title, forKey: CozieStorageKeys.externalURLTitle.rawValue)
     }
     
     func pIDSynced() -> Bool {
@@ -183,4 +200,8 @@ class CozieStorage: CozieStorageProtocol {
     }
 }
 
-extension CozieStorage: SurveyStorageProtocol {}
+extension CozieStorage: SurveyStorageProtocol {
+    func selectedWSInfoLink() -> String {
+        return selectedWSLink().link
+    }
+}

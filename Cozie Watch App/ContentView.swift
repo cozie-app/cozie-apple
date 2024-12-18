@@ -8,6 +8,14 @@
 import SwiftUI
 import WatchConnectivity
 
+struct UICommon {
+    static let buttonHeight: CGFloat = 45
+    static let cornerRadius: CGFloat = 8
+    
+    static let buttonColor = Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.20)
+    static let selectedButtonColor = Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.12)
+}
+
 struct ContentView: View {
     @StateObject var viewModel = WatchSurveyViewModel()
     var body: some View {

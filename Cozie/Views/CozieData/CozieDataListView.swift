@@ -24,7 +24,7 @@ struct CozieDataListView: View {
     @State var showError = false
     @State var presentingModal = false
     
-    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.didReceiveDeeplink)
     
     var body: some View {
         NavigationView {

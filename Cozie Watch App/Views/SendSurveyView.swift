@@ -10,57 +10,62 @@ import SwiftUI
 struct SendSurveyView: View {
     @EnvironmentObject var viewModel: WatchSurveyViewModel
     @State var sendingProgress = false
+    
     var body: some View {
-        ZStack {
-            VStack {
-                Text("Thank you.")
-                    .multilineTextAlignment(.center)
-                    .padding([.leading, .trailing], 8)
-                
-                Spacer()
-                HStack {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                        
-                        HStack {
-                            Image("send_green")
-                                .resizable()
-                                .frame(width: 28,height: 28)
-                            Text("Submit survey")
-                        }
-                    }
-                    .onTapGesture {
-                        viewModel.sendWatchSurvey()
-                    }
-                }
-                .frame(height: 45)
-                
-                Spacer()
-                HStack {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                        
-                        Text("Back")
-                        
-                    }
-                    .onTapGesture {
-                        viewModel.backAction()
-                    }
+        GeometryReader { render in
+            ZStack {
+                VStack {
+                    Text("Thank you.")
+                        .multilineTextAlignment(.center)
+                        .padding([.leading, .trailing], 8)
+                    
                     Spacer()
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                        
-                        Text("Reset")
-                        
+                    HStack {
+                        Button {
+                            viewModel.sendWatchSurvey()
+                        } label: {
+                            HStack {
+                                Image("send_green")
+                                    .resizable()
+                                    .frame(width: 28,height: 28)
+                                Text("Submit survey")
+                            }
+                            .frame(width: render.size.width, height: UICommon.buttonHeight)
+                            .background {
+                                RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                    .foregroundColor(UICommon.buttonColor)
+                            }
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .onTapGesture {
-                        viewModel.restart()
+                    
+                    Spacer()
+                    HStack {
+                        Button {
+                            viewModel.backAction()
+                        } label: {
+                            Text("Back")
+                                .frame(width: render.size.width/2-UICommon.cornerRadius/2, height: UICommon.buttonHeight)
+                                .background {
+                                    RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                        .foregroundColor(UICommon.buttonColor)
+                                }
+                        }
+                        .buttonStyle(.plain)
+                        Spacer()
+                        Button {
+                            viewModel.restart()
+                        } label: {
+                            Text("Reset")
+                                .frame(width: render.size.width/2-UICommon.cornerRadius/2, height: UICommon.buttonHeight)
+                                .background {
+                                    RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                        .foregroundColor(UICommon.buttonColor)
+                                }
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
-                .frame(height: 45)
             }
             
             if viewModel.sendSurveyProgress {

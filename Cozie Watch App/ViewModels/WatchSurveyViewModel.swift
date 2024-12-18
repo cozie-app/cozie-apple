@@ -223,7 +223,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     func isOptinSelected(option: ResponseOption) -> Bool {
-        return selectedOptions.contains(where: {$0.optin.id == option.id})
+        return selectedOptions.contains(where: {$0.optin.id == option.id && $0.sID == currentSurvey?.questionID})
     }
     
     func selectOptions(option: ResponseOption) {

@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CozieStorageProtocol {
+    typealias SurveyInfo = (link: String, title: String)
     func playerID() -> String
     
     func maxHealthCutoffInteval() -> Double

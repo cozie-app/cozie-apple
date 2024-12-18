@@ -75,8 +75,11 @@ class SettingsInteractor: SettingInteractorProtocol {
             model.pss_reminder_enabled = pssReminderEnabled ?? Defaults.PSSreminderEnabled
             model.pss_reminder_days = pssReminderDays ?? Defaults.PSSreminderDays
             model.pss_reminder_time = pssReminderTime ?? Defaults.PSSreminderTime
-            
-            try? persistenceController.container.viewContext.save()
+            do {
+                try persistenceController.container.viewContext.save()
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
         } else {
             createDefaultSetting()
         }

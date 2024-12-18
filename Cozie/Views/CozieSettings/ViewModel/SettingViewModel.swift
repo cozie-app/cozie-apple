@@ -148,22 +148,120 @@ class SettingViewModel: ObservableObject {
         }
     }
     
-    func configureSettings() {
+    /// Prepare WS Link user interface
+    ///
+    /// Backend behavior:
+    ///
+    ///    Behavior 1:
+    ///    The 1st one (external or internal) is selected. If user update the link (from Advanced tab) we update selected link and setting tab to new link info.
+    ///
+    ///    Behavior 2:
+    ///    If the user selects the 3rd one from internal and updates the external one in Advanced tab, we update the first link (external) in the settings list (external + 6 internal), but the 3rd one is selected.
+    ///
+    ///    DeepLink/QR-Code behavior:
+    ///
+    ///    Behavior 1: same as behavior 1 Advanced tab.
+    ///
+    ///    Behavior 2:
+    ///    If the user selects the 3rd one from internal and updates from DeepLink/QR-Code we make the external link (from Advanced tab) selected.
+    /// - Parameter settingsTitle: wss_title from settings model.
+    /// - Parameter updateExternalSurvey: Indicates that the function was called via Deep Link/QR code.
+    @MainActor
+    func prepareSelectedWSLinkUI(_ settingsTitle: String, updateExternalSurvey: Bool = false) {
+        let (selectedLink, selectedWSTitle) = storage.selectedWSLink()
+        let (externalLink, externalWSTitle) = storage.externalWSLink()
+        let backendLink = backendInteractor.currentBackendSettings?.watch_survey_link ?? ""
+        
+        if !selectedLink.isEmpty {
+            if selectedLink != backendLink {
+                // update from QR/DeepLink
+                if updateExternalSurvey {
+                    storage.saveWSLink(link: (backendLink, settingsTitle))
+                    questionViewModel.updateWithBackendSurvey(title: settingsTitle, link: backendLink)
+                    questionViewModel.selectedId = questionViewModel.selectedIDForTitle(selectedWSTitle)
+                } else {
+                    // selected link is internal
+                    if let id = questionViewModel.selectedIDForLink(selectedLink), id > 0 {
+                        questionViewModel.selectedId = id
+                        // update external ws link in ws links list
+                        if !backendLink.isEmpty && (externalLink != backendLink || questionViewModel.firstWSInfoLink()?.title != externalWSTitle){
+                            storage.saveExternalWSLink(link: (backendLink, externalWSTitle))
+                            questionViewModel.updateWithBackendSurvey(title: externalWSTitle, link: backendLink)
+                        }
+                        
+                        updateQuestionTitle()
+                    } else {
+                        do {
+                            let request = WatchSurveyData.fetchRequest()
+                            request.predicate = NSPredicate(format: "external == %d", true)
+                            // get external
+                            let surveysList = try persistenceController.container.viewContext.fetch(request)
+                            
+                            if let model = surveysList.first {
+                                if questionViewModel.selectedId == 0, selectedLink != backendLink {
+                                    // update selected ws link
+                                    storage.saveWSLink(link: (backendLink, model.surveyName ?? ""))
+                                }
+                                
+                                let modelTitle = model.surveyName ?? ""
+                                updateWSLinkView(title: modelTitle, link: backendLink, id: questionViewModel.selectedIDForTitle(modelTitle))
+                            } else {
+                                if !backendLink.isEmpty {
+                                    storage.saveWSLink(link: (backendLink, ""))
+                                    // update selected ws link without synced ws
+                                    updateWSLinkView(link: selectedLink, id: self.questionViewModel.defaultSelectedID())
+                                } else {
+                                    // if ws link was removed or not filled in backend tab it should be set to default state
+                                    setToDefaulsWSLink()
+                                }
+                            }
+                        } catch let error {
+                            debugPrint(error.localizedDescription)
+                        }
+                    }
+                }
+            // selected and backend link is the same
+            // first load of app
+            } else {
+                updateWSLinkView(title: selectedWSTitle, link: selectedLink, id: questionViewModel.selectedIDForTitle(selectedWSTitle))
+            }
+        } else {
+            // first load if user has ws-link in backend config
+            if !backendLink.isEmpty {
+                updateWSLinkView(title: settingsTitle, link: backendLink, id: questionViewModel.selectedIDForTitle(settingsTitle))
+                // first load with default ws link
+            } else {
+                // if ws link was removed or not filled in backend tab it should be set to default state
+                setToDefaulsWSLink()
+            }
+        }
+    }
+    
+    /// Set the default link state. The internal link is empty.
+    @MainActor
+    private func setToDefaulsWSLink() {
+        questionViewModel.updateToDefaultState()
+        questionViewModel.selectedId = questionViewModel.defaultSelectedID()
+    }
+    
+    /// Update selected ws link.
+    /// The first default/internal element will be replaced by an external link from the backend tab.
+    /// - Parameter title: Empty string by default or survey name.
+    /// - Parameter link: WS link.
+    /// - Parameter id: The selected identifier from the list of links.
+    @MainActor
+    private func updateWSLinkView(title: String = "", link: String, id: Int) {
+        questionViewModel.updateWithBackendSurvey(title: title, link: link)
+        questionViewModel.selectedId = id
+        updateQuestionTitle()
+    }
+    
+    @MainActor
+    func configureSettings(updateExternalSurvey: Bool = false) {
         if let settings = settingsIntaractor.currentSettings {
             subscriptions.removeAll()
-            
-            // Find selected id
-            // Side effect for updateSurveyList
-            let selectedLink = storage.selectedWSLink()
-            if  !selectedLink.isEmpty {
-                questionViewModel.selectedId = questionViewModel.selectedIDForLink(selectedLink)
-            } else {
-                questionViewModel.selectedId = questionViewModel.selectedIDForTitle(settings.wss_title ?? "")
-            }
-            //
-            
-            updateSurveyList()
-            
+            prepareSelectedWSLinkUI(settings.wss_title ?? "", updateExternalSurvey: updateExternalSurvey)
+
             goal = "\(settings.wss_goal)"
             isReminderEnabled = settings.wss_reminder_enabled
             $isReminderEnabled.eraseToAnyPublisher().dropFirst().sink { [weak self] value in
@@ -255,10 +353,11 @@ class SettingViewModel: ObservableObject {
             let selectedTitle = questionViewModel.selectedTitle()
             if selectedTitle != settings.wss_title {
                 settings.wss_title = questionViewModel.selectedTitle()
-                // update selected link
-                storage.saveWSLink(link: questionViewModel.selectedLink())
-                updateStateForSurveySynced(enabled: false)
                 try? persistenceController.container.viewContext.save()
+                
+                // update selected link
+                storage.saveWSLink(link: (questionViewModel.selectedLink(), selectedTitle))
+                updateStateForSurveySynced(enabled: false)
             }
         }
     }
@@ -453,7 +552,7 @@ class SettingViewModel: ObservableObject {
     
     // MARK: Sync watch survey
     func syncWatchData(completion: ((_ error: Error?)->())? = nil) {
-        watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] loadError in
+        watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] title, loadError in
             guard let self = self else {
                 return
             }
@@ -503,25 +602,34 @@ class SettingViewModel: ObservableObject {
     
     // MARK: Watch survey list
     func updateSurveyList() {
-//        if self.questionViewModel.list.first(where: { $0.link == (backendInteractor.currentBackendSettings?.watch_survey_link ?? "link" ) }) == nil {
-            do {
-                let request = WatchSurveyData.fetchRequest()
-                request.predicate = NSPredicate(format: "external == %d", true)
-                let surveysList = try self.persistenceController.container.viewContext.fetch(request)
-                if let model = surveysList.first {
-                    
-                    let link = self.backendInteractor.currentBackendSettings?.watch_survey_link ?? ""
-                    if self.questionViewModel.selectedId == 0, storage.selectedWSLink() != link {
-                        storage.saveWSLink(link: link)
-                    }
-                    
+        do {
+            let request = WatchSurveyData.fetchRequest()
+            let (selectedLink, title) = storage.selectedWSLink()
+            
+            request.predicate = NSPredicate(format: "external == %d", true)
+            let surveysList = try self.persistenceController.container.viewContext.fetch(request)
+            // update survey link if needed
+            if let model = surveysList.first, title == model.surveyName {
+                
+                let link = self.backendInteractor.currentBackendSettings?.watch_survey_link ?? ""
+                let newTitle = model.surveyName ?? ""
+                
+                if self.questionViewModel.selectedId == 0, (selectedLink != link || title != newTitle) {
+                    storage.saveWSLink(link: (link, newTitle))
+                }
+                
+                Task { @MainActor in
                     self.questionViewModel.updateWithBackendSurvey(title: model.surveyName ?? "", link: link)
                 }
-            } catch let error {
-                debugPrint(error.localizedDescription)
+            // clear
+            } else {
+                surveysList.forEach { model in
+                    self.persistenceController.container.viewContext.delete(model)
+                }
             }
-//        } else {
-//            
-//        }
+        } catch let error {
+            debugPrint(error.localizedDescription)
+        }
+        
     }
 }
