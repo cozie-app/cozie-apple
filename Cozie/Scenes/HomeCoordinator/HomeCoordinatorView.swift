@@ -35,7 +35,7 @@ struct HomeCoordinatorView: View {
                 HomeTabView(title: "Advanced", imageName: "cloud")
             }
             .tag(CozieTabs.backend)
-            .environmentObject(coordinator.settingsViewModel)
+            .environmentObject(coordinator)
         }
         .accentColor(.appOrange)
         .onAppear{
@@ -49,6 +49,7 @@ struct HomeCoordinatorView: View {
                 }
             }
         }
+        .disabled(coordinator.disableUI)
     }
 }
 

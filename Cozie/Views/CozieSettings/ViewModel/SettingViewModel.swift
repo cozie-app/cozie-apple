@@ -187,6 +187,8 @@ class SettingViewModel: ObservableObject {
                         if !backendLink.isEmpty && (externalLink != backendLink || questionViewModel.firstWSInfoLink()?.title != externalWSTitle){
                             storage.saveExternalWSLink(link: (backendLink, externalWSTitle))
                             questionViewModel.updateWithBackendSurvey(title: externalWSTitle, link: backendLink)
+                        } else {
+                            questionViewModel.updateToDefaultState()
                         }
                         
                         updateQuestionTitle()
@@ -198,12 +200,16 @@ class SettingViewModel: ObservableObject {
                             let surveysList = try persistenceController.container.viewContext.fetch(request)
                             
                             if let model = surveysList.first {
-                                if questionViewModel.selectedId == 0, selectedLink != backendLink {
+                                if selectedLink != externalLink, model.surveyName == externalWSTitle {
                                     // update selected ws link
-                                    storage.saveWSLink(link: (backendLink, model.surveyName ?? ""))
+                                    storage.saveWSLink(link: (externalLink, externalWSTitle))
+                                }
+                                // seved model was not updated
+                                var modelTitle = model.surveyName ?? ""
+                                if modelTitle != externalWSTitle {
+                                    modelTitle = externalWSTitle
                                 }
                                 
-                                let modelTitle = model.surveyName ?? ""
                                 updateWSLinkView(title: modelTitle, link: backendLink, id: questionViewModel.selectedIDForTitle(modelTitle))
                             } else {
                                 if !backendLink.isEmpty {
@@ -223,7 +229,13 @@ class SettingViewModel: ObservableObject {
             // selected and backend link is the same
             // first load of app
             } else {
-                updateWSLinkView(title: selectedWSTitle, link: selectedLink, id: questionViewModel.selectedIDForTitle(selectedWSTitle))
+                ///
+                if questionViewModel.selectedId == 0 {
+                    let title = selectedWSTitle.isEmpty ? externalWSTitle : selectedWSTitle
+                    updateWSLinkView(title: title, link: selectedLink, id: questionViewModel.selectedIDForTitle(title))
+                } else {
+                    updateWSLinkView(title: selectedWSTitle, link: selectedLink, id: questionViewModel.selectedIDForTitle(selectedWSTitle))
+                }
             }
         } else {
             // first load if user has ws-link in backend config
@@ -598,38 +610,5 @@ class SettingViewModel: ObservableObject {
         updateStateForParticipentID(enabled: false)
         updateStateForExperimentID(enabled: false)
         updateStateForSurveySynced(enabled: false)
-    }
-    
-    // MARK: Watch survey list
-    func updateSurveyList() {
-        do {
-            let request = WatchSurveyData.fetchRequest()
-            let (selectedLink, title) = storage.selectedWSLink()
-            
-            request.predicate = NSPredicate(format: "external == %d", true)
-            let surveysList = try self.persistenceController.container.viewContext.fetch(request)
-            // update survey link if needed
-            if let model = surveysList.first, title == model.surveyName {
-                
-                let link = self.backendInteractor.currentBackendSettings?.watch_survey_link ?? ""
-                let newTitle = model.surveyName ?? ""
-                
-                if self.questionViewModel.selectedId == 0, (selectedLink != link || title != newTitle) {
-                    storage.saveWSLink(link: (link, newTitle))
-                }
-                
-                Task { @MainActor in
-                    self.questionViewModel.updateWithBackendSurvey(title: model.surveyName ?? "", link: link)
-                }
-            // clear
-            } else {
-                surveysList.forEach { model in
-                    self.persistenceController.container.viewContext.delete(model)
-                }
-            }
-        } catch let error {
-            debugPrint(error.localizedDescription)
-        }
-        
     }
 }

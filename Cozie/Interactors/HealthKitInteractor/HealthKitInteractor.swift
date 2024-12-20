@@ -232,8 +232,9 @@ final class HealthKitInteractor {
                 apneaEventSamples.forEach { sample in
                     apneaSeamples.append((.apnea, HeathDataKeys.apneaEvent.rawValue, sample.startDate, sample.startDate.distance(to: sample.endDate)/60))
                 }
-            
+                
                 completion([], apneaSeamples, nil)
+                return
             }
             // Sleep Analysis
             if typeKey == HeathDataKeys.sleepAnalysisKey.rawValue {
@@ -328,59 +329,66 @@ final class HealthKitInteractor {
         let tag = Tags(idOnesignal: storage.playerID(), idParticipant: user.participantID, idPassword: user.passwordID)
         
         getLastDaySamples(for: type) { [weak self] (samples, healthData, error) in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             
             var healthModels: [HealthModel] = []
             
             if samples.count > 0 {
-                    let lastSunccesTimestamp = self.storage.healthLastSyncedTimeInterval(key: self.healthKeyFor(simple: type), offline: offlineMode.isEnabled)
+                let lastSunccesTimestamp = self.storage.healthLastSyncedTimeInterval(key: self.healthKeyFor(simple: type), offline: offlineMode.isEnabled)
+                
+                let group = DispatchGroup()
+                let lock = NSLock()
+                samples.forEach({
+                    let sample = $0
                     
-                    let group = DispatchGroup()
-                    samples.forEach({
-                        let sample = $0
+                    group.enter()
+                    self.convertToUnit(sample: $0, type: type) { value in
+                        // reject value with start time less than last update time
+                        if sample.startDate.timeIntervalSince1970 <= lastSunccesTimestamp {
+                            
+                            // self.testLog(trigger: trigger, details: "Reject value with start time:\(sample.startDate.timeIntervalSince1970) less than last update time:\(lastSunccesTimestamp)", state: "error")
+                            group.leave()
+                            return
+                        }
                         
-                        group.enter()
-                        self.convertToUnit(sample: $0, type: type) { value in
-                            // reject value with start time less than last update time
-                            if sample.startDate.timeIntervalSince1970 <= lastSunccesTimestamp {
-                                
-                                // self.testLog(trigger: trigger, details: "Reject value with start time:\(sample.startDate.timeIntervalSince1970) less than last update time:\(lastSunccesTimestamp)", state: "error")
-                                group.leave()
-                                return
-                            }
-                            
-                            let currentDataString = self.healthDateFormatter.string(from: sample.startDate)
-                            
-                            if let lastModel = healthModels.last {
-                                // prevent value duplicates
-                                if lastModel.time != currentDataString {
-                                    healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
-                                    //
-                                    // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
-                                }
-                            } else {
+                        let currentDataString = self.healthDateFormatter.string(from: sample.startDate)
+                        
+                        if let lastModel = healthModels.last {
+                            // prevent value duplicates
+                            if lastModel.time != currentDataString {
+                                lock.lock()
                                 healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
+                                lock.unlock()
+                                //
                                 // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                             }
-                            group.leave()
+                        } else {
+                            lock.lock()
+                            healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
+                            lock.unlock()
+                            // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                         }
-                    })
-                    
-                    group.notify(queue: DispatchQueue.global()) {
-                        completion(healthModels, samples)
+                        group.leave()
                     }
+                })
+                
+                group.notify(queue: DispatchQueue.global()) {
+                    completion(healthModels, samples)
+                }
                 
             } else if healthData.count > 0 {
                 // Apnea event
                 if healthData.first?.type == .apnea {
                     healthData.forEach { sample in
                         let customTrigger = self.addPrefixForDataKey(key: HeathDataKeys.apneaEventTrigger.rawValue)
-
+                        
                         healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: customTrigger, healthKey: self.addPrefixForDataKey(key: sample.key), healthValue: sample.value)))
                     }
                     completion(healthModels, samples)
                     
-                // With units (steps, hr...)
+                    // With units (steps, hr...)
                 } else if healthData.first?.type == .workout {
                     healthData.forEach { (type, workautKey, startDate, value) in
                         if workautKey == HeathDataKeys.workoutType.rawValue {
@@ -619,13 +627,13 @@ final class HealthKitInteractor {
             let group = DispatchGroup()
             for type in self.allTypes {
                 group.enter()
-                print("\(type) enter(type)")
+                debugPrint("\(type) enter")
                 self.getDataObject(type: type, trigger: trigger) { infos, simples in
                     self.lock.lock()
                     list.append(contentsOf: infos)
-                    self.lock.unlock()
-                    print("\(type) leav(type)")
+                    debugPrint("\(type) leav")
                     group.leave()
+                    self.lock.unlock()
                 }
             }
             

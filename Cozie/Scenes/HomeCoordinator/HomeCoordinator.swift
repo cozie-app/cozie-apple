@@ -17,6 +17,7 @@ class HomeCoordinator: ObservableObject {
     
     @Published var tab = CozieTabs.data
     @Published var session: Session
+    @Published var disableUI: Bool = false
     
     let userIntaractor = UserInteractor()
     let settingsInteractor = SettingsInteractor()

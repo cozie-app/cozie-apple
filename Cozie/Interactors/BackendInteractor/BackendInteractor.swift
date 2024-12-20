@@ -103,6 +103,9 @@ class BackendInteractor {
     func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         if let backend = currentBackendSettings {
             let surveyLink = backend.watch_survey_link ?? ""
+            if surveyLink.isEmpty {
+                completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
+            }
             baseRepo.getFileContent(url: surveyLink, parameters: nil) { [weak self] result in
                 
                 guard let self = self else {

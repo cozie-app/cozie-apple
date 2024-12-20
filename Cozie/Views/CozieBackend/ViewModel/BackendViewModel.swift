@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import Combine
 
 final class BackendSection: Identifiable {
     let id: Int
@@ -97,15 +98,21 @@ class BackendViewModel: NSObject, ObservableObject {
     
     @Published var showError: Bool = false
     var errorString: String = ""
+    private var subscriptions = Set<AnyCancellable>()
     
     // MARK: Prepare Data
-    func prepareData() {
+    func prepareData(active: ((_ progress: Bool)->())?) {
         let updatedList = section
         updatedList
             .flatMap{ $0.list }
             .forEach { $0.subtitle = dataFor(state: BackendState(rawValue: $0.id) ?? .clear)}
         section = updatedList
         sendHKInfo()
+        
+        $loading.sink { progress in
+            active?(progress)
+        }
+        .store(in: &subscriptions)
     }
     
     // MARK: - State Property Reaction
@@ -135,9 +142,10 @@ class BackendViewModel: NSObject, ObservableObject {
             backend.participant_password = value
             userIntaractor.currentUser?.passwordID = value
         case .watchsurveyLink:
+            // Load watch summary if ws link was edited
             if backend.watch_survey_link != value {
                 backend.watch_survey_link = value
-                storage.saveExternalWSLink(link: (value, ""))
+                loadWatchSurveyJSON(completion: nil)
             }
         case .phoneSurveyLink:
             backend.phone_survey_link = value
@@ -151,6 +159,11 @@ class BackendViewModel: NSObject, ObservableObject {
         try? persistenceController.container.viewContext.save()
     }
     
+    /// Get a string representation of the Backend tab values.
+    ///
+    /// - Parameters:
+    ///     - state: BackendState
+    ///
     func dataFor(state: BackendState) -> String {
         guard let backend = backendInteractor.currentBackendSettings else { return "" }
         switch state {
@@ -177,6 +190,13 @@ class BackendViewModel: NSObject, ObservableObject {
         }
     }
     
+    /// Use this function to download a watch survey.
+    ///
+    /// - Parameters:
+    ///     - completion: return closure with load status
+    ///
+    ///  - Note: This function enables the loading indicator on the view.
+    ///
     func loadWatchSurveyJSON(completion: ((_ success: Bool)->())?) {
         if !loading {
             loading = true
@@ -191,7 +211,10 @@ class BackendViewModel: NSObject, ObservableObject {
                         completion?(true)
                     } else {
                         self.errorString = WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError.localizedDescription
-                        completion?(false)
+                        Task { @MainActor in
+                            try? await self.persistenceController.removeExternalSurvey()
+                            completion?(false)
+                        }
                     }
                 }
             }
