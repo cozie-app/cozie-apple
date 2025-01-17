@@ -8,27 +8,32 @@
 import Foundation
 import CoreData
 
-protocol SettingInteractorProtocol {
-    func prepareSettingsData()
-}
-
-class SettingsInteractor: SettingInteractorProtocol {
-    let persistenceController = PersistenceController.shared
+class SettingsInteractor: SettingsInteractorProtocol {
+    let dbStorage: DataBaseStorageProtocol
     
-    let backendInteractor = BackendInteractor()
-    let loggerInteractor = LoggerInteractor.shared
+    let backendInteractor: BackendInteractorProtocol
+    let loggerInteractor: LoggerProtocol
 
-    let baseRepo = BaseRepository()
+    let apiRepository: ApiRepositoryProtocol
+    
+    init(dbStorage: DataBaseStorageProtocol = PersistenceController.shared,
+         backendInteractor: BackendInteractorProtocol = BackendInteractor(),
+         loggerInteractor: LoggerProtocol = LoggerInteractor.shared,
+         apiRepository: ApiRepositoryProtocol = BaseRepository()) {
+        self.dbStorage = dbStorage
+        self.backendInteractor = backendInteractor
+        self.loggerInteractor = loggerInteractor
+        self.apiRepository = apiRepository
+    }
     
     var currentSettings: SettingsData? {
-        guard let settingsList = try? persistenceController.container.viewContext.fetch(SettingsData.fetchRequest()),
-                let settings = settingsList.first else { return nil }
-        
+        guard let settings = try? dbStorage.settings() else { return nil }
         return settings
     }
     
+    // TODO: - Unit Tests & move to db storage
     private func createDefaultSetting() {
-        let settings = SettingsData(context: persistenceController.container.viewContext)
+        let settings = dbStorage.createSettingsData()
         settings.wss_title = Defaults.WSStitle
         settings.wss_goal = Defaults.WSSgoal
         settings.wss_time_out = Defaults.WSStimeOutTime
@@ -41,17 +46,18 @@ class SettingsInteractor: SettingInteractorProtocol {
         settings.pss_reminder_days = Defaults.PSSreminderDays
         settings.pss_reminder_time = Defaults.PSSreminderTime
         
-        try? persistenceController.container.viewContext.save()
+        try? dbStorage.saveViewContext()
     }
     
     func prepareSettingsData() {
-        if let settingList = try? persistenceController.container.viewContext.fetch(SettingsData.fetchRequest()), let _ = settingList.first {
-           debugPrint(settingList)
+        if let setting = try? dbStorage.settings() {
+           debugPrint(setting)
         } else {
             createDefaultSetting()
         }
     }
-    
+
+    // TODO: - Unit Tests
     func prepareSettingsData(wssTitle: String?,
                              wssGoal: Int16?,
                              wssTimeout: Int16?,
@@ -63,7 +69,7 @@ class SettingsInteractor: SettingInteractorProtocol {
                              pssReminderEnabled: Bool?,
                              pssReminderDays: String?,
                              pssReminderTime: String?) {
-        if let settingList = try? persistenceController.container.viewContext.fetch(SettingsData.fetchRequest()), let model = settingList.first {
+        if let model = try? dbStorage.settings() {
             model.wss_title = wssTitle ?? Defaults.WSStitle
             model.wss_goal = Int16(wssGoal ?? Defaults.WSSgoal)
             model.wss_time_out = Int16(wssTimeout ?? Defaults.WSStimeOutTime)
@@ -76,7 +82,7 @@ class SettingsInteractor: SettingInteractorProtocol {
             model.pss_reminder_days = pssReminderDays ?? Defaults.PSSreminderDays
             model.pss_reminder_time = pssReminderTime ?? Defaults.PSSreminderTime
             do {
-                try persistenceController.container.viewContext.save()
+                try dbStorage.saveViewContext()
             } catch {
                 debugPrint(error.localizedDescription)
             }
@@ -85,6 +91,7 @@ class SettingsInteractor: SettingInteractorProtocol {
         }
     }
     
+    // TODO: - Unit Tests
     func logSettingsData(name: String, expiriment: String, logs: Logs, completion: ((_ success: Bool)->())?) {
         if let backend = backendInteractor.currentBackendSettings {
             if (backend.api_write_url?.isEmpty ?? true) || (backend.api_write_key?.isEmpty ?? true) {
@@ -110,7 +117,7 @@ class SettingsInteractor: SettingInteractorProtocol {
                     self.loggerInteractor.logInfo(action: "", info: String(data: json, encoding: .utf8) ?? "")
                 }
                 
-                baseRepo.post(url: backend.api_write_url ?? "", body: bodyJson, key: backend.api_write_key ?? "") { result in
+                apiRepository.post(url: backend.api_write_url ?? "", body: bodyJson, key: backend.api_write_key ?? "") { result in
                     switch result {
                     case .success(_):
                         completion?(true)

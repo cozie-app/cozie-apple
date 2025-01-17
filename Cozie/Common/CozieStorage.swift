@@ -7,8 +7,45 @@
 
 import Foundation
 
-class CozieStorage: CozieStorageProtocol {
+protocol WSStorageProtocol {
+    typealias SurveyInfo = (link: String, title: String)
+    func selectedWSLink() -> SurveyInfo
+    func saveWSLink(link: SurveyInfo)
+    func externalWSLink() -> SurveyInfo
+    func saveExternalWSLink(link: SurveyInfo)
+    func maxHealthCutoffTimeInterval() -> Double
+    func saveMaxHealthCutoffTimeInterval(_ interval: Double)
+    func setDistanceFilter(_ distance: Float)
+    func distanceFilter() -> Float
+}
+
+protocol WSStateStoregeProtocol {
+    /// Participant ID sync status with device (Watch app)
+    func pIDSynced() -> Bool
     
+    /// Save participant ID sync status
+    func savePIDSynced(_ synced: Bool)
+    
+    /// Experiment ID sync status with device (Watch app)
+    func expIDSynced() -> Bool
+    
+    /// Save experiment ID sync status
+    func saveExpIDSynced(_ synced: Bool)
+    
+    /// Watch survey sync status with device (Watch app)
+    func surveySynced() -> Bool
+    
+    /// Save watch survey sync status
+    func saveSurveySynced(_ synced: Bool)
+    
+    /// Save patizipent id
+    func savePlayerID(_ id: String)
+}
+
+protocol UserDefaultsStoregeProtocol: CozieStorageProtocol, WSStorageProtocol, WSStateStoregeProtocol {}
+
+class CozieStorage: UserDefaultsStoregeProtocol {
+
     enum CozieStorageKeys: String {
         case appConfigured = "CozieStorageAppConfiguredKey"
         case selectedURL = "CozieStorageSelectedURLKey"
@@ -40,9 +77,23 @@ class CozieStorage: CozieStorageProtocol {
         
         case firstLaunchTimeInterval = "firstLaunchTimeInterval"
         case maxHealthCutoffTime = "healthCutoffTimeTimeInterval"
+        case distanceFilterKey = "distanceFilter"
     }
     
     static let shared = CozieStorage()
+    
+    /// Use this function to set distance filter.
+    /// - Parameters:
+    ///    - distance: Minimum distance for location tracking - (Float).
+    func setDistanceFilter(_ distance: Float) {
+        UserDefaults.standard.set(distance, forKey: CozieStorageKeys.distanceFilterKey.rawValue)
+    }
+    
+    /// Use this function to get distance filter.
+    func distanceFilter() -> Float {
+        UserDefaults.standard.value(forKey: CozieStorageKeys.distanceFilterKey.rawValue) as? Float ?? 100.0
+    }
+    
     
     func playerID() -> String {
         UserDefaults.standard.value(forKey: CozieStorageKeys.playerID.rawValue) as? String ?? ""
@@ -57,7 +108,6 @@ class CozieStorage: CozieStorageProtocol {
          UserDefaults.standard.value(forKey: CozieStorageKeys.selectedURLTitle.rawValue) as? String ?? "")
     }
 
-    
     func saveWSLink(link: SurveyInfo) {
         UserDefaults.standard.set(link.link, forKey: CozieStorageKeys.selectedURL.rawValue)
         UserDefaults.standard.set(link.title, forKey: CozieStorageKeys.selectedURLTitle.rawValue)
@@ -68,7 +118,6 @@ class CozieStorage: CozieStorageProtocol {
          UserDefaults.standard.value(forKey: CozieStorageKeys.externalURLTitle.rawValue) as? String ?? "")
     }
 
-    
     func saveExternalWSLink(link: SurveyInfo) {
         UserDefaults.standard.set(link.link, forKey: CozieStorageKeys.externalURL.rawValue)
         UserDefaults.standard.set(link.title, forKey: CozieStorageKeys.externalURLTitle.rawValue)

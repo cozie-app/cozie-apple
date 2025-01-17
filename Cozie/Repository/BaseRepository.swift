@@ -27,6 +27,7 @@ protocol ApiRepositoryProtocol {
 class BaseRepository: ObservableObject {
    
     // MARK: Base GET JSON file
+    // TODO: - Unit Tests
     func getFileContent(url: String, parameters: [String: String]?, completion: @escaping (Result<Data, Error>) -> Void) {
         guard var componentsQuery = URLComponents(string: url) else { return }
         
@@ -95,7 +96,7 @@ extension BaseRepository: ApiRepositoryProtocol {
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 // debug
                 if let dataToPrint = data {
-                    debugPrint(String(data: dataToPrint, encoding: .utf8))
+                    debugPrint(String(data: dataToPrint, encoding: .utf8) ?? "empty")
                 }
                 //
                 
@@ -116,6 +117,7 @@ extension BaseRepository: ApiRepositoryProtocol {
     }
     
     // MARK: Base Post
+    // TODO: - Unit Tests
     func post(url: String, body: Data, key: String, completion: @escaping (Result<Data, Error>) -> Void) {
         
         if let url = URL(string: url) {
@@ -130,7 +132,7 @@ extension BaseRepository: ApiRepositoryProtocol {
             ]
             
             // debug
-            debugPrint(String(data: body, encoding: .utf8))
+            debugPrint(String(data: body, encoding: .utf8) ?? "empty")
             //
             
             urlRequest.httpBody = body

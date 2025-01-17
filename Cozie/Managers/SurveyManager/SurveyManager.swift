@@ -9,7 +9,7 @@ import Foundation
 
 class SurveyManager {
     // TO DO: async/await
-    func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ title: String?, _ error: Error?)->())? ) {
+    func update(surveyListData: Data, storage: DataBaseStorageProtocol, selected: Bool, completion: ((_ title: String?, _ error: Error?)->())? ) {
         do {
             let surveyModel = try JSONDecoder().decode(WatchSurveyModelController.self, from: surveyListData)
             // set first question ID
@@ -28,8 +28,8 @@ class SurveyManager {
             }
         }
     }
-    // TO DO: async/await
-    func asyncUpdate(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool) async throws {
+
+    func asyncUpdate(surveyListData: Data, storage: DataBaseStorageProtocol, selected: Bool) async throws {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) -> Void in
             self.update(surveyListData: surveyListData, storage: storage, selected: selected) { (title, err) in
                 if let error = err {

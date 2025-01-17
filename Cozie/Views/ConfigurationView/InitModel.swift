@@ -19,9 +19,11 @@ class InitModel: Codable {
     var apiReadURL: String?
     var apiReadKey: String?
     var apiWriteURL: String?
-    var apiWriteKey, appOneSignalAppID, idPassword: String?
+    var apiWriteKey, idPassword: String?
     var apiWatchSurveyURL: String?
     var apiPhoneSurveyURL: String?
+    var cutoffTime: Double?
+    var distaceFilter: Double?
     
     enum CodingKeys: String, CodingKey {
         case idParticipant = "id_participant"
@@ -41,13 +43,14 @@ class InitModel: Codable {
         case apiReadKey = "api_read_key"
         case apiWriteURL = "api_write_url"
         case apiWriteKey = "api_write_key"
-        case appOneSignalAppID = "app_one_signal_app_id"
         case idPassword = "id_password"
         case apiWatchSurveyURL = "api_watch_survey_url"
         case apiPhoneSurveyURL = "api_phone_survey_url"
+        case cutoffTime = "cutoff_time"
+        case distaceFilter = "distace_filter"
     }
     
-    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String) {
+    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String, cutoffTime: Double, distaceFilter: Double) {
         self.idParticipant = idParticipant
         self.idExperiment = idExperiment
         self.wssTitle = wssTitle
@@ -65,9 +68,10 @@ class InitModel: Codable {
         self.apiReadKey = apiReadKey
         self.apiWriteURL = apiWriteURL
         self.apiWriteKey = apiWriteKey
-        self.appOneSignalAppID = appOneSignalAppID
         self.idPassword = idPassword
         self.apiWatchSurveyURL = apiWatchSurveyURL
         self.apiPhoneSurveyURL = apiPhoneSurveyURL
+        self.cutoffTime = cutoffTime
+        self.distaceFilter = distaceFilter
     }
 }

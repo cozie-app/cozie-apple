@@ -79,6 +79,7 @@ final class LoggerInteractor: LoggerProtocol {
         }
     }
     
+    // TODO: - Unit Tests
     func logdeInfo(completion:((_ url: URL?,_ error: String?) -> ())?) {
         if let currentUser = userIntaractor.currentUser {
             let filename = getDocumentsDirectory().appendingPathComponent(buildFileName(additionalName: userFileName(user: currentUser)))

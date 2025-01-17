@@ -8,7 +8,12 @@
 import Foundation
 import HealthKit
 
-final class HealthKitInteractor {
+protocol HealthKitInteractorProtocol {
+    func getAllRequestedData(trigger: String, completion: ((_ models: [HealthModel])->())?)
+    func sendData(trigger: String, timeout: Double?, healthCache: [HealthModel]?, completion: ((_ succces: Bool)->())?)
+}
+
+final class HealthKitInteractor: HealthKitInteractorProtocol {
     static let minInterval: Double = 60
     enum HealthValueType: Int {
         case workout, sleep, apnea

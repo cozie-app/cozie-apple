@@ -126,19 +126,11 @@ extension PushNotificationController: UNUserNotificationCenterDelegate {
     }
     
     func logPuchNotificationAction(actionIdentifier: String, userInfo: [String: Any]) async throws {
-        let surveyInteractor = WatchSurveyInteractor()
         if actionIdentifier != UNNotificationDefaultActionIdentifier && actionIdentifier != UNNotificationDismissActionIdentifier {
-            try await withCheckedThrowingContinuation { continuation in
-                surveyInteractor.sendResponse(action: actionIdentifier) { success in
-                    if success {
-                        debugPrint("iOS notification action sent.")
-                    }
-                    continuation.resume()
-                }
-            }
-           
+            let data = self.groupLoggerStorage.formattedActions(trigger: actionIdentifier, categoryList: categoryList() ?? [], info: userInfo)
+            try await self.pushNotificationLogger.pushNotificationDidReciv(payload: data)
         } else if actionIdentifier == UNNotificationDismissActionIdentifier {
-            let data = self.groupLoggerStorage.formattedActions(categoryList: categoryList() ?? [], info: userInfo)
+            let data = self.groupLoggerStorage.formattedActions(trigger: "Dismiss", categoryList: categoryList() ?? [], info: userInfo)
             try await self.pushNotificationLogger.pushNotificationDidReciv(payload: data)
         }
     }

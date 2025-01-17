@@ -118,7 +118,7 @@ struct CozieApp: App {
            let base64DataEnc = Data(base64Encoded: base64Str, options: .ignoreUnknownCharacters) {
             do {
                 let model = try JSONDecoder().decode(InitModel.self, from: base64DataEnc)
-                coordinator.prepareSource(info: model)
+                coordinator.prepareSource(info: model, storage: CozieStorage())
             } catch let error {
                 debugPrint(error)
             }

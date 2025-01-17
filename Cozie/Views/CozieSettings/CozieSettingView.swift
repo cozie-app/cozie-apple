@@ -29,6 +29,7 @@ fileprivate extension Int {
         }
     }
 }
+
 enum WatchSurveyType: CaseIterable {
     case watchSurvey, watchSurveyResponseGoal, enableReminders, reminderInterval, participationDays, participationTimeStart, participationTimeEnd
     

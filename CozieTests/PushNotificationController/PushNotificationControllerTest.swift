@@ -29,9 +29,28 @@ final class PushNotificationControllerTests {
     
     @Suite("PushNotification")
     struct PushNotificationControllerUTest {
-        @Test("PushNotificationController is UNUserNotificationCenterDelegate and logged PuchNotification",
+        @Test("PushNotificationController send test action and logged PuchNotification",
             .tags(.parsing))
-        func controllerIsUNUserNotificationCenterDelegateAndLogPuchNotification() async throws {
+        func controllerSendTestActionAndLogPuchNotification() async throws {
+            let repositorySpy = PushNotificationRepositorySpy()
+            let loggerController = PushNotificationLoggerController(repository: repositorySpy)
+            
+            let sut = PushNotificationController(pushNotificationLogger: loggerController, userData: UserDataSpy(), storage: CozieStorageSpy())
+            
+            _ = try #require(sut as UNUserNotificationCenterDelegate)
+            await #expect(repositorySpy.savedeNotifInfo.isEmpty)
+            
+            try await sut.logPuchNotificationAction(actionIdentifier: "Test", userInfo: ["test": 1.0])
+            
+            await #expect(repositorySpy.savedeNotifInfo.count == 1)
+            
+            try await sut.logPuchNotificationAction(actionIdentifier: "Test", userInfo: ["test": 1.0])
+            await #expect(repositorySpy.savedeNotifInfo.count == 2)
+        }
+        
+        @Test("PushNotificationController send dismiss action and logged PuchNotification",
+            .tags(.parsing))
+        func controllerSendDismissTestActionAndLogPuchNotification() async throws {
             let repositorySpy = PushNotificationRepositorySpy()
             let loggerController = PushNotificationLoggerController(repository: repositorySpy)
             

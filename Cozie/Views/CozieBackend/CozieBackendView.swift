@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CozieBackendView: View {
-    @StateObject var viewModel = BackendViewModel()
+    @StateObject var viewModel = BackendViewModel(storage: CozieStorage.shared)
     @EnvironmentObject var coordinator: HomeCoordinator
     
     // MARK: States

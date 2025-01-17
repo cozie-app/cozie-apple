@@ -8,7 +8,19 @@
 import Foundation
 import WatchConnectivity
 
-class WatchConnectivityManagerPhone: NSObject {
+protocol WatchConnectivityManagerPhoneProtocol {
+    func sendAll(data: Data,
+                 writeApiURL: String,
+                 writeApiKey: String,
+                 userID: String,
+                 expID: String,
+                 password: String,
+                 userOneSignalID: String,
+                 timeInterval: Int,
+                 healthCutoffTimeInterval: Double, completion: ((_ error: Error?)->())?)
+}
+
+class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProtocol {
     
     enum WatchConnectivityManagerError: Error, LocalizedError {
         case connectionError, surveyJSONError
@@ -53,7 +65,7 @@ class WatchConnectivityManagerPhone: NSObject {
             activateFahlerCompletion = nil
         }
     }
-    
+    // TODO: - Unit Tests
     func sendUserData(userID: String, expID: String, password: String) {
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.userIDKey.rawValue: userID,
@@ -69,7 +81,7 @@ class WatchConnectivityManagerPhone: NSObject {
         
         activateIfNeededAndSendMessage()
     }
-    
+    // TODO: - Unit Tests
     func sendAPI(writeApiURL: String, writeApiKey: String) {
         
         activateCompletion = { [weak self] in
@@ -85,7 +97,7 @@ class WatchConnectivityManagerPhone: NSObject {
         
         activateIfNeededAndSendMessage()
     }
-    
+    // TODO: - Unit Tests
     func sendWatchSurvey(data: Data) {
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data]
@@ -100,6 +112,7 @@ class WatchConnectivityManagerPhone: NSObject {
         activateIfNeededAndSendMessage()
     }
     
+    // TODO: - Unit Tests
     func sendAll(data: Data,
                  writeApiURL: String,
                  writeApiKey: String,
@@ -181,6 +194,7 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
         }
     }
     
+    // TODO: - Unit Tests
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         
         if let logs = message[CommunicationKeys.wsLogs.rawValue] as? String {
@@ -195,6 +209,7 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
         // testLog(details: session.isReachable ? "ConnectivityManager Session Reachabil!" : "ConnectivityManager Session not Reachabil!", state: "info")
     }
     
+    // TODO: - Unit Tests
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         do {
             let wlogs = try String(contentsOf: file.fileURL, encoding: .utf8)

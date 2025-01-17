@@ -7,52 +7,54 @@
 
 import CoreData
 
-protocol StorageRepositoryProtocol {
+protocol DataBaseStorageProtocol: DataBaseStorageSettingsProtocol {
+    func backendSetting() throws -> BackendInfo?
+    func createBackendSetting(apiReadUrl: String?,
+                           apiReadKey: String?,
+                           apiWriteUrl: String?,
+                           apiWriteKey: String?,
+                           oneSigmnalId: String?,
+                           participantPassword: String?,
+                           watchSurveyLink: String?,
+                           phoneSurveyLink: String?) throws
+    func removeBackendSetting() async throws
+    
+    
+    func selectedWatchSurvey() throws -> WatchSurveyData?
+    func externalWatchSurvey() throws -> WatchSurveyData?
+    
     func updateStorageWithSurvey(_ surveyModel: WatchSurveyModelController, selected: Bool) async throws
     func removeExternalSurvey() async throws
+
+    func saveViewContext() throws
+}
+
+protocol DataBaseStorageSettingsProtocol {
+    func createSettingsData() -> SettingsData
+    func settings() throws -> SettingsData?
 }
 
 struct PersistenceController {
+#if TEST
+    static let shared = PersistenceController(inMemory: true)
+#else
     static let shared = PersistenceController()
-
+#endif
+    
     static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
+        return PersistenceController(inMemory: true)
     }()
-
+    
     let container: NSPersistentContainer
-
+    
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Cozie")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
@@ -61,7 +63,66 @@ struct PersistenceController {
     }
 }
 
-extension PersistenceController: StorageRepositoryProtocol {
+extension PersistenceController: DataBaseStorageProtocol {
+    
+    func saveViewContext() throws {
+        try container.viewContext.save()
+    }
+    
+    func backendSetting() throws -> BackendInfo? {
+        try container
+            .viewContext
+            .fetch(BackendInfo.fetchRequest())
+            .first
+    }
+    
+    
+    /// Created default settings data.
+    func createSettingsData() -> SettingsData {
+        SettingsData(context: container.viewContext)
+    }
+    
+    /// Get settins model.
+    func settings() throws -> SettingsData? {
+        try container.viewContext.fetch(SettingsData.fetchRequest()).first
+    }
+    
+    
+    func createBackendSetting(apiReadUrl: String?,
+                           apiReadKey: String?,
+                           apiWriteUrl: String?,
+                           apiWriteKey: String?,
+                           oneSigmnalId: String?,
+                           participantPassword: String?,
+                           watchSurveyLink: String?,
+                           phoneSurveyLink: String?) throws {
+        let backend = BackendInfo(context: container.viewContext)
+        backend.api_read_url = apiReadUrl
+        backend.api_read_key = apiReadKey
+        backend.api_write_url = apiWriteUrl
+        backend.api_write_key = apiWriteKey
+        backend.one_signal_id = Defaults.OneSignalAppID // oneSigmnalId
+        backend.participant_password = participantPassword
+        backend.watch_survey_link = watchSurveyLink
+        backend.phone_survey_link = phoneSurveyLink
+        
+        try container.viewContext.save()
+    }
+    
+    func selectedWatchSurvey() throws -> WatchSurveyData? {
+        let request = WatchSurveyData.fetchRequest()
+        request.predicate = NSPredicate(format: "selected == %d", true)
+        let surveysList = try container.viewContext.fetch(request)
+        return surveysList.first
+    }
+    
+    func externalWatchSurvey() throws -> WatchSurveyData? {
+        let request = WatchSurveyData.fetchRequest()
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "external == %d", true)
+        let surveysList = try container.viewContext.fetch(request)
+        return surveysList.first
+    }
     
     func updateStorageWithSurvey(_ surveyModel: WatchSurveyModelController, selected: Bool) async throws {
         try await self.container.performBackgroundTask({ context in
@@ -139,6 +200,17 @@ extension PersistenceController: StorageRepositoryProtocol {
             }
             try context.save()
         })
+    }
+    
+    func removeBackendSetting() throws {
+        let context = self.container.viewContext
+        let request = BackendInfo.fetchRequest()
+        let settings = try context.fetch(request)
+        
+        settings.forEach { modle in
+            context.delete(modle)
+        }
+        try context.save()
     }
 }
 

@@ -228,7 +228,7 @@ class StorageManager: CozieStorageProtocol {
     }
     
     func dataSynced() -> Bool {
-        let api = watchSurveyAPI()
+//        let api = watchSurveyAPI()
         if watchatchSurveyJSON() != nil,
 //            !api.key.isEmpty,
 //            !api.url.isEmpty,

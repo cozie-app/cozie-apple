@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - WatchSurvey
+// TODO: - Unit Tests
 class WatchSurveyModelController: Codable {
     var surveyName, surveyID: String
     var firstQuestionID: String? = nil
@@ -28,6 +29,7 @@ class WatchSurveyModelController: Codable {
 }
 
 // MARK: - Survey
+// TODO: - Unit Tests
 class Survey: Codable, Identifiable {
     
     var id: String {
@@ -51,6 +53,7 @@ class Survey: Codable, Identifiable {
 }
 
 // MARK: - ResponseOption
+// TODO: - Unit Tests
 class ResponseOption: Codable, Identifiable {
     var id: String {
         return text + icon

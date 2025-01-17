@@ -39,6 +39,7 @@ final class BackgroundUpdateManager {
     var lastProcessingEvent: Double? = nil
     var startTimeStamp: Double = 0
     
+    // TODO: - Unit Tests
     func registerBackgroundRefresh() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: refreshID, using: nil) { task in
             self.hendleBgProcessing(task: task, work: nil)
@@ -47,6 +48,7 @@ final class BackgroundUpdateManager {
         lastProcessingEvent = storage.healthLastSyncedTimeInterval(offline: healthKitInteractor.offlineMode.isEnabled)
     }
     
+    // TODO: - Unit Tests
     func registerBackgroundProcessing(work: (()->())? = nil ) {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: processingID, using: nil) { task in
             self.hendleBgProcessing(task: task, work: work)
@@ -77,7 +79,7 @@ final class BackgroundUpdateManager {
             debugPrint("Error: " + error.localizedDescription)
         }
     }
-    
+    // TODO: - Unit Tests
     private func hendleBgProcessing(task: BGTask, work: (()->())? = nil ) {
         
         task.expirationHandler = { /*[weak self] in*/

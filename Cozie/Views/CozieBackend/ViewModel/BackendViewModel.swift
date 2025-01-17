@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import Combine
 
+/// Generate data for TableView section
 final class BackendSection: Identifiable {
     let id: Int
     var list: [BackendData]
@@ -21,7 +22,10 @@ final class BackendSection: Identifiable {
     static var defaulDataSection = BackendSection(id: BackendViewModel.BackendSectionType.data.rawValue,
                                                   list: [BackendData(id: BackendViewModel.BackendState.healthCutoffTime.rawValue,
                                                                      title: "HealthKit Cutoff Time",
-                                                                     subtitle: "")])
+                                                                     subtitle: ""),
+                                                         BackendData(id: BackendViewModel.BackendState.distanceFilter.rawValue,
+                                                                                                title: "Distance Filter",
+                                                                                                subtitle: "")])
     
     static var defaulBackendSection = BackendSection(id: BackendViewModel.BackendSectionType.backend.rawValue,
                                                      list: [BackendData(id: BackendViewModel.BackendState.readURL.rawValue,
@@ -36,9 +40,6 @@ final class BackendSection: Identifiable {
                                                             BackendData(id: BackendViewModel.BackendState.writeKey.rawValue,
                                                                         title: "API Write Key",
                                                                         subtitle: ""),
-                                                            //                                          BackendData(id: 4,
-                                                            //                                                      title: "OneSignal App ID",
-                                                            //                                                      subtitle: ""),
                                                             BackendData(id: BackendViewModel.BackendState.participantPassword.rawValue,
                                                                         title: "Participant Password",
                                                                         subtitle: "")])
@@ -52,7 +53,7 @@ final class BackendSection: Identifiable {
                                                                         subtitle: "")])
 }
 
-
+/// Cell data presentation.
 class BackendData: Identifiable {
     let id: Int
     var title: String
@@ -67,7 +68,7 @@ class BackendData: Identifiable {
 
 class BackendViewModel: NSObject, ObservableObject {
     enum BackendState: Int {
-        case readURL, readKey, writeURL, writeKey,/* oneSignalAppId,*/ participantPassword, watchsurveyLink, phoneSurveyLink, healthCutoffTime, clear
+        case readURL, readKey, writeURL, writeKey, participantPassword, watchsurveyLink, phoneSurveyLink, healthCutoffTime, distanceFilter, clear
     }
     
     enum BackendSectionType: Int {
@@ -84,28 +85,56 @@ class BackendViewModel: NSObject, ObservableObject {
                                                 BackendSection.defaulBackendSection,
                                                 BackendSection.defaulDataSection]
     
+    let storage: CozieStorageProtocol & WSStorageProtocol
     private var backendState: BackendState = .clear
-    let backendInteractor = BackendInteractor()
-    let userIntaractor = UserInteractor()
-    let persistenceController = PersistenceController.shared
-    let comManager = WatchConnectivityManagerPhone.shared
-    let setitngsInteractor = SettingsInteractor()
-    let watchSurveyInteractor = WatchSurveyInteractor()
-    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
-    let storage = CozieStorage()
+    
+    let backendInteractor: BackendInteractorProtocol
+    let setitngsInteractor: SettingsInteractorProtocol
+    let userIntaractor: UserInteractorProtocol
+    
+    let dbStorage: DataBaseStorageProtocol
+    let comManager: WatchConnectivityManagerPhoneProtocol
+    
+    let watchSurveyInteractor: WatchSurveyInteractorProtocol
+    let healthKitInteractor: HealthKitInteractorProtocol
     
     @Published var loading: Bool = false
-    
     @Published var showError: Bool = false
+    
     var errorString: String = ""
     private var subscriptions = Set<AnyCancellable>()
     
+    /// Init Ingection
+    /// - Parameters:
+    ///    - storage: User storage
+    ///    - backendInteractor: Interactor for backend data.
+    ///    - setitngsInteractor: Interactor for settings data.
+    init(storage: CozieStorageProtocol & WSStorageProtocol,
+         backendInteractor: BackendInteractorProtocol = BackendInteractor(),
+         setitngsInteractor: SettingsInteractorProtocol = SettingsInteractor(),
+         userIntaractor: UserInteractorProtocol = UserInteractor(),
+         dbStorage: DataBaseStorageProtocol = PersistenceController.shared,
+         comManager: WatchConnectivityManagerPhoneProtocol = WatchConnectivityManagerPhone.shared,
+         watchSurveyInteractor: WatchSurveyInteractorProtocol = WatchSurveyInteractor(),
+         healthKitInteractor: HealthKitInteractorProtocol = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)) {
+        
+        self.storage = storage
+        self.backendInteractor = backendInteractor
+        self.setitngsInteractor = setitngsInteractor
+        self.userIntaractor = userIntaractor
+        self.dbStorage = dbStorage
+        self.comManager = comManager
+        self.watchSurveyInteractor = watchSurveyInteractor
+        self.healthKitInteractor = healthKitInteractor
+
+    }
     // MARK: Prepare Data
     func prepareData(active: ((_ progress: Bool)->())?) {
         let updatedList = section
         updatedList
             .flatMap{ $0.list }
             .forEach { $0.subtitle = dataFor(state: BackendState(rawValue: $0.id) ?? .clear)}
+        
         section = updatedList
         sendHKInfo()
         
@@ -125,6 +154,10 @@ class BackendViewModel: NSObject, ObservableObject {
     }
     
     // MARK: Update backend values
+    /// Use this function to update backend data.
+    /// - Parameters:
+    ///    - state: BackendState type.
+    ///    - value: string value from testField.
     func updateValue(state: BackendState, value: String) {
         guard let backend = backendInteractor.currentBackendSettings else { return }
         switch state {
@@ -136,8 +169,6 @@ class BackendViewModel: NSObject, ObservableObject {
             backend.api_write_url = value
         case .writeKey:
             backend.api_write_key = value
-//        case .oneSignalAppId:
-//            backend.one_signal_id = value
         case .participantPassword:
             backend.participant_password = value
             userIntaractor.currentUser?.passwordID = value
@@ -150,13 +181,16 @@ class BackendViewModel: NSObject, ObservableObject {
         case .phoneSurveyLink:
             backend.phone_survey_link = value
         case .healthCutoffTime:
-            CozieStorage.shared.saveMaxHealthCutoffTimeInterval(Double(value) ?? 3.0)
+            storage.saveMaxHealthCutoffTimeInterval(Double(value) ?? 3.0)
             break
+        case .distanceFilter:
+            guard let floatValue = Float(value) else { return }
+            storage.setDistanceFilter(floatValue)
         case .clear:
             break
         }
         
-        try? persistenceController.container.viewContext.save()
+        try? dbStorage.saveViewContext()
     }
     
     /// Get a string representation of the Backend tab values.
@@ -175,8 +209,6 @@ class BackendViewModel: NSObject, ObservableObject {
             return backend.api_write_url ?? ""
         case .writeKey:
             return backend.api_write_key ?? ""
-            //        case .oneSignalAppId:
-            //            return backend.one_signal_id ?? ""
         case .participantPassword:
             return backend.participant_password ?? ""
         case .watchsurveyLink:
@@ -184,7 +216,9 @@ class BackendViewModel: NSObject, ObservableObject {
         case .phoneSurveyLink:
             return backend.phone_survey_link ?? ""
         case .healthCutoffTime:
-            return "\(Int(CozieStorage.shared.maxHealthCutoffTimeInterval()))"
+            return "\(Int(storage.maxHealthCutoffTimeInterval()))"
+        case .distanceFilter:
+            return "\(Int(storage.distanceFilter()))"
         case .clear:
             return ""
         }
@@ -212,7 +246,7 @@ class BackendViewModel: NSObject, ObservableObject {
                     } else {
                         self.errorString = WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError.localizedDescription
                         Task { @MainActor in
-                            try? await self.persistenceController.removeExternalSurvey()
+                            try? await self.dbStorage.removeExternalSurvey()
                             completion?(false)
                         }
                     }
@@ -220,26 +254,36 @@ class BackendViewModel: NSObject, ObservableObject {
             }
             
             // send health data
-            healthKitInteractor.sendData(trigger: CommunicationKeys.syncBackendTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
+            healthKitInteractor.sendData(trigger: CommunicationKeys.syncBackendTrigger.rawValue,
+                                         timeout: HealthKitInteractor.minInterval,
+                                         healthCache: nil,
+                                         completion: nil)
         }
     }
     
     // MARK: Sync watch survey
+    
+    /// Sync with watch
     func syncWatchData() {
         watchSurveyInteractor.loadSelectedWatchSurveyJSON { [weak self] title, loadError in
             guard let self = self else {
                 return
             }
             if loadError == nil {
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
                     do {
                         let request = WatchSurveyData.fetchRequest()
-                        request.predicate = NSPredicate(format: "selected == %d", true)
-                        let surveysList = try self.persistenceController.container.viewContext.fetch(request)
+                        let selectedSurvey = try dbStorage.selectedWatchSurvey()
                         
-                        if let survey = surveysList.first?.toModel(), let backend = self.backendInteractor.currentBackendSettings, let user = self.userIntaractor.currentUser, let settings = self.setitngsInteractor.currentSettings  {
+                        if let survey = selectedSurvey?.toModel(),
+                            let backend = self.backendInteractor.currentBackendSettings,
+                            let user = self.userIntaractor.currentUser,
+                            let settings = self.setitngsInteractor.currentSettings {
+                            
                             let json = try JSONEncoder().encode(survey)
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_signal_id ?? "", timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: CozieStorage.shared.maxHealthCutoffTimeInterval())
+                            
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_signal_id ?? "", timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: storage.maxHealthCutoffTimeInterval(), completion: nil)
                         }
                         
                     } catch let error {
@@ -254,8 +298,9 @@ class BackendViewModel: NSObject, ObservableObject {
     }
     
     // MARK: send HKInfo
+    /// Send health kit data to the server.
     func sendHKInfo() {
-        healthKitInteractor.getAllRequestedData(completion: nil)
+        healthKitInteractor.getAllRequestedData(trigger: CommunicationKeys.syncBackgroundTaskTrigger.rawValue, completion: nil)
     }
     
 }

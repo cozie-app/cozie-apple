@@ -8,11 +8,12 @@
 import Foundation
 
 // MARK: - HealthModel
+// TODO: - Unit Tests
 class HealthFields: Encodable {
     
     private enum HealthModelKeys: String {
         case startTime = "start_time"
-        case endTime = "end_time"
+        case endTime = "timestamp_end"
     }
     
     var transmitTtrigger: String = ""

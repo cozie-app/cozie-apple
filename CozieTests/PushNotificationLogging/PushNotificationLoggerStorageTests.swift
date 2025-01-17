@@ -23,11 +23,26 @@ struct PushNotificationLoggerGroupStorageTest {
     func retrieveStoredActions() {
         let sut = PushNotificationLoggerGroupStorage(groupStorage: GroupStorageSpy(), localStorage: LocaleStorageSpy(), userData: UserDataSpy())
         
-        let list = sut.formattedActions(categoryList: [], info: [:])
+        let list = sut.formattedActions(trigger: "Test", categoryList: categoryInfo(), info: payload(1))
         
         #expect(list.count > 0)
     }
+    
+    private func payload(_ category: Int) -> [String: Any] {
+        ["aps": ["alert": ["title": "Test Title",
+                           "subtitle": "Test Subtitle",
+                          ]],
+         "category": "\(category)"]
+        
+    }
+    
+    private func categoryInfo() -> [CategoryInfo] {
+        return [CategoryInfo(id: "1", buttons: ["but1", "but2"]),
+                CategoryInfo(id: "2", buttons: ["but1", "but2", "but2"])]
+    }
 }
+
+
 
 fileprivate final class GroupStorageSpy: GroupStorageProtocol {
     func delete(_ payloads: [String : Any]) {}
@@ -40,7 +55,7 @@ fileprivate final class GroupStorageSpy: GroupStorageProtocol {
     
     func payloads() -> [[String: Any]] {
         return [[GroupCommon.timestamp.rawValue: 1.0,
-                  "test": "1"]]
+                 "test": "1"]]
     }
     
     func actions() -> [String] {

@@ -10,6 +10,7 @@ import WatchKit
 import UserNotifications
 
 class NotificationViewModel {
+    static let dismissKey = "Dismiss"
     
     let watchSurveyInteractor = WatchSurveyInteractor()
     
@@ -28,7 +29,7 @@ class CozieUserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDel
             return
         }
         
-        notificationViewModel.sendResponse(response.actionIdentifier) { success in
+        notificationViewModel.sendResponse(/*response.actionIdentifier*/NotificationViewModel.dismissKey) { success in
             completionHandler()
         }
     }

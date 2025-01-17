@@ -21,11 +21,6 @@ struct PushNotificationLoggerGroupStorage {
         case alertSubtitle = "subtitle"
         case alertBody = "body"
         case category = "category"
-        case notificationTitle = "notification_title"
-        case notificationSubtitle = "notification_subtitle"
-        case notificationText = "notification_text"
-        case actionButtonShown = "action_buttons_shown"
-        case transmitTrigger = "transmit_trigger"
     }
     
     let dateForm: DateFormatter = {
@@ -38,15 +33,15 @@ struct PushNotificationLoggerGroupStorage {
         return groupStorage.payloads().compactMap{formattedData(trigger: NotificationKeys.reception.rawValue, categoryList: categoryList, info: $0, dateFormatter: dateForm)}
     }
     
-    func formattedActions(categoryList: [CategoryInfo], info: [String: Any]) -> [String: Any] {
+    func formattedActions(trigger: String, categoryList: [CategoryInfo], info: [String: Any]) -> [String: Any] {
         let dateString = dateForm.string(from: Date())
         
-        return formattedData(trigger: NotificationKeys.dismissButton.rawValue,
+        return formattedData(trigger: trigger,
                              categoryList: categoryList,
                              info: info,
                              dateString: dateString) ?? [:]
     }
-        
+    
     private func formattedData(trigger: String,
                                categoryList: [CategoryInfo],
                                info: [String: Any],
@@ -76,13 +71,15 @@ struct PushNotificationLoggerGroupStorage {
            let alert = aps[NotificationKeys.alert.rawValue] as? [String: Any] {
             let categoryInfo = categoryList.first(where: {$0.id == (aps[NotificationKeys.category.rawValue] as? String ?? "")})
             
-            fields = [NotificationKeys.notificationTitle.rawValue: alert[NotificationKeys.alertTitle.rawValue] ?? "",
-                     NotificationKeys.notificationSubtitle.rawValue: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
-                     NotificationKeys.notificationText.rawValue: alert[NotificationKeys.alertBody.rawValue] ?? "",
-                     NotificationKeys.actionButtonShown.rawValue: (categoryInfo?.buttons as? [String])?.reduce("", { partialResult, action in
+            fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+                      NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
+                      NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
+                      NotificationActionKeys.notificationActionsSchowKey: (categoryInfo?.buttons as? [String])?.reduce("", { partialResult, action in
                 return partialResult.count > 0 ? partialResult + ", " + action : action
             }) ?? "",
-                     NotificationKeys.transmitTrigger.rawValue: trigger]
+                      NotificationActionKeys.notificationActionButtonKey: trigger,
+                      NotificationActionKeys.notificationTriggerKey: NotificationActionKeys.notificationTTValue,
+                      NotificationActionKeys.notificationTransmitKey: NotificationActionKeys.notificationTTValue]
         } else {
             fields = [:]
         }

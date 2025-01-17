@@ -113,6 +113,7 @@
 		CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
 		CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */; };
 		CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */; };
+		CA82B7F72D2ACC2700ADB4D8 /* SettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B7F62D2ACC2300ADB4D8 /* SettingViewModelTests.swift */; };
 		CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */; };
@@ -122,6 +123,13 @@
 		CA8BE5682A53FF0E00D0627D /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */; };
 		CA8BE5692A53FF0E00D0627D /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */; };
 		CA8BE56A2A54002000D0627D /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
+		CA90C7382D3947F5007F39E9 /* BackendViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90C7372D3947F1007F39E9 /* BackendViewModelTests.swift */; };
+		CA9511D22D3658A000BA4283 /* HomeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9511D02D36589600BA4283 /* HomeCoordinatorTests.swift */; };
+		CA9511D52D3660F100BA4283 /* BackendInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9511D42D3660E600BA4283 /* BackendInteractorMock.swift */; };
+		CA9511D72D36615A00BA4283 /* SettingsInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9511D62D36614F00BA4283 /* SettingsInteractorMock.swift */; };
+		CA9511D92D366F1200BA4283 /* CozieStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9511D82D366F0700BA4283 /* CozieStorageMock.swift */; };
+		CA9511DC2D366F5000BA4283 /* BackendSettingsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9511DB2D366F4100BA4283 /* BackendSettingsStub.swift */; };
+		CA9511DE2D3676E200BA4283 /* LocationManagerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9511DD2D3676D700BA4283 /* LocationManagerInteractor.swift */; };
 		CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
 		CAB063002CC79A84004D94CA /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
 		CAB063042CC79BCA004D94CA /* CategoryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAB063032CC79BCA004D94CA /* CategoryList.plist */; };
@@ -131,6 +139,8 @@
 		CAB58A5829F9706900E26D20 /* WatchSurveyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */; };
 		CAB58A5B29F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */; };
 		CAB58A5C29F971BD00E26D20 /* WatchSurveyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5A29F971BD00E26D20 /* WatchSurveyData+CoreDataProperties.swift */; };
+		CAC5D4EE2D3A6887006EF85B /* SettingsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC5D4ED2D3A6882006EF85B /* SettingsInteractorTests.swift */; };
+		CAC5D4F02D3A68F4006EF85B /* DataBaseStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC5D4EF2D3A68ED006EF85B /* DataBaseStorageMock.swift */; };
 		CAC6F92B2A091742006D625D /* SendSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC6F92A2A091742006D625D /* SendSurveyView.swift */; };
 		CAC6F92F2A0CFCB7006D625D /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC6F92E2A0CFCB7006D625D /* ConfigurationView.swift */; };
 		CAC6F9312A0CFFCB006D625D /* InitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC6F9302A0CFFCB006D625D /* InitModel.swift */; };
@@ -146,6 +156,8 @@
 		CAE4FDB72CD28BF900B0B888 /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
 		CAE4FDB82CD28C6300B0B888 /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CAE4FDB92CD28C7000B0B888 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
+		CAE88C512D2B228D00EE8A83 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE88C502D2B228600EE8A83 /* TimeModel.swift */; };
+		CAE88C552D2B22EF00EE8A83 /* TimeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -332,10 +344,18 @@
 		CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCommon.swift; sourceTree = "<group>"; };
 		CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyModelControllerTest.swift; sourceTree = "<group>"; };
 		CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTest.swift; sourceTree = "<group>"; };
+		CA82B7F62D2ACC2300ADB4D8 /* SettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelTests.swift; sourceTree = "<group>"; };
 		CA87CFFD2CB534A600501497 /* OneSignalNotificationServiceExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionDebug.entitlements; sourceTree = "<group>"; };
 		CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
+		CA90C7372D3947F1007F39E9 /* BackendViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendViewModelTests.swift; sourceTree = "<group>"; };
+		CA9511D02D36589600BA4283 /* HomeCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorTests.swift; sourceTree = "<group>"; };
+		CA9511D42D3660E600BA4283 /* BackendInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendInteractorMock.swift; sourceTree = "<group>"; };
+		CA9511D62D36614F00BA4283 /* SettingsInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractorMock.swift; sourceTree = "<group>"; };
+		CA9511D82D366F0700BA4283 /* CozieStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorageMock.swift; sourceTree = "<group>"; };
+		CA9511DB2D366F4100BA4283 /* BackendSettingsStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendSettingsStub.swift; sourceTree = "<group>"; };
+		CA9511DD2D3676D700BA4283 /* LocationManagerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerInteractor.swift; sourceTree = "<group>"; };
 		CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorageProtocol.swift; sourceTree = "<group>"; };
 		CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationControllerProtocol.swift; sourceTree = "<group>"; };
 		CAB063032CC79BCA004D94CA /* CategoryList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CategoryList.plist; sourceTree = "<group>"; };
@@ -345,6 +365,8 @@
 		CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyInteractor.swift; sourceTree = "<group>"; };
 		CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchSurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CAB58A5A29F971BD00E26D20 /* WatchSurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchSurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CAC5D4ED2D3A6882006EF85B /* SettingsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractorTests.swift; sourceTree = "<group>"; };
+		CAC5D4EF2D3A68ED006EF85B /* DataBaseStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStorageMock.swift; sourceTree = "<group>"; };
 		CAC6F92A2A091742006D625D /* SendSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSurveyView.swift; sourceTree = "<group>"; };
 		CAC6F92D2A0A2923006D625D /* Cozie Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cozie Watch App.entitlements"; sourceTree = "<group>"; };
 		CAC6F92E2A0CFCB7006D625D /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
@@ -357,6 +379,8 @@
 		CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerController.swift; sourceTree = "<group>"; };
 		CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificaitonLoggerRepository.swift; sourceTree = "<group>"; };
 		CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerRepositoryTests.swift; sourceTree = "<group>"; };
+		CAE88C502D2B228600EE8A83 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
+		CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModelTests.swift; sourceTree = "<group>"; };
 		D24C4273B7B8B756FE8443A6 /* Pods-Cozie Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie Watch App.release.xcconfig"; path = "Target Support Files/Pods-Cozie Watch App/Pods-Cozie Watch App.release.xcconfig"; sourceTree = "<group>"; };
 		E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F415053C9AB8896A79909F80 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
@@ -500,7 +524,13 @@
 		921289E2299649ED0060C729 /* CozieTests */ = {
 			isa = PBXGroup;
 			children = (
-				CA7139932CF9A199003E7F41 /* OfflineMAnagerTests */,
+				CAC5D4EB2D3A685B006EF85B /* Interactors */,
+				CA90C7352D3947DA007F39E9 /* Views */,
+				CA9511DA2D366F2E00BA4283 /* Stubs */,
+				CA9511D32D3660DF00BA4283 /* Mocks */,
+				CA9511CD2D36586200BA4283 /* Scenes */,
+				CAE88C522D2B22B800EE8A83 /* SettingsModuleTests */,
+				CA7139932CF9A199003E7F41 /* OfflineManagerTests */,
 				CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */,
 				CAB063052CC7A4A3004D94CA /* PushNotificationController */,
 				CA8160462CC2588E00BCBE25 /* WatchSurvey */,
@@ -663,6 +693,7 @@
 		9267EFEE299A90A10025A3CE /* CozieSettings */ = {
 			isa = PBXGroup;
 			children = (
+				CAE88C4F2D2B227700EE8A83 /* Models */,
 				92D0B81029D9BF94008557FC /* Coordinator */,
 				9251772029C376C00089C92C /* ViewModel */,
 				9251771629C3644C0089C92C /* Picker */,
@@ -732,6 +763,7 @@
 		CA011F122A174470006BFA7C /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
+				CA9511DD2D3676D700BA4283 /* LocationManagerInteractor.swift */,
 				CA011F142A1744A7006BFA7C /* CozieLocationManager.swift */,
 			);
 			path = LocationManager;
@@ -972,12 +1004,12 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
-		CA7139932CF9A199003E7F41 /* OfflineMAnagerTests */ = {
+		CA7139932CF9A199003E7F41 /* OfflineManagerTests */ = {
 			isa = PBXGroup;
 			children = (
 				CA7139942CF9A1B6003E7F41 /* OfflineManagerTests.swift */,
 			);
-			path = OfflineMAnagerTests;
+			path = OfflineManagerTests;
 			sourceTree = "<group>";
 		};
 		CA7E1D872CCFD695000C6461 /* PushNotificationLoggerGroupStorage */ = {
@@ -1003,6 +1035,57 @@
 				CA8160452CC2587500BCBE25 /* WatchSurveyModelController */,
 			);
 			path = WatchSurvey;
+			sourceTree = "<group>";
+		};
+		CA82B7F52D2ACC1700ADB4D8 /* SettingViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA82B7F62D2ACC2300ADB4D8 /* SettingViewModelTests.swift */,
+			);
+			path = SettingViewModelTests;
+			sourceTree = "<group>";
+		};
+		CA90C7352D3947DA007F39E9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA90C7362D3947E5007F39E9 /* CozieBackend */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CA90C7362D3947E5007F39E9 /* CozieBackend */ = {
+			isa = PBXGroup;
+			children = (
+				CA90C7372D3947F1007F39E9 /* BackendViewModelTests.swift */,
+			);
+			path = CozieBackend;
+			sourceTree = "<group>";
+		};
+		CA9511CD2D36586200BA4283 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				CA9511D02D36589600BA4283 /* HomeCoordinatorTests.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		CA9511D32D3660DF00BA4283 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				CAC5D4EF2D3A68ED006EF85B /* DataBaseStorageMock.swift */,
+				CA9511D82D366F0700BA4283 /* CozieStorageMock.swift */,
+				CA9511D42D3660E600BA4283 /* BackendInteractorMock.swift */,
+				CA9511D62D36614F00BA4283 /* SettingsInteractorMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		CA9511DA2D366F2E00BA4283 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				CA9511DB2D366F4100BA4283 /* BackendSettingsStub.swift */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 		CAB062FA2CC79A1A004D94CA /* PushNotificationController */ = {
@@ -1051,6 +1134,22 @@
 			path = WatchSurveyInteractor;
 			sourceTree = "<group>";
 		};
+		CAC5D4EB2D3A685B006EF85B /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				CAC5D4EC2D3A6873006EF85B /* SettingsInteractorTests */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
+		CAC5D4EC2D3A6873006EF85B /* SettingsInteractorTests */ = {
+			isa = PBXGroup;
+			children = (
+				CAC5D4ED2D3A6882006EF85B /* SettingsInteractorTests.swift */,
+			);
+			path = SettingsInteractorTests;
+			sourceTree = "<group>";
+		};
 		CAC6F9322A0D02D0006D625D /* ConfigurationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1085,6 +1184,31 @@
 				CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */,
 			);
 			path = PushNotificationLogging;
+			sourceTree = "<group>";
+		};
+		CAE88C4F2D2B227700EE8A83 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAE88C502D2B228600EE8A83 /* TimeModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CAE88C522D2B22B800EE8A83 /* SettingsModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				CAE88C532D2B22D500EE8A83 /* TimeModelTests */,
+				CA82B7F52D2ACC1700ADB4D8 /* SettingViewModelTests */,
+			);
+			path = SettingsModuleTests;
+			sourceTree = "<group>";
+		};
+		CAE88C532D2B22D500EE8A83 /* TimeModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */,
+			);
+			path = TimeModelTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1463,6 +1587,7 @@
 				9212143F29CDD4BA002BAEB4 /* TitleTitleCell.swift in Sources */,
 				921289D7299649ED0060C729 /* Persistence.swift in Sources */,
 				927E20EA29D5ED5B008F476F /* WatchSurveyList.swift in Sources */,
+				CAE88C512D2B228D00EE8A83 /* TimeModel.swift in Sources */,
 				CA18CCE62CD28A77000FC4B1 /* PushNotificationController.swift in Sources */,
 				CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */,
 				CA0A1B1C29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift in Sources */,
@@ -1491,6 +1616,7 @@
 				9212144229CDFBB7002BAEB4 /* AppColor.swift in Sources */,
 				CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */,
 				921289D0299649EC0060C729 /* ContentView.swift in Sources */,
+				CA9511DE2D3676E200BA4283 /* LocationManagerInteractor.swift in Sources */,
 				92D0B80F29D9BD63008557FC /* SettingCoordinator.swift in Sources */,
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
 				CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */,
@@ -1531,13 +1657,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA7E1D892CCFD6E9000C6461 /* PushNotificationLoggerStorageTests.swift in Sources */,
+				CA9511D22D3658A000BA4283 /* HomeCoordinatorTests.swift in Sources */,
+				CA9511D92D366F1200BA4283 /* CozieStorageMock.swift in Sources */,
 				CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */,
 				CAB063072CC7A4AD004D94CA /* PushNotificationControllerTest.swift in Sources */,
+				CAC5D4EE2D3A6887006EF85B /* SettingsInteractorTests.swift in Sources */,
 				CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */,
 				CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */,
+				CA9511D52D3660F100BA4283 /* BackendInteractorMock.swift in Sources */,
 				CA7139952CF9A1B8003E7F41 /* OfflineManagerTests.swift in Sources */,
+				CAE88C552D2B22EF00EE8A83 /* TimeModelTests.swift in Sources */,
 				CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */,
+				CA9511DC2D366F5000BA4283 /* BackendSettingsStub.swift in Sources */,
+				CA9511D72D36615A00BA4283 /* SettingsInteractorMock.swift in Sources */,
+				CAC5D4F02D3A68F4006EF85B /* DataBaseStorageMock.swift in Sources */,
+				CA90C7382D3947F5007F39E9 /* BackendViewModelTests.swift in Sources */,
 				CA0F69BA2CD2606D00C0B0F5 /* GroupStorageTests.swift in Sources */,
+				CA82B7F72D2ACC2700ADB4D8 /* SettingViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1746,7 +1882,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1790,7 +1926,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1833,6 +1969,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"TEST=1",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -1914,7 +2055,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1956,7 +2097,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1996,7 +2137,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -2030,7 +2171,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
