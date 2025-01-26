@@ -9,13 +9,14 @@ import SwiftUI
 
 struct CozieBackendView: View {
     @StateObject var viewModel = BackendViewModel()
-    @EnvironmentObject var settingsViewModel: SettingViewModel
+    @EnvironmentObject var coordinator: HomeCoordinator
     
     // MARK: States
     @State var isSelected: Bool = false
     @State var showError = false
+    @State var disabled: Bool = false
     
-    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.didReceiveDeeplink)
     
     var body: some View {
         NavigationView {
@@ -53,13 +54,15 @@ struct CozieBackendView: View {
             })
             .background(Color.appBackground)
             .onAppear{
-                viewModel.prepareData()
+                viewModel.prepareData { progress in
+                    coordinator.disableUI = progress
+                }
             }
             .alert(viewModel.errorString, isPresented: $showError) {
                 Button("OK", role: .cancel) { }
             }
             .onReceive(updateTrigger) { _ in
-                viewModel.prepareData()
+                viewModel.prepareData(active: nil)
             }
         }
     }
@@ -105,7 +108,6 @@ struct CozieBackendView: View {
                     viewModel.loadWatchSurveyJSON { success in
                         showError = !success
                         if success {
-                            settingsViewModel.updateSurveyList()
                             viewModel.syncWatchData()
                         }
                     }

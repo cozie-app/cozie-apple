@@ -106,6 +106,7 @@
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
 		CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F3DE22B51664100C42C7F /* NotificationService.swift */; };
+		CA7139952CF9A1B8003E7F41 /* OfflineManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7139942CF9A1B6003E7F41 /* OfflineManagerTests.swift */; };
 		CA7E1D892CCFD6E9000C6461 /* PushNotificationLoggerStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */; };
 		CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */; };
 		CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
@@ -325,6 +326,7 @@
 		CA6F3DE42B51664100C42C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
+		CA7139942CF9A1B6003E7F41 /* OfflineManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineManagerTests.swift; sourceTree = "<group>"; };
 		CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerStorageTests.swift; sourceTree = "<group>"; };
 		CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerGroupStorage.swift; sourceTree = "<group>"; };
 		CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCommon.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		921289E2299649ED0060C729 /* CozieTests */ = {
 			isa = PBXGroup;
 			children = (
+				CA7139932CF9A199003E7F41 /* OfflineMAnagerTests */,
 				CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */,
 				CAB063052CC7A4A3004D94CA /* PushNotificationController */,
 				CA8160462CC2588E00BCBE25 /* WatchSurvey */,
@@ -967,6 +970,14 @@
 				CA6F3DE42B51664100C42C7F /* Info.plist */,
 			);
 			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		CA7139932CF9A199003E7F41 /* OfflineMAnagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA7139942CF9A1B6003E7F41 /* OfflineManagerTests.swift */,
+			);
+			path = OfflineMAnagerTests;
 			sourceTree = "<group>";
 		};
 		CA7E1D872CCFD695000C6461 /* PushNotificationLoggerGroupStorage */ = {
@@ -1524,6 +1535,7 @@
 				CAB063072CC7A4AD004D94CA /* PushNotificationControllerTest.swift in Sources */,
 				CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */,
 				CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */,
+				CA7139952CF9A1B8003E7F41 /* OfflineManagerTests.swift in Sources */,
 				CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */,
 				CA0F69BA2CD2606D00C0B0F5 /* GroupStorageTests.swift in Sources */,
 			);
@@ -1734,7 +1746,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1778,7 +1790,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1902,7 +1914,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1944,7 +1956,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1984,7 +1996,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -2018,7 +2030,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;

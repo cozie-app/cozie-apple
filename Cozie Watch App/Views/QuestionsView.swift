@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuestionsView: View {
     @EnvironmentObject var viewModel: WatchSurveyViewModel
+    @State private var sensoryFeedback: Int = 0
+    
     let questionTopInset: CGFloat = 16
     
     var body: some View {
@@ -16,7 +18,7 @@ struct QuestionsView: View {
             VStack {
                 //
                 Rectangle()
-                    .foregroundStyle(.clear) // 
+                    .foregroundStyle(.clear) //
                     .frame(height: geometry.safeAreaInsets.top - questionTopInset)
                     .ignoresSafeArea()
                     .zIndex(1)
@@ -26,17 +28,18 @@ struct QuestionsView: View {
                         Text(.init(viewModel.questionsTitle))  // render markdown using .init()
                             .multilineTextAlignment(.center)
                             .padding([.leading, .trailing], 8)
-                            // ScrollView needs an id for questionTitel to scroll
+                        // ScrollView needs an id for questionTitel to scroll
                             .id(viewModel.questionID)
                         
                         ForEach(viewModel.questionsList, id: \.id) { option in
                             HStack {
+                                
                                 ZStack {
                                     if option.icon != "" {
                                         // Only show background if icon name string is not empty
                                         Image(systemName: "circle.fill")
                                             .resizable()
-                                            .frame(width: 35,height: 35)
+                                            .frame(width: 35, height: 35)
                                             .foregroundColor(Color(hex: option.iconBackgroundColor))
                                     }
                                     if option.useSfSymbols {
@@ -53,98 +56,89 @@ struct QuestionsView: View {
                                                 .foregroundColor(Color(hex: option.sfSymbolsColor))
                                         }
                                     } else {
-                                        if UIImage(named: option.icon) == nil {
-                                            // Show default icon
-                                            //Image(systemName: "photo.circle")
-                                            //    .resizable()
-                                            //    .frame(width: 35,height: 35)
-                                            //    .foregroundColor(.black)
-                                        } else {
+                                        if UIImage(named: option.icon) != nil {
                                             Image(option.icon)
                                                 .resizable()
                                                 .frame(width: 35,height: 35)
                                         }
                                     }
                                 }
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
+                                
+                                Button {
+                                    viewModel.selectOptions(option: option)
+                                    scrollToTopAnimation(reader: reader, animation: true)
+                                } label: {
+                                    
                                     HStack {
                                         Text(.init(option.text))  // render markdown using .init()
-                                            .foregroundColor(Color.white)
-                                            .padding(.leading, 8)
+                                            .foregroundStyle(viewModel.isOptinSelected(option: option) ? Color.gray : Color.white)
+                                            .padding(.leading, 4)
                                         Spacer()
                                     }
-                                    .padding(4)
+                                    .padding(.leading, UICommon.cornerRadius)
+                                    .frame(height: UICommon.buttonHeight)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                            .foregroundColor(viewModel.isOptinSelected(option: option) ? UICommon.selectedButtonColor : UICommon.buttonColor)
+                                    }
                                     
                                 }
+                                .buttonStyle(.plain)
+                                
                             }
-                            .frame(minHeight: 45)
+                            .frame(minHeight: UICommon.buttonHeight)
                             .padding(.vertical, 1)
-                            .onTapGesture {
-                                viewModel.selectOptions(option: option)
-                                scrollToTopAnimation(reader: reader, animation: true)
-                            }
                         }
                         
                         if !viewModel.isFirstQuestion {
-                            VStack {
+                            GeometryReader { render in
                                 HStack {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                                        
-                                        Text("Back")
-                                        
-                                    }
-                                    .onTapGesture {
+                                    Button {
                                         viewModel.backAction()
                                         scrollToTopAnimation(reader: reader, animation: true)
+                                    } label: {
+                                        Text("Back")
+                                            .frame(width: render.size.width/2-UICommon.cornerRadius/2, height: UICommon.buttonHeight)
+                                            .background {
+                                                RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                                    .foregroundColor(UICommon.buttonColor)
+                                            }
                                     }
+                                    .buttonStyle(.plain)
                                     Spacer()
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .foregroundColor(Color(.displayP3, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.15))
-                                        
-                                        Text("Reset")
-                                        
-                                    }
-                                    .onTapGesture {
+                                    Button {
                                         viewModel.restart()
                                         scrollToTopAnimation(reader: reader, animation: true)
+                                    } label: {
+                                        Text("Reset")
+                                            .frame(width: render.size.width/2-UICommon.cornerRadius/2, height: UICommon.buttonHeight)
+                                            .background {
+                                                RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                                    .foregroundColor(UICommon.buttonColor)
+                                            }
                                     }
+                                    .buttonStyle(.plain)
                                 }
+                                .padding(.vertical, 3)
                             }
-                            .frame(height: 45)
-                            .padding(.vertical, 3)
+                            .frame(height: UICommon.buttonHeight)
                         }
-                        
                     }
-                    
-                    
                 }
-                //.animation(.easeIn)
                 .foregroundColor(.white)
                 .onReceive(NotificationCenter.default.publisher(for: WKExtension.applicationWillEnterForegroundNotification)) { _ in
                     viewModel.restart()
                 }
-                
             }
             .ignoresSafeArea(edges: .top)
             .onAppear {
-                viewModel.prepare()
+                viewModel.prepareLocationAndConnectivityManager()
             }
         }
     }
     
     func scrollToTopAnimation(reader: ScrollViewProxy?, animation: Bool) {
         reader?.scrollTo(viewModel.questionID, anchor: .top)
-        // remove scroll animation to question in watch app
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            withAnimation {
-//                reader?.scrollTo(viewModel.questionID, anchor: .top)
-//            }
-//        }
     }
 }
 

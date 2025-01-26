@@ -21,7 +21,7 @@ struct BGUpdateData: Codable {
     }
 }
 
-class BackgroundUpdateManager {
+final class BackgroundUpdateManager {
     enum ExecutionStatus: Int {
         case inprogress = 1, end  = 0
     }
@@ -31,14 +31,10 @@ class BackgroundUpdateManager {
     private let refreshID = "app.cozie.datarefresh"
     
     static let minimumTimeInterval: Double = 25 * 60
-    
-    // HKHealthStore
-    private let healthStore = HKHealthStore()
-    private let noise = HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!
-    private let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate)!
-    
+    // TO DO:  Dependency Inversion + Test coverage
     private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
     private let storage = CozieStorage.shared
+    //
     
     var lastProcessingEvent: Double? = nil
     var startTimeStamp: Double = 0

@@ -59,7 +59,7 @@ struct CozieSettingView: View {
     
     // MARK: States
     @State var showError = false
-    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.updateNorification)
+    let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.didReceiveDeeplink)
     
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
@@ -87,10 +87,11 @@ struct CozieSettingView: View {
                 viewModel.getUserInfo()
                 viewModel.configureSettings()
             }
+            // triggerd by DeepLink
             .onReceive(updateTrigger) { _ in
                 viewModel.resetSyncInfo()
                 viewModel.getUserInfo()
-                viewModel.configureSettings()
+                viewModel.configureSettings(updateExternalSurvey: true)
             }
             
             switch viewModel.showingState {
@@ -240,6 +241,7 @@ struct CozieSettingView: View {
         return Section(content: {
             ForEach( 0 ..< WatchSurveyType.allCases.count ) { index in
                 createWatchSurveyCell(type: index.toWatchType())
+                    .tag(index.toWatchType().toString())
             }
         },
                        header: {

@@ -8,10 +8,13 @@
 import Foundation
 import HealthKit
 
-class HealthKitInteractor {
+final class HealthKitInteractor {
     static let minInterval: Double = 60
-    typealias SleepData = (sleepKey: String, startDate: Date, value: Double)
-    typealias WorkaoutData = (key: String, startDate: Date, value: Double)
+    enum HealthValueType: Int {
+        case workout, sleep, apnea
+    }
+    
+    typealias HealthValue = (type: HealthValueType, key: String, startDate: Date, value: Double)
     
     enum HeathDataKeys: String {
         case heartRateKey = "_heart_rate"
@@ -37,13 +40,17 @@ class HealthKitInteractor {
         case sleepREM = "_sleep_REM"
         case sleepUnspecified = "_sleep_unspecified"
         
-        //workaut
+        // workaut
         case workout = "_workout"
         case workoutType = "_workout_type"
         case workoutDuration = "_workout_duration"
         case activeEnergyBurned = "_active_energy_burned"
         case moveTime = "_move_time"
         case exerciseTime = "_exercise_time"
+        
+        // Apnea
+        case apneaEvent = "_sleep_apnea_duration_minutes"
+        case apneaEventTrigger = "_sleep_apnea_duration_minutes_trigger"
     }
     
     private let healthStore = HKHealthStore()
@@ -105,6 +112,9 @@ class HealthKitInteractor {
         if #available(iOS 16, *) {
             var setTypes = Set(allTypesiPhone)
             setTypes.insert(HKQuantityType(HKQuantityTypeIdentifier.appleSleepingWristTemperature))
+            if #available(iOS 18, *) {
+                setTypes.insert(HKCategoryType(.sleepApneaEvent))
+            }
             allTypes = setTypes
         } else {
             allTypes = Set(allTypesiPhone)
@@ -113,6 +123,9 @@ class HealthKitInteractor {
         if #available(watchOS 9, *), Self.isWatchUltraOr9() {
             var setTypes = Set(allWatchTypes)
             setTypes.insert(HKQuantityType(HKQuantityTypeIdentifier.appleSleepingWristTemperature))
+            if #available(watchOS 11, *) {
+                setTypes.insert(HKCategoryType(.sleepApneaEvent))
+            }
             allTypes = setTypes
         } else {
             allTypes = Set(allWatchTypes)
@@ -161,7 +174,7 @@ class HealthKitInteractor {
     }
     
     private func getLastDaySamples(for sampleType: HKSampleType,
-                                   completion: @escaping ([HKQuantitySample], [SleepData], [WorkaoutData], Error?) -> Swift.Void) {
+                                   completion: @escaping ([HKQuantitySample], [HealthValue], Error?) -> Swift.Void) {
         var lastSync = Date().timeIntervalSince1970
         let typeKey = healthKeyFor(simple: sampleType)
         
@@ -193,19 +206,45 @@ class HealthKitInteractor {
                                         limit: HKObjectQueryNoLimit,
                                         sortDescriptors: [sortDescriptor]) { [weak self] (query, samples, error) in
             if samples?.isEmpty ?? true {
-                completion([], [], [], error)
+                completion([], [], error)
                 return
             }
-            
-            // Sleep Analysis
-            if typeKey == HeathDataKeys.sleepAnalysisKey.rawValue {
-                guard let sleepSamples = samples as? [HKCategorySample], let self = self else {
-                    completion([], [], [], error)
+            // Apnea Event
+            if typeKey == HeathDataKeys.apneaEvent.rawValue {
+                guard let apneaEventSamples = samples as? [HKCategorySample], let self = self else {
+                    completion([], [], error)
                     return
                 }
                 
                 var lastSyncInterval = 0.0
-                var sleepData: [SleepData] = []
+                apneaEventSamples.forEach { obj in
+                    let interval = obj.endDate.timeIntervalSince1970
+                    debugPrint("Interval for symple:\(interval)")
+                    if interval > lastSyncInterval {
+                        lastSyncInterval = interval
+                        debugPrint("Update interval for symple:\(interval)")
+                    }
+                }
+                if lastSyncInterval > 0 {
+                    storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey, offline: offlineMode.isEnabled)
+                }
+                var apneaSeamples: [HealthValue] = []
+                apneaEventSamples.forEach { sample in
+                    apneaSeamples.append((.apnea, HeathDataKeys.apneaEvent.rawValue, sample.startDate, sample.startDate.distance(to: sample.endDate)/60))
+                }
+                
+                completion([], apneaSeamples, nil)
+                return
+            }
+            // Sleep Analysis
+            if typeKey == HeathDataKeys.sleepAnalysisKey.rawValue {
+                guard let sleepSamples = samples as? [HKCategorySample], let self = self else {
+                    completion([], [], error)
+                    return
+                }
+                
+                var lastSyncInterval = 0.0
+                var sleepData: [HealthValue] = []
                 for sleepSample in sleepSamples {
                     let sleepKey = self.keyForSleepAnalysis(value: sleepSample.value)
                     if !sleepKey.isEmpty {
@@ -214,7 +253,7 @@ class HealthKitInteractor {
                             lastSyncInterval = lastInterval
                         }
                         if lastInterval > lastSync {
-                            sleepData.append((sleepKey, sleepSample.startDate, sleepSample.startDate.distance(to: sleepSample.endDate)/60))
+                            sleepData.append((.sleep, sleepKey, sleepSample.startDate, sleepSample.startDate.distance(to: sleepSample.endDate)/60))
                         }
                     }
                 }
@@ -223,10 +262,10 @@ class HealthKitInteractor {
                     self.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey, offline: offlineMode.isEnabled)
                 }
                 
-                completion([], sleepData, [], nil)
+                completion([], sleepData, nil)
             } else if let samplesWorkaout = samples as? [HKWorkout] {
                 var lastSyncInterval = 0.0
-                var workaoutData: [WorkaoutData] = []
+                var workaoutData: [HealthValue] = []
                 for sampleWorkaout in samplesWorkaout {
                     if !typeKey.isEmpty {
                         let lastInterval = sampleWorkaout.endDate.timeIntervalSince1970
@@ -234,8 +273,8 @@ class HealthKitInteractor {
                             lastSyncInterval = lastInterval
                         }
                         if lastInterval > lastSync {
-                            workaoutData.append((HeathDataKeys.workoutType.rawValue, sampleWorkaout.startDate, Double(sampleWorkaout.workoutActivityType.rawValue)))
-                            workaoutData.append((HeathDataKeys.workoutDuration.rawValue, sampleWorkaout.startDate, sampleWorkaout.duration))
+                            workaoutData.append((.workout, HeathDataKeys.workoutType.rawValue, sampleWorkaout.startDate, Double(sampleWorkaout.workoutActivityType.rawValue)))
+                            workaoutData.append((.workout, HeathDataKeys.workoutDuration.rawValue, sampleWorkaout.startDate, sampleWorkaout.duration))
                         }
                     }
                 }
@@ -244,10 +283,10 @@ class HealthKitInteractor {
                     self?.storage.healthUpdateTempLastSyncedTimeInterval(lastSyncInterval, key: typeKey, offline: self?.offlineMode.isEnabled ?? false)
                 }
                 
-                completion([], [], workaoutData, nil)
+                completion([], workaoutData, nil)
             } else {
                 guard let samples = samples as? [HKQuantitySample] else {
-                    completion([], [], [], error)
+                    completion([], [], error)
                     return
                 }
                 
@@ -266,7 +305,7 @@ class HealthKitInteractor {
                 //self?.testLog(trigger: "(HealthKit)Samples for -> (\(typeKey))", details: "Last sync interval: (\(lastSyncInterval))", state: "info")
                 //
                 
-                completion(samples, [], [], nil)
+                completion(samples, [], nil)
             }
         }
         
@@ -275,7 +314,7 @@ class HealthKitInteractor {
     // MARK: - Helfer
     private let healthDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         return dateFormatter
     }()
     
@@ -289,8 +328,10 @@ class HealthKitInteractor {
         
         let tag = Tags(idOnesignal: storage.playerID(), idParticipant: user.participantID, idPassword: user.passwordID)
         
-        getLastDaySamples(for: type) { [weak self] (samples, sleepData, workautData, error) in
-            guard let self = self else { return }
+        getLastDaySamples(for: type) { [weak self] (samples, healthData, error) in
+            guard let self = self else {
+                return
+            }
             
             var healthModels: [HealthModel] = []
             
@@ -298,6 +339,7 @@ class HealthKitInteractor {
                 let lastSunccesTimestamp = self.storage.healthLastSyncedTimeInterval(key: self.healthKeyFor(simple: type), offline: offlineMode.isEnabled)
                 
                 let group = DispatchGroup()
+                let lock = NSLock()
                 samples.forEach({
                     let sample = $0
                     
@@ -316,12 +358,16 @@ class HealthKitInteractor {
                         if let lastModel = healthModels.last {
                             // prevent value duplicates
                             if lastModel.time != currentDataString {
+                                lock.lock()
                                 healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
+                                lock.unlock()
                                 //
                                 // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                             }
                         } else {
+                            lock.lock()
                             healthModels.append(self.healthModel(type: type, sample: sample, user: user, tag: tag, currentDataString: currentDataString, trigger: trigger, value: value))
+                            lock.unlock()
                             // self.testLog(trigger: trigger, details: "Added simples with start date:\(sample.startDate.timeIntervalSince1970) last update time:\(lastSunccesTimestamp)", state: "info")
                         }
                         group.leave()
@@ -332,22 +378,32 @@ class HealthKitInteractor {
                     completion(healthModels, samples)
                 }
                 
-            } else if sleepData.count > 0 {
-                sleepData.forEach { (sleepKey, startDate, value) in
-                    healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
-                }
-                completion(healthModels, samples)
-                
-            } else if workautData.count > 0 {
-                workautData.forEach { (workautKey, startDate, value) in
-                    if workautKey == HeathDataKeys.workoutType.rawValue {
-                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
-                    } else {
-                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value)))
+            } else if healthData.count > 0 {
+                // Apnea event
+                if healthData.first?.type == .apnea {
+                    healthData.forEach { sample in
+                        let customTrigger = self.addPrefixForDataKey(key: HeathDataKeys.apneaEventTrigger.rawValue)
+                        
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: customTrigger, healthKey: self.addPrefixForDataKey(key: sample.key), healthValue: sample.value)))
                     }
+                    completion(healthModels, samples)
+                    
+                    // With units (steps, hr...)
+                } else if healthData.first?.type == .workout {
+                    healthData.forEach { (type, workautKey, startDate, value) in
+                        if workautKey == HeathDataKeys.workoutType.rawValue {
+                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
+                        } else {
+                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: workautKey), healthValue: value)))
+                        }
+                    }
+                    completion(healthModels, samples)
+                } else if healthData.first?.type == .sleep {
+                    healthData.forEach { (type, sleepKey, startDate, value) in
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTtrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
+                    }
+                    completion(healthModels, samples)
                 }
-                completion(healthModels, samples)
-                
             } else if let error = error {
                 completion([], samples)
                 debugPrint("error: \(error)")
@@ -406,8 +462,34 @@ class HealthKitInteractor {
         case HKObjectType.quantityType(forIdentifier: .appleExerciseTime):
             return HeathDataKeys.exerciseTime.rawValue
         default:
+            return healthKeyForiOS18(simple: simple)
+        }
+    }
+    
+    private func healthKeyForiOS18(simple: HKSampleType) -> String {
+#if os(iOS)
+        if #available(iOS 18, *) {
+            switch simple {
+            case HKObjectType.categoryType(forIdentifier: .sleepApneaEvent):
+                return HeathDataKeys.apneaEvent.rawValue
+            default:
+                return ""
+            }
+        } else {
             return ""
         }
+#else
+        if #available(watchOS 11, *), Self.isWatchUltraOr9() {
+            switch simple {
+            case HKObjectType.categoryType(forIdentifier: .sleepApneaEvent):
+                return HeathDataKeys.apneaEvent.rawValue
+            default:
+                return ""
+            }
+        } else {
+            return ""
+        }
+#endif
     }
     
     private func keyForSleepAnalysis(value: Int) -> String {
@@ -545,13 +627,13 @@ class HealthKitInteractor {
             let group = DispatchGroup()
             for type in self.allTypes {
                 group.enter()
-                print("\(type) enter(type)")
+                debugPrint("\(type) enter")
                 self.getDataObject(type: type, trigger: trigger) { infos, simples in
                     self.lock.lock()
                     list.append(contentsOf: infos)
-                    self.lock.unlock()
-                    print("\(type) leav(type)")
+                    debugPrint("\(type) leav")
                     group.leave()
+                    self.lock.unlock()
                 }
             }
             

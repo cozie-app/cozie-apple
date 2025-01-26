@@ -7,13 +7,13 @@
 
 import UIKit
 
-let testTag = Tags(idOnesignal: "", idParticipant: "", idPassword: "")
+let emptyTag = Tags(idOnesignal: "", idParticipant: "", idPassword: "")
 
-let testFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
+let emptyFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
 
-let testLog = Logs(time: "2023-01-01T07:02:51.578Z", measurement: "dev", tags: testTag, fields: testFields)
+let testLog = Logs(time: "2023-01-01T07:02:51.578Z", measurement: "dev", tags: emptyTag, fields: emptyFields)
 
-class LogsSystemInteractor {
+final class LogsSystemInteractor {
     let userIntaractor = UserInteractor()
     let settingsInteractor = SettingsInteractor()
     let backendInteractor = BackendInteractor()
@@ -61,7 +61,7 @@ class LogsSystemInteractor {
                              transmitTrigger: "app_change_settings")
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         let dateString = dateFormatter.string(from: date)
         let logs = Logs(time: dateString, measurement: user.experimentID ?? "", tags: tag, fields: fields)
         

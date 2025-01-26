@@ -8,6 +8,7 @@
 import SwiftUI
 import WatchConnectivity
 import Combine
+import WatchKit
 
 class WatchSurveyViewModel: NSObject, ObservableObject {
     // Uncomment for preview tests
@@ -32,7 +33,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     // MARK: Private
     private let session = WCSession.default
     private let storage = StorageManager.shared
-    private let locationManager = LocationManager()
+    private let locationManager: UpdateLocationProtocol = LocationManager()
     private let watchSurveyInteractor = WatchSurveyInteractor()
     
     private var selectedOptions: [(sID: String, optin: ResponseOption)] = []
@@ -45,7 +46,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     
     // MARK: Public
     var isFirstQuestion: Bool {
-        return self.selectedOptions.count == 0
+        return (self.selectedOption(for: currentSurvey?.questionID ?? "") == 0) || (self.selectedOptions.count == 0)
     }
     
     // MARK: Published
@@ -159,11 +160,10 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         
         storage.saveLastSurveySend()
         storage.updateSurveyCount()
-        locationManager.completion = nil
     }
     
     private func triggerSendSurvey() {
-        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: healthCache, logsComplition: { }, completion: { [weak self] success, error in
+        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.currentLocation?.timestamp), healthCache: healthCache, logsComplition: { }, completion: { [weak self] success, error in
             self?.resetCachedHealthData()
             
             if success {
@@ -208,13 +208,8 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     // MARK: Public func
-    func prepare() {
-        if let manager = locationManager.locationManager,
-           manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            manager.requestLocation()
-        } else {
-            locationManager.requestAuth()
-        }
+    func prepareLocationAndConnectivityManager() {
+        locationManager.updateLocation(completion: nil)
         
         if WCSession.isSupported(), !session.isReachable {
             session.delegate = self
@@ -223,9 +218,24 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         }
     }
     
+    func selectedOption(for questionID: String) -> Int? {
+        return selectedOptions.firstIndex(where: { $0.sID == questionID })
+    }
+    
+    func isOptinSelected(option: ResponseOption) -> Bool {
+        return selectedOptions.contains(where: {$0.optin.id == option.id && $0.sID == currentSurvey?.questionID})
+    }
+    
     func selectOptions(option: ResponseOption) {
+        // haptic indicator of button presses
+        WKInterfaceDevice.current().play(.click)
         
-        selectedOptions.append((currentSurvey?.questionID ?? "", option))
+        // remove previouse selected option
+        if let indextoDelete = selectedOption(for: currentSurvey?.questionID ?? "") {
+            selectedOptions[indextoDelete] = (currentSurvey?.questionID ?? "", option)
+        } else {
+            selectedOptions.append((currentSurvey?.questionID ?? "", option))
+        }
         
         if let nextSuvey = watchSurvey?.survey.first(where: { $0.questionID == option.nextQuestionID}) {
             questionsTitle = nextSuvey.question
@@ -243,15 +253,31 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     
     func backAction() {
         if !selectedOptions.isEmpty {
-            
-            if let previousSelected = selectedOptions.last , let prevSuvey = watchSurvey?.survey.first(where: { $0.questionID == previousSelected.sID }) {
-                questionsTitle = prevSuvey.question
-                questionsList = prevSuvey.responseOptions
-                currentSurvey = prevSuvey
+            // Return to sync state and show the last selected survey
+            if state == .sendData{
+                state = .synced
+                return
             }
             
-            selectedOptions.removeLast()
-            state = .synced
+            WKInterfaceDevice.current().play(.click)
+            
+            // Return to the previous selected option from the selected option
+            if let currentSurveyIndex = selectedOption(for: currentSurvey?.questionID ?? ""), currentSurveyIndex > 0 {
+                let prewSurveyIndex = currentSurveyIndex-1
+                if let prevSuvey = watchSurvey?.survey.first(where: { $0.questionID == selectedOptions[prewSurveyIndex].sID }) {
+                    questionsTitle = prevSuvey.question
+                    questionsList = prevSuvey.responseOptions
+                    currentSurvey = prevSuvey
+                }
+            } else {
+                // Back to previous selected option
+                let current = selectedOptions.last
+                if let prevSuvey = watchSurvey?.survey.first(where: { $0.questionID == current?.sID ?? "" }) {
+                    questionsTitle = prevSuvey.question
+                    questionsList = prevSuvey.responseOptions
+                    currentSurvey = prevSuvey
+                }
+            }
         }
     }
     
@@ -260,19 +286,11 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     func restart() {
+        WKInterfaceDevice.current().play(.click)
+        locationManager.updateLocation(completion: nil)
+        
         selectedOptions.removeAll()
         prepareWatchSurvey()
-    }
-    
-    func updateLocation() {
-        upadateLocationInProgress = true
-        if let manager = locationManager.locationManager,
-           manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            manager.requestLocation()
-            locationManager.completion = { [weak self] in
-                self?.upadateLocationInProgress = false
-            }
-        }
     }
     
     // log test

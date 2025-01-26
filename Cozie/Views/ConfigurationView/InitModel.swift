@@ -9,19 +9,19 @@ import Foundation
 
 // MARK: - InitModel
 class InitModel: Codable {
-    var idParticipant, idExperiment, wssTitle: String
-    var wssGoal, wssTimeOut: Int16
-    var wssReminderEnabled: Bool
-    var wssParticipationTimeStart, wssParticipationTimeEnd, wssParticipationDays: String
-    var wssReminderInterval: Int16
-    var pssReminderEnabled: Bool
-    var pssReminderDays, pssReminderTime: String
-    var apiReadURL: String
-    var apiReadKey: String
-    var apiWriteURL: String
-    var apiWriteKey, appOneSignalAppID, idPassword: String
-    var apiWatchSurveyURL: String
-    var apiPhoneSurveyURL: String
+    var idParticipant, idExperiment, wssTitle: String?
+    var wssGoal, wssTimeOut: Int16?
+    var wssReminderEnabled: Bool?
+    var wssParticipationTimeStart, wssParticipationTimeEnd, wssParticipationDays: String?
+    var wssReminderInterval: Int16?
+    var pssReminderEnabled: Bool?
+    var pssReminderDays, pssReminderTime: String?
+    var apiReadURL: String?
+    var apiReadKey: String?
+    var apiWriteURL: String?
+    var apiWriteKey, appOneSignalAppID, idPassword: String?
+    var apiWatchSurveyURL: String?
+    var apiPhoneSurveyURL: String?
     
     enum CodingKeys: String, CodingKey {
         case idParticipant = "id_participant"

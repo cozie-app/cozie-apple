@@ -9,8 +9,10 @@ import Foundation
 import CoreLocation
 
 class LocationManagerInteractor {
+    // TO DO:  Dependency Inversion + Test coverage
     let baseRepo = BaseRepository()
     let storage = CozieStorage.shared
+    //
     
     // MARK: Notification response
     func sendLocation(location: CLLocation,
@@ -25,7 +27,7 @@ class LocationManagerInteractor {
         
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         let dateString = dateFormatter.string(from: date)
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.playerID(),

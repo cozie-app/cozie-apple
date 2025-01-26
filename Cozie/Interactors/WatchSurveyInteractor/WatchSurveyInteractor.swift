@@ -9,12 +9,12 @@ import Foundation
 import CoreData
 
 protocol SurveyManagerProtocol {
-    func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ error: Error?)->())? )
+    func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ title: String?, _ error: Error?)->())? )
     func asyncUpdate(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool) async throws
 }
 
 protocol SurveyStorageProtocol {
-    func selectedWSLink() -> String
+    func selectedWSInfoLink() -> String
     func playerID() -> String
 }
 
@@ -42,13 +42,13 @@ class WatchSurveyInteractor {
     deinit { debugPrint("\(WatchSurveyInteractor.self) - deinit") }
     
     // MARK: - Load WatchSurvey JSON
-    func loadSelectedWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
-        let selectedLink = storage.selectedWSLink()
+    func loadSelectedWatchSurveyJSON(completion: ((_ title: String?, _ error: Error?) -> ())?) {
+        let selectedLink = storage.selectedWSInfoLink()
         if !selectedLink.isEmpty {
             baseRepo.getFileContent(url: selectedLink, parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
-                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
+                    completion?(nil ,WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     return
                 }
                 
@@ -56,7 +56,7 @@ class WatchSurveyInteractor {
                 case .success(let surveyListData):
                     self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: true, completion: completion)
                 case .failure(let error):
-                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
+                    completion?(nil, WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)
                 }
             }
@@ -76,7 +76,7 @@ class WatchSurveyInteractor {
         
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = DateFormat.defaultFormat
         let dateString = dateFormatter.string(from: date)
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.playerID(),

@@ -39,30 +39,48 @@ class BackendInteractor {
             backend.phone_survey_link = Defaults.phoneSurveyLink
             
             // save default link
-            storage.saveWSLink(link: Defaults.phoneSurveyLink)
+            storage.saveWSLink(link: (Defaults.watchSurveyLink, Defaults.WSStitle))
             
             try? persistenceController.container.viewContext.save()
         }
     }
     
-    func prepareBackendData(apiReadUrl: String,
-                            apiReadKey: String,
-                            apiWriteUrl: String,
-                            apiWriteKey: String,
-                            oneSigmnalId: String,
-                            participantPassword: String,
-                            watchSurveyLink: String,
-                            phoneSurveyLink: String) {
+    func prepareBackendData(apiReadUrl: String?,
+                            apiReadKey: String?,
+                            apiWriteUrl: String?,
+                            apiWriteKey: String?,
+                            oneSigmnalId: String?,
+                            participantPassword: String?,
+                            watchSurveyLink: String?,
+                            phoneSurveyLink: String?) {
         if let settingList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()), let model = settingList.first {
             
-            model.api_read_url = apiReadUrl
-            model.api_read_key = apiReadKey
-            model.api_write_url = apiWriteUrl
-            model.api_write_key = apiWriteKey
+            if let apiReadUrl {
+                model.api_read_url = apiReadUrl
+            }
+            if let apiReadKey {
+                model.api_read_key = apiReadKey
+            }
+            if let apiWriteUrl {
+                model.api_write_url = apiWriteUrl
+            }
+            if let apiWriteKey {
+                model.api_write_key = apiWriteKey
+            }
+
             model.one_signal_id = Defaults.OneSignalAppID //oneSigmnalId
-            model.participant_password = participantPassword
-            model.watch_survey_link = watchSurveyLink
-            model.phone_survey_link = phoneSurveyLink
+            
+            if let participantPassword {
+                model.participant_password = participantPassword
+            }
+            
+            if let watchSurveyLink {
+                model.watch_survey_link = watchSurveyLink
+            }
+            
+            if let phoneSurveyLink {
+                model.phone_survey_link = phoneSurveyLink
+            }
             
             try? persistenceController.container.viewContext.save()
             debugPrint(settingList)
@@ -84,7 +102,11 @@ class BackendInteractor {
     // MARK: - Load WatchSurvey JSON
     func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         if let backend = currentBackendSettings {
-            baseRepo.getFileContent(url: backend.watch_survey_link ?? "", parameters: nil) { [weak self] result in
+            let surveyLink = backend.watch_survey_link ?? ""
+            if surveyLink.isEmpty {
+                completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
+            }
+            baseRepo.getFileContent(url: surveyLink, parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
                     completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
@@ -93,7 +115,15 @@ class BackendInteractor {
                 
                 switch result {
                 case .success(let surveyListData):
-                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false, completion: completion)
+                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false) { title, error in
+                        if let surveyTitle = title {
+                            // update external ws link after sync
+                            self.storage.saveExternalWSLink(link: (surveyLink, surveyTitle))
+                            completion?(error)
+                        } else {
+                            completion?(error)
+                        }
+                    }
                 case .failure(let error):
                     completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)

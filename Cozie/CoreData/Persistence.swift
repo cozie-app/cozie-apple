@@ -9,6 +9,7 @@ import CoreData
 
 protocol StorageRepositoryProtocol {
     func updateStorageWithSurvey(_ surveyModel: WatchSurveyModelController, selected: Bool) async throws
+    func removeExternalSurvey() async throws
 }
 
 struct PersistenceController {
@@ -120,6 +121,22 @@ extension PersistenceController: StorageRepositoryProtocol {
                     }
                 }
             
+            try context.save()
+        })
+    }
+    
+    func removeExternalSurvey() async throws {
+        try await self.container.performBackgroundTask({ context in
+            context.automaticallyMergesChangesFromParent = true
+            // remove previouse saved external
+            let request = WatchSurveyData.fetchRequest()
+            request.predicate = NSPredicate(format: "external == %d", true)
+            
+            let surveysList = try context.fetch(request)
+            
+            surveysList.forEach { modle in
+                context.delete(modle)
+            }
             try context.save()
         })
     }

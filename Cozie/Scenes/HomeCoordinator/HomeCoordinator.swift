@@ -13,21 +13,24 @@ enum CozieTabs {
 }
 
 class HomeCoordinator: ObservableObject {
-    static let updateNorification = Notification.Name("CozieUpdateView")
+    static let didReceiveDeeplink = Notification.Name("Cozie.didReceiveDeeplink")
     
     @Published var tab = CozieTabs.data
     @Published var session: Session
+    @Published var disableUI: Bool = false
     
     let userIntaractor = UserInteractor()
     let settingsInteractor = SettingsInteractor()
     let backendInteractor = BackendInteractor()
     let settingsViewModel: SettingViewModel
+    let watchSurveyInteractor: WatchSurveyInteractor
     
     init(tab: CozieTabs = CozieTabs.data,
          session: Session) {
         self.tab = tab
         self.session = session
         settingsViewModel = SettingViewModel(reminderManager: session.reminderManager)
+        watchSurveyInteractor = WatchSurveyInteractor()
     }
     
     func loadSessionCoodinator() -> SettingCoordinator {
@@ -44,26 +47,29 @@ class HomeCoordinator: ObservableObject {
             settingsInteractor.prepareSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabled: info.wssReminderEnabled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
             
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
-            
-            settingsViewModel.configureSettings()
             settingsViewModel.prepareRemindersIfNeeded()
-            
-            // update selected survey
-            if let selectedSurvey = QuestionViewModel.defaultQuestions.first(where: { $0.title == info.wssTitle }) {
-                CozieStorage.shared.saveWSLink(link: selectedSurvey.link)
-            } else {
-                if !info.apiWatchSurveyURL.isEmpty {
-                    settingsViewModel.questionViewModel.updateWithBackendSurvey(title: info.wssTitle, link: info.apiWatchSurveyURL)
-                    CozieStorage.shared.saveWSLink(link: info.apiWatchSurveyURL)
-                }
-            }
             
             CozieStorage.shared.savePIDSynced(false)
             CozieStorage.shared.saveExpIDSynced(false)
             CozieStorage.shared.saveSurveySynced(false)
             
-            // trigger screens update
-            NotificationCenter.default.post(name: HomeCoordinator.updateNorification, object: nil)
+            // update selected survey
+            if let selectedSurvey = QuestionViewModel.defaultQuestions.first(where: { $0.title == info.wssTitle }) {
+                CozieStorage.shared.saveWSLink(link: (selectedSurvey.link, selectedSurvey.title))
+            } else {
+                if let apiWatchSurveyURL = info.apiWatchSurveyURL, !apiWatchSurveyURL.isEmpty, let wssTitle = info.wssTitle {
+                    Task { @MainActor in
+                        CozieStorage.shared.saveWSLink(link: (apiWatchSurveyURL, wssTitle))
+                        settingsViewModel.questionViewModel.updateWithBackendSurvey(title: wssTitle, link: apiWatchSurveyURL)
+                        settingsViewModel.prepareSelectedWSLinkUI(wssTitle)
+                    }
+                    watchSurveyInteractor.loadSelectedWatchSurveyJSON { title, loadError in
+                        Task { @MainActor in
+                            NotificationCenter.default.post(name: HomeCoordinator.didReceiveDeeplink, object: nil)
+                        }
+                    }
+                }
+            }
         }
     }
     
