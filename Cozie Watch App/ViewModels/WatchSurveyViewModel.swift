@@ -7,11 +7,26 @@
 
 import SwiftUI
 import WatchConnectivity
+import Combine
 
 class WatchSurveyViewModel: NSObject, ObservableObject {
+    // Uncomment for preview tests
+    /*static var test = {
+        let model = WatchSurveyViewModel()
+        model.questionsTitle = "Currently, the end of watch survey questions might not shown depending on the Apple Watch model and font size settings in watchOS. We would like to make the following changes"
+        model.questionsList = [ResponseOption(text: "Test 1", icon: "12", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 2", icon: "23", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 3", icon: "34", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 4", icon: "45", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: "")]
+        return model
+    }()*/
     
     enum CozieAppState: Int {
         case notsynced, synced, /*timeout,*/ sendData, finished
+    }
+    
+    enum CozieCacheState: Int {
+        case nottrigered, inprogress, finished
     }
     
     // MARK: Private
@@ -22,7 +37,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     
     private var selectedOptions: [(sID: String, optin: ResponseOption)] = []
     private var currentSurvey: Survey?
-    private var watchSurvey: WatchSurvey? = nil
+    private var watchSurvey: WatchSurveyModelController? = nil
     private var startTime = Date()
     
     let categoryId = "cozie_push_action_category"
@@ -38,14 +53,25 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     @Published var questionsTitle: String = ""
     @Published var state: CozieAppState = .notsynced
     @Published var sendSurveyProgress: Bool = false
+    
+    private(set) var questionID: String = ""
+    
+    var cacheHealthState = CurrentValueSubject<CozieCacheState, Never>(.finished)
+    
     var upadateLocationInProgress = false
+    
+    private var healthCache: [HealthModel]?
+    private var bag = Set<AnyCancellable>()
     
     // MARK: Private func
     private func loadWatchSurvey(data: Data) {
         do {
-            let wSurvey = try JSONDecoder().decode(WatchSurvey.self, from: data)
+            let wSurvey = try JSONDecoder().decode(WatchSurveyModelController.self, from: data)
             watchSurvey = wSurvey
             if let question = wSurvey.survey.first(where: { $0.questionID == (wSurvey.firstQuestionID ?? "failed") }) {
+                // questionID has a side effect of questionsTitle !!!
+                questionID = question.questionID
+                
                 questionsList = question.responseOptions
                 questionsTitle = question.question
                 currentSurvey = question
@@ -68,6 +94,22 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             state = .synced
             startTime = Date()
             syncSurvey()
+            
+            cacheHealthState.send(.inprogress)
+            watchSurveyInteractor.healthDataPreload(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue) { [weak self] models in
+                if self?.cacheHealthState.value == .inprogress {
+                    self?.healthCache = models
+                    self?.cacheHealthState.send(.finished)
+                }
+            }
+            
+            // Uncomment for test
+//            Task {
+//                try await Task.sleep(nanoseconds: 10_000_000_000)
+//                self.healthCache = []
+//                self.cacheHealthState.send(.finished)
+//            }
+            
             // Uncomment to test
             //                let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
             //                if let url = defaultURLJSON {
@@ -92,10 +134,38 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     private func sendSurvey() {
+        if cacheHealthState.value == .inprogress {
+            // clear bag
+            bag = Set<AnyCancellable>()
+            
+            // bind HealfData state
+            cacheHealthState.sink { [weak self] value in
+                guard let self = self else { return }
+                
+                switch value {
+                case .finished:
+                    debugPrint("HealthData finished pre-cache")
+                    triggerSendSurvey()
+                default:
+                    debugPrint("HealthData error pre-cache")
+                }
+            }
+            .store(in: &bag)
+        } else if cacheHealthState.value == .finished, healthCache != nil {
+            triggerSendSurvey()
+        } else {
+            triggerSendSurvey()
+        }
         
-        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), logsComplition: { /*[weak self]  in*/
-            ///
-        }, completion: { [weak self] success, error in
+        storage.saveLastSurveySend()
+        storage.updateSurveyCount()
+        locationManager.completion = nil
+    }
+    
+    private func triggerSendSurvey() {
+        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.lastUpdateDate), healthCache: healthCache, logsComplition: { }, completion: { [weak self] success, error in
+            self?.resetCachedHealthData()
+            
             if success {
                 DispatchQueue.main.async {
                     self?.sendSurveyProgress = false
@@ -107,14 +177,16 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
                     self?.state = .finished
                 }
                 if !success {
-//                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
+                    //                    self?.testLog(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, details: "Failed to send Survey data. Error details: \(error?.localizedDescription ?? "no details")")
                 }
             }
         })
-        
-        storage.saveLastSurveySend()
-        storage.updateSurveyCount()
-        locationManager.completion = nil
+    }
+    
+    // MARK: reset pre-cache HealthData
+    private func resetCachedHealthData() {
+        healthCache = nil
+        cacheHealthState.send(.finished)
     }
     
     func syncSurvey() {
@@ -273,6 +345,10 @@ extension WatchSurveyViewModel: WCSessionDelegate {
         
         if let timeInterval = message[CommunicationKeys.timeInterval.rawValue] as? Int {
             storage.saveTimeInterval(interval: timeInterval)
+        }
+        
+        if let maxTimeInterval = message[CommunicationKeys.healthCutoffTimeInterval.rawValue] as? Double {
+            storage.saveHealthMaxCutoffTimeinterval(maxTimeInterval)
         }
         
         transferLoggFile()

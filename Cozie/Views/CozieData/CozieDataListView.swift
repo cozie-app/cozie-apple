@@ -17,6 +17,7 @@ struct CozieDataListView: View {
     @Environment(\.openURL) var openURL
     
     @FetchRequest(sortDescriptors: []) var syncInfo: FetchedResults<SyncInfo>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.index)]) var summaryList: FetchedResults<SummaryInfoData>
     @FetchRequest(sortDescriptors: []) var settings: FetchedResults<SettingsData>
     
     // MARK: States
@@ -32,17 +33,25 @@ struct CozieDataListView: View {
                     .frame(height: 1)
                 List {
                     Section(content: {
-                        WatchSurveyRow(info: WatchSurveyInfo(title: "Valid Survey Count",
-                                                             subtitle: (syncInfo.first?.validCount ?? "0") + "/\(settings.first?.wss_goal ?? 0)",
-                                                             state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                        WatchSurveyRow(info: WatchSurveyInfo(title: "Invalid Survey Count",
-                                                             subtitle: syncInfo.first?.invalidCount ?? "0",
-                                                             state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                        WatchSurveyRow(info: WatchSurveyInfo(title: "Last Watch Survey",
-                                                             subtitle: syncInfo.first?.date ?? "0",
-                                                             state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                        if summaryList.count == 0 {
+                            WatchSurveyRow(info: WatchSurveyInfo(title: "Valid Survey Count",
+                                                                 subtitle: (syncInfo.first?.validCount ?? "0") + "/\(settings.first?.wss_goal ?? 0)",
+                                                                 state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                            WatchSurveyRow(info: WatchSurveyInfo(title: "Invalid Survey Count",
+                                                                 subtitle: syncInfo.first?.invalidCount ?? "0",
+                                                                 state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                            WatchSurveyRow(info: WatchSurveyInfo(title: "Last Watch Survey",
+                                                                 subtitle: syncInfo.first?.date ?? "0",
+                                                                 state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                        } else {
+                            ForEach(summaryList) { summary in
+                                WatchSurveyRow(info: WatchSurveyInfo(title: summary.label ?? "",
+                                                                     subtitle: summary.data ?? "" ,
+                                                                     state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                            }
+                        }
                     }, header: {
-                        CozieAnimatedSyncHeader(title: "Watch Survey", action: {
+                        CozieAnimatedSyncHeader(title: "Summary", action: {
                             watchSurveyViewModel.updateData(sendHealthData: true) {
                                 debugPrint("finish update data!")
                             }
@@ -80,8 +89,8 @@ struct CozieDataListView: View {
                             }
                         }.padding(.top, cellInset)
                     }, header: {
-                    CozieHeaderView(title: "About")
-                })
+                        CozieHeaderView(title: "About")
+                    })
                     .frame(height: cellHeight)
                     .padding(.top, sectionInset)
                 }
@@ -215,23 +224,23 @@ struct CozieAnimatedSyncHeader: View {
 // MARK: UIKit Representable
 struct ActivityView: UIViewControllerRepresentable {
     let url: URL
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
         return UIActivityViewController(activityItems: [url], applicationActivities: nil)
     }
-
+    
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityView>) {}
 }
 
 struct ActivityIndicator: UIViewRepresentable {
-
+    
     @Binding var isAnimating: Bool
     let style: UIActivityIndicatorView.Style
-
+    
     func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
         return UIActivityIndicatorView(style: style)
     }
-
+    
     func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
         isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }

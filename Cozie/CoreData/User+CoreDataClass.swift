@@ -2,7 +2,7 @@
 //  User+CoreDataClass.swift
 //  Cozie
 //
-//  Created by Alexandr Chmal on 04.04.23.
+//  Created by Alexandr Chmal on 10.10.24.
 //
 //
 

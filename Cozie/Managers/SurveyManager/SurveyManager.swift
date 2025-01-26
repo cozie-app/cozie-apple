@@ -7,78 +7,38 @@
 
 import Foundation
 
-
 class SurveyManager {
-    func update(surveyListData: Data, persistenceController: PersistenceController, selected: Bool, completion: ((Bool)->())? ) {
+    func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ error: Error?)->())? ) {
         do {
-            let surveyModel = try JSONDecoder().decode(WatchSurvey.self, from: surveyListData)
+            let surveyModel = try JSONDecoder().decode(WatchSurveyModelController.self, from: surveyListData)
             // set first question ID
             surveyModel.firstQuestionID = surveyModel.survey.first?.questionID
             Task {
-                try await persistenceController.container.performBackgroundTask({ context in
-                    context.automaticallyMergesChangesFromParent = true
-                    // remove previouse saved external
-                    let request = WatchSurveyData.fetchRequest()
-                    if !selected {
-                        request.predicate = NSPredicate(format: "external == %d", true)
-                    }
-                    
-                    let surveysList = try context.fetch(request)
-                    
-                    surveysList.forEach { modle in
-                        // reset previouse selected
-                        if selected {
-                            if modle.selected {
-                                modle.selected = false
-                            }
-                            // remove all internal
-                            if !modle.external {
-                                context.delete(modle)
-                            }
-                        } else {
-                            context.delete(modle)
-                        }
-                    }
-                    
-                    // Save new survey to core data
-                    let watchSurvey = WatchSurveyData(context: context)
-                    watchSurvey.surveyID = surveyModel.surveyID
-                    watchSurvey.surveyName = surveyModel.surveyName
-                    watchSurvey.firstQuestionID = surveyModel.firstQuestionID
-                    
-                    if selected  {
-                        watchSurvey.selected = selected
-                    } else {
-                        watchSurvey.external = true
-                    }
-                    
-                    surveyModel.survey.enumerated()
-                        .forEach{ (index, survey) in
-                            let surveyData = SurveyData(context: context)
-                            surveyData.watchSurvey = watchSurvey
-                            surveyData.question = survey.question
-                            surveyData.questionID = survey.questionID
-                            surveyData.index = Int16(index)
-                            survey.responseOptions.enumerated().forEach { (index, respObj) in
-                                let responseOptionData = ResponseOptionData(context: context)
-                                responseOptionData.survey = surveyData
-                                responseOptionData.index = Int16(index)
-                                responseOptionData.text = respObj.text
-                                responseOptionData.nextQuestionID = respObj.nextQuestionID
-                                responseOptionData.icon = respObj.icon
-                                responseOptionData.iconBackgroundColor = respObj.iconBackgroundColor
-                                responseOptionData.useSfSymbols = respObj.useSfSymbols
-                                responseOptionData.sfSymbolsColor = respObj.sfSymbolsColor
-                            }
-                        }
-                    
-                    try context.save()
-                    completion?(true)
-                })
+                try await storage.updateStorageWithSurvey(surveyModel, selected: selected)
+                DispatchQueue.main.async {
+                    completion?(nil)
+                }
             }
+            
         } catch let error {
             debugPrint(error.localizedDescription)
-            completion?(false)
+            DispatchQueue.main.async {
+                completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
+            }
+        }
+    }
+    
+    func asyncUpdate(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool) async throws {
+        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) -> Void in
+            self.update(surveyListData: surveyListData, storage: storage, selected: selected) { err in
+                if let error = err {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
         }
     }
 }
+
+extension SurveyManager: SurveyManagerProtocol {}

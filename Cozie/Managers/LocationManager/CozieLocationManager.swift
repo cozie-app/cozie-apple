@@ -32,7 +32,7 @@ class LocationManagerInteractor {
                     WatchSurveyKeys.idParticipant.rawValue: user.participantID ?? "",
                     WatchSurveyKeys.idPassword.rawValue: user.passwordID ?? ""]
         
-        let filds: [String : Any] = [LocationChangedKey.locationChange.rawValue: true,
+        let fields: [String : Any] = [LocationChangedKey.locationChange.rawValue: true,
                                      LocationChangedKey.tsTimestampLocation.rawValue: dateFormatter.string(from: location.timestamp),
                                      LocationChangedKey.tsLatitude.rawValue: location.coordinate.latitude,
                                      LocationChangedKey.tsLongitude.rawValue: location.coordinate.longitude,
@@ -47,12 +47,12 @@ class LocationManagerInteractor {
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
                                         WatchSurveyKeys.tags.rawValue: tags,
-                                        WatchSurveyKeys.fields.rawValue: filds]
+                                        WatchSurveyKeys.fields.rawValue: fields]
         
         do {
             let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
             
-            BaseRepository().post(url: backend.api_write_url ?? "", body: json, key: backend.api_write_key ?? "") { result in
+            baseRepo.post(url: backend.api_write_url ?? "", body: json, key: backend.api_write_key ?? "") { result in
                 switch result {
                 case .success(let data):
                     debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")

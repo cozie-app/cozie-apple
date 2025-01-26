@@ -43,7 +43,7 @@ extension WatchSurveyData {
 }
 
 extension WatchSurveyData : Identifiable {
-    func toModel() -> WatchSurvey {
+    func toModel() -> WatchSurveyModelController {
         let surveyList = self.survey?
             .compactMap { $0 as? SurveyData }
             .sorted(by: { $0.index < $1.index })
@@ -51,7 +51,7 @@ extension WatchSurveyData : Identifiable {
                 return surveyData.toModel()
             })
                
-        let watchSurvey = WatchSurvey(surveyName: self.surveyName ?? "", surveyID: self.surveyID ?? "", survey: surveyList ?? [])
+        let watchSurvey = WatchSurveyModelController(surveyName: self.surveyName ?? "", surveyID: self.surveyID ?? "", survey: surveyList ?? [])
         watchSurvey.firstQuestionID = self.firstQuestionID ?? ""
         return watchSurvey
     }

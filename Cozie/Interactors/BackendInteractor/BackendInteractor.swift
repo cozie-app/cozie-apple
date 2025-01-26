@@ -8,13 +8,14 @@
 import Foundation
 import CoreData
 import UIKit
-import OneSignal
+import OneSignalFramework
 
 class BackendInteractor {
     let persistenceController = PersistenceController.shared
     let baseRepo = BaseRepository()
     let storage = CozieStorage.shared
     let surveyManager = SurveyManager()
+    let notifListner = CozieNotificationLifecycleListener()
     
     var currentBackendSettings: BackendInfo? {
         guard let settingsList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()),
@@ -81,20 +82,20 @@ class BackendInteractor {
     }
     
     // MARK: - Load WatchSurvey JSON
-    func loadExternalWatchSurveyJSON(completion: ((_ success: Bool) -> ())?) {
+    func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         if let backend = currentBackendSettings {
             baseRepo.getFileContent(url: backend.watch_survey_link ?? "", parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
-                    completion?(false)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     return
                 }
                 
                 switch result {
                 case .success(let surveyListData):
-                    self.surveyManager.update(surveyListData: surveyListData, persistenceController: self.persistenceController, selected: false, completion: completion)
+                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false, completion: completion)
                 case .failure(let error):
-                    completion?(false)
+                    completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
                     debugPrint(error.localizedDescription)
                 }
             }
@@ -109,60 +110,52 @@ class BackendInteractor {
         
         if let _ = currentBackendSettings {
             // Remove this method to stop OneSignal Debugging
-            OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
+            OneSignal.Debug.setLogLevel(.LL_VERBOSE)
             
-            let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-                // This block gets called when the user reacts to a notification received
-                if let actionID = result.action.actionId {
-                    surveyInteractor.sendResponse(action: actionID) { success in
-                        if success {
-                            debugPrint("iOS notification action sent")
-                        }
-                    }
-                }
-            }
-            
-            OneSignal.setNotificationWillShowInForegroundHandler { /*[weak self]*/ notification, completion in
-                // send health data
-                healthKitInteractor.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
-                    completion(notification)
-                }
-                //self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
-            }
-            
-            OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+            notifListner.healthKitInteractor = healthKitInteractor
+            OneSignal.Notifications.addForegroundLifecycleListener(notifListner)
             
             // OneSignal initialization
-            OneSignal.initWithLaunchOptions(launchOptions)
-            OneSignal.setAppId(CommunicationKeys.oneSignalAppID.rawValue)
-            OneSignal.promptForPushNotifications(userResponse: { accepted in
-                debugPrint("User accepted notifications: \(accepted)")
-            })
+            OneSignal.initialize(CommunicationKeys.oneSignalAppID.rawValue, withLaunchOptions: launchOptions)
+            OneSignal.User.pushSubscription.optIn()
             
             if let delegate = AppDelegate.instance {
-                OneSignal.add(delegate as OSSubscriptionObserver)
+                OneSignal.User.addObserver(delegate)
             }
         }
     }
     
     // log test
-//    private func testLog(trigger: String, details: String, state: String = "error") {
-//        
-//        let str =
-//        """
-//        {
-//        "trigger": "\(trigger)",
-//        "si_onesignal_state": "\(state)",
-//        "si_onesignal_details": "\(details)",
-//        }
-//        """
-//        LoggerInteractor.shared.logInfo(action: "", info: str)
-//    }
+    //    private func testLog(trigger: String, details: String, state: String = "error") {
+    //
+    //        let str =
+    //        """
+    //        {
+    //        "trigger": "\(trigger)",
+    //        "si_onesignal_state": "\(state)",
+    //        "si_onesignal_details": "\(details)",
+    //        }
+    //        """
+    //        LoggerInteractor.shared.logInfo(action: "", info: str)
+    //    }
 }
- 
-extension AppDelegate: OSSubscriptionObserver {
-    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges) {
-        if let playerId = stateChanges.to.userId {
+
+class CozieNotificationLifecycleListener : NSObject, OSNotificationLifecycleListener {
+    var healthKitInteractor: HealthKitInteractor? = nil
+    func onWillDisplay(event: OSNotificationWillDisplayEvent) {
+        event.preventDefault()
+        healthKitInteractor?.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
+            debugPrint("On WillDisplay Notification")
+        }
+        // self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
+    }
+}
+
+
+extension AppDelegate: OSUserStateObserver {
+    func onUserStateDidChange(state: OSUserChangedState) {
+        // prints out all properties
+        if let playerId = state.current.onesignalId {
             CozieStorage.shared.savePlayerID(playerId)
             debugPrint("Player id: \(playerId)")
         }
@@ -177,3 +170,32 @@ extension BackendInteractor: BackendDataProtocol {
         return (settings.api_write_url ?? "", settings.api_write_key ?? "")
     }
 }
+
+extension BackendInteractor: ApiDataProtocol{
+    var url: String {
+        return currentBackendSettings?.api_write_url ?? ""
+    }
+    
+    var key: String {
+        return currentBackendSettings?.api_write_key ?? ""
+    }
+}
+
+// MARK: - TEST: - OneSIgnal curl Alex_Segment
+/*
+ curl --include \
+      --request POST \
+      --header "Content-Type: application/json; charset=utf-8" \
+      --header "Authorization: Basic NDRkODliNWUtZjdlMy00YmU1LWI2M2YtN2I1MTAzOTg5ZjU3"\
+      --data-binary "{
+          \"app_id\": \"17d346bf-bfe5-4422-be96-2a8e4ae4cc3d\",
+          \"contents\": {\"en\": \"Alexs test for content\"},
+          \"headings\": {\"en\": \"Alexs test for headings\"},
+          \"subtitle\": {\"en\": \"Alexs test for subtitle\"},
+          \"ios_category\": \"cozie_notification_action_category\",
+          \"content_available\": true,
+          \"included_segments\": [\"Alex_Segment\"]
+      }" \
+      https://api.onesignal.com/notifications
+*/
+ 

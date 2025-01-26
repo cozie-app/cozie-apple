@@ -29,6 +29,7 @@ public enum CommunicationKeys: String {
     case pushNotificationForegroundTrigger = "push_notification_foreground"
     
     case transferFileStatusKey = "transfer_file_status"
+    case healthCutoffTimeInterval = "health_cutoff_time_interval"
 }
 
 public enum FileTransferStatus: Int {
@@ -56,7 +57,7 @@ public enum WatchSurveyKeys: String {
     case tags = "tags"
     case fields = "fields"
     case wssTitle = "wss_title"
-    case actionButtonKey = "action_button"
+    case actionButtonKey = "action_button_pressed"
     case transmitTriggerPushValue = "push_notification_action_button"
 }
 

@@ -23,6 +23,7 @@ class StorageManager: CozieStorageProtocol {
         case lastSurveyTimeInterval = "CozieLastSurveyTimeIntervalKey"
         case sevedSurveyCount = "CozieSevedSurveyCount"
         case notSyncedSurvey = "CozieNotSyncedSurvey"
+        case healthMaxCutoffTimeintervalKey = "CozieHealthMaxCutoffTimeintervalKey"
         
         // Storage postfix
         case storagePostfixTime = "_wstorage_time"
@@ -116,6 +117,15 @@ class StorageManager: CozieStorageProtocol {
     
     func lastSurveySendInterval() -> Int {
         return (UserDefaults.standard.value(forKey: Keys.lastSurveyTimeInterval.rawValue) as? Int) ?? 0
+    }
+    
+    // MARK: Last survey send
+    func saveHealthMaxCutoffTimeinterval(_ interval: Double) {
+        UserDefaults.standard.set(interval, forKey: Keys.healthMaxCutoffTimeintervalKey.rawValue)
+    }
+    
+    func healthMaxCutoffTimeinterval() -> Double {
+        return (UserDefaults.standard.value(forKey: Keys.healthMaxCutoffTimeintervalKey.rawValue) as? Double) ?? 0
     }
     
     // MARK: Save survey logs
@@ -241,6 +251,10 @@ class StorageManager: CozieStorageProtocol {
     }
     
     // MARK: HealthKit data storage
+    
+    func maxHealthCutoffInteval() -> Double {
+        return healthMaxCutoffTimeinterval()
+    }
     
     func healthLastSyncedTimeInterval(offline: Bool) -> Double {
         return UserDefaults.standard.value(forKey: offline ? Keys.healthLastSyncOfflineKey.rawValue : Keys.healthLastSyncKey.rawValue) as? Double ?? 0.0

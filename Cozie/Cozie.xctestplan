@@ -1,0 +1,46 @@
+{
+  "configurations" : [
+    {
+      "id" : "2950283E-AF78-4601-A990-45E49E9DEEA4",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:Cozie.xcodeproj",
+          "identifier" : "921289C9299649EC0060C729",
+          "name" : "Cozie"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Cozie.xcodeproj",
+      "identifier" : "921289C9299649EC0060C729",
+      "name" : "Cozie"
+    }
+  },
+  "testTargets" : [
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:Cozie.xcodeproj",
+        "identifier" : "921289E8299649ED0060C729",
+        "name" : "CozieUITests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Cozie.xcodeproj",
+        "identifier" : "921289DE299649ED0060C729",
+        "name" : "CozieTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -23,14 +23,12 @@
 		921289D5299649ED0060C729 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921289D4299649ED0060C729 /* Preview Assets.xcassets */; };
 		921289D7299649ED0060C729 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289D6299649ED0060C729 /* Persistence.swift */; };
 		921289DA299649ED0060C729 /* Cozie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 921289D8299649ED0060C729 /* Cozie.xcdatamodeld */; };
-		921289E4299649ED0060C729 /* CozieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289E3299649ED0060C729 /* CozieTests.swift */; };
 		921289EE299649ED0060C729 /* CozieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289ED299649ED0060C729 /* CozieUITests.swift */; };
 		921289F0299649ED0060C729 /* CozieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289EF299649ED0060C729 /* CozieUITestsLaunchTests.swift */; };
 		92128A04299687410060C729 /* CozieDataListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92128A03299687410060C729 /* CozieDataListView.swift */; };
 		92128A06299688640060C729 /* WatchSurveyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92128A05299688640060C729 /* WatchSurveyRow.swift */; };
 		92210746299906F1001EC552 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92210745299906F1001EC552 /* HomeCoordinator.swift */; };
 		922107482999188F001EC552 /* HomeCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922107472999188F001EC552 /* HomeCoordinatorView.swift */; };
-		9221074A29992205001EC552 /* CozieDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221074929992205001EC552 /* CozieDataCoordinator.swift */; };
 		9244815D29C0CF63004E6779 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244815C29C0CF63004E6779 /* AppLinks.swift */; };
 		9244815F29C1CA1A004E6779 /* SettingWatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244815E29C1CA1A004E6779 /* SettingWatchCell.swift */; };
 		9251771829C3645E0089C92C /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9251771729C3645E0089C92C /* TimePicker.swift */; };
@@ -58,16 +56,17 @@
 		CA011F152A1744A7006BFA7C /* CozieLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA011F142A1744A7006BFA7C /* CozieLocationManager.swift */; };
 		CA0A1B0E29DB20F2007A3A19 /* SyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B0D29DB20F2007A3A19 /* SyncInteractor.swift */; };
 		CA0A1B1529DB23F5007A3A19 /* UserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1429DB23F5007A3A19 /* UserInteractor.swift */; };
-		CA0A1B1829DC772F007A3A19 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1629DC772F007A3A19 /* User+CoreDataClass.swift */; };
-		CA0A1B1929DC772F007A3A19 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1729DC772F007A3A19 /* User+CoreDataProperties.swift */; };
 		CA0A1B1C29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */; };
 		CA0A1B1D29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */; };
 		CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A1B1F29DDB0AA007A3A19 /* SettingsInteractor.swift */; };
+		CA0F69BA2CD2606D00C0B0F5 /* GroupStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0F69B92CD2606300C0B0F5 /* GroupStorageTests.swift */; };
 		CA1548F629E5B1F0005FDD6B /* BackendInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548F429E5B1EF005FDD6B /* BackendInfo+CoreDataClass.swift */; };
 		CA1548F729E5B1F0005FDD6B /* BackendInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548F529E5B1EF005FDD6B /* BackendInfo+CoreDataProperties.swift */; };
 		CA1548FA29E5B244005FDD6B /* BackendInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548F929E5B244005FDD6B /* BackendInteractor.swift */; };
 		CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548FC29E5D3BB005FDD6B /* SystemInteractor.swift */; };
 		CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1548FF29E6F7FE005FDD6B /* LoggerInteractor.swift */; };
+		CA1865982CCBEC0F000B6702 /* Cozie.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = CA1865962CCBEC0F000B6702 /* Cozie.xctestplan */; };
+		CA18CCE62CD28A77000FC4B1 /* PushNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */; };
 		CA1A68062A1F8C840084B000 /* SurveyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1A68052A1F8C840084B000 /* SurveyManager.swift */; };
 		CA2EE84E29E8679B00590527 /* HealthKitInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE84D29E8679B00590527 /* HealthKitInteractor.swift */; };
 		CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE85229ED47B000590527 /* LogInfoView.swift */; };
@@ -95,13 +94,24 @@
 		CA4349172B8CD12F00C0EEDA /* OfflineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4349152B8CCC1E00C0EEDA /* OfflineManager.swift */; };
 		CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */; };
 		CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EBE4E2A0256A300D096AD /* NotificationView.swift */; };
+		CA4F42442CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42422CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift */; };
+		CA4F42452CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42432CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift */; };
+		CA4F42482CB7D9000059013B /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42462CB7D9000059013B /* User+CoreDataClass.swift */; };
+		CA4F42492CB7D9000059013B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4F42472CB7D9000059013B /* User+CoreDataProperties.swift */; };
 		CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */; };
 		CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */; };
 		CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */; };
 		CA57234829F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */; };
+		CA59D2702CAE8F84008A0771 /* String+Lacalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA59D26F2CAE8F84008A0771 /* String+Lacalization.swift */; };
 		CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6102B629F6C7320055A140 /* ComplicationController.swift */; };
 		CA6F3DF12B516A1200C42C7F /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F3DE22B51664100C42C7F /* NotificationService.swift */; };
+		CA7E1D892CCFD6E9000C6461 /* PushNotificationLoggerStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */; };
+		CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */; };
+		CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
+		CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
+		CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */; };
+		CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */; };
 		CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
 		CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */; };
@@ -112,6 +122,10 @@
 		CA8BE5692A53FF0E00D0627D /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */; };
 		CA8BE56A2A54002000D0627D /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
 		CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
+		CAB063002CC79A84004D94CA /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
+		CAB063042CC79BCA004D94CA /* CategoryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAB063032CC79BCA004D94CA /* CategoryList.plist */; };
+		CAB063072CC7A4AD004D94CA /* PushNotificationControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB063062CC7A4AA004D94CA /* PushNotificationControllerTest.swift */; };
+		CAB063092CC7A515004D94CA /* CategoryListTets.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAB063082CC7A515004D94CA /* CategoryListTets.plist */; };
 		CAB58A5529F960D000E26D20 /* CozieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5429F960D000E26D20 /* CozieStorage.swift */; };
 		CAB58A5829F9706900E26D20 /* WatchSurveyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */; };
 		CAB58A5B29F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */; };
@@ -123,6 +137,14 @@
 		CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */; };
 		CAD1E5CA29FBEF17000F9FE7 /* HealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */; };
 		CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */; };
+		CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */; };
+		CAD1F0EF2CCFB87F001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
+		CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */; };
+		CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */; };
+		CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
+		CAE4FDB72CD28BF900B0B888 /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
+		CAE4FDB82CD28C6300B0B888 /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */; };
+		CAE4FDB92CD28C7000B0B888 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,7 +238,6 @@
 		921289D6299649ED0060C729 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		921289D9299649ED0060C729 /* Cozie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cozie.xcdatamodel; sourceTree = "<group>"; };
 		921289DF299649ED0060C729 /* CozieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CozieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		921289E3299649ED0060C729 /* CozieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieTests.swift; sourceTree = "<group>"; };
 		921289E9299649ED0060C729 /* CozieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CozieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		921289ED299649ED0060C729 /* CozieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieUITests.swift; sourceTree = "<group>"; };
 		921289EF299649ED0060C729 /* CozieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -224,7 +245,6 @@
 		92128A05299688640060C729 /* WatchSurveyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyRow.swift; sourceTree = "<group>"; };
 		92210745299906F1001EC552 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		922107472999188F001EC552 /* HomeCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorView.swift; sourceTree = "<group>"; };
-		9221074929992205001EC552 /* CozieDataCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieDataCoordinator.swift; sourceTree = "<group>"; };
 		9244815C29C0CF63004E6779 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
 		9244815E29C1CA1A004E6779 /* SettingWatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWatchCell.swift; sourceTree = "<group>"; };
 		9251771729C3645E0089C92C /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
@@ -252,16 +272,17 @@
 		CA011F142A1744A7006BFA7C /* CozieLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieLocationManager.swift; sourceTree = "<group>"; };
 		CA0A1B0D29DB20F2007A3A19 /* SyncInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncInteractor.swift; sourceTree = "<group>"; };
 		CA0A1B1429DB23F5007A3A19 /* UserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInteractor.swift; sourceTree = "<group>"; };
-		CA0A1B1629DC772F007A3A19 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "Cozie/CoreData/User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		CA0A1B1729DC772F007A3A19 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "Cozie/CoreData/User+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SyncInfo+CoreDataClass.swift"; path = "Cozie/CoreData/SyncInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SyncInfo+CoreDataProperties.swift"; path = "Cozie/CoreData/SyncInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CA0A1B1F29DDB0AA007A3A19 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		CA0F69B92CD2606300C0B0F5 /* GroupStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStorageTests.swift; sourceTree = "<group>"; };
 		CA1548F429E5B1EF005FDD6B /* BackendInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackendInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA1548F529E5B1EF005FDD6B /* BackendInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackendInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA1548F929E5B244005FDD6B /* BackendInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendInteractor.swift; sourceTree = "<group>"; };
 		CA1548FC29E5D3BB005FDD6B /* SystemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInteractor.swift; sourceTree = "<group>"; };
 		CA1548FF29E6F7FE005FDD6B /* LoggerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerInteractor.swift; sourceTree = "<group>"; };
+		CA1865962CCBEC0F000B6702 /* Cozie.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cozie.xctestplan; sourceTree = "<group>"; };
+		CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationController.swift; sourceTree = "<group>"; };
 		CA1A68052A1F8C840084B000 /* SurveyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyManager.swift; sourceTree = "<group>"; };
 		CA2EE84D29E8679B00590527 /* HealthKitInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitInteractor.swift; sourceTree = "<group>"; };
 		CA2EE84F29E867D500590527 /* Cozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cozie.entitlements; sourceTree = "<group>"; };
@@ -289,20 +310,35 @@
 		CA4EBE4C2A0255DF00D096AD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		CA4EBE4E2A0256A300D096AD /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CA4EBE502A025BD100D096AD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CA4F42422CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummaryInfoData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CA4F42432CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummaryInfoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CA4F42462CB7D9000059013B /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CA4F42472CB7D9000059013B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234129F6808B008C293C /* SurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234229F6808B008C293C /* SurveyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurveyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA57234529F680F9008C293C /* ResponseOptionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA57234629F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseOptionData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CA59D26F2CAE8F84008A0771 /* String+Lacalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Lacalization.swift"; sourceTree = "<group>"; };
 		CA6102B629F6C7320055A140 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		CA6F3DE22B51664100C42C7F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CA6F3DE32B51664100C42C7F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		CA6F3DE42B51664100C42C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA6F3DEA2B516A1100C42C7F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
+		CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerStorageTests.swift; sourceTree = "<group>"; };
+		CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerGroupStorage.swift; sourceTree = "<group>"; };
+		CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCommon.swift; sourceTree = "<group>"; };
+		CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyModelControllerTest.swift; sourceTree = "<group>"; };
+		CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTest.swift; sourceTree = "<group>"; };
+		CA87CFFD2CB534A600501497 /* OneSignalNotificationServiceExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionDebug.entitlements; sourceTree = "<group>"; };
 		CA8BE55F2A53F52F00D0627D /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5622A53F6C400D0627D /* BackendDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendDataProtocol.swift; sourceTree = "<group>"; };
 		CA8BE5672A53FF0E00D0627D /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorageProtocol.swift; sourceTree = "<group>"; };
+		CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationControllerProtocol.swift; sourceTree = "<group>"; };
+		CAB063032CC79BCA004D94CA /* CategoryList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CategoryList.plist; sourceTree = "<group>"; };
+		CAB063062CC7A4AA004D94CA /* PushNotificationControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationControllerTest.swift; sourceTree = "<group>"; };
+		CAB063082CC7A515004D94CA /* CategoryListTets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CategoryListTets.plist; sourceTree = "<group>"; };
 		CAB58A5429F960D000E26D20 /* CozieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieStorage.swift; sourceTree = "<group>"; };
 		CAB58A5729F9706900E26D20 /* WatchSurveyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSurveyInteractor.swift; sourceTree = "<group>"; };
 		CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WatchSurveyData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -315,6 +351,10 @@
 		CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CAD1E5C929FBEF17000F9FE7 /* HealthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataModel.swift; sourceTree = "<group>"; };
 		CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundUpdateManager.swift; sourceTree = "<group>"; };
+		CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPushTests.swift; sourceTree = "<group>"; };
+		CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerController.swift; sourceTree = "<group>"; };
+		CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificaitonLoggerRepository.swift; sourceTree = "<group>"; };
+		CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerRepositoryTests.swift; sourceTree = "<group>"; };
 		D24C4273B7B8B756FE8443A6 /* Pods-Cozie Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie Watch App.release.xcconfig"; path = "Target Support Files/Pods-Cozie Watch App/Pods-Cozie Watch App.release.xcconfig"; sourceTree = "<group>"; };
 		E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F415053C9AB8896A79909F80 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
@@ -427,8 +467,10 @@
 		921289CC299649EC0060C729 /* Cozie */ = {
 			isa = PBXGroup;
 			children = (
+				CA1865962CCBEC0F000B6702 /* Cozie.xctestplan */,
 				CA2EE85029E86CEF00590527 /* Info.plist */,
 				CA2EE84F29E867D500590527 /* Cozie.entitlements */,
+				CAB062FB2CC79A39004D94CA /* Controller */,
 				CA2EE92C29EFE16F00590527 /* Managers */,
 				CA0A1B0B29DB20CF007A3A19 /* Interactors */,
 				92524F9229CCA9D800074A09 /* Model */,
@@ -456,7 +498,9 @@
 		921289E2299649ED0060C729 /* CozieTests */ = {
 			isa = PBXGroup;
 			children = (
-				921289E3299649ED0060C729 /* CozieTests.swift */,
+				CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */,
+				CAB063052CC7A4A3004D94CA /* PushNotificationController */,
+				CA8160462CC2588E00BCBE25 /* WatchSurvey */,
 			);
 			path = CozieTests;
 			sourceTree = "<group>";
@@ -473,6 +517,10 @@
 		921289FC29964A0B0060C729 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CA4F42462CB7D9000059013B /* User+CoreDataClass.swift */,
+				CA4F42472CB7D9000059013B /* User+CoreDataProperties.swift */,
+				CA4F42422CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift */,
+				CA4F42432CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift */,
 				CAD1E5C529FA901D000F9FE7 /* SettingsData+CoreDataClass.swift */,
 				CAD1E5C629FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift */,
 				CAB58A5929F971BD00E26D20 /* WatchSurveyData+CoreDataClass.swift */,
@@ -485,8 +533,6 @@
 				CA1548F529E5B1EF005FDD6B /* BackendInfo+CoreDataProperties.swift */,
 				CA0A1B1A29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift */,
 				CA0A1B1B29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift */,
-				CA0A1B1629DC772F007A3A19 /* User+CoreDataClass.swift */,
-				CA0A1B1729DC772F007A3A19 /* User+CoreDataProperties.swift */,
 				921289D6299649ED0060C729 /* Persistence.swift */,
 				921289D8299649ED0060C729 /* Cozie.xcdatamodeld */,
 			);
@@ -569,6 +615,7 @@
 		92524F8F29CC5FEA00074A09 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */,
 				92524F9029CC6A2C00074A09 /* BaseRepository.swift */,
 			);
 			path = Repository;
@@ -605,7 +652,6 @@
 			children = (
 				CA2EE85129ED478F00590527 /* View */,
 				9267EFEA299A6F8B0025A3CE /* Rows */,
-				9221074929992205001EC552 /* CozieDataCoordinator.swift */,
 				92128A03299687410060C729 /* CozieDataListView.swift */,
 			);
 			path = CozieData;
@@ -657,6 +703,7 @@
 			children = (
 				92803DEF29D4279B008438EB /* Date+Helper.swift */,
 				92042D1629D5B357007A9250 /* Int+Helper.swift */,
+				CA59D26F2CAE8F84008A0771 /* String+Lacalization.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -913,12 +960,76 @@
 		CA6F3DEB2B516A1200C42C7F /* OneSignalNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
+				CA87CFFD2CB534A600501497 /* OneSignalNotificationServiceExtensionDebug.entitlements */,
 				CA6F3DF72B516EE900C42C7F /* OneSignalNotificationServiceExtensionRelease.entitlements */,
 				CA6F3DE22B51664100C42C7F /* NotificationService.swift */,
 				CA6F3DE32B51664100C42C7F /* OneSignalNotificationServiceExtension.entitlements */,
 				CA6F3DE42B51664100C42C7F /* Info.plist */,
 			);
 			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		CA7E1D872CCFD695000C6461 /* PushNotificationLoggerGroupStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */,
+			);
+			path = PushNotificationLoggerGroupStorage;
+			sourceTree = "<group>";
+		};
+		CA8160452CC2587500BCBE25 /* WatchSurveyModelController */ = {
+			isa = PBXGroup;
+			children = (
+				CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */,
+			);
+			path = WatchSurveyModelController;
+			sourceTree = "<group>";
+		};
+		CA8160462CC2588E00BCBE25 /* WatchSurvey */ = {
+			isa = PBXGroup;
+			children = (
+				CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */,
+				CA8160452CC2587500BCBE25 /* WatchSurveyModelController */,
+			);
+			path = WatchSurvey;
+			sourceTree = "<group>";
+		};
+		CAB062FA2CC79A1A004D94CA /* PushNotificationController */ = {
+			isa = PBXGroup;
+			children = (
+				CAB062FE2CC79A72004D94CA /* Protocols */,
+				CA7E1D872CCFD695000C6461 /* PushNotificationLoggerGroupStorage */,
+				CAD1F0ED2CCFB857001B5307 /* PushNotificationLoggerController */,
+				CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */,
+				CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */,
+				CAB063032CC79BCA004D94CA /* CategoryList.plist */,
+			);
+			path = PushNotificationController;
+			sourceTree = "<group>";
+		};
+		CAB062FB2CC79A39004D94CA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CAB062FA2CC79A1A004D94CA /* PushNotificationController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CAB062FE2CC79A72004D94CA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CAB063052CC7A4A3004D94CA /* PushNotificationController */ = {
+			isa = PBXGroup;
+			children = (
+				CAB063062CC7A4AA004D94CA /* PushNotificationControllerTest.swift */,
+				CAB063082CC7A515004D94CA /* CategoryListTets.plist */,
+			);
+			path = PushNotificationController;
 			sourceTree = "<group>";
 		};
 		CAB58A5629F9704F00E26D20 /* WatchSurveyInteractor */ = {
@@ -944,6 +1055,25 @@
 				CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */,
 			);
 			path = BackgroundTask;
+			sourceTree = "<group>";
+		};
+		CAD1F0ED2CCFB857001B5307 /* PushNotificationLoggerController */ = {
+			isa = PBXGroup;
+			children = (
+				CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */,
+			);
+			path = PushNotificationLoggerController;
+			sourceTree = "<group>";
+		};
+		CAD1F0F62CCFC58B001B5307 /* PushNotificationLogging */ = {
+			isa = PBXGroup;
+			children = (
+				CA0F69B92CD2606300C0B0F5 /* GroupStorageTests.swift */,
+				CA7E1D882CCFD6E5000C6461 /* PushNotificationLoggerStorageTests.swift */,
+				CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */,
+				CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */,
+			);
+			path = PushNotificationLogging;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1085,6 +1215,8 @@
 				en,
 			);
 			mainGroup = 921289C1299649EC0060C729;
+			packageReferences = (
+			);
 			productRefGroup = 921289CB299649EC0060C729 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1104,6 +1236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				921289D5299649ED0060C729 /* Preview Assets.xcassets in Resources */,
+				CAB063042CC79BCA004D94CA /* CategoryList.plist in Resources */,
 				921289D2299649ED0060C729 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1112,6 +1245,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1865982CCBEC0F000B6702 /* Cozie.xctestplan in Resources */,
+				CAB063092CC7A515004D94CA /* CategoryListTets.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1296,15 +1431,18 @@
 				9267EFF0299A91470025A3CE /* CozieSettingView.swift in Sources */,
 				CA1A68062A1F8C840084B000 /* SurveyManager.swift in Sources */,
 				921289DA299649ED0060C729 /* Cozie.xcdatamodeld in Sources */,
-				CA0A1B1929DC772F007A3A19 /* User+CoreDataProperties.swift in Sources */,
 				9267485D29D71868004329B9 /* BackendViewModel.swift in Sources */,
 				9212144429CE0730002BAEB4 /* TextFieldPopUp.swift in Sources */,
+				CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */,
 				CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */,
 				CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */,
 				CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */,
+				CAD1F0EF2CCFB87F001B5307 /* PushNotificationLoggerController.swift in Sources */,
 				CA2EE92E29EFE18900590527 /* WatchConnectivityManager.swift in Sources */,
 				CA1548FD29E5D3BB005FDD6B /* SystemInteractor.swift in Sources */,
 				92128A06299688640060C729 /* WatchSurveyRow.swift in Sources */,
+				CA4F42442CB7D8C10059013B /* SummaryInfoData+CoreDataClass.swift in Sources */,
+				CA4F42452CB7D8C10059013B /* SummaryInfoData+CoreDataProperties.swift in Sources */,
 				ACAB713F2A98536000AC8C80 /* Defaults.swift in Sources */,
 				CA4349162B8CCC1E00C0EEDA /* OfflineManager.swift in Sources */,
 				92CFCA8A29C8877900ABC374 /* DaysViewModel.swift in Sources */,
@@ -1314,6 +1452,7 @@
 				9212143F29CDD4BA002BAEB4 /* TitleTitleCell.swift in Sources */,
 				921289D7299649ED0060C729 /* Persistence.swift in Sources */,
 				927E20EA29D5ED5B008F476F /* WatchSurveyList.swift in Sources */,
+				CA18CCE62CD28A77000FC4B1 /* PushNotificationController.swift in Sources */,
 				CA57234329F6808B008C293C /* SurveyData+CoreDataClass.swift in Sources */,
 				CA0A1B1C29DC7750007A3A19 /* SyncInfo+CoreDataClass.swift in Sources */,
 				92524F9129CC6A2C00074A09 /* BaseRepository.swift in Sources */,
@@ -1322,7 +1461,6 @@
 				92524F9629CCBA5100074A09 /* WatchSurveyViewModel.swift in Sources */,
 				CAB58A5829F9706900E26D20 /* WatchSurveyInteractor.swift in Sources */,
 				9244815F29C1CA1A004E6779 /* SettingWatchCell.swift in Sources */,
-				CA0A1B1829DC772F007A3A19 /* User+CoreDataClass.swift in Sources */,
 				CA0A1B1529DB23F5007A3A19 /* UserInteractor.swift in Sources */,
 				CA1548F629E5B1F0005FDD6B /* BackendInfo+CoreDataClass.swift in Sources */,
 				CA57234429F6808B008C293C /* SurveyData+CoreDataProperties.swift in Sources */,
@@ -1336,18 +1474,20 @@
 				CA2EE84E29E8679B00590527 /* HealthKitInteractor.swift in Sources */,
 				9251771D29C366180089C92C /* TimePickerView.swift in Sources */,
 				922107482999188F001EC552 /* HomeCoordinatorView.swift in Sources */,
+				CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */,
 				CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */,
 				CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */,
 				9212144229CDFBB7002BAEB4 /* AppColor.swift in Sources */,
+				CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */,
 				921289D0299649EC0060C729 /* ContentView.swift in Sources */,
 				92D0B80F29D9BD63008557FC /* SettingCoordinator.swift in Sources */,
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
 				CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */,
 				CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */,
 				9212144729D18FF5002BAEB4 /* ReminderManager.swift in Sources */,
+				CA59D2702CAE8F84008A0771 /* String+Lacalization.swift in Sources */,
 				CA1548FA29E5B244005FDD6B /* BackendInteractor.swift in Sources */,
 				CAC6F92F2A0CFCB7006D625D /* ConfigurationView.swift in Sources */,
-				9221074A29992205001EC552 /* CozieDataCoordinator.swift in Sources */,
 				CA57234729F680F9008C293C /* ResponseOptionData+CoreDataClass.swift in Sources */,
 				927E20EC29D5ED6E008F476F /* QuestionViewModel.swift in Sources */,
 				CA8BE5682A53FF0E00D0627D /* LoggerProtocol.swift in Sources */,
@@ -1358,10 +1498,13 @@
 				9267EFEC299A6FCA0025A3CE /* DataTitleImageRow.swift in Sources */,
 				CA011F152A1744A7006BFA7C /* CozieLocationManager.swift in Sources */,
 				CA8BE5602A53F52F00D0627D /* UserDataProtocol.swift in Sources */,
+				CAB063002CC79A84004D94CA /* PushNotificationControllerProtocol.swift in Sources */,
 				CA0A1B1D29DC7750007A3A19 /* SyncInfo+CoreDataProperties.swift in Sources */,
 				9251771B29C364870089C92C /* TimePickerViewModel.swift in Sources */,
 				CAC6F9312A0CFFCB006D625D /* InitModel.swift in Sources */,
 				9267EFF3299A946C0025A3CE /* CozieBackendView.swift in Sources */,
+				CA4F42482CB7D9000059013B /* User+CoreDataClass.swift in Sources */,
+				CA4F42492CB7D9000059013B /* User+CoreDataProperties.swift in Sources */,
 				CA2EE93029EFE36E00590527 /* CommunicationKeys.swift in Sources */,
 				92803DF029D4279B008438EB /* Date+Helper.swift in Sources */,
 				92524F9429CCA9EA00074A09 /* WatchSurveyModel.swift in Sources */,
@@ -1376,7 +1519,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				921289E4299649ED0060C729 /* CozieTests.swift in Sources */,
+				CA7E1D892CCFD6E9000C6461 /* PushNotificationLoggerStorageTests.swift in Sources */,
+				CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */,
+				CAB063072CC7A4AD004D94CA /* PushNotificationControllerTest.swift in Sources */,
+				CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */,
+				CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */,
+				CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */,
+				CA0F69BA2CD2606D00C0B0F5 /* GroupStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1424,7 +1573,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE4FDB82CD28C6300B0B888 /* UserDataProtocol.swift in Sources */,
+				CAE4FDB72CD28BF900B0B888 /* PushNotificationControllerProtocol.swift in Sources */,
+				CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */,
+				CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */,
 				CA6F3DF62B516A2A00C42C7F /* NotificationService.swift in Sources */,
+				CAE4FDB92CD28C7000B0B888 /* CozieStorageProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,7 +1734,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1624,7 +1778,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1665,7 +1819,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1686,7 +1840,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1706,7 +1860,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -1725,7 +1879,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -1748,7 +1902,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1790,7 +1944,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1827,9 +1981,10 @@
 			baseConfigurationReference = 3FAA11F93F17560C643D3510 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1844,7 +1999,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1863,7 +2018,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1878,7 +2033,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = app.cozie.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

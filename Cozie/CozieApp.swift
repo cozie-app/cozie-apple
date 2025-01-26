@@ -7,7 +7,9 @@
 
 import SwiftUI
 import UIKit
+import OneSignalFramework
 
+// MARK: AppDelegate: - Application initialization / BGTasks
 class AppDelegate: NSObject, UIApplicationDelegate {
     let locationManager = LocationManager()
     let backgroundProcessing = BackgroundUpdateManager()
@@ -15,6 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     static private(set) var instance: AppDelegate! = nil
+    private(set) var pushNotificationController: PushNotificationControllerProtocol = PushNotificationController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificaitonLoggerRepository(apiRepository: BaseRepository(), api: BackendInteractor())), userData: UserInteractor(), storage: CozieStorage.shared)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -45,8 +48,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // init conection with watch
         _ = WatchConnectivityManagerPhone.shared
+        
+        // custom notification action: register new notification category
+        pushNotificationController.registerActionNotifCategory()
         return true
     }
+    
+    // MARK: BGTask - Start
     
     func startBGTasks() {
         // backgroundProcessing.test()
@@ -66,17 +74,25 @@ struct CozieApp: App {
     
     @StateObject var coordinator = HomeCoordinator(session: Session())
     let persistenceController = PersistenceController.shared
+    var defaults = UserDefaults(suiteName: "group.app.cozie.ios")
     
     var body: some Scene {
         WindowGroup {
             HomeCoordinatorView(coordinator: coordinator)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onChange(of: scenePhase) { newPhase in
+                    
                     if newPhase == .active {
+                        
+                        debugPrint(defaults?.value(forKey: "cozie_notification_infoKey") ?? "info ist empty")
+                        debugPrint(defaults?.value(forKey: "cozie_notification_info_deleted_Key") ?? "info ist empty")
+                        //defaults?.set(["test" : "info ist emptyTest"], forKey: "cozie_notification_info")
+                        
                         // Delivery HealthKit info on application launch
                         appDelegate.healthKitInteractor.sendData(trigger: CommunicationKeys.appTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { success in
                             debugPrint(success ? "Health data sent" : "Health data failed")
                         }
+                        appDelegate.pushNotificationController.enablePushLogging(true)
                     } else if newPhase == .inactive {
                         debugPrint("Inactive")
                     } else if newPhase == .background {

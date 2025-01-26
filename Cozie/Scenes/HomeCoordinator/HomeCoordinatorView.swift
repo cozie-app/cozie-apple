@@ -32,7 +32,7 @@ struct HomeCoordinatorView: View {
                 }.tag(CozieTabs.settings)
             
             CozieBackendView().tabItem {
-                HomeTabView(title: "Backend", imageName: "cloud")
+                HomeTabView(title: "Advanced", imageName: "cloud")
             }
             .tag(CozieTabs.backend)
             .environmentObject(coordinator.settingsViewModel)
@@ -57,7 +57,6 @@ struct HomeCoordinatorView_Previews: PreviewProvider {
         HomeCoordinatorView(coordinator: HomeCoordinator(session: Session()))
     }
 }
-
 
 struct HomeTabView: View {
     let title: String

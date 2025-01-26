@@ -36,6 +36,7 @@ class CozieStorage: CozieStorageProtocol {
         case storagePostfixTempTimeOffline = "_offline_storage_temp_time"
         
         case firstLaunchTimeInterval = "firstLaunchTimeInterval"
+        case maxHealthCutoffTime = "healthCutoffTimeTimeInterval"
     }
     
     static let shared = CozieStorage()
@@ -88,8 +89,22 @@ class CozieStorage: CozieStorageProtocol {
     func updatefirstLaunchTimeInterval(_ interval: Double) {
         UserDefaults.standard.set(interval, forKey: CozieStorageKeys.firstLaunchTimeInterval.rawValue)
     }
+
+    // MARK: - Health Cutoff Time
+    
+    func maxHealthCutoffTimeInterval() -> Double {
+        return UserDefaults.standard.value(forKey: CozieStorageKeys.maxHealthCutoffTime.rawValue) as? Double ?? 3.0
+    }
+    
+    func saveMaxHealthCutoffTimeInterval(_ interval: Double) {
+        UserDefaults.standard.set(interval, forKey: CozieStorageKeys.maxHealthCutoffTime.rawValue)
+    }
     
     // MARK: HealthKit data storage
+    
+    func maxHealthCutoffInteval() -> Double {
+        return maxHealthCutoffTimeInterval()
+    }
     
     func healthLastSyncedTimeInterval(offline: Bool) -> Double {
         return UserDefaults.standard.value(forKey: offline ? CozieStorageKeys.healthLastSyncOffleinKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue) as? Double ?? 0.0
@@ -167,3 +182,5 @@ class CozieStorage: CozieStorageProtocol {
         return CozieStorageKeys.healthPrefixSyncedDateKey.rawValue
     }
 }
+
+extension CozieStorage: SurveyStorageProtocol {}

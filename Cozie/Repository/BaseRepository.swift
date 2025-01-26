@@ -19,45 +19,13 @@ enum ServiceError: Error, LocalizedError {
     }
 }
 
+protocol ApiRepositoryProtocol {
+    func get(url: String, parameters: [String: String], key: String, completion: @escaping (Result<Data, Error>) -> Void)
+    func post(url: String, body: Data, key: String, completion: @escaping (Result<Data, Error>) -> Void)
+}
+
 class BaseRepository: ObservableObject {
    
-    // MARK: Base GET
-    func get(url: String, parameters: [String: String], key: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        guard var componentsQuery = URLComponents(string: url) else { return }
-        
-        var itemsList = [URLQueryItem]()
-        for (key, value) in parameters {
-            itemsList.append(URLQueryItem(name: key, value: value))
-        }
-        componentsQuery.queryItems = itemsList
-        
-        if let url = componentsQuery.url {
-            
-            var urlRequest = URLRequest(url: url)
-            urlRequest.httpMethod = "GET"
-            
-            urlRequest.allHTTPHeaderFields = [
-                "Accept": "application/json",
-                "x-api-key": key
-            ]
-            
-            URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                if let httpResponse = response as? HTTPURLResponse,
-                   httpResponse.statusCode == 200,
-                   let responseData = data {
-                    completion(.success(responseData))
-                } else {
-                    debugPrint("error - Sync data!")
-                    if let error = error {
-                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
-                    } else {
-                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
-                    }
-                }
-            }.resume()
-        }
-    }
-    
     // MARK: Base GET JSON file
     func getFileContent(url: String, parameters: [String: String]?, completion: @escaping (Result<Data, Error>) -> Void) {
         guard var componentsQuery = URLComponents(string: url) else { return }
@@ -98,6 +66,54 @@ class BaseRepository: ObservableObject {
             }.resume()
         }
     }
+}
+
+extension BaseRepository: ApiRepositoryProtocol {
+    // MARK: Base GET
+    func get(url: String, parameters: [String: String], key: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard var componentsQuery = URLComponents(string: url) else {
+            completion(.failure(ServiceError.responseStatusError(0, "Fatal error")))
+            return
+        }
+        
+        var itemsList = [URLQueryItem]()
+        for (key, value) in parameters {
+            itemsList.append(URLQueryItem(name: key, value: value))
+        }
+        componentsQuery.queryItems = itemsList
+        
+        if let url = componentsQuery.url {
+            
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "GET"
+            
+            urlRequest.allHTTPHeaderFields = [
+                "Accept": "application/json",
+                "x-api-key": key
+            ]
+            
+            URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                // debug
+                if let dataToPrint = data {
+                    debugPrint(String(data: dataToPrint, encoding: .utf8))
+                }
+                //
+                
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode == 200,
+                   let responseData = data {
+                    completion(.success(responseData))
+                } else {
+                    debugPrint("error - Sync data!")
+                    if let error = error {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, error.localizedDescription)))
+                    } else {
+                        completion(.failure(ServiceError.responseStatusError((response as? HTTPURLResponse)?.statusCode ?? 0, "Empty response!")))
+                    }
+                }
+            }.resume()
+        }
+    }
     
     // MARK: Base Post
     func post(url: String, body: Data, key: String, completion: @escaping (Result<Data, Error>) -> Void) {
@@ -112,6 +128,10 @@ class BaseRepository: ObservableObject {
                 "Content-Type": "application/json",
                 "x-api-key": key
             ]
+            
+            // debug
+            debugPrint(String(data: body, encoding: .utf8))
+            //
             
             urlRequest.httpBody = body
             let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -131,4 +151,6 @@ class BaseRepository: ObservableObject {
             }.resume()
         }
     }
+
 }
+ 

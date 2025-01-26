@@ -4,7 +4,7 @@
 target 'Cozie' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+  pod 'OneSignalXCFramework', '>= 5.0', '< 6.0'
   # Pods for Cozie
 
   target 'CozieTests' do
@@ -31,5 +31,5 @@ target 'OneSignalNotificationServiceExtension' do
   use_frameworks!
 
   # Pods for OneSignalNotificationServiceExtension
-  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+  pod 'OneSignalXCFramework', '>= 5.0', '< 6.0'
 end
