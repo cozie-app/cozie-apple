@@ -19,15 +19,15 @@ final class BackendSection: Identifiable {
         self.list = list
     }
     
-    static var defaulDataSection = BackendSection(id: BackendViewModel.BackendSectionType.data.rawValue,
+    static var defaultDataSection = BackendSection(id: BackendViewModel.BackendSectionType.data.rawValue,
                                                   list: [BackendData(id: BackendViewModel.BackendState.healthCutoffTime.rawValue,
-                                                                     title: "HealthKit Cutoff Time",
+                                                                     title: "HealthKit Cutoff Time [d]",
                                                                      subtitle: ""),
                                                          BackendData(id: BackendViewModel.BackendState.distanceFilter.rawValue,
-                                                                                                title: "Distance Filter",
+                                                                                                title: "Distance Filter [m]",
                                                                                                 subtitle: "")])
     
-    static var defaulBackendSection = BackendSection(id: BackendViewModel.BackendSectionType.backend.rawValue,
+    static var defaultBackendSection = BackendSection(id: BackendViewModel.BackendSectionType.backend.rawValue,
                                                      list: [BackendData(id: BackendViewModel.BackendState.readURL.rawValue,
                                                                         title: "API Read URL",
                                                                         subtitle: "https://at6x6b7v54hmoki6dlyew72csq0ihxrn.lambda-url.ap-southeast-1.on.aws"),
@@ -44,7 +44,7 @@ final class BackendSection: Identifiable {
                                                                         title: "Participant Password",
                                                                         subtitle: "")])
     
-    static var defaulSurveysSection = BackendSection(id: BackendViewModel.BackendSectionType.surveys.rawValue,
+    static var defaultSurveysSection = BackendSection(id: BackendViewModel.BackendSectionType.surveys.rawValue,
                                                      list: [BackendData(id: BackendViewModel.BackendState.watchsurveyLink.rawValue,
                                                                         title: "Watch Survey Link",
                                                                         subtitle: ""),
@@ -81,16 +81,16 @@ class BackendViewModel: NSObject, ObservableObject {
             updateState(state: showingState)
         }
     }
-    @Published var section: [BackendSection] = [BackendSection.defaulSurveysSection,
-                                                BackendSection.defaulBackendSection,
-                                                BackendSection.defaulDataSection]
+    @Published var section: [BackendSection] = [BackendSection.defaultSurveysSection,
+                                                BackendSection.defaultBackendSection,
+                                                BackendSection.defaultDataSection]
     
     let storage: CozieStorageProtocol & WSStorageProtocol
     private var backendState: BackendState = .clear
     
     let backendInteractor: BackendInteractorProtocol
-    let setitngsInteractor: SettingsInteractorProtocol
-    let userIntaractor: UserInteractorProtocol
+    let settingsInteractor: SettingsInteractorProtocol
+    let userInteractor: UserInteractorProtocol
     
     let dbStorage: DataBaseStorageProtocol
     let comManager: WatchConnectivityManagerPhoneProtocol
@@ -98,30 +98,32 @@ class BackendViewModel: NSObject, ObservableObject {
     let watchSurveyInteractor: WatchSurveyInteractorProtocol
     let healthKitInteractor: HealthKitInteractorProtocol
     
+    weak var appDelegate: AppDelegate?
+    
     @Published var loading: Bool = false
     @Published var showError: Bool = false
     
     var errorString: String = ""
     private var subscriptions = Set<AnyCancellable>()
     
-    /// Init Ingection
+    /// Init Injection
     /// - Parameters:
     ///    - storage: User storage
     ///    - backendInteractor: Interactor for backend data.
-    ///    - setitngsInteractor: Interactor for settings data.
+    ///    - settingsInteractor: Interactor for settings data.
     init(storage: CozieStorageProtocol & WSStorageProtocol,
          backendInteractor: BackendInteractorProtocol = BackendInteractor(),
-         setitngsInteractor: SettingsInteractorProtocol = SettingsInteractor(),
-         userIntaractor: UserInteractorProtocol = UserInteractor(),
+         settingsInteractor: SettingsInteractorProtocol = SettingsInteractor(),
+         userInteractor: UserInteractorProtocol = UserInteractor(),
          dbStorage: DataBaseStorageProtocol = PersistenceController.shared,
          comManager: WatchConnectivityManagerPhoneProtocol = WatchConnectivityManagerPhone.shared,
          watchSurveyInteractor: WatchSurveyInteractorProtocol = WatchSurveyInteractor(),
-         healthKitInteractor: HealthKitInteractorProtocol = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)) {
+         healthKitInteractor: HealthKitInteractorProtocol = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)) {
         
         self.storage = storage
         self.backendInteractor = backendInteractor
-        self.setitngsInteractor = setitngsInteractor
-        self.userIntaractor = userIntaractor
+        self.settingsInteractor = settingsInteractor
+        self.userInteractor = userInteractor
         self.dbStorage = dbStorage
         self.comManager = comManager
         self.watchSurveyInteractor = watchSurveyInteractor
@@ -171,7 +173,7 @@ class BackendViewModel: NSObject, ObservableObject {
             backend.api_write_key = value
         case .participantPassword:
             backend.participant_password = value
-            userIntaractor.currentUser?.passwordID = value
+            userInteractor.currentUser?.passwordID = value
         case .watchsurveyLink:
             // Load watch summary if ws link was edited
             if backend.watch_survey_link != value {
@@ -186,6 +188,7 @@ class BackendViewModel: NSObject, ObservableObject {
         case .distanceFilter:
             guard let floatValue = Float(value) else { return }
             storage.setDistanceFilter(floatValue)
+            appDelegate?.locationManager.updateLocationManager()
         case .clear:
             break
         }
@@ -216,9 +219,9 @@ class BackendViewModel: NSObject, ObservableObject {
         case .phoneSurveyLink:
             return backend.phone_survey_link ?? ""
         case .healthCutoffTime:
-            return "\(Int(storage.maxHealthCutoffTimeInterval()))"
+            return "\(Float(storage.maxHealthCutoffTimeInterval()))"
         case .distanceFilter:
-            return "\(Int(storage.distanceFilter()))"
+            return "\(Float(storage.distanceFilter()))"
         case .clear:
             return ""
         }
@@ -278,8 +281,8 @@ class BackendViewModel: NSObject, ObservableObject {
                         
                         if let survey = selectedSurvey?.toModel(),
                             let backend = self.backendInteractor.currentBackendSettings,
-                            let user = self.userIntaractor.currentUser,
-                            let settings = self.setitngsInteractor.currentSettings {
+                            let user = self.userInteractor.currentUser,
+                            let settings = self.settingsInteractor.currentSettings {
                             
                             let json = try JSONEncoder().encode(survey)
                             

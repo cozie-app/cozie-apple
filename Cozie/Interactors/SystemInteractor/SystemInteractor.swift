@@ -14,12 +14,12 @@ let emptyFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEna
 let testLog = Logs(time: "2023-01-01T07:02:51.578Z", measurement: "dev", tags: emptyTag, fields: emptyFields)
 // TODO: - Unit Tests
 final class LogsSystemInteractor {
-    let userIntaractor = UserInteractor()
+    let userInteractor = UserInteractor()
     let settingsInteractor = SettingsInteractor()
     let backendInteractor = BackendInteractor()
     
     func logsData() -> Logs {
-        guard let user = userIntaractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
+        guard let user = userInteractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
         let tag = Tags(idOnesignal: CozieStorage.shared.playerID(), idParticipant: user.participantID ?? "", idPassword: user.passwordID ?? "")
         let fields = Fields(wssGoal: Int(settings.wss_goal),
                              wssTitle: settings.wss_title ?? "",

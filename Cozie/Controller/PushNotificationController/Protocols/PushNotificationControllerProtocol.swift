@@ -6,7 +6,7 @@
 //
 
 protocol PushNotificationControllerProtocol {
-    func registerActionNotifCategory()
+    func registerActionNotificationCategory()
     func enablePushLogging(_ value: Bool)
 }
 
@@ -16,7 +16,7 @@ protocol ApiDataProtocol {
 }
 
 protocol PushNotificationRepositoryProtocol {
-    func saveNotifInfo(info: [String: Any]) async throws
+    func saveNotificationInfo(info: [String: Any]) async throws
     func saveAction(action: String) async throws
 }
 

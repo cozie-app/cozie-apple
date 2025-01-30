@@ -56,8 +56,10 @@ class Survey: Codable, Identifiable {
 // TODO: - Unit Tests
 class ResponseOption: Codable, Identifiable {
     var id: String {
-        return text + icon
+        return uuid.uuidString // text + icon
     }
+    let uuid = UUID()
+    
     var text, icon, iconBackgroundColor: String
     var useSfSymbols: Bool
     var sfSymbolsColor, nextQuestionID: String

@@ -17,12 +17,12 @@ struct PushNotificationLoggerTests {
         let sut = PushNotificationLoggerController(repository: spy)
         
         #expect(spy.info.isEmpty)
-        try? await sut.pushNotificationDidReciv(payload: [:])
+        try? await sut.pushNotificationDidReceive(payload: [:])
         
         #expect(spy.info.isEmpty)
         #expect(spy.actions.isEmpty)
         
-        try? await sut.pushNotificationDidReciv(payload: ["test": 0])
+        try? await sut.pushNotificationDidReceive(payload: ["test": 0])
         
         #expect(spy.info.count == 1)
         #expect(spy.actions.isEmpty)
@@ -53,7 +53,7 @@ fileprivate final class RepositorySpy: PushNotificationRepositoryProtocol {
     var info: [String: Any] = [:]
     var actions: [String] = []
     
-    func saveNotifInfo(info: [String: Any]) async throws {
+    func saveNotificationInfo(info: [String: Any]) async throws {
         self.info = info
     }
     

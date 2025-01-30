@@ -11,7 +11,7 @@ import Foundation
 
 @Suite("BackendViewModel tests", .serialized)
 struct BackendViewModelTests {
-    @Test func prepareDataForDefaulSurveysSection() async throws {
+    @Test func prepareDataForDefaultSurveysSection() async throws {
         let dbStorage = PersistenceController(inMemory: true)
         let hkInteractorMock = HealthKitInteractorMock()
         let backendMock = BackendInteractorMock()
@@ -22,8 +22,8 @@ struct BackendViewModelTests {
         
         let sut = BackendViewModel(storage: CozieStorageMock(),
                                    backendInteractor: backendMock,
-                                   setitngsInteractor: SettingsInteractorMock(),
-                                   userIntaractor: UserInteractorMock(),
+                                   settingsInteractor: SettingsInteractorMock(),
+                                   userInteractor: UserInteractorMock(),
                                    dbStorage: dbStorage,
                                    comManager: WatchConnectivityManagerPhoneMock(),
                                    watchSurveyInteractor: WatchSurveyInteractor(),
@@ -39,7 +39,7 @@ struct BackendViewModelTests {
         #expect(sut.section.first?.list[1].subtitle == infoStub.phone_survey_link)
     }
     
-    @Test func prepareDataForDefaulDataSection() async throws {
+    @Test func prepareDataForDefaultDataSection() async throws {
         let dbStorage = PersistenceController(inMemory: true)
         let hkInteractorMock = HealthKitInteractorMock()
         let backendMock = BackendInteractorMock()
@@ -50,8 +50,8 @@ struct BackendViewModelTests {
         
         let sut = BackendViewModel(storage: storage,
                                    backendInteractor: backendMock,
-                                   setitngsInteractor: SettingsInteractorMock(),
-                                   userIntaractor: UserInteractorMock(),
+                                   settingsInteractor: SettingsInteractorMock(),
+                                   userInteractor: UserInteractorMock(),
                                    dbStorage: dbStorage,
                                    comManager: WatchConnectivityManagerPhoneMock(),
                                    watchSurveyInteractor: WatchSurveyInteractor(),
@@ -60,11 +60,11 @@ struct BackendViewModelTests {
         sut.prepareData(active: nil)
         
         #expect(hkInteractorMock.getAllRequestedDataCalledCount == 1)
-        #expect(sut.section[2].list.first?.subtitle == "\(Int(storage.cutoffTimeIntervalStub ?? 0))")
-        #expect(sut.section[2].list[1].subtitle == "\(Int(storage.distanceFilterStub ?? 0))")
+        #expect(sut.section[2].list.first?.subtitle == "\(storage.cutoffTimeIntervalStub ?? 0)")
+        #expect(sut.section[2].list[1].subtitle == "\(storage.distanceFilterStub ?? 0)")
     }
     
-    @Test func prepareDataForDefaulBackendSection() async throws {
+    @Test func prepareDataForDefaultBackendSection() async throws {
         let dbStorage = PersistenceController(inMemory: true)
         let hkInteractorMock = HealthKitInteractorMock()
         let backendMock = BackendInteractorMock()
@@ -79,8 +79,8 @@ struct BackendViewModelTests {
         
         let sut = BackendViewModel(storage: CozieStorageMock(),
                                    backendInteractor: backendMock,
-                                   setitngsInteractor: SettingsInteractorMock(),
-                                   userIntaractor: UserInteractorMock(),
+                                   settingsInteractor: SettingsInteractorMock(),
+                                   userInteractor: UserInteractorMock(),
                                    dbStorage: dbStorage,
                                    comManager: WatchConnectivityManagerPhoneMock(),
                                    watchSurveyInteractor: WatchSurveyInteractor(),
@@ -104,8 +104,8 @@ struct BackendViewModelTests {
         
         let sut = BackendViewModel(storage: storage,
                                    backendInteractor: backendMock,
-                                   setitngsInteractor: SettingsInteractorMock(),
-                                   userIntaractor: UserInteractorMock(),
+                                   settingsInteractor: SettingsInteractorMock(),
+                                   userInteractor: UserInteractorMock(),
                                    dbStorage: dbStorage,
                                    comManager: WatchConnectivityManagerPhoneMock(),
                                    watchSurveyInteractor: WatchSurveyInteractor(),
@@ -128,8 +128,8 @@ struct BackendViewModelTests {
         
         let sut = BackendViewModel(storage: storage,
                                    backendInteractor: backendMock,
-                                   setitngsInteractor: SettingsInteractorMock(),
-                                   userIntaractor: UserInteractorMock(),
+                                   settingsInteractor: SettingsInteractorMock(),
+                                   userInteractor: UserInteractorMock(),
                                    dbStorage: dbStorage,
                                    comManager: WatchConnectivityManagerPhoneMock(),
                                    watchSurveyInteractor: WatchSurveyInteractor(),
@@ -166,8 +166,8 @@ struct BackendViewModelTests {
         
         let sut = BackendViewModel(storage: storage,
                                    backendInteractor: backendMock,
-                                   setitngsInteractor: SettingsInteractorMock(),
-                                   userIntaractor: UserInteractorMock(),
+                                   settingsInteractor: SettingsInteractorMock(),
+                                   userInteractor: UserInteractorMock(),
                                    dbStorage: dbStorage,
                                    comManager: WatchConnectivityManagerPhoneMock(),
                                    watchSurveyInteractor: WatchSurveyInteractor(),

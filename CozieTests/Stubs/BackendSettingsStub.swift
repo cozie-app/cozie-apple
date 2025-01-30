@@ -12,7 +12,7 @@ struct BackendSettingStub {
     static let apiReadKey = "ApiReadKeySub"
     static let apiWriteUrl = "ApiWriteUrlSub"
     static let apiWriteKey = "ApiWriteKeySub"
-    static let oneSigmnalId = "OneSigmnalIdSub"
+    static let oneSignalId = "OneSignalIdSub"
     static let participantPassword = "1234"
     static let watchSurveyLink = "https://test_new_ws"
     static let phoneSurveyLink = "https://test_new_ps"

@@ -16,23 +16,23 @@ class HealthFields: Encodable {
         case endTime = "timestamp_end"
     }
     
-    var transmitTtrigger: String = ""
+    var transmitTrigger: String = ""
     var healthKey: String = ""
     var healthValue: Double = 0.0
     
-    // workaut
+    // workout
     var healthStringValue: String = ""
     
     // start/end time
-    var startTime: String = ""
+    // var startTime: String = ""
     var endTime: String = ""
     
-    init(transmitTtrigger: String, healthKey: String, healthValue: Double, healthStringValue: String = "", startTime: String = "", endTime: String = "") {
-        self.transmitTtrigger = transmitTtrigger
+    init(transmitTrigger: String, healthKey: String, healthValue: Double, healthStringValue: String = "", /*startTime: String = "",*/ endTime: String = "") {
+        self.transmitTrigger = transmitTrigger
         self.healthKey = healthKey
         self.healthValue = healthValue
         self.healthStringValue = healthStringValue
-        self.startTime = startTime
+        //self.startTime = startTime
         self.endTime = endTime
     }
     
@@ -69,7 +69,7 @@ class HealthFields: Encodable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: HealthFieldsCodingKeys.self)
-        try container.encode(transmitTtrigger, forKey: .transmitTtrigger)
+        try container.encode(transmitTrigger, forKey: .transmitTtrigger)
         if healthStringValue.isEmpty {
             try container.encode(healthValue, forKey: .info(key: healthKey))
         } else {
@@ -77,8 +77,8 @@ class HealthFields: Encodable {
         }
         
         // start_time -- end_time
-        if !startTime.isEmpty && !endTime.isEmpty {
-            try container.encode(startTime, forKey: .info(key: healthKey + "_" + HealthModelKeys.startTime.rawValue))
+        if !endTime.isEmpty {
+            // try container.encode(startTime, forKey: .info(key: healthKey + "_" + HealthModelKeys.startTime.rawValue))
             try container.encode(endTime, forKey: .info(key: healthKey + "_" + HealthModelKeys.endTime.rawValue))
         }
     }

@@ -37,11 +37,12 @@ protocol SettingsInteractorProtocol {
 final class HomeCoordinator: ObservableObject {
     
     // MARK: Private
-    private let userIntaractor: UserInteractorProtocol
+    private let userInteractor: UserInteractorProtocol
     private let settingsInteractor: SettingsInteractorProtocol
     private let backendInteractor: BackendInteractorProtocol
     private let settingsViewModel: SettingViewModel
     private let watchSurveyInteractor: WatchSurveyInteractor
+    weak var appDelegate: AppDelegate?
     
     static let didReceiveDeeplink = Notification.Name("Cozie.didReceiveDeeplink")
     
@@ -51,13 +52,13 @@ final class HomeCoordinator: ObservableObject {
     
     init(tab: CozieTabs = CozieTabs.data,
          session: Session,
-         userIntaractor: UserInteractorProtocol = UserInteractor(),
+         userInteractor: UserInteractorProtocol = UserInteractor(),
          settingsInteractor: SettingsInteractorProtocol = SettingsInteractor(),
          backendInteractor: BackendInteractorProtocol = BackendInteractor()) {
         self.tab = tab
         self.session = session
         
-        self.userIntaractor = userIntaractor
+        self.userInteractor = userInteractor
         self.settingsInteractor = settingsInteractor
         self.backendInteractor = backendInteractor
         
@@ -67,7 +68,7 @@ final class HomeCoordinator: ObservableObject {
     
     /// Create settings coordinator
     ///
-    func loadSessionCoodinator() -> SettingCoordinator {
+    func loadSessionCoordinator() -> SettingCoordinator {
         return SettingCoordinator(parent: self,
                                   viewModel: settingsViewModel,
                                   title: "Cozie - Settings",
@@ -76,30 +77,31 @@ final class HomeCoordinator: ObservableObject {
     
     /// Use this function to apply new settings from QR-code/DeepLink
     ///
-    func prepareSource(info: InitModel, storage: WSStateStoregeProtocol & WSStorageProtocol) {
+    func prepareSource(info: InitModel, storage: WSStateStorageProtocol & WSStorageProtocol, appDelegate: AppDelegate? = nil ) {
         // update backend data
-        backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSigmnalId: nil, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
+        backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSignalId: nil, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
         
-        // update healthkit cut off interval
+        // update HealthKit cut off interval
         if let cuttoffTime = info.cutoffTime {
             storage.saveMaxHealthCutoffTimeInterval(cuttoffTime)
         }
         
         // update location distance filter
-        if let distaceFilter = info.distaceFilter {
-            storage.setDistanceFilter(Float(distaceFilter))
+        if let distanceFilter = info.distanceFilter {
+            storage.setDistanceFilter(Float(distanceFilter))
+            appDelegate?.locationManager.updateLocationManager()
         }
         
         // update settings data
         if let backend = backendInteractor.currentBackendSettings {
-            userIntaractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
+            userInteractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
             settingsInteractor.prepareSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabled: info.wssReminderEnabled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
             
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions, surveyInteractor: WatchSurveyInteractor())
             // clear and update reminders via QR-code/DeepLink
             settingsViewModel.prepareRemindersIfNeeded()
             
-            // reset sync device sataus
+            // reset sync device status
             storage.savePIDSynced(false)
             storage.saveExpIDSynced(false)
             storage.saveSurveySynced(false)
@@ -125,12 +127,12 @@ final class HomeCoordinator: ObservableObject {
         }
     }
     
-    /// Use this function to prepaere default data
+    /// Use this function to prepare default data
     ///
     func prepareSource() {
         backendInteractor.prepareBackendData()
         if let backend = backendInteractor.currentBackendSettings {
-            userIntaractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
+            userInteractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
             settingsInteractor.prepareSettingsData()
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions, surveyInteractor: WatchSurveyInteractor())
         }

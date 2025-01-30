@@ -10,7 +10,7 @@ import Testing
 
 struct OfflineManagerTests {
     @Test
-    func offleinModeEnabledIfEmptyAPI() async throws {
+    func offlineModeEnabledIfEmptyAPI() async throws {
         let sut = OfflineModeManager()
         
         sut.updateWith(apiInfo: ("", ""))
@@ -19,7 +19,7 @@ struct OfflineManagerTests {
     }
     
     @Test
-    func offleinModeEnabledIfEmptyAPIKey() async throws {
+    func offlineModeEnabledIfEmptyAPIKey() async throws {
         let sut = OfflineModeManager()
         
         sut.updateWith(apiInfo: ("https://test", ""))
@@ -28,7 +28,7 @@ struct OfflineManagerTests {
     }
     
     @Test
-    func offleinModeEnabledIfEmptyAPIURL() async throws {
+    func offlineModeEnabledIfEmptyAPIURL() async throws {
         let sut = OfflineModeManager()
         
         sut.updateWith(apiInfo: ("", "test"))
@@ -37,7 +37,7 @@ struct OfflineManagerTests {
     }
     
     @Test
-    func offleinModeDisabled() async throws {
+    func offlineModeDisabled() async throws {
         let sut = OfflineModeManager()
         
         sut.updateWith(apiInfo: ("https://test", "test"))

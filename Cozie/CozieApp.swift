@@ -9,15 +9,19 @@ import SwiftUI
 import UIKit
 import OneSignalFramework
 
-// MARK: AppDelegate: - Application initialization / BGTasks
+// MARK: AppDelegate: - Application initialisation / BGTasks
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    // move to global state
     let locationManager = LocationManager()
     let backgroundProcessing = BackgroundUpdateManager()
-    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
+    
     var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     static private(set) var instance: AppDelegate! = nil
-    private(set) var pushNotificationController: PushNotificationControllerProtocol = PushNotificationController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificaitonLoggerRepository(apiRepository: BaseRepository(), api: BackendInteractor())), userData: UserInteractor(), storage: CozieStorage.shared)
+    
+    private(set) var pushNotificationController: PushNotificationControllerProtocol = PushNotificationController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificationLoggerRepository(apiRepository: BaseRepository(), api: BackendInteractor())), userData: UserInteractor(), storage: CozieStorage.shared)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -30,7 +34,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             let interval = Date().timeIntervalSince1970
             CozieStorage.shared.healthUpdateLastSyncedTimeInterval(interval, offline: false)
             CozieStorage.shared.healthUpdateLastSyncedTimeInterval(interval, offline: true)
-            CozieStorage.shared.updatefirstLaunchTimeInterval(interval)
+            CozieStorage.shared.updateFirstLaunchTimeInterval(interval)
             
             healthKitInteractor.requestHealthAuth()
         }
@@ -46,11 +50,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         locationManager.requestAuth()
         
-        // init conection with watch
+        // init connection with watch
         _ = WatchConnectivityManagerPhone.shared
         
         // custom notification action: register new notification category
-        pushNotificationController.registerActionNotifCategory()
+        pushNotificationController.registerActionNotificationCategory()
         return true
     }
     
@@ -78,7 +82,7 @@ struct CozieApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeCoordinatorView(coordinator: coordinator)
+            HomeCoordinatorView(coordinator: coordinator, appDelegate: appDelegate)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onChange(of: scenePhase) { newPhase in
                     
@@ -118,7 +122,7 @@ struct CozieApp: App {
            let base64DataEnc = Data(base64Encoded: base64Str, options: .ignoreUnknownCharacters) {
             do {
                 let model = try JSONDecoder().decode(InitModel.self, from: base64DataEnc)
-                coordinator.prepareSource(info: model, storage: CozieStorage())
+                coordinator.prepareSource(info: model, storage: CozieStorage(), appDelegate: appDelegate)
             } catch let error {
                 debugPrint(error)
             }

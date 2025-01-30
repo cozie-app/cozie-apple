@@ -22,7 +22,7 @@ struct TimePicker: View {
     var setAction: (_ hour: Int, _ minutes: Int) -> ()
     
     var body: some View {
-        GeometryReader { geomentry in
+        GeometryReader { geometry in
             ZStack {
                 Color.white.opacity(0.9).blur(radius: 10)
                 VStack(spacing: 6) {
@@ -34,17 +34,17 @@ struct TimePicker: View {
                         TimePickerView(title: "hours",
                                        data: viewModel.hourRange,
                                        selection: $selectedHour)
-                        .frame(width: geomentry.size.width/2 - 8, height: 160)
+                        .frame(width: geometry.size.width/2 - 8, height: 160)
                         .clipped()
                         
                         TimePickerView(title: "min",
                                        data: viewModel.minutesRange,
                                        stepInterval: stepInterval,
                                        selection: $selectedMinutes)
-                        .frame(width: geomentry.size.width/2 - 8, height: 160)
+                        .frame(width: geometry.size.width/2 - 8, height: 160)
                         .clipped()
                     }
-                    .frame(width: geomentry.size.width)
+                    .frame(width: geometry.size.width)
                     //.padding([.leading, .trailing], 8)
                     
                     Button {

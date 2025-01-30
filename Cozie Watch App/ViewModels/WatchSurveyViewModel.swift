@@ -16,7 +16,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         let model = WatchSurveyViewModel()
         model.questionsTitle = "Currently, the end of watch survey questions might not shown depending on the Apple Watch model and font size settings in watchOS. We would like to make the following changes"
         model.questionsList = [ResponseOption(text: "Test 1", icon: "12", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
-                               ResponseOption(text: "Test 2", icon: "23", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
+                               ResponseOption(text: "Test 2 sdfsdf sd fsd fsd fsdf sdf sdf sdf sdf sdf sdf sdf sdf sd fs dfsd fsd", icon: "23", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
                                ResponseOption(text: "Test 3", icon: "34", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
                                ResponseOption(text: "Test 4", icon: "45", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: "")]
         return model
@@ -36,7 +36,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     private let locationManager: UpdateLocationProtocol = LocationManager()
     private let watchSurveyInteractor = WatchSurveyInteractor()
     
-    private var selectedOptions: [(sID: String, optin: ResponseOption)] = []
+    private var selectedOptions: [(sID: String, option: ResponseOption)] = []
     private var currentSurvey: Survey?
     private var watchSurvey: WatchSurveyModelController? = nil
     private var startTime = Date()
@@ -86,7 +86,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         if !storage.dataSynced() {
             state = .notsynced
         } else {
-            //            let lastUpdateInSconds = Int(Date().timeIntervalSince1970) - storage.lastSurveySendInterval()
+            //            let lastUpdateInSeconds = Int(Date().timeIntervalSince1970) - storage.lastSurveySendInterval()
             //            let timeInterval = storage.timeInterval()
             //            if storage.lastSurveySendInterval() > 0, timeInterval > 0, (lastUpdateInSconds - timeInterval) < 0 {
             //                state = .timeout
@@ -112,20 +112,25 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
 //            }
             
             // Uncomment to test
-            //                let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
-            //                if let url = defaultURLJSON {
-            //                    do {
-            //                        let data = try Data(contentsOf: url)
-            //                        let wSurvey = try JSONDecoder().decode(WatchSurvey.self, from: data)
-            //                        watchSurvey = wSurvey
-            //                        questionsTitle = wSurvey.survey.first!.question
-            //                        questionsList = wSurvey.survey.first!.responseOptions
-            //                    } catch let error {
-            //                        debugPrint(error.localizedDescription)
-            //                    }
-            //                }
+//            let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
+            /*if let url = defaultURLJSON {
+                do {
+                    let data = try Data(contentsOf: url)
+                    let wSurvey = try JSONDecoder().decode(WatchSurveyModelController.self, from: data)
+                    if let question = wSurvey.survey.first(where: { $0.questionID == (wSurvey.firstQuestionID ?? "failed") }) {
+                        // questionID has a side effect of questionsTitle !!!
+                        questionID = question.questionID
+                        
+                        questionsList = question.responseOptions
+                        questionsTitle = question.question
+                        currentSurvey = question
+                    }
+                } catch let error {
+                    debugPrint(error.localizedDescription)
+                }
+            }*/
             
-            if let json = StorageManager.shared.watchatchSurveyJSON() {
+            if let json = StorageManager.shared.watchSurveyJSON() {
                 loadWatchSurvey(data: json)
             } else {
                 fatalError("Incorrect State!!!")
@@ -139,7 +144,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             // clear bag
             bag = Set<AnyCancellable>()
             
-            // bind HealfData state
+            // bind HealthData state
             cacheHealthState.sink { [weak self] value in
                 guard let self = self else { return }
                 
@@ -163,7 +168,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     private func triggerSendSurvey() {
-        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.currentLocation?.timestamp), healthCache: healthCache, logsComplition: { }, completion: { [weak self] success, error in
+        watchSurveyInteractor.sendSurveyData(watchSurvey: watchSurvey, selectedOptions: selectedOptions, location: locationManager.currentLocation, time: (startTime, locationManager.currentLocation?.timestamp), healthCache: healthCache, logsCompletion: { }, completion: { [weak self] success, error in
             self?.resetCachedHealthData()
             
             if success {
@@ -222,25 +227,27 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         return selectedOptions.firstIndex(where: { $0.sID == questionID })
     }
     
-    func isOptinSelected(option: ResponseOption) -> Bool {
-        return selectedOptions.contains(where: {$0.optin.id == option.id && $0.sID == currentSurvey?.questionID})
+    func isOptionSelected(option: ResponseOption) -> Bool {
+        return selectedOptions.contains(where: {$0.option.id == option.id && $0.sID == currentSurvey?.questionID})
     }
     
     func selectOptions(option: ResponseOption) {
         // haptic indicator of button presses
-        WKInterfaceDevice.current().play(.click)
+        Task { @MainActor in
+            WKInterfaceDevice.current().play(.click)
+        }
         
-        // remove previouse selected option
-        if let indextoDelete = selectedOption(for: currentSurvey?.questionID ?? "") {
-            selectedOptions[indextoDelete] = (currentSurvey?.questionID ?? "", option)
+        // remove previous selected option
+        if let indexToDelete = selectedOption(for: currentSurvey?.questionID ?? "") {
+            selectedOptions[indexToDelete] = (currentSurvey?.questionID ?? "", option)
         } else {
             selectedOptions.append((currentSurvey?.questionID ?? "", option))
         }
         
-        if let nextSuvey = watchSurvey?.survey.first(where: { $0.questionID == option.nextQuestionID}) {
-            questionsTitle = nextSuvey.question
-            questionsList = nextSuvey.responseOptions
-            currentSurvey = nextSuvey
+        if let nextSurvey = watchSurvey?.survey.first(where: { $0.questionID == option.nextQuestionID}) {
+            questionsTitle = nextSurvey.question
+            questionsList = nextSurvey.responseOptions
+            currentSurvey = nextSurvey
         } else {
             state = .sendData
         }
@@ -263,19 +270,20 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             
             // Return to the previous selected option from the selected option
             if let currentSurveyIndex = selectedOption(for: currentSurvey?.questionID ?? ""), currentSurveyIndex > 0 {
-                let prewSurveyIndex = currentSurveyIndex-1
-                if let prevSuvey = watchSurvey?.survey.first(where: { $0.questionID == selectedOptions[prewSurveyIndex].sID }) {
-                    questionsTitle = prevSuvey.question
-                    questionsList = prevSuvey.responseOptions
-                    currentSurvey = prevSuvey
+                let deletedOption = selectedOptions.removeLast()
+                let prevSurveyIndex = selectedOptions.count - 1
+                if let prevSurvey = watchSurvey?.survey.first(where: { $0.questionID == selectedOptions[prevSurveyIndex].sID }) {
+                    questionsTitle = prevSurvey.question
+                    questionsList = prevSurvey.responseOptions
+                    currentSurvey = prevSurvey
                 }
             } else {
                 // Back to previous selected option
                 let current = selectedOptions.last
-                if let prevSuvey = watchSurvey?.survey.first(where: { $0.questionID == current?.sID ?? "" }) {
-                    questionsTitle = prevSuvey.question
-                    questionsList = prevSuvey.responseOptions
-                    currentSurvey = prevSuvey
+                if let prevSurvey = watchSurvey?.survey.first(where: { $0.questionID == current?.sID ?? "" }) {
+                    questionsTitle = prevSurvey.question
+                    questionsList = prevSurvey.responseOptions
+                    currentSurvey = prevSurvey
                 }
             }
         }
@@ -341,11 +349,11 @@ extension WatchSurveyViewModel: WCSessionDelegate {
         
         if let expID = message[CommunicationKeys.expIDKey.rawValue] as? String {
             // reset survey count
-            if storage.expirimentID() != expID {
+            if storage.experimentID() != expID {
                 storage.resetSurveyCount()
                 storage.clearLogs()
             }
-            storage.saveExpirimentID(expID: expID)
+            storage.saveExperimentID(expID: expID)
         }
         
         if let userOneSignalID = message[CommunicationKeys.userOneSignalIDKey.rawValue] as? String {
@@ -366,7 +374,7 @@ extension WatchSurveyViewModel: WCSessionDelegate {
         }
         
         if let maxTimeInterval = message[CommunicationKeys.healthCutoffTimeInterval.rawValue] as? Double {
-            storage.saveHealthMaxCutoffTimeinterval(maxTimeInterval)
+            storage.saveHealthMaxCutoffTimeInterval(maxTimeInterval)
         }
         
         transferLoggFile()

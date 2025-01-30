@@ -92,7 +92,7 @@ class SettingsInteractor: SettingsInteractorProtocol {
     }
     
     // TODO: - Unit Tests
-    func logSettingsData(name: String, expiriment: String, logs: Logs, completion: ((_ success: Bool)->())?) {
+    func logSettingsData(name: String, experiment: String, logs: Logs, completion: ((_ success: Bool)->())?) {
         if let backend = backendInteractor.currentBackendSettings {
             if (backend.api_write_url?.isEmpty ?? true) || (backend.api_write_key?.isEmpty ?? true) {
                 

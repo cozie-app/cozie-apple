@@ -88,7 +88,7 @@ struct CozieSettingView: View {
                 viewModel.getUserInfo()
                 viewModel.configureSettings()
             }
-            // triggerd by DeepLink
+            // triggered by DeepLink
             .onReceive(updateTrigger) { _ in
                 viewModel.resetSyncInfo()
                 viewModel.getUserInfo()
@@ -134,7 +134,7 @@ struct CozieSettingView: View {
                     viewModel.clearState()
                 } setAction: { list in
                     viewModel.clearState()
-                    viewModel.updatePartisipants(list: list)
+                    viewModel.updateParticipants(list: list)
                 }
             case .watchParticipationTimeStart:
                 TimePicker(title:"Daily Participation Time Start",
@@ -208,7 +208,7 @@ struct CozieSettingView: View {
                     viewModel.clearState()
                 } setAction: { list in
                     viewModel.clearState()
-                    viewModel.updatePhonePartisipants(list: list)
+                    viewModel.updatePhoneParticipants(list: list)
                 }
             }
         }

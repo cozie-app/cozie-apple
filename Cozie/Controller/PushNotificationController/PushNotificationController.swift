@@ -28,6 +28,7 @@ class PushNotificationController: NSObject {
     let pushNotificationLogger: PushNotificationLoggerController
     let groupLoggerStorage: PushNotificationLoggerGroupStorage
     let categoryFileName = "CategoryList"
+    let dismissOrSelectTrigger = "Dismiss"
     
     init(pushNotificationLogger: PushNotificationLoggerController,
          userData: UserDataProtocol,
@@ -37,8 +38,8 @@ class PushNotificationController: NSObject {
         self.groupLoggerStorage = PushNotificationLoggerGroupStorage(groupStorage: UserDefaults(suiteName: GroupCommon.storageName.rawValue) ?? UserDefaults.standard, localStorage: storage, userData: userData)
     }
     
-    func categoryList(plistName: String, bundel: Bundle) throws -> [CategoryInfo] {
-        if let url = bundel.url(forResource: plistName, withExtension: "plist") {
+    func categoryList(plistName: String, bundle: Bundle) throws -> [CategoryInfo] {
+        if let url = bundle.url(forResource: plistName, withExtension: "plist") {
             let data = try Data(contentsOf: url)
             let decoder = PropertyListDecoder()
             let list = try decoder.decode([CategoryInfo].self, from: data)
@@ -66,8 +67,8 @@ class PushNotificationController: NSObject {
     }
     
     fileprivate func categoryList() -> [CategoryInfo]? {
-        let bundel = Bundle(for: PushNotificationController.self)
-        return try? self.categoryList(plistName: categoryFileName, bundel: bundel)
+        let bundle = Bundle(for: PushNotificationController.self)
+        return try? self.categoryList(plistName: categoryFileName, bundle: bundle)
     }
 
 }
@@ -81,7 +82,7 @@ extension PushNotificationController: PushNotificationControllerProtocol {
                     if let self {
                         group.addTask {
                             for payloads in self.groupLoggerStorage.formattedPayloads(categoryList: self.categoryList() ?? []) {
-                                try? await self.pushNotificationLogger.pushNotificationDidReciv(payload: payloads)
+                                try? await self.pushNotificationLogger.pushNotificationDidReceive(payload: payloads)
                             }
                         }
                     }
@@ -92,23 +93,23 @@ extension PushNotificationController: PushNotificationControllerProtocol {
     }
     
     // MARK: Notification - Register Notification Category
-    func registerActionNotifCategory() {
+    func registerActionNotificationCategory() {
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().setNotificationCategories([])
 
         UNUserNotificationCenter.current().getNotificationCategories { list in
-            var categorys: Set<UNNotificationCategory> = []
+            var categories: Set<UNNotificationCategory> = []
             do {
-                let bundel = Bundle(for: PushNotificationController.self)
-                let categoryList = try self.categoryList(plistName: self.categoryFileName, bundel: bundel)
+                let bundle = Bundle(for: PushNotificationController.self)
+                let categoryList = try self.categoryList(plistName: self.categoryFileName, bundle: bundle)
                 for value in categoryList {
                     if list.first(where: { $0.identifier == value.id }) == nil {
-                        categorys.insert(self.registerCategory(value.id, actionList: value.buttons))
+                        categories.insert(self.registerCategory(value.id, actionList: value.buttons))
                     }
                 }
             } catch _ {}
             
-            UNUserNotificationCenter.current().setNotificationCategories(categorys)
+            UNUserNotificationCenter.current().setNotificationCategories(categories)
         }
     }
 }
@@ -118,20 +119,20 @@ extension PushNotificationController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         Task {
             do {
-                try await logPuchNotificationAction(actionIdentifier: response.actionIdentifier, userInfo: response.notification.request.content.userInfo as? [String: Any] ?? [:])
+                try await logPushNotificationAction(actionIdentifier: response.actionIdentifier, userInfo: response.notification.request.content.userInfo as? [String: Any] ?? [:])
             } catch let error {
                 debugPrint(error.localizedDescription)
             }
         }
     }
     
-    func logPuchNotificationAction(actionIdentifier: String, userInfo: [String: Any]) async throws {
+    func logPushNotificationAction(actionIdentifier: String, userInfo: [String: Any]) async throws {
         if actionIdentifier != UNNotificationDefaultActionIdentifier && actionIdentifier != UNNotificationDismissActionIdentifier {
             let data = self.groupLoggerStorage.formattedActions(trigger: actionIdentifier, categoryList: categoryList() ?? [], info: userInfo)
-            try await self.pushNotificationLogger.pushNotificationDidReciv(payload: data)
+            try await self.pushNotificationLogger.pushNotificationDidReceive(payload: data)
         } else if actionIdentifier == UNNotificationDismissActionIdentifier {
-            let data = self.groupLoggerStorage.formattedActions(trigger: "Dismiss", categoryList: categoryList() ?? [], info: userInfo)
-            try await self.pushNotificationLogger.pushNotificationDidReciv(payload: data)
+            let data = self.groupLoggerStorage.formattedActions(trigger: dismissOrSelectTrigger, categoryList: categoryList() ?? [], info: userInfo)
+            try await self.pushNotificationLogger.pushNotificationDidReceive(payload: data)
         }
     }
 }

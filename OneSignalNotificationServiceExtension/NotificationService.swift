@@ -24,7 +24,7 @@ class NotificationService: UNNotificationServiceExtension {
         Task {
             var tempInfo = request.content.userInfo
             tempInfo[GroupCommon.timestamp.rawValue] = Date().timeIntervalSince1970
-            try? await pushLogger.pushNotificationDidReciv(payload: tempInfo as? [String: Any] ?? [:])
+            try? await pushLogger.pushNotificationDidReceive(payload: tempInfo as? [String: Any] ?? [:])
         }
         
         if let bestAttemptContent = bestAttemptContent {
@@ -46,25 +46,25 @@ class NotificationService: UNNotificationServiceExtension {
 }
 
 extension UserDefaults: PushNotificationRepositoryProtocol {
-    func saveNotifInfo(info: [String: Any]) async throws {
-        var storredInfo: [[String: Any]] = self.object(forKey: GroupCommon.payloads.rawValue) as? [[String: Any]] ?? []
+    func saveNotificationInfo(info: [String: Any]) async throws {
+        var storedInfo: [[String: Any]] = self.object(forKey: GroupCommon.payloads.rawValue) as? [[String: Any]] ?? []
         
-        if storredInfo.count > GroupCommon.payloadsLimit {
-            storredInfo.removeFirst()
+        if storedInfo.count > GroupCommon.payloadsLimit {
+            storedInfo.removeFirst()
         }
         
-        storredInfo.append(info)
-        self.set(storredInfo, forKey: GroupCommon.payloads.rawValue)
+        storedInfo.append(info)
+        self.set(storedInfo, forKey: GroupCommon.payloads.rawValue)
     }
     
     func saveAction(action: String) async throws {
-        var storredAction: [String] = self.object(forKey: GroupCommon.actions.rawValue) as? [String] ?? []
+        var storedAction: [String] = self.object(forKey: GroupCommon.actions.rawValue) as? [String] ?? []
         
-        if storredAction.count > GroupCommon.actionsLimit {
-            storredAction.removeFirst()
+        if storedAction.count > GroupCommon.actionsLimit {
+            storedAction.removeFirst()
         }
         
-        storredAction.append(action)
-        self.set(storredAction, forKey: GroupCommon.actions.rawValue)
+        storedAction.append(action)
+        self.set(storedAction, forKey: GroupCommon.actions.rawValue)
     }
 }

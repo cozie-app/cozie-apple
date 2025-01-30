@@ -30,7 +30,7 @@ struct PushNotificationLoggerGroupStorage {
     }()
     
     func formattedPayloads(categoryList: [CategoryInfo]) -> [[String: Any]] {
-        return groupStorage.payloads().compactMap{formattedData(trigger: NotificationKeys.reception.rawValue, categoryList: categoryList, info: $0, dateFormatter: dateForm)}
+        return groupStorage.payloads().compactMap{ formattedData(trigger: NotificationKeys.reception.rawValue, categoryList: categoryList, info: $0, dateFormatter: dateForm, receive: true)}
     }
     
     func formattedActions(trigger: String, categoryList: [CategoryInfo], info: [String: Any]) -> [String: Any] {
@@ -45,17 +45,58 @@ struct PushNotificationLoggerGroupStorage {
     private func formattedData(trigger: String,
                                categoryList: [CategoryInfo],
                                info: [String: Any],
-                               dateFormatter: DateFormatter) -> [String: Any]? {
+                               dateFormatter: DateFormatter, receive: Bool = false) -> [String: Any]? {
         if let timestamp = info[GroupCommon.timestamp.rawValue] as? Double {
             let date = Date(timeIntervalSince1970: timestamp)
             let dateString = dateFormatter.string(from: date)
             
-            
-            return formattedData(trigger: trigger,
-                                 categoryList: categoryList,
-                                 info: info,
-                                 dateString: dateString)
+            if receive {
+                return formattedDataReceive(trigger: trigger,
+                                     categoryList: categoryList,
+                                     info: info,
+                                     dateString: dateString)
+            } else {
+                return formattedData(trigger: trigger,
+                                     categoryList: categoryList,
+                                     info: info,
+                                     dateString: dateString)
+            }
         } else { return nil }
+    }
+    
+    private func formattedDataReceive(trigger: String,
+                               categoryList: [CategoryInfo],
+                               info: [String: Any],
+                               dateString: String) -> [String: Any]? {
+        let tags = [WatchSurveyKeys.idOnesignal.rawValue: localStorage.playerID(),
+                    WatchSurveyKeys.idParticipant.rawValue: userData.userInfo?.participantID ?? "",
+                    WatchSurveyKeys.idPassword.rawValue: userData.userInfo?.passwordID ?? ""]
+        
+        let fields: [String: Any]
+        if let aps = info[NotificationKeys.aps.rawValue] as? [String: Any],
+           let alert = aps[NotificationKeys.alert.rawValue] as? [String: Any] {
+            let categoryInfo = categoryList.first(where: {$0.id == (aps[NotificationKeys.category.rawValue] as? String ?? "")})
+            
+            let buttons = categoryInfo?.buttons.reduce("", { partialResult, action in
+                return partialResult.count > 0 ? partialResult + ", " + action : action
+            }) ?? ""
+            
+            fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+                      NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
+                      NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
+                      NotificationActionKeys.notificationActionsShowKey: buttons,
+                      NotificationActionKeys.notificationActionButtonKey: "Dismissed",
+                      NotificationActionKeys.notificationTriggerKey: trigger,
+                      NotificationActionKeys.notificationTransmitKey: trigger]
+        } else {
+            fields = [:]
+        }
+        
+        let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
+                                        WatchSurveyKeys.measurement.rawValue: userData.userInfo?.experimentID ?? "",
+                                        WatchSurveyKeys.tags.rawValue: tags,
+                                        WatchSurveyKeys.fields.rawValue: fields]
+        return response
     }
     
     private func formattedData(trigger: String,
@@ -71,12 +112,14 @@ struct PushNotificationLoggerGroupStorage {
            let alert = aps[NotificationKeys.alert.rawValue] as? [String: Any] {
             let categoryInfo = categoryList.first(where: {$0.id == (aps[NotificationKeys.category.rawValue] as? String ?? "")})
             
+            let buttons = categoryInfo?.buttons.reduce("", { partialResult, action in
+                return partialResult.count > 0 ? partialResult + ", " + action : action
+            }) ?? ""
+            
             fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
                       NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
                       NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
-                      NotificationActionKeys.notificationActionsSchowKey: (categoryInfo?.buttons as? [String])?.reduce("", { partialResult, action in
-                return partialResult.count > 0 ? partialResult + ", " + action : action
-            }) ?? "",
+                      NotificationActionKeys.notificationActionsShowKey: buttons,
                       NotificationActionKeys.notificationActionButtonKey: trigger,
                       NotificationActionKeys.notificationTriggerKey: NotificationActionKeys.notificationTTValue,
                       NotificationActionKeys.notificationTransmitKey: NotificationActionKeys.notificationTTValue]

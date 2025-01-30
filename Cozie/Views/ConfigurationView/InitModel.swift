@@ -23,7 +23,7 @@ class InitModel: Codable {
     var apiWatchSurveyURL: String?
     var apiPhoneSurveyURL: String?
     var cutoffTime: Double?
-    var distaceFilter: Double?
+    var distanceFilter: Double?
     
     enum CodingKeys: String, CodingKey {
         case idParticipant = "id_participant"
@@ -47,10 +47,10 @@ class InitModel: Codable {
         case apiWatchSurveyURL = "api_watch_survey_url"
         case apiPhoneSurveyURL = "api_phone_survey_url"
         case cutoffTime = "cutoff_time"
-        case distaceFilter = "distace_filter"
+        case distanceFilter = "distance_filter"
     }
     
-    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String, cutoffTime: Double, distaceFilter: Double) {
+    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String, cutoffTime: Double, distanceFilter: Double) {
         self.idParticipant = idParticipant
         self.idExperiment = idExperiment
         self.wssTitle = wssTitle
@@ -72,6 +72,6 @@ class InitModel: Codable {
         self.apiWatchSurveyURL = apiWatchSurveyURL
         self.apiPhoneSurveyURL = apiPhoneSurveyURL
         self.cutoffTime = cutoffTime
-        self.distaceFilter = distaceFilter
+        self.distanceFilter = distanceFilter
     }
 }

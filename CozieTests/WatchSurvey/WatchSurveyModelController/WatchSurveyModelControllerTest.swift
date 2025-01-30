@@ -15,7 +15,7 @@ final class WatchSurveyModelControllerTest {
     deinit {}
     
     @Test func parseWatchSurveyModel() throws {
-        let mod = try JSONDecoder().decode(WatchSurveyModelController.self, from: TestSurveyData.suveyStub)
+        let mod = try JSONDecoder().decode(WatchSurveyModelController.self, from: TestSurveyData.surveyStub)
         
         #expect(mod.surveyName == "Thermal (short)")
         #expect(mod.surveyID == "thermal_short")
@@ -27,7 +27,7 @@ final class WatchSurveyModelControllerTest {
 // MARK: - Helper
 
 struct TestSurveyData {
-    static var suveyStub: Data {
+    static var surveyStub: Data {
         get {
         """
         {

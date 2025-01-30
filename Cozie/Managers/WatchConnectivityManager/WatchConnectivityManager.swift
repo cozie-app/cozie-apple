@@ -36,10 +36,10 @@ class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProt
     
     let session: WCSession = WCSession.default
     let loggerInteractor = LoggerInteractor.shared
-    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
     var activateCompletion: (()->())?
-    var activateFahlerCompletion: ((_ error: Error)->())?
-    var transferingFileCompletion: ((_ error: Error?)->())?
+    var activateFailureCompletion: ((_ error: Error)->())?
+    var transferringFileCompletion: ((_ error: Error?)->())?
     
     override init() {
         super.init()
@@ -49,20 +49,20 @@ class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProt
     func activate() {
         if WCSession.isSupported(), !session.isReachable {
             if session.activationState == .activated, !session.isReachable {
-                failer()
+                failure()
                 return
             }
             session.delegate = self
             session.activate()
         } else {
-            failer()
+            failure()
         }
     }
     
-    private func failer() {
-        if activateFahlerCompletion != nil {
-            activateFahlerCompletion?(WatchConnectivityManagerError.connectionError)
-            activateFahlerCompletion = nil
+    private func failure() {
+        if activateFailureCompletion != nil {
+            activateFailureCompletion?(WatchConnectivityManagerError.connectionError)
+            activateFailureCompletion = nil
         }
     }
     // TODO: - Unit Tests
@@ -144,7 +144,7 @@ class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProt
                 if let transferStatus = response[CommunicationKeys.transferFileStatusKey.rawValue] as? Int {
                     switch transferStatus {
                     case FileTransferStatus.started.rawValue:
-                        self?.transferingFileCompletion = completion
+                        self?.transferringFileCompletion = completion
                     case FileTransferStatus.error.rawValue:
                         completion?(WatchConnectivityManagerError.connectionError)
                     default:
@@ -157,7 +157,7 @@ class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProt
             })
         }
         
-        activateFahlerCompletion = completion
+        activateFailureCompletion = completion
         activateIfNeededAndSendMessage()
     }
     
@@ -189,7 +189,7 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
             activateCompletion?()
             activateCompletion = nil
         } else {
-            failer()
+            failure()
             activateCompletion = nil
         }
     }
@@ -244,10 +244,10 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
     }
     
     private func transferCompletion(_ error: Error?) {
-        if transferingFileCompletion != nil {
-            transferingFileCompletion?(error)
+        if transferringFileCompletion != nil {
+            transferringFileCompletion?(error)
         }
-        transferingFileCompletion = nil
+        transferringFileCompletion = nil
     }
     
     // log test

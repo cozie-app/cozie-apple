@@ -18,7 +18,6 @@
 		9212144729D18FF5002BAEB4 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212144629D18FF5002BAEB4 /* ReminderManager.swift */; };
 		9212144B29D1EEBE002BAEB4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212144A29D1EEBE002BAEB4 /* Session.swift */; };
 		921289CE299649EC0060C729 /* CozieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289CD299649EC0060C729 /* CozieApp.swift */; };
-		921289D0299649EC0060C729 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289CF299649EC0060C729 /* ContentView.swift */; };
 		921289D2299649ED0060C729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921289D1299649ED0060C729 /* Assets.xcassets */; };
 		921289D5299649ED0060C729 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921289D4299649ED0060C729 /* Preview Assets.xcassets */; };
 		921289D7299649ED0060C729 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921289D6299649ED0060C729 /* Persistence.swift */; };
@@ -150,7 +149,7 @@
 		CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */; };
 		CAD1F0EC2CCFADD3001B5307 /* LoggingPushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */; };
 		CAD1F0EF2CCFB87F001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
-		CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */; };
+		CAD1F0F22CCFC093001B5307 /* PushNotificationLoggerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F02CCFC080001B5307 /* PushNotificationLoggerRepository.swift */; };
 		CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */; };
 		CAD1F0FA2CCFD0EC001B5307 /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
 		CAE4FDB72CD28BF900B0B888 /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
@@ -245,7 +244,6 @@
 		9212144A29D1EEBE002BAEB4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		921289CA299649EC0060C729 /* Cozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		921289CD299649EC0060C729 /* CozieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozieApp.swift; sourceTree = "<group>"; };
-		921289CF299649EC0060C729 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		921289D1299649ED0060C729 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		921289D4299649ED0060C729 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		921289D6299649ED0060C729 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -377,7 +375,7 @@
 		CAD1E5CB29FBF065000F9FE7 /* BackgroundUpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundUpdateManager.swift; sourceTree = "<group>"; };
 		CAD1F0EB2CCFADBF001B5307 /* LoggingPushTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPushTests.swift; sourceTree = "<group>"; };
 		CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerController.swift; sourceTree = "<group>"; };
-		CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificaitonLoggerRepository.swift; sourceTree = "<group>"; };
+		CAD1F0F02CCFC080001B5307 /* PushNotificationLoggerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerRepository.swift; sourceTree = "<group>"; };
 		CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerRepositoryTests.swift; sourceTree = "<group>"; };
 		CAE88C502D2B228600EE8A83 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
 		CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModelTests.swift; sourceTree = "<group>"; };
@@ -506,7 +504,6 @@
 				92128A02299687330060C729 /* Views */,
 				921289FC29964A0B0060C729 /* CoreData */,
 				921289CD299649EC0060C729 /* CozieApp.swift */,
-				921289CF299649EC0060C729 /* ContentView.swift */,
 				921289D1299649ED0060C729 /* Assets.xcassets */,
 				921289D3299649ED0060C729 /* Preview Content */,
 			);
@@ -648,7 +645,7 @@
 		92524F8F29CC5FEA00074A09 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				CAD1F0F02CCFC080001B5307 /* PushNotificaitonLoggerRepository.swift */,
+				CAD1F0F02CCFC080001B5307 /* PushNotificationLoggerRepository.swift */,
 				92524F9029CC6A2C00074A09 /* BaseRepository.swift */,
 			);
 			path = Repository;
@@ -1568,7 +1565,7 @@
 				921289DA299649ED0060C729 /* Cozie.xcdatamodeld in Sources */,
 				9267485D29D71868004329B9 /* BackendViewModel.swift in Sources */,
 				9212144429CE0730002BAEB4 /* TextFieldPopUp.swift in Sources */,
-				CAD1F0F22CCFC093001B5307 /* PushNotificaitonLoggerRepository.swift in Sources */,
+				CAD1F0F22CCFC093001B5307 /* PushNotificationLoggerRepository.swift in Sources */,
 				CA15490029E6F7FE005FDD6B /* LoggerInteractor.swift in Sources */,
 				CA8BE5632A53F6C400D0627D /* BackendDataProtocol.swift in Sources */,
 				CAD1E5CC29FBF066000F9FE7 /* BackgroundUpdateManager.swift in Sources */,
@@ -1615,7 +1612,6 @@
 				CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */,
 				9212144229CDFBB7002BAEB4 /* AppColor.swift in Sources */,
 				CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */,
-				921289D0299649EC0060C729 /* ContentView.swift in Sources */,
 				CA9511DE2D3676E200BA4283 /* LocationManagerInteractor.swift in Sources */,
 				92D0B80F29D9BD63008557FC /* SettingCoordinator.swift in Sources */,
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
@@ -1882,7 +1878,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1926,7 +1922,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -2055,7 +2051,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -2097,7 +2093,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -2137,7 +2133,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -2171,7 +2167,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;

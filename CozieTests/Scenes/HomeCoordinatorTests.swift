@@ -11,10 +11,10 @@ import UIKit
 
 @Suite("Test for HomeCoordinator", .serialized)
 struct HomeCoordinatorTests {
-    @Test func updateCutoffTimeIntervalFromLinckOrQRCode() async throws {
-        let userIteractor = UserInteractorMock()
+    @Test func updateCutoffTimeIntervalFromLinkOrQRCode() async throws {
+        let userInteractor = UserInteractorMock()
         let settingInteractor = SettingsInteractorMock()
-        let sut = HomeCoordinator(tab: .data, session: Session(), userIntaractor: userIteractor, settingsInteractor: settingInteractor, backendInteractor: BackendInteractorMock())
+        let sut = HomeCoordinator(tab: .data, session: Session(), userInteractor: userInteractor, settingsInteractor: settingInteractor, backendInteractor: BackendInteractorMock())
         let storage = CozieStorageMock()
         
         sut.prepareSource(info: InitModel.stubModel(), storage: storage)
@@ -23,26 +23,26 @@ struct HomeCoordinatorTests {
         #expect(cotoff == 3.0)
     }
     
-    @Test func updateDistanceFilterFromLinckOrQRCode() async throws {
-        let userIteractor = UserInteractorMock()
+    @Test func updateDistanceFilterFromLinkOrQRCode() async throws {
+        let userInteractor = UserInteractorMock()
         let settingInteractor = SettingsInteractorMock()
         
-        let sut = HomeCoordinator(tab: .data, session: Session(), userIntaractor: userIteractor, settingsInteractor: settingInteractor, backendInteractor: BackendInteractorMock())
+        let sut = HomeCoordinator(tab: .data, session: Session(), userInteractor: userInteractor, settingsInteractor: settingInteractor, backendInteractor: BackendInteractorMock())
         
         let storage = CozieStorageMock()
         
         sut.prepareSource(info: InitModel.stubModel(), storage: storage)
         
-        let cotoff = try #require(storage.distanceFilter())
-        #expect(cotoff == 100.0)
+        let cotOff = try #require(storage.distanceFilter())
+        #expect(cotOff == 100.0)
     }
     
-    @Test() func updateIdParticipantFromLinckOrQRCode() async throws {
-        let userIteractorMock = UserInteractorMock()
+    @Test() func updateIdParticipantFromLinkOrQRCode() async throws {
+        let userInteractorMock = UserInteractorMock()
         let settingInteractorMock = SettingsInteractorMock()
         let backendInteractorMock = BackendInteractorMock()
         
-        let sut = HomeCoordinator(tab: .data, session: Session(), userIntaractor: userIteractorMock, settingsInteractor: settingInteractorMock, backendInteractor: backendInteractorMock)
+        let sut = HomeCoordinator(tab: .data, session: Session(), userInteractor: userInteractorMock, settingsInteractor: settingInteractorMock, backendInteractor: backendInteractorMock)
         
         let storage = CozieStorageMock()
         
@@ -50,9 +50,9 @@ struct HomeCoordinatorTests {
         
         sut.prepareSource(info: InitModel.stubModel(), storage: storage)
 
-        #expect(userIteractorMock.participantID == linkStub.idParticipant)
-        #expect(userIteractorMock.experimentID == linkStub.idExperiment)
-        #expect(userIteractorMock.password == linkStub.idPassword)
+        #expect(userInteractorMock.participantID == linkStub.idParticipant)
+        #expect(userInteractorMock.experimentID == linkStub.idExperiment)
+        #expect(userInteractorMock.password == linkStub.idPassword)
         
         #expect(settingInteractorMock.currentSettings?.wss_title == linkStub.wssTitle)
         #expect(settingInteractorMock.currentSettings?.wss_goal == linkStub.wssGoal)
@@ -100,7 +100,7 @@ fileprivate extension InitModel {
                   apiWatchSurveyURL: "https://apiWatchSurveyURL",
                   apiPhoneSurveyURL: "https://apiPhoneSurveyURL",
                   cutoffTime: 3.0,
-                  distaceFilter: 100.0)
+                  distanceFilter: 100.0)
     }
 }
 
@@ -110,18 +110,18 @@ final class UserInteractorMock: UserInteractorProtocol {
     var participantID: String? = nil
     var experimentID: String? = nil
     var password: String? = nil
-    var prepareUserCallsCaunt = 0
-    var prepareUserWithPassCallsCaunt = 0
+    var prepareUserCallsCount = 0
+    var prepareUserWithPassCallsCount = 0
     
     func prepareUser(participantID: String?, experimentID: String?, password: String?) {
-        prepareUserCallsCaunt += 1
+        prepareUserCallsCount += 1
         self.password = password
         self.experimentID = experimentID
         self.participantID = participantID
     }
     
     func prepareUser(password: String) {
-        prepareUserWithPassCallsCaunt += 1
+        prepareUserWithPassCallsCount += 1
         self.password = password
     }
 }

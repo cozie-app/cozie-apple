@@ -8,22 +8,23 @@
 import Foundation
 
 class StorageManager: CozieStorageProtocol {
+
     typealias ApiInfo = (url: String, key: String)
     static let logFileName = "wlogs.txt"
     
     enum Keys: String {
-        case jsonKey = "CozieWatchSyrveyJSON"
+        case jsonKey = "CozieWatchSurveyJSON"
         case writeURL = "CozieApiWriteURL"
         case writeKey = "CozieApiWriteKey"
         case userIDKey = "CozieUserIDKey"
         case userOneSignalIDKey = "CozieOneSignalIDKey"
-        case expirimentIDKey = "CozieExpirimentIDKey"
-        case paswordIDKey = "CoziePaswordIDKey"
+        case experimentIDKey = "CozieExperimentIDKey"
+        case passwordIDKey = "CoziePasswordIDKey"
         case timeInterval = "CozieTimeIntervalKey"
         case lastSurveyTimeInterval = "CozieLastSurveyTimeIntervalKey"
-        case sevedSurveyCount = "CozieSevedSurveyCount"
+        case savedSurveyCount = "CozieSavedSurveyCount"
         case notSyncedSurvey = "CozieNotSyncedSurvey"
-        case healthMaxCutoffTimeintervalKey = "CozieHealthMaxCutoffTimeintervalKey"
+        case healthMaxCutoffTimeIntervalKey = "CozieHealthMaxCutoffTimeIntervalKey"
         
         // Storage postfix
         case storagePostfixTime = "_wstorage_time"
@@ -44,7 +45,7 @@ class StorageManager: CozieStorageProtocol {
     
     static let shared = StorageManager()
     
-    let semapfore = DispatchSemaphore(value: 1)
+    let semaphore = DispatchSemaphore(value: 1)
     let writeQueue = DispatchQueue.global(qos: .userInitiated)
     
     // MARK: Watch Survey JSON
@@ -52,7 +53,7 @@ class StorageManager: CozieStorageProtocol {
         UserDefaults.standard.set(data, forKey: Keys.jsonKey.rawValue)
     }
     
-    func watchatchSurveyJSON() -> Data? {
+    func watchSurveyJSON() -> Data? {
         return UserDefaults.standard.value(forKey: Keys.jsonKey.rawValue) as? Data
     }
     
@@ -84,23 +85,23 @@ class StorageManager: CozieStorageProtocol {
         return (UserDefaults.standard.value(forKey: Keys.userOneSignalIDKey.rawValue) as? String) ?? ""
     }
     
-    func saveExpirimentID(expID: String) {
-        UserDefaults.standard.set(expID, forKey: Keys.expirimentIDKey.rawValue)
+    func saveExperimentID(expID: String) {
+        UserDefaults.standard.set(expID, forKey: Keys.experimentIDKey.rawValue)
     }
     
-    func expirimentID() -> String {
-        return (UserDefaults.standard.value(forKey: Keys.expirimentIDKey.rawValue) as? String) ?? ""
+    func experimentID() -> String {
+        return (UserDefaults.standard.value(forKey: Keys.experimentIDKey.rawValue) as? String) ?? ""
     }
     
     func savePaswordID(passwordID: String) {
-        UserDefaults.standard.set(passwordID, forKey: Keys.paswordIDKey.rawValue)
+        UserDefaults.standard.set(passwordID, forKey: Keys.passwordIDKey.rawValue)
     }
     
-    func paswordID() -> String {
-        return (UserDefaults.standard.value(forKey: Keys.paswordIDKey.rawValue) as? String) ?? ""
+    func passwordID() -> String {
+        return (UserDefaults.standard.value(forKey: Keys.passwordIDKey.rawValue) as? String) ?? ""
     }
     
-    // MARK: Time interval betwin survey
+    // MARK: Time interval between survey
     func saveTimeInterval(interval: Int) {
         UserDefaults.standard.set(interval, forKey: Keys.timeInterval.rawValue)
     }
@@ -120,12 +121,12 @@ class StorageManager: CozieStorageProtocol {
     }
     
     // MARK: Last survey send
-    func saveHealthMaxCutoffTimeinterval(_ interval: Double) {
-        UserDefaults.standard.set(interval, forKey: Keys.healthMaxCutoffTimeintervalKey.rawValue)
+    func saveHealthMaxCutoffTimeInterval(_ interval: Double) {
+        UserDefaults.standard.set(interval, forKey: Keys.healthMaxCutoffTimeIntervalKey.rawValue)
     }
     
-    func healthMaxCutoffTimeinterval() -> Double {
-        return (UserDefaults.standard.value(forKey: Keys.healthMaxCutoffTimeintervalKey.rawValue) as? Double) ?? 0
+    func healthMaxCutoffTimeInterval() -> Double {
+        return (UserDefaults.standard.value(forKey: Keys.healthMaxCutoffTimeIntervalKey.rawValue) as? Double) ?? 0
     }
     
     // MARK: Save survey logs
@@ -138,7 +139,7 @@ class StorageManager: CozieStorageProtocol {
     func seveLogs(logs: String, surveyCount: Int? = nil) {
         let filename = getDocumentsDirectory().appendingPathComponent(StorageManager.logFileName)
         writeQueue.async { [weak self] in
-            self?.semapfore.wait()
+            self?.semaphore.wait()
             do {
                 var logsHistory = ""
                 if FileManager.default.fileExists(atPath: filename.relativePath) {
@@ -146,7 +147,7 @@ class StorageManager: CozieStorageProtocol {
                 }
                 if !logsHistory.isEmpty {
                     if let surveyCount = surveyCount, (logsHistory.range(of: "ws_survey_count\":\(surveyCount)") != nil) {
-                        self?.semapfore.signal()
+                        self?.semaphore.signal()
                         return
                     }
                     logsHistory.append(",")
@@ -156,11 +157,11 @@ class StorageManager: CozieStorageProtocol {
                 }
                 
                 try logsHistory.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
-                self?.semapfore.signal()
+                self?.semaphore.signal()
                 
             } catch let error {
                 debugPrint(error)
-                self?.semapfore.signal()
+                self?.semaphore.signal()
             }
         }
     }
@@ -178,7 +179,7 @@ class StorageManager: CozieStorageProtocol {
     }
     
     // MARK: Not Synced Survey
-    func seveNotSyncedSurvey(history: SurveyHistory) {
+    func saveNotSyncedSurvey(history: SurveyHistory) {
         do {
             var notSyncedList = allNotSyncedSurveyList()
             notSyncedList.append(history)
@@ -214,46 +215,46 @@ class StorageManager: CozieStorageProtocol {
     
     // MARK: Survey Count
     func surveyCount() -> Int {
-        return (UserDefaults.standard.value(forKey: Keys.sevedSurveyCount.rawValue) as? Int) ?? 1
+        return (UserDefaults.standard.value(forKey: Keys.savedSurveyCount.rawValue) as? Int) ?? 1
     }
     
     func updateSurveyCount() {
         var count = surveyCount()
         count += 1
-        UserDefaults.standard.set(count, forKey: Keys.sevedSurveyCount.rawValue)
+        UserDefaults.standard.set(count, forKey: Keys.savedSurveyCount.rawValue)
     }
     
     func resetSurveyCount() {
-        UserDefaults.standard.set(0, forKey: Keys.sevedSurveyCount.rawValue)
+        UserDefaults.standard.set(0, forKey: Keys.savedSurveyCount.rawValue)
     }
     
     func dataSynced() -> Bool {
 //        let api = watchSurveyAPI()
-        if watchatchSurveyJSON() != nil,
+        if watchSurveyJSON() != nil,
 //            !api.key.isEmpty,
 //            !api.url.isEmpty,
-            !expirimentID().isEmpty,
+            !experimentID().isEmpty,
             !userID().isEmpty,
-            !paswordID().isEmpty {
+            !passwordID().isEmpty {
             return true
         } else {
             return false
         }
     }
     
-    // MARK: first lanch time interval
+    // MARK: first launch time interval
     func  firstLaunchTimeInterval() -> Double {
         return UserDefaults.standard.value(forKey: Keys.firstLaunchTimeInterval.rawValue) as? Double ?? 0.0
     }
     
-    func updatefirstLaunchTimeInterval(_ interval: Double) {
+    func updateFirstLaunchTimeInterval(_ interval: Double) {
         UserDefaults.standard.set(interval, forKey: Keys.firstLaunchTimeInterval.rawValue)
     }
     
     // MARK: HealthKit data storage
     
-    func maxHealthCutoffInteval() -> Double {
-        return healthMaxCutoffTimeinterval()
+    func maxHealthCutOffInterval() -> Double {
+        return healthMaxCutoffTimeInterval()
     }
     
     func healthLastSyncedTimeInterval(offline: Bool) -> Double {
@@ -301,7 +302,7 @@ extension StorageManager: LoggerProtocol {
 
 extension StorageManager: UserDataProtocol {
     var userInfo: CUserInfo? {
-        return (userID(), paswordID(), expirimentID())
+        return (userID(), passwordID(), experimentID())
     }
 }
 

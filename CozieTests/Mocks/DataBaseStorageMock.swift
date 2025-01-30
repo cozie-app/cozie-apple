@@ -10,7 +10,7 @@ import Foundation
 @testable import Cozie
 
 final class DataBaseStorageMock: DataBaseStorageProtocol {
-    var saveViewContextCalledCout = 0
+    var saveViewContextCalledCount = 0
     var removeExternalSurveyCalledCount = 0
     var settingsDataSpy: SettingsData? = SettingsDataSpy()
     
@@ -18,7 +18,7 @@ final class DataBaseStorageMock: DataBaseStorageProtocol {
         StubBackendInfo()
     }
     
-    func createBackendSetting(apiReadUrl: String?, apiReadKey: String?, apiWriteUrl: String?, apiWriteKey: String?, oneSigmnalId: String?, participantPassword: String?, watchSurveyLink: String?, phoneSurveyLink: String?) throws {
+    func createBackendSetting(apiReadUrl: String?, apiReadKey: String?, apiWriteUrl: String?, apiWriteKey: String?, oneSignalId: String?, participantPassword: String?, watchSurveyLink: String?, phoneSurveyLink: String?) throws {
         //
     }
     
@@ -43,7 +43,7 @@ final class DataBaseStorageMock: DataBaseStorageProtocol {
     }
     
     func saveViewContext() throws {
-        saveViewContextCalledCout += 1
+        saveViewContextCalledCount += 1
     }
     
     func createSettingsData() -> Cozie.SettingsData {
@@ -113,7 +113,7 @@ final class WatchSurveyDataSpy: WatchSurveyData {
             surveySpy
         }
         set {
-            surveySpy = survey
+            surveySpy = newValue
         }
     }
     

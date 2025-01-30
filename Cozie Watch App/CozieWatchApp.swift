@@ -41,7 +41,7 @@ struct CozieWatchApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     let cozieUserNotificationCenterDelegate = CozieUserNotificationCenterDelegate()
-    let healthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, loger: StorageManager.shared)
+    let healthKitInteractor = HealthKitInteractor(storage: StorageManager.shared, userData: StorageManager.shared, backendData: StorageManager.shared, logger: StorageManager.shared)
     
     var body: some Scene {
         WindowGroup {
@@ -84,7 +84,7 @@ struct CozieWatchApp: App {
             let interval = Date().timeIntervalSince1970
             StorageManager.shared.healthUpdateLastSyncedTimeInterval(interval, offline: false)
             StorageManager.shared.healthUpdateLastSyncedTimeInterval(interval, offline: true)
-            StorageManager.shared.updatefirstLaunchTimeInterval(interval)
+            StorageManager.shared.updateFirstLaunchTimeInterval(interval)
             
             healthKitInteractor.requestHealthAuth()
         }

@@ -7,13 +7,26 @@
 
 import Foundation
 
+enum LoggerErrorStatus: Int {
+    case fatal = -1, server, validation
+    
+    var details: String {
+        switch self {
+        case .fatal:
+            return "<.fatal>"
+        default:
+            return "<unknown>"
+        }
+    }
+}
+
 enum LoggerError: Error, LocalizedError {
-    case statusError(Int, String)
+    case statusError(LoggerErrorStatus, String)
     
     public var errorDescription: String? {
         switch self {
         case let .statusError(status, message):
-            return "Error with status \(status) message: \(message)"
+            return "Error with status \(status.details) message: \(message)"
         }
     }
 }
@@ -21,16 +34,16 @@ enum LoggerError: Error, LocalizedError {
 struct PushNotificationLoggerController {
     let repository: PushNotificationRepositoryProtocol
     
-    func pushNotificationDidReciv(payload: [String: Any]) async throws {
+    func pushNotificationDidReceive(payload: [String: Any]) async throws {
         if payload.isEmpty {
-            throw LoggerError.statusError(-1, "Fatal error.")
+            throw LoggerError.statusError(.fatal, "Fatal error.")
         }
-        try await repository.saveNotifInfo(info: payload)
+        try await repository.saveNotificationInfo(info: payload)
     }
     
     func pushNotificationDidSelectAction(_ action: String) async throws {
         if action.isEmpty {
-            throw LoggerError.statusError(-1, "Fatal error.")
+            throw LoggerError.statusError(.fatal, "Fatal error.")
         }
         try await repository.saveAction(action: action)
     }

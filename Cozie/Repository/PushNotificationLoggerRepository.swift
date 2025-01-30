@@ -1,5 +1,5 @@
 //
-//  PushNotificaitonLoggerRepository.swift
+//  PushNotificationLoggerRepository.swift
 //  Cozie
 //
 //  Created by Alexandr Chmal on 28.10.24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PushNotificaitonLoggerRepository: PushNotificationRepositoryProtocol {
+final class PushNotificationLoggerRepository: PushNotificationRepositoryProtocol {
     let apiRepository: ApiRepositoryProtocol
     let api: ApiDataProtocol
     let loggerInteractor: LoggerInteractor = LoggerInteractor.shared
@@ -17,7 +17,7 @@ final class PushNotificaitonLoggerRepository: PushNotificationRepositoryProtocol
         self.api = api
     }
     
-    func saveNotifInfo(info: [String : Any]) async throws {
+    func saveNotificationInfo(info: [String : Any]) async throws {
         try await postData(info: info)
     }
     
@@ -37,6 +37,7 @@ final class PushNotificaitonLoggerRepository: PushNotificationRepositoryProtocol
     private func postData(info: [String : Any]) async throws {
         let json = try JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
         
+        debugPrint(String(data: json, encoding: .utf8) ?? "empty")
         try await withCheckedThrowingContinuation { continuation in
             apiRepository.post(url: api.url, body: json, key: api.key) { [weak self] result in
                 switch result {

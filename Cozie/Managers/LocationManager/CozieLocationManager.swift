@@ -18,17 +18,17 @@ import CoreLocation
 /// The "distance to location" will be added to the deep link parameters with an updated value in the 'Advanced' tab and in the Location Manager.
 ///
 /// WatchOS:
-/// We tracking location only on start or reset syrvey
+/// We tracking location only on start or reset survey
 ///
 final class LocationManager: NSObject {
-    let mimimumDistance: Double = Defaults.locationChangeDistanceThreshold
+    let minimumDistance: Double = Defaults.locationChangeDistanceThreshold
     var locationManager: CLLocationManager? = nil
     var currentLocation: CLLocation? = nil
     
     let locationManagerInteractor = LocationManagerInteractor()
     let storage: WSStorageProtocol
     
-    private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
 
     var completion: (()->())?
     
@@ -44,6 +44,31 @@ final class LocationManager: NSObject {
         locationManager?.requestAlwaysAuthorization()
     }
     
+    func updateLocationManager() {
+        if let locationManager {
+            if locationManager.distanceFilter == CLLocationDistance(self.storage.distanceFilter()) {
+                return
+            }
+            locationManager.stopUpdatingLocation()
+            
+            if locationManager.delegate == nil {
+                locationManager.delegate = self
+            }
+            locationManager.distanceFilter = CLLocationDistance(self.storage.distanceFilter())
+            
+            if locationManager.desiredAccuracy != kCLLocationAccuracyBest {
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            }
+            
+            Task.detached {
+                do {
+                    try await Task.sleep(for: .seconds(5))
+                    locationManager.startUpdatingLocation()
+                }
+            }
+        }
+    }
+    
     // TODO: - Unit Tests
     func updateLocation(locations: [CLLocation]) {
         if let lastSavedLocation = CozieStorage.shared.lastLocation(), currentLocation == nil {
@@ -51,7 +76,7 @@ final class LocationManager: NSObject {
         }
         
         if let cLocation = currentLocation {
-            if let last = locations.last, cLocation.distance(from: last) > mimimumDistance {
+            if let last = locations.last, cLocation.distance(from: last) > minimumDistance {
                 currentLocation = last
                 CozieStorage.shared.updateLastLocation(lat: last.coordinate.latitude, lng: last.coordinate.longitude)
                 if let location = currentLocation {

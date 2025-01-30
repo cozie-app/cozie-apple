@@ -72,7 +72,7 @@ fileprivate final class LocaleStorageSpy: CozieStorageProtocol {
         "playerID"
     }
     
-    func maxHealthCutoffInteval() -> Double {
+    func maxHealthCutOffInterval() -> Double {
         0.0
     }
     

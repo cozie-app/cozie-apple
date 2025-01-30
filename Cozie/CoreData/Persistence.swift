@@ -6,14 +6,14 @@
 //
 
 import CoreData
-
+/// @mockable
 protocol DataBaseStorageProtocol: DataBaseStorageSettingsProtocol {
     func backendSetting() throws -> BackendInfo?
     func createBackendSetting(apiReadUrl: String?,
                            apiReadKey: String?,
                            apiWriteUrl: String?,
                            apiWriteKey: String?,
-                           oneSigmnalId: String?,
+                           oneSignalId: String?,
                            participantPassword: String?,
                            watchSurveyLink: String?,
                            phoneSurveyLink: String?) throws
@@ -82,7 +82,7 @@ extension PersistenceController: DataBaseStorageProtocol {
         SettingsData(context: container.viewContext)
     }
     
-    /// Get settins model.
+    /// Get settings model.
     func settings() throws -> SettingsData? {
         try container.viewContext.fetch(SettingsData.fetchRequest()).first
     }
@@ -92,7 +92,7 @@ extension PersistenceController: DataBaseStorageProtocol {
                            apiReadKey: String?,
                            apiWriteUrl: String?,
                            apiWriteKey: String?,
-                           oneSigmnalId: String?,
+                           oneSignalId: String?,
                            participantPassword: String?,
                            watchSurveyLink: String?,
                            phoneSurveyLink: String?) throws {
@@ -101,7 +101,7 @@ extension PersistenceController: DataBaseStorageProtocol {
         backend.api_read_key = apiReadKey
         backend.api_write_url = apiWriteUrl
         backend.api_write_key = apiWriteKey
-        backend.one_signal_id = Defaults.OneSignalAppID // oneSigmnalId
+        backend.one_signal_id = Defaults.OneSignalAppID // oneSignalId
         backend.participant_password = participantPassword
         backend.watch_survey_link = watchSurveyLink
         backend.phone_survey_link = phoneSurveyLink
@@ -127,7 +127,7 @@ extension PersistenceController: DataBaseStorageProtocol {
     func updateStorageWithSurvey(_ surveyModel: WatchSurveyModelController, selected: Bool) async throws {
         try await self.container.performBackgroundTask({ context in
             context.automaticallyMergesChangesFromParent = true
-            // remove previouse saved external
+            // remove previous saved external
             let request = WatchSurveyData.fetchRequest()
             if !selected {
                 request.predicate = NSPredicate(format: "external == %d", true)
@@ -135,18 +135,18 @@ extension PersistenceController: DataBaseStorageProtocol {
             
             let surveysList = try context.fetch(request)
             
-            surveysList.forEach { modle in
-                // reset previouse selected
+            surveysList.forEach { model in
+                // reset previous selected
                 if selected {
-                    if modle.selected {
-                        modle.selected = false
+                    if model.selected {
+                        model.selected = false
                     }
                     // remove all internal
-                    if !modle.external {
-                        context.delete(modle)
+                    if !model.external {
+                        context.delete(model)
                     }
                 } else {
-                    context.delete(modle)
+                    context.delete(model)
                 }
             }
             
@@ -189,7 +189,7 @@ extension PersistenceController: DataBaseStorageProtocol {
     func removeExternalSurvey() async throws {
         try await self.container.performBackgroundTask({ context in
             context.automaticallyMergesChangesFromParent = true
-            // remove previouse saved external
+            // remove previous saved external
             let request = WatchSurveyData.fetchRequest()
             request.predicate = NSPredicate(format: "external == %d", true)
             

@@ -19,7 +19,7 @@ protocol WSStorageProtocol {
     func distanceFilter() -> Float
 }
 
-protocol WSStateStoregeProtocol {
+protocol WSStateStorageProtocol {
     /// Participant ID sync status with device (Watch app)
     func pIDSynced() -> Bool
     
@@ -38,13 +38,13 @@ protocol WSStateStoregeProtocol {
     /// Save watch survey sync status
     func saveSurveySynced(_ synced: Bool)
     
-    /// Save patizipent id
+    /// Save participant id
     func savePlayerID(_ id: String)
 }
 
-protocol UserDefaultsStoregeProtocol: CozieStorageProtocol, WSStorageProtocol, WSStateStoregeProtocol {}
+protocol UserDefaultsStorageProtocol: CozieStorageProtocol, WSStorageProtocol, WSStateStorageProtocol {}
 
-class CozieStorage: UserDefaultsStoregeProtocol {
+class CozieStorage: UserDefaultsStorageProtocol {
 
     enum CozieStorageKeys: String {
         case appConfigured = "CozieStorageAppConfiguredKey"
@@ -61,7 +61,7 @@ class CozieStorage: UserDefaultsStoregeProtocol {
         case healthPrefixSyncedDateKey = "CozieStorageHealthSyncedDateKey"
         case healthLastSyncKey = "CozieStorageLastSyncTimestamp"
         // offline
-        case healthLastSyncOffleinKey = "CozieStorageLastSyncTimestampOffline"
+        case healthLastSyncOfflineKey = "CozieStorageLastSyncTimestampOffline"
         
         // Location
         case locationLatKey = "location_lat"
@@ -152,7 +152,7 @@ class CozieStorage: UserDefaultsStoregeProtocol {
         return UserDefaults.standard.value(forKey: CozieStorageKeys.firstLaunchTimeInterval.rawValue) as? Double ?? 0.0
     }
     
-    func updatefirstLaunchTimeInterval(_ interval: Double) {
+    func updateFirstLaunchTimeInterval(_ interval: Double) {
         UserDefaults.standard.set(interval, forKey: CozieStorageKeys.firstLaunchTimeInterval.rawValue)
     }
 
@@ -168,16 +168,16 @@ class CozieStorage: UserDefaultsStoregeProtocol {
     
     // MARK: HealthKit data storage
     
-    func maxHealthCutoffInteval() -> Double {
+    func maxHealthCutOffInterval() -> Double {
         return maxHealthCutoffTimeInterval()
     }
     
     func healthLastSyncedTimeInterval(offline: Bool) -> Double {
-        return UserDefaults.standard.value(forKey: offline ? CozieStorageKeys.healthLastSyncOffleinKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue) as? Double ?? 0.0
+        return UserDefaults.standard.value(forKey: offline ? CozieStorageKeys.healthLastSyncOfflineKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue) as? Double ?? 0.0
     }
     
     func healthUpdateLastSyncedTimeInterval(_ interval: Double, offline: Bool) {
-        UserDefaults.standard.set(interval, forKey: offline ? CozieStorageKeys.healthLastSyncOffleinKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue)
+        UserDefaults.standard.set(interval, forKey: offline ? CozieStorageKeys.healthLastSyncOfflineKey.rawValue : CozieStorageKeys.healthLastSyncKey.rawValue)
     }
     
     func healthLastSyncedTimeInterval(key: String, offline: Bool) -> Double {

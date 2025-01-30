@@ -188,7 +188,7 @@ struct CozieAnimatedSyncHeader: View {
     let title: String
     var action: () -> Void
     @Binding var animated: Bool
-    @State var animaiton: Bool = false
+    @State var animation: Bool = false
     var body: some View {
         HStack {
             Text(title)
@@ -201,19 +201,19 @@ struct CozieAnimatedSyncHeader: View {
                 if animated {
                     Image(systemName: "arrow.triangle.2.circlepath")
                         .foregroundColor(.black)
-                        .rotationEffect(Angle.degrees(animaiton ? 360 : 0))
+                        .rotationEffect(Angle.degrees(animation ? 360 : 0))
                         .animation(.linear(duration: 0.8)
-                            .repeatForever(autoreverses: false), value: animaiton)
+                            .repeatForever(autoreverses: false), value: animation)
                         .padding(.trailing, -15)
                         .onAppear{
-                            animaiton = true
+                            animation = true
                         }
                 } else {
                     Image(systemName: "arrow.triangle.2.circlepath")
                         .foregroundColor(.black)
                         .padding(.trailing, -15)
                         .onAppear{
-                            animaiton = false
+                            animation = false
                         }
                 }
             })

@@ -19,7 +19,7 @@ struct GroupStorageTests {
         }
 
         @Test("Get/Clear Payload from UserDefaults as group storage",
-              .tags(.userDfaulsts))
+              .tags(.userDefaults))
         func payloadsFromGroupStorageGetAndClear() async throws {
             var payloads = sut.payloads()
             #expect(payloads.count == 2)
@@ -30,7 +30,7 @@ struct GroupStorageTests {
         }
         
         @Test("Delete Payload from UserDefaults as group storage",
-              .tags(.userDfaulsts))
+              .tags(.userDefaults))
         func deletePayloadFromGroupStorage() async throws {
             setTestPayloads()
             var payloads = sut.payloads()
@@ -57,7 +57,7 @@ struct GroupStorageTests {
         }
 
         @Test("Get/Clear Action from UserDefaults as group storage",
-              .tags(.userDfaulsts))
+              .tags(.userDefaults))
         func actionsFromGroupStorageGetAndClear() async throws {
             
             var actions = sut.actions()
@@ -69,7 +69,7 @@ struct GroupStorageTests {
         }
         
         @Test("Delete action from UserDefaults as group storage",
-              .tags(.userDfaulsts))
+              .tags(.userDefaults))
         func deleteActionFromGroupStorage() async throws {
             setTestActions()
             var actions = sut.actions()
@@ -88,5 +88,5 @@ struct GroupStorageTests {
 }
 
 extension Tag {
-    @Tag static var userDfaulsts: Self
+    @Tag static var userDefaults: Self
 }

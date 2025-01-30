@@ -11,6 +11,7 @@ struct TimeOutView: View {
     @EnvironmentObject var viewModel: WatchSurveyViewModel
     @ObservedObject var timeOutViewModel = TimeOutViewModel()
     @Environment(\.scenePhase) private var scenePhase
+    
     var body: some View {
         ZStack {
             Color.red

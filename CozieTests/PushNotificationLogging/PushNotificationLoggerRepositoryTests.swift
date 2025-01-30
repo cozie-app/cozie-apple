@@ -12,32 +12,32 @@ import Foundation
 struct PushNotificationLoggerRepositoryTests {
     
     @Test("Send PushNotification info to API")
-    func sendPuschNotificationInfoByAPI() async throws {
+    func sendPushNotificationInfoByAPI() async throws {
         let apiRepositorySpy = ApiRepositorySpy(triggerError: false)
         
         let testUrl = "test_url"
         let testKey = "test_key"
         
         let api = ApiDataStub(url: testUrl, key: testKey)
-        let sut = PushNotificaitonLoggerRepository(apiRepository: apiRepositorySpy, api: api)
+        let sut = PushNotificationLoggerRepository(apiRepository: apiRepositorySpy, api: api)
         #expect(apiRepositorySpy.calledPostUrl.isEmpty)
         #expect(apiRepositorySpy.calledPostKey.isEmpty)
         
-        try await sut.saveNotifInfo(info: ["test": "test"])
+        try await sut.saveNotificationInfo(info: ["test": "test"])
         
         #expect(apiRepositorySpy.calledPostUrl == testUrl)
         #expect(apiRepositorySpy.calledPostKey == testKey)
     }
     
     @Test("Send PushNotification info by API")
-    func sendPuschNotificationActionByAPI() async throws {
+    func sendPushNotificationActionByAPI() async throws {
         let apiRepositorySpy = ApiRepositorySpy(triggerError: false)
         
         let testUrl = "test_url"
         let testKey = "test_key"
         
         let api = ApiDataStub(url: testUrl, key: testKey)
-        let sut = PushNotificaitonLoggerRepository(apiRepository: apiRepositorySpy, api: api)
+        let sut = PushNotificationLoggerRepository(apiRepository: apiRepositorySpy, api: api)
         #expect(apiRepositorySpy.calledPostUrl.isEmpty)
         #expect(apiRepositorySpy.calledPostKey.isEmpty)
         

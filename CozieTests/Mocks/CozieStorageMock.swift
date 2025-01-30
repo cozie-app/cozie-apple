@@ -7,7 +7,7 @@
 
 @testable import Cozie
 
-final class CozieStorageMock: UserDefaultsStoregeProtocol {
+final class CozieStorageMock: UserDefaultsStorageProtocol {
     
     var wsLinkStub: String = ""
     var wsTitleStub: String = ""
@@ -16,9 +16,9 @@ final class CozieStorageMock: UserDefaultsStoregeProtocol {
     var wsExternalTitleStub: String = ""
     
     var playerIDStub = "id"
-    var maxHealthCutoffIntevalStub: Double = 0
+    var maxHealthCutOffIntervalStub: Double = 0
     var healthLastSyncedTimeIntervalStub: Double = 0
-    var healthLastSyncedTimeIntervalOflineStub: Double = 0
+    var healthLastSyncedTimeIntervalOfflineStub: Double = 0
     
     var cutoffTimeIntervalStub: Double? = nil
     
@@ -59,8 +59,8 @@ final class CozieStorageMock: UserDefaultsStoregeProtocol {
     }
     
     
-    func maxHealthCutoffInteval() -> Double {
-        maxHealthCutoffIntevalStub
+    func maxHealthCutOffInterval() -> Double {
+        maxHealthCutOffIntervalStub
     }
     
     func healthLastSyncedTimeInterval(offline: Bool) -> Double {
@@ -76,7 +76,7 @@ final class CozieStorageMock: UserDefaultsStoregeProtocol {
     }
     
     func healthLastSyncedTimeInterval(key: String, offline: Bool) -> Double {
-        return healthLastSyncedTimeIntervalOflineStub
+        return healthLastSyncedTimeIntervalOfflineStub
     }
     
     func healthUpdateTempLastSyncedTimeInterval(_ interval: Double, key: String, offline: Bool) {

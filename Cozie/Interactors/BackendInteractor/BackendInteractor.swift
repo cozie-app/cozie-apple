@@ -17,7 +17,7 @@ protocol BackendInteractorProtocol {
                             apiReadKey: String?,
                             apiWriteUrl: String?,
                             apiWriteKey: String?,
-                            oneSigmnalId: String?,
+                            oneSignalId: String?,
                             participantPassword: String?,
                             watchSurveyLink: String?,
                             phoneSurveyLink: String?)
@@ -27,15 +27,15 @@ protocol BackendInteractorProtocol {
 }
 
 class BackendInteractor: BackendInteractorProtocol {
-    let udStorage: UserDefaultsStoregeProtocol
+    let udStorage: UserDefaultsStorageProtocol
     let dbStorage: DataBaseStorageProtocol
     
     let baseRepo = BaseRepository()
     
     let surveyManager = SurveyManager()
-    let notifListner = CozieNotificationLifecycleListener()
+    let notificationListener = CozieNotificationLifecycleListener()
     
-    init(storage: UserDefaultsStoregeProtocol = CozieStorage.shared,
+    init(storage: UserDefaultsStorageProtocol = CozieStorage.shared,
          dbStorage: DataBaseStorageProtocol = PersistenceController.shared) {
         
         self.udStorage = storage
@@ -54,7 +54,7 @@ class BackendInteractor: BackendInteractorProtocol {
                                apiReadKey: Defaults.APIreadKey,
                                apiWriteUrl: Defaults.APIwriteURL,
                                apiWriteKey: Defaults.APIwriteKey,
-                               oneSigmnalId: Defaults.OneSignalAppID,
+                               oneSignalId: Defaults.OneSignalAppID,
                                participantPassword: Defaults.generatePasswordID(),
                                watchSurveyLink: Defaults.watchSurveyLink,
                                phoneSurveyLink: Defaults.phoneSurveyLink)
@@ -68,7 +68,7 @@ class BackendInteractor: BackendInteractorProtocol {
                             apiReadKey: String?,
                             apiWriteUrl: String?,
                             apiWriteKey: String?,
-                            oneSigmnalId: String?,
+                            oneSignalId: String?,
                             participantPassword: String?,
                             watchSurveyLink: String?,
                             phoneSurveyLink: String?) {
@@ -87,7 +87,7 @@ class BackendInteractor: BackendInteractorProtocol {
                 model.api_write_key = apiWriteKey
             }
             
-            model.one_signal_id = Defaults.OneSignalAppID //oneSigmnalId
+            model.one_signal_id = Defaults.OneSignalAppID //oneSignalId
             
             if let participantPassword {
                 model.participant_password = participantPassword
@@ -104,7 +104,7 @@ class BackendInteractor: BackendInteractorProtocol {
             try? dbStorage.saveViewContext()
             debugPrint(model)
         } else {
-            try? dbStorage.createBackendSetting(apiReadUrl: apiReadUrl, apiReadKey: apiReadKey, apiWriteUrl: apiWriteUrl, apiWriteKey: apiWriteKey, oneSigmnalId: oneSigmnalId, participantPassword: participantPassword, watchSurveyLink: watchSurveyLink, phoneSurveyLink: phoneSurveyLink)
+            try? dbStorage.createBackendSetting(apiReadUrl: apiReadUrl, apiReadKey: apiReadKey, apiWriteUrl: apiWriteUrl, apiWriteKey: apiWriteKey, oneSignalId: oneSignalId, participantPassword: participantPassword, watchSurveyLink: watchSurveyLink, phoneSurveyLink: phoneSurveyLink)
         }
     }
     
@@ -142,20 +142,20 @@ class BackendInteractor: BackendInteractorProtocol {
         }
     }
     
-    // MARK: Setup/Updaete OneSign
+    // MARK: Setup/Update OneSign
     func updateOneSign(launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil,
                        surveyInteractor: WatchSurveyInteractor = WatchSurveyInteractor()) {
         
-        let healthKitInteractor: HealthKitInteractor = HealthKitInteractor(storage: udStorage, userData: UserInteractor(), backendData: self, loger: LoggerInteractor.shared)
+        let healthKitInteractor: HealthKitInteractor = HealthKitInteractor(storage: udStorage, userData: UserInteractor(), backendData: self, logger: LoggerInteractor.shared)
         
         if let _ = currentBackendSettings {
             // Remove this method to stop OneSignal Debugging
             OneSignal.Debug.setLogLevel(.LL_VERBOSE)
             
-            notifListner.healthKitInteractor = healthKitInteractor
-            OneSignal.Notifications.addForegroundLifecycleListener(notifListner)
+            notificationListener.healthKitInteractor = healthKitInteractor
+            OneSignal.Notifications.addForegroundLifecycleListener(notificationListener)
             
-            // OneSignal initialization
+            // OneSignal initialisation
             OneSignal.initialize(CommunicationKeys.oneSignalAppID.rawValue, withLaunchOptions: launchOptions)
             OneSignal.User.pushSubscription.optIn()
             
@@ -184,7 +184,7 @@ class CozieNotificationLifecycleListener : NSObject, OSNotificationLifecycleList
     var healthKitInteractor: HealthKitInteractor? = nil
     func onWillDisplay(event: OSNotificationWillDisplayEvent) {
         event.preventDefault()
-        healthKitInteractor?.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
+        healthKitInteractor?.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { success in
             debugPrint("On WillDisplay Notification")
         }
         // self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
@@ -221,7 +221,7 @@ extension BackendInteractor: ApiDataProtocol{
     }
 }
 
-// MARK: - TEST: - OneSIgnal curl Alex_Segment
+// MARK: - TEST: - OneSignal curl Alex_Segment
 /*
  curl --include \
  --request POST \

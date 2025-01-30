@@ -9,15 +9,15 @@
 class SettingsInteractorMock: SettingsInteractorProtocol {
     var currentSettings: Cozie.SettingsData? = SettingsDataSpy()
     
-    var prepareSettingsDataCallsCaunt = 0
-    var prepareSettingsWithDataCallsCaunt = 0
+    var prepareSettingsDataCallsCount = 0
+    var prepareSettingsWithDataCallsCount = 0
     
     func prepareSettingsData() {
-        prepareSettingsDataCallsCaunt += 1
+        prepareSettingsDataCallsCount += 1
     }
     
     func prepareSettingsData(wssTitle: String?, wssGoal: Int16?, wssTimeout: Int16?, wssReminderEnabled: Bool?, wssReminderInterval: Int16?, wssParticipationDays: String?, wssParticipationTimeStart: String?, wssParticipationTimeEnd: String?, pssReminderEnabled: Bool?, pssReminderDays: String?, pssReminderTime: String?) {
-        prepareSettingsWithDataCallsCaunt += 1
+        prepareSettingsWithDataCallsCount += 1
         currentSettings?.wss_title = wssTitle
         currentSettings?.wss_goal = wssGoal ?? 0
         currentSettings?.wss_time_out = wssTimeout ?? 0

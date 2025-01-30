@@ -11,7 +11,7 @@ public struct NotificationActionKeys {
     static let notificationTitleKey = "notification_title"
     static let notificationSubtitleKey = "notification_subtitle"
     static let notificationTextKey = "notification_text"
-    static let notificationActionsSchowKey = "action_buttons_shown"
+    static let notificationActionsShowKey = "action_buttons_shown"
     static let notificationActionButtonKey = "action_button_pressed"
     static let notificationTriggerKey = "notification_trigger"
     static let notificationTransmitKey = "transmit_trigger"

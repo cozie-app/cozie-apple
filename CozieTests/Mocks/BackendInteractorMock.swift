@@ -25,7 +25,7 @@ final class BackendInteractorMock: BackendInteractorProtocol {
     func prepareBackendData() {
     }
     
-    func prepareBackendData(apiReadUrl: String?, apiReadKey: String?, apiWriteUrl: String?, apiWriteKey: String?, oneSigmnalId: String?, participantPassword: String?, watchSurveyLink: String?, phoneSurveyLink: String?) {
+    func prepareBackendData(apiReadUrl: String?, apiReadKey: String?, apiWriteUrl: String?, apiWriteKey: String?, oneSignalId: String?, participantPassword: String?, watchSurveyLink: String?, phoneSurveyLink: String?) {
         info.api_read_url = apiReadUrl
         info.api_read_key = apiReadKey
         info.api_write_url = apiWriteUrl
