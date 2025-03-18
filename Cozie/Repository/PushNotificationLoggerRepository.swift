@@ -10,7 +10,9 @@ import Foundation
 final class PushNotificationLoggerRepository: PushNotificationRepositoryProtocol {
     let apiRepository: ApiRepositoryProtocol
     let api: ApiDataProtocol
+#if os(iOS)
     let loggerInteractor: LoggerInteractor = LoggerInteractor.shared
+#endif
     
     init(apiRepository: ApiRepositoryProtocol, api: ApiDataProtocol) {
         self.apiRepository = apiRepository
@@ -38,6 +40,7 @@ final class PushNotificationLoggerRepository: PushNotificationRepositoryProtocol
         let json = try JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
         
         debugPrint(String(data: json, encoding: .utf8) ?? "empty")
+        
         try await withCheckedThrowingContinuation { continuation in
             apiRepository.post(url: api.url, body: json, key: api.key) { [weak self] result in
                 switch result {
@@ -45,7 +48,9 @@ final class PushNotificationLoggerRepository: PushNotificationRepositoryProtocol
                     // log data
                     if let jsonToLog = try? JSONSerialization.data(withJSONObject: info, options: .withoutEscapingSlashes) {
                         debugPrint(jsonToLog)
+#if os(iOS)
                         self?.loggerInteractor.logInfo(action: "", info: String(data: jsonToLog, encoding: .utf8) ?? "")
+#endif
                     }
                     continuation.resume()
                 case .failure(let error):

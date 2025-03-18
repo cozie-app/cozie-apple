@@ -270,7 +270,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             
             // Return to the previous selected option from the selected option
             if let currentSurveyIndex = selectedOption(for: currentSurvey?.questionID ?? ""), currentSurveyIndex > 0 {
-                let deletedOption = selectedOptions.removeLast()
+                let _ = selectedOptions.removeLast()
                 let prevSurveyIndex = selectedOptions.count - 1
                 if let prevSurvey = watchSurvey?.survey.first(where: { $0.questionID == selectedOptions[prevSurveyIndex].sID }) {
                     questionsTitle = prevSurvey.question

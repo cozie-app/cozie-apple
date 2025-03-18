@@ -110,6 +110,12 @@
 		CA7E1D8B2CCFD866000C6461 /* PushNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */; };
 		CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
 		CA7E1D8E2CCFDD37000C6461 /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
+		CA7F0A9B2D6B2D13000DE90F /* PushNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA18CCE42CD28A77000FC4B1 /* PushNotificationController.swift */; };
+		CA7F0A9C2D6B2D45000DE90F /* GroupCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8C2CCFDCED000C6461 /* GroupCommon.swift */; };
+		CA7F0A9D2D6B2D64000DE90F /* PushNotificationLoggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0EE2CCFB87D001B5307 /* PushNotificationLoggerController.swift */; };
+		CA7F0A9E2D6B2D6B000DE90F /* PushNotificationLoggerGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E1D8A2CCFD865000C6461 /* PushNotificationLoggerGroupStorage.swift */; };
+		CA7F0A9F2D6B2D73000DE90F /* PushNotificationControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB062FF2CC79A7E004D94CA /* PushNotificationControllerProtocol.swift */; };
+		CA7F0AA42D6B30C1000DE90F /* PushNotificationLoggerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1F0F02CCFC080001B5307 /* PushNotificationLoggerRepository.swift */; };
 		CA81604E2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA81604D2CC2593300BCBE25 /* WatchSurveyModelControllerTest.swift */; };
 		CA8160512CC262F200BCBE25 /* PersistenceControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8160502CC262EB00BCBE25 /* PersistenceControllerTest.swift */; };
 		CA82B7F72D2ACC2700ADB4D8 /* SettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B7F62D2ACC2300ADB4D8 /* SettingViewModelTests.swift */; };
@@ -1688,6 +1694,7 @@
 			files = (
 				CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */,
 				CA2EE92629EED2F400590527 /* WaychSurveyData.swift in Sources */,
+				CA7F0A9C2D6B2D45000DE90F /* GroupCommon.swift in Sources */,
 				CA2EE93E29F1157400590527 /* QuestionsView.swift in Sources */,
 				CA4EBE4F2A0256A300D096AD /* NotificationView.swift in Sources */,
 				CAC6F92B2A091742006D625D /* SendSurveyView.swift in Sources */,
@@ -1696,15 +1703,20 @@
 				CA2EE90229EDA92E00590527 /* ContentView.swift in Sources */,
 				CA8BE5612A53F52F00D0627D /* UserDataProtocol.swift in Sources */,
 				CA2EE94529F1531700590527 /* LocationManager.swift in Sources */,
+				CA7F0A9D2D6B2D64000DE90F /* PushNotificationLoggerController.swift in Sources */,
+				CA7F0AA42D6B30C1000DE90F /* PushNotificationLoggerRepository.swift in Sources */,
 				CA2EE93129EFE38100590527 /* CommunicationKeys.swift in Sources */,
 				CA2EE94229F1391300590527 /* TimeOutViewModel.swift in Sources */,
 				CA2EE94829F180FD00590527 /* WatchSurveyInteractor.swift in Sources */,
 				CA2EE90029EDA92E00590527 /* CozieWatchApp.swift in Sources */,
+				CA7F0A9E2D6B2D6B000DE90F /* PushNotificationLoggerGroupStorage.swift in Sources */,
 				CA8BE5692A53FF0E00D0627D /* LoggerProtocol.swift in Sources */,
 				CA2EE90D29EEB89600590527 /* WatchSurveyViewModel.swift in Sources */,
 				CA2EE94029F12F5100590527 /* TimeOutView.swift in Sources */,
 				CA2EE94329F151CC00590527 /* BaseRepository.swift in Sources */,
 				CA8BE5642A53F6C400D0627D /* BackendDataProtocol.swift in Sources */,
+				CA7F0A9B2D6B2D13000DE90F /* PushNotificationController.swift in Sources */,
+				CA7F0A9F2D6B2D73000DE90F /* PushNotificationControllerProtocol.swift in Sources */,
 				CA8BE56A2A54002000D0627D /* HealthDataModel.swift in Sources */,
 				CA6102B729F6C7320055A140 /* ComplicationController.swift in Sources */,
 				CA2EE93C29F1152C00590527 /* ThankYouView.swift in Sources */,
@@ -1878,7 +1890,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1891,7 +1903,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used it to determine form where you completed the survey.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1922,7 +1933,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cozie/Cozie.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -1935,7 +1946,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Used it to determine form where you completed the survey.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2051,7 +2061,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -2093,7 +2103,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Cozie Watch App/Cozie Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"Cozie Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_PREVIEWS = YES;
@@ -2133,7 +2143,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -2167,7 +2177,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = P6T3BWDB2K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;

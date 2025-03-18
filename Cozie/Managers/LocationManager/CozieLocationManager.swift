@@ -24,7 +24,7 @@ final class LocationManager: NSObject {
     let minimumDistance: Double = Defaults.locationChangeDistanceThreshold
     var locationManager: CLLocationManager? = nil
     var currentLocation: CLLocation? = nil
-    
+
     let locationManagerInteractor = LocationManagerInteractor()
     let storage: WSStorageProtocol
     
@@ -39,14 +39,15 @@ final class LocationManager: NSObject {
     func requestAuth() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
-        locationManager?.distanceFilter = CLLocationDistance(self.storage.distanceFilter()) // mimimumDistance
+        locationManager?.distanceFilter = CLLocationDistance(storage.distanceFilter()) // mimimumDistance
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.requestAlwaysAuthorization()
+        locationManager?.allowsBackgroundLocationUpdates = true
     }
     
     func updateLocationManager() {
         if let locationManager {
-            if locationManager.distanceFilter == CLLocationDistance(self.storage.distanceFilter()) {
+            if locationManager.distanceFilter == CLLocationDistance(storage.distanceFilter()) {
                 return
             }
             locationManager.stopUpdatingLocation()
@@ -56,8 +57,8 @@ final class LocationManager: NSObject {
             }
             locationManager.distanceFilter = CLLocationDistance(self.storage.distanceFilter())
             
-            if locationManager.desiredAccuracy != kCLLocationAccuracyBest {
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            if locationManager.desiredAccuracy != kCLLocationAccuracyBestForNavigation {
+                locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
             }
             
             Task.detached {
@@ -71,14 +72,23 @@ final class LocationManager: NSObject {
     
     // TODO: - Unit Tests
     func updateLocation(locations: [CLLocation]) {
+        let lastPrecise = locations.last
+        guard var lastPrecise else { return }
+        locations.dropLast().forEach({ location in
+            if location.horizontalAccuracy < lastPrecise.horizontalAccuracy {
+                lastPrecise = location
+            }
+        })
+        
         if let lastSavedLocation = CozieStorage.shared.lastLocation(), currentLocation == nil {
             currentLocation = CLLocation(latitude: lastSavedLocation.lat, longitude: lastSavedLocation.lng)
         }
         
         if let cLocation = currentLocation {
-            if let last = locations.last, cLocation.distance(from: last) > minimumDistance {
-                currentLocation = last
-                CozieStorage.shared.updateLastLocation(lat: last.coordinate.latitude, lng: last.coordinate.longitude)
+            debugPrint("distance: -> \(cLocation.distance(from: lastPrecise))")
+            if cLocation.distance(from: lastPrecise) > minimumDistance {
+                currentLocation = lastPrecise
+                CozieStorage.shared.updateLastLocation(lat: lastPrecise.coordinate.latitude, lng: lastPrecise.coordinate.longitude)
                 if let location = currentLocation {
                     locationManagerInteractor.sendLocation(location: location) { [weak self] success in
                         guard let self = self else { return }
@@ -88,7 +98,7 @@ final class LocationManager: NSObject {
                 }
             }
         } else {
-            currentLocation = locations.last
+            currentLocation = lastPrecise
             
             if let cLocation = currentLocation {
                 CozieStorage.shared.updateLastLocation(lat: cLocation.coordinate.latitude, lng: cLocation.coordinate.longitude)
@@ -131,7 +141,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint(error.localizedDescription)
-        //testLog(details: "LocationManager didFailWithError: \(error.localizedDescription)")
+//        testLog(details: "LocationManager didFailWithError: \(error.localizedDescription)")
     }
     
     // log test

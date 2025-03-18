@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 struct CategoryInfo: CategoryDataProtocol {
     let id: String

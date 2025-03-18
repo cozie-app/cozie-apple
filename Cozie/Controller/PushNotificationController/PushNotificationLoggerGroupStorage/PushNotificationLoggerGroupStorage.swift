@@ -21,6 +21,10 @@ struct PushNotificationLoggerGroupStorage {
         case alertSubtitle = "subtitle"
         case alertBody = "body"
         case category = "category"
+        
+        case custom = "custom"
+        case additional = "a"
+        case nID = "notification_id"
     }
     
     let dateForm: DateFormatter = {
@@ -81,13 +85,26 @@ struct PushNotificationLoggerGroupStorage {
                 return partialResult.count > 0 ? partialResult + ", " + action : action
             }) ?? ""
             
-            fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
-                      NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
-                      NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
-                      NotificationActionKeys.notificationActionsShowKey: buttons,
-                      NotificationActionKeys.notificationActionButtonKey: "Dismissed",
-                      NotificationActionKeys.notificationTriggerKey: trigger,
-                      NotificationActionKeys.notificationTransmitKey: trigger]
+            if let custom = info[NotificationKeys.custom.rawValue] as? [String: Any],
+               let additional = custom[NotificationKeys.additional.rawValue] as? [String: Any],
+               let nID = additional[NotificationKeys.nID.rawValue] as? String {
+                fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
+                          NotificationActionKeys.notificationActionsShowKey: buttons,
+                          NotificationActionKeys.notificationNotificationIdKey: nID,
+                          NotificationActionKeys.notificationTriggerKey: trigger,
+                          NotificationActionKeys.notificationTransmitKey: trigger]
+            } else {
+                
+                fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
+                          NotificationActionKeys.notificationActionsShowKey: buttons,
+                          NotificationActionKeys.notificationTriggerKey: trigger,
+                          NotificationActionKeys.notificationTransmitKey: trigger]
+            }
+            
         } else {
             fields = [:]
         }
@@ -116,13 +133,27 @@ struct PushNotificationLoggerGroupStorage {
                 return partialResult.count > 0 ? partialResult + ", " + action : action
             }) ?? ""
             
-            fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
-                      NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
-                      NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
-                      NotificationActionKeys.notificationActionsShowKey: buttons,
-                      NotificationActionKeys.notificationActionButtonKey: trigger,
-                      NotificationActionKeys.notificationTriggerKey: NotificationActionKeys.notificationTTValue,
-                      NotificationActionKeys.notificationTransmitKey: NotificationActionKeys.notificationTTValue]
+            if let custom = info[NotificationKeys.custom.rawValue] as? [String: Any],
+               let additional = custom[NotificationKeys.additional.rawValue] as? [String: Any],
+               let nID = additional[NotificationKeys.nID.rawValue] as? String {
+                fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
+                          NotificationActionKeys.notificationActionsShowKey: buttons,
+                          NotificationActionKeys.notificationNotificationIdKey: nID,
+                          NotificationActionKeys.notificationActionButtonKey: trigger,
+                          NotificationActionKeys.notificationTriggerKey: NotificationActionKeys.notificationTTValue,
+                          NotificationActionKeys.notificationTransmitKey: NotificationActionKeys.notificationTTValue]
+            } else {
+                
+                fields = [NotificationActionKeys.notificationTitleKey: alert[NotificationKeys.alertTitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationSubtitleKey: alert[NotificationKeys.alertSubtitle.rawValue] ?? "",
+                          NotificationActionKeys.notificationTextKey: alert[NotificationKeys.alertBody.rawValue] ?? "",
+                          NotificationActionKeys.notificationActionsShowKey: buttons,
+                          NotificationActionKeys.notificationActionButtonKey: trigger,
+                          NotificationActionKeys.notificationTriggerKey: NotificationActionKeys.notificationTTValue,
+                          NotificationActionKeys.notificationTransmitKey: NotificationActionKeys.notificationTTValue]
+            }
         } else {
             fields = [:]
         }

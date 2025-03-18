@@ -311,3 +311,13 @@ extension StorageManager: BackendDataProtocol {
         return (watchSurveyAPI().url, watchSurveyAPI().key)
     }
 }
+
+extension StorageManager: ApiDataProtocol {
+    var url: String {
+        watchSurveyAPI().url
+    }
+    
+    var key: String {
+        watchSurveyAPI().key
+    }
+}

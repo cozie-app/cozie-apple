@@ -15,6 +15,7 @@ public struct NotificationActionKeys {
     static let notificationActionButtonKey = "action_button_pressed"
     static let notificationTriggerKey = "notification_trigger"
     static let notificationTransmitKey = "transmit_trigger"
+    static let notificationNotificationIdKey = "notification_id"
     static let notificationTTValue = "push_notification_action_button"
 }
 
@@ -70,6 +71,7 @@ public enum WatchSurveyKeys: String {
     case wssTitle = "wss_title"
     case actionButtonKey = "action_button_pressed"
     case transmitTriggerPushValue = "push_notification_action_button"
+    case appVersion = "app_bundle_build_version"
 }
 
 public enum LocationChangedKey: String {

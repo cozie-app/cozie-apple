@@ -34,6 +34,8 @@ final class LocationManagerInteractor {
                     WatchSurveyKeys.idParticipant.rawValue: user.participantID ?? "",
                     WatchSurveyKeys.idPassword.rawValue: user.passwordID ?? ""]
         
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        
         let fields: [String : Any] = [LocationChangedKey.locationChange.rawValue: true,
                                      LocationChangedKey.tsTimestampLocation.rawValue: dateFormatter.string(from: location.timestamp),
                                      LocationChangedKey.tsLatitude.rawValue: location.coordinate.latitude,
@@ -44,7 +46,8 @@ final class LocationManagerInteractor {
                                      LocationChangedKey.tsLocationAccuracyVertical.rawValue: location.verticalAccuracy,
                                      LocationChangedKey.tsLocationAcquisitionMethod.rawValue: "GPS",
                                      LocationChangedKey.tsLocationSourceDevice.rawValue: "iPhone",
-                                     WatchSurveyKeys.transmitTrigger.rawValue: LocationChangedKey.locationChange.rawValue]
+                                     WatchSurveyKeys.transmitTrigger.rawValue: LocationChangedKey.locationChange.rawValue,
+                                     WatchSurveyKeys.appVersion.rawValue: appVersion]
         
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
@@ -57,7 +60,7 @@ final class LocationManagerInteractor {
             baseRepo.post(url: backend.api_write_url ?? "", body: json, key: backend.api_write_key ?? "") { result in
                 switch result {
                 case .success(let data):
-                    debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
+                    debugPrint(String(data: data, encoding: .utf8) ?? "failure")
                     completion?(true)
                 case .failure(let error):
                     debugPrint(error.localizedDescription)

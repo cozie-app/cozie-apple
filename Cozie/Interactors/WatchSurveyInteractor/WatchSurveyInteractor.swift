@@ -89,8 +89,11 @@ final class WatchSurveyInteractor: WatchSurveyInteractorProtocol {
                     WatchSurveyKeys.idParticipant.rawValue: user.participantID ?? "",
                     WatchSurveyKeys.idPassword.rawValue: user.passwordID ?? ""]
         
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        
         let fields = [WatchSurveyKeys.actionButtonKey.rawValue: action,
-                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
+                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue,
+                      WatchSurveyKeys.appVersion.rawValue: appVersion]
 
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",

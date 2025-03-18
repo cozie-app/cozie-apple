@@ -45,6 +45,7 @@ final class WatchSurveyInteractor {
         dateFormatter.dateFormat = DateFormat.defaultFormat
         // dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let dateString = dateFormatter.string(from: date)
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.userOneSignalID(),
@@ -63,7 +64,8 @@ final class WatchSurveyInteractor {
                                       WatchSurveyKeys.wsLocationAcquisitionMethod.rawValue: "GPS",
                                       WatchSurveyKeys.wsLocationSourceDevice.rawValue: "Apple Watch",
                                       WatchSurveyKeys.transmitTrigger.rawValue: "watch_survey",
-                                      WatchSurveyKeys.wssTitle.rawValue: watchSurvey?.surveyName ?? ""]
+                                      WatchSurveyKeys.wssTitle.rawValue: watchSurvey?.surveyName ?? "",
+                                      WatchSurveyKeys.appVersion.rawValue: appVersion]
         
         for selected in selectedOptions {
             if selected.sID.isEmpty {
@@ -163,8 +165,11 @@ final class WatchSurveyInteractor {
                     WatchSurveyKeys.idParticipant.rawValue: storage.userID(),
                     WatchSurveyKeys.idPassword.rawValue: storage.passwordID()]
         
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        
         let fields = [WatchSurveyKeys.actionButtonKey.rawValue: action,
-                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
+                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue,
+                     WatchSurveyKeys.appVersion.rawValue: appVersion]
         
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: formattedDate(),
                                         WatchSurveyKeys.measurement.rawValue: storage.experimentID(),
