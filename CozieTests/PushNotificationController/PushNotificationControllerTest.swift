@@ -18,10 +18,10 @@ final class PushNotificationControllerTests {
     @Suite("Parsing")
     struct PushNotificationControllerParsing {
         @Test("Parsing Local Category", .tags(.parsing))
-        func parseLocalSevedCategory() throws {
-            let contr = PushNotificationController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificationRepositorySpy()), userData: UserDataSpy(), storage: CozieStorageSpy())
+        func parseLocalSavedCategory() throws {
+            let controller = PushNotificationController(pushNotificationLogger: PushNotificationLoggerController(repository: PushNotificationRepositorySpy()), userData: UserDataSpy(), storage: CozieStorageSpy())
             
-            let list = try contr.categoryList(plistName: "CategoryList", bundel: Bundle(for: PushNotificationController.self))
+            let list = try controller.categoryList(plistName: "CategoryList", bundle: Bundle(for: PushNotificationController.self))
             
             #expect(list.count > 0)
         }
@@ -29,23 +29,42 @@ final class PushNotificationControllerTests {
     
     @Suite("PushNotification")
     struct PushNotificationControllerUTest {
-        @Test("PushNotificationController is UNUserNotificationCenterDelegate and logged PuchNotification",
+        @Test("PushNotificationController send test action and logged PuchNotification",
             .tags(.parsing))
-        func controllerIsUNUserNotificationCenterDelegateAndLogPuchNotification() async throws {
+        func controllerSendTestActionAndLogPushNotification() async throws {
             let repositorySpy = PushNotificationRepositorySpy()
             let loggerController = PushNotificationLoggerController(repository: repositorySpy)
             
             let sut = PushNotificationController(pushNotificationLogger: loggerController, userData: UserDataSpy(), storage: CozieStorageSpy())
             
             _ = try #require(sut as UNUserNotificationCenterDelegate)
-            await #expect(repositorySpy.savedeNotifInfo.isEmpty)
+            await #expect(repositorySpy.savedNotificationInfo.isEmpty)
             
-            try await sut.logPuchNotificationAction(actionIdentifier: UNNotificationDismissActionIdentifier, userInfo: ["test": 1.0])
+            try await sut.logPushNotificationAction(actionIdentifier: "Test", userInfo: ["test": 1.0])
             
-            await #expect(repositorySpy.savedeNotifInfo.count == 1)
+            await #expect(repositorySpy.savedNotificationInfo.count == 1)
             
-            try await sut.logPuchNotificationAction(actionIdentifier: UNNotificationDismissActionIdentifier, userInfo: ["test": 1.0])
-            await #expect(repositorySpy.savedeNotifInfo.count == 2)
+            try await sut.logPushNotificationAction(actionIdentifier: "Test", userInfo: ["test": 1.0])
+            await #expect(repositorySpy.savedNotificationInfo.count == 2)
+        }
+        
+        @Test("PushNotificationController send dismiss action and logged PuchNotification",
+            .tags(.parsing))
+        func controllerSendDismissTestActionAndLogPuchNotification() async throws {
+            let repositorySpy = PushNotificationRepositorySpy()
+            let loggerController = PushNotificationLoggerController(repository: repositorySpy)
+            
+            let sut = PushNotificationController(pushNotificationLogger: loggerController, userData: UserDataSpy(), storage: CozieStorageSpy())
+            
+            _ = try #require(sut as UNUserNotificationCenterDelegate)
+            await #expect(repositorySpy.savedNotificationInfo.isEmpty)
+            
+            try await sut.logPushNotificationAction(actionIdentifier: UNNotificationDismissActionIdentifier, userInfo: ["test": 1.0])
+            
+            await #expect(repositorySpy.savedNotificationInfo.count == 1)
+            
+            try await sut.logPushNotificationAction(actionIdentifier: UNNotificationDismissActionIdentifier, userInfo: ["test": 1.0])
+            await #expect(repositorySpy.savedNotificationInfo.count == 2)
         }
     }
 }
@@ -59,7 +78,7 @@ fileprivate struct CozieStorageSpy: CozieStorageProtocol {
         "playerID"
     }
     
-    func maxHealthCutoffInteval() -> Double {
+    func maxHealthCutOffInterval() -> Double {
         0.0
     }
     
@@ -85,11 +104,11 @@ fileprivate struct CozieStorageSpy: CozieStorageProtocol {
 }
 
 actor PushNotificationRepositorySpy : PushNotificationRepositoryProtocol {
-    var savedeNotifInfo: [[String : Any]] = []
+    var savedNotificationInfo: [[String : Any]] = []
     
-    func saveNotifInfo(info: [String : Any]) async throws {
+    func saveNotificationInfo(info: [String : Any]) async throws {
         await withCheckedContinuation { continuation in
-            savedeNotifInfo.append(info)
+            savedNotificationInfo.append(info)
             continuation.resume()
         }
     }

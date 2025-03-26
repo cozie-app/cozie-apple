@@ -1,12 +1,14 @@
 {
     "survey_name": "Thermal (short)",
     "survey_id": "thermal_short",
+    "firstQuestionID": "q_thermal",
     "survey": [{
             "question": "How would you prefer to be?",
             "question_id": "q_thermal",
             "response_options": [{
                     "text": "Cooler",
                     "icon": "cloud.circle",
+                    "icon_background_color": "",
                     "use_sf_symbols": true,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": "q_location"
@@ -14,13 +16,15 @@
                 {
                     "text": "No Change",
                     "icon": "comfortable",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": "q_location"
                 },
                 {
-                    "text": "Warmer",
+                    "text": "Long long long long long long long long long long long long long long text",
                     "icon": "tp_warmer",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": "q_location"
@@ -33,6 +37,7 @@
             "response_options": [{
                     "text": "Outdoor",
                     "icon": "outdoor",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": "q_clothing"
@@ -40,6 +45,7 @@
                 {
                     "text": "Indoor",
                     "icon": "indoor",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": "q_clothing"
@@ -52,6 +58,7 @@
             "response_options": [{
                     "text": "Very light",
                     "icon": "clo-very-light",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": ""
@@ -59,6 +66,7 @@
                 {
                     "text": "Light",
                     "icon": "clo-light",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": ""
@@ -66,6 +74,7 @@
                 {
                     "text": "Medium",
                     "icon": "clo-medium",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": ""
@@ -73,6 +82,7 @@
                 {
                     "text": "heavy",
                     "icon": "clo-heavy",
+                    "icon_background_color": "",
                     "use_sf_symbols": false,
                     "sf_symbols_color": "#F55D25",
                     "next_question_id": ""

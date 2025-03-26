@@ -9,7 +9,7 @@ import Foundation
 
 class TimePickerViewModel: ObservableObject {
     @Published var selectedHour: Int = 10
-    @Published var selectedMinures: Int = 10
+    @Published var selectedMinutes: Int = 10
     @Published var selectedSeconds: Int = 10
     
     let hourRange = 0...24

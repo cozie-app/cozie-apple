@@ -10,38 +10,57 @@ import CoreData
 import UIKit
 import OneSignalFramework
 
-class BackendInteractor {
-    let persistenceController = PersistenceController.shared
+protocol BackendInteractorProtocol {
+    var currentBackendSettings: BackendInfo? { get }
+    func prepareBackendData()
+    func prepareBackendData(apiReadUrl: String?,
+                            apiReadKey: String?,
+                            apiWriteUrl: String?,
+                            apiWriteKey: String?,
+                            oneSignalId: String?,
+                            participantPassword: String?,
+                            watchSurveyLink: String?,
+                            phoneSurveyLink: String?)
+    func updateOneSign(launchOptions: [UIApplication.LaunchOptionsKey : Any]?,
+                       surveyInteractor: WatchSurveyInteractor)
+    func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?)
+}
+
+class BackendInteractor: BackendInteractorProtocol {
+    let udStorage: UserDefaultsStorageProtocol
+    let dbStorage: DataBaseStorageProtocol
+    
     let baseRepo = BaseRepository()
-    let storage = CozieStorage.shared
+    
     let surveyManager = SurveyManager()
-    let notifListner = CozieNotificationLifecycleListener()
+    let notificationListener = CozieNotificationLifecycleListener()
+    
+    init(storage: UserDefaultsStorageProtocol = CozieStorage.shared,
+         dbStorage: DataBaseStorageProtocol = PersistenceController.shared) {
+        
+        self.udStorage = storage
+        self.dbStorage = dbStorage
+    }
     
     var currentBackendSettings: BackendInfo? {
-        guard let settingsList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()),
-              let settings = settingsList.first else { return nil }
-        
+        guard let settings = try? dbStorage.backendSetting() else { return nil }
         return settings
     }
     
     func prepareBackendData() {
-        if let settingList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()), let _ = settingList.first {
-            debugPrint(settingList)
-        } else {
-            let backend = BackendInfo(context: persistenceController.container.viewContext)
-            backend.api_read_url = Defaults.APIreadURL
-            backend.api_read_key = Defaults.APIreadKey
-            backend.api_write_url = Defaults.APIwriteURL
-            backend.api_write_key = Defaults.APIwriteKey
-            backend.one_signal_id = Defaults.OneSignalAppID
-            backend.participant_password = Defaults.generatePasswordID()
-            backend.watch_survey_link = Defaults.watchSurveyLink
-            backend.phone_survey_link = Defaults.phoneSurveyLink
+        let backendInfo = try? dbStorage.backendSetting()
+        if backendInfo == nil {
+            prepareBackendData(apiReadUrl: Defaults.APIreadURL,
+                               apiReadKey: Defaults.APIreadKey,
+                               apiWriteUrl: Defaults.APIwriteURL,
+                               apiWriteKey: Defaults.APIwriteKey,
+                               oneSignalId: Defaults.OneSignalAppID,
+                               participantPassword: Defaults.generatePasswordID(),
+                               watchSurveyLink: Defaults.watchSurveyLink,
+                               phoneSurveyLink: Defaults.phoneSurveyLink)
             
             // save default link
-            storage.saveWSLink(link: (Defaults.watchSurveyLink, Defaults.WSStitle))
-            
-            try? persistenceController.container.viewContext.save()
+            udStorage.saveWSLink(link: (Defaults.watchSurveyLink, Defaults.WSStitle))
         }
     }
     
@@ -49,11 +68,11 @@ class BackendInteractor {
                             apiReadKey: String?,
                             apiWriteUrl: String?,
                             apiWriteKey: String?,
-                            oneSigmnalId: String?,
+                            oneSignalId: String?,
                             participantPassword: String?,
                             watchSurveyLink: String?,
                             phoneSurveyLink: String?) {
-        if let settingList = try? persistenceController.container.viewContext.fetch(BackendInfo.fetchRequest()), let model = settingList.first {
+        if let model = try? dbStorage.backendSetting() {
             
             if let apiReadUrl {
                 model.api_read_url = apiReadUrl
@@ -67,8 +86,8 @@ class BackendInteractor {
             if let apiWriteKey {
                 model.api_write_key = apiWriteKey
             }
-
-            model.one_signal_id = Defaults.OneSignalAppID //oneSigmnalId
+            
+            model.one_signal_id = Defaults.OneSignalAppID //oneSignalId
             
             if let participantPassword {
                 model.participant_password = participantPassword
@@ -82,24 +101,15 @@ class BackendInteractor {
                 model.phone_survey_link = phoneSurveyLink
             }
             
-            try? persistenceController.container.viewContext.save()
-            debugPrint(settingList)
+            try? dbStorage.saveViewContext()
+            debugPrint(model)
         } else {
-            let backend = BackendInfo(context: persistenceController.container.viewContext)
-            backend.api_read_url = apiReadUrl
-            backend.api_read_key = apiReadKey
-            backend.api_write_url = apiWriteUrl
-            backend.api_write_key = apiWriteKey
-            backend.one_signal_id = Defaults.OneSignalAppID//oneSigmnalId
-            backend.participant_password = participantPassword
-            backend.watch_survey_link = watchSurveyLink
-            backend.phone_survey_link = phoneSurveyLink
-            
-            try? persistenceController.container.viewContext.save()
+            try? dbStorage.createBackendSetting(apiReadUrl: apiReadUrl, apiReadKey: apiReadKey, apiWriteUrl: apiWriteUrl, apiWriteKey: apiWriteKey, oneSignalId: oneSignalId, participantPassword: participantPassword, watchSurveyLink: watchSurveyLink, phoneSurveyLink: phoneSurveyLink)
         }
     }
     
     // MARK: - Load WatchSurvey JSON
+    // TODO: - Unit Tests
     func loadExternalWatchSurveyJSON(completion: ((_ error: Error?) -> ())?) {
         if let backend = currentBackendSettings {
             let surveyLink = backend.watch_survey_link ?? ""
@@ -115,10 +125,10 @@ class BackendInteractor {
                 
                 switch result {
                 case .success(let surveyListData):
-                    self.surveyManager.update(surveyListData: surveyListData, storage: self.persistenceController, selected: false) { title, error in
+                    self.surveyManager.update(surveyListData: surveyListData, storage: self.dbStorage, selected: false) { title, error in
                         if let surveyTitle = title {
                             // update external ws link after sync
-                            self.storage.saveExternalWSLink(link: (surveyLink, surveyTitle))
+                            self.udStorage.saveExternalWSLink(link: (surveyLink, surveyTitle))
                             completion?(error)
                         } else {
                             completion?(error)
@@ -132,20 +142,20 @@ class BackendInteractor {
         }
     }
     
-    // MARK: Setup/Updaete OneSign
+    // MARK: Setup/Update OneSign
     func updateOneSign(launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil,
                        surveyInteractor: WatchSurveyInteractor = WatchSurveyInteractor()) {
         
-        let healthKitInteractor: HealthKitInteractor = HealthKitInteractor(storage: storage, userData: UserInteractor(), backendData: self, loger: LoggerInteractor.shared)
+        let healthKitInteractor: HealthKitInteractor = HealthKitInteractor(storage: udStorage, userData: UserInteractor(), backendData: self, logger: LoggerInteractor.shared)
         
         if let _ = currentBackendSettings {
             // Remove this method to stop OneSignal Debugging
             OneSignal.Debug.setLogLevel(.LL_VERBOSE)
             
-            notifListner.healthKitInteractor = healthKitInteractor
-            OneSignal.Notifications.addForegroundLifecycleListener(notifListner)
+            notificationListener.healthKitInteractor = healthKitInteractor
+            OneSignal.Notifications.addForegroundLifecycleListener(notificationListener)
             
-            // OneSignal initialization
+            // OneSignal initialisation
             OneSignal.initialize(CommunicationKeys.oneSignalAppID.rawValue, withLaunchOptions: launchOptions)
             OneSignal.User.pushSubscription.optIn()
             
@@ -174,7 +184,7 @@ class CozieNotificationLifecycleListener : NSObject, OSNotificationLifecycleList
     var healthKitInteractor: HealthKitInteractor? = nil
     func onWillDisplay(event: OSNotificationWillDisplayEvent) {
         event.preventDefault()
-        healthKitInteractor?.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { succces in
+        healthKitInteractor?.sendData(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, timeout: HealthKitInteractor.minInterval) { success in
             debugPrint("On WillDisplay Notification")
         }
         // self?.testLog(trigger: CommunicationKeys.pushNotificationForegroundTrigger.rawValue, details: "(OneSignal) Notification Will Show In Foreground Handler!")
@@ -211,21 +221,21 @@ extension BackendInteractor: ApiDataProtocol{
     }
 }
 
-// MARK: - TEST: - OneSIgnal curl Alex_Segment
+// MARK: - TEST: - OneSignal curl Alex_Segment
 /*
  curl --include \
-      --request POST \
-      --header "Content-Type: application/json; charset=utf-8" \
-      --header "Authorization: Basic NDRkODliNWUtZjdlMy00YmU1LWI2M2YtN2I1MTAzOTg5ZjU3"\
-      --data-binary "{
-          \"app_id\": \"17d346bf-bfe5-4422-be96-2a8e4ae4cc3d\",
-          \"contents\": {\"en\": \"Alexs test for content\"},
-          \"headings\": {\"en\": \"Alexs test for headings\"},
-          \"subtitle\": {\"en\": \"Alexs test for subtitle\"},
-          \"ios_category\": \"cozie_notification_action_category\",
-          \"content_available\": true,
-          \"included_segments\": [\"Alex_Segment\"]
-      }" \
-      https://api.onesignal.com/notifications
-*/
- 
+ --request POST \
+ --header "Content-Type: application/json; charset=utf-8" \
+ --header "Authorization: Basic NDRkODliNWUtZjdlMy00YmU1LWI2M2YtN2I1MTAzOTg5ZjU3"\
+ --data-binary "{
+ \"app_id\": \"17d346bf-bfe5-4422-be96-2a8e4ae4cc3d\",
+ \"contents\": {\"en\": \"Alexs test for content\"},
+ \"headings\": {\"en\": \"Alexs test for headings\"},
+ \"subtitle\": {\"en\": \"Alexs test for subtitle\"},
+ \"ios_category\": \"cozie_notification_action_category\",
+ \"content_available\": true,
+ \"included_segments\": [\"Alex_Segment\"]
+ }" \
+ https://api.onesignal.com/notifications
+ */
+

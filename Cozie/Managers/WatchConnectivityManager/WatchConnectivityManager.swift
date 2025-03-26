@@ -8,7 +8,19 @@
 import Foundation
 import WatchConnectivity
 
-class WatchConnectivityManagerPhone: NSObject {
+protocol WatchConnectivityManagerPhoneProtocol {
+    func sendAll(data: Data,
+                 writeApiURL: String,
+                 writeApiKey: String,
+                 userID: String,
+                 expID: String,
+                 password: String,
+                 userOneSignalID: String,
+                 timeInterval: Int,
+                 healthCutoffTimeInterval: Double, completion: ((_ error: Error?)->())?)
+}
+
+class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProtocol {
     
     enum WatchConnectivityManagerError: Error, LocalizedError {
         case connectionError, surveyJSONError
@@ -24,10 +36,10 @@ class WatchConnectivityManagerPhone: NSObject {
     
     let session: WCSession = WCSession.default
     let loggerInteractor = LoggerInteractor.shared
-    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
     var activateCompletion: (()->())?
-    var activateFahlerCompletion: ((_ error: Error)->())?
-    var transferingFileCompletion: ((_ error: Error?)->())?
+    var activateFailureCompletion: ((_ error: Error)->())?
+    var transferringFileCompletion: ((_ error: Error?)->())?
     
     override init() {
         super.init()
@@ -37,23 +49,23 @@ class WatchConnectivityManagerPhone: NSObject {
     func activate() {
         if WCSession.isSupported(), !session.isReachable {
             if session.activationState == .activated, !session.isReachable {
-                failer()
+                failure()
                 return
             }
             session.delegate = self
             session.activate()
         } else {
-            failer()
+            failure()
         }
     }
     
-    private func failer() {
-        if activateFahlerCompletion != nil {
-            activateFahlerCompletion?(WatchConnectivityManagerError.connectionError)
-            activateFahlerCompletion = nil
+    private func failure() {
+        if activateFailureCompletion != nil {
+            activateFailureCompletion?(WatchConnectivityManagerError.connectionError)
+            activateFailureCompletion = nil
         }
     }
-    
+    // TODO: - Unit Tests
     func sendUserData(userID: String, expID: String, password: String) {
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.userIDKey.rawValue: userID,
@@ -69,7 +81,7 @@ class WatchConnectivityManagerPhone: NSObject {
         
         activateIfNeededAndSendMessage()
     }
-    
+    // TODO: - Unit Tests
     func sendAPI(writeApiURL: String, writeApiKey: String) {
         
         activateCompletion = { [weak self] in
@@ -85,7 +97,7 @@ class WatchConnectivityManagerPhone: NSObject {
         
         activateIfNeededAndSendMessage()
     }
-    
+    // TODO: - Unit Tests
     func sendWatchSurvey(data: Data) {
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data]
@@ -100,6 +112,7 @@ class WatchConnectivityManagerPhone: NSObject {
         activateIfNeededAndSendMessage()
     }
     
+    // TODO: - Unit Tests
     func sendAll(data: Data,
                  writeApiURL: String,
                  writeApiKey: String,
@@ -131,7 +144,7 @@ class WatchConnectivityManagerPhone: NSObject {
                 if let transferStatus = response[CommunicationKeys.transferFileStatusKey.rawValue] as? Int {
                     switch transferStatus {
                     case FileTransferStatus.started.rawValue:
-                        self?.transferingFileCompletion = completion
+                        self?.transferringFileCompletion = completion
                     case FileTransferStatus.error.rawValue:
                         completion?(WatchConnectivityManagerError.connectionError)
                     default:
@@ -144,7 +157,7 @@ class WatchConnectivityManagerPhone: NSObject {
             })
         }
         
-        activateFahlerCompletion = completion
+        activateFailureCompletion = completion
         activateIfNeededAndSendMessage()
     }
     
@@ -176,11 +189,12 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
             activateCompletion?()
             activateCompletion = nil
         } else {
-            failer()
+            failure()
             activateCompletion = nil
         }
     }
     
+    // TODO: - Unit Tests
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         
         if let logs = message[CommunicationKeys.wsLogs.rawValue] as? String {
@@ -195,6 +209,7 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
         // testLog(details: session.isReachable ? "ConnectivityManager Session Reachabil!" : "ConnectivityManager Session not Reachabil!", state: "info")
     }
     
+    // TODO: - Unit Tests
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         do {
             let wlogs = try String(contentsOf: file.fileURL, encoding: .utf8)
@@ -229,10 +244,10 @@ extension WatchConnectivityManagerPhone: WCSessionDelegate {
     }
     
     private func transferCompletion(_ error: Error?) {
-        if transferingFileCompletion != nil {
-            transferingFileCompletion?(error)
+        if transferringFileCompletion != nil {
+            transferringFileCompletion?(error)
         }
-        transferingFileCompletion = nil
+        transferringFileCompletion = nil
     }
     
     // log test

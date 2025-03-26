@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class UserInteractor {
+final class UserInteractor {
     // TO DO: Dependency Inversion + Test coverage
     let persistenceController = PersistenceController.shared
     
@@ -19,7 +19,7 @@ class UserInteractor {
         
         return user
     }
-    
+    // TODO: - Unit Tests
     public func prepareUser(password: String = "1G8yOhPvMZ6m") {
         if let userList = try? persistenceController.container.viewContext.fetch(User.fetchRequest()), let _ = userList.first {
            debugPrint(userList)
@@ -32,7 +32,8 @@ class UserInteractor {
         }
     }
     
-    // 
+    //
+    // TODO: - Unit Tests
     public func prepareUser(participantID: String?, experimentID: String?, password: String? = "1G8yOhPvMZ6m") {
         if let userList = try? persistenceController.container.viewContext.fetch(User.fetchRequest()), let user = userList.first {
             if let participantID {
@@ -54,6 +55,8 @@ class UserInteractor {
         }
     }
 }
+
+extension UserInteractor: UserInteractorProtocol {}
 
 extension UserInteractor: UserDataProtocol {
     var userInfo: CUserInfo? {

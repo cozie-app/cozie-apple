@@ -12,57 +12,111 @@ enum CozieTabs {
     case data, settings, backend
 }
 
-class HomeCoordinator: ObservableObject {
+protocol UserInteractorProtocol {
+    var currentUser: User? { get }
+    func prepareUser(participantID: String?, experimentID: String?, password: String?)
+    func prepareUser(password: String)
+}
+
+protocol SettingsInteractorProtocol {
+    var currentSettings: SettingsData? { get }
+    func prepareSettingsData()
+    func prepareSettingsData(wssTitle: String?,
+                             wssGoal: Int16?,
+                             wssTimeout: Int16?,
+                             wssReminderEnabled: Bool?,
+                             wssReminderInterval: Int16?,
+                             wssParticipationDays: String?,
+                             wssParticipationTimeStart: String?,
+                             wssParticipationTimeEnd: String?,
+                             pssReminderEnabled: Bool?,
+                             pssReminderDays: String?,
+                             pssReminderTime: String?)
+}
+
+final class HomeCoordinator: ObservableObject {
+    
+    // MARK: Private
+    private let userInteractor: UserInteractorProtocol
+    private let settingsInteractor: SettingsInteractorProtocol
+    private let backendInteractor: BackendInteractorProtocol
+    private let settingsViewModel: SettingViewModel
+    private let watchSurveyInteractor: WatchSurveyInteractor
+    weak var appDelegate: AppDelegate?
+    
     static let didReceiveDeeplink = Notification.Name("Cozie.didReceiveDeeplink")
     
     @Published var tab = CozieTabs.data
     @Published var session: Session
     @Published var disableUI: Bool = false
     
-    let userIntaractor = UserInteractor()
-    let settingsInteractor = SettingsInteractor()
-    let backendInteractor = BackendInteractor()
-    let settingsViewModel: SettingViewModel
-    let watchSurveyInteractor: WatchSurveyInteractor
-    
     init(tab: CozieTabs = CozieTabs.data,
-         session: Session) {
+         session: Session,
+         userInteractor: UserInteractorProtocol = UserInteractor(),
+         settingsInteractor: SettingsInteractorProtocol = SettingsInteractor(),
+         backendInteractor: BackendInteractorProtocol = BackendInteractor()) {
         self.tab = tab
         self.session = session
+        
+        self.userInteractor = userInteractor
+        self.settingsInteractor = settingsInteractor
+        self.backendInteractor = backendInteractor
+        
         settingsViewModel = SettingViewModel(reminderManager: session.reminderManager)
         watchSurveyInteractor = WatchSurveyInteractor()
     }
     
-    func loadSessionCoodinator() -> SettingCoordinator {
+    /// Create settings coordinator
+    ///
+    func loadSessionCoordinator() -> SettingCoordinator {
         return SettingCoordinator(parent: self,
                                   viewModel: settingsViewModel,
                                   title: "Cozie - Settings",
                                   session: session)
     }
     
-    func prepareSource(info: InitModel) {
-        backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSigmnalId: info.appOneSignalAppID, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
+    /// Use this function to apply new settings from QR-code/DeepLink
+    ///
+    func prepareSource(info: InitModel, storage: WSStateStorageProtocol & WSStorageProtocol, appDelegate: AppDelegate? = nil ) {
+        // update backend data
+        backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSignalId: nil, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
+        
+        // update HealthKit cut off interval
+        if let cuttoffTime = info.cutoffTime {
+            storage.saveMaxHealthCutoffTimeInterval(cuttoffTime)
+        }
+        
+        // update location distance filter
+        if let distanceFilter = info.distanceFilter {
+            storage.setDistanceFilter(Float(distanceFilter))
+            appDelegate?.locationManager.updateLocationManager()
+        }
+        
+        // update settings data
         if let backend = backendInteractor.currentBackendSettings {
-            userIntaractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
+            userInteractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
             settingsInteractor.prepareSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabled: info.wssReminderEnabled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
             
-            backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
+            backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions, surveyInteractor: WatchSurveyInteractor())
+            // clear and update reminders via QR-code/DeepLink
             settingsViewModel.prepareRemindersIfNeeded()
             
-            CozieStorage.shared.savePIDSynced(false)
-            CozieStorage.shared.saveExpIDSynced(false)
-            CozieStorage.shared.saveSurveySynced(false)
+            // reset sync device status
+            storage.savePIDSynced(false)
+            storage.saveExpIDSynced(false)
+            storage.saveSurveySynced(false)
             
             // update selected survey
             if let selectedSurvey = QuestionViewModel.defaultQuestions.first(where: { $0.title == info.wssTitle }) {
-                CozieStorage.shared.saveWSLink(link: (selectedSurvey.link, selectedSurvey.title))
+                storage.saveWSLink(link: (selectedSurvey.link, selectedSurvey.title))
             } else {
                 if let apiWatchSurveyURL = info.apiWatchSurveyURL, !apiWatchSurveyURL.isEmpty, let wssTitle = info.wssTitle {
                     Task { @MainActor in
-                        CozieStorage.shared.saveWSLink(link: (apiWatchSurveyURL, wssTitle))
+                        storage.saveWSLink(link: (apiWatchSurveyURL, wssTitle))
                         settingsViewModel.questionViewModel.updateWithBackendSurvey(title: wssTitle, link: apiWatchSurveyURL)
                         settingsViewModel.prepareSelectedWSLinkUI(wssTitle)
                     }
+                    // reload view settings after loading a new watch review
                     watchSurveyInteractor.loadSelectedWatchSurveyJSON { title, loadError in
                         Task { @MainActor in
                             NotificationCenter.default.post(name: HomeCoordinator.didReceiveDeeplink, object: nil)
@@ -73,13 +127,14 @@ class HomeCoordinator: ObservableObject {
         }
     }
     
+    /// Use this function to prepare default data
+    ///
     func prepareSource() {
         backendInteractor.prepareBackendData()
         if let backend = backendInteractor.currentBackendSettings {
-            userIntaractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
+            userInteractor.prepareUser(password: backend.participant_password ?? "1G8yOhPvMZ6m")
             settingsInteractor.prepareSettingsData()
-            backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions)
+            backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions, surveyInteractor: WatchSurveyInteractor())
         }
     }
-    
 }

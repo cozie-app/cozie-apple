@@ -8,10 +8,9 @@
 import Foundation
 
 protocol CozieStorageProtocol {
-    typealias SurveyInfo = (link: String, title: String)
     func playerID() -> String
     
-    func maxHealthCutoffInteval() -> Double
+    func maxHealthCutOffInterval() -> Double
     func healthLastSyncedTimeInterval(offline: Bool) -> Double
     
     func healthUpdateLastSyncedTimeInterval(_ interval: Double, offline: Bool)

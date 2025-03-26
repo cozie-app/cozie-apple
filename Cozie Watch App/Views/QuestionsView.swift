@@ -12,6 +12,7 @@ struct QuestionsView: View {
     @State private var sensoryFeedback: Int = 0
     
     let questionTopInset: CGFloat = 16
+    let actionDelayInSeconds = 0.2
     
     var body: some View {
         GeometryReader { geometry in
@@ -65,21 +66,26 @@ struct QuestionsView: View {
                                 }
                                 
                                 Button {
-                                    viewModel.selectOptions(option: option)
-                                    scrollToTopAnimation(reader: reader, animation: true)
+                                    Task {
+                                        try await Task.sleep(for: .seconds(actionDelayInSeconds))
+                                        viewModel.selectOptions(option: option)
+                                        scrollToTopAnimation(reader: reader, animation: true)
+                                    }
                                 } label: {
                                     
                                     HStack {
                                         Text(.init(option.text))  // render markdown using .init()
-                                            .foregroundStyle(viewModel.isOptinSelected(option: option) ? Color.gray : Color.white)
+                                            .foregroundStyle(viewModel.isOptionSelected(option: option) ? Color.gray : Color.white)
+                                            .fixedSize(horizontal: false, vertical: true)
                                             .padding(.leading, 4)
+                                            .padding(.vertical, 8)
                                         Spacer()
                                     }
                                     .padding(.leading, UICommon.cornerRadius)
-                                    .frame(height: UICommon.buttonHeight)
+                                    .frame(minHeight: UICommon.buttonHeight)
                                     .background {
                                         RoundedRectangle(cornerRadius: UICommon.cornerRadius)
-                                            .foregroundColor(viewModel.isOptinSelected(option: option) ? UICommon.selectedButtonColor : UICommon.buttonColor)
+                                            .foregroundColor(viewModel.isOptionSelected(option: option) ? UICommon.selectedButtonColor : UICommon.buttonColor)
                                     }
                                     
                                 }
@@ -94,8 +100,11 @@ struct QuestionsView: View {
                             GeometryReader { render in
                                 HStack {
                                     Button {
-                                        viewModel.backAction()
-                                        scrollToTopAnimation(reader: reader, animation: true)
+                                        Task {
+                                            try await Task.sleep(for: .seconds(actionDelayInSeconds))
+                                            viewModel.backAction()
+                                            scrollToTopAnimation(reader: reader, animation: true)
+                                        }
                                     } label: {
                                         Text("Back")
                                             .frame(width: render.size.width/2-UICommon.cornerRadius/2, height: UICommon.buttonHeight)
@@ -105,10 +114,14 @@ struct QuestionsView: View {
                                             }
                                     }
                                     .buttonStyle(.plain)
+                                    
                                     Spacer()
                                     Button {
-                                        viewModel.restart()
-                                        scrollToTopAnimation(reader: reader, animation: true)
+                                        Task {
+                                            try await Task.sleep(for: .seconds(actionDelayInSeconds))
+                                            viewModel.restart()
+                                            scrollToTopAnimation(reader: reader, animation: true)
+                                        }
                                     } label: {
                                         Text("Reset")
                                             .frame(width: render.size.width/2-UICommon.cornerRadius/2, height: UICommon.buttonHeight)

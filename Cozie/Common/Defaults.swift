@@ -21,6 +21,7 @@ struct Defaults {
         //let participantID = "simulator"
         return participantID
     }
+    
     static func generatePasswordID() -> String {
         let password_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890*&%$#@"
         let password_length = 16

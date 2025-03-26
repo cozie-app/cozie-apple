@@ -25,6 +25,7 @@ struct PhoneReminder {
     let timeStart: Int
 }
 
+// TODO: - Unit Tests
 class ReminderManager: NSObject, ObservableObject {
     
     private let watchIndentifier = "watch-"

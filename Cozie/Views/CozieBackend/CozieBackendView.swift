@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CozieBackendView: View {
-    @StateObject var viewModel = BackendViewModel()
+    @StateObject var viewModel = BackendViewModel(storage: CozieStorage.shared)
     @EnvironmentObject var coordinator: HomeCoordinator
     
     // MARK: States
@@ -54,6 +54,9 @@ struct CozieBackendView: View {
             })
             .background(Color.appBackground)
             .onAppear{
+                //??? Global
+                viewModel.appDelegate = coordinator.appDelegate
+                //
                 viewModel.prepareData { progress in
                     coordinator.disableUI = progress
                 }
@@ -69,11 +72,11 @@ struct CozieBackendView: View {
     
     // MARK: Did Selected
     func didSelectCell(itemID: Int) -> some View {
-        let tt = viewModel.section
+        let selectedItems = viewModel.section
             .flatMap{ $0.list }
             .filter{ $0.id == itemID }.first
         
-        guard let item = tt else {
+        guard let item = selectedItems else {
             return TextFieldPopUp(title: "", text: "") {
                 viewModel.showingState = .clear
             } setAction: { text in

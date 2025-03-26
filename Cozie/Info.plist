@@ -29,5 +29,12 @@
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>CozieOrange</string>
+		<key>UIImageName</key>
+		<string>SplashIcon</string>
+	</dict>
 </dict>
 </plist>

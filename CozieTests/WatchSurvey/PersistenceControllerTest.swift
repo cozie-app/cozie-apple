@@ -11,16 +11,16 @@ import Testing
 final class PersistenceControllerTest {
     let storage = PersistenceController(inMemory: true)
     let surveyManager: SurveyManagerProtocol = SurveyManager()
-    @Test("Test Persistence Controller") func test_seve_survey() async throws {
+    @Test("Test Persistence Controller") func testSaveSurvey() async throws {
         let request = WatchSurveyData.fetchRequest()
-        let prelist  = try storage.container.viewContext.fetch(request)
+        let preList  = try storage.container.viewContext.fetch(request)
         
-        #expect(prelist.isEmpty)
-        try await surveyManager.asyncUpdate(surveyListData: TestSurveyData.suveyStub, storage: storage, selected: false)
+        #expect(preList.isEmpty)
+        try await surveyManager.asyncUpdate(surveyListData: TestSurveyData.surveyStub, storage: storage, selected: false)
         
 
-        let poslist  = try storage.container.viewContext.fetch(request)
-        #expect(!poslist.isEmpty)
+        let posList  = try storage.container.viewContext.fetch(request)
+        #expect(!posList.isEmpty)
     }
     
 }

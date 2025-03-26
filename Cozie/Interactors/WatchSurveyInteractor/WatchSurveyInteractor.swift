@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 protocol SurveyManagerProtocol {
-    func update(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool, completion: ((_ title: String?, _ error: Error?)->())? )
-    func asyncUpdate(surveyListData: Data, storage: StorageRepositoryProtocol, selected: Bool) async throws
+    func update(surveyListData: Data, storage: DataBaseStorageProtocol, selected: Bool, completion: ((_ title: String?, _ error: Error?)->())? )
+    func asyncUpdate(surveyListData: Data, storage: DataBaseStorageProtocol, selected: Bool) async throws
 }
 
 protocol SurveyStorageProtocol {
@@ -18,7 +18,11 @@ protocol SurveyStorageProtocol {
     func playerID() -> String
 }
 
-class WatchSurveyInteractor {
+protocol WatchSurveyInteractorProtocol {
+    func loadSelectedWatchSurveyJSON(completion: ((_ title: String?, _ error: Error?) -> ())?)
+}
+
+final class WatchSurveyInteractor: WatchSurveyInteractorProtocol {
     let persistenceController: PersistenceController
     let baseRepo: BaseRepository
     let storage: SurveyStorageProtocol
@@ -42,6 +46,7 @@ class WatchSurveyInteractor {
     deinit { debugPrint("\(WatchSurveyInteractor.self) - deinit") }
     
     // MARK: - Load WatchSurvey JSON
+    // TODO: - Unit Tests
     func loadSelectedWatchSurveyJSON(completion: ((_ title: String?, _ error: Error?) -> ())?) {
         let selectedLink = storage.selectedWSInfoLink()
         if !selectedLink.isEmpty {
@@ -64,6 +69,7 @@ class WatchSurveyInteractor {
     }
     
     // MARK: Notification response
+    // TODO: - Unit Tests
     func sendResponse(action: String,
                       userInteractor: UserInteractor = UserInteractor(),
                       backendInteractor: BackendInteractor = BackendInteractor(),
@@ -83,14 +89,16 @@ class WatchSurveyInteractor {
                     WatchSurveyKeys.idParticipant.rawValue: user.participantID ?? "",
                     WatchSurveyKeys.idPassword.rawValue: user.passwordID ?? ""]
         
-        let fields = [WatchSurveyKeys.actionButtonKey.rawValue: action,
-                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue]
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         
+        let fields = [WatchSurveyKeys.actionButtonKey.rawValue: action,
+                     WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue,
+                      WatchSurveyKeys.appVersion.rawValue: appVersion]
+
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
                                         WatchSurveyKeys.tags.rawValue: tags,
                                         WatchSurveyKeys.fields.rawValue: fields]
-
         do {
             let json = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
             

@@ -10,15 +10,15 @@ import Foundation
 final class LoggerInteractor: LoggerProtocol {
     static let shared = LoggerInteractor()
     
-    let userIntaractor = UserInteractor()
+    let userInteractor = UserInteractor()
     
-    let semapfore = DispatchSemaphore(value: 1)
+    let semaphore = DispatchSemaphore(value: 1)
     let writeQueue = DispatchQueue.global(qos: .userInitiated)
     
     // MARK: Private
     private enum Constants: String {
         case fileNamePrefix = "cozie_"
-        case fileNameSufix = "logs.txt"
+        case fileNameSuffix = "logs.txt"
         case errorTitle = "Log history is empty"
     }
     
@@ -28,9 +28,9 @@ final class LoggerInteractor: LoggerProtocol {
     }
     
     private func buildFileName(additionalName: String?) -> String {
-        var name = Constants.fileNamePrefix.rawValue + Constants.fileNameSufix.rawValue
+        var name = Constants.fileNamePrefix.rawValue + Constants.fileNameSuffix.rawValue
         if let additionalName = additionalName {
-            name = Constants.fileNamePrefix.rawValue + additionalName + Constants.fileNameSufix.rawValue
+            name = Constants.fileNamePrefix.rawValue + additionalName + Constants.fileNameSuffix.rawValue
         }
         return name
     }
@@ -50,10 +50,10 @@ final class LoggerInteractor: LoggerProtocol {
     
     // MARK: Public
     func logInfo(action: String, info: String) {
-        if let currentUser = userIntaractor.currentUser {
+        if let currentUser = userInteractor.currentUser {
             let filename = getDocumentsDirectory().appendingPathComponent(buildFileName(additionalName: userFileName(user: currentUser)))
             writeQueue.async { [weak self] in
-                self?.semapfore.wait()
+                self?.semaphore.wait()
                 do {
                     var logHistory = ""
                     if FileManager.default.fileExists(atPath: filename.relativePath) {
@@ -69,18 +69,19 @@ final class LoggerInteractor: LoggerProtocol {
                     logHistory.append(info)
                     logHistory.append("]")
                     try logHistory.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
-                    self?.semapfore.signal()
+                    self?.semaphore.signal()
                 } catch let error {
                     debugPrint(error)
-                    self?.semapfore.signal()
+                    self?.semaphore.signal()
 //                    self?.logInfo(action: "", info: "Writing error: \(error.localizedDescription)")
                 }
             }
         }
     }
     
-    func logdeInfo(completion:((_ url: URL?,_ error: String?) -> ())?) {
-        if let currentUser = userIntaractor.currentUser {
+    // TODO: - Unit Tests
+    func loggedInfo(completion:((_ url: URL?,_ error: String?) -> ())?) {
+        if let currentUser = userInteractor.currentUser {
             let filename = getDocumentsDirectory().appendingPathComponent(buildFileName(additionalName: userFileName(user: currentUser)))
             
             if FileManager.default.fileExists(atPath: filename.relativePath) {

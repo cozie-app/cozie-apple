@@ -11,7 +11,7 @@ class WatchSurveyViewModel: ObservableObject {
     let syncInteractor = SyncInteractor()
     let backendInteractor = BackendInteractor()
     let loggerInteractor = LoggerInteractor.shared
-    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
     
     @Published var loading: Bool = false
     @Published var dataSynced: Bool = false
@@ -37,9 +37,9 @@ class WatchSurveyViewModel: ObservableObject {
     func phoneSurveyLink() -> String? {
         return backendInteractor.currentBackendSettings?.phone_survey_link
     }
-    
+    // TODO: - Unit Tests
     func loadData(completion: ((_ success: Bool) -> ())?) {
-        loggerInteractor.logdeInfo { url, error in
+        loggerInteractor.loggedInfo { url, error in
             if let error = error {
                 self.errorString = error
                 completion?(false)

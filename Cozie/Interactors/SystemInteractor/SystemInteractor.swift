@@ -12,14 +12,14 @@ let emptyTag = Tags(idOnesignal: "", idParticipant: "", idPassword: "")
 let emptyFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
 
 let testLog = Logs(time: "2023-01-01T07:02:51.578Z", measurement: "dev", tags: emptyTag, fields: emptyFields)
-
+// TODO: - Unit Tests
 final class LogsSystemInteractor {
-    let userIntaractor = UserInteractor()
+    let userInteractor = UserInteractor()
     let settingsInteractor = SettingsInteractor()
     let backendInteractor = BackendInteractor()
     
     func logsData() -> Logs {
-        guard let user = userIntaractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
+        guard let user = userInteractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
         let tag = Tags(idOnesignal: CozieStorage.shared.playerID(), idParticipant: user.participantID ?? "", idPassword: user.passwordID ?? "")
         let fields = Fields(wssGoal: Int(settings.wss_goal),
                              wssTitle: settings.wss_title ?? "",

@@ -32,24 +32,26 @@ final class BackgroundUpdateManager {
     
     static let minimumTimeInterval: Double = 25 * 60
     // TO DO:  Dependency Inversion + Test coverage
-    private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), loger: LoggerInteractor.shared)
+    private let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
     private let storage = CozieStorage.shared
     //
     
     var lastProcessingEvent: Double? = nil
     var startTimeStamp: Double = 0
     
+    // TODO: - Unit Tests
     func registerBackgroundRefresh() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: refreshID, using: nil) { task in
-            self.hendleBgProcessing(task: task, work: nil)
+            self.handleBgProcessing(task: task, work: nil)
         }
         healthKitInteractor.updateState()
         lastProcessingEvent = storage.healthLastSyncedTimeInterval(offline: healthKitInteractor.offlineMode.isEnabled)
     }
     
+    // TODO: - Unit Tests
     func registerBackgroundProcessing(work: (()->())? = nil ) {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: processingID, using: nil) { task in
-            self.hendleBgProcessing(task: task, work: work)
+            self.handleBgProcessing(task: task, work: work)
         }
         healthKitInteractor.updateState()
         lastProcessingEvent = storage.healthLastSyncedTimeInterval(offline: healthKitInteractor.offlineMode.isEnabled)
@@ -77,12 +79,12 @@ final class BackgroundUpdateManager {
             debugPrint("Error: " + error.localizedDescription)
         }
     }
-    
-    private func hendleBgProcessing(task: BGTask, work: (()->())? = nil ) {
+    // TODO: - Unit Tests
+    private func handleBgProcessing(task: BGTask, work: (()->())? = nil ) {
         
         task.expirationHandler = { /*[weak self] in*/
-            debugPrint("Expiration Processing Handler Accured!")
-            //self?.testLog(details: "Expiration Processing Handler Accured!")
+            debugPrint("Expiration Processing Handler Occurred!")
+            //self?.testLog(details: "Expiration Processing Handler Occurred!")
         }
         
         // update lastProcessingEvent
