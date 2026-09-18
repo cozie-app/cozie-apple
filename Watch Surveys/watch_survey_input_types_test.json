@@ -1,0 +1,125 @@
+{
+  "survey_name": "Input Types Test",
+  "survey_id": "input_types_test",
+  "survey": [
+    {
+      "question": "Where are you testing this survey?",
+      "question_id": "q_context_single",
+      "response_options": [
+        {
+          "text": "Home",
+          "icon": "building_house",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_note_text"
+        },
+        {
+          "text": "Office",
+          "icon": "building_office",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_note_text"
+        },
+        {
+          "text": "Other",
+          "icon": "text_other",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": "q_note_text"
+        }
+      ]
+    },
+    {
+      "question": "Enter a short test note.",
+      "question_id": "q_note_text",
+      "question_type": "text",
+      "next_question_id": "q_activities_multi",
+      "response_options": [
+        {
+          "text": "",
+          "icon": "",
+          "icon_background_color": "",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000"
+        }
+      ]
+    },
+    {
+      "question": "Select all activities you are testing.",
+      "question_id": "q_activities_multi",
+      "question_type": "multi_select",
+      "next_question_id": "q_comfort_single",
+      "response_options": [
+        {
+          "text": "Reading",
+          "icon": "book_open",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000"
+        },
+        {
+          "text": "Talking",
+          "icon": "person_group_3_talking",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000"
+        },
+        {
+          "text": "Coffee or tea",
+          "icon": "beverage_coffee",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000"
+        },
+        {
+          "text": "Walking",
+          "icon": "person_walking",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000"
+        },
+        {
+          "text": "None of these",
+          "icon": "text_none",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "question": "How does the test flow feel?",
+      "question_id": "q_comfort_single",
+      "response_options": [
+        {
+          "text": "Easy",
+          "icon": "thumbs_up",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Neutral",
+          "icon": "emoticon_neutral",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        },
+        {
+          "text": "Difficult",
+          "icon": "thumbs_down",
+          "icon_background_color": "#F1A62E",
+          "use_sf_symbols": false,
+          "sf_symbols_color": "#000000",
+          "next_question_id": ""
+        }
+      ]
+    }
+  ]
+}

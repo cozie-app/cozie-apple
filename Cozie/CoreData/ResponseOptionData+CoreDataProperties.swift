@@ -22,6 +22,7 @@ extension ResponseOptionData {
     @NSManaged public var sfSymbolsColor: String?
     @NSManaged public var text: String?
     @NSManaged public var useSfSymbols: Bool
+    @NSManaged public var exclusive: Bool
     @NSManaged public var index: Int16
     @NSManaged public var survey: SurveyData?
 
@@ -29,7 +30,13 @@ extension ResponseOptionData {
 
 extension ResponseOptionData : Identifiable {
     func toModel() -> ResponseOption {
-        let responseOption = ResponseOption(text: self.text ?? "", icon: self.icon ?? "", iconBackgroundColor: self.iconBackgroundColor ?? "", useSfSymbols: self.useSfSymbols, sfSymbolsColor: self.sfSymbolsColor ?? "", nextQuestionID: self.nextQuestionID ?? "")
+        let responseOption = ResponseOption(text: self.text ?? "",
+                                            icon: self.icon ?? "",
+                                            iconBackgroundColor: self.iconBackgroundColor ?? "",
+                                            useSfSymbols: self.useSfSymbols,
+                                            sfSymbolsColor: self.sfSymbolsColor ?? "",
+                                            nextQuestionID: self.nextQuestionID ?? "",
+                                            exclusive: self.exclusive)
         return responseOption
     }
 }

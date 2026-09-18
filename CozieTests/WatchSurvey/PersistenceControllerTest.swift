@@ -22,5 +22,21 @@ final class PersistenceControllerTest {
         let posList  = try storage.container.viewContext.fetch(request)
         #expect(!posList.isEmpty)
     }
+
+    @Test("Test extended survey schema persistence") func testSaveExtendedSurveySchema() async throws {
+        let storage = PersistenceController(inMemory: true)
+        try await surveyManager.asyncUpdate(surveyListData: TestSurveyData.extendedSurveyStub, storage: storage, selected: false)
+
+        let survey = try #require(try storage.externalWatchSurvey()?.toModel())
+        let textQuestion = try #require(survey.survey.first)
+        let multiSelectQuestion = try #require(survey.survey.last)
+        let exclusiveOption = try #require(multiSelectQuestion.responseOptions.last)
+
+        #expect(textQuestion.questionType == .text)
+        #expect(textQuestion.nextQuestionID == "q_recent_activities")
+        #expect(multiSelectQuestion.questionType == .multiSelect)
+        #expect(multiSelectQuestion.nextQuestionID == "q_done")
+        #expect(exclusiveOption.exclusive)
+    }
     
 }

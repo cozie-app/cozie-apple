@@ -45,7 +45,6 @@ final class WatchSurveyInteractor {
         dateFormatter.dateFormat = DateFormat.defaultFormat
         // dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let dateString = dateFormatter.string(from: date)
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         
         
         let tags = [WatchSurveyKeys.idOnesignal.rawValue: storage.userOneSignalID(),
@@ -64,8 +63,7 @@ final class WatchSurveyInteractor {
                                       WatchSurveyKeys.wsLocationAcquisitionMethod.rawValue: "GPS",
                                       WatchSurveyKeys.wsLocationSourceDevice.rawValue: "Apple Watch",
                                       WatchSurveyKeys.transmitTrigger.rawValue: "watch_survey",
-                                      WatchSurveyKeys.wssTitle.rawValue: watchSurvey?.surveyName ?? "",
-                                      WatchSurveyKeys.appVersion.rawValue: appVersion]
+                                      WatchSurveyKeys.wssTitle.rawValue: watchSurvey?.surveyName ?? ""]
         
         for selected in selectedOptions {
             if selected.sID.isEmpty {

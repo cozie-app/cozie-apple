@@ -30,6 +30,12 @@ class WatchSurveyModelController: Codable {
 
 // MARK: - Survey
 // TODO: - Unit Tests
+enum SurveyQuestionType: String, Codable {
+    case singleSelect = "single_select"
+    case multiSelect = "multi_select"
+    case text
+}
+
 class Survey: Codable, Identifiable {
     
     var id: String {
@@ -37,18 +43,33 @@ class Survey: Codable, Identifiable {
     }
     
     var question, questionID: String
+    var questionType: SurveyQuestionType
+    var nextQuestionID: String?
     var responseOptions: [ResponseOption]
 
     enum CodingKeys: String, CodingKey {
         case question
         case questionID = "question_id"
+        case questionType = "question_type"
+        case nextQuestionID = "next_question_id"
         case responseOptions = "response_options"
     }
 
-    init(question: String, questionID: String, responseOptions: [ResponseOption]) {
+    init(question: String, questionID: String, questionType: SurveyQuestionType = .singleSelect, nextQuestionID: String? = nil, responseOptions: [ResponseOption]) {
         self.question = question
         self.questionID = questionID
+        self.questionType = questionType
+        self.nextQuestionID = nextQuestionID
         self.responseOptions = responseOptions
+    }
+
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        question = try values.decode(String.self, forKey: .question)
+        questionID = try values.decode(String.self, forKey: .questionID)
+        questionType = try values.decodeIfPresent(SurveyQuestionType.self, forKey: .questionType) ?? .singleSelect
+        nextQuestionID = try values.decodeIfPresent(String.self, forKey: .nextQuestionID)
+        responseOptions = try values.decode([ResponseOption].self, forKey: .responseOptions)
     }
 }
 
@@ -63,6 +84,7 @@ class ResponseOption: Codable, Identifiable {
     var text, icon, iconBackgroundColor: String
     var useSfSymbols: Bool
     var sfSymbolsColor, nextQuestionID: String
+    var exclusive: Bool
 
     enum CodingKeys: String, CodingKey {
         case text, icon
@@ -70,15 +92,27 @@ class ResponseOption: Codable, Identifiable {
         case useSfSymbols = "use_sf_symbols"
         case sfSymbolsColor = "sf_symbols_color"
         case nextQuestionID = "next_question_id"
+        case exclusive
     }
 
-    init(text: String, icon: String, iconBackgroundColor:String, useSfSymbols: Bool, sfSymbolsColor: String, nextQuestionID: String) {
+    init(text: String, icon: String, iconBackgroundColor:String, useSfSymbols: Bool, sfSymbolsColor: String, nextQuestionID: String, exclusive: Bool = false) {
         self.text = text
         self.icon = icon
         self.iconBackgroundColor = iconBackgroundColor
         self.useSfSymbols = useSfSymbols
         self.sfSymbolsColor = sfSymbolsColor
         self.nextQuestionID = nextQuestionID
+        self.exclusive = exclusive
+    }
+
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        text = try values.decode(String.self, forKey: .text)
+        icon = try values.decode(String.self, forKey: .icon)
+        iconBackgroundColor = try values.decode(String.self, forKey: .iconBackgroundColor)
+        useSfSymbols = try values.decode(Bool.self, forKey: .useSfSymbols)
+        sfSymbolsColor = try values.decode(String.self, forKey: .sfSymbolsColor)
+        nextQuestionID = try values.decodeIfPresent(String.self, forKey: .nextQuestionID) ?? ""
+        exclusive = try values.decodeIfPresent(Bool.self, forKey: .exclusive) ?? false
     }
 }
-

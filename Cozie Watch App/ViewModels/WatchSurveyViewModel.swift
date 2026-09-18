@@ -37,6 +37,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     private let watchSurveyInteractor = WatchSurveyInteractor()
     
     private var selectedOptions: [(sID: String, option: ResponseOption)] = []
+    @Published private var selectedMultiOptions: [String: [ResponseOption]] = [:]
     private var currentSurvey: Survey?
     private var watchSurvey: WatchSurveyModelController? = nil
     private var startTime = Date()
@@ -54,8 +55,29 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     @Published var questionsTitle: String = ""
     @Published var state: CozieAppState = .notsynced
     @Published var sendSurveyProgress: Bool = false
+    @Published var textAnswer: String = ""
     
-    private(set) var questionID: String = ""
+    @Published private(set) var questionID: String = ""
+    
+    var isMultiSelectQuestion: Bool {
+        return currentSurvey?.questionType == .multiSelect
+    }
+    
+    var isTextQuestion: Bool {
+        return currentSurvey?.questionType == .text
+    }
+    
+    var canContinueCurrentQuestion: Bool {
+        if isMultiSelectQuestion {
+            return !(selectedMultiOptions[currentSurvey?.questionID ?? ""]?.isEmpty ?? true)
+        }
+        
+        if isTextQuestion {
+            return !textAnswer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }
+        
+        return false
+    }
     
     var cacheHealthState = CurrentValueSubject<CozieCacheState, Never>(.finished)
     
@@ -70,12 +92,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             let wSurvey = try JSONDecoder().decode(WatchSurveyModelController.self, from: data)
             watchSurvey = wSurvey
             if let question = wSurvey.survey.first(where: { $0.questionID == (wSurvey.firstQuestionID ?? "failed") }) {
-                // questionID has a side effect of questionsTitle !!!
-                questionID = question.questionID
-                
-                questionsList = question.responseOptions
-                questionsTitle = question.question
-                currentSurvey = question
+                showSurvey(question)
             }
         } catch let error {
             debugPrint(error.localizedDescription)
@@ -194,6 +211,52 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         cacheHealthState.send(.finished)
     }
     
+    private func showSurvey(_ survey: Survey) {
+        currentSurvey = survey
+        questionsList = survey.responseOptions
+        questionsTitle = survey.question
+        
+        if survey.questionType == .text {
+            textAnswer = selectedOptions.first(where: { $0.sID == survey.questionID })?.option.text ?? ""
+        } else {
+            textAnswer = ""
+        }
+        
+        questionID = survey.questionID
+    }
+    
+    private func saveSelectedOption(_ option: ResponseOption, questionID: String) {
+        if let indexToUpdate = selectedOption(for: questionID) {
+            selectedOptions[indexToUpdate] = (questionID, option)
+            
+            let nextIndex = indexToUpdate + 1
+            if selectedOptions.count > nextIndex {
+                let removedQuestionIDs = selectedOptions[nextIndex..<selectedOptions.count].map { $0.sID }
+                selectedOptions.removeSubrange(nextIndex..<selectedOptions.count)
+                removedQuestionIDs.forEach { selectedMultiOptions.removeValue(forKey: $0) }
+            }
+        } else {
+            selectedOptions.append((questionID, option))
+        }
+    }
+    
+    private func goToNextSurvey(nextQuestionID: String) {
+        if let nextSurvey = watchSurvey?.survey.first(where: { $0.questionID == nextQuestionID}) {
+            showSurvey(nextSurvey)
+        } else {
+            state = .sendData
+        }
+    }
+    
+    private func responseOption(text: String, nextQuestionID: String) -> ResponseOption {
+        return ResponseOption(text: text,
+                              icon: "",
+                              iconBackgroundColor: "",
+                              useSfSymbols: false,
+                              sfSymbolsColor: "",
+                              nextQuestionID: nextQuestionID)
+    }
+    
     func syncSurvey() {
         let list = storage.allNotSyncedSurveyList()
         if !list.isEmpty {
@@ -228,6 +291,10 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     func isOptionSelected(option: ResponseOption) -> Bool {
+        if isMultiSelectQuestion {
+            return selectedMultiOptions[currentSurvey?.questionID ?? ""]?.contains(where: { $0.id == option.id }) ?? false
+        }
+        
         return selectedOptions.contains(where: {$0.option.id == option.id && $0.sID == currentSurvey?.questionID})
     }
     
@@ -237,19 +304,62 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             WKInterfaceDevice.current().play(.click)
         }
         
-        // remove previous selected option
-        if let indexToDelete = selectedOption(for: currentSurvey?.questionID ?? "") {
-            selectedOptions[indexToDelete] = (currentSurvey?.questionID ?? "", option)
-        } else {
-            selectedOptions.append((currentSurvey?.questionID ?? "", option))
+        guard let currentSurvey = currentSurvey else {
+            return
         }
         
-        if let nextSurvey = watchSurvey?.survey.first(where: { $0.questionID == option.nextQuestionID}) {
-            questionsTitle = nextSurvey.question
-            questionsList = nextSurvey.responseOptions
-            currentSurvey = nextSurvey
+        if isMultiSelectQuestion {
+            let questionID = currentSurvey.questionID
+            var selected = selectedMultiOptions[questionID] ?? []
+            if let index = selected.firstIndex(where: { $0.id == option.id }) {
+                selected.remove(at: index)
+            } else if option.exclusive {
+                selected = [option]
+            } else {
+                selected.removeAll { $0.exclusive }
+                selected.append(option)
+            }
+            selectedMultiOptions[questionID] = selected
+            return
+        }
+        
+        if isTextQuestion {
+            return
+        }
+        
+        saveSelectedOption(option, questionID: currentSurvey.questionID)
+        goToNextSurvey(nextQuestionID: option.nextQuestionID)
+    }
+    
+    func continueCurrentQuestion() {
+        guard let currentSurvey = currentSurvey, canContinueCurrentQuestion else {
+            return
+        }
+        
+        Task { @MainActor in
+            WKInterfaceDevice.current().play(.click)
+        }
+        
+        let nextQuestionID = currentSurvey.nextQuestionID ?? ""
+        
+        if isMultiSelectQuestion {
+            let selected = selectedMultiOptions[currentSurvey.questionID] ?? []
+            let text = currentSurvey.responseOptions
+                .filter { option in
+                    selected.contains { $0.id == option.id }
+                }
+                .map { $0.text }
+                .joined(separator: " | ")
+            saveSelectedOption(responseOption(text: text, nextQuestionID: nextQuestionID),
+                               questionID: currentSurvey.questionID)
+            goToNextSurvey(nextQuestionID: nextQuestionID)
+        } else if isTextQuestion {
+            let text = textAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+            saveSelectedOption(responseOption(text: text, nextQuestionID: nextQuestionID),
+                               questionID: currentSurvey.questionID)
+            goToNextSurvey(nextQuestionID: nextQuestionID)
         } else {
-            state = .sendData
+            return
         }
     }
     
@@ -273,17 +383,13 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
                 let _ = selectedOptions.removeLast()
                 let prevSurveyIndex = selectedOptions.count - 1
                 if let prevSurvey = watchSurvey?.survey.first(where: { $0.questionID == selectedOptions[prevSurveyIndex].sID }) {
-                    questionsTitle = prevSurvey.question
-                    questionsList = prevSurvey.responseOptions
-                    currentSurvey = prevSurvey
+                    showSurvey(prevSurvey)
                 }
             } else {
                 // Back to previous selected option
                 let current = selectedOptions.last
                 if let prevSurvey = watchSurvey?.survey.first(where: { $0.questionID == current?.sID ?? "" }) {
-                    questionsTitle = prevSurvey.question
-                    questionsList = prevSurvey.responseOptions
-                    currentSurvey = prevSurvey
+                    showSurvey(prevSurvey)
                 }
             }
         }
@@ -298,6 +404,8 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         locationManager.updateLocation(completion: nil)
         
         selectedOptions.removeAll()
+        selectedMultiOptions.removeAll()
+        textAnswer = ""
         prepareWatchSurvey()
     }
     

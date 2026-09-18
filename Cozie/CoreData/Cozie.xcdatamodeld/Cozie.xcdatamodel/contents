@@ -14,6 +14,7 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="ResponseOptionData" representedClassName=".ResponseOptionData" syncable="YES">
+        <attribute name="exclusive" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="iconBackgroundColor" optional="YES" attributeType="String"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -45,8 +46,10 @@
     </entity>
     <entity name="SurveyData" representedClassName=".SurveyData" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nextQuestionID" optional="YES" attributeType="String"/>
         <attribute name="question" optional="YES" attributeType="String"/>
         <attribute name="questionID" attributeType="String" defaultValueString=""/>
+        <attribute name="questionType" optional="YES" attributeType="String" defaultValueString="single_select"/>
         <relationship name="responseOption" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ResponseOptionData" inverseName="survey" inverseEntity="ResponseOptionData"/>
         <relationship name="watchSurvey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WatchSurveyData" inverseName="survey" inverseEntity="WatchSurveyData"/>
     </entity>

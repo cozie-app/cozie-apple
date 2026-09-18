@@ -168,6 +168,8 @@ extension PersistenceController: DataBaseStorageProtocol {
                     surveyData.watchSurvey = watchSurvey
                     surveyData.question = survey.question
                     surveyData.questionID = survey.questionID
+                    surveyData.questionType = survey.questionType.rawValue
+                    surveyData.nextQuestionID = survey.nextQuestionID
                     surveyData.index = Int16(index)
                     survey.responseOptions.enumerated().forEach { (index, respObj) in
                         let responseOptionData = ResponseOptionData(context: context)
@@ -179,6 +181,7 @@ extension PersistenceController: DataBaseStorageProtocol {
                         responseOptionData.iconBackgroundColor = respObj.iconBackgroundColor
                         responseOptionData.useSfSymbols = respObj.useSfSymbols
                         responseOptionData.sfSymbolsColor = respObj.sfSymbolsColor
+                        responseOptionData.exclusive = respObj.exclusive
                     }
                 }
             
@@ -213,4 +216,3 @@ extension PersistenceController: DataBaseStorageProtocol {
         try context.save()
     }
 }
-

@@ -32,68 +32,91 @@ struct QuestionsView: View {
                         // ScrollView needs an id for questionTitel to scroll
                             .id(viewModel.questionID)
                         
-                        ForEach(viewModel.questionsList, id: \.id) { option in
-                            HStack {
-                                
-                                ZStack {
-                                    if option.icon != "" {
-                                        // Only show background if icon name string is not empty
-                                        Image(systemName: "circle.fill")
-                                            .resizable()
-                                            .frame(width: 35, height: 35)
-                                            .foregroundColor(Color(hex: option.iconBackgroundColor))
-                                    }
-                                    if option.useSfSymbols {
-                                        if UIImage(systemName: option.icon) == nil {
-                                            Image(systemName: "photo.circle")
-                                                .resizable()
-                                                .frame(width: 35,height: 35)
-                                                .foregroundColor(.black)
-                                        } else {
-                                            Image(systemName: option.icon)
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width:25, height: 25)
-                                                .foregroundColor(Color(hex: option.sfSymbolsColor))
-                                        }
-                                    } else {
-                                        if UIImage(named: option.icon) != nil {
-                                            Image(option.icon)
-                                                .resizable()
-                                                .frame(width: 35,height: 35)
-                                        }
-                                    }
-                                }
-                                
-                                Button {
-                                    Task {
-                                        try await Task.sleep(for: .seconds(actionDelayInSeconds))
-                                        viewModel.selectOptions(option: option)
-                                        scrollToTopAnimation(reader: reader, animation: true)
-                                    }
-                                } label: {
+                        if viewModel.isTextQuestion {
+                            TextField("Answer", text: $viewModel.textAnswer)
+                                .padding(.vertical, 4)
+                        } else {
+                            ForEach(viewModel.questionsList, id: \.id) { option in
+                                HStack {
                                     
-                                    HStack {
-                                        Text(.init(option.text))  // render markdown using .init()
-                                            .foregroundStyle(viewModel.isOptionSelected(option: option) ? Color.gray : Color.white)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .padding(.leading, 4)
-                                            .padding(.vertical, 8)
-                                        Spacer()
+                                    ZStack {
+                                        if option.icon != "" {
+                                            // Only show background if icon name string is not empty
+                                            Image(systemName: "circle.fill")
+                                                .resizable()
+                                                .frame(width: 35, height: 35)
+                                                .foregroundColor(Color(hex: option.iconBackgroundColor))
+                                        }
+                                        if option.useSfSymbols {
+                                            if UIImage(systemName: option.icon) == nil {
+                                                Image(systemName: "photo.circle")
+                                                    .resizable()
+                                                    .frame(width: 35,height: 35)
+                                                    .foregroundColor(.black)
+                                            } else {
+                                                Image(systemName: option.icon)
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width:25, height: 25)
+                                                    .foregroundColor(Color(hex: option.sfSymbolsColor))
+                                            }
+                                        } else {
+                                            if UIImage(named: option.icon) != nil {
+                                                Image(option.icon)
+                                                    .resizable()
+                                                    .frame(width: 35,height: 35)
+                                            }
+                                        }
                                     }
-                                    .padding(.leading, UICommon.cornerRadius)
-                                    .frame(minHeight: UICommon.buttonHeight)
+                                    
+                                    Button {
+                                        Task {
+                                            try await Task.sleep(for: .seconds(actionDelayInSeconds))
+                                            viewModel.selectOptions(option: option)
+                                        }
+                                    } label: {
+                                        
+                                        HStack {
+                                            Text(.init(option.text))  // render markdown using .init()
+                                                .foregroundStyle(viewModel.isOptionSelected(option: option) ? Color.gray : Color.white)
+                                                .fixedSize(horizontal: false, vertical: true)
+                                                .padding(.leading, 4)
+                                                .padding(.vertical, 8)
+                                            Spacer()
+                                        }
+                                        .padding(.leading, UICommon.cornerRadius)
+                                        .frame(minHeight: UICommon.buttonHeight)
+                                        .background {
+                                            RoundedRectangle(cornerRadius: UICommon.cornerRadius)
+                                                .foregroundColor(viewModel.isOptionSelected(option: option) ? UICommon.selectedButtonColor : UICommon.buttonColor)
+                                        }
+                                        
+                                    }
+                                    .buttonStyle(.plain)
+                                    
+                                }
+                                .frame(minHeight: UICommon.buttonHeight)
+                                .padding(.vertical, 1)
+                            }
+                        }
+                        
+                        if viewModel.isMultiSelectQuestion || viewModel.isTextQuestion {
+                            Button {
+                                Task {
+                                    try await Task.sleep(for: .seconds(actionDelayInSeconds))
+                                    viewModel.continueCurrentQuestion()
+                                }
+                            } label: {
+                                Text("Continue")
+                                    .frame(maxWidth: .infinity, minHeight: UICommon.buttonHeight)
                                     .background {
                                         RoundedRectangle(cornerRadius: UICommon.cornerRadius)
-                                            .foregroundColor(viewModel.isOptionSelected(option: option) ? UICommon.selectedButtonColor : UICommon.buttonColor)
+                                            .foregroundColor(viewModel.canContinueCurrentQuestion ? UICommon.buttonColor : UICommon.selectedButtonColor)
                                     }
-                                    
-                                }
-                                .buttonStyle(.plain)
-                                
                             }
-                            .frame(minHeight: UICommon.buttonHeight)
-                            .padding(.vertical, 1)
+                            .buttonStyle(.plain)
+                            .disabled(!viewModel.canContinueCurrentQuestion)
+                            .padding(.vertical, 3)
                         }
                         
                         if !viewModel.isFirstQuestion {
@@ -103,7 +126,6 @@ struct QuestionsView: View {
                                         Task {
                                             try await Task.sleep(for: .seconds(actionDelayInSeconds))
                                             viewModel.backAction()
-                                            scrollToTopAnimation(reader: reader, animation: true)
                                         }
                                     } label: {
                                         Text("Back")
@@ -120,7 +142,6 @@ struct QuestionsView: View {
                                         Task {
                                             try await Task.sleep(for: .seconds(actionDelayInSeconds))
                                             viewModel.restart()
-                                            scrollToTopAnimation(reader: reader, animation: true)
                                         }
                                     } label: {
                                         Text("Reset")
@@ -135,6 +156,11 @@ struct QuestionsView: View {
                                 .padding(.vertical, 3)
                             }
                             .frame(height: UICommon.buttonHeight)
+                        }
+                    }
+                    .onChange(of: viewModel.questionID) { _ in
+                        DispatchQueue.main.async {
+                            scrollToTopAnimation(reader: reader, animation: true)
                         }
                     }
                 }

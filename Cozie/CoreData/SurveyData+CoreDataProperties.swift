@@ -18,6 +18,8 @@ extension SurveyData {
 
     @NSManaged public var question: String?
     @NSManaged public var questionID: String?
+    @NSManaged public var questionType: String?
+    @NSManaged public var nextQuestionID: String?
     @NSManaged public var index: Int16
     @NSManaged public var responseOption: NSSet?
     @NSManaged public var watchSurvey: WatchSurveyData?
@@ -50,7 +52,11 @@ extension SurveyData : Identifiable {
                 return responseOptionData.toModel()
             })
                
-        let survey = Survey(question: self.question ?? "", questionID: self.questionID ?? "", responseOptions: responseOptionList ?? [])
+        let survey = Survey(question: self.question ?? "",
+                            questionID: self.questionID ?? "",
+                            questionType: SurveyQuestionType(rawValue: self.questionType ?? "") ?? .singleSelect,
+                            nextQuestionID: self.nextQuestionID,
+                            responseOptions: responseOptionList ?? [])
         return survey
     }
 }
