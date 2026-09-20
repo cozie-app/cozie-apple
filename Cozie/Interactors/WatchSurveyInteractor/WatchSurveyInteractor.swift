@@ -93,7 +93,8 @@ final class WatchSurveyInteractor: WatchSurveyInteractorProtocol {
         
         let fields = [WatchSurveyKeys.actionButtonKey.rawValue: action,
                      WatchSurveyKeys.transmitTrigger.rawValue: WatchSurveyKeys.transmitTriggerPushValue.rawValue,
-                      WatchSurveyKeys.appVersion.rawValue: appVersion]
+                      WatchSurveyKeys.appVersion.rawValue: appVersion,
+                      WatchSurveyKeys.timeZone.rawValue: TimeZone.current.identifier]
 
         let response: [String : Any] = [WatchSurveyKeys.postTime.rawValue: dateString,
                                         WatchSurveyKeys.measurement.rawValue: user.experimentID ?? "",
