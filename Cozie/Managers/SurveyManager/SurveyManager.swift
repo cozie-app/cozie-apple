@@ -15,9 +15,11 @@ class SurveyManager {
             // set first question ID
             surveyModel.firstQuestionID = surveyModel.survey.first?.questionID
             Task {
-                try await storage.updateStorageWithSurvey(surveyModel, selected: selected)
-                DispatchQueue.main.async {
-                    completion?(surveyModel.surveyName, nil)
+                do {
+                    try await storage.updateStorageWithSurvey(surveyModel, selected: selected)
+                    DispatchQueue.main.async { completion?(surveyModel.surveyName, nil) }
+                } catch {
+                    DispatchQueue.main.async { completion?(nil, error) }
                 }
             }
             

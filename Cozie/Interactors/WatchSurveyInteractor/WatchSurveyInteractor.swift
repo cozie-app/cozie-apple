@@ -49,8 +49,10 @@ final class WatchSurveyInteractor: WatchSurveyInteractorProtocol {
     // TODO: - Unit Tests
     func loadSelectedWatchSurveyJSON(completion: ((_ title: String?, _ error: Error?) -> ())?) {
         let selectedLink = storage.selectedWSInfoLink()
-        if !selectedLink.isEmpty {
-            baseRepo.getFileContent(url: selectedLink, parameters: nil) { [weak self] result in
+        if let url = URL(string: selectedLink),
+           ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
+           let host = url.host, !host.isEmpty {
+            baseRepo.getFileContent(url: url.absoluteString, parameters: nil) { [weak self] result in
                 
                 guard let self = self else {
                     completion?(nil ,WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
@@ -65,6 +67,8 @@ final class WatchSurveyInteractor: WatchSurveyInteractorProtocol {
                     debugPrint(error.localizedDescription)
                 }
             }
+        } else {
+            completion?(nil, WatchConnectivityManagerPhone.WatchConnectivityManagerError.surveyJSONError)
         }
     }
     
