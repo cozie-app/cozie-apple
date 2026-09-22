@@ -13,4 +13,5 @@ enum GroupCommon: String {
     case payloads = "cozie_push_notification_payload_info"
     case actions = "cozie_push_notification_payload_action"
     case timestamp = "cozie_push_notification_timestamp_action"
+    case history = "cozie_push_notification_history"
 }

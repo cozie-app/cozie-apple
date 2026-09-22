@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1853333E305637DF00BB52A4 /* PushNotificationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853333D305637CB00BB52A4 /* PushNotificationHistory.swift */; };
+		1853334130563A1500BB52A4 /* PushNotificationHistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18533340305639F900BB52A4 /* PushNotificationHistoryRepository.swift */; };
+		18BC55853062656000E8411D /* PushNotificationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BC55843062656000E8411D /* PushNotificationHistoryView.swift */; };
 		410F9F24609171DBA9C76493 /* Pods_Cozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1684B5F544F1C4F61CEB3474 /* Pods_Cozie.framework */; };
 		5A3B1674EE88726D3A70656B /* Pods_Cozie_Watch_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21102A014A9965ACB8F62D4A /* Pods_Cozie_Watch_App.framework */; };
 		6AA6E556E22A71C96B09ED9C /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */; };
@@ -235,6 +238,9 @@
 		0D5CA005FB257C75385D1CF1 /* Pods-CozieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CozieTests.release.xcconfig"; path = "Target Support Files/Pods-CozieTests/Pods-CozieTests.release.xcconfig"; sourceTree = "<group>"; };
 		113BFEB7973276FBE0602531 /* Pods-Cozie Watch App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie Watch App.debug.xcconfig"; path = "Target Support Files/Pods-Cozie Watch App/Pods-Cozie Watch App.debug.xcconfig"; sourceTree = "<group>"; };
 		1684B5F544F1C4F61CEB3474 /* Pods_Cozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1853333D305637CB00BB52A4 /* PushNotificationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHistory.swift; sourceTree = "<group>"; };
+		18533340305639F900BB52A4 /* PushNotificationHistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHistoryRepository.swift; sourceTree = "<group>"; };
+		18BC55843062656000E8411D /* PushNotificationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHistoryView.swift; sourceTree = "<group>"; };
 		1B7A34F99C19A755D1793F9B /* Pods_CozieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CozieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21102A014A9965ACB8F62D4A /* Pods_Cozie_Watch_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cozie_Watch_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C8A1E07A73983C9EB107B45 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -435,6 +441,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1853333C3056378B00BB52A4 /* PushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				1853333D305637CB00BB52A4 /* PushNotificationHistory.swift */,
+			);
+			path = PushNotification;
+			sourceTree = "<group>";
+		};
 		428AB4AF32555B272CBCC37A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +665,7 @@
 		92524F8F29CC5FEA00074A09 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				18533340305639F900BB52A4 /* PushNotificationHistoryRepository.swift */,
 				CAD1F0F02CCFC080001B5307 /* PushNotificationLoggerRepository.swift */,
 				92524F9029CC6A2C00074A09 /* BaseRepository.swift */,
 			);
@@ -660,6 +675,7 @@
 		92524F9229CCA9D800074A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1853333C3056378B00BB52A4 /* PushNotification */,
 				CA0A1B2129DDB0C5007A3A19 /* HealthDataModle */,
 				CA2EE85629ED6E2300590527 /* WaychSurvey */,
 			);
@@ -866,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				CA2EE85229ED47B000590527 /* LogInfoView.swift */,
+				18BC55843062656000E8411D /* PushNotificationHistoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1353,8 +1370,6 @@
 				en,
 			);
 			mainGroup = 921289C1299649EC0060C729;
-			packageReferences = (
-			);
 			productRefGroup = 921289CB299649EC0060C729 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1467,13 +1482,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cozie-CozieUITests/Pods-Cozie-CozieUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1488,13 +1499,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cozie/Pods-Cozie-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cozie/Pods-Cozie-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1622,6 +1629,7 @@
 				9251771D29C366180089C92C /* TimePickerView.swift in Sources */,
 				922107482999188F001EC552 /* HomeCoordinatorView.swift in Sources */,
 				CA7E1D8D2CCFDCF7000C6461 /* GroupCommon.swift in Sources */,
+				18BC55853062656000E8411D /* PushNotificationHistoryView.swift in Sources */,
 				CAD1E5C829FA901D000F9FE7 /* SettingsData+CoreDataProperties.swift in Sources */,
 				CA0A1B2029DDB0AA007A3A19 /* SettingsInteractor.swift in Sources */,
 				9212144229CDFBB7002BAEB4 /* AppColor.swift in Sources */,
@@ -1631,6 +1639,7 @@
 				9267EFF8299A98130025A3CE /* TitleSubtitleCell.swift in Sources */,
 				CA2EE85329ED47B000590527 /* LogInfoView.swift in Sources */,
 				CAA92EF92A53EE7700DA6A28 /* CozieStorageProtocol.swift in Sources */,
+				1853333E305637DF00BB52A4 /* PushNotificationHistory.swift in Sources */,
 				9212144729D18FF5002BAEB4 /* ReminderManager.swift in Sources */,
 				CA59D2702CAE8F84008A0771 /* String+Lacalization.swift in Sources */,
 				CA1548FA29E5B244005FDD6B /* BackendInteractor.swift in Sources */,
@@ -1658,6 +1667,7 @@
 				CA57234829F680F9008C293C /* ResponseOptionData+CoreDataProperties.swift in Sources */,
 				CAD1E5C729FA901D000F9FE7 /* SettingsData+CoreDataClass.swift in Sources */,
 				921289CE299649EC0060C729 /* CozieApp.swift in Sources */,
+				1853334130563A1500BB52A4 /* PushNotificationHistoryRepository.swift in Sources */,
 				9251771829C3645E0089C92C /* TimePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

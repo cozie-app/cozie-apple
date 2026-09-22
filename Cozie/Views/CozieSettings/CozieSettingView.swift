@@ -75,6 +75,7 @@ struct CozieSettingView: View {
                     experimentSection()
                     watchSurveySection()
                     phoneSurveySection()
+                    notificationHistorySection()
                 }
                 .padding([.leading, .trailing], -5)
                 .listStyle(.insetGrouped)
@@ -166,6 +167,20 @@ struct CozieSettingView: View {
                     viewModel.clearState()
                 }
                 )
+
+            case .notificationHistoryRetention:
+                TextFieldPopUp(
+                    title: "Notification History Retention",
+                    subtitle: "Please enter the number of days to keep notification history",
+                    text: viewModel.notificationHistoryRetentionDays
+                ) {
+                    viewModel.clearState()
+                } setAction: { days in
+                    if let value = Int(days), value > 0 {
+                        viewModel.updateNotificationHistoryRetentionDays(value)
+                    }
+                    viewModel.clearState()
+                }
             case .clear:
                 let _ = print("do nothing")
             case .participantId:
@@ -264,6 +279,20 @@ struct CozieSettingView: View {
         },
                        header: {
             CozieHeaderView(title: "Phone Survey")
+        })
+    }
+    
+    func notificationHistorySection() -> some View {
+        return Section(content: {
+            TitleSubtitleCell(
+                title: "Retention",
+                subtitle: "\(viewModel.notificationHistoryRetentionDays) days"
+            )
+            .onTapGesture {
+                viewModel.showingState = .notificationHistoryRetention
+            }
+        }, header: {
+            CozieHeaderView(title: "Notification History")
         })
     }
     

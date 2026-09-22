@@ -23,119 +23,144 @@ struct CozieDataListView: View {
     // MARK: States
     @State var showError = false
     @State var presentingModal = false
+    @State private var showingNotificationHistory = false
     
     let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.didReceiveDeeplink)
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Spacer()
-                    .frame(height: 1)
-                List {
-                    Section(content: {
-                        if summaryList.count == 0 {
-                            WatchSurveyRow(info: WatchSurveyInfo(title: "Valid Survey Count",
-                                                                 subtitle: (syncInfo.first?.validCount ?? "0") + "/\(settings.first?.wss_goal ?? 0)",
-                                                                 state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                            WatchSurveyRow(info: WatchSurveyInfo(title: "Invalid Survey Count",
-                                                                 subtitle: syncInfo.first?.invalidCount ?? "0",
-                                                                 state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                            WatchSurveyRow(info: WatchSurveyInfo(title: "Last Watch Survey",
-                                                                 subtitle: syncInfo.first?.date ?? "0",
-                                                                 state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                        } else {
-                            ForEach(summaryList) { summary in
-                                WatchSurveyRow(info: WatchSurveyInfo(title: summary.label ?? "",
-                                                                     subtitle: summary.data ?? "" ,
+        ZStack{
+            NavigationView {
+                VStack {
+                    Spacer()
+                        .frame(height: 1)
+                    List {
+                        Section(content: {
+                            if summaryList.count == 0 {
+                                WatchSurveyRow(info: WatchSurveyInfo(title: "Valid Survey Count",
+                                                                     subtitle: (syncInfo.first?.validCount ?? "0") + "/\(settings.first?.wss_goal ?? 0)",
                                                                      state: watchSurveyViewModel.dataSynced ? .remote : .local))
-                            }
-                        }
-                    }, header: {
-                        CozieAnimatedSyncHeader(title: "Summary", action: {
-                            watchSurveyViewModel.updateData(sendHealthData: true) {
-                                debugPrint("finish update data!")
-                            }
-                        }, animated: $watchSurveyViewModel.loading)
-                    })
-                    
-                    Section(content: {
-                        DataTitleImageRow(title: "Download",
-                                          imageType: .download)
-                        .padding(.top, cellInset)
-                        .onTapGesture {
-                            watchSurveyViewModel.loadData { success in
-                                if success {
-                                    presentingModal = success
-                                } else {
-                                    showError = !success
+                                WatchSurveyRow(info: WatchSurveyInfo(title: "Invalid Survey Count",
+                                                                     subtitle: syncInfo.first?.invalidCount ?? "0",
+                                                                     state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                                WatchSurveyRow(info: WatchSurveyInfo(title: "Last Watch Survey",
+                                                                     subtitle: syncInfo.first?.date ?? "0",
+                                                                     state: watchSurveyViewModel.dataSynced ? .remote : .local))
+                            } else {
+                                ForEach(summaryList) { summary in
+                                    WatchSurveyRow(info: WatchSurveyInfo(title: summary.label ?? "",
+                                                                         subtitle: summary.data ?? "" ,
+                                                                         state: watchSurveyViewModel.dataSynced ? .remote : .local))
                                 }
                             }
-                        }
-                    }, header: {
-                        CozieHeaderView(title: "Download")
-                    })
-                    .frame(height: cellHeight)
-                    .padding(.top, sectionInset)
-                    
-                    Section(content: {
-                        DataTitleImageRow(title: "Cozie Github Repository", imageType: .github).onTapGesture {
-                            if let url = URL(string: AppLink.githubRepo.rawValue) {
-                                openURL(url)
+                        }, header: {
+                            CozieAnimatedSyncHeader(title: "Summary", action: {
+                                watchSurveyViewModel.updateData(sendHealthData: true) {
+                                    debugPrint("finish update data!")
+                                }
+                            }, animated: $watchSurveyViewModel.loading)
+                        })
+                        
+                        Section(content: {
+                            DataTitleImageRow(title: "Download",
+                                              imageType: .download)
+                            .padding(.top, cellInset)
+                            .onTapGesture {
+                                watchSurveyViewModel.loadData { success in
+                                    if success {
+                                        presentingModal = success
+                                    } else {
+                                        showError = !success
+                                    }
+                                }
                             }
-                        }.padding(.top, cellInset)
-                        DataTitleImageRow(title: "Cozie Documentation", imageType: .documentations).onTapGesture {
-                            if let url = URL(string: AppLink.documentation.rawValue) {
-                                openURL(url)
+                        }, header: {
+                            CozieHeaderView(title: "Download")
+                        })
+                        .frame(height: cellHeight)
+                        .padding(.top, sectionInset)
+                        
+                        Section(content: {
+                            DataTitleImageRow(title: "Notification History",
+                                              imageType: .documentations)
+                            .padding(.top, cellInset)
+                            .onTapGesture {
+                                showingNotificationHistory = true
                             }
-                        }.padding(.top, cellInset)
-                    }, header: {
-                        CozieHeaderView(title: "About")
-                    })
-                    .frame(height: cellHeight)
-                    .padding(.top, sectionInset)
-                }
-                .listStyle(.insetGrouped)
-                .padding([.leading, .trailing], -5)
-                Spacer(minLength: 16)
-                HStack {
-                    Button {
-                        if let urlStr = watchSurveyViewModel.phoneSurveyLink(), let url = URL(string: urlStr) {
-                            openURL(url)
-                        }
-                    } label: {
-                        Text("Phone survey")
-                            .font(.headline)
-                            .padding([.top, .bottom], 20)
+                        }, header: {
+                            CozieHeaderView(title: "Push Notifications")
+                        })
+                        .frame(height: cellHeight)
+                        .padding(.top, sectionInset)
+                        
+                        Section(content: {
+                            DataTitleImageRow(title: "Cozie Github Repository", imageType: .github).onTapGesture {
+                                if let url = URL(string: AppLink.githubRepo.rawValue) {
+                                    openURL(url)
+                                }
+                            }.padding(.top, cellInset)
+                            DataTitleImageRow(title: "Cozie Documentation", imageType: .documentations).onTapGesture {
+                                if let url = URL(string: AppLink.documentation.rawValue) {
+                                    openURL(url)
+                                }
+                            }.padding(.top, cellInset)
+                        }, header: {
+                            CozieHeaderView(title: "About")
+                        })
+                        .frame(height: cellHeight)
+                        .padding(.top, sectionInset)
                     }
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.white)
-                    .background(Color("AccentColor"))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding([.leading, .trailing], 8)
+                    .listStyle(.insetGrouped)
+                    .padding([.leading, .trailing], -5)
+                    Spacer(minLength: 16)
+                    HStack {
+                        Button {
+                            if let urlStr = watchSurveyViewModel.phoneSurveyLink(), let url = URL(string: urlStr) {
+                                openURL(url)
+                            }
+                        } label: {
+                            Text("Phone survey")
+                                .font(.headline)
+                                .padding([.top, .bottom], 20)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.white)
+                        .background(Color("AccentColor"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding([.leading, .trailing], 8)
+                    }
+                    .padding(.bottom, 21)
                 }
-                .padding(.bottom, 21)
+                .background(Color.appBackground)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar(content: {
+                    CozieToolbarContent(title: "Cozie - Data")
+                })
             }
             .background(Color.appBackground)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar(content: {
-                CozieToolbarContent(title: "Cozie - Data")
-            })
-        }
-        .background(Color.appBackground)
-        .onAppear {
-            watchSurveyViewModel.updateData(completion: {})
-        }
-        .sheet(isPresented: $presentingModal) {
-            ActivityView(url: watchSurveyViewModel.fileDataURL!)
-        }
-        .alert(watchSurveyViewModel.errorString, isPresented: $showError) {
-            Button("OK", role: .cancel) { }
-        }
-        .onReceive(updateTrigger) { _ in
-            watchSurveyViewModel.updateData(completion: {})
-        }
-    }
+            .onAppear {
+                watchSurveyViewModel.updateData(completion: {})
+                }
+            
+            .sheet(isPresented: $presentingModal) {
+                ActivityView(url: watchSurveyViewModel.fileDataURL!)
+            }
+            .alert(watchSurveyViewModel.errorString, isPresented: $showError) {
+                Button("OK", role: .cancel) { }
+            }
+            .onReceive(updateTrigger) { _ in
+                watchSurveyViewModel.updateData(completion: {})
 }
+            if showingNotificationHistory {
+                PushNotificationHistoryView(
+                    history: PushNotificationHistoryRepository().load(),
+                    closeAction: {
+                        showingNotificationHistory = false
+                    }
+                )
+            }
+                    }
+                }
+            }
 
 struct CozieDataListView_Previews: PreviewProvider {
     static var previews: some View {
