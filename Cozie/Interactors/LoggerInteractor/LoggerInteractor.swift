@@ -15,6 +15,7 @@ final class LoggerInteractor: LoggerProtocol {
     let semaphore = DispatchSemaphore(value: 1)
     let writeQueue = DispatchQueue.global(qos: .userInitiated)
     
+    private let backupFileNameKey = "cozieLocalBackupFileName"
     // MARK: Private
     private enum Constants: String {
         case fileNamePrefix = "cozie_"
@@ -48,10 +49,27 @@ final class LoggerInteractor: LoggerProtocol {
         return name
     }
     
+    private func backupFileURL(user: User) -> URL {
+        let defaults = UserDefaults.standard
+
+        if let savedFileName = defaults.string(forKey: backupFileNameKey) {
+            return getDocumentsDirectory()
+                .appendingPathComponent(savedFileName)
+        }
+
+        let fileName = buildFileName(
+            additionalName: userFileName(user: user)
+        )
+
+        defaults.set(fileName, forKey: backupFileNameKey)
+
+        return getDocumentsDirectory()
+            .appendingPathComponent(fileName)
+    }
     // MARK: Public
     func logInfo(action: String, info: String) {
         if let currentUser = userInteractor.currentUser {
-            let filename = getDocumentsDirectory().appendingPathComponent(buildFileName(additionalName: userFileName(user: currentUser)))
+            let filename = backupFileURL(user: currentUser)
             writeQueue.async { [weak self] in
                 self?.semaphore.wait()
                 do {
@@ -82,7 +100,7 @@ final class LoggerInteractor: LoggerProtocol {
     // TODO: - Unit Tests
     func loggedInfo(completion:((_ url: URL?,_ error: String?) -> ())?) {
         if let currentUser = userInteractor.currentUser {
-            let filename = getDocumentsDirectory().appendingPathComponent(buildFileName(additionalName: userFileName(user: currentUser)))
+            let filename = backupFileURL(user: currentUser)
             
             if FileManager.default.fileExists(atPath: filename.relativePath) {
                 completion?(filename, nil)
