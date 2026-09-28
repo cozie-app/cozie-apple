@@ -200,12 +200,12 @@ final class HealthKitInteractorMock: HealthKitInteractorProtocol {
     var getAllRequestedDataCalledCount = 0
     var getAllRequestedDataTrigger: String?
     
-    func getAllRequestedData(trigger: String, completion: (([Cozie.HealthModel]) -> ())?) {
+        func getAllRequestedData(trigger: String, progress: ((Double) -> Void)?, completion: (([Cozie.HealthModel]) -> ())?) {
         getAllRequestedDataCalledCount += 1
         getAllRequestedDataTrigger = trigger
     }
-    
-    func sendData(trigger: String, timeout: Double?, healthCache: [Cozie.HealthModel]?, completion: ((Bool) -> ())?) {
+
+    func sendData(trigger: String, timeout: Double?, healthCache: [Cozie.HealthModel]?, progress: ((Double) -> Void)?, completion: ((Bool) -> ())?) {
         //
     }
 }

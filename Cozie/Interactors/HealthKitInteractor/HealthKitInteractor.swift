@@ -9,8 +9,8 @@ import Foundation
 import HealthKit
 
 protocol HealthKitInteractorProtocol {
-    func getAllRequestedData(trigger: String, completion: ((_ models: [HealthModel])->())?)
-    func sendData(trigger: String, timeout: Double?, healthCache: [HealthModel]?, completion: ((_ success: Bool)->())?)
+    func getAllRequestedData(trigger: String, progress: ((Double) -> Void)?, completion: ((_ models: [HealthModel])->())?)
+    func sendData(trigger: String, timeout: Double?, healthCache: [HealthModel]?, progress: ((Double) -> Void)?, completion: ((_ success: Bool)->())?)
 }
 
 final class HealthKitInteractor: HealthKitInteractorProtocol {
@@ -631,12 +631,12 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
     }
     
     // MARK: - Get All Requested Data
-    func getAllRequestedData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, completion: ((_ models: [HealthModel])->())?) {
+    func getAllRequestedData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, progress: ((Double) -> Void)? = nil, completion: ((_ models: [HealthModel])->())?) {
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
-            
             var list: [HealthModel] = []
-            
+            let totalTypes = self.allTypes.count
+            var completedTypes = 0
             let group = DispatchGroup()
             for type in self.allTypes {
                 group.enter()
@@ -644,12 +644,17 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                 self.getDataObject(type: type, trigger: trigger) { infos, simples in
                     self.lock.lock()
                     list.append(contentsOf: infos)
-                    debugPrint("\(type) leav")
-                    group.leave()
+                    completedTypes += 1
+                    let fraction = totalTypes > 0 ? Double(completedTypes) / Double(totalTypes) : 1.0
                     self.lock.unlock()
+                    debugPrint("\(type) leav")
+                    DispatchQueue.main.async {
+                        progress?(fraction)
+                    }
+                    group.leave()
                 }
             }
-            
+
             group.notify(queue: DispatchQueue.global()) {
                 completion?(list)
             }
@@ -657,10 +662,10 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
     }
     
     // MARK: - Send And Log Date
-    func sendData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, timeout: Double? = nil, healthCache: [HealthModel]? = nil, completion: ((_ success: Bool)->())?) {
-        
+    func sendData(trigger: String = CommunicationKeys.syncBackgroundTaskTrigger.rawValue, timeout: Double? = nil, healthCache: [HealthModel]? = nil, progress: ((Double) -> Void)? = nil, completion: ((_ success: Bool)->())?) {
+
         // testLog(trigger: trigger, details: "WS:Sending HealthKit data started", state: "triggered")
-        
+
         // update offline status
         updateState()
         // prevent data from being sent if a previous send has not completed
@@ -669,38 +674,53 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
             // testLog(trigger: trigger, details: "WS:Sending HealthKit data suspended (previous send has not completed)", state: "error")
             return
         }
-        
+
         // check if the timeout has expired
         var sendTimeout: Double = 25 * 60 // 25 minutes by default
         if let customTimeout = timeout {
             sendTimeout = customTimeout
         }
-        
+
         if ((Date().timeIntervalSince1970 - storage.healthLastSyncedTimeInterval(offline: offlineMode.isEnabled)) - sendTimeout) < 0 {
             HealthKitInteractor.sendDataInProgress = false
             completion?(false)
             // testLog(trigger: trigger, details: "WS:Minimum time interval not reached", state: "error")
             return
         }
-        
+
         HealthKitInteractor.sendDataInProgress = true
-        
+
+        let reportUploadProgress: (Bool) -> Void = { success in
+            DispatchQueue.main.async {
+                progress?(1.0)
+            }
+        }
+
         if let cache = healthCache {
-            self.sendHealthKitData(models: cache, completion: completion)
+            self.sendHealthKitData(models: cache) { success in
+                reportUploadProgress(success)
+                completion?(success)
+            }
         } else {
             self.requestHealthAuth { [weak self]  success in
-                
+
                 guard let self else { return }
-                
+
                 if !success, !HealthKitInteractor.sendDataInProgress {
                     HealthKitInteractor.sendDataInProgress = false
+                    reportUploadProgress(false)
                     completion?(success)
                     // self.testLog(trigger: trigger, details: "WS: (HealthKit) Permission not granted or sending data in progress", state: "error")
                     return
                 }
-                
-                self.getAllRequestedData(trigger: trigger) { models in
-                    self.sendHealthKitData(models: models, completion: completion)
+
+                self.getAllRequestedData(trigger: trigger, progress: { fraction in
+                    progress?(fraction * 0.9)
+                }) { models in
+                    self.sendHealthKitData(models: models) { success in
+                        reportUploadProgress(success)
+                        completion?(success)
+                    }
                 }
             }
         }

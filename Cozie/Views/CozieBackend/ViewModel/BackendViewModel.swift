@@ -260,6 +260,7 @@ class BackendViewModel: NSObject, ObservableObject {
             healthKitInteractor.sendData(trigger: CommunicationKeys.syncBackendTrigger.rawValue,
                                          timeout: HealthKitInteractor.minInterval,
                                          healthCache: nil,
+                                         progress: nil,
                                          completion: nil)
         }
     }
@@ -303,7 +304,7 @@ class BackendViewModel: NSObject, ObservableObject {
     // MARK: send HKInfo
     /// Send health kit data to the server.
     func sendHKInfo() {
-        healthKitInteractor.getAllRequestedData(trigger: CommunicationKeys.syncBackgroundTaskTrigger.rawValue, completion: nil)
+        healthKitInteractor.getAllRequestedData(trigger: CommunicationKeys.syncBackgroundTaskTrigger.rawValue, progress: nil, completion: nil)
     }
     
 }

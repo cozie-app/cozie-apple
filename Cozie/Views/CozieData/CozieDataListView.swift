@@ -55,7 +55,8 @@ struct CozieDataListView: View {
                             watchSurveyViewModel.updateData(sendHealthData: true) {
                                 debugPrint("finish update data!")
                             }
-                        }, animated: $watchSurveyViewModel.loading)
+                        }, animated: $watchSurveyViewModel.loading,
+                                                progress: watchSurveyViewModel.syncProgress)
                     })
                     
                     Section(content: {
@@ -188,6 +189,7 @@ struct CozieAnimatedSyncHeader: View {
     let title: String
     var action: () -> Void
     @Binding var animated: Bool
+    var progress: Double? = nil
     @State var animation: Bool = false
     var body: some View {
         HStack {
@@ -196,6 +198,15 @@ struct CozieAnimatedSyncHeader: View {
                 .foregroundColor(.black)
                 .textCase(nil)
             Spacer()
+            if animated, let progress, progress > 0 {
+                Text("\(Int((progress * 100).rounded()))%")
+                    .font(.caption)
+                    .monospacedDigit()
+                    .foregroundColor(.gray)
+                    .transition(.opacity)
+                    .accessibilityLabel("Sync progress")
+                    .accessibilityValue("\(Int((progress * 100).rounded())) percent")
+            }
             Button(action: action,
                    label: {
                 if animated {
