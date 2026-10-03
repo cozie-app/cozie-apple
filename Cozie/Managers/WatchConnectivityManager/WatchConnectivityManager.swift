@@ -17,7 +17,9 @@ protocol WatchConnectivityManagerPhoneProtocol {
                  password: String,
                  userOneSignalID: String,
                  timeInterval: Int,
-                 healthCutoffTimeInterval: Double, completion: ((_ error: Error?)->())?)
+                 healthCutoffTimeInterval: Double,
+                 locationTimeout: Double,
+                 waitForAccurateLocation: Bool, completion: ((_ error: Error?)->())?)
 }
 
 class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProtocol {
@@ -121,7 +123,9 @@ class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProt
                  password: String,
                  userOneSignalID: String,
                  timeInterval: Int,
-                 healthCutoffTimeInterval: Double, completion: ((_ error: Error?)->())? = nil) {
+                 healthCutoffTimeInterval: Double,
+                 locationTimeout: Double,
+                 waitForAccurateLocation: Bool, completion: ((_ error: Error?)->())? = nil) {
         
         activateCompletion = { [weak self] in
             let params = [CommunicationKeys.jsonKey.rawValue: data,
@@ -132,7 +136,9 @@ class WatchConnectivityManagerPhone: NSObject, WatchConnectivityManagerPhoneProt
                           CommunicationKeys.userOneSignalIDKey.rawValue: CozieStorage.shared.playerID(),
                           CommunicationKeys.passwordIDKey.rawValue: password,
                           CommunicationKeys.timeInterval.rawValue: timeInterval,
-                          CommunicationKeys.healthCutoffTimeInterval.rawValue: healthCutoffTimeInterval]
+                          CommunicationKeys.healthCutoffTimeInterval.rawValue: healthCutoffTimeInterval,
+                          CommunicationKeys.locationTimeout.rawValue: locationTimeout,
+                          CommunicationKeys.waitForAccurateLocation.rawValue: waitForAccurateLocation]
             
             self?.session.sendMessage(params, replyHandler: { response in
                 debugPrint(response)

@@ -25,6 +25,12 @@ final class BackendSection: Identifiable {
                                                                      subtitle: ""),
                                                          BackendData(id: BackendViewModel.BackendState.distanceFilter.rawValue,
                                                                                                 title: "Distance Filter [m]",
+                                                                                                subtitle: ""),
+                                                         BackendData(id: BackendViewModel.BackendState.locationTimeout.rawValue,
+                                                                                                title: "Location Timeout [s]",
+                                                                                                subtitle: ""),
+                                                         BackendData(id: BackendViewModel.BackendState.waitForAccurateLocation.rawValue,
+                                                                                                title: "Wait for Accurate Location (true/false)",
                                                                                                 subtitle: "")])
     
     static var defaultBackendSection = BackendSection(id: BackendViewModel.BackendSectionType.backend.rawValue,
@@ -68,7 +74,7 @@ class BackendData: Identifiable {
 
 class BackendViewModel: NSObject, ObservableObject {
     enum BackendState: Int {
-        case readURL, readKey, writeURL, writeKey, participantPassword, watchsurveyLink, phoneSurveyLink, healthCutoffTime, distanceFilter, clear
+        case readURL, readKey, writeURL, writeKey, participantPassword, watchsurveyLink, phoneSurveyLink, healthCutoffTime, distanceFilter, locationTimeout, waitForAccurateLocation, clear
     }
     
     enum BackendSectionType: Int {
@@ -189,6 +195,11 @@ class BackendViewModel: NSObject, ObservableObject {
             guard let floatValue = Float(value) else { return }
             storage.setDistanceFilter(floatValue)
             appDelegate?.locationManager.updateLocationManager()
+        case .locationTimeout:
+            guard let doubleValue = Double(value) else { return }
+            storage.setLocationTimeout(doubleValue)
+        case .waitForAccurateLocation:
+            storage.setWaitForAccurateLocation(value.lowercased() == "true" || value == "1")
         case .clear:
             break
         }
@@ -222,6 +233,10 @@ class BackendViewModel: NSObject, ObservableObject {
             return "\(Float(storage.maxHealthCutoffTimeInterval()))"
         case .distanceFilter:
             return "\(Float(storage.distanceFilter()))"
+        case .locationTimeout:
+            return "\(storage.locationTimeout())"
+        case .waitForAccurateLocation:
+            return "\(storage.waitForAccurateLocation())"
         case .clear:
             return ""
         }
@@ -286,7 +301,7 @@ class BackendViewModel: NSObject, ObservableObject {
                             
                             let json = try JSONEncoder().encode(survey)
                             
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_signal_id ?? "", timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: storage.maxHealthCutoffTimeInterval(), completion: nil)
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: backend.one_signal_id ?? "", timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: storage.maxHealthCutoffTimeInterval(), locationTimeout: storage.locationTimeout(), waitForAccurateLocation: storage.waitForAccurateLocation(), completion: nil)
                         }
                         
                     } catch let error {

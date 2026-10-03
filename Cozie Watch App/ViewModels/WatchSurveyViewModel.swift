@@ -223,12 +223,21 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     func sendWatchSurvey() {
         sendSurveyProgress = true
         
+        // If the client has configured the app to not wait for an accurate
+        // location, submit right away using whatever location is already
+        // available, skipping the wait-and-timeout logic below entirely.
+        guard storage.waitForAccurateLocation() else {
+            sendSurvey()
+            return
+        }
+        
         // Request a fresh location right before sending, so the location
         // attached to this response reflects where the participant is now
         // rather than a stale location left over from an earlier request.
         // If CoreLocation doesn't respond within the timeout (e.g. weak
         // signal), fall back to whatever location is already available so
-        // submission is never blocked.
+        // submission is never blocked. The timeout duration is configurable
+        // via the "Advanced" settings tab (default 5s).
         var didProceed = false
         let proceed: () -> Void = { [weak self] in
             guard !didProceed else { return }
@@ -240,7 +249,7 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
             proceed()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + storage.locationTimeout()) {
             proceed()
         }
     }
@@ -362,6 +371,14 @@ extension WatchSurveyViewModel: WCSessionDelegate {
         
         if let maxTimeInterval = message[CommunicationKeys.healthCutoffTimeInterval.rawValue] as? Double {
             storage.saveHealthMaxCutoffTimeInterval(maxTimeInterval)
+        }
+        
+        if let locationTimeout = message[CommunicationKeys.locationTimeout.rawValue] as? Double {
+            storage.saveLocationTimeout(locationTimeout)
+        }
+        
+        if let waitForAccurateLocation = message[CommunicationKeys.waitForAccurateLocation.rawValue] as? Bool {
+            storage.saveWaitForAccurateLocation(waitForAccurateLocation)
         }
         
         transferLoggFile()

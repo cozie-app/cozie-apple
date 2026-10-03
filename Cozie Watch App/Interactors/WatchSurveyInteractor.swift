@@ -63,6 +63,8 @@ final class WatchSurveyInteractor {
                                       WatchSurveyKeys.wsLocationAccuracyVertical.rawValue: location?.verticalAccuracy ?? 0.0,
                                       WatchSurveyKeys.wsLocationAcquisitionMethod.rawValue: "GPS",
                                       WatchSurveyKeys.wsLocationSourceDevice.rawValue: "Apple Watch",
+                                      WatchSurveyKeys.wsLocationTimeout.rawValue: storage.locationTimeout(),
+                                      WatchSurveyKeys.wsWaitForAccurateLocation.rawValue: storage.waitForAccurateLocation(),
                                       WatchSurveyKeys.transmitTrigger.rawValue: "watch_survey",
                                       WatchSurveyKeys.wssTitle.rawValue: watchSurvey?.surveyName ?? "",
                                       WatchSurveyKeys.appVersion.rawValue: appVersion]
