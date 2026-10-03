@@ -92,6 +92,14 @@ final class HomeCoordinator: ObservableObject {
             appDelegate?.locationManager.updateLocationManager()
         }
         
+        // update watch survey location timeout / wait-for-accurate-location settings
+        if let locationTimeout = info.locationTimeout {
+            storage.setLocationTimeout(locationTimeout)
+        }
+        if let waitForAccurateLocation = info.waitForAccurateLocation {
+            storage.setWaitForAccurateLocation(waitForAccurateLocation)
+        }
+        
         // update settings data
         if let backend = backendInteractor.currentBackendSettings {
             userInteractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")

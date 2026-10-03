@@ -23,6 +23,7 @@ final class LocationManager: NSObject {
     func requestAuth() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.requestWhenInUseAuthorization()
     }
 }
