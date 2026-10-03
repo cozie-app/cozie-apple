@@ -7,6 +7,7 @@
 
 import Foundation
 import HealthKit
+import CryptoKit
 
 protocol HealthKitInteractorProtocol {
     func getAllRequestedData(trigger: String, completion: ((_ models: [HealthModel])->())?)
@@ -535,14 +536,25 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         // merging them all under one shared "_watch" suffix.
         let manufacturer = sanitizeForFieldName(device.manufacturer ?? "")
         let deviceModel = sanitizeForFieldName(model)
-        let uniquePart = sanitizeForFieldName(String(device.localIdentifier?.prefix(6) ?? ""))
+        let uniquePart = anonymizedDeviceTag(device.localIdentifier ?? "")
         let suffix = "_\(manufacturer)_\(deviceModel)_\(uniquePart)".lowercased()
 
         return dataPrefix + key + suffix
-    }
-    private static func sanitizeForFieldName(_ raw: String) -> String {
-        raw.filter { $0.isLetter || $0.isNumber }
-    }
+        }
+        private static func sanitizeForFieldName(_ raw: String) -> String {
+            raw.filter { $0.isLetter || $0.isNumber }
+        }
+
+        // Per-device tag that cannot be reversed back to the original
+        // localIdentifier, per client request (non-reversible/anonymized).
+        // Same device always hashes to the same tag (still distinguishes two
+        // same-model devices); different devices practically never collide.
+        private static func anonymizedDeviceTag(_ raw: String) -> String {
+            guard !raw.isEmpty else { return "" }
+            let hash = SHA256.hash(data: Data(raw.utf8))
+            let hex = hash.compactMap { String(format: "%02x", $0) }.joined()
+            return String(hex.prefix(6))
+        }
 
     private func addPrefixForDataKey(key: String, device: HKDevice? = nil) -> String {
         Self.addPrefixForDataKey(key: key, device: device, dataPrefix: dataPrefix)

@@ -102,4 +102,19 @@ struct HealthKitInteractorTests {
 
         #expect(key == "tssteps")
     }
+    @Test("Device suffix is a hash, not the raw local identifier")
+    func deviceSuffixDoesNotExposeRawIdentifier() {
+        let watch = HKDevice(name: "Apple Watch",
+                              manufacturer: "Apple Inc.",
+                              model: "Watch7,1",
+                              hardwareVersion: nil,
+                              firmwareVersion: nil,
+                              softwareVersion: nil,
+                              localIdentifier: "AAAAAA-1111",
+                              udiDeviceIdentifier: nil)
+
+        let key = HealthKitInteractor.addPrefixForDataKey(key: "steps", device: watch, dataPrefix: "ts")
+
+        #expect(!key.lowercased().contains("aaaaaa"))
+    }
 }
