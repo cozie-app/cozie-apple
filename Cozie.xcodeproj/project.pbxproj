@@ -163,6 +163,7 @@
 		CAE4FDB92CD28C7000B0B888 /* CozieStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA92EF82A53EE7700DA6A28 /* CozieStorageProtocol.swift */; };
 		CAE88C512D2B228D00EE8A83 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE88C502D2B228600EE8A83 /* TimeModel.swift */; };
 		CAE88C552D2B22EF00EE8A83 /* TimeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */; };
+		D1AE130A3052E90D008AFE77 /* HealthKitInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE13093052E8F1008AFE77 /* HealthKitInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,6 +386,7 @@
 		CAD1F0F72CCFC5A1001B5307 /* PushNotificationLoggerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationLoggerRepositoryTests.swift; sourceTree = "<group>"; };
 		CAE88C502D2B228600EE8A83 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
 		CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModelTests.swift; sourceTree = "<group>"; };
+		D1AE13093052E8F1008AFE77 /* HealthKitInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitInteractorTests.swift; sourceTree = "<group>"; };
 		D24C4273B7B8B756FE8443A6 /* Pods-Cozie Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie Watch App.release.xcconfig"; path = "Target Support Files/Pods-Cozie Watch App/Pods-Cozie Watch App.release.xcconfig"; sourceTree = "<group>"; };
 		E183B343CF71E4B7667B905D /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F415053C9AB8896A79909F80 /* Pods-Cozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cozie.release.xcconfig"; path = "Target Support Files/Pods-Cozie/Pods-Cozie.release.xcconfig"; sourceTree = "<group>"; };
@@ -1140,6 +1142,7 @@
 		CAC5D4EB2D3A685B006EF85B /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				D1AE13083052E8AE008AFE77 /* HealthKitInteractorTests */,
 				CAC5D4EC2D3A6873006EF85B /* SettingsInteractorTests */,
 			);
 			path = Interactors;
@@ -1212,6 +1215,14 @@
 				CAE88C542D2B22EB00EE8A83 /* TimeModelTests.swift */,
 			);
 			path = TimeModelTests;
+			sourceTree = "<group>";
+		};
+		D1AE13083052E8AE008AFE77 /* HealthKitInteractorTests */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE13093052E8F1008AFE77 /* HealthKitInteractorTests.swift */,
+			);
+			path = HealthKitInteractorTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1353,8 +1364,6 @@
 				en,
 			);
 			mainGroup = 921289C1299649EC0060C729;
-			packageReferences = (
-			);
 			productRefGroup = 921289CB299649EC0060C729 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1678,6 +1687,7 @@
 				CA7139952CF9A1B8003E7F41 /* OfflineManagerTests.swift in Sources */,
 				CAE88C552D2B22EF00EE8A83 /* TimeModelTests.swift in Sources */,
 				CAD1F0F82CCFC5B7001B5307 /* PushNotificationLoggerRepositoryTests.swift in Sources */,
+				D1AE130A3052E90D008AFE77 /* HealthKitInteractorTests.swift in Sources */,
 				CA9511DC2D366F5000BA4283 /* BackendSettingsStub.swift in Sources */,
 				CA9511D72D36615A00BA4283 /* SettingsInteractorMock.swift in Sources */,
 				CAC5D4F02D3A68F4006EF85B /* DataBaseStorageMock.swift in Sources */,
