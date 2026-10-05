@@ -10,7 +10,7 @@ import Combine
 
 enum SettingState {
     case clear, watchSurvey, watchGoal, watchReminderInterval, watchParticipation, watchParticipationTimeStart, watchParticipationTimeEnd, participantId, experimentId,
-         phoneReminderInterval, phoneParticipation
+         phoneReminderInterval, phoneParticipation, notificationHistoryRetention
 }
 
 class SettingViewModel: ObservableObject {
@@ -34,6 +34,9 @@ class SettingViewModel: ObservableObject {
     @Published var timeEnd: TimeModel = TimeModel(hour: 23, minute: 0)
     @Published var questionViewModel = QuestionViewModel()
     var dayList = DaysViewModel().list
+    
+    // Notification History
+    @Published var notificationHistoryRetentionDays: String = "2"
     
     // Phone Survey
     @Published var phoneReminderState: Bool = false
@@ -114,6 +117,13 @@ class SettingViewModel: ObservableObject {
             participantID = user.participantID ?? "Participant_Ge9VxH5iP"
             experimentID = user.experimentID ?? "App Store"
         }
+
+        notificationHistoryRetentionDays = "\(CozieStorage.shared.notificationHistoryRetentionDays())"
+    }
+    
+    func updateNotificationHistoryRetentionDays(_ days: Int) {
+        notificationHistoryRetentionDays = "\(days)"
+        CozieStorage.shared.saveNotificationHistoryRetentionDays(days)
     }
     
     /// Prepare WS Link user interface

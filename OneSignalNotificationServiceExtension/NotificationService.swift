@@ -25,11 +25,19 @@ class NotificationService: UNNotificationServiceExtension {
             var tempInfo = request.content.userInfo
             tempInfo[GroupCommon.timestamp.rawValue] = Date().timeIntervalSince1970
             try? await pushLogger.pushNotificationDidReceive(payload: tempInfo as? [String: Any] ?? [:])
+            saveNotificationHistory(info: tempInfo as? [String: Any] ?? [:])
         }
         
         if let bestAttemptContent = bestAttemptContent {
             OneSignalExtension.didReceiveNotificationExtensionRequest(self.receivedRequest, with: bestAttemptContent, withContentHandler: self.contentHandler)
         }
+    }
+    private func saveNotificationHistory(info: [String: Any]){
+        let storage = UserDefaults(suiteName: GroupCommon.storageName.rawValue) ?? UserDefaults.standard
+        var history = storage.object(forKey: GroupCommon.history.rawValue) as? [[String: Any]] ?? []
+        history.append(info)
+        
+        storage.set(history, forKey: GroupCommon.history.rawValue)
     }
     
     override func serviceExtensionTimeWillExpire() {

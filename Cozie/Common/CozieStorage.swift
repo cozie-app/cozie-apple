@@ -17,6 +17,8 @@ protocol WSStorageProtocol {
     func saveMaxHealthCutoffTimeInterval(_ interval: Double)
     func setDistanceFilter(_ distance: Float)
     func distanceFilter() -> Float
+    func notificationHistoryRetentionDays() -> Int
+    func saveNotificationHistoryRetentionDays(_ days: Int)
 }
 
 protocol WSStateStorageProtocol {
@@ -78,6 +80,7 @@ class CozieStorage: UserDefaultsStorageProtocol {
         case firstLaunchTimeInterval = "firstLaunchTimeInterval"
         case maxHealthCutoffTime = "healthCutoffTimeTimeInterval"
         case distanceFilterKey = "distanceFilter"
+        case notificationHistoryRetentionDays = "notificationHistoryRetentionDays"
     }
     
     static let shared = CozieStorage()
@@ -92,6 +95,21 @@ class CozieStorage: UserDefaultsStorageProtocol {
     /// Use this function to get distance filter.
     func distanceFilter() -> Float {
         UserDefaults.standard.value(forKey: CozieStorageKeys.distanceFilterKey.rawValue) as? Float ?? 100.0
+    }
+    
+    /// Notification History
+
+    func notificationHistoryRetentionDays() -> Int {
+        return UserDefaults.standard.value(
+            forKey: CozieStorageKeys.notificationHistoryRetentionDays.rawValue
+        ) as? Int ?? 2
+    }
+
+    func saveNotificationHistoryRetentionDays(_ days: Int) {
+        UserDefaults.standard.set(
+            days,
+            forKey: CozieStorageKeys.notificationHistoryRetentionDays.rawValue
+        )
     }
     
     
