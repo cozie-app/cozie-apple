@@ -62,7 +62,12 @@ final class HomeCoordinator: ObservableObject {
         self.settingsInteractor = settingsInteractor
         self.backendInteractor = backendInteractor
         
-        settingsViewModel = SettingViewModel(reminderManager: session.reminderManager)
+        settingsViewModel = SettingViewModel(
+            reminderManager: session.reminderManager,
+            pauseServiceProvider: {
+                session.pauseService
+            }
+        )
         watchSurveyInteractor = WatchSurveyInteractor()
     }
     
@@ -77,7 +82,50 @@ final class HomeCoordinator: ObservableObject {
     
     /// Use this function to apply new settings from QR-code/DeepLink
     ///
-    func prepareSource(info: InitModel, storage: WSStateStorageProtocol & WSStorageProtocol, appDelegate: AppDelegate? = nil ) {
+    @MainActor
+    func prepareSource(
+        info: InitModel,
+        storage: WSStateStorageProtocol & WSStorageProtocol,
+        appDelegate: AppDelegate? = nil
+    ) async throws {
+        guard !disableUI else {
+            throw PauseValidationError(
+                message: "An import is already in progress. Please try again shortly."
+            )
+        }
+
+        disableUI = true
+        defer { disableUI = false }
+
+        let service = session.pauseService
+
+        // Do not transfer an existing pause to another participant or study.
+        if let plan = service.plan, plan.endDate > Date() {
+            let currentUser = userInteractor.currentUser
+
+            let changesParticipant = info.idParticipant.map {
+                $0 != currentUser?.participantID
+            } ?? false
+
+            let changesExperiment = info.idExperiment.map {
+                $0 != currentUser?.experimentID
+            } ?? false
+
+            guard !changesParticipant, !changesExperiment else {
+                throw PauseValidationError(
+                    message:
+                        "Please cancel or end the current pause before "
+                        + "switching participant or experiment."
+                )
+            }
+        }
+
+        // Create default settings if this is the first configuration.
+        settingsInteractor.prepareSettingsData()
+
+        // Continue importing only after settings and reminders succeed.
+        try await settingsViewModel.applyImportedSettings(info)
+
         // update backend data
         backendInteractor.prepareBackendData(apiReadUrl: info.apiReadURL, apiReadKey: info.apiReadKey, apiWriteUrl: info.apiWriteURL, apiWriteKey: info.apiWriteKey, oneSignalId: nil, participantPassword: info.idPassword, watchSurveyLink: info.apiWatchSurveyURL, phoneSurveyLink: info.apiPhoneSurveyURL)
         
@@ -95,11 +143,7 @@ final class HomeCoordinator: ObservableObject {
         // update settings data
         if let backend = backendInteractor.currentBackendSettings {
             userInteractor.prepareUser(participantID: info.idParticipant, experimentID: info.idExperiment, password: backend.participant_password ?? "1G8yOhPvMZ6m")
-            settingsInteractor.prepareSettingsData(wssTitle: info.wssTitle, wssGoal: info.wssGoal, wssTimeout: info.wssTimeOut, wssReminderEnabled: info.wssReminderEnabled, wssReminderInterval: info.wssReminderInterval, wssParticipationDays: info.wssParticipationDays, wssParticipationTimeStart: info.wssParticipationTimeStart, wssParticipationTimeEnd: info.wssParticipationTimeEnd, pssReminderEnabled: info.pssReminderEnabled, pssReminderDays: info.pssReminderDays, pssReminderTime: info.pssReminderTime)
-            
             backendInteractor.updateOneSign(launchOptions: AppDelegate.instance?.launchOptions, surveyInteractor: WatchSurveyInteractor())
-            // clear and update reminders via QR-code/DeepLink
-            settingsViewModel.prepareRemindersIfNeeded()
             
             // reset sync device status
             storage.savePIDSynced(false)
@@ -125,6 +169,10 @@ final class HomeCoordinator: ObservableObject {
                 }
             }
         }
+        NotificationCenter.default.post(
+            name: HomeCoordinator.didReceiveDeeplink,
+            object: nil
+        )
     }
     
     /// Use this function to prepare default data

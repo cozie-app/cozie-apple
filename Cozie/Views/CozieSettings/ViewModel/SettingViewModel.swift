@@ -41,6 +41,7 @@ class SettingViewModel: ObservableObject {
     @Published var phoneReminderInterval: TimeModel = TimeModel()
     
     @Published var reminderManager: ReminderManager
+    private let pauseServiceProvider: (@MainActor () -> PauseService)?
     
     @Published var loading: Bool = false
     
@@ -49,6 +50,10 @@ class SettingViewModel: ObservableObject {
     @Published var participentIDSynced: Bool = false
     @Published var experimentIDSynced: Bool = false
     @Published var surveySynced: Bool = false
+    
+    @Published private(set) var isUpdatingReminders = false
+    @Published var showReminderError = false
+    @Published var reminderErrorMessage = ""
     
     var errorString: String = ""
     var phoneParticipationDays = DaysViewModel().list
@@ -67,15 +72,18 @@ class SettingViewModel: ObservableObject {
     let watchSurveyInteractor = WatchSurveyInteractor()
     let healthKitInteractor = HealthKitInteractor(storage: CozieStorage.shared, userData: UserInteractor(), backendData: BackendInteractor(), logger: LoggerInteractor.shared)
     
-    init(reminderManager: ReminderManager,
-         storage: UserDefaultsStorageProtocol = CozieStorage(),
-         dbStorage: DataBaseStorageProtocol = PersistenceController.shared,
-         backendInteractor: BackendInteractorProtocol = BackendInteractor()) {
-        
+    init(
+        reminderManager: ReminderManager,
+        storage: UserDefaultsStorageProtocol = CozieStorage(),
+        dbStorage: DataBaseStorageProtocol = PersistenceController.shared,
+        backendInteractor: BackendInteractorProtocol = BackendInteractor(),
+        pauseServiceProvider: (@MainActor () -> PauseService)? = nil
+    ) {
         self.reminderManager = reminderManager
         self.udStorage = storage
         self.dbStorage = dbStorage
         self.backendInteractor = backendInteractor
+        self.pauseServiceProvider = pauseServiceProvider
     }
     
     // MARK: System Logs
@@ -240,7 +248,6 @@ class SettingViewModel: ObservableObject {
             goal = "\(settings.wss_goal)"
             isReminderEnabled = settings.wss_reminder_enabled
             $isReminderEnabled.eraseToAnyPublisher().dropFirst().sink { [weak self] value in
-                self?.updateInterval()
                 self?.updateReminderState(isEnabled: value)
             }
             .store(in: &subscriptions)
@@ -268,7 +275,6 @@ class SettingViewModel: ObservableObject {
             
             phoneReminderState = settings.pss_reminder_enabled
             $phoneReminderState.eraseToAnyPublisher().dropFirst().sink { [weak self] value in
-                self?.updateInterval()
                 self?.updatePhoneReminderState(isEnabled: value)
             }
             .store(in: &subscriptions)
@@ -293,14 +299,91 @@ class SettingViewModel: ObservableObject {
         }
     }
     
-    func updateParticipantID(_ pID: String) {
-        if let user = userInteractor.currentUser {
-            if pID != user.participantID {
-                user.participantID = pID
-                updateStateForParticipantID(enabled: false)
-                try? dbStorage.saveViewContext()
+    //When there is a Scheduled/Active pause: Modifications will be blocked and a prompt will be given to cancel or end the pause first
+    private func updateIdentity(
+        participantID: String? = nil,
+        experimentID: String? = nil
+    ) {
+        Task { @MainActor in
+            do {
+                guard let provider = pauseServiceProvider else {
+                    throw PauseValidationError(
+                        message: "The pause service is unavailable."
+                    )
+                }
+
+                let service = provider()
+
+                guard !isUpdatingReminders, !service.isBusy else {
+                    throw PauseValidationError(
+                        message: "Please wait for the current reminder operation."
+                    )
+                }
+
+                guard let user = userInteractor.currentUser else {
+                    throw PauseValidationError(
+                        message: "Participant information could not be loaded."
+                    )
+                }
+
+                let previousParticipant = user.participantID
+                let previousExperiment = user.experimentID
+
+                let newParticipant = participantID ?? previousParticipant
+                let newExperiment = experimentID ?? previousExperiment
+
+                let changesParticipant = newParticipant != previousParticipant
+                let changesExperiment = newExperiment != previousExperiment
+
+                guard changesParticipant || changesExperiment else {
+                    return
+                }
+
+                guard service.storageError == nil else {
+                    throw PauseValidationError(
+                        message: "The saved pause plan could not be loaded."
+                    )
+                }
+
+                guard service.status() == .noPause else {
+                    throw PauseValidationError(
+                        message:
+                            "Please cancel or end the current pause before "
+                            + "switching participant or experiment."
+                    )
+                }
+
+                user.participantID = newParticipant
+                user.experimentID = newExperiment
+
+                do {
+                    try dbStorage.saveViewContext()
+                } catch {
+                    user.participantID = previousParticipant
+                    user.experimentID = previousExperiment
+                    throw error
+                }
+
+                if changesParticipant {
+                    updateStateForParticipantID(enabled: false)
+                }
+
+                if changesExperiment {
+                    updateStateForExperimentID(enabled: false)
+                }
+
+                getUserInfo()
+            } catch {
+                // Restore the displayed identity from the saved user.
+                getUserInfo()
+                reminderErrorMessage = error.localizedDescription
+                showReminderError = true
             }
         }
+    }
+    
+    func updateParticipantID(_ pID: String) {
+        updateIdentity(participantID: pID)
     }
     
     private func updateStateForParticipantID(enabled: Bool) {
@@ -309,13 +392,7 @@ class SettingViewModel: ObservableObject {
     }
     
     func updateExperimentID(_ eID: String) {
-        if let user = userInteractor.currentUser {
-            if eID != user.experimentID {
-                user.experimentID = eID
-                updateStateForExperimentID(enabled: false)
-                try? dbStorage.saveViewContext()
-            }
-        }
+        updateIdentity(experimentID: eID)
     }
     
     private func updateStateForExperimentID(enabled: Bool) {
@@ -349,30 +426,118 @@ class SettingViewModel: ObservableObject {
         }
     }
     
+    private func applyReminderSettings(
+        _ change: @escaping (SettingsData) -> Void
+    ) {
+        Task { @MainActor in
+            guard !isUpdatingReminders else {
+                return
+            }
+
+            guard let provider = pauseServiceProvider else {
+                reminderErrorMessage = "The pause service is unavailable."
+                showReminderError = true
+                configureSettings()
+                return
+            }
+
+            let service = provider()
+
+            guard !service.isBusy else {
+                reminderErrorMessage = "Please wait for the current pause operation."
+                showReminderError = true
+                configureSettings()
+                return
+            }
+
+            guard let settings = settingsInteractor.currentSettings else {
+                reminderErrorMessage = "Reminder settings could not be loaded."
+                showReminderError = true
+                return
+            }
+
+            // Keep the previous reminder values for error recovery.
+            let previousWatchEnabled = settings.wss_reminder_enabled
+            let previousWatchInterval = settings.wss_reminder_interval
+            let previousWatchDays = settings.wss_participation_days
+            let previousWatchStart = settings.wss_participation_time_start
+            let previousWatchEnd = settings.wss_participation_time_end
+
+            let previousPhoneEnabled = settings.pss_reminder_enabled
+            let previousPhoneDays = settings.pss_reminder_days
+            let previousPhoneTime = settings.pss_reminder_time
+
+            isUpdatingReminders = true
+            defer { isUpdatingReminders = false }
+
+            // Apply the proposed values in memory first.
+            change(settings)
+
+            do {
+                try await service.refreshRemindersFromSettings {
+                    try self.dbStorage.saveViewContext()
+                }
+
+                configureSettings()
+            } catch {
+                let updateError = error.localizedDescription
+
+                settings.wss_reminder_enabled = previousWatchEnabled
+                settings.wss_reminder_interval = previousWatchInterval
+                settings.wss_participation_days = previousWatchDays
+                settings.wss_participation_time_start = previousWatchStart
+                settings.wss_participation_time_end = previousWatchEnd
+
+                settings.pss_reminder_enabled = previousPhoneEnabled
+                settings.pss_reminder_days = previousPhoneDays
+                settings.pss_reminder_time = previousPhoneTime
+
+                do {
+                    try dbStorage.saveViewContext()
+                    reminderErrorMessage = updateError
+                } catch {
+                    reminderErrorMessage =
+                        "\(updateError)\nThe previous settings could not be saved: "
+                        + error.localizedDescription
+                }
+
+                configureSettings()
+                showReminderError = true
+            }
+        }
+    }
+    
     func updateReminderInterval() {
         updateInterval()
-        if let settings = settingsInteractor.currentSettings {
-            settings.wss_reminder_interval = Int16(reminderInterval.timeInMinutes())
-            try? dbStorage.saveViewContext()
+        let requestedInterval = Int16(reminderInterval.timeInMinutes())
+
+        applyReminderSettings { settings in
+            settings.wss_reminder_interval = requestedInterval
         }
     }
     
     func updateWSSReminderStartTime() {
-        if let settings = settingsInteractor.currentSettings {
-            settings.wss_participation_time_start = timeStart.formattedHourMinString()
-            try? dbStorage.saveViewContext()
-        }
         updateInterval()
-        configureWatchReminders(enabled: isReminderEnabled)
+
+        let requestedStart = timeStart.formattedHourMinString()
+        let requestedInterval = Int16(reminderInterval.timeInMinutes())
+
+        applyReminderSettings { settings in
+            settings.wss_participation_time_start = requestedStart
+            settings.wss_reminder_interval = requestedInterval
+        }
     }
     
     func updateWSSReminderEndTime() {
-        if let settings = settingsInteractor.currentSettings {
-            settings.wss_participation_time_end = timeEnd.formattedHourMinString()
-            try? dbStorage.saveViewContext()
-        }
         updateInterval()
-        configureWatchReminders(enabled: isReminderEnabled)
+
+        let requestedEnd = timeEnd.formattedHourMinString()
+        let requestedInterval = Int16(reminderInterval.timeInMinutes())
+
+        applyReminderSettings { settings in
+            settings.wss_participation_time_end = requestedEnd
+            settings.wss_reminder_interval = requestedInterval
+        }
     }
     
     func updateInterval() {
@@ -393,57 +558,40 @@ class SettingViewModel: ObservableObject {
     }
     
     func updatePSSReminderTime() {
-        if let settings = settingsInteractor.currentSettings {
-            settings.pss_reminder_time = phoneReminderInterval.formattedHourMinString()
-            try? dbStorage.saveViewContext()
+        let requestedTime = phoneReminderInterval.formattedHourMinString()
+
+        applyReminderSettings { settings in
+            settings.pss_reminder_time = requestedTime
         }
-        configurePhoneReminders(enabled: phoneReminderState)
     }
     
     // MARK: Watch Action
     func updateParticipants(list: [DayModel]) {
-        let selected = list.filter{ $0.isSelected }
-        var content = ""
-        for day in selected {
-            content = content + day.titleShort() + ","
-        }
         dayList = list
-        participationDays = String(content.dropLast())
-        
-        if let settings = settingsInteractor.currentSettings {
-            settings.wss_participation_days = String(content.dropLast())
-            try? dbStorage.saveViewContext()
-        }
         updateInterval()
-        configureWatchReminders(enabled: isReminderEnabled)
+
+        let requestedDays = list
+            .filter { $0.isSelected }
+            .map { $0.titleShort() }
+            .joined(separator: ",")
+
+        let requestedInterval = Int16(reminderInterval.timeInMinutes())
+
+        applyReminderSettings { settings in
+            settings.wss_participation_days = requestedDays
+            settings.wss_reminder_interval = requestedInterval
+        }
     }
     
     func updateReminderState(isEnabled: Bool) {
-        if let settings = settingsInteractor.currentSettings {
+        updateInterval()
+        let requestedInterval = Int16(reminderInterval.timeInMinutes())
+
+        applyReminderSettings { settings in
             settings.wss_reminder_enabled = isEnabled
-            try? dbStorage.saveViewContext()
-        }
-        
-        configureWatchReminders(enabled: isEnabled)
-    }
-    
-    private func configureWatchReminders(enabled: Bool) {
-        self.reminderManager.removeWatchNotification { [weak self] in
-            guard let self = self else { return }
-            if enabled {
-                var reminders = [Reminder]()
-                let selectedDays = self.dayList.filter({ $0.isSelected })
-                for day in selectedDays {
-                    let model = Reminder(identifier: "watch",
-                                         day: day,
-                                         timeStart: self.timeStart.timeInMinutes(),
-                                         timeEnd: self.timeEnd.timeInMinutes(),
-                                         interval: self.reminderInterval.timeInMinutes())
-                    reminders.append(model)
-                }
-                DispatchQueue.main.async {
-                    self.reminderManager.createReminderNotification(list: reminders)
-                }
+
+            if isEnabled {
+                settings.wss_reminder_interval = requestedInterval
             }
         }
     }
@@ -472,57 +620,128 @@ class SettingViewModel: ObservableObject {
     
     // MARK: Phone Survey Funk
     func updatePhoneReminderState(isEnabled: Bool) {
-        if let settings = settingsInteractor.currentSettings {
+        applyReminderSettings { settings in
             settings.pss_reminder_enabled = isEnabled
-            try? dbStorage.saveViewContext()
         }
-        configurePhoneReminders(enabled: isEnabled)
     }
     
-    private func configurePhoneReminders(enabled: Bool) {
-        reminderManager.removePhoneNotification { [weak self] in
-            guard let self = self else { return }
-            if enabled {
-                var reminders = [PhoneReminder]()
-                let selectedDays = self.phoneParticipationDays.filter({ $0.isSelected })
-                for day in selectedDays {
-                    let model = PhoneReminder(identifier: "phone",
-                                              day: day,
-                                              timeStart: self.phoneReminderInterval.timeInMinutes())
-                    reminders.append(model)
-                }
-                if !reminders.isEmpty {
-                    DispatchQueue.main.async {
-                        self.reminderManager.createPhoneReminder(list: reminders)
-                    }
-                }
-            }
-        }
-    }
+    
     // MARK: Reminders
     
-    func prepareRemindersIfNeeded() {
-        if let settings = settingsInteractor.currentSettings {
-            configureWatchReminders(enabled: settings.wss_reminder_enabled)
-            configurePhoneReminders(enabled: settings.pss_reminder_enabled)
+    @MainActor
+    func applyImportedSettings(_ info: InitModel) async throws {
+        guard let provider = pauseServiceProvider else {
+            throw PauseValidationError(
+                message: "The pause service is unavailable."
+            )
+        }
+
+        let service = provider()
+
+        guard !isUpdatingReminders, !service.isBusy else {
+            throw PauseValidationError(
+                message: "Please wait for the current reminder operation, then import again."
+            )
+        }
+
+        guard let settings = settingsInteractor.currentSettings else {
+            throw PauseValidationError(
+                message: "Settings could not be loaded. Please reopen the app and try again."
+            )
+        }
+
+        let previousTitle = settings.wss_title
+        let previousGoal = settings.wss_goal
+        let previousTimeout = settings.wss_time_out
+
+        let previousWatchEnabled = settings.wss_reminder_enabled
+        let previousWatchInterval = settings.wss_reminder_interval
+        let previousWatchDays = settings.wss_participation_days
+        let previousWatchStart = settings.wss_participation_time_start
+        let previousWatchEnd = settings.wss_participation_time_end
+
+        let previousPhoneEnabled = settings.pss_reminder_enabled
+        let previousPhoneDays = settings.pss_reminder_days
+        let previousPhoneTime = settings.pss_reminder_time
+
+        isUpdatingReminders = true
+        defer { isUpdatingReminders = false }
+
+        // Match the existing import defaults.
+        settings.wss_title = info.wssTitle ?? Defaults.WSStitle
+        settings.wss_goal = info.wssGoal ?? Defaults.WSSgoal
+        settings.wss_time_out = info.wssTimeOut ?? Defaults.WSStimeOutTime
+
+        settings.wss_reminder_enabled =
+            info.wssReminderEnabled ?? Defaults.WSSreminderEnabled
+
+        settings.wss_reminder_interval =
+            info.wssReminderInterval ?? Defaults.WSSreminderInterval
+
+        settings.wss_participation_days =
+            info.wssParticipationDays ?? ""
+
+        settings.wss_participation_time_start =
+            info.wssParticipationTimeStart ?? Defaults.WSSparticiaptionTimeStart
+
+        settings.wss_participation_time_end =
+            info.wssParticipationTimeEnd ?? Defaults.WSSparticipationTimeEnd
+
+        settings.pss_reminder_enabled =
+            info.pssReminderEnabled ?? Defaults.PSSreminderEnabled
+
+        settings.pss_reminder_days =
+            info.pssReminderDays ?? Defaults.PSSreminderDays
+
+        settings.pss_reminder_time =
+            info.pssReminderTime ?? Defaults.PSSreminderTime
+
+        do {
+            try await service.refreshRemindersFromSettings {
+                try self.dbStorage.saveViewContext()
+            }
+        } catch {
+            let importError = error
+
+            settings.wss_title = previousTitle
+            settings.wss_goal = previousGoal
+            settings.wss_time_out = previousTimeout
+
+            settings.wss_reminder_enabled = previousWatchEnabled
+            settings.wss_reminder_interval = previousWatchInterval
+            settings.wss_participation_days = previousWatchDays
+            settings.wss_participation_time_start = previousWatchStart
+            settings.wss_participation_time_end = previousWatchEnd
+
+            settings.pss_reminder_enabled = previousPhoneEnabled
+            settings.pss_reminder_days = previousPhoneDays
+            settings.pss_reminder_time = previousPhoneTime
+
+            do {
+                try dbStorage.saveViewContext()
+            } catch {
+                throw PauseValidationError(
+                    message:
+                        "\(importError.localizedDescription)\n"
+                        + "The previous settings could not be saved: "
+                        + error.localizedDescription
+                )
+            }
+
+            throw importError
         }
     }
     
+    
     func updatePhoneParticipants(list: [DayModel]) {
-        let selected = list.filter{ $0.isSelected }
-        var content = ""
-        for day in selected {
-            content = content + day.titleShort() + ","
+        let requestedDays = list
+            .filter { $0.isSelected }
+            .map { $0.titleShort() }
+            .joined(separator: ",")
+
+        applyReminderSettings { settings in
+            settings.pss_reminder_days = requestedDays
         }
-        phoneParticipationDays = list
-        phoneParticipation = String(content.dropLast())
-        
-        if let settings = settingsInteractor.currentSettings {
-            settings.pss_reminder_days = String(content.dropLast())
-            try? dbStorage.saveViewContext()
-        }
-        
-        configurePhoneReminders(enabled: phoneReminderState)
     }
     
     // MARK: Sync watch survey

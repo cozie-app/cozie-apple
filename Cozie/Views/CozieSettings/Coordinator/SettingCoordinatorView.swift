@@ -13,7 +13,10 @@ struct SettingCoordinatorView: View {
     
     var body: some View {
         NavigationView {
-            CozieSettingView(viewModel: coordinator.viewModel)
+            CozieSettingView(
+                viewModel: coordinator.viewModel,
+                pauseService: coordinator.session.pauseService
+            )
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar(content: {
                     CozieToolbarContent(title: "Cozie - Settings")

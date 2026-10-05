@@ -57,13 +57,18 @@ struct CozieSettingView: View {
     private let cellHeight: CGFloat = 35
     
     @ObservedObject var viewModel: SettingViewModel
+    @ObservedObject var pauseService: PauseService
     
     // MARK: States
     @State var showError = false
     let updateTrigger = NotificationCenter.default.publisher(for: HomeCoordinator.didReceiveDeeplink)
     
-    init(viewModel: SettingViewModel) {
+    init(
+        viewModel: SettingViewModel,
+        pauseService: PauseService
+    ) {
         self.viewModel = viewModel
+        self.pauseService = pauseService
     }
     
     var body: some View {
@@ -75,6 +80,8 @@ struct CozieSettingView: View {
                     experimentSection()
                     watchSurveySection()
                     phoneSurveySection()
+                    
+                    PauseSettingsSection(pauseService: pauseService)
                 }
                 .padding([.leading, .trailing], -5)
                 .listStyle(.insetGrouped)
@@ -212,6 +219,17 @@ struct CozieSettingView: View {
                 }
             }
         }
+        .disabled(
+            viewModel.isUpdatingReminders || pauseService.isBusy
+        )
+        .alert(
+            "Could not update reminders",
+            isPresented: $viewModel.showReminderError
+        ) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(viewModel.reminderErrorMessage)
+        }
     }
     
     // MARK: - List Section
@@ -306,6 +324,13 @@ struct CozieSettingView: View {
 
 struct CozieSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        CozieSettingView(viewModel: SettingViewModel(reminderManager: Session().reminderManager))
+        let session = Session()
+
+        CozieSettingView(
+            viewModel: SettingViewModel(
+                reminderManager: session.reminderManager
+            ),
+            pauseService: session.pauseService
+        )
     }
 }

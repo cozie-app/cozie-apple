@@ -9,4 +9,12 @@ import Foundation
 
 class Session: ObservableObject {
     @Published var reminderManager = ReminderManager()
+
+    @MainActor
+    private(set) lazy var pauseService = PauseService(
+        pauseManager: PauseManager(),
+        reminderManager: reminderManager
+    )
+    @MainActor
+    private(set) lazy var pauseLogUploader = PauseLogUploader()
 }
