@@ -52,6 +52,7 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         case activeEnergyBurned = "_active_energy_burned"
         case moveTime = "_move_time"
         case exerciseTime = "_exercise_time"
+        case timeInDaylight = "_time_in_daylight"
         
         // Apnea
         case apneaEvent = "_sleep_apnea_duration_minutes"
@@ -122,6 +123,9 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         if #available(iOS 16, *) {
             var setTypes = Set(allTypesiPhone)
             setTypes.insert(HKQuantityType(HKQuantityTypeIdentifier.appleSleepingWristTemperature))
+            if #available(iOS 17, *) {
+                setTypes.insert(HKQuantityType(.timeInDaylight))
+            }
             if #available(iOS 18, *) {
                 setTypes.insert(HKCategoryType(.sleepApneaEvent))
             }
@@ -478,6 +482,10 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
     
     private func healthKeyForiOS18(simple: HKSampleType) -> String {
 #if os(iOS)
+        if #available(iOS 17, *),
+           simple == HKObjectType.quantityType(forIdentifier: .timeInDaylight) {
+            return HeathDataKeys.timeInDaylight.rawValue
+        }
         if #available(iOS 18, *) {
             switch simple {
             case HKObjectType.categoryType(forIdentifier: .sleepApneaEvent):
@@ -532,6 +540,14 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         
         var data: Double? = nil
         // TO DO: chage to -> type.identifier
+        #if os(iOS)
+        if #available(iOS 17, *),
+           type == HKObjectType.quantityType(forIdentifier: .timeInDaylight) {
+            data = sample.quantity.doubleValue(for: .minute())
+            completion(data)
+            return
+        }
+        #endif
         switch type {
         case HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure),
             HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure):
