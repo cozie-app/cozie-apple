@@ -11,6 +11,20 @@ import Combine
 import WatchKit
 
 class WatchSurveyViewModel: NSObject, ObservableObject {
+    private static let appliedSnapshotKey = "CozieAppliedSettingsSnapshot"
+
+    override init() {
+        super.init()
+        // Restore a complete snapshot before exposing its individual fields.
+        if let snapshot = UserDefaults.standard.dictionary(forKey: Self.appliedSnapshotKey) {
+            _ = applySettings(snapshot, restoring: true)
+        }
+        if WCSession.isSupported() {
+            session.delegate = self
+            session.activate()
+        }
+    }
+
     // Uncomment for preview tests
     /*static var test = {
         let model = WatchSurveyViewModel()
@@ -276,14 +290,10 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     }
     
     // MARK: Public func
+    // The existing StateObject owns this receiver; connectivity starts in init.
     func prepareLocationAndConnectivityManager() {
         locationManager.updateLocation(completion: nil)
-        
-        if WCSession.isSupported(), !session.isReachable {
-            session.delegate = self
-            session.activate()
-            prepareWatchSurvey()
-        }
+        if state == .notsynced { prepareWatchSurvey() }
     }
     
     func selectedOption(for questionID: String) -> Int? {
@@ -426,7 +436,14 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
 
 extension WatchSurveyViewModel: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        debugPrint("activationState:\n \(activationState)")
+        DispatchQueue.main.async {
+            guard activationState == .activated else {
+                debugPrint("Watch settings session activation failed:", error as Any)
+                return
+            }
+            let context = session.receivedApplicationContext
+            if !context.isEmpty { self.receiveSettings(context) }
+        }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
@@ -440,8 +457,52 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             return
         }
         
-        replyHandler([CommunicationKeys.received.rawValue: true])
-        
+        DispatchQueue.main.async {
+            replyHandler(self.receiveSettings(message))
+        }
+    }
+
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        DispatchQueue.main.async { self.receiveSettings(applicationContext) }
+    }
+
+    @discardableResult
+    private func receiveSettings(_ message: [String: Any]) -> [String: Any] {
+        // Keep the latest successful reverse context when a stale delivery arrives.
+        if let saved = UserDefaults.standard.dictionary(forKey: Self.appliedSnapshotKey),
+           let savedTime = saved[CommunicationKeys.settingsTimestamp.rawValue] as? Double,
+           let incomingTime = message[CommunicationKeys.settingsTimestamp.rawValue] as? Double,
+           incomingTime < savedTime,
+           let savedRevision = saved[CommunicationKeys.settingsRevision.rawValue] as? String {
+            return [CommunicationKeys.received.rawValue: true,
+                    CommunicationKeys.settingsRevision.rawValue: savedRevision]
+        }
+        let success = applySettings(message)
+        var acknowledgement: [String: Any] = [CommunicationKeys.received.rawValue: success]
+        if let revision = message[CommunicationKeys.settingsRevision.rawValue] as? String {
+            acknowledgement[CommunicationKeys.settingsRevision.rawValue] = revision
+            // Persist the acknowledgement in the reverse background context too.
+            do { try session.updateApplicationContext(acknowledgement) }
+            catch { debugPrint("Settings acknowledgement failed:", error) }
+        }
+        return acknowledgement
+    }
+
+    private func applySettings(_ message: [String: Any], restoring: Bool = false) -> Bool {
+        guard SettingsSyncPayload.isValid(message) else { return false }
+        let saved = UserDefaults.standard.dictionary(forKey: Self.appliedSnapshotKey)
+        if let revision = message[CommunicationKeys.settingsRevision.rawValue] as? String,
+           let timestamp = message[CommunicationKeys.settingsTimestamp.rawValue] as? Double {
+            let savedRevision = saved?[CommunicationKeys.settingsRevision.rawValue] as? String
+            let savedTimestamp = saved?[CommunicationKeys.settingsTimestamp.rawValue] as? Double ?? 0
+            // Immediate messages and background contexts can arrive in either order.
+            if revision != savedRevision && timestamp <= savedTimestamp { return false }
+            if !restoring && revision == savedRevision && storage.dataSynced() { return true }
+        } else if saved?[CommunicationKeys.settingsRevision.rawValue] != nil {
+            // Do not let an old unversioned message overwrite a versioned snapshot.
+            return false
+        }
+        UserDefaults.standard.set(message, forKey: Self.appliedSnapshotKey)
         if let json = message[CommunicationKeys.jsonKey.rawValue] as? Data {
             storage.saveWatchSurveyJSON(data: json)
         }
@@ -485,13 +546,11 @@ extension WatchSurveyViewModel: WCSessionDelegate {
             storage.saveHealthMaxCutoffTimeInterval(maxTimeInterval)
         }
         
-        transferLoggFile()
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.prepareWatchSurvey()
-        }
+        if !restoring { prepareWatchSurvey() }
+        if session.activationState == .activated { transferLoggFile() }
+        return storage.dataSynced()
     }
-    
+
     func transferLoggFile() {
         let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         

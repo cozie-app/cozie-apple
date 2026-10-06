@@ -80,34 +80,40 @@ class SettingViewModel: ObservableObject {
     
     // MARK: System Logs
     func sendInfo(completion: ((_ success: Bool)->())?) {
-        if !loading, let user = userInteractor.currentUser {
-            // reset images for watch sync status
-            resetSyncInfo()
-            
-            loading = true
-            // post setting data
-            settingsInteractor.logSettingsData(name: user.participantID ?? "",
-                                               experiment: user.experimentID ?? "",
-                                               logs: logsSystemInteractor.logsData(), completion: nil)
-            
-            // sync with watch
-            syncWatchData { [weak self] error in
-                DispatchQueue.main.async {
-                    // show error when clock synchronisation fails
-                    if let error = error {
-                        self?.errorString = error.localizedDescription
-                        completion?(false)
-                    }
-                    
-                    self?.loading = false
-                }
-            }
-            
-            // send health data
-            healthKitInteractor.sendData(trigger: CommunicationKeys.syncSettingsTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
+        guard !loading else { return }
+        guard let user = userInteractor.currentUser else {
+            errorString = WatchConnectivityManagerPhone.WatchConnectivityManagerError.invalidSettings.localizedDescription
+            completion?(false)
+            return
         }
+        // reset images for watch sync status
+        resetSyncInfo()
+
+        loading = true
+        // post setting data
+        settingsInteractor.logSettingsData(name: user.participantID ?? "",
+                                           experiment: user.experimentID ?? "",
+                                           logs: logsSystemInteractor.logsData(), completion: nil)
+
+        // sync with watch
+        syncWatchData { [weak self] error in
+            DispatchQueue.main.async {
+                // show error when clock synchronisation fails
+                if let error = error {
+                    self?.errorString = error.localizedDescription
+                    completion?(false)
+                } else {
+                    completion?(true)
+                }
+
+                self?.loading = false
+            }
+        }
+
+        // send health data
+        healthKitInteractor.sendData(trigger: CommunicationKeys.syncSettingsTrigger.rawValue, timeout: HealthKitInteractor.minInterval, completion: nil)
     }
-    
+
     // MARK: User info
     func getUserInfo() {
         if let user = userInteractor.currentUser {
@@ -555,6 +561,8 @@ class SettingViewModel: ObservableObject {
                                     completion?(nil)
                                 }
                             }
+                        } else {
+                            completion?(WatchConnectivityManagerPhone.WatchConnectivityManagerError.invalidSettings)
                         }
                         
                     } catch let error {
