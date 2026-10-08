@@ -72,6 +72,7 @@ public enum WatchSurveyKeys: String {
     case actionButtonKey = "action_button_pressed"
     case transmitTriggerPushValue = "push_notification_action_button"
     case appVersion = "app_bundle_build_version"
+    case timeZone = "si_time_zone"
 }
 
 public enum LocationChangedKey: String {
