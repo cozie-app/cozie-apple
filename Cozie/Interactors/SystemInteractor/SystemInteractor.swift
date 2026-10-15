@@ -9,7 +9,7 @@ import UIKit
 
 let emptyTag = Tags(idOnesignal: "", idParticipant: "", idPassword: "")
 
-let emptyFields = Fields(wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
+let emptyFields = Fields(cutoffTime: 0.0, distanceFilter: 0.0, wssGoal: 0, wssTitle: "", wssTimeOut: 0, wssReminderEnabled: false, wssReminderInterval: 0, wssParticipationDays: "", wssParticipationTimeStart: "", wssParticipationTimeEnd: "", apiReadUrl: "", apiReadKey: "", apiWriteUrl: "", apiWriteKey: "", pssReminderEnabled: false, pssReminderTime: "", pssReminderDays: "", siIosVersion: "", siWatchosVersion: "", siIphoneModel: "", siWatchModel: "", siIphoneDeviceID: "", siWatchDeviceID: "", siIphoneBatteryChargeState: 0, siWatchBatteryChargeState: 0, siIphoneWifiSignalStrength: "", siWatchWifiSignalStrength: "", siIphoneCellularSignalStrength: "", siWatchCellularSignalStrength: "", siIphoneLocationServiceEnabled: false, siWatchLocationServiceEnabled: false, siIphoneLowBatteryModeEnabled: false, siWatchConnectedToPhone: false, appBundleName: "", appBundleBuildVersion: "", appBundleBuildNumber: "", appOneSignalAppID: "", apiPhoneSurveyURL: "", apiWatchSurveyURL: "", transmitTrigger: "")
 
 let testLog = Logs(time: "2023-01-01T07:02:51.578Z", measurement: "dev", tags: emptyTag, fields: emptyFields)
 // TODO: - Unit Tests
@@ -21,7 +21,10 @@ final class LogsSystemInteractor {
     func logsData() -> Logs {
         guard let user = userInteractor.currentUser, let settings = settingsInteractor.currentSettings, let backend = backendInteractor.currentBackendSettings else { return testLog }
         let tag = Tags(idOnesignal: CozieStorage.shared.playerID(), idParticipant: user.participantID ?? "", idPassword: user.passwordID ?? "")
-        let fields = Fields(wssGoal: Int(settings.wss_goal),
+        let fields = Fields(
+                            cutoffTime: CozieStorage.shared.maxHealthCutoffTimeInterval(),
+                            distanceFilter: Double(CozieStorage.shared.distanceFilter()),
+                             wssGoal: Int(settings.wss_goal),
                              wssTitle: settings.wss_title ?? "",
                              wssTimeOut: Int(settings.wss_time_out),
                              wssReminderEnabled: settings.wss_reminder_enabled,
@@ -97,6 +100,9 @@ class Fields: Codable {
     var appBundleName, appBundleBuildVersion, appBundleBuildNumber, appOneSignalAppID: String
     var apiPhoneSurveyURL, apiWatchSurveyURL: String
     var transmitTrigger: String
+    
+    var cutoffTime: Double
+    var distanceFilter: Double
 
     enum CodingKeys: String, CodingKey {
         case wssGoal = "wss_goal"
@@ -137,9 +143,13 @@ class Fields: Codable {
         case apiPhoneSurveyURL = "api_phone_survey_url"
         case apiWatchSurveyURL = "api_watch_survey_url"
         case transmitTrigger = "transmit_trigger"
+        case cutoffTime = "cutoff_time"
+        case distanceFilter = "distance_filter"
     }
 
-    init(wssGoal: Int, wssTitle: String, wssTimeOut: Int, wssReminderEnabled: Bool, wssReminderInterval: Int, wssParticipationDays: String, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, apiReadUrl: String, apiReadKey: String, apiWriteUrl: String, apiWriteKey: String, pssReminderEnabled: Bool, pssReminderTime: String, pssReminderDays: String, siIosVersion: String, siWatchosVersion: String, siIphoneModel: String, siWatchModel: String, siIphoneDeviceID: String, siWatchDeviceID: String, siIphoneBatteryChargeState: Int, siWatchBatteryChargeState: Int, siIphoneWifiSignalStrength: String, siWatchWifiSignalStrength: String, siIphoneCellularSignalStrength: String, siWatchCellularSignalStrength: String, siIphoneLocationServiceEnabled: Bool, siWatchLocationServiceEnabled: Bool, siIphoneLowBatteryModeEnabled: Bool, siWatchConnectedToPhone: Bool, appBundleName: String, appBundleBuildVersion: String, appBundleBuildNumber: String, appOneSignalAppID: String, apiPhoneSurveyURL: String, apiWatchSurveyURL: String, transmitTrigger: String) {
+    init(cutoffTime: Double, distanceFilter: Double, wssGoal: Int, wssTitle: String, wssTimeOut: Int, wssReminderEnabled: Bool, wssReminderInterval: Int, wssParticipationDays: String, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, apiReadUrl: String, apiReadKey: String, apiWriteUrl: String, apiWriteKey: String, pssReminderEnabled: Bool, pssReminderTime: String, pssReminderDays: String, siIosVersion: String, siWatchosVersion: String, siIphoneModel: String, siWatchModel: String, siIphoneDeviceID: String, siWatchDeviceID: String, siIphoneBatteryChargeState: Int, siWatchBatteryChargeState: Int, siIphoneWifiSignalStrength: String, siWatchWifiSignalStrength: String, siIphoneCellularSignalStrength: String, siWatchCellularSignalStrength: String, siIphoneLocationServiceEnabled: Bool, siWatchLocationServiceEnabled: Bool, siIphoneLowBatteryModeEnabled: Bool, siWatchConnectedToPhone: Bool, appBundleName: String, appBundleBuildVersion: String, appBundleBuildNumber: String, appOneSignalAppID: String, apiPhoneSurveyURL: String, apiWatchSurveyURL: String, transmitTrigger: String) {
+        self.cutoffTime = cutoffTime
+        self.distanceFilter = distanceFilter
         self.wssGoal = wssGoal
         self.wssTitle = wssTitle
         self.wssTimeOut = wssTimeOut
