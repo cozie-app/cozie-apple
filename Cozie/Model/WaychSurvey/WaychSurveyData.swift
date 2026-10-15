@@ -82,12 +82,14 @@ class ResponseOption: Codable, Identifiable {
     let uuid = UUID()
     
     var text, icon, iconBackgroundColor: String
+    var iconURL: String?
     var useSfSymbols: Bool
     var sfSymbolsColor, nextQuestionID: String
     var exclusive: Bool
 
     enum CodingKeys: String, CodingKey {
         case text, icon
+        case iconURL = "icon_url"
         case iconBackgroundColor = "icon_background_color"
         case useSfSymbols = "use_sf_symbols"
         case sfSymbolsColor = "sf_symbols_color"
@@ -95,9 +97,10 @@ class ResponseOption: Codable, Identifiable {
         case exclusive
     }
 
-    init(text: String, icon: String, iconBackgroundColor:String, useSfSymbols: Bool, sfSymbolsColor: String, nextQuestionID: String, exclusive: Bool = false) {
+    init(text: String, icon: String, iconBackgroundColor:String, useSfSymbols: Bool, sfSymbolsColor: String, nextQuestionID: String, exclusive: Bool = false, iconURL: String? = nil) {
         self.text = text
         self.icon = icon
+        self.iconURL = iconURL
         self.iconBackgroundColor = iconBackgroundColor
         self.useSfSymbols = useSfSymbols
         self.sfSymbolsColor = sfSymbolsColor
@@ -109,6 +112,7 @@ class ResponseOption: Codable, Identifiable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         text = try values.decode(String.self, forKey: .text)
         icon = try values.decode(String.self, forKey: .icon)
+        iconURL = try values.decodeIfPresent(String.self, forKey: .iconURL)
         iconBackgroundColor = try values.decode(String.self, forKey: .iconBackgroundColor)
         useSfSymbols = try values.decode(Bool.self, forKey: .useSfSymbols)
         sfSymbolsColor = try values.decode(String.self, forKey: .sfSymbolsColor)

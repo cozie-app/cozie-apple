@@ -39,35 +39,7 @@ struct QuestionsView: View {
                             ForEach(viewModel.questionsList, id: \.id) { option in
                                 HStack {
                                     
-                                    ZStack {
-                                        if option.icon != "" {
-                                            // Only show background if icon name string is not empty
-                                            Image(systemName: "circle.fill")
-                                                .resizable()
-                                                .frame(width: 35, height: 35)
-                                                .foregroundColor(Color(hex: option.iconBackgroundColor))
-                                        }
-                                        if option.useSfSymbols {
-                                            if UIImage(systemName: option.icon) == nil {
-                                                Image(systemName: "photo.circle")
-                                                    .resizable()
-                                                    .frame(width: 35,height: 35)
-                                                    .foregroundColor(.black)
-                                            } else {
-                                                Image(systemName: option.icon)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width:25, height: 25)
-                                                    .foregroundColor(Color(hex: option.sfSymbolsColor))
-                                            }
-                                        } else {
-                                            if UIImage(named: option.icon) != nil {
-                                                Image(option.icon)
-                                                    .resizable()
-                                                    .frame(width: 35,height: 35)
-                                            }
-                                        }
-                                    }
+                                    SurveyOptionIconView(option: option)
                                     
                                     Button {
                                         Task {
@@ -181,10 +153,85 @@ struct QuestionsView: View {
     }
 }
 
+private struct SurveyOptionIconView: View {
+    let option: ResponseOption
+
+    @State private var remoteImage: UIImage?
+
+    var body: some View {
+        Group {
+            if let remoteImage {
+                ZStack {
+                    if !option.iconBackgroundColor.isEmpty {
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(Color(hex: option.iconBackgroundColor))
+                    }
+
+                    Image(uiImage: remoteImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 35, height: 35)
+                }
+            } else {
+                fallbackIcon
+            }
+        }
+        .task(id: option.iconURL) {
+            await loadRemoteImage()
+        }
+    }
+
+    @ViewBuilder
+    private var fallbackIcon: some View {
+        ZStack {
+            if !option.icon.isEmpty {
+                // Only show background if icon name string is not empty
+                Image(systemName: "circle.fill")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+                    .foregroundColor(Color(hex: option.iconBackgroundColor))
+            }
+
+            if option.useSfSymbols {
+                if UIImage(systemName: option.icon) == nil {
+                    Image(systemName: "photo.circle")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(.black)
+                } else {
+                    Image(systemName: option.icon)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(Color(hex: option.sfSymbolsColor))
+                }
+            } else if UIImage(named: option.icon) != nil {
+                Image(option.icon)
+                    .resizable()
+                    .frame(width: 35, height: 35)
+            }
+        }
+    }
+
+    @MainActor
+    private func loadRemoteImage() async {
+        remoteImage = nil
+
+        guard let iconURL = option.iconURL?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !iconURL.isEmpty else {
+            return
+        }
+
+        remoteImage = try? await SurveyIconLoader.shared.image(from: iconURL)
+    }
+}
+
 struct QuestionsView_Previews: PreviewProvider {
     static var previews: some View {
         QuestionsView()
-            .environmentObject(WatchSurveyViewModel()/*WatchSurveyViewModel.test*/)
+            .environmentObject(WatchSurveyViewModel.preview)
     }
 }
 

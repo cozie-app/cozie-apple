@@ -11,16 +11,32 @@ import Combine
 import WatchKit
 
 class WatchSurveyViewModel: NSObject, ObservableObject {
-    // Uncomment for preview tests
-    /*static var test = {
+    #if DEBUG
+    static var preview: WatchSurveyViewModel = {
         let model = WatchSurveyViewModel()
-        model.questionsTitle = "Currently, the end of watch survey questions might not shown depending on the Apple Watch model and font size settings in watchOS. We would like to make the following changes"
-        model.questionsList = [ResponseOption(text: "Test 1", icon: "12", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
-                               ResponseOption(text: "Test 2 sdfsdf sd fsd fsd fsdf sdf sdf sdf sdf sdf sdf sdf sdf sd fs dfsd fsd", icon: "23", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
-                               ResponseOption(text: "Test 3", icon: "34", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: ""),
-                               ResponseOption(text: "Test 4", icon: "45", iconBackgroundColor: "", useSfSymbols: true, sfSymbolsColor: "", nextQuestionID: "")]
+        model.questionsTitle = "Where are you testing this survey?"
+        model.questionsList = [
+            ResponseOption(
+                text: "Home — remote icon",
+                icon: "exclamationmark",
+                iconBackgroundColor: "#F1A62E",
+                useSfSymbols: true,
+                sfSymbolsColor: "#000000",
+                nextQuestionID: "",
+                iconURL: "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Cozie%20Watch%20App/Assets.xcassets/WatchSurvey/building_house.imageset/building_house.png"
+            ),
+            ResponseOption(
+                text: "Office — existing icon",
+                icon: "building_office",
+                iconBackgroundColor: "#F1A62E",
+                useSfSymbols: false,
+                sfSymbolsColor: "#000000",
+                nextQuestionID: ""
+            )
+        ]
         return model
-    }()*/
+    }()
+    #endif
     
     enum CozieAppState: Int {
         case notsynced, synced, /*timeout,*/ sendData, finished

@@ -21,6 +21,10 @@ final class PersistenceControllerTest {
 
         let posList  = try storage.container.viewContext.fetch(request)
         #expect(!posList.isEmpty)
+
+        let storedSurvey = try #require(try storage.externalWatchSurvey()?.toModel())
+        let firstOption = try #require(storedSurvey.survey.first?.responseOptions.first)
+        #expect(firstOption.iconURL == "https://example.com/icons/snowflake.png")
     }
 
     @Test("Test extended survey schema persistence") func testSaveExtendedSurveySchema() async throws {

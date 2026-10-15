@@ -9,6 +9,7 @@
         {
           "text": "Home",
           "icon": "building_house",
+          "icon_url": "https://raw.githubusercontent.com/cozie-app/cozie-apple/master/Cozie%20Watch%20App/Assets.xcassets/WatchSurvey/building_house.imageset/building_house.png",
           "icon_background_color": "#F1A62E",
           "use_sf_symbols": false,
           "sf_symbols_color": "#000000",

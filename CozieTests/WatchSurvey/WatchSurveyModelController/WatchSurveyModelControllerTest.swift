@@ -25,6 +25,8 @@ final class WatchSurveyModelControllerTest {
         #expect(firstQuestion.questionType == .singleSelect)
         #expect(firstQuestion.nextQuestionID == nil)
         #expect(!firstOption.exclusive)
+        #expect(firstOption.iconURL == "https://example.com/icons/snowflake.png")
+        #expect(firstQuestion.responseOptions[1].iconURL == nil)
     }
 
     @Test func parseExtendedWatchSurveySchema() throws {
@@ -58,6 +60,7 @@ struct TestSurveyData {
               "response_options": [{
                   "text": "Cooler",
                   "icon": "snowflake",
+                  "icon_url": "https://example.com/icons/snowflake.png",
                   "icon_background_color": "#F1A62E",
                   "use_sf_symbols": false,
                   "sf_symbols_color": "#000000",

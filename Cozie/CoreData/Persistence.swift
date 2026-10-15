@@ -179,6 +179,7 @@ extension PersistenceController: DataBaseStorageProtocol {
                         responseOptionData.nextQuestionID = respObj.nextQuestionID
                         responseOptionData.icon = respObj.icon
                         responseOptionData.iconBackgroundColor = respObj.iconBackgroundColor
+                        responseOptionData.iconURL = respObj.iconURL
                         responseOptionData.useSfSymbols = respObj.useSfSymbols
                         responseOptionData.sfSymbolsColor = respObj.sfSymbolsColor
                         responseOptionData.exclusive = respObj.exclusive

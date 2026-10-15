@@ -18,6 +18,7 @@ extension ResponseOptionData {
 
     @NSManaged public var icon: String?
     @NSManaged public var iconBackgroundColor: String?
+    @NSManaged public var iconURL: String?
     @NSManaged public var nextQuestionID: String?
     @NSManaged public var sfSymbolsColor: String?
     @NSManaged public var text: String?
@@ -36,7 +37,8 @@ extension ResponseOptionData : Identifiable {
                                             useSfSymbols: self.useSfSymbols,
                                             sfSymbolsColor: self.sfSymbolsColor ?? "",
                                             nextQuestionID: self.nextQuestionID ?? "",
-                                            exclusive: self.exclusive)
+                                            exclusive: self.exclusive,
+                                            iconURL: self.iconURL)
         return responseOption
     }
 }

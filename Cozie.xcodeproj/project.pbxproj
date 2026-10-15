@@ -83,6 +83,7 @@
 		CA2EE93129EFE38100590527 /* CommunicationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE92F29EFE36E00590527 /* CommunicationKeys.swift */; };
 		CA2EE93C29F1152C00590527 /* ThankYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE93B29F1152B00590527 /* ThankYouView.swift */; };
 		CA2EE93E29F1157400590527 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE93D29F1157400590527 /* QuestionsView.swift */; };
+		A10900000000000000000002 /* SurveyIconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10900000000000000000001 /* SurveyIconLoader.swift */; };
 		CA2EE94029F12F5100590527 /* TimeOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE93F29F12F5100590527 /* TimeOutView.swift */; };
 		CA2EE94229F1391300590527 /* TimeOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EE94129F1391300590527 /* TimeOutViewModel.swift */; };
 		CA2EE94329F151CC00590527 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92524F9029CC6A2C00074A09 /* BaseRepository.swift */; };
@@ -318,6 +319,7 @@
 		CA2EE92F29EFE36E00590527 /* CommunicationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationKeys.swift; sourceTree = "<group>"; };
 		CA2EE93B29F1152B00590527 /* ThankYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouView.swift; sourceTree = "<group>"; };
 		CA2EE93D29F1157400590527 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
+		A10900000000000000000001 /* SurveyIconLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyIconLoader.swift; sourceTree = "<group>"; };
 		CA2EE93F29F12F5100590527 /* TimeOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOutView.swift; sourceTree = "<group>"; };
 		CA2EE94129F1391300590527 /* TimeOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOutViewModel.swift; sourceTree = "<group>"; };
 		CA2EE94429F1531700590527 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -942,6 +944,7 @@
 		CA2EE92A29EEF31C00590527 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A10900000000000000000001 /* SurveyIconLoader.swift */,
 				CA2EE94429F1531700590527 /* LocationManager.swift */,
 				CA2EE94929F1862400590527 /* StorageManager.swift */,
 			);
@@ -1700,6 +1703,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10900000000000000000002 /* SurveyIconLoader.swift in Sources */,
 				CA4EBE4D2A0255DF00D096AD /* NotificationController.swift in Sources */,
 				CA2EE92629EED2F400590527 /* WaychSurveyData.swift in Sources */,
 				CA7F0A9C2D6B2D45000DE90F /* GroupCommon.swift in Sources */,

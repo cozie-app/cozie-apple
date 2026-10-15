@@ -17,6 +17,7 @@
         <attribute name="exclusive" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="iconBackgroundColor" optional="YES" attributeType="String"/>
+        <attribute name="iconURL" optional="YES" attributeType="String"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="nextQuestionID" attributeType="String" defaultValueString=""/>
         <attribute name="sfSymbolsColor" optional="YES" attributeType="String"/>
