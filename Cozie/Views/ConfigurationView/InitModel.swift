@@ -24,6 +24,8 @@ class InitModel: Codable {
     var apiPhoneSurveyURL: String?
     var cutoffTime: Double?
     var distanceFilter: Double?
+    var locationTimeout: Double?
+    var waitForAccurateLocation: Bool?
     
     enum CodingKeys: String, CodingKey {
         case idParticipant = "id_participant"
@@ -48,9 +50,11 @@ class InitModel: Codable {
         case apiPhoneSurveyURL = "api_phone_survey_url"
         case cutoffTime = "cutoff_time"
         case distanceFilter = "distance_filter"
+        case locationTimeout = "location_timeout"
+        case waitForAccurateLocation = "wait_for_accurate_location"
     }
     
-    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String, cutoffTime: Double, distanceFilter: Double) {
+    init(idParticipant: String, idExperiment: String, wssTitle: String, wssGoal: Int16, wssTimeOut: Int16, wssReminderEnabled: Bool, wssParticipationTimeStart: String, wssParticipationTimeEnd: String, wssParticipationDays: String, wssReminderInterval: Int16, pssReminderEnabled: Bool, pssReminderDays: String, pssReminderTime: String, apiReadURL: String, apiReadKey: String, apiWriteURL: String, apiWriteKey: String, appOneSignalAppID: String, idPassword: String, apiWatchSurveyURL: String, apiPhoneSurveyURL: String, cutoffTime: Double, distanceFilter: Double, locationTimeout: Double? = nil, waitForAccurateLocation: Bool? = nil) {
         self.idParticipant = idParticipant
         self.idExperiment = idExperiment
         self.wssTitle = wssTitle
@@ -73,5 +77,7 @@ class InitModel: Codable {
         self.apiPhoneSurveyURL = apiPhoneSurveyURL
         self.cutoffTime = cutoffTime
         self.distanceFilter = distanceFilter
+        self.locationTimeout = locationTimeout
+        self.waitForAccurateLocation = waitForAccurateLocation
     }
 }

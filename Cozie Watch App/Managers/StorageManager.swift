@@ -25,6 +25,8 @@ class StorageManager: CozieStorageProtocol {
         case savedSurveyCount = "CozieSavedSurveyCount"
         case notSyncedSurvey = "CozieNotSyncedSurvey"
         case healthMaxCutoffTimeIntervalKey = "CozieHealthMaxCutoffTimeIntervalKey"
+        case locationTimeoutKey = "CozieLocationTimeoutKey"
+        case waitForAccurateLocationKey = "CozieWaitForAccurateLocationKey"
         
         // Storage postfix
         case storagePostfixTime = "_wstorage_time"
@@ -127,6 +129,23 @@ class StorageManager: CozieStorageProtocol {
     
     func healthMaxCutoffTimeInterval() -> Double {
         return (UserDefaults.standard.value(forKey: Keys.healthMaxCutoffTimeIntervalKey.rawValue) as? Double) ?? 0
+    }
+    
+    // MARK: Location timeout / wait-for-accurate-location (synced from phone)
+    func saveLocationTimeout(_ timeout: Double) {
+        UserDefaults.standard.set(timeout, forKey: Keys.locationTimeoutKey.rawValue)
+    }
+    
+    func locationTimeout() -> Double {
+        return (UserDefaults.standard.value(forKey: Keys.locationTimeoutKey.rawValue) as? Double) ?? 5.0
+    }
+    
+    func saveWaitForAccurateLocation(_ wait: Bool) {
+        UserDefaults.standard.set(wait, forKey: Keys.waitForAccurateLocationKey.rawValue)
+    }
+    
+    func waitForAccurateLocation() -> Bool {
+        return (UserDefaults.standard.value(forKey: Keys.waitForAccurateLocationKey.rawValue) as? Bool) ?? true
     }
     
     // MARK: Save survey logs

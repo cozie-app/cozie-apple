@@ -539,7 +539,7 @@ class SettingViewModel: ObservableObject {
                         
                         if let survey = selectedWS?.toModel(), let backend = self.backendInteractor.currentBackendSettings, let user = self.userInteractor.currentUser, let settings = self.settingsInteractor.currentSettings  {
                             let json = try JSONEncoder().encode(survey)
-                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: self.udStorage.playerID(), timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: CozieStorage.shared.maxHealthCutOffInterval()) { error in
+                            self.comManager.sendAll(data: json, writeApiURL: backend.api_write_url ?? "", writeApiKey: backend.api_write_key ?? "", userID: user.participantID ?? "", expID: user.experimentID ?? "", password: user.passwordID ?? "", userOneSignalID: self.udStorage.playerID(), timeInterval: Int(settings.wss_time_out), healthCutoffTimeInterval: CozieStorage.shared.maxHealthCutOffInterval(), locationTimeout: CozieStorage.shared.locationTimeout(), waitForAccurateLocation: CozieStorage.shared.waitForAccurateLocation()) { error in
                                 DispatchQueue.main.async { [weak self] in
                                     
                                     // trigger an error alert

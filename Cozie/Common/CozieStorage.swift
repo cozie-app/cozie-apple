@@ -17,6 +17,10 @@ protocol WSStorageProtocol {
     func saveMaxHealthCutoffTimeInterval(_ interval: Double)
     func setDistanceFilter(_ distance: Float)
     func distanceFilter() -> Float
+    func setLocationTimeout(_ timeout: Double)
+    func locationTimeout() -> Double
+    func setWaitForAccurateLocation(_ wait: Bool)
+    func waitForAccurateLocation() -> Bool
 }
 
 protocol WSStateStorageProtocol {
@@ -78,6 +82,8 @@ class CozieStorage: UserDefaultsStorageProtocol {
         case firstLaunchTimeInterval = "firstLaunchTimeInterval"
         case maxHealthCutoffTime = "healthCutoffTimeTimeInterval"
         case distanceFilterKey = "distanceFilter"
+        case locationTimeoutKey = "locationTimeout"
+        case waitForAccurateLocationKey = "waitForAccurateLocation"
     }
     
     static let shared = CozieStorage()
@@ -92,6 +98,22 @@ class CozieStorage: UserDefaultsStorageProtocol {
     /// Use this function to get distance filter.
     func distanceFilter() -> Float {
         UserDefaults.standard.value(forKey: CozieStorageKeys.distanceFilterKey.rawValue) as? Float ?? 100.0
+    }
+    
+    func setLocationTimeout(_ timeout: Double) {
+        UserDefaults.standard.set(timeout, forKey: CozieStorageKeys.locationTimeoutKey.rawValue)
+    }
+
+    func locationTimeout() -> Double {
+        UserDefaults.standard.value(forKey: CozieStorageKeys.locationTimeoutKey.rawValue) as? Double ?? 5.0
+    }
+
+    func setWaitForAccurateLocation(_ wait: Bool) {
+        UserDefaults.standard.set(wait, forKey: CozieStorageKeys.waitForAccurateLocationKey.rawValue)
+    }
+
+    func waitForAccurateLocation() -> Bool {
+        UserDefaults.standard.value(forKey: CozieStorageKeys.waitForAccurateLocationKey.rawValue) as? Bool ?? true
     }
     
     

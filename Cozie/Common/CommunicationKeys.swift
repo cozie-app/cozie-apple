@@ -42,6 +42,8 @@ public enum CommunicationKeys: String {
     
     case transferFileStatusKey = "transfer_file_status"
     case healthCutoffTimeInterval = "health_cutoff_time_interval"
+    case locationTimeout = "location_timeout"
+    case waitForAccurateLocation = "wait_for_accurate_location"
 }
 
 public enum FileTransferStatus: Int {
@@ -63,6 +65,8 @@ public enum WatchSurveyKeys: String {
     case wsLocationAccuracyVertical = "ws_location_accuracy_vertical"
     case wsLocationAcquisitionMethod = "ws_location_acquisition_method"
     case wsLocationSourceDevice = "ws_location_source_device"
+    case wsLocationTimeout = "ws_location_timeout"
+    case wsWaitForAccurateLocation = "ws_wait_for_accurate_location"
     case transmitTrigger = "transmit_trigger"
     case postTime = "time"
     case measurement = "measurement"

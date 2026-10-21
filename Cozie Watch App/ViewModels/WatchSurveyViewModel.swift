@@ -34,6 +34,8 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
     private let session = WCSession.default
     private let storage = StorageManager.shared
     private let locationManager: UpdateLocationProtocol = LocationManager()
+    private let prefetchedLocationMaxAge: TimeInterval = 60
+    private let prefetchedLocationMaxAccuracy: Double = 100
     private let watchSurveyInteractor = WatchSurveyInteractor()
     
     private var selectedOptions: [(sID: String, option: ResponseOption)] = []
@@ -103,15 +105,11 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         if !storage.dataSynced() {
             state = .notsynced
         } else {
-            //            let lastUpdateInSeconds = Int(Date().timeIntervalSince1970) - storage.lastSurveySendInterval()
-            //            let timeInterval = storage.timeInterval()
-            //            if storage.lastSurveySendInterval() > 0, timeInterval > 0, (lastUpdateInSconds - timeInterval) < 0 {
-            //                state = .timeout
-            //
-            //            } else {
             state = .synced
             startTime = Date()
             syncSurvey()
+            
+            prefetchLocation()
             
             cacheHealthState.send(.inprogress)
             watchSurveyInteractor.healthDataPreload(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue) { [weak self] models in
@@ -121,38 +119,11 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
                 }
             }
             
-            // Uncomment for test
-//            Task {
-//                try await Task.sleep(nanoseconds: 10_000_000_000)
-//                self.healthCache = []
-//                self.cacheHealthState.send(.finished)
-//            }
-            
-            // Uncomment to test
-//            let defaultURLJSON = Bundle.main.url(forResource: "DefaultWSJSON", withExtension: "json")
-            /*if let url = defaultURLJSON {
-                do {
-                    let data = try Data(contentsOf: url)
-                    let wSurvey = try JSONDecoder().decode(WatchSurveyModelController.self, from: data)
-                    if let question = wSurvey.survey.first(where: { $0.questionID == (wSurvey.firstQuestionID ?? "failed") }) {
-                        // questionID has a side effect of questionsTitle !!!
-                        questionID = question.questionID
-                        
-                        questionsList = question.responseOptions
-                        questionsTitle = question.question
-                        currentSurvey = question
-                    }
-                } catch let error {
-                    debugPrint(error.localizedDescription)
-                }
-            }*/
-            
             if let json = StorageManager.shared.watchSurveyJSON() {
                 loadWatchSurvey(data: json)
             } else {
                 fatalError("Incorrect State!!!")
             }
-            //            }
         }
     }
     
@@ -363,9 +334,49 @@ class WatchSurveyViewModel: NSObject, ObservableObject {
         }
     }
     
+    func prefetchLocation() {
+        locationManager.updateLocation { }
+    }
+
+    // The location request is started when the survey is prepared (prefetchLocation()),
+    // so it can complete while the participant is answering.
+    // On submit:
+    // - If "wait for accurate location" is OFF, submit immediately with the current location.
+    // - If a prefetched location is fresh (< 60s) and accurate (<= 100m), use it immediately.
+    // - Otherwise, request a new location and wait up to the configured timeout,
+    //   then fall back to the best available location so submission is never blocked.
     func sendWatchSurvey() {
         sendSurveyProgress = true
-        sendSurvey()
+        
+        var didProceed = false
+        let proceed: () -> Void = { [weak self] in
+            guard !didProceed else { return }
+            didProceed = true
+            self?.sendSurvey()
+        }
+
+        // Setting OFF: don't wait for a new location, submit with what is available
+        if !storage.waitForAccurateLocation() {
+            proceed()
+            return
+        }
+
+        if let location = locationManager.currentLocation,
+           Date().timeIntervalSince(location.timestamp) < prefetchedLocationMaxAge,
+           location.horizontalAccuracy >= 0,
+           location.horizontalAccuracy <= prefetchedLocationMaxAccuracy {
+            proceed()
+            return
+        }
+        
+      
+        locationManager.updateLocation {
+            proceed()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + storage.locationTimeout()) {
+            proceed()
+        }
     }
     
     func backAction() {
@@ -483,6 +494,14 @@ extension WatchSurveyViewModel: WCSessionDelegate {
         
         if let maxTimeInterval = message[CommunicationKeys.healthCutoffTimeInterval.rawValue] as? Double {
             storage.saveHealthMaxCutoffTimeInterval(maxTimeInterval)
+        }
+        
+        if let locationTimeout = message[CommunicationKeys.locationTimeout.rawValue] as? Double {
+            storage.saveLocationTimeout(locationTimeout)
+        }
+        
+        if let waitForAccurateLocation = message[CommunicationKeys.waitForAccurateLocation.rawValue] as? Bool {
+            storage.saveWaitForAccurateLocation(waitForAccurateLocation)
         }
         
         transferLoggFile()
