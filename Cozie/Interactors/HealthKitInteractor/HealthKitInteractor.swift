@@ -7,6 +7,7 @@
 
 import Foundation
 import HealthKit
+import CryptoKit
 
 protocol HealthKitInteractorProtocol {
     func getAllRequestedData(trigger: String, completion: ((_ models: [HealthModel])->())?)
@@ -19,7 +20,7 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         case workout, sleep, apnea
     }
     
-    typealias HealthValue = (type: HealthValueType, key: String, startDate: Date, value: Double)
+    typealias HealthValue = (type: HealthValueType, key: String, startDate: Date, value: Double, device: HKDevice?, sourceId: String?)
     
     enum HeathDataKeys: String {
         case heartRateKey = "_heart_rate"
@@ -208,6 +209,7 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
             print(TimeInterval(lastSync))
         }
         
+        
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
                                               ascending: false)
         
@@ -240,8 +242,8 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                 }
                 var apneaSamples: [HealthValue] = []
                 apneaEventSamples.forEach { sample in
-                    apneaSamples.append((.apnea, HeathDataKeys.apneaEvent.rawValue, sample.startDate, sample.startDate.distance(to: sample.endDate)/60))
-                }
+                    apneaSamples.append((.apnea, HeathDataKeys.apneaEvent.rawValue, sample.startDate, sample.startDate.distance(to: sample.endDate)/60, sample.device, sample.sourceRevision.source.bundleIdentifier))
+                    }
                 
                 completion([], apneaSamples, nil)
                 return
@@ -263,7 +265,7 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                             lastSyncInterval = lastInterval
                         }
                         if lastInterval > lastSync {
-                            sleepData.append((.sleep, sleepKey, sleepSample.startDate, sleepSample.startDate.distance(to: sleepSample.endDate)/60))
+                            sleepData.append((.sleep, sleepKey, sleepSample.startDate, sleepSample.startDate.distance(to: sleepSample.endDate)/60, sleepSample.device, sleepSample.sourceRevision.source.bundleIdentifier))
                         }
                     }
                 }
@@ -283,8 +285,8 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                             lastSyncInterval = lastInterval
                         }
                         if lastInterval > lastSync {
-                            workoutData.append((.workout, HeathDataKeys.workoutType.rawValue, sampleWorkout.startDate, Double(sampleWorkout.workoutActivityType.rawValue)))
-                            workoutData.append((.workout, HeathDataKeys.workoutDuration.rawValue, sampleWorkout.startDate, sampleWorkout.duration))
+                            workoutData.append((.workout, HeathDataKeys.workoutType.rawValue, sampleWorkout.startDate, Double(sampleWorkout.workoutActivityType.rawValue), sampleWorkout.device, sampleWorkout.sourceRevision.source.bundleIdentifier))
+                            workoutData.append((.workout, HeathDataKeys.workoutDuration.rawValue, sampleWorkout.startDate, sampleWorkout.duration, sampleWorkout.device, sampleWorkout.sourceRevision.source.bundleIdentifier))
                         }
                     }
                 }
@@ -343,6 +345,7 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                 return
             }
             
+            
             var healthModels: [HealthModel] = []
             
             if samples.count > 0 {
@@ -394,23 +397,23 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                     healthData.forEach { sample in
                         let customTrigger = self.addPrefixForDataKey(key: HeathDataKeys.apneaEventTrigger.rawValue)
                         
-                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: customTrigger, healthKey: self.addPrefixForDataKey(key: sample.key), healthValue: sample.value)))
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: sample.startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: customTrigger, healthKey: self.addPrefixForDataKey(key: sample.key, device: sample.device, sourceId: sample.sourceId), healthValue: sample.value)))
                     }
                     completion(healthModels, samples)
                     
                     // With units (steps, hr...)
                 } else if healthData.first?.type == .workout {
-                    healthData.forEach { (type, workoutKey, startDate, value) in
+                    healthData.forEach { (type, workoutKey, startDate, value, device, sourceId) in
                         if workoutKey == HeathDataKeys.workoutType.rawValue {
-                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: workoutKey), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
+                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: workoutKey, device: device, sourceId: sourceId), healthValue: value, healthStringValue: HKWorkoutActivityType(rawValue: UInt(value))?.name ?? "")))
                         } else {
-                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: workoutKey), healthValue: value)))
+                            healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: workoutKey, device: device, sourceId: sourceId), healthValue: value)))
                         }
                     }
                     completion(healthModels, samples)
                 } else if healthData.first?.type == .sleep {
-                    healthData.forEach { (type, sleepKey, startDate, value) in
-                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey), healthValue: value)))
+                    healthData.forEach { (type, sleepKey, startDate, value, device, sourceId) in
+                        healthModels.append(HealthModel(time: self.healthDateFormatter.string(from: startDate), measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: sleepKey, device: device, sourceId: sourceId), healthValue: value)))
                     }
                     completion(healthModels, samples)
                 }
@@ -424,12 +427,13 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
     }
     
     private func healthModel(type: HKSampleType, sample: HKQuantitySample, user: CUserInfo, tag: Tags, currentDataString: String, trigger: String, value: Double?) -> HealthModel {
+       
 
         if type == HKObjectType.quantityType(forIdentifier: .stepCount) || type == HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) {
             let endDataString = self.healthDateFormatter.string(from: sample.endDate)
-            return HealthModel(time: currentDataString/*self.healthDateFormatter.string(from: sample.startDate)*/, measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type), device: sample.device), healthValue: value ?? 0.0, /*startTime: currentDataString,*/ endTime: endDataString))
+            return HealthModel(time: currentDataString/*self.healthDateFormatter.string(from: sample.startDate)*/, measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type), device: sample.device, sourceId: sample.sourceRevision.source.bundleIdentifier), healthValue: value ?? 0.0, /*startTime: currentDataString,*/ endTime: endDataString))
         } else {
-            return HealthModel(time: currentDataString/*self.healthDateFormatter.string(from: sample.startDate)*/, measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type)), healthValue: value ?? 0.0))
+            return HealthModel(time: currentDataString/*self.healthDateFormatter.string(from: sample.startDate)*/, measurement: user.experimentID, tags: tag, fields: HealthFields(transmitTrigger: trigger, healthKey: self.addPrefixForDataKey(key: self.healthKeyFor(simple: type), device: sample.device, sourceId: sample.sourceRevision.source.bundleIdentifier), healthValue: value ?? 0.0))
         }
     }
     
@@ -521,11 +525,43 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         }
     }
     
-    private func addPrefixForDataKey(key: String, device: HKDevice? = nil) -> String {
-        if let name = device?.model {
-            return dataPrefix + key + (name.lowercased().contains("phone") ? HeathDataKeys.phone.rawValue : HeathDataKeys.watch.rawValue)
+    static func addPrefixForDataKey(key: String, device: HKDevice?, dataPrefix: String, sourceId: String? = nil) -> String {
+        guard let device = device, let model = device.model else {
+            return dataPrefix + key
         }
-        return dataPrefix + key
+
+        if model.lowercased().contains("phone") {
+            return dataPrefix + key + HeathDataKeys.phone.rawValue
+        }
+
+        // Distinguish between multiple non-phone sources (e.g. two Apple Watches of
+        // the same model, or an Apple Watch alongside a Fitbit/Oura), instead of
+        // merging them all under one shared "_watch" suffix.
+        let manufacturer = sanitizeForFieldName(device.manufacturer ?? "")
+        let deviceModel = sanitizeForFieldName(model)
+        let rawId = [device.localIdentifier, sourceId].compactMap { $0 }.first { !$0.isEmpty } ?? ""
+        let uniquePart = anonymizedDeviceTag(rawId)
+        let suffix = "_\(manufacturer)_\(deviceModel)_\(uniquePart)".lowercased()
+
+        return dataPrefix + key + suffix
+        }
+        private static func sanitizeForFieldName(_ raw: String) -> String {
+            raw.filter { $0.isLetter || $0.isNumber }
+        }
+
+        // Per-device tag that cannot be reversed back to the original
+        // localIdentifier, per client request (non-reversible/anonymized).
+        // Same device always hashes to the same tag (still distinguishes two
+        // same-model devices); different devices practically never collide.
+        private static func anonymizedDeviceTag(_ raw: String) -> String {
+            guard !raw.isEmpty else { return "" }
+            let hash = SHA256.hash(data: Data(raw.utf8))
+            let hex = hash.compactMap { String(format: "%02x", $0) }.joined()
+            return String(hex.prefix(6))
+        }
+
+    private func addPrefixForDataKey(key: String, device: HKDevice? = nil, sourceId: String? = nil) -> String {
+        Self.addPrefixForDataKey(key: key, device: device, dataPrefix: dataPrefix, sourceId: sourceId)
     }
     
     private func convertToUnit(sample: HKQuantitySample, type: HKSampleType, completion: @escaping (Double?) -> Void) {
