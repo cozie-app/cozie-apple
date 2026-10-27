@@ -88,25 +88,33 @@ final class WatchSurveyInteractor {
             logsCompletion?()
             
             if offlineMode.isEnabled {
-                healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0, healthCache: healthCache) { succces in
-                    completion?(true, nil)
-                }
-            } else {
-                BaseRepository().post(url: api.url, body: json, key: api.key) { [weak self] result in
-                    switch result {
-                    case .success(let data):
-                        debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
-                        //completion?(true, nil)
-                        self?.healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0, healthCache: healthCache) { success in
-                            completion?(true, nil)
+                            healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0, healthCache: healthCache) { succces in
+                                completion?(true, nil)
+                            }
+                        } else {
+                            let group = DispatchGroup()
+                            var surveyResult: (success: Bool, error: Error?) = (false, nil)
+                            group.enter()
+                            BaseRepository().post(url: api.url, body: json, key: api.key) { [weak self] result in
+                                switch result {
+                                case .success(let data):
+                                    debugPrint(String(data: data, encoding: .utf8) ?? "somthing whent wrong!!!")
+                                    surveyResult = (true, nil)
+                                case .failure(let error):
+                                    self?.saveNotSyncedSurvey(jsonData: json, userInfo: storage.userID() + storage.experimentID())
+                                    debugPrint(error.localizedDescription)
+                                    surveyResult = (false, error)
+                                }
+                                group.leave()
+                            }
+                            group.enter()
+                            healthInteractor.sendData(trigger: CommunicationKeys.syncWatchSurveyTrigger.rawValue, timeout: 0, healthCache: healthCache) { _ in
+                                group.leave()
+                            }
+                            group.notify(queue: .main) {
+                                completion?(surveyResult.success, surveyResult.error)
+                            }
                         }
-                    case .failure(let error):
-                        self?.saveNotSyncedSurvey(jsonData: json, userInfo: storage.userID() + storage.experimentID())
-                        debugPrint(error.localizedDescription)
-                        completion?(false, error)
-                    }
-                }
-            }
             
             // save logs
 //            DispatchQueue.global().async { [weak self] in
