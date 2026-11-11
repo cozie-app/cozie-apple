@@ -33,6 +33,8 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
         case oxygenSaturationKey = "_oxygen_saturation"
         case bodyMassKey = "_body_mass"
         case bodyMassIndexKey = "_BMI"
+        case bloodPressureSystolicKey = "_blood_pressure_systolic"
+        case bloodPressureDiastolicKey = "_blood_pressure_diastolic"
         // Wrist Temperature
         case wristTemperatureKey = "_wrist_temperature"
         
@@ -90,8 +92,10 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
                           .workoutType(),
                           HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
                           HKObjectType.quantityType(forIdentifier: .appleMoveTime)!,
-                          HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!]
-    
+                          HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!,
+                          HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
+                          HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!]
+
     let allWatchTypes = [HKObjectType.quantityType(forIdentifier: .heartRate)!,
                          HKObjectType.quantityType(forIdentifier: .restingHeartRate)!,
                          HKObjectType.quantityType(forIdentifier: .environmentalAudioExposure)!,
@@ -457,6 +461,10 @@ final class HealthKitInteractor: HealthKitInteractorProtocol {
             return HeathDataKeys.bodyMassKey.rawValue
         case HKObjectType.quantityType(forIdentifier: .bodyMassIndex):
             return HeathDataKeys.bodyMassIndexKey.rawValue
+        case HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic):
+            return HeathDataKeys.bloodPressureSystolicKey.rawValue
+        case HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic):
+            return HeathDataKeys.bloodPressureDiastolicKey.rawValue
         case HKObjectType.quantityType(forIdentifier: .bodyTemperature):
             return HeathDataKeys.wristTemperatureKey.rawValue
         case HKObjectType.categoryType(forIdentifier: .sleepAnalysis):
